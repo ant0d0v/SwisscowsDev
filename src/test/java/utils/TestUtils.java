@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 public class TestUtils {
 
-    private final static By H2_HEADER = By.xpath("//div[@id = 'weather-widget']//h2");
-    private final static By ON_LOAD_CONTAINER = By.className("owm-loader-container");
+    private final static By H2_HEADER = By.xpath("//div[@class = 'logo-home']//h1");
+    private final static By ON_LOAD_CONTAINER = By.xpath("//div[@class = 'badges animation-badges']");
 
     public static void loadBaseUrlPage(WebDriver driver, WebDriverWait wait) {
         driver.get(BaseTest.getBaseUrl());
         waitForPageLoaded(driver);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(ON_LOAD_CONTAINER));
+        wait.until(ExpectedConditions.presenceOfElementLocated(ON_LOAD_CONTAINER));
     }
 
     public static void waitForPageLoaded(WebDriver driver) {

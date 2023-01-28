@@ -6,12 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.WeatherStationsPage;
-import pages.footer_menu.AboutUsPage;
-import pages.footer_menu.TechnologyPage;
-import pages.footer_menu.WidgetsPage;
-import pages.home.HomeAskQuestionPage;
-import pages.top_menu.PricePage;
-import pages.top_menu.WeatherDashboardPage;
+
 
 import java.util.List;
 
@@ -154,39 +149,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    public WeatherDashboardPage clickWeatherDashboardFooterMenu() {
-        click(weatherDashboardFooterMenu);
 
-        return new WeatherDashboardPage(getDriver());
-    }
-
-    public TechnologyPage clickOurTechnologyFooterMenu() {
-        click(ourTechnologyFooterMenu);
-
-        return new TechnologyPage(getDriver());
-    }
-
-    public void clickPrivacyPolicyFooterMenu() {
-        click(privacyPolicyFooterMenu);
-    }
-
-    public PricePage clickPricingFooterMenu() {
-        click20(pricingFooterMenu);
-
-        return new PricePage(getDriver());
-    }
-
-    public AboutUsPage clickAboutUsFooterMenu() {
-        click20(aboutUsFooterMenu);
-
-        return new AboutUsPage(getDriver());
-    }
-
-    public WidgetsPage clickWidgetsPageFooterMenu() {
-        click(widgetsFooterMenu);
-
-        return new WidgetsPage(getDriver());
-    }
 
     public WeatherStationsPage clickConnectYourWeatherStationFooterMenu() {
         click(connectYourWeatherStationFooterMenu);
@@ -221,11 +184,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return new MainPage(getDriver());
     }
 
-    public HomeAskQuestionPage switchToHomeAskQuestionPage() {
-        switchToAnotherWindow();
-
-        return new HomeAskQuestionPage(getDriver());
-    }
 
     public boolean isStorePanelDisplayed() {
 
