@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
-import utils.DateTimeUtils;
 import utils.TestUtils;
 
 import java.time.Year;
@@ -21,17 +21,27 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(className = "owm-loader-container")
     private WebElement greyContainer;
 
-    @FindBy(xpath = "//div[@id = 'weather-widget']//h2")
-    private WebElement h2CityCountryHeader;
+    @FindBy(xpath = "//div[@class = 'logo-home']//h1")
+    private WebElement h1HomeTitle;
 
-    @FindBy(xpath = "//div[@id = 'weather-widget']//input[@placeholder = 'Search city']")
-    private WebElement searchCityField;
+    @FindBy(xpath = "//input[@class = 'input-search'][@placeholder = 'Your search. Your business.']")
+    private WebElement searchCityField; // swisscows
 
-    @FindBy(xpath = "//div[@id = 'weather-widget']//button[@type = 'submit']")
-    private WebElement searchButton;
+    @FindBy(xpath = "//button[@class = 'search-submit']")
+    private WebElement searchButton; // swisscows
 
     @FindBy(className = "search-dropdown-menu")
-    private WebElement searchDropdownMenu;
+    private WebElement searchDropdownMenu;// swisscows
+
+    @FindBy(xpath = "//div[@class = 'logo-home']//h1")
+    private WebElement logoHome; // swisscows
+
+    @FindBy(xpath = "//ul[@class = 'suggestions']/li")
+    private List<WebElement> allChoicesInSuggestion; //swisscows
+
+    @FindBy(xpath = "//div[@class = 'bnnr-widget']")
+    private WebElement homepageBanner; //swisscows
+
 
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
@@ -110,6 +120,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//button[@type='button' and text()='Allow all']")
     private WebElement allowAllButton;
+
+    @FindBy(xpath = "//ul[@class = 'suggestions']")
+    private WebElement suggestMainPage;
 
     @FindBy(xpath = "//a[@href='/cookies-settings' and text()=' Manage cookies ']")
     private WebElement manageButton;
@@ -197,7 +210,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public String getCityCountryName() {
 
-        return getText(h2CityCountryHeader);
+        return getText(h1HomeTitle);
     }
 
     public String getH1Color() {
@@ -335,15 +348,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getText(currentTempAndUnit);
     }
 
-    public String getEightDaysForecastCalendarSequenceText() {
 
-        final String[] dowMonDate = currentDateFromEightDaysForecast.getText().split(" ");
-        final String dowText = dowMonDate[0].substring(0, 3);
-        final int monNum = DateTimeUtils.returnMonth(dowMonDate[1]);
-        final int date = Integer.parseInt(dowMonDate[2]);
-
-        return DateTimeUtils.getEightDaysFromDate(dowText, monNum, date, Year.now().getValue());
-    }
 
     public String getH2Header() {
 
@@ -376,7 +381,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return pressure.substring(0, pressure.length() - 3);
     }
 
-    public MainPage clickSearchCityField() {
+    public MainPage clickSearchField() {
         click(searchCityField);
 
         return this;
@@ -387,6 +392,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
+
+    public MainPage clickHomeBanner() {
+        click(homepageBanner);
+
+        return this;
+    }
+
+
 
     public MainPage clickParisInDropDownList() {
         wait20ElementToBeVisible(searchDropdownMenu);
@@ -488,7 +501,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
     public MainPage waitForCityCountryNameChanged(String oldText) {
-        waitTextToBeChanged(h2CityCountryHeader, oldText);
+        waitTextToBeChanged(h1HomeTitle, oldText);
 
         return this;
     }
@@ -509,6 +522,17 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return isElementDisplayed(xButtonInDifferentWeatherContainer);
     }
 
+    public boolean suggestIsDisplayed() {
+
+        return isElementDisplayed(suggestMainPage);
+    }
+
+    public boolean homePageBannerIsDisplayed() {
+
+        return isElementDisplayed(homepageBanner);
+    }
+
+
     public MainPage switchToMetric() {
         click(metricButton);
 
@@ -517,6 +541,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage switchToImperial() {
         click(imperialButton);
+
+        return this;
+    }
+
+    public MainPage clickMainLogo() {
+        click(logoHome);
 
         return this;
     }
@@ -560,6 +590,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public MainPage waitForElementToBeVisible() {
         wait20ElementToBeVisible(allowAllButton);
         wait20ElementToBeVisible(manageButton);
+
+        return this;
+    }
+    public MainPage waitForSuggestToBeVisible() {
+        wait20ElementToBeVisible(suggestMainPage);
+
 
         return this;
     }
@@ -637,4 +673,26 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return humidity.substring(10, humidity.length() - 1);
     }
+
+    public List<String> getAllElementsText() {
+
+        List<String> textList = new ArrayList<>();
+
+        for (WebElement element : allChoicesInSuggestion) {
+            textList.add(element.getText().toLowerCase());
+        }
+        return textList;
+    }
+    public void switchToAnotherWindow() {
+        String originalWindow = getDriver().getWindowHandle();
+
+        for (String windowHandle : getDriver().getWindowHandles()) {
+            if (!originalWindow.equals(windowHandle) && getDriver().getWindowHandles().size() == 2) {
+                getDriver().switchTo().window(windowHandle);
+                break;
+            }
+        }
+    }
+
+
 }

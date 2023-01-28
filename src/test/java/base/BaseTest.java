@@ -17,7 +17,7 @@ import java.time.Duration;
 
 public abstract class BaseTest {
 
-    private final static String BASE_URL = "https://openweathermap.org/";
+    private final static String BASE_URL = "https://dev.swisscows.com/en";
 
     private WebDriver driver;
     private WebDriverWait webDriverWait;

@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-import pages.home.HomePage;
-import pages.home.HomeUsersSignInPage;
+
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    abstract HomePage signIn();
 
-    abstract HomeUsersSignInPage signOut();
+
+
 
     protected WebDriver getDriver() {
         return driver;
@@ -258,6 +257,7 @@ public abstract class BasePage {
 
         return element.isDisplayed();
     }
+
 
     protected boolean areElementsInListDisplayed(List<WebElement> list) {
         boolean result = false;

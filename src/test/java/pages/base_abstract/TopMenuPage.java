@@ -7,11 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.FindPage;
 import pages.MainPage;
 import pages.OurInitiativesPage;
-import pages.home.HomeAskQuestionPage;
-import pages.home.HomeMarketplacePage;
-import pages.home.HomePage;
-import pages.home.HomeUsersSignInPage;
-import pages.top_menu.*;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -174,35 +169,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
 
-    public GuidePage clickGuideMenu() {
-        click(guideTopMenu);
-
-        return new GuidePage(getDriver());
-    }
-
-    public APIPage clickAPIMenu() {
-        click(apiTopMenu);
-
-        return new APIPage(getDriver());
-    }
-
-    public HomeMarketplacePage clickMarketplaceMenu() {
-        click(marketplaceTopMenu);
-
-        return new HomeMarketplacePage(getDriver());
-    }
-
-    public PricePage clickPricingMenu() {
-        click(pricingTopMenu);
-
-        return new PricePage(getDriver());
-    }
-
-    public WeatherMapsPage clickMapsMenu() {
-        click(mapsTopMenu);
-
-        return new WeatherMapsPage(getDriver());
-    }
 
     public OurInitiativesPage clickOurInitiativesMenu() {
         click(ourInitiativesTopMenu);
@@ -210,11 +176,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new OurInitiativesPage(getDriver());
     }
 
-    public PartnersPage clickPartnersMenu() {
-        click(partnersTopMenu);
-
-        return new PartnersPage(getDriver());
-    }
 
     public MainPage clickSupportMenu() {
         click(supportTopMenu);
@@ -222,24 +183,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
 
-    public FAQPage clickFAQSupportSubmenu() {
-        click(faqSupportSubmenu);
 
-        return new FAQPage(getDriver());
-    }
-
-    public HowToStartPage clickHowToStartSupportSubmenu() {
-        click(howToStartSupportSubmenu);
-        setOriginalHandle();
-
-        return new HowToStartPage(getDriver());
-    }
-
-    public WeatherDashboardPage clickDashboardMenu() {
-        click(dashboardTopMenu);
-
-        return new WeatherDashboardPage(getDriver());
-    }
 
     public MainPage clickSearchFieldTopMenu() {
         click(searchFieldTopMenu);
@@ -253,31 +197,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
-    public HomeAskQuestionPage clickAskQuestionSupportSubmenu() {
-        click(askQuestionSupportSubmenu);
-        switchToAnotherWindow();
 
-        return new HomeAskQuestionPage(getDriver());
-    }
-
-    public HomeUsersSignInPage clickSignInMenu() {
-        click20(signInTopMenu);
-
-        return new HomeUsersSignInPage(getDriver());
-    }
-
-    public HomePage signIn() {
-        clickSignInMenu().signInAsRegularUser();
-
-        return new HomePage(getDriver());
-    }
-
-    public HomeUsersSignInPage signOut() {
-        click(getDriver().findElement(By.id("user-dropdown")));
-        click(getDriver().findElement(By.xpath("//a[@href='/users/sign_out']")));
-
-        return new HomeUsersSignInPage(getDriver());
-    }
 
     public FindPage inputSearchCriteriaIntoSearchField(String text) {
         if (!getText(searchFieldTopMenu).isEmpty() && !getText(searchFieldTopMenu).isBlank()) {
