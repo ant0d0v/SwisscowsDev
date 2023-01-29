@@ -67,7 +67,7 @@ public class MainTest extends BaseTest {
                 .clickHomeBanner()
                 .switchToAnotherWindow();
 
-        String actualUrl = getExternalPageURL();
+        String actualUrl = mainPage.getCurrentURL();
 
         Assert.assertEquals(actualUrl,expectedUrl);
     }
