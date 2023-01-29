@@ -87,6 +87,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//p[@class= 'answer close']")
     private WebElement homepageOneAnswer; //
 
+    @FindBy(xpath = "//a[@class = 'install-sw-block popup']")
+    private WebElement installGoogleBlockPopup; //
+
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
 
@@ -456,8 +459,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage clickQuestion3() {
-        click(homepageQuestion3);
+    public MainPage clickInstallGoogleBlockPopup() {
+        click(installGoogleBlockPopup);
 
         return this;
     }
@@ -697,9 +700,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage waitForAnswerToBeInvisible(){
+    public void waitForAnswerToBeInvisible(){
       wait10ElementToBeInVisible(homepageOneAnswer);
-        return this;
 
     }
 
@@ -720,6 +722,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage scrollToQuestions() {
         scrollByVisibleElement(homepageQuestion6);
+
+        return this;
+    }
+
+    public MainPage scrollToBlockGooglePopup() {
+        scrollByVisibleElement(installGoogleBlockPopup);
 
         return this;
     }
