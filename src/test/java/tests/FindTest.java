@@ -48,4 +48,26 @@ public class FindTest extends BaseTest {
             Assert.assertEquals(TestUtils.getSubstring(cityName, ","), expectedCityName);
         }
     }
+
+    @Test
+    public void testQuestionAndAnswersOpenAndClose() {
+
+        final String expectedClassOpen = "faq open";
+        final String expectedClassCloses = "faq";
+
+        MainPage mainPage = openBaseURL();
+
+        mainPage
+                .scrollToQuestions()
+                .clickQuestion1();
+        String actualClassAttributeQuestionOpen = mainPage.getClassAttributeQuestion1();
+        Assert.assertEquals(actualClassAttributeQuestionOpen, expectedClassOpen);
+
+        mainPage
+                .clickQuestion1();
+        String actualClassAttributeQuestionCloses = mainPage.getClassAttributeQuestion1();
+        Assert.assertEquals(actualClassAttributeQuestionCloses, expectedClassCloses);
+
+
+    }
 }
