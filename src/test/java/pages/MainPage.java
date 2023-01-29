@@ -34,6 +34,18 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class = 'logo-home']//h1")
     private WebElement logoHome; // swisscows
 
+    @FindBy(xpath = "//div[@class='services-blocks']")
+    private WebElement ourServiceContainer; // swisscows
+
+    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://hesbox.com/']")
+    private WebElement linkLearnMoreInOurService; // swisscows
+
+    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://swisscows-fanshop.com']")
+    private WebElement linkFanShopInOurService; // swisscows
+
+    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://awiebe.org/']")
+    private WebElement linkWiebeBlogInOurService; // swisscows
+
     @FindBy(xpath = "//ul[@class = 'suggestions']/li")
     private List<WebElement> allChoicesInSuggestion; //swisscows
 
@@ -90,6 +102,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//a[@class = 'install-sw-block popup']")
     private WebElement installGoogleBlockPopup; //
 
+    @FindBy(xpath = "//div[@class='home-link-instruction popup animation-badges']")
+    private WebElement googlePopupInstall; //
+
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
 
@@ -98,6 +113,18 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//div[@class = 'controls']//span")
     private WebElement differentWeatherButton;
+
+    @FindBy(xpath = "//p[@class='title-section']")
+    private WebElement tittleWhySwisscows;
+
+    @FindBy(xpath = "//div[@class='block block-1']")
+    private WebElement WhySwisscowsBlock1;
+
+    @FindBy(xpath = "//div[@class='block block-2']")
+    private WebElement WhySwisscowsBlock2;
+
+    @FindBy(xpath = "//div[@class='block block-3']")
+    private WebElement WhySwisscowsBlock3;
 
     @FindBy(xpath = "//div[@class='control-el']")
     private WebElement locationButton;
@@ -159,11 +186,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@id='weather-widget']//span[@Class='orange-text']")
     private WebElement currentTime;
 
-    @FindBy(xpath = "//div[@class='stick-footer-panel__container']")
+    @FindBy(xpath = "//div[@class='footer-full-inner-wrap']")
     private WebElement footerPanelContainer;
 
-    @FindBy(xpath = "//div[@class='stick-footer-panel__container']")
-    private WebElement bottomPanel;
+    @FindBy(xpath = "//img[@class='footer-back']")
+    private WebElement imageFooterPanel;
 
     @FindBy(xpath = "//button[@type='button' and text()='Allow all']")
     private WebElement allowAllButton;
@@ -231,7 +258,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//span[@class='sub']")
     private List<WebElement> weatherDescription;
 
-    @FindBy(css = "a[href*='/'],a[href*='#']")
+    @FindBy(xpath = "//footer[@class='footer-full']//a[@href]")
     private List<WebElement> allLinks;
 
     @FindBy(xpath = "//div[@class = 'current-temp']//span[@class = 'heading']")
@@ -448,6 +475,21 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
+
+    public void clickLinkLearnMoreInOurService() {
+        click(linkLearnMoreInOurService);
+
+    }
+
+    public void clickLinkFanShopInOurService() {
+        click(linkFanShopInOurService);
+
+    }
+
+    public void clickLinkWiebeBlogInOurService() {
+        click(linkWiebeBlogInOurService);
+
+    }
     public MainPage clickQuestion1() {
         click(homepageQuestionOne);
 
@@ -601,19 +643,27 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public boolean isSendButtonDisplayed() {
+    public boolean isPopupGoogleDisplayed() {
 
-        return isElementDisplayed(sendButtonInDifferentWeatherContainer);
+        return isElementDisplayed(googlePopupInstall);
     }
 
-    public boolean isXButtonDisplayed() {
+    public boolean isTittleWhySwisscowsIsDisplayed() {
 
-        return isElementDisplayed(xButtonInDifferentWeatherContainer);
+        return isElementDisplayed(tittleWhySwisscows);
     }
 
-    public boolean isImageOfBannerDisplayed() {
+    public boolean isDisplayedWhySwisscowsBlock1() {
 
-        return isElementDisplayed(homepageBannerImage);
+        return isElementDisplayed(WhySwisscowsBlock1);
+    }
+    public boolean isDisplayedWhySwisscowsBlock2() {
+
+        return isElementDisplayed(WhySwisscowsBlock2);
+    }
+    public boolean isDisplayedWhySwisscowsBlock3() {
+
+        return isElementDisplayed(WhySwisscowsBlock3);
     }
 
     public boolean suggestIsDisplayed() {
@@ -641,6 +691,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage clickMainLogo() {
         click(logoHome);
+
+        return this;
+    }
+
+    public MainPage clickPopupGoogle() {
+        click(googlePopupInstall);
 
         return this;
     }
@@ -682,22 +738,22 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage waitForFooterPanelToBeVisible() {
         wait20ElementToBeVisible(footerPanelContainer);
-        wait20ElementToBeVisible(bottomPanel);
+        wait20ElementToBeVisible(imageFooterPanel);
 
         return this;
     }
 
-    public MainPage waitFor2ElementsToBeVisible() {
-        wait20ElementToBeVisible(homepageBannerSwitchSecondValue);
-        wait20ElementToBeVisible(homepageBannerSwitchFirstValue);
 
-        return this;
-    }
     public MainPage waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
 
 
         return this;
+    }
+    public void waitForPopupGoogleInstallToBeVisible() {
+        wait20ElementToBeVisible(googlePopupInstall);
+
+
     }
 
     public void waitForAnswerToBeInvisible(){
@@ -728,6 +784,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage scrollToBlockGooglePopup() {
         scrollByVisibleElement(installGoogleBlockPopup);
+
+        return this;
+    }
+    public MainPage scrollToFooter() {
+        scrollByVisibleElement(footerPanelContainer);
+
+        return this;
+    }
+    public MainPage scrollToOurService() {
+        scrollByVisibleElement(ourServiceContainer);
 
         return this;
     }

@@ -38,7 +38,7 @@ public class ReportUtils {
         String currentDate = "\tDate: "
                 + DateTimeUtils.getCurrentDateTime()
                 + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "\n";
-        String projectName = "\tProject: OpenWeatherJava_05" + "\n";
+        String projectName = "\tProject: Swisscows" + "\n";
         String baseURL = "\tBASE_URL: " + BaseTest.getBaseUrl()
                 + "\t\t\t\t\t\t\t\t\t\t\t" + "\n";
 

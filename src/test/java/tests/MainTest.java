@@ -64,6 +64,8 @@ public class MainTest extends BaseTest {
 
         MainPage mainPage = openBaseURL();
         mainPage
+                .waitForImageInBannerDisappeared();
+        mainPage
                 .clickHomeBanner()
                 .switchToAnotherWindow();
 
@@ -184,7 +186,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testInstallGoogleBlock() {
+    public void testClickableAndVisibleInstallGoogleBlock() {
 
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
 
@@ -197,6 +199,111 @@ public class MainTest extends BaseTest {
 
         String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
+
+    }
+
+    @Test
+    public void testAmountLinksInTheFooter() {
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToFooter()
+                .waitForFooterPanelToBeVisible();
+
+        int actualUrl = mainPage.getAllLinks().size();
+        Assert.assertEquals(actualUrl, 25);
+
+
+    }
+
+    @Test
+    public void testClickebleLinkLearnMore() {
+        final String expectedUrl = "https://hesbox.com/en";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToOurService()
+                .clickLinkLearnMoreInOurService();
+        mainPage.switchToAnotherWindow();
+
+        String actualLearnMoreUrl = getExternalPageURL();
+
+        Assert.assertEquals(actualLearnMoreUrl,expectedUrl);
+
+
+    }
+
+    @Test
+    public void testClickebleLinkFanShop() {
+        final String expectedUrl = "https://swisscows-fanshop.com/";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToOurService()
+                .clickLinkFanShopInOurService();
+        mainPage.switchToAnotherWindow();
+
+        String actualFanShopUrl = getExternalPageURL();
+
+        Assert.assertEquals(actualFanShopUrl,expectedUrl);
+
+
+    }
+
+    @Test
+    public void testClickebleLinkWiebeBlog() {
+        final String expectedUrl = "https://awiebe.org/";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToOurService()
+                .clickLinkWiebeBlogInOurService();
+        mainPage.switchToAnotherWindow();
+
+        String actualWiebeBlogUrl = getExternalPageURL();
+
+        Assert.assertEquals(actualWiebeBlogUrl,expectedUrl);
+
+
+    }
+    @Test
+    public void testPopupIsDysplaed() {
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .waitForPopupGoogleInstallToBeVisible();
+
+        Assert.assertTrue(mainPage.isPopupGoogleDisplayed());
+
+
+    }
+
+    @Test
+    public void testPopupGoogleRedirectToInstall() {
+
+        final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .waitForPopupGoogleInstallToBeVisible();
+        mainPage
+                .clickPopupGoogle()
+                .switchToAnotherWindow();
+
+        String actualUrl = getExternalPageURL();
+        Assert.assertEquals(actualUrl,expectedUrl);
+
+    }
+
+    @Test
+    public void testBlockWhySwisscowsIsDisplayed() {
+
+        MainPage mainPage = openBaseURL();
+
+        Assert.assertTrue(mainPage.isTittleWhySwisscowsIsDisplayed());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock1());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock2());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock3());
 
     }
 
