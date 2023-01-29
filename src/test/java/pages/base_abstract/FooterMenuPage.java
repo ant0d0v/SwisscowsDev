@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
-import pages.WeatherStationsPage;
 
 
 import java.util.List;
@@ -151,11 +150,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
 
 
-    public WeatherStationsPage clickConnectYourWeatherStationFooterMenu() {
-        click(connectYourWeatherStationFooterMenu);
 
-        return new WeatherStationsPage(getDriver());
-    }
 
     public void clickGitHubIcon() {
         click20(githubIconFooterMenu);

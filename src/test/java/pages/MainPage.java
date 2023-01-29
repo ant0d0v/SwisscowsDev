@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
 import utils.TestUtils;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +40,52 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class = 'bnnr-widget']")
     private WebElement homepageBanner; //swisscows
 
+    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-active']")
+    private WebElement homepageBannerSwitchSecondValue; //Get the second switch value
+
+    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-next']")
+    private WebElement homepageBannerSwitchFirstValue; //Get the first switch value
+
+    @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][2]")
+    private WebElement homepageBannerSwitchSecond; //Click on the second switch
+
+    @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][1]")
+    private WebElement homepageBannerSwitchFirst; // Click on the first switch
+
+    @FindBy(xpath = "//div[@data-swiper-slide-index = '2']")
+    private WebElement homepageBannerImage; // Image of banner
+
+    @FindBy(xpath = "//div[@class = 'swiper-wrapper']//a[@href]//img[@src]")
+    private List<WebElement> homepageBannerAllImages; // All image of banner
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
+    private WebElement homepageQuestion1; //
+
+    @FindBy(xpath = "//h3[@class='question'][1]")
+    private WebElement homepageQuestionOne; //
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[2]")
+    private WebElement homepageQuestion2; //
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[3]")
+    private WebElement homepageQuestion3; //
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[4]")
+    private WebElement homepageQuestion4; //
+
+    @FindBy(xpath = "//p//a[@href='/en/default-search']")
+    private WebElement linkInQuestion4; //
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[5]")
+    private WebElement homepageQuestion5; //
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[6]")
+    private WebElement homepageQuestion6; //
+
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//h3")
+    private List<WebElement> homepageAllQuestion; // All questions
+
+    @FindBy(xpath = "//p[@class= 'answer close']")
+    private WebElement homepageOneAnswer; //
 
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
@@ -73,8 +117,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//ul[@class='icons']/*")
     private WebElement differentWeatherIconsContainer;
 
-    @FindBy(xpath = "//ul[@class = 'icons']/*")
-    private List<WebElement> iconsList;
+    @FindBy(xpath = "//div[@aria-label='Loading']")
+    private List<WebElement> questionList; // AllQeustion
 
     @FindBy(xpath = "//div[@aria-label='Loading']")
     private WebElement seeLoading;
@@ -223,9 +267,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getFontSize(colorAndFontSizeOfH1Header);
     }
 
-    public int getAmountOfIconsOnDifferentWeatherPopUp() {
+    public int getAmountOftListOfQuestion() {
 
-        return getListSize(iconsList);
+        return getListSize(questionList);
     }
 
     public String getLoadingText(String attribute) {
@@ -233,9 +277,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getAttribute(seeLoading, attribute);
     }
 
-    public List<WebElement> getListOfIconsOnDifferentWeatherPopUp() {
+    public List<WebElement> getListOfQuestion() {
 
-        return iconsList;
+        return questionList;
     }
 
     public String getErrorText() {
@@ -301,9 +345,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return displayedIcons;
     }
 
-    public List<String> getCurrentWeatherText() {
+    public List<String> getTextsAllQuestion() {
 
-        return getTexts(currentWeatherContainer);
+        return getTexts(getListOfQuestion());
     }
 
     public List<String> getListWeatherDescriptionText() {
@@ -381,11 +425,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return pressure.substring(0, pressure.length() - 3);
     }
 
+
     public MainPage clickSearchField() {
         click(searchCityField);
 
         return this;
     }
+
+
 
     public MainPage clickSearchButton() {
         click(searchButton);
@@ -398,6 +445,45 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
+    public MainPage clickQuestion1() {
+        click(homepageQuestionOne);
+
+        return this;
+    }
+    public MainPage clickQuestion2() {
+        click(homepageQuestion2);
+
+        return this;
+    }
+
+    public MainPage clickQuestion3() {
+        click(homepageQuestion3);
+
+        return this;
+    }
+
+    public MainPage clickQuestion4() {
+        click(homepageQuestion4);
+
+        return this;
+    }
+    public MainPage clickLinkInQuestion4() {
+        click(linkInQuestion4);
+
+        return this;
+    }
+
+    public MainPage clickQuestion6() {
+        click(homepageQuestion6);
+
+        return this;
+    }
+
+    public MainPage clickAllQuestions(){
+        clickAllElementsInList(homepageAllQuestion);
+        return this;
+    }
+
 
 
 
@@ -522,6 +608,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return isElementDisplayed(xButtonInDifferentWeatherContainer);
     }
 
+    public boolean isImageOfBannerDisplayed() {
+
+        return isElementDisplayed(homepageBannerImage);
+    }
+
     public boolean suggestIsDisplayed() {
 
         return isElementDisplayed(suggestMainPage);
@@ -550,6 +641,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
+    public void clickBannerSwitch() {
+        click(homepageBannerSwitchSecond);
+    }
+    public void clickBannerSwitchFirst() {
+        click(homepageBannerSwitchFirst);
+    }
+
 
     public List<String> getTempsAndUnitsList() {
 
@@ -574,10 +672,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage waitForGreyContainerDisappeared() {
-        waitForGreyContainerDisappeared(greyContainer);
+    public void waitForImageInBannerDisappeared() {
+        waitForElementIsDisappeared(homepageBannerImage);
 
-        return this;
     }
 
     public MainPage waitForFooterPanelToBeVisible() {
@@ -587,9 +684,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage waitForElementToBeVisible() {
-        wait20ElementToBeVisible(allowAllButton);
-        wait20ElementToBeVisible(manageButton);
+    public MainPage waitFor2ElementsToBeVisible() {
+        wait20ElementToBeVisible(homepageBannerSwitchSecondValue);
+        wait20ElementToBeVisible(homepageBannerSwitchFirstValue);
 
         return this;
     }
@@ -598,6 +695,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
 
         return this;
+    }
+
+    public MainPage waitForAnswerToBeInvisible(){
+      wait10ElementToBeInVisible(homepageOneAnswer);
+        return this;
+
     }
 
     public MainPage scrollToBulkLink() {
@@ -615,8 +718,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return isElementDisplayed(locationButton);
     }
 
-    public MainPage scrollByCurrentWeatherIcon() {
-        scrollByVisibleElement(currentWeatherIcon);
+    public MainPage scrollToQuestions() {
+        scrollByVisibleElement(homepageQuestion6);
 
         return this;
     }
@@ -667,6 +770,41 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getAttribute(element, "class");
     }
 
+    public String getClassAttributeSwitchSecond() {
+
+        return getAttribute(homepageBannerSwitchSecondValue, "class");
+    }
+   public String getClassAttributeSwitchFirst() {
+
+     return getAttribute(homepageBannerSwitchFirstValue, "class");
+   }
+
+    public String getClassAttributeQuestion1() {
+
+        return getAttribute(homepageQuestion1,"class");
+    }
+    public String getClassAttributeQuestion2() {
+
+        return getAttribute(homepageQuestion2,"class");
+    }
+    public String getClassAttributeQuestion3() {
+
+        return getAttribute(homepageQuestion3,"class");
+    }
+    public String getClassAttributeQuestion4() {
+
+        return getAttribute(homepageQuestion4,"class");
+    }
+    public String getClassAttributeQuestion5() {
+
+        return getAttribute(homepageQuestion5,"class");
+    }
+    public String getClassAttributeQuestion6() {
+
+        return getAttribute(homepageQuestion6,"class");
+    }
+
+
     public String getCurrentHumidity() {
 
         String humidity = getText(currentHumidity);
@@ -683,6 +821,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         }
         return textList;
     }
+
+
+
     public void switchToAnotherWindow() {
         String originalWindow = getDriver().getWindowHandle();
 

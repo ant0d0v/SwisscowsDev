@@ -96,6 +96,8 @@ public abstract class BasePage {
         return new ArrayList<>();
     }
 
+
+
     protected List<String> getTrimmedTexts(List<WebElement> elements) {
         List<String> texts = new ArrayList<>();
 
@@ -113,6 +115,7 @@ public abstract class BasePage {
 
         return element.getAttribute(attribute);
     }
+
 
     protected String getBackgroundColor(WebElement element) {
         wait10ElementToBeVisible(element);
@@ -229,6 +232,9 @@ public abstract class BasePage {
     protected void wait10ElementToBeVisible(WebElement element) {
         getWait10().until(ExpectedConditions.visibilityOf(element));
     }
+    protected void wait10ElementToBeInVisible(WebElement element) {
+        getWait10().until(ExpectedConditions.invisibilityOf(element));
+    }
 
     protected void wait20ElementToBeVisible(WebElement element) {
         getWait20().until(ExpectedConditions.visibilityOf(element));
@@ -289,8 +295,13 @@ public abstract class BasePage {
         return elementsSize == count;
     }
 
-    public void waitForGreyContainerDisappeared(WebElement element) {
-        getWait20().until(ExpectedConditions.invisibilityOf(element));
+    public void waitForElementIsDisappeared(WebElement element) {
+        getWait20().until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public String getClassAttribute(WebElement element) {
+
+        return getAttribute(element, "class");
     }
 
     public void switchToExternalPage() {
