@@ -181,8 +181,22 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(actualUrl,expectedUrl);
 
 
+    }
+
+    @Test
+    public void testInstallGoogleBlock() {
+
+        final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToBlockGooglePopup()
+                .clickInstallGoogleBlockPopup()
+                .switchToAnotherWindow();
 
 
+        String actualUrl = getExternalPageURL();
+        Assert.assertEquals(actualUrl,expectedUrl);
 
     }
 
