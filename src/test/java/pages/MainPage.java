@@ -563,19 +563,20 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public CurrentWeatherPage clickCurrentWeatherIcon() {
-        wait10ElementToBeClickable(currentWeatherIcon);
-        click20(currentWeatherIcon);
+//    public CurrentWeatherPage clickCurrentWeatherIcon() {
+//        wait10ElementToBeClickable(currentWeatherIcon);
+//        click20(currentWeatherIcon);
+//
+//        return new CurrentWeatherPage(getDriver());
+//
+//   }
 
-        return new CurrentWeatherPage(getDriver());
-    }
-
-    public BulkPage clickBulks() {
-        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-        executor.executeScript("arguments[0].click()", bulkLink);
-
-        return new BulkPage(getDriver());
-    }
+//    public BulkPage clickBulks() {
+//        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+//        executor.executeScript("arguments[0].click()", bulkLink);
+//
+//        return new BulkPage(getDriver());
+//    }
 
     public MainPage clickMoreOptionsDropDown() {
         click20(moreOptionsDropDown);
@@ -800,6 +801,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage scrollToAboutSwisscowsFooterMenu() {
         scrollByVisibleElement(getAboutSwisscowsFooterMenu());
+
+        return this;
+    }
+    public MainPage scrollToAboutSwisscowsAGFooterMenu() {
+        scrollByVisibleElement(getAboutSwisscowsAGFooterMenu());
 
         return this;
     }

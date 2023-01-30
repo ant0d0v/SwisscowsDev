@@ -1,12 +1,9 @@
 package pages.base_abstract;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.FindPage;
 import pages.MainPage;
-import pages.OurInitiativesPage;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -170,11 +167,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
 
-    public OurInitiativesPage clickOurInitiativesMenu() {
+    /*public OurInitiativesPage clickOurInitiativesMenu() {
         click(ourInitiativesTopMenu);
 
         return new OurInitiativesPage(getDriver());
-    }
+    }*/
 
 
     public MainPage clickSupportMenu() {
@@ -199,7 +196,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-    public FindPage inputSearchCriteriaIntoSearchField(String text) {
+  /*  public FindPage inputSearchCriteriaIntoSearchField(String text) {
         if (!getText(searchFieldTopMenu).isEmpty() && !getText(searchFieldTopMenu).isBlank()) {
             clear(searchFieldTopMenu);
         }
@@ -212,7 +209,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(searchFieldTopMenu);
 
         return new FindPage(getDriver());
-    }
+    }*/
 
     public boolean isPlaceholderDisplayed() {
 
@@ -239,10 +236,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getAttribute(searchFieldTopMenu, "value");
     }
 
-    public FindPage inputSearchCriteriaAndEnter(String text) {
+   /* public FindPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
 
         return new FindPage(getDriver());
-    }
+    }*/
 }
