@@ -105,6 +105,7 @@ public class FooterMenuTest extends BaseTest {
                  .scrollToFooterMenu()
                  .clickMediaEducationFooterMenu();
 
+        TestUtils.waitForPageLoaded(getDriver());
         String actualTitle = educationPagePage.getTitle();
         String actualURL = educationPagePage.getCurrentURL();
 
@@ -123,6 +124,7 @@ public class FooterMenuTest extends BaseTest {
         CharityProjectPage charityPagePage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickCharityProjectFooterMenu();
+        TestUtils.waitForPageLoaded(getDriver());
 
         String actualTitle = charityPagePage.getTitle();
         String actualURL = charityPagePage.getCurrentURL();
@@ -141,6 +143,7 @@ public class FooterMenuTest extends BaseTest {
         OurDatacenterPage OurDatacenterPage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickOurDatacenterPageFooterMenu();
+        TestUtils.waitForPageLoaded(getDriver());
 
         String actualTitle = OurDatacenterPage.getTitle();
         String actualURL = OurDatacenterPage.getCurrentURL();
@@ -182,6 +185,7 @@ public class FooterMenuTest extends BaseTest {
         ContactUsPage contactPage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickContactUsPageFooterMenu();
+        TestUtils.waitForPageLoaded(getDriver());
 
         String actualTitle = contactPage.getTitle();
         String actualURL = contactPage.getCurrentURL();
@@ -304,7 +308,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test(priority = -5)
     public void testFooterMenuLinksAmount() {
-        final int expectedLinks = 27;
+        final int expectedLinks = 25;
 
         int actualLinks = openBaseURL()
                 .scrollToFooterMenu()
