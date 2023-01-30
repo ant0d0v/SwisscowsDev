@@ -55,8 +55,8 @@ public class TestData {
                 {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data center – Everything about the Swisscows data center"},
                 {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us | Swisscows"},
                 {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Surf anonymously with VPN - Secure web surfing with Swisscows"},
-                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "Your private and anonymous search engine Swisscows"},
-                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "Your private and anonymous search engine Swisscows"},
+                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "Set Swisscows as start page"},
+                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "Install Swisscows and use it as the default search"},
 
 
         };
