@@ -798,8 +798,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage scrollToSubscriptionFooterMenu() {
-        scrollByVisibleElement(getSubscriptionFooterMenu());
+    public MainPage scrollToAboutSwisscowsFooterMenu() {
+        scrollByVisibleElement(getAboutSwisscowsFooterMenu());
 
         return this;
     }

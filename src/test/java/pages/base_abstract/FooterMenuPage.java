@@ -4,83 +4,145 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.MainPage;
-
+import pages.footer_menu.*;
+/*import pages.MainPage;
+import pages.WeatherStationsPage;
+import pages.footer_menu.WhoWeArePage;
+import pages.footer_menu.TechnologyPage;
+import pages.footer_menu.WidgetsPage;
+import pages.home.HomeAskQuestionPage;
+import pages.top_menu.PricePage;
+import pages.top_menu.WeatherDashboardPage;*/
 
 import java.util.List;
 
 public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
-    private static final String FOOTER_MENU_ID = "//div[@id='footer-website']";
+    private static final String FOOTER_MENU_ID = "//div[@class = 'footer-full-inner-wrap']";
 
     @FindBy(xpath = FOOTER_MENU_ID)
     private WebElement footerMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/weather-dashboard']")
-    private WebElement weatherDashboardFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/en/media-education']")
+    private WebElement MediaEducationFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/technology']")
-    private WebElement ourTechnologyFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Charity Project']") // Swisscows
+    private WebElement CharityProjectFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://openweather.co.uk/privacy-policy']")
-    private WebElement privacyPolicyFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/en/search-engine-no-tracking']")
+    private WebElement whoWeAreFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/about-us']")
-    private WebElement aboutUsFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Our Datacenter']")// Swisscows
+    private WebElement OurDatacenterFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/widgets-constructor']")
-    private WebElement widgetsFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Contact us']")//Swisscows
+    private WebElement ContactusFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'VPN']")//Swisscows
+    private WebElement VpnFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Swisscows.email']")//Swisscows
+    private WebElement SwisscowsEmailFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'TeleGuard']")//Swisscows
+    private WebElement TeleGuardFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'HES']")//Swisscows
+    private WebElement HesFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'GetDigest']")//Swisscows
+    private WebElement GetDigestFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu']//ul[2]//a")//Swisscows
+    private List<WebElement> OurProductsList;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Fan-shop']")//Swisscows
+    private WebElement fanShopFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Swisscows Blog']")//Swisscows
+    private WebElement swisscowsBlogFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Set as Startpage']")//Swisscows
+    private WebElement setAsStartpageFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Make a Default Search Engine']")//Swisscows
+    private WebElement makeDefaultSearchEngineFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@class = 'company-link']")//Swisscows
+    private WebElement AboutSwisscowsAgFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Imprint']")//Swisscows
+    private WebElement imprintFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Data privacy']")//Swisscows
+    private WebElement dataPrivacyFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Donation']")//Swisscows
+    private WebElement donationFooterMenu;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu-bottom']/a")//Swisscows
+    private List<WebElement> swisscowsFooterLinks;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://apps.apple.com/gb/app/openweather/id1535923697'] "
             + "[@target='_blank']")
     private WebElement downloadOnTheAppStoreLinkFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='social']/a")
-    private List<WebElement> socialPanelIconsFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href ='https://play.google.com/store/apps/details?id=com.swisscows.search']"
+            + "[@target ='_blank']")
+    private WebElement downloadGooglePlayLinkFooterMenu; // Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://github.com/search?q=openweathermap&ref=cmdform']")
-    private WebElement githubIconFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href ='https://apps.apple.com/app/swisscows-privacy-search/id1581108092']"
+            + "[@target ='_blank']")
+    private WebElement downloadAppStoreLinkFooterMenu; //Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/stations']")
-    private WebElement connectYourWeatherStationFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'social-networks']/a")
+    private List<WebElement> socialPanelIconsFooterMenu;//Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//p[text()='Download OpenWeather app']")
-    private WebElement downloadOpenWeatherAppText;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://home.openweathermap.org/questions']")
-    private WebElement askQuestionFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://www.facebook.com/swisscows/']")
+    private WebElement facebookIconFooterMenu; // Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='/price']")
-    private WebElement pricingFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://www.instagram.com/swisscows.official/']")
+    private WebElement instagramIconFooterMenu; // Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//div[@style='display: flex; flex-direction: row;']/a")
-    private List<WebElement> storeIcons;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://www.linkedin.com/company/swisscows/']")
+    private WebElement linkedinIconFooterMenu; // Swisscows
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://twitter.com/swisscows_ch']")
+    private WebElement twitterIconFooterMenu; // Swisscows
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://teleguard.com/']")
+    private WebElement teleGuardIconFooterMenu; // Swisscows
+
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'app']/a")
+    private List<WebElement> storeIconsDownload;// Swisscows
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://play.google.com/store/apps/details?id=uk.co.openweather']")
     private WebElement iconGooglePlay;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//span[contains(text(), '©')]")
+    @FindBy(xpath = FOOTER_MENU_ID + "//p[contains(text(), '©')]")
     private WebElement copyright;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://www.facebook.com/groups/270748973021342']")
     private WebElement iconFacebook;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//p[text()='Subscription']")
-    private WebElement subscription;
+    @FindBy(xpath = FOOTER_MENU_ID + "//li[text()='About Swisscows']")
+    private WebElement aboutSwisscows; // swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//p[text()='Subscription']/parent::div/div/ul/li")
-    private List<WebElement> subscriptionList;
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu']//ul[1]//a")
+    private List<WebElement> aboutSwisscowsList;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a")
+    @FindBy(xpath = FOOTER_MENU_ID + "//a") // Swisscows links
     private List<WebElement> footerMenuLinks;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://openweather.co.uk/']")
     private WebElement openWeatherForBusinessFooterMenuLink;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='my-5']//a")
-    private List<WebElement> storePanelIconsFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='app']//a")
+    private List<WebElement> storePanelIconsFooterMenu; // Swisscows
 
-    @FindBy(className = "social")
+    @FindBy(className = "social-networks")
     private WebElement socialPanelFooterMenu;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//ul/li/a")
@@ -102,14 +164,19 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return getText(copyright);
     }
 
-    public WebElement getSubscriptionFooterMenu() {
+    public WebElement getAboutSwisscowsFooterMenu() {
 
-        return subscription;
+        return aboutSwisscows;
     }
 
-    public List<String> getSubscriptionMenusTexts() {
+    public List<String> getAboutSwisscowsMenusTexts() {
 
-        return getTexts(subscriptionList);
+        return getTexts(aboutSwisscowsList);
+    }
+
+    public List<String> getOurProductsMenusTexts() {
+
+        return getTexts(OurProductsList);
     }
 
     protected WebElement getFooterMenu() {
@@ -149,11 +216,44 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
 
+    public MediaEducationPage clickMediaEducationFooterMenu() {
+        click(MediaEducationFooterMenu);
+
+        return new MediaEducationPage(getDriver());
+    }
 
 
+    public CharityProjectPage clickCharityProjectFooterMenu() {
+        click(CharityProjectFooterMenu);
 
-    public void clickGitHubIcon() {
-        click20(githubIconFooterMenu);
+        return new CharityProjectPage(getDriver());
+    }
+
+    public OurDatacenterPage clickOurDatacenterPageFooterMenu() {
+        click(OurDatacenterFooterMenu);
+
+        return new OurDatacenterPage(getDriver());
+    }
+
+    public WhoWeArePage clickAboutUsFooterMenu() {
+        click20(whoWeAreFooterMenu);
+
+        return new WhoWeArePage(getDriver());
+    }
+
+    /*public WidgetsPage clickWidgetsPageFooterMenu() {
+        click(widgetsFooterMenu);
+
+        return new WidgetsPage(getDriver());
+    }*/
+
+    public void clickSwisscowsEmail() {
+        click20(SwisscowsEmailFooterMenu);
+    }
+    public ContactUsPage clickContactUsPageFooterMenu() {
+        click(ContactusFooterMenu);
+
+        return new ContactUsPage(getDriver());
     }
 
     public void clickAppStoreIcon() {
@@ -172,13 +272,18 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         click(openWeatherForBusinessFooterMenuLink);
     }
 
-    public MainPage clickAskQuestionFooterMenu() {
+   /* public MainPage clickAskQuestionFooterMenu() {
         wait10ElementToBeClickable(askQuestionFooterMenu);
         click20(askQuestionFooterMenu);
 
         return new MainPage(getDriver());
     }
 
+    public HomeAskQuestionPage switchToHomeAskQuestionPage() {
+        switchToAnotherWindow();
+
+        return new HomeAskQuestionPage(getDriver());
+    }*/
 
     public boolean isStorePanelDisplayed() {
 
