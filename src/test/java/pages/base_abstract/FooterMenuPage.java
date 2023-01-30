@@ -83,8 +83,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu-bottom']/a")//Swisscows
     private List<WebElement> swisscowsFooterLinks;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://apps.apple.com/gb/app/openweather/id1535923697'] "
-            + "[@target='_blank']")
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[@class = 'app-link'][2]")
     private WebElement downloadOnTheAppStoreLinkFooterMenu;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@href ='https://play.google.com/store/apps/details?id=com.swisscows.search']"
@@ -118,20 +117,21 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'app']/a")
     private List<WebElement> storeIconsDownload;// Swisscows
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://play.google.com/store/apps/details?id=uk.co.openweather']")
-    private WebElement iconGooglePlay;
-
     @FindBy(xpath = FOOTER_MENU_ID + "//p[contains(text(), '©')]")
     private WebElement copyright;
-
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://www.facebook.com/groups/270748973021342']")
-    private WebElement iconFacebook;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//li[text()='About Swisscows']")
     private WebElement aboutSwisscows; // swisscows
 
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='footer-menu-bottom']")
+    private WebElement aboutSwisscowsAG; // swisscows
+
+
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu']//ul[1]//a")
     private List<WebElement> aboutSwisscowsList;
+
+    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='footer-menu-bottom']//a")
+    private List<WebElement> aboutSwisscowsAGList;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a") // Swisscows links
     private List<WebElement> footerMenuLinks;
@@ -169,9 +169,20 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return aboutSwisscows;
     }
 
+    public WebElement getAboutSwisscowsAGFooterMenu() {
+
+        return aboutSwisscowsAG;
+    }
+
+
     public List<String> getAboutSwisscowsMenusTexts() {
 
         return getTexts(aboutSwisscowsList);
+    }
+
+    public List<String> getAboutSwisscowsAGMenusTexts() {
+
+        return getTexts(aboutSwisscowsAGList);
     }
 
     public List<String> getOurProductsMenusTexts() {
@@ -241,11 +252,13 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return new WhoWeArePage(getDriver());
     }
 
-    /*public WidgetsPage clickWidgetsPageFooterMenu() {
-        click(widgetsFooterMenu);
+    public void clickInstagramIcon() {
+        click20(instagramIconFooterMenu);
+    }
 
-        return new WidgetsPage(getDriver());
-    }*/
+    public void clickLinkedinIcon() {
+        click20(linkedinIconFooterMenu);
+    }
 
     public void clickSwisscowsEmail() {
         click20(SwisscowsEmailFooterMenu);
@@ -260,12 +273,21 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         click20(downloadOnTheAppStoreLinkFooterMenu);
     }
 
+
     public void clickGooglePlayIcon() {
-        click20(iconGooglePlay);
+        click20(downloadGooglePlayLinkFooterMenu);
     }
 
     public void clickFacebookIcon() {
-        click20(iconFacebook);
+        click20(facebookIconFooterMenu);
+    }
+
+    public void clickTwitterIcon() {
+        click20(twitterIconFooterMenu);
+    }
+
+    public void clickTeleGuardIcon() {
+        click20(teleGuardIconFooterMenu);
     }
 
     public void clickOpenWeatherForBusinessFooterMenuLink() {

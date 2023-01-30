@@ -242,14 +242,34 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testGooglePlayIconNavigatesToGooglePlayWeb() {
-        final String expectedURL = "https://play.google.com/store/apps/details?id=uk.co.openweather";
-        final String expectedTitle = "OpenWeather - Apps on Google Play";
+        final String expectedURL = "https://play.google.com/store/apps/details?id=com.swisscows.search";
+        final String expectedTitle = "Swisscows Private Search - Apps on Google Play";
 
         String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
-        mainPage.scrollToFooterMenu().clickGooglePlayIcon();
+        mainPage.scrollToFooterMenu()
+                .clickGooglePlayIcon();
+        mainPage.switchToExternalPage();
+        TestUtils.waitForPageLoaded(getDriver());
+
+        Assert.assertNotEquals(getExternalPageURL(), oldURL);
+        Assert.assertEquals(getExternalPageURL(), expectedURL);
+        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
+    }
+
+    @Test
+    public void testAppStoreIconNavigatesToAppStoreWeb() {
+        final String expectedURL = "https://apps.apple.com/app/swisscows-privacy-search/id1581108092";
+        final String expectedTitle = "Swisscows Private Search on the App Store";
+
+        String oldURL = openBaseURL().getCurrentURL();
+
+        MainPage mainPage = new MainPage(getDriver());
+
+        mainPage.scrollToFooterMenu()
+                .clickAppStoreIcon();
         mainPage.switchToExternalPage();
         TestUtils.waitForPageLoaded(getDriver());
 
@@ -284,27 +304,80 @@ public class FooterMenuTest extends BaseTest {
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
-                " ExternalPageURL does not contain'facebook.com' " + getExternalPageURL());
+                " ExternalPageURL does not contain 'facebook.com' " + getExternalPageURL());
     }
 
     @Test
-    public void testOpenWeatherForBusinessLinkNavigateToForBusinessWeb() {
-        final String expectedURL = "https://openweather.co.uk/";
-        final String expectedTitle = "OpenWeather for business - OpenWeatherMap";
+    public void testInstagramIconNavigatesToInstagramWeb() {
+        final String expectedPartialInstagramURL = "https://www.instagram.com/swisscows.official/";
+
+        String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
-        String urlOfMainPage = openBaseURL().getCurrentURL();
-
-        mainPage.scrollToPageBottom()
-                .clickOpenWeatherForBusinessFooterMenuLink();
+        mainPage.scrollToFooterMenu()
+                .clickInstagramIcon();
         mainPage.switchToExternalPage();
         TestUtils.waitForPageLoaded(getDriver());
 
-        Assert.assertNotEquals(getExternalPageURL(), urlOfMainPage);
-        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
-        Assert.assertEquals(getExternalPageURL(), expectedURL);
+        Assert.assertNotEquals(getExternalPageURL(), oldURL);
+        Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
+
     }
+    @Test
+    public void testLinkedinIconNavigatesToLinkedinWeb() {
+        final String expectedPartialFacebookURL = "linkedin.com";
+
+        String oldURL = openBaseURL().getCurrentURL();
+
+        MainPage mainPage = new MainPage(getDriver());
+
+        mainPage.scrollToFooterMenu()
+                .clickLinkedinIcon();
+        mainPage.switchToExternalPage();
+        TestUtils.waitForPageLoaded(getDriver());
+
+        Assert.assertNotEquals(getExternalPageURL(), oldURL);
+        Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
+                " ExternalPageURL does not contain 'linkedin.com' " + getExternalPageURL());
+    }
+
+    @Test
+    public void testTwitterIconNavigatesToTwitterWeb() {
+        final String expectedPartialInstagramURL = "https://twitter.com/swisscows_ch";
+
+        String oldURL = openBaseURL().getCurrentURL();
+
+        MainPage mainPage = new MainPage(getDriver());
+
+        mainPage.scrollToFooterMenu()
+                .clickTwitterIcon();
+        mainPage.switchToExternalPage();
+        TestUtils.waitForPageLoaded(getDriver());
+
+        Assert.assertNotEquals(getExternalPageURL(), oldURL);
+        Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
+
+    }
+
+    @Test
+    public void testTeleGardIconNavigatesToTeleGardWeb() {
+        final String expectedPartialInstagramURL = "https://teleguard.com/en";
+
+        String oldURL = openBaseURL().getCurrentURL();
+
+        MainPage mainPage = new MainPage(getDriver());
+
+        mainPage.scrollToFooterMenu()
+                .clickTeleGuardIcon();
+        mainPage.switchToExternalPage();
+        TestUtils.waitForPageLoaded(getDriver());
+
+        Assert.assertNotEquals(getExternalPageURL(), oldURL);
+        Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
+
+    }
+
 
     @Test(priority = -5)
     public void testFooterMenuLinksAmount() {
@@ -315,6 +388,25 @@ public class FooterMenuTest extends BaseTest {
                 .getFooterMenuLinksCount();
 
         Assert.assertEquals(actualLinks, expectedLinks);
+    }
+
+    @Test
+    public void testBlockImprintDonationDataPrivacyTexts() {
+        List<String> OurProductsTextTexts = List.of(
+                "About Swisscows AG",
+                "Imprint",
+                "Data privacy",
+                "Donation"
+
+        );
+
+        List<String> actualSubscriptionTexts =
+                openBaseURL()
+                        .scrollToAboutSwisscowsAGFooterMenu()
+                        .getAboutSwisscowsAGMenusTexts();
+
+        Assert.assertTrue(actualSubscriptionTexts.size() > 0);
+        Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
     }
 
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)

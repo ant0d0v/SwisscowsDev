@@ -49,20 +49,16 @@ public class TestData {
     public static Object[][] footerMenuTestDataProvider() {
 
         return new Object[][] {
-                {0, "Current and Forecast APIs", "/api#current", "https://openweathermap.org/api#current", "Weather API - OpenWeatherMap"},
-                {1, "Historical Weather Data", "/api#history", "https://openweathermap.org/api#history", "Weather API - OpenWeatherMap"},
-                {2, "Weather Maps", "/api#maps", "https://openweathermap.org/api#maps", "Weather API - OpenWeatherMap"},
-                {3, "Weather Dashboard", "/weather-dashboard", "https://openweathermap.org/weather-dashboard", "Weather dashboard - OpenWeatherMap"},
-                {4, "Widgets", "/widgets-constructor", "https://openweathermap.org/widgets-constructor", "Weather widgets constructor - OpenWeatherMap"},
-                {5, "How to start", "/appid", "https://openweathermap.org/appid", "How to start to work with Openweather API - OpenWeatherMap"},
-                {6, "Pricing", "/price", "https://openweathermap.org/price", "Pricing - OpenWeatherMap"},
-                {7, "Subscribe for free", "https://home.openweathermap.org/users/sign_up", "https://home.openweathermap.org/users/sign_up", "Members"},
-                {8, "FAQ", "/faq", "https://openweathermap.org/faq", "Frequently Asked Questions - OpenWeatherMap"},
-                {9, "Our technology", "/technology", "https://openweathermap.org/technology", "Weather model - OpenWeatherMap"},
-                {10, "Accuracy and quality of weather data", "/accuracy-and-quality", "https://openweathermap.org/accuracy-and-quality", "Accuracy and quality of weather data - OpenWeatherMap"},
-                {11, "Connect your weather station", "/stations", "https://openweathermap.org/stations", "Weather Stations - OpenWeatherMap"},
-                {15, "About us", "/about-us", "https://openweathermap.org/about-us", "About us - OpenWeatherMap"},
-                {18, "Ask a question", "https://home.openweathermap.org/questions", "https://home.openweathermap.org/questions", "Members"}
+                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "Your private and anonymous search engine Swisscows"},
+                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Your private and anonymous search engine Swisscows"},
+                {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Social projects - We support social projects"},
+                {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data center – Everything about the Swisscows data center"},
+                {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us | Swisscows"},
+                {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Surf anonymously with VPN - Secure web surfing with Swisscows"},
+                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "Your private and anonymous search engine Swisscows"},
+                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "Your private and anonymous search engine Swisscows"},
+
+
         };
     }
 
@@ -70,9 +66,15 @@ public class TestData {
     public static Object[][] externalMenuTestDataProvider() {
 
         return new Object[][] {
-                {13, "Privacy Policy", "https://openweather.co.uk/privacy-policy", "https://openweather.co.uk/privacy-policy", "Privacy policy - OpenWeatherMap"},
-                {16, "Blog", "https://openweather.co.uk/blog/category/weather", "https://openweather.co.uk/blog/category/weather", "Blog - OpenWeatherMap"},
-                {17, "OpenWeather for Business", "https://openweather.co.uk/", "https://openweather.co.uk/", "OpenWeather for business - OpenWeatherMap"},
+                {6, "Swisscows.email", "https://swisscows.email/", "https://swisscows.email/", "Swisscows.email - My secure e-mail."},
+                {7, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en", "TeleGuard - secure messenger from Switzerland"},
+                {8, "HES", "https://hesbox.com/", "https://hesbox.com/en", "Enterprise Search Software for companies"},
+                {9, "GetDigest", "https://getdigest.com/", "https://getdigest.com/en", "GetDigest | Get a document summary. Fast!"},
+                {10, "Fan-shop", "https://swisscows-fanshop.com", "https://swisscows-fanshop.com/", "Swisscows Fanshop für Kleider und Geschenke für Fans"},
+                {11, "Swisscows Blog", "https://blog.swisscows.com/", "https://blog.swisscows.com/", "Blog - Swisscows AG"},
+
+
+
         };
     }
 
