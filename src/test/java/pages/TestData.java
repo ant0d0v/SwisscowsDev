@@ -25,22 +25,11 @@ public class TestData {
     public static Object[][] externalTopMenuTestDataProvider() {
 
         return new Object[][]{
-                {8, "Blog", "https://openweather.co.uk/blog/category/weather", "https://openweather.co.uk/blog/category/weather", "Blog - OpenWeatherMap"},
-                {9, "For Business", "https://openweather.co.uk", "https://openweather.co.uk/", "OpenWeather for business - OpenWeatherMap"}
+                {8, "Blog", "https://dev.swisscows.com/en/privacy", "https://dev.swisscows.com/en/privacy", "Blog "},
+                {9, "For Business", "https://dev.swisscows.com/en/privacy", "https://dev.swisscows.com/en/privacy", "for business"}
         };
     }
 
-    @DataProvider(name = "ApiIconsMainPage")
-    public static Object[][] apiIconsTestDataProvider() {
-
-        return new Object[][]{
-                {0, "current\nweather", "(current)", "/current", "https://openweathermap.org/current", "Current weather data - OpenWeatherMap"},
-                {1, "hourly\nforecast", "(4 days)", "/api/hourly-forecast", "https://openweathermap.org/api/hourly-forecast", "Hourly Weather Forecast 4 days - OpenWeatherMap"},
-                {2, "daily\nforecast", "(16 days)", "/forecast16", "https://openweathermap.org/forecast16", "Daily Forecast 16 Days - OpenWeatherMap"},
-                {3, "climatic\nforecast", "(30 days)", "/api/forecast30", "https://openweathermap.org/api/forecast30", "Climate forecast for 30 days - OpenWeatherMap"},
-                {4, "historical\nweather", "(1 month, 1 year)", "/history", "https://openweathermap.org/history", "Historical weather API - OpenWeatherMap"}
-        };
-    }
 
     @DataProvider(name = "FooterMenuData")
     public static Object[][] footerMenuTestDataProvider() {

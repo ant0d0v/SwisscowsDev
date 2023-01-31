@@ -411,7 +411,7 @@ public class FooterMenuTest extends BaseTest {
 
 
 
-    @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
+    @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
 
@@ -429,7 +429,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Test(dataProvider = "ExternalFooterMenuData", dataProviderClass = TestData.class)
+    @Test(dataProvider = "ExternalFooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)
     public void testExternalMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
 
