@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
+import pages.accounts.ProfilePage;
+import pages.accounts.UsersLoginPage;
+import pages.top_menu.VpnPage;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -11,35 +14,35 @@ import java.util.List;
 
 public abstract class TopMenuPage<Generic> extends BasePage {
 
-    private static final String TOP_MENU_ID = "//div[@id='desktop-menu']";
-    private static final String SUPPORT_DROPDOWN_ID = "//ul[@id='support-dropdown-menu']";
+    private static final String TOP_MENU_ID = "//div[@class = 'badges animation-badges']";
+    private static final String HAMBURGER_DROPDOWN_ID = "//button[@class = 'hamburger-menu']";
 
-    @FindBy(xpath = "//li[@class='logo']/a")
+    @FindBy(xpath = "//a[@class = 'logo']")
     private WebElement logo;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a")
+    @FindBy(xpath = TOP_MENU_ID + "//a") // 3 links [teleGuard, VPN, Email]
     private List<WebElement> topMenuLinks;
 
-    @FindBy(xpath = TOP_MENU_ID + "//form[@role='search']")
+    @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
     private WebElement searchBoxTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//input[@name='q']")
+    @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
     private WebElement searchFieldTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/guide']")
-    private WebElement guideTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//a[3]")
+    private WebElement TeleGuardTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//li/a[@href='/api']")
-    private WebElement apiTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//a[2]")
+    private WebElement VPNTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='https://home.openweathermap.org/marketplace']")
-    private WebElement marketplaceTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//a[1]")
+    private WebElement EmailTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/price']")
-    private WebElement pricingTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']//a[@href = '/en/set-as-startpage']")
+    private WebElement setAsStartAppHamburgerMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/weathermap']")
-    private WebElement mapsTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']")
+    private WebElement hamburgerDropDownContainerTopMenu;
 
     @FindBy(xpath = TOP_MENU_ID + "//a[@href='/our-initiatives']")
     private WebElement ourInitiativesTopMenu;
@@ -47,7 +50,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a[@href='/examples']")
     private WebElement partnersTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "/ul/li")
+    @FindBy(xpath = TOP_MENU_ID + "//a")
     private List<WebElement> topMenus;
 
     @FindBy(xpath = TOP_MENU_ID + "//a[@href='/weather-dashboard']")
@@ -56,32 +59,32 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a[@href='https://openweathermap.org/weather-dashboard']")
     private WebElement homeDashboardTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//li[@class='user-li']/a")
+    @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
 
-    @FindBy(id = "support-dropdown")
-    private WebElement supportTopMenu;
+    @FindBy(xpath= "//div[@class ='menu popup']")
+    private WebElement hamburgerTopMenuDropdown;
 
-    @FindBy(xpath = "//li[@class='with-dropdown']//ul")
-    private WebElement supportTopMenuDropdown;
+    @FindBy(xpath = "//button[@type = 'button']")
+    private WebElement hamburgerTopMenu;
 
-    @FindBy(xpath = "//li[@class='with-dropdown']//li/a")
-    private List<WebElement> supportTopMenuDropdownLinks;
+    @FindBy(xpath = "//div[@class ='menu popup']//a")
+    private List<WebElement> hamburgerTopMenuDropdownLinks;
 
-    @FindBy(xpath = SUPPORT_DROPDOWN_ID + "//li/a[@href='/faq']")
+    @FindBy(xpath = "//div[@class ='menu popup']//li")
+    private List<WebElement> hamburgerTopMenuDropdownList;
+
+    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='/faq']")
     private WebElement faqSupportSubmenu;
 
-    @FindBy(xpath = SUPPORT_DROPDOWN_ID + "//li/a[@href='/appid']")
+    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='/appid']")
     private WebElement howToStartSupportSubmenu;
 
-    @FindBy(xpath = SUPPORT_DROPDOWN_ID + "//li/a[@href='https://home.openweathermap.org/questions']")
+    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='https://home.openweathermap.org/questions']")
     private WebElement askQuestionSupportSubmenu;
 
-    @FindBy(xpath = "//nav/ul/li[@id='hamburger']/img")
+    @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenuIcon;
-
-    @FindBy(xpath = "//ul[@id='mobile-menu']/li/a")
-    private List<WebElement> hamburgerTopMenuDropdownLinks;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -101,7 +104,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public List<String> getLinksText() {
 
-        return getTexts(supportTopMenuDropdownLinks);
+        return getTexts(hamburgerTopMenuDropdownLinks);
     }
 
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
@@ -115,14 +118,23 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
 
+    public List<String> getHamburgerMenuAllListText() {
+
+        return getTexts(hamburgerTopMenuDropdownList);
+    }
+
     public int getNumberOfOptionsHamburgerMenu() {
 
         return getListSize(hamburgerTopMenuDropdownLinks);
     }
+    public int getNumberOfListHamburgerMenu() {
 
-    public String getSupportMenuIsActiveValue() {
+        return getListSize(hamburgerTopMenuDropdownList);
+    }
 
-        return getAttribute(supportTopMenuDropdown, "class");
+    public String getHamburgerMenuIsActiveValue() {
+
+        return getAttribute(hamburgerTopMenu, "class");
     }
 
     public List<WebElement> getTopMenuLinks() {
@@ -130,21 +142,21 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return topMenuLinks;
     }
 
-    public Generic clickTopMenu(int index) {
-        List<WebElement> menus = new ArrayList<>();
-        menus.add(logo);
-        menus.addAll(topMenuLinks);
 
-        if (menus.get(index).isDisplayed()) {
-            click(menus.get(index));
-        } else {
-            clickSupportMenu().click(menus.get(index));
-        }
+    public void clickTopMenu(int index) {
+        List<WebElement> menus = new ArrayList<>();
+        click(hamburgerTopMenu);
+        menus.addAll(hamburgerTopMenuDropdownLinks);
+        click(menus.get(index));
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
+    }
 
-        return createGeneric();
+    public MainPage clickHamburgerMenu() {
+        click(hamburgerTopMenu);
+
+        return new MainPage(getDriver());
     }
 
     public void clickTopMenuExternalLink (int index) {
@@ -174,10 +186,24 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }*/
 
 
-    public MainPage clickSupportMenu() {
-        click(supportTopMenu);
+    public void clickTeleGuardTopMenu() {
+        click(TeleGuardTopMenu);
 
-        return new MainPage(getDriver());
+        new MainPage(getDriver());
+    }
+
+    public void clickEmailTopMenu() {
+        click(EmailTopMenu);
+
+        new MainPage(getDriver());
+    }
+
+
+
+    public VpnPage clickVPNTopMenu() {
+        click(VPNTopMenu);
+
+        return new VpnPage(getDriver());
     }
 
 
@@ -189,7 +215,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public void clickHamburgerMenuIcon() {
-        click(hamburgerTopMenuIcon);
+        click(hamburgerTopMenu);
+
+        new MainPage(getDriver());
+    }
+
+    public void clickSetAsStartAppInHamburgerMenu() {
+        click(setAsStartAppHamburgerMenu);
 
         new MainPage(getDriver());
     }
@@ -216,9 +248,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return isElementDisplayed(searchBoxTopMenu);
     }
 
-    public boolean isSupportDropdownContainerDisplayed() {
+    public boolean isHamburgerDropdownContainerDisplayed() {
 
-        return isElementDisplayed(supportTopMenuDropdown);
+        return isElementDisplayed(hamburgerDropDownContainerTopMenu);
     }
 
     public boolean isHamburgerIconDisplayed() {
@@ -230,11 +262,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return isElementDisplayed(logo);
     }
+    public UsersLoginPage clickSignInMenu() {
+        click20(signInTopMenu);
+
+        return new UsersLoginPage(getDriver());
+    }
 
     public String getEnteredValue() {
 
         return getAttribute(searchFieldTopMenu, "value");
     }
+
+
 
    /* public FindPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
