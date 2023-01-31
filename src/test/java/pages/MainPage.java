@@ -64,7 +64,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][1]")
     private WebElement homepageBannerSwitchFirst; // Click on the first switch
 
-    @FindBy(xpath = "//div[@data-swiper-slide-index = '2']")
+    @FindBy(xpath = "//div[@data-swiper-slide-index = '1']")
     private WebElement homepageBannerImage; // Image of banner
 
     @FindBy(xpath = "//div[@class = 'swiper-wrapper']//a[@href]//img[@src]")
