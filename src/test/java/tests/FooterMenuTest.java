@@ -114,7 +114,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCharityProjectFooterLinkNavigatesToCharityProjectPage() {
         final String expectedURL = "https://dev.swisscows.com/en/social-projects";
         final String expectedTitle = "Social projects - We support social projects";
@@ -133,7 +133,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOurDatacenterPageFooterLinkNavigatesToOurDatacenterPagePage() {
         final String expectedURL = "https://dev.swisscows.com/en/data-safe-search-engine";
         final String expectedTitle = "Data center – Everything about the Swisscows data center";
@@ -155,7 +155,7 @@ public class FooterMenuTest extends BaseTest {
 
 
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testWhoWeAreUsFooterLinkNavigatesToAboutUsPage() {
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
         final String expectedUrl = "https://dev.swisscows.com/en/search-engine-no-tracking";

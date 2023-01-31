@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import utils.ProjectConstants;
+import utils.TestUtils;
 
 import java.util.List;
 
@@ -70,6 +71,9 @@ public class MainTest extends BaseTest {
         mainPage
                 .clickHomeBanner()
                 .switchToAnotherWindow();
+
+        TestUtils.waitForPageLoaded(getDriver());
+
 
         String actualUrl = mainPage.getCurrentURL();
 

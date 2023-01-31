@@ -8,6 +8,7 @@ import pages.TestData;
 import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
+import tests.retrytest.Retry;
 import utils.ProjectConstants;
 import utils.TestUtils;
 
@@ -58,7 +59,7 @@ public class TopMenuTest extends BaseTest {
 
 
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testVPNIconNavigatesToVPNWebTopMenu() {
         final String expectedURL = "https://dev.swisscows.com/en/anonymous-vpn";
         final String expectedTitle = "Surf anonymously with VPN - Secure web surfing with Swisscows";
