@@ -11,8 +11,8 @@ import pages.footer_menu.WhoWeArePage;
 import pages.footer_menu.TechnologyPage;
 import pages.footer_menu.WidgetsPage;
 import pages.home.HomeAskQuestionPage;
-import pages.top_menu.PricePage;
-import pages.top_menu.WeatherDashboardPage;*/
+import pages.pages.top_menu.PricePage;
+import pages.pages.top_menu.WeatherDashboardPage;*/
 
 import java.util.List;
 

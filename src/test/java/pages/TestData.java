@@ -8,19 +8,16 @@ public class TestData {
     public static Object[][] topMenuTestDataProvider() {
 
         return new Object[][]{
-                {0, "Logo", "/", "https://openweathermap.org/", "Сurrent weather and forecast - OpenWeatherMap"},
-                {1, "Guide", "/guide", "https://openweathermap.org/guide", "OpenWeatherMap API guide - OpenWeatherMap"},
-                {2, "API", "/api", "https://openweathermap.org/api", "Weather API - OpenWeatherMap"},
-                {3, "Dashboard", "/weather-dashboard", "https://openweathermap.org/weather-dashboard", "Weather dashboard - OpenWeatherMap"},
-                {4, "Marketplace", "https://home.openweathermap.org/marketplace", "https://home.openweathermap.org/marketplace", "Marketplace: History Bulk, History Forecast Bulk, Historical Weather Data by State for all ZIP codes, USA - OpenWeather"},
-                {5, "Pricing", "/price", "https://openweathermap.org/price", "Pricing - OpenWeatherMap"},
-                {6, "Maps", "/weathermap", "https://openweathermap.org/weathermap", "Interactive weather maps - OpenWeatherMap"},
-                {7, "Our Initiatives", "/our-initiatives", "https://openweathermap.org/our-initiatives", "Our Initiatives - OpenWeatherMap"},
-                {8, "Partners", "/examples", "https://openweathermap.org/examples", "Partners and solutions - OpenWeatherMap"},
-                {11, "Sign In", "/users/sign_in", "https://home.openweathermap.org/users/sign_in", "Members"},
-                {12, "FAQ", "/faq", "https://openweathermap.org/faq", "Frequently Asked Questions - OpenWeatherMap"},
-                {13, "How to start", "/appid", "https://openweathermap.org/appid", "How to start to work with Openweather API - OpenWeatherMap"},
-                {14, "Ask a question", "https://home.openweathermap.org/questions", "https://home.openweathermap.org/questions", "Members"}
+                {0, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage"},
+                {1, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search"},
+                {2, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking"},
+                {3, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education"},
+                {4, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects"},
+                {5, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine"},
+                {6, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact"},
+                {7, "Data privacy", "/en/privacy", "https://dev.swisscows.com/en/privacy"},
+                {8, "Donation", "/en/donation", "https://dev.swisscows.com/en/donation"},
+
         };
     }
 

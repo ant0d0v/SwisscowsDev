@@ -3,6 +3,8 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import utils.ProjectConstants;
+
 import java.util.List;
 
 public class MainTest extends BaseTest {
@@ -304,6 +306,30 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock1());
         Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock2());
         Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock3());
+
+    }
+
+    @Test
+    public void testPlaceholderIsAvailable_Main() {
+        final String expectedInnerTextOfPlaceholder = "Your search. Your business.";
+        final String attribute = "placeholder";
+
+        MainPage mainPage = openBaseURL();
+        Assert.assertTrue(mainPage.isPlaceholderDisplayedMain());
+
+        String actualInnerTextOfPlaceholder = mainPage.getInnerTextOfPlaceholderMain(attribute);
+
+        Assert.assertEquals(actualInnerTextOfPlaceholder, expectedInnerTextOfPlaceholder);
+    }
+
+    @Test
+    public void testAdaptiveHomePageHasLogo() {
+
+
+        MainPage mainPage =  openBaseURL()
+                .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
+
+        Assert.assertTrue(new MainPage(getDriver()).isHomePageLogoDisplayed());
 
     }
 

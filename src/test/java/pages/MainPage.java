@@ -273,6 +273,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//ul//li[contains(text(), '%')]")
     private WebElement currentHumidity;
 
+    @FindBy(xpath = "//input[@class ='input-search']")
+    private WebElement searchBoxTopMenu;
+
+    @FindBy(xpath =  "//input[@class ='input-search']")
+    private WebElement searchField;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -373,6 +379,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
         }
 
         return displayedIcons;
+    }
+
+    public boolean isHomePageLogoDisplayed() {
+
+        return isElementDisplayed(logoHome);
     }
 
     public List<String> getTextsAllQuestion() {
@@ -675,6 +686,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public boolean homePageBannerIsDisplayed() {
 
         return isElementDisplayed(homepageBanner);
+    }
+
+    public boolean isPlaceholderDisplayedMain() {
+
+        return isElementDisplayed(searchBoxTopMenu);
+    }
+
+    public String getInnerTextOfPlaceholderMain(String attribute) {
+
+        return getAttribute(searchField, attribute);
     }
 
 

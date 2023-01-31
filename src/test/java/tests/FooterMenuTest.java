@@ -409,6 +409,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
     }
 
+
+
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
