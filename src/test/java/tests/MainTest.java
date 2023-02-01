@@ -13,6 +13,7 @@ public class MainTest extends BaseTest {
     @Test
     public void testSuggestIsDysplaed() {
         final String query = "test";
+        final int expectedSizeSuggest = 5;
 
         MainPage mainPage = openBaseURL();
 
@@ -23,8 +24,11 @@ public class MainTest extends BaseTest {
                 .clickSearchField()
                 .waitForSuggestToBeVisible();
 
-
+        int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
         Assert.assertTrue(mainPage.suggestIsDisplayed());
+        Assert.assertTrue(actualSizeSuggest > 0);
+        Assert.assertEquals(actualSizeSuggest, expectedSizeSuggest);
+
 
 
     }
@@ -44,7 +48,11 @@ public class MainTest extends BaseTest {
 
         List<String> actualSuggestion = mainPage.getAllElementsText();
 
+        int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
+
         for (String searchCriteria : actualSuggestion) {
+            Assert.assertTrue(mainPage.suggestIsDisplayed());
+            Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
 
         }
@@ -66,6 +74,8 @@ public class MainTest extends BaseTest {
         final String expectedUrl = "https://dev.swisscows.com/en/music?query=popular+music";
 
         MainPage mainPage = openBaseURL();
+
+        String oldUrl  = mainPage.getCurrentURL();
         mainPage
                 .waitForImageInBannerDisappeared();
         mainPage
@@ -73,15 +83,15 @@ public class MainTest extends BaseTest {
                 .switchToAnotherWindow();
 
         TestUtils.waitForPageLoaded(getDriver());
-
-
         String actualUrl = mainPage.getCurrentURL();
 
+        Assert.assertNotEquals(oldUrl,actualUrl);
         Assert.assertEquals(actualUrl,expectedUrl);
     }
     @Test
     public void testHomePageBannerSwitching ()  {
 
+        final String expectedValue = "swiper-slide swiper-slide-next";
 
         MainPage mainPage = openBaseURL();
         mainPage
@@ -92,7 +102,7 @@ public class MainTest extends BaseTest {
                 .clickBannerSwitchFirst();
         String valueFirstSwitch = mainPage.getClassAttributeSwitchFirst();
 
-
+        Assert.assertEquals(valueFirstSwitch,expectedValue);
         Assert.assertNotEquals(valueSecondSwitch,valueFirstSwitch);
 
     }

@@ -231,4 +231,102 @@ public class TopMenuTest extends BaseTest {
         Assert.assertTrue(actualURL.contains(expectedURLPartial)," PageURL does not contain 'accounts.dev.swisscows.com' ");
 
     }
+
+    @Test
+    public void testLocalizationDropdownMenuIsAvailableAndHasOptions_TopMenu() {
+        final int expectedNumberOfOptionsHamburgerMenu = 10;
+        final List<String> expectedHamburgerMenuListTexts = List.of(
+                "English", "Deutsch", "Français", "Italiano", "Español",
+                "Nederlands", "Latviešu", "Magyar", "Русский", "Українська"
+        );
+        openBaseURL()
+                .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU)
+                .clickHamburgerMenuIcon();
+
+        MainPage mainPage = new MainPage(getDriver());
+        mainPage
+                .clickLanguagesTopMenu();
+
+
+
+        int actualNumberOfOptionsHamburgerMenu = new MainPage(getDriver()).getNumberLangMenu();
+
+        List<String> actualHamburgerMenuListTexts = new MainPage(getDriver()).getLangMenuListTexts();
+
+        Assert.assertTrue(new MainPage(getDriver()).isHamburgerIconDisplayed());
+        Assert.assertTrue(new MainPage(getDriver()).getNumberOfListHamburgerMenu() > 0);
+        Assert.assertEquals(actualNumberOfOptionsHamburgerMenu, expectedNumberOfOptionsHamburgerMenu);
+        Assert.assertEquals(actualHamburgerMenuListTexts, expectedHamburgerMenuListTexts);
+    }
+
+    @Test(dataProvider = "LangTopMenuTestData", dataProviderClass = TestData.class)
+    public void testLocalizationNavigateToCorrespondingPages(
+            int index, String LangName, String expectedURL, String expectedTitle) {
+
+        MainPage mainPage = openBaseURL();
+
+        final String oldURL = mainPage.getCurrentURL();
+        final String oldTitle = mainPage.getTitle();
+
+        mainPage.clickHamburgerMenu().clickLangDropDown(index);
+        TestUtils.waitForPageLoaded(getDriver());
+        String actualURL = mainPage.getCurrentURL();
+        String actualTitle = getDriver().getTitle();
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldTitle, actualTitle);
+        Assert.assertEquals(actualURL, expectedURL);
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+    @Test
+    public void testRegionDropdownMenuIsAvailableAndHasOptions_TopMenu() {
+        final int expectedNumberOfOptionsHamburgerMenu = 46;
+        final List<String> expectedHamburgerMenuListTexts = List.of(
+                "Argentina", "Australia", "Austria", "Belgium (fr)", "Belgium (nl)",
+                "Brazil", "Canada (en)", "Canada (fr)", "Chile", "China", "Denmark", "Finland", "France",
+                "Germany", "Hong Kong SAR", "Hungary", "India", "Indonesia", "Italy", "Japan",
+                 "Kazakhstan", "Korea", "Latvia", "Malaysia", "Mexico", "Netherlands",
+                "New Zealand", "Nigeria", "Norway", "Philippines", "Poland", "Portugal", "Russia", "Saudi Arabia", "South Africa"
+                ,"Spain", "Sweden", "Switzerland (de)", "Switzerland (fr)", "Taiwan", "Turkey","Ukraine", "United Kingdom"
+                ,"United States (en)", "United States (es)", "World-wide"
+        );
+        openBaseURL()
+                .clickHamburgerMenuIcon();
+
+        MainPage mainPage = new MainPage(getDriver());
+        mainPage
+                .clickRegionTopMenu();
+        mainPage
+                .scrollToLastElementInDropdownRegion();
+
+        int actualNumberOfOptionsHamburgerMenu = new MainPage(getDriver()).getNumberRegionMenu();
+
+        List<String> actualHamburgerMenuListTexts = new MainPage(getDriver()).getLangMenuListTexts();
+
+        Assert.assertTrue(new MainPage(getDriver()).isHamburgerIconDisplayed());
+        Assert.assertTrue(new MainPage(getDriver()).getNumberOfListHamburgerMenu() > 0);
+        Assert.assertEquals(actualNumberOfOptionsHamburgerMenu, expectedNumberOfOptionsHamburgerMenu);
+        Assert.assertEquals(actualHamburgerMenuListTexts, expectedHamburgerMenuListTexts);
+    }
+
+    @Test(dataProvider = "RegionTopMenuTestData", dataProviderClass = TestData.class)
+    public void testRegionNavigateToCorrespondingPages(
+            int index, String LangName, String expectedURL, String expectedTitle) {
+
+        MainPage mainPage = openBaseURL();
+
+        final String oldURL = mainPage.getCurrentURL();
+
+        mainPage.clickHamburgerMenu().clickRegionDropDown(index);
+        TestUtils.waitForPageLoaded(getDriver());
+        String actualURL = mainPage.getCurrentURL();
+        String actualTitle = getDriver().getTitle();
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertEquals(actualURL, expectedURL);
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+
+
 }

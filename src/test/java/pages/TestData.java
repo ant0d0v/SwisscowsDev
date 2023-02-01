@@ -21,6 +21,43 @@ public class TestData {
         };
     }
 
+    @DataProvider(name = "LangTopMenuTestData")
+    public static Object[][] LangTestDataProvider() {
+
+        return new Object[][]{
+                {1, "Deutsch", "https://dev.swisscows.com/de","Deine private und anonyme Suchmaschine Swisscows"},
+                {2, "Français", "https://dev.swisscows.com/fr", "Votre moteur de recherche privé et anonyme Swisscows"},
+                {3, "Italiano", "https://dev.swisscows.com/it", "Il tuo motore di ricerca privato e anonimo Swisscows"},
+                {4, "Español", "https://dev.swisscows.com/es", "Su buscador privado y anónimo Swisscows"},
+                {5, "Nederlands", "https://dev.swisscows.com/nl", "Uw privé en anonieme zoekmachine Swisscows"},
+                {6, "Latviešu", "https://dev.swisscows.com/lv", "Jūsu privātā un anonīma meklētājprogramma Swisscows"},
+                {7, "Magyar", "https://dev.swisscows.com/hu", "Az Ön privát és névtelen keresőmotorja, Swisscows"},
+                {8, "Русский", "https://dev.swisscows.com/ru", "Swisscows - Ваша приватная и анонимная поисковая система"},
+                {9, "Українська", "https://dev.swisscows.com/uk", "Swisscows - Ваша приватна та анонімна пошукова система"},
+
+        };
+    }
+
+    @DataProvider(name = "RegionTopMenuTestData")
+    public static Object[][] RegionTestDataProvider() {
+
+        return new Object[][]{
+                {0, "Argentina", "https://dev.swisscows.com/en?region=es-AR","Your private und anonymous search engine Swisscows"},
+                {1, "Australia", "https://dev.swisscows.com/en?region=en-AU", "Your private und anonymous search engine Swisscows"},
+                {2, "Austria", "https://dev.swisscows.com/en?region=de-AT", "Your private und anonymous search engine Swisscows"},
+                {3, "Belgium(fr)", "https://dev.swisscows.com/en?region=fr-BE", "Your private und anonymous search engine Swisscows"},
+                {6, "Canada(en)", "https://dev.swisscows.com/en?region=en-CA", "Your private und anonymous search engine Swisscows"},
+                {7, "Canada(fr)", "https://dev.swisscows.com/en?region=fr-CA", "Your private und anonymous search engine Swisscows"},
+                {12, "France", "https://dev.swisscows.com/en?region=fr-FR", "Your private und anonymous search engine Swisscows"},
+                {13, "Germany", "https://dev.swisscows.com/en?region=de-DE", "Your private und anonymous search engine Swisscows"},
+                {18, "Italy", "https://dev.swisscows.com/en?region=it-IT", "Your private und anonymous search engine Swisscows"},
+                {37, "Switzerland(de)", "https://dev.swisscows.com/en?region=de-CH", "Your private und anonymous search engine Swisscows"},
+                {38, "Switzerland(fr)", "https://dev.swisscows.com/en?region=fr-CH", "Your private und anonymous search engine Swisscows"},
+                {45, "World-wide", "https://dev.swisscows.com/en?region=iv", "Your private und anonymous search engine Swisscows"},
+
+        };
+    }
+
     @DataProvider(name = "ExternalTopMenuTestData")
     public static Object[][] externalTopMenuTestDataProvider() {
 
