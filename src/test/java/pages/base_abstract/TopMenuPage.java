@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
-import pages.accounts.ProfilePage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
 import utils.TestUtils;
@@ -86,6 +85,26 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenuIcon;
 
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']/li")
+    private List<WebElement> innerLangMenuList;
+
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li")
+    private List<WebElement> innerRegionMenuList;
+
+    @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
+    private WebElement LangDropDownIcon;
+
+    @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
+    private WebElement RegionDropDownIcon;
+
+    @FindBy(xpath = "//div[@class='menu-dropdown-button'][3]")
+    private WebElement ThemeDropDownIcon;
+
+    @FindBy(xpath = "//div[@class='menu-dropdown-button'][3]")
+    private WebElement lastElementInDropdownRegion;
+
+
+
     public TopMenuPage(WebDriver driver) {
         super(driver);
     }
@@ -102,6 +121,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getAttribute(searchFieldTopMenu, attribute);
     }
 
+    protected WebElement getLastElementInDropdownRegion() {
+
+        return lastElementInDropdownRegion;
+    }
+
     public List<String> getLinksText() {
 
         return getTexts(hamburgerTopMenuDropdownLinks);
@@ -113,9 +137,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
 
-    public List<String> getHamburgerMenuList() {
+    public List<String> getLangMenuListTexts() {
 
-        return getTexts(hamburgerTopMenuDropdownLinks);
+        return getTexts(innerLangMenuList);
     }
 
     public List<String> getHamburgerMenuAllListText() {
@@ -123,9 +147,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getTexts(hamburgerTopMenuDropdownList);
     }
 
-    public int getNumberOfOptionsHamburgerMenu() {
+    public int getNumberLangMenu() {
 
-        return getListSize(hamburgerTopMenuDropdownLinks);
+        return getListSize(innerRegionMenuList);
+    }
+    public int getNumberRegionMenu() {
+
+        return getListSize(innerRegionMenuList);
     }
     public int getNumberOfListHamburgerMenu() {
 
@@ -194,6 +222,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public void clickEmailTopMenu() {
         click(EmailTopMenu);
+
+        new MainPage(getDriver());
+    }
+
+    public void clickLanguagesTopMenu() {
+        click(LangDropDownIcon);
+
+        new MainPage(getDriver());
+    }
+
+    public void clickRegionTopMenu() {
+        click(RegionDropDownIcon);
 
         new MainPage(getDriver());
     }
@@ -271,6 +311,34 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public String getEnteredValue() {
 
         return getAttribute(searchFieldTopMenu, "value");
+    }
+    public void clickLangDropDown(int index) {
+        click(LangDropDownIcon);
+        click(getInnerLangMenuList().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        createGeneric();
+    }
+
+    public void clickRegionDropDown(int index) {
+        click(RegionDropDownIcon);
+        click(getInnerRegionMenuList().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        createGeneric();
+    }
+
+    public List<WebElement> getInnerLangMenuList() {
+
+        return innerLangMenuList;
+    }
+    public List<WebElement> getInnerRegionMenuList() {
+
+        return innerRegionMenuList;
     }
 
 

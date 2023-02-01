@@ -420,7 +420,9 @@ public class FooterMenuTest extends BaseTest {
         final String oldURL = mainPage.getCurrentURL();
         final String oldTitle = mainPage.getTitle();
 
-        String actualURL = mainPage.scrollToFooterMenu().clickFooterMenu(index).getCurrentURL();
+        mainPage.scrollToFooterMenu().clickFooterMenu(index);
+        TestUtils.waitForPageLoaded(getDriver());
+        String actualURL = mainPage.getCurrentURL();
         String actualTitle = getDriver().getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);

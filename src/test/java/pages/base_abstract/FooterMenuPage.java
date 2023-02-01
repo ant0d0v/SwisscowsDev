@@ -148,6 +148,18 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(xpath = FOOTER_MENU_ID + "//ul/li/a")
     private List<WebElement> innerFooterMenuLink;
 
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']/li")
+    private List<WebElement> innerLangMenuList;
+
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li")
+    private List<WebElement> innerRegionMenuList;
+
+    @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
+    private WebElement LangDropDownIcon;
+
+    @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
+    private WebElement RegionDropDownIcon;
+
     public FooterMenuPage(WebDriver driver) {
         super(driver);
     }
@@ -211,6 +223,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return innerFooterMenuLink;
     }
 
+
+
     public Generic clickFooterMenu(int index) {
         click(getInnerFooterMenuLinks().get(index));
         if (getDriver().getWindowHandles().size() > 1) {
@@ -219,6 +233,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return createGeneric();
     }
+
 
     public void clickFooterMenuExternalLink(int index) {
         click(getInnerFooterMenuLinks().get(index));

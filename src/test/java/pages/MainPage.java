@@ -198,6 +198,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//ul[@class = 'suggestions']")
     private WebElement suggestMainPage;
 
+    @FindBy(xpath = "//ul[@class = 'suggestions']//li")
+    private List<WebElement> suggestListMainPage;
+
     @FindBy(xpath = "//a[@href='/cookies-settings' and text()=' Manage cookies ']")
     private WebElement manageButton;
 
@@ -417,7 +420,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getTexts(listOfEightDaysData);
     }
-
     public String getH2Header() {
 
         return getText(mainPageHeader2);
@@ -426,11 +428,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public String getAdditionalInfoText() {
 
         return getAttribute(anyAdditionalInfoTextarea, "_value");
-    }
-
-    public String getDataSourceDropDownText() {
-
-        return getText(dataSourceDropDown);
     }
 
     public String getEmailTextBoxText() {
@@ -542,12 +539,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 //        return new BulkPage(getDriver());
 //    }
 
-    public MainPage clickMoreOptionsDropDown() {
-        click20(moreOptionsDropDown);
-
-        return this;
-    }
-
     public MainPage clickLessOptionsDropDown() {
         click20(moreOptionsDropDown);
 
@@ -583,6 +574,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public MainPage scrollToFooterMenu() {
         scrollByVisibleElement(getFooterMenu());
+
+        return this;
+    }
+
+    public MainPage scrollToLastElementInDropdownRegion() {
+        scrollByVisibleElement(getLastElementInDropdownRegion());
 
         return this;
     }
@@ -680,9 +677,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return list;
     }
 
-    public int countActiveIconsInDifferentWeatherContainer() {
+    public int countElementsInSuggestContainer() {
 
-        return getListSize(activeIconsInDifferentWeatherContainer);
+        return getListSize(suggestListMainPage);
     }
 
     public MainPage scrollToPageBottom() {
