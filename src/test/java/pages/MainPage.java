@@ -389,11 +389,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return isElementDisplayed(logoHome);
     }
 
-    public List<String> getTextsAllQuestion() {
-
-        return getTexts(getListOfQuestion());
-    }
-
     public List<String> getListWeatherDescriptionText() {
         getActions().scrollByAmount(0, 500).perform();
 
@@ -425,9 +420,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getTexts(listOfEightDaysData);
     }
-
-
-
     public String getH2Header() {
 
         return getText(mainPageHeader2);
@@ -494,11 +486,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-    public MainPage clickQuestion2() {
-        click(homepageQuestion2);
-
-        return this;
-    }
 
     public MainPage clickInstallGoogleBlockPopup() {
         click(installGoogleBlockPopup);
@@ -511,21 +498,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-    public MainPage clickLinkInQuestion4() {
+    public void clickLinkInQuestion4() {
         click(linkInQuestion4);
 
-        return this;
     }
 
-    public MainPage clickQuestion6() {
-        click(homepageQuestion6);
-
-        return this;
-    }
-
-    public MainPage clickAllQuestions(){
+    public void clickAllQuestions(){
         clickAllElementsInList(homepageAllQuestion);
-        return this;
     }
 
 
@@ -552,13 +531,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-//    public CurrentWeatherPage clickCurrentWeatherIcon() {
-//        wait10ElementToBeClickable(currentWeatherIcon);
-//        click20(currentWeatherIcon);
-//
-//        return new CurrentWeatherPage(getDriver());
-//
-//   }
 
 //    public BulkPage clickBulks() {
 //        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
@@ -599,9 +571,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public void clickApiIcon(int index) {
-        click(getApiIcons().get(index));
-    }
 
     public MainPage scrollToFooterMenu() {
         scrollByVisibleElement(getFooterMenu());
@@ -677,17 +646,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-    public MainPage switchToMetric() {
-        click(metricButton);
-
-        return this;
-    }
-
-    public MainPage switchToImperial() {
-        click(imperialButton);
-
-        return this;
-    }
 
     public MainPage clickMainLogo() {
         click(logoHome);
@@ -736,19 +694,17 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     }
 
-    public MainPage waitForFooterPanelToBeVisible() {
+    public void waitForFooterPanelToBeVisible() {
         wait20ElementToBeVisible(footerPanelContainer);
         wait20ElementToBeVisible(imageFooterPanel);
 
-        return this;
     }
 
 
-    public MainPage waitForSuggestToBeVisible() {
+    public void waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
 
 
-        return this;
     }
     public void waitForPopupGoogleInstallToBeVisible() {
         wait20ElementToBeVisible(googlePopupInstall);
