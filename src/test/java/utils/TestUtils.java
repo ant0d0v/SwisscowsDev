@@ -21,7 +21,7 @@ public class TestUtils {
     public static void loadBaseUrlPage(WebDriver driver, WebDriverWait wait) {
         driver.get(BaseTest.getBaseUrl());
         waitForPageLoaded(driver);
-        wait.until(ExpectedConditions.presenceOfElementLocated(ON_LOAD_CONTAINER));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ON_LOAD_CONTAINER));
     }
 
     public static void waitForPageLoaded(WebDriver driver) {
