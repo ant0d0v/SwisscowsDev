@@ -23,6 +23,7 @@ public class MainTest extends BaseTest {
                 .waitForSuggestToBeVisible();
 
 
+
         Assert.assertTrue(mainPage.suggestIsDisplayed());
 
 
