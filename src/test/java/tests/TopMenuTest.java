@@ -312,14 +312,14 @@ public class TopMenuTest extends BaseTest {
 
     @Test(dataProvider = "RegionTopMenuTestData", dataProviderClass = TestData.class)
     public void testRegionNavigateToCorrespondingPages(
-            int index, String LangName, String expectedURL, String expectedTitle) {
+            int index, String LangName, String expectedURL, String expectedTitle) throws InterruptedException {
 
         MainPage mainPage = openBaseURL();
 
         final String oldURL = mainPage.getCurrentURL();
 
         mainPage.clickHamburgerMenu().clickRegionDropDown(index);
-        TestUtils.waitForPageLoaded(getDriver());
+        sleep(3000);
         String actualURL = mainPage.getCurrentURL();
         String actualTitle = getDriver().getTitle();
 
