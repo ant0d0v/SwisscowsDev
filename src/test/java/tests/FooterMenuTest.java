@@ -411,9 +411,9 @@ public class FooterMenuTest extends BaseTest {
 
 
 
-    @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)
+    @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
-            int index, String linkName, String href, String expectedURL, String expectedTitle) {
+            int index, String linkName, String href, String expectedURL, String expectedTitle) throws InterruptedException {
 
         MainPage mainPage = openBaseURL();
 
@@ -421,7 +421,7 @@ public class FooterMenuTest extends BaseTest {
         final String oldTitle = mainPage.getTitle();
 
         mainPage.scrollToFooterMenu().clickFooterMenu(index);
-        TestUtils.waitForPageLoaded(getDriver());
+
         String actualURL = mainPage.getCurrentURL();
         String actualTitle = getDriver().getTitle();
 
