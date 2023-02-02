@@ -22,8 +22,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a") // 3 links [teleGuard, VPN, Email]
     private List<WebElement> topMenuLinks;
 
-    @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
-    private WebElement searchBoxTopMenu;
+    @FindBy(xpath = TOP_MENU_ID + "//div[@class='input-search-wrap']")
+    private WebElement searchBoxMainPage;
 
     @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
     private WebElement searchFieldTopMenu;
@@ -285,7 +285,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public boolean isPlaceholderDisplayed() {
 
-        return isElementDisplayed(searchBoxTopMenu);
+        return isElementDisplayed(searchBoxMainPage);
     }
 
     public boolean isHamburgerDropdownContainerDisplayed() {

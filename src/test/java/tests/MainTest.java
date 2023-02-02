@@ -334,16 +334,20 @@ public class MainTest extends BaseTest {
         String actualInnerTextOfPlaceholder = mainPage.getInnerTextOfPlaceholderMain(attribute);
 
         Assert.assertEquals(actualInnerTextOfPlaceholder, expectedInnerTextOfPlaceholder);
+
     }
 
     @Test
     public void testAdaptiveHomePageHasLogo() {
+        MainPage mainPage =  openBaseURL();
 
-
-        MainPage mainPage =  openBaseURL()
-                .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
+        mainPage.setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
 
         Assert.assertTrue(new MainPage(getDriver()).isHomePageLogoDisplayed());
+        Assert.assertTrue(mainPage.isTittleWhySwisscowsIsDisplayed());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock1());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock2());
+        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock3());
 
     }
 
