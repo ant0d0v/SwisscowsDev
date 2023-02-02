@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
+import pages.accounts.LoginPage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
 import utils.TestUtils;
@@ -61,8 +62,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
 
-    @FindBy(xpath= "//div[@class ='menu popup']")
-    private WebElement hamburgerTopMenuDropdown;
+    @FindBy(xpath= "//div[@class ='account']")
+    private WebElement userInfoContainer;
 
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenu;
@@ -85,6 +86,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenuIcon;
 
+    @FindBy(xpath = "//button[@type = 'button']")
+    private WebElement hamburgerDropDownMenu;
+
+
     @FindBy(xpath = "//ul[@class ='menu-dropdown-list']/li")
     private List<WebElement> innerLangMenuList;
 
@@ -100,8 +105,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][3]")
     private WebElement ThemeDropDownIcon;
 
-    @FindBy(xpath = "//div[@class='menu-dropdown-button'][3]")
+    @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement lastElementInDropdownRegion;
+
+    @FindBy(xpath = "//div[@class = 'avatar']")
+    private WebElement AvatarIconHamburgerMenu;
 
 
 
@@ -129,6 +137,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<String> getLinksText() {
 
         return getTexts(hamburgerTopMenuDropdownLinks);
+    }
+
+    public LoginPage signIn() {
+        clickSignInMenu().signInAsRegularUser();
+
+        return new LoginPage(getDriver());
     }
 
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
@@ -168,6 +182,16 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<WebElement> getTopMenuLinks() {
 
         return topMenuLinks;
+    }
+
+    public void waitHamburgerMenuToBeInvisible(){
+        wait10ElementToBeInVisible(hamburgerTopMenuIcon);
+
+    }
+
+    public void waitHamburgerDropDownMenuToBeInvisible(){
+        wait10ElementToBeInVisible(userInfoContainer);
+
     }
 
 
@@ -238,7 +262,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
+    public void clickThemeDropDownIcon() {
+        click(ThemeDropDownIcon);
 
+        new MainPage(getDriver());
+    }
 
     public VpnPage clickVPNTopMenu() {
         click(VPNTopMenu);
@@ -296,6 +324,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public boolean isHamburgerIconDisplayed() {
 
         return isElementDisplayed(hamburgerTopMenuIcon);
+    }
+
+    public boolean isAvatarIconIsDisplayedInHamburgerMenu() {
+
+        return isElementDisplayed(AvatarIconHamburgerMenu);
     }
 
     public boolean isLogoIconDisplayed() {

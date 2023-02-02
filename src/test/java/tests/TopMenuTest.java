@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
+import pages.accounts.LoginPage;
 import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
@@ -30,7 +31,7 @@ public class TopMenuTest extends BaseTest {
         TestUtils.waitForPageLoaded(getDriver());
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
+        Assert.assertEquals(getExternalPageURL(), expectedPartialInstagramURL);
 
     }
 
@@ -52,11 +53,10 @@ public class TopMenuTest extends BaseTest {
 
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(),expectedTeleGardURL);
+        Assert.assertEquals(getExternalPageURL(), expectedTeleGardURL);
         Assert.assertEquals(actualTitle, expectedTitle);
 
     }
-
 
 
     @Test(retryAnalyzer = Retry.class)
@@ -116,14 +116,14 @@ public class TopMenuTest extends BaseTest {
         openBaseURL();
 
         MainPage mainPage = new MainPage(getDriver());
-                 mainPage.clickHamburgerMenuIcon();
+        mainPage.clickHamburgerMenuIcon();
         String actualIfVisible = mainPage.getHamburgerMenuIsActiveValue();
 
         Assert.assertTrue(new MainPage(getDriver()).isHamburgerDropdownContainerDisplayed());
         Assert.assertEquals(actualIfVisible, expectedIfVisible);
 
-                mainPage.clickHamburgerMenuIcon();
-        String actualIfNotVisible =  mainPage.getHamburgerMenuIsActiveValue();
+        mainPage.clickHamburgerMenuIcon();
+        String actualIfNotVisible = mainPage.getHamburgerMenuIsActiveValue();
 
         Assert.assertEquals(actualIfNotVisible, expectedIfNotVisible);
     }
@@ -148,16 +148,16 @@ public class TopMenuTest extends BaseTest {
         openBaseURL();
 
         MainPage mainPage = new MainPage(getDriver());
-                mainPage
-                        .clickHamburgerMenuIcon();
-                mainPage
-                        .clickSetAsStartAppInHamburgerMenu();
-                mainPage.switchToAnotherWindow();
-                mainPage
-                        .clickLogo()
-                        .switchToAnotherWindow();
+        mainPage
+                .clickHamburgerMenuIcon();
+        mainPage
+                .clickSetAsStartAppInHamburgerMenu();
+        mainPage.switchToAnotherWindow();
+        mainPage
+                .clickLogo()
+                .switchToAnotherWindow();
 
-        String actualURL  = mainPage.getCurrentURL();
+        String actualURL = mainPage.getCurrentURL();
 
         String actualTitle = new MainPage(getDriver()).getTitle();
 
@@ -228,7 +228,7 @@ public class TopMenuTest extends BaseTest {
 
 
         Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertTrue(actualURL.contains(expectedURLPartial)," PageURL does not contain 'accounts.dev.swisscows.com' ");
+        Assert.assertTrue(actualURL.contains(expectedURLPartial), " PageURL does not contain 'accounts.dev.swisscows.com' ");
 
     }
 
@@ -246,7 +246,6 @@ public class TopMenuTest extends BaseTest {
         MainPage mainPage = new MainPage(getDriver());
         mainPage
                 .clickLanguagesTopMenu();
-
 
 
         int actualNumberOfOptionsHamburgerMenu = new MainPage(getDriver()).getNumberLangMenu();
@@ -286,10 +285,10 @@ public class TopMenuTest extends BaseTest {
                 "Argentina", "Australia", "Austria", "Belgium (fr)", "Belgium (nl)",
                 "Brazil", "Canada (en)", "Canada (fr)", "Chile", "China", "Denmark", "Finland", "France",
                 "Germany", "Hong Kong SAR", "Hungary", "India", "Indonesia", "Italy", "Japan",
-                 "Kazakhstan", "Korea", "Latvia", "Malaysia", "Mexico", "Netherlands",
+                "Kazakhstan", "Korea", "Latvia", "Malaysia", "Mexico", "Netherlands",
                 "New Zealand", "Nigeria", "Norway", "Philippines", "Poland", "Portugal", "Russia", "Saudi Arabia", "South Africa"
-                ,"Spain", "Sweden", "Switzerland (de)", "Switzerland (fr)", "Taiwan", "Turkey","Ukraine", "United Kingdom"
-                ,"United States (en)", "United States (es)", "World-wide"
+                , "Spain", "Sweden", "Switzerland (de)", "Switzerland (fr)", "Taiwan", "Turkey", "Ukraine", "United Kingdom"
+                , "United States (en)", "United States (es)", "World-wide"
         );
         openBaseURL()
                 .clickHamburgerMenuIcon();
@@ -328,5 +327,116 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
+    @Test
+    public void testThemeIsDefaultFirstOpenSite() {
+        final String expectedValue = "active";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .clickHamburgerMenu()
+                .clickThemeDropDownIcon();
+        String actualValue = mainPage.getClassAttributeThemeDefault();
+
+        Assert.assertEquals(actualValue, expectedValue);
+
+    }
+
+    @Test
+    public void tesThemeChanged() throws InterruptedException {
+        final String expectedValue = "active";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .clickHamburgerMenu()
+                .clickThemeDropDownIcon();
+        mainPage
+                .clickThemeLight();
+        mainPage
+                .clickHamburgerMenu()
+                .clickThemeDropDownIcon();
+
+        String actualValueLight = mainPage.getClassAttributeThemeLight();
+
+        Assert.assertEquals(actualValueLight, expectedValue);
+    }
+
+    @Test
+    public void tesThemeOfBodyChanged() throws InterruptedException {
+        final String expectedValue = "dark";
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .clickHamburgerMenu()
+                .clickThemeDropDownIcon();
+        mainPage
+                .clickThemeDark();
+
+        String actualValueLight = mainPage.getClassAttributeBodyOfSite();
+
+        Assert.assertEquals(actualValueLight, expectedValue);
+
+
+    }
+    @Test
+    public void testThemeMenuTexts() {
+        final List<String> expectedList = List.of(
+                "Default",
+                "Light",
+                "Dark"
+
+        );
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .clickHamburgerMenuIcon();
+        mainPage
+                .clickThemeDropDownIcon();
+        List<String> actualList = mainPage.getLangMenuListTexts();// the same xpath as in theme
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test
+    public void testLoginUserAndAvatarIconIsDysplaed() {
+        MainPage mainPage = openBaseURL();
+        mainPage.clickHamburgerMenu();
+        UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
+        UsersloginPage
+                .signInTopMenu();
+
+        mainPage.switchToAnotherWindow();
+        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage.clickHamburgerMenu();
+
+        Assert.assertTrue(mainPage.isAvatarIconIsDisplayedInHamburgerMenu());
+
+    }
+
+    @Test
+    public void testLoginUserAndNicknameIsDysplaed() throws InterruptedException {
+        final String expectedNick = "T" +"\n" +"Test";
+
+        MainPage mainPage = openBaseURL();
+        mainPage.clickHamburgerMenu();
+        UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
+        UsersloginPage
+                .signInTopMenu();
+
+        mainPage.switchToAnotherWindow();
+        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage
+                .clickHamburgerMenu();
+        sleep(2000);
+
+        String nickname = mainPage.getNicknameInHamburgerMenu();
+
+
+        Assert.assertEquals(nickname,expectedNick);
+
+
+
+
+
+    }
 
 }

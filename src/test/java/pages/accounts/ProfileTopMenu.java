@@ -59,12 +59,12 @@ public abstract class ProfileTopMenu<Generic> extends FooterMenuPage<Generic> {
         return new LoginPage(getDriver());
     }
 
-    public ProfilePage signIn() {
+    public LoginPage signIn() {
         clickSignInMenu()
                 .clickClearInputRegularUserEmail()
                 .clickClearInputRegularUserPassword()
                 .clickSubmitButton();
 
-        return new ProfilePage(getDriver());
+        return new LoginPage(getDriver());
     }
 }
