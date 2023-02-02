@@ -3,17 +3,18 @@ package pages.accounts;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.MainPage;
 import pages.base_abstract.FooterMenuPage;
 
 public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
 
     @FindBy(xpath = "//div[@class = 'panel-body']")
     WebElement notification;
-    @FindBy(id = "user_email")
+    @FindBy(xpath = "//input[@type = 'email']")
     private WebElement userEmail;
-    @FindBy(id = "user_password")
+    @FindBy(xpath = "//input[@type = 'password']")
     private WebElement userPassword;
-    @FindBy(name = "commit")
+    @FindBy(xpath = "//button[@class = 'button primary']")
     private WebElement submitButton;
     @FindBy(xpath = "//a[@href='/users/sign_up']")
     private WebElement createAccountLink;
@@ -51,7 +52,7 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
     public UsersLoginPage clickClearInputRegularUserEmail() {
         click(userEmail);
         userEmail.clear();
-        String email = "jka59433@xcoxc.com";
+        String email = "a.qa@swisscows.email";
         input(email, userEmail);
 
         return this;
@@ -68,7 +69,7 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
     public UsersLoginPage clickClearInputRegularUserPassword() {
         click(userPassword);
         userPassword.clear();
-        String password = "Tester12#";
+        String password = "2075Deltuha";
         input(password, userPassword);
 
         return this;
@@ -91,7 +92,13 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
         clickClearInputRegularUserPassword();
         clickSubmitButton();
 
-        new ProfilePage(getDriver());
+        new MainPage(getDriver());
+    }
+    public LoginPage signInTopMenu() {
+        clickSignInMenu();
+        switchToAnotherWindow();
+        signInAsRegularUser();
+        return new LoginPage(getDriver());
     }
 
     public UsersLoginPage clickCreateAnAccountLink() {

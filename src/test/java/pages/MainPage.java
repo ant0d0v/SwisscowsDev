@@ -279,8 +279,22 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//input[@class ='input-search']")
     private WebElement searchBoxTopMenu;
 
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[1]")
+    private static WebElement firstValueOfTheme;
+
+    @FindBy(xpath = "//body[@class ='dark']")
+    private static WebElement bodyIsDark;
+
+
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[2]")
+    private static WebElement secondValueOfLight;
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[3]")
+    private static WebElement thirdValueOfDark;
+
     @FindBy(xpath =  "//input[@class ='input-search']")
     private WebElement searchField;
+    @FindBy(xpath =  "//a[@class = 'userinfo']")
+    private WebElement nicknameHamburgerMenu;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -341,9 +355,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getText(h3DialogTitle);
     }
 
-    public String getBottomPanelText() {
+    public String getNicknameInHamburgerMenu() {
 
-        return getText(textPanel);
+        return getText(nicknameHamburgerMenu);
     }
 
     public int getTemperatureValueInDifferentWeatherContainer() {
@@ -658,6 +672,18 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
+
+    public void clickThemeLight() {
+        click(secondValueOfLight);
+
+        new MainPage(getDriver());
+    }
+    public void clickThemeDark() {
+        click(thirdValueOfDark);
+
+        new MainPage(getDriver());
+    }
+
     public void clickBannerSwitch() {
         click(homepageBannerSwitchSecond);
     }
@@ -813,6 +839,20 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
      return getAttribute(homepageBannerSwitchFirstValue, "class");
    }
+
+    public String getClassAttributeThemeDefault() {
+
+        return getAttribute(firstValueOfTheme, "class");
+    }
+
+    public String getClassAttributeBodyOfSite() {
+
+        return getAttribute(bodyIsDark, "class");
+    }
+    public String getClassAttributeThemeLight() {
+
+        return getAttribute(secondValueOfLight, "class");
+    }
 
     public String getClassAttributeQuestion1() {
 
