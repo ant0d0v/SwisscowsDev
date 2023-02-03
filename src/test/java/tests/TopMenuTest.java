@@ -397,7 +397,7 @@ public class TopMenuTest extends BaseTest {
     }
 
     @Test
-    public void testLoginUserAndAvatarIconIsDysplaed() {
+    public void testLoginUserAndAvatarIconIsDysplaed() throws InterruptedException {
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
         UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
@@ -405,7 +405,8 @@ public class TopMenuTest extends BaseTest {
                 .signInTopMenu();
 
         mainPage.switchToAnotherWindow();
-        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage.waitTopMenuToBeInvisible();
+
         mainPage.clickHamburgerMenu();
 
         Assert.assertTrue(mainPage.isAvatarIconIsDisplayedInHamburgerMenu());
@@ -414,24 +415,41 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLoginUserAndNicknameIsDysplaed() throws InterruptedException {
-        final String expectedNick = "T" +"\n" +"Test";
+        final String expectedNick = "T" + "\n" + "Test";
 
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
-        UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
+        UsersLoginPage UsersloginPage = new UsersLoginPage(getDriver());
         UsersloginPage
                 .signInTopMenu();
-
         mainPage.switchToAnotherWindow();
-        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage.waitTopMenuToBeInvisible();
         mainPage
                 .clickHamburgerMenu();
-        sleep(2000);
 
         String nickname = mainPage.getNicknameInHamburgerMenu();
+        Assert.assertEquals(nickname, expectedNick);
+    }
+        @Test
+        public void testLogOutUserAndNicknameIsDysplaed() throws InterruptedException {
 
+            final String expectedUrl = "https://dev.swisscows.com/en";
 
-        Assert.assertEquals(nickname,expectedNick);
+            MainPage mainPage = openBaseURL();
+            mainPage.clickHamburgerMenu();
+            UsersLoginPage UsersloginPage = new UsersLoginPage(getDriver());
+            UsersloginPage
+                    .signInTopMenu();
+            mainPage.switchToAnotherWindow();
+            mainPage.waitTopMenuToBeInvisible();
+
+            mainPage.logOut().waitTopMenuToBeInvisible();
+            mainPage.clickHamburgerMenu();
+            String actualUrl = mainPage.getCurrentURL();
+
+            Assert.assertTrue(mainPage.isLoginIconDisplayed());
+            Assert.assertEquals(actualUrl,expectedUrl);
+
 
 
 

@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//a[@class = 'logo']")
     private WebElement logo;
+    @FindBy(xpath = TOP_MENU_ID) // 3 links [teleGuard, VPN, Email]
+    private WebElement topMenuContainer;
 
     @FindBy(xpath = TOP_MENU_ID + "//a") // 3 links [teleGuard, VPN, Email]
     private List<WebElement> topMenuLinks;
@@ -89,6 +92,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerDropDownMenu;
 
+    @FindBy(xpath = "//button[@class ='logout']")
+    private WebElement LogOutButtonHamburgerDropDownMenu;
+
 
     @FindBy(xpath = "//ul[@class ='menu-dropdown-list']/li")
     private List<WebElement> innerLangMenuList;
@@ -110,6 +116,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class = 'avatar']")
     private WebElement AvatarIconHamburgerMenu;
+
+    @FindBy(xpath = "//button[@class ='login']")
+    private WebElement LoginIconHamburgerMenu;
 
 
 
@@ -184,8 +193,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return topMenuLinks;
     }
 
-    public void waitHamburgerMenuToBeInvisible(){
-        wait10ElementToBeInVisible(hamburgerTopMenuIcon);
+    public void waitTopMenuToBeInvisible(){
+        wait10ElementToBeInVisible(topMenuContainer);
 
     }
 
@@ -203,6 +212,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
+    }
+
+    public MainPage logOut() {
+        click(hamburgerTopMenu);
+        wait20ElementToBeVisible(LogOutButtonHamburgerDropDownMenu);
+        click(LogOutButtonHamburgerDropDownMenu);
+        return new MainPage(getDriver());
     }
 
     public MainPage clickHamburgerMenu() {
@@ -324,6 +340,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public boolean isHamburgerIconDisplayed() {
 
         return isElementDisplayed(hamburgerTopMenuIcon);
+    }
+
+    public boolean isLoginIconDisplayed() {
+
+        return isElementDisplayed(LoginIconHamburgerMenu);
     }
 
     public boolean isAvatarIconIsDisplayedInHamburgerMenu() {
