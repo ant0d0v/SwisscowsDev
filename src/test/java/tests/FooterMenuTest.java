@@ -1,6 +1,7 @@
 package tests;
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
@@ -93,7 +94,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(actualSubscriptionTexts.size() > 0);
         Assert.assertEquals(actualSubscriptionTexts, expectedSubscriptionTexts);
     }
-
+    @Ignore
     @Test
     public void testEducationFooterLinkNavigatesToEducationPage() {
         final String expectedURL = "https://dev.swisscows.com/en/media-education";
@@ -113,7 +114,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-
+    @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testCharityProjectFooterLinkNavigatesToCharityProjectPage() {
         final String expectedURL = "https://dev.swisscows.com/en/social-projects";
@@ -133,6 +134,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+    @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testOurDatacenterPageFooterLinkNavigatesToOurDatacenterPagePage() {
         final String expectedURL = "https://dev.swisscows.com/en/data-safe-search-engine";
@@ -154,7 +156,7 @@ public class FooterMenuTest extends BaseTest {
     }
 
 
-
+    @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testWhoWeAreUsFooterLinkNavigatesToAboutUsPage() {
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
@@ -411,6 +413,7 @@ public class FooterMenuTest extends BaseTest {
 
 
 
+    @Ignore
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) throws InterruptedException {

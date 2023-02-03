@@ -12,7 +12,7 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
     @FindBy(xpath = "//div[@class ='row narrow static-content']//h1")
     private WebElement WhoWeArePageHeader;
 
-    @FindBy(xpath = "//div[@class ='row narrow static-content']//h2")
+    @FindBy(xpath = "//div/h2")
     private WebElement whereToH2Header;
 
     @FindBy(xpath = "//div[@class='products']//span")
@@ -32,7 +32,7 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
         return getTexts(products);
     }
 
-    public WhoWeArePage scrollToWhereTo() {
+    public WhoWeArePage scrollToWhereToH2Header() {
         scrollByVisibleElement(whereToH2Header);
 
         return this;
@@ -43,6 +43,16 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
 
         return new WhoWeArePage(getDriver());
     }
+
+    public WhoWeArePage clickAllLinks(int index) {
+        click(getAllLinksOnPage().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        return createGeneric();
+    }
+
 
     public WhoWeArePage waitAllOptionsAreVisibleAndClickable() {
         areAllElementsVisibleAndClickable(products);

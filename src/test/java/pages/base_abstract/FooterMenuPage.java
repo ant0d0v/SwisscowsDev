@@ -145,6 +145,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(className = "social-networks")
     private WebElement socialPanelFooterMenu;
 
+    @FindBy(xpath = "//div[@class='row narrow static-content']//h1")
+    private WebElement textH1FooterMenu;
+
+    @FindBy(xpath = "//div[@class='row narrow static-content']//a")
+    private List<WebElement> allLinksOnPage; // Swisscows
+
     @FindBy(xpath = FOOTER_MENU_ID + "//ul/li/a")
     private List<WebElement> innerFooterMenuLink;
 
@@ -174,6 +180,11 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public String getCopyright() {
 
         return getText(copyright);
+    }
+
+    public String getH1Text() {
+
+        return getText(textH1FooterMenu);
     }
 
     public WebElement getAboutSwisscowsFooterMenu() {
@@ -222,6 +233,13 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return innerFooterMenuLink;
     }
+
+    public List<WebElement> getAllLinksOnPage() {
+
+        return allLinksOnPage;
+    }
+
+
 
 
 

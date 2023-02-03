@@ -72,8 +72,8 @@ public class TestData {
     public static Object[][] footerMenuTestDataProvider() {
 
         return new Object[][] {
-                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "Your private and anonymous search engine Swisscows"},
-                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Your private and anonymous search engine Swisscows"},
+                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "Search engine without tracking - Learn more about us"},
+                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Media Education - Extremely Safe Web for Children"},
                 {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Social projects - We support social projects"},
                 {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data center – Everything about the Swisscows data center"},
                 {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us | Swisscows"},
@@ -84,6 +84,16 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "WhoWeAreLinksData")
+    public static Object[][] WhoWeAreLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Your private und anonymous search engine Swisscows"},
+                {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Privacy Policy | Swisscows"},
+
+        };
+    }
+
 
     @DataProvider(name = "ExternalFooterMenuData")
     public static Object[][] externalMenuTestDataProvider() {
