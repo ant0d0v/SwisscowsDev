@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.accounts.LoginPage;
-import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
 import tests.retrytest.Retry;
@@ -35,9 +33,9 @@ public class TopMenuTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testEmailIconNavigatesToTeleGardWebTopMenu() {
-        final String expectedTeleGardURL = "https://swisscows.email/";
+        final String expectedEmailURL = "https://swisscows.email/";
         final String expectedTitle = "Swisscows.email - My secure e-mail.";
 
         String oldURL = openBaseURL().getCurrentURL();
@@ -53,7 +51,7 @@ public class TopMenuTest extends BaseTest {
 
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(), expectedTeleGardURL);
+        Assert.assertEquals(getExternalPageURL(), expectedEmailURL);
         Assert.assertEquals(actualTitle, expectedTitle);
 
     }
@@ -72,8 +70,6 @@ public class TopMenuTest extends BaseTest {
                 .clickVPNTopMenu();
         mainPage
                 .switchToExternalPage();
-
-
         String actualURL = vpnPage
                 .getCurrentURL();
 
@@ -86,7 +82,7 @@ public class TopMenuTest extends BaseTest {
 
 
     @Test
-    public void testSupportMenuLinksTexts() {
+    public void testHamburgerMenuLinksTexts() {
         final List<String> expectedList = List.of(
                 "Set as Startpage",
                 "Make a Default Search Engine",
@@ -215,7 +211,7 @@ public class TopMenuTest extends BaseTest {
 
 
     @Test
-    public void testSignInMenuNavigatesToSignInPage() {
+    public void testLoginMenuNavigatesToAccountPage() {
         final String expectedURLPartial = "accounts.dev.swisscows.com";
 
 
@@ -431,7 +427,7 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(nickname, expectedNick);
     }
         @Test
-        public void testLogOutUserAndNicknameIsDysplaed() throws InterruptedException {
+        public void testLogOutUserAndLoginButtonIsDysplaed() throws InterruptedException {
 
             final String expectedUrl = "https://dev.swisscows.com/en";
 

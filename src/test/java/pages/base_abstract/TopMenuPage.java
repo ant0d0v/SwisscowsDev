@@ -56,12 +56,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a")
     private List<WebElement> topMenus;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/weather-dashboard']")
-    private WebElement dashboardTopMenu;
-
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='https://openweathermap.org/weather-dashboard']")
-    private WebElement homeDashboardTopMenu;
-
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
 
@@ -77,20 +71,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//div[@class ='menu popup']//li")
     private List<WebElement> hamburgerTopMenuDropdownList;
 
-    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='/faq']")
-    private WebElement faqSupportSubmenu;
-
-    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='/appid']")
-    private WebElement howToStartSupportSubmenu;
-
-    @FindBy(xpath = HAMBURGER_DROPDOWN_ID + "//li/a[@href='https://home.openweathermap.org/questions']")
-    private WebElement askQuestionSupportSubmenu;
-
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenuIcon;
-
-    @FindBy(xpath = "//button[@type = 'button']")
-    private WebElement hamburgerDropDownMenu;
 
     @FindBy(xpath = "//button[@class ='logout']")
     private WebElement LogOutButtonHamburgerDropDownMenu;
@@ -198,12 +180,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     }
 
-    public void waitHamburgerDropDownMenuToBeInvisible(){
-        wait10ElementToBeInVisible(userInfoContainer);
-
-    }
-
-
     public void clickTopMenu(int index) {
         List<WebElement> menus = new ArrayList<>();
         click(hamburgerTopMenu);
@@ -288,14 +264,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(VPNTopMenu);
 
         return new VpnPage(getDriver());
-    }
-
-
-
-    public MainPage clickSearchFieldTopMenu() {
-        click(searchFieldTopMenu);
-
-        return new MainPage(getDriver());
     }
 
     public void clickHamburgerMenuIcon() {
