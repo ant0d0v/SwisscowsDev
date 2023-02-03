@@ -16,9 +16,6 @@ import static utils.TestUtils.convertStringToInt;
 
 public class MainPage extends FooterMenuPage<MainPage> {
 
-    @FindBy(className = "owm-loader-container")
-    private WebElement greyContainer;
-
     @FindBy(xpath = "//div[@class = 'logo-home']//h1")
     private WebElement h1HomeTitle;
 
@@ -67,9 +64,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@data-swiper-slide-index = '1']")
     private WebElement homepageBannerImage; // Image of banner
 
-    @FindBy(xpath = "//div[@class = 'swiper-wrapper']//a[@href]//img[@src]")
-    private List<WebElement> homepageBannerAllImages; // All image of banner
-
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
     private WebElement homepageQuestion1; //
 
@@ -108,12 +102,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
 
-    @FindBy(xpath = "//ul[@class = 'search-dropdown-menu']/li/span[@style='width: 140px;']")
-    private List<WebElement> allChoicesInDropDownMenu;
-
-    @FindBy(xpath = "//div[@class = 'controls']//span")
-    private WebElement differentWeatherButton;
-
     @FindBy(xpath = "//p[@class='title-section']")
     private WebElement tittleWhySwisscows;
 
@@ -138,29 +126,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class='current-temp']/span")
     private WebElement currentTempAndUnit;
 
-    @FindBy(css = "div.current-container.mobile-padding")
-    private List<WebElement> currentWeatherContainer;
-
     @FindBy(className = "pop-up-container")
     private WebElement differentWeatherPopUpContainer;
-
-    @FindBy(xpath = "//ul[@class='icons']/*")
-    private WebElement differentWeatherIconsContainer;
 
     @FindBy(xpath = "//div[@aria-label='Loading']")
     private List<WebElement> questionList; // AllQeustion
 
     @FindBy(xpath = "//div[@aria-label='Loading']")
     private WebElement seeLoading;
-
-    @FindBy(xpath = "//ul[@class='icons']/li")
-    private List<WebElement> differentWeatherIcons;
-
-    @FindBy(xpath = "//button[text()='Send']")
-    private WebElement sendButtonInDifferentWeatherContainer;
-
-    @FindBy(xpath = "//div[@class='pop-up-container']//*[name()='path' and @fill='#8a8a8a']")
-    private WebElement xButtonInDifferentWeatherContainer;
 
     @FindBy(xpath = "//div[@class='widget-notification']")
     private WebElement resultErrorWidget;
@@ -183,32 +156,17 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(id = "dialogTitle")
     private WebElement h3DialogTitle;
 
-    @FindBy(xpath = "//div[@id='weather-widget']//span[@Class='orange-text']")
-    private WebElement currentTime;
-
     @FindBy(xpath = "//div[@class='footer-full-inner-wrap']")
     private WebElement footerPanelContainer;
 
     @FindBy(xpath = "//img[@class='footer-back']")
     private WebElement imageFooterPanel;
 
-    @FindBy(xpath = "//button[@type='button' and text()='Allow all']")
-    private WebElement allowAllButton;
-
     @FindBy(xpath = "//ul[@class = 'suggestions']")
     private WebElement suggestMainPage;
 
     @FindBy(xpath = "//ul[@class = 'suggestions']//li")
     private List<WebElement> suggestListMainPage;
-
-    @FindBy(xpath = "//a[@href='/cookies-settings' and text()=' Manage cookies ']")
-    private WebElement manageButton;
-
-    @FindBy(xpath = "//p[@class='stick-footer-panel__description']")
-    private WebElement textPanel;
-
-    @FindBy(xpath = "//div[@id='footer-website']//a[@href='/weather-dashboard']")
-    private WebElement weatherDashboardFooterMenu;
 
     @FindBy(xpath = "//div[@class='more-options']")
     private WebElement moreOptionsDropDown;
@@ -224,10 +182,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//div/a[@class='stats white-text']")
     private List<WebElement> apiIcons;
-
-    @FindBy(xpath = "//div/a[@href='/current']")
-    private WebElement currentWeatherIcon;
-
     @FindBy(xpath = "//div[@class='section orange-background white-text']")
     private WebElement orangeBackground;
 
@@ -254,9 +208,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//ul[@class='day-list']/li/span[1]")
     private WebElement currentDateFromEightDaysForecast;
-
-    @FindBy(xpath = "//div[@class = 'weather-alert']")
-    private WebElement weatherAlert;
 
     @FindBy(xpath = "//span[@class='sub']")
     private List<WebElement> weatherDescription;
@@ -350,10 +301,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getBackgroundColorInHEX(activeIcon);
     }
 
-    public String getHeaderForDifferentWeatherContainer() {
-
-        return getText(h3DialogTitle);
-    }
 
     public String getNicknameInHamburgerMenu() {
 

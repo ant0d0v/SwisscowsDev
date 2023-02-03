@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.accounts.LoginPage;
-import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.VpnPage;
 import tests.retrytest.Retry;
@@ -35,9 +33,9 @@ public class TopMenuTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testEmailIconNavigatesToTeleGardWebTopMenu() {
-        final String expectedTeleGardURL = "https://swisscows.email/";
+        final String expectedEmailURL = "https://swisscows.email/";
         final String expectedTitle = "Swisscows.email - My secure e-mail.";
 
         String oldURL = openBaseURL().getCurrentURL();
@@ -53,7 +51,7 @@ public class TopMenuTest extends BaseTest {
 
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(), expectedTeleGardURL);
+        Assert.assertEquals(getExternalPageURL(), expectedEmailURL);
         Assert.assertEquals(actualTitle, expectedTitle);
 
     }
@@ -72,8 +70,6 @@ public class TopMenuTest extends BaseTest {
                 .clickVPNTopMenu();
         mainPage
                 .switchToExternalPage();
-
-
         String actualURL = vpnPage
                 .getCurrentURL();
 
@@ -86,7 +82,7 @@ public class TopMenuTest extends BaseTest {
 
 
     @Test
-    public void testSupportMenuLinksTexts() {
+    public void testHamburgerMenuLinksTexts() {
         final List<String> expectedList = List.of(
                 "Set as Startpage",
                 "Make a Default Search Engine",
@@ -215,7 +211,7 @@ public class TopMenuTest extends BaseTest {
 
 
     @Test
-    public void testSignInMenuNavigatesToSignInPage() {
+    public void testLoginMenuNavigatesToAccountPage() {
         final String expectedURLPartial = "accounts.dev.swisscows.com";
 
 
@@ -397,7 +393,7 @@ public class TopMenuTest extends BaseTest {
     }
 
     @Test
-    public void testLoginUserAndAvatarIconIsDysplaed() {
+    public void testLoginUserAndAvatarIconIsDysplaed() throws InterruptedException {
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
         UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
@@ -405,7 +401,8 @@ public class TopMenuTest extends BaseTest {
                 .signInTopMenu();
 
         mainPage.switchToAnotherWindow();
-        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage.waitTopMenuToBeInvisible();
+
         mainPage.clickHamburgerMenu();
 
         Assert.assertTrue(mainPage.isAvatarIconIsDisplayedInHamburgerMenu());
@@ -414,24 +411,41 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLoginUserAndNicknameIsDysplaed() throws InterruptedException {
-        final String expectedNick = "T" +"\n" +"Test";
+        final String expectedNick = "T" + "\n" + "Test";
 
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
-        UsersLoginPage UsersloginPage  = new UsersLoginPage (getDriver());
+        UsersLoginPage UsersloginPage = new UsersLoginPage(getDriver());
         UsersloginPage
                 .signInTopMenu();
-
         mainPage.switchToAnotherWindow();
-        mainPage.waitHamburgerMenuToBeInvisible();
+        mainPage.waitTopMenuToBeInvisible();
         mainPage
                 .clickHamburgerMenu();
-        sleep(2000);
 
         String nickname = mainPage.getNicknameInHamburgerMenu();
+        Assert.assertEquals(nickname, expectedNick);
+    }
+        @Test
+        public void testLogOutUserAndLoginButtonIsDysplaed() throws InterruptedException {
 
+            final String expectedUrl = "https://dev.swisscows.com/en";
 
-        Assert.assertEquals(nickname,expectedNick);
+            MainPage mainPage = openBaseURL();
+            mainPage.clickHamburgerMenu();
+            UsersLoginPage UsersloginPage = new UsersLoginPage(getDriver());
+            UsersloginPage
+                    .signInTopMenu();
+            mainPage.switchToAnotherWindow();
+            mainPage.waitTopMenuToBeInvisible();
+
+            mainPage.logOut().waitTopMenuToBeInvisible();
+            mainPage.clickHamburgerMenu();
+            String actualUrl = mainPage.getCurrentURL();
+
+            Assert.assertTrue(mainPage.isLoginIconDisplayed());
+            Assert.assertEquals(actualUrl,expectedUrl);
+
 
 
 
