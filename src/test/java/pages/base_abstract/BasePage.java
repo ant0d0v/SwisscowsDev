@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -10,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -307,6 +310,11 @@ public abstract class BasePage {
     public void switchToExternalPage() {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+    }
+
+    public void screen(String localPlace) throws IOException {
+        File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File(localPlace));
     }
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {

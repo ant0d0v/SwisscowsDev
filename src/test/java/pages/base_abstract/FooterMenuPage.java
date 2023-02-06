@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -145,7 +146,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(className = "social-networks")
     private WebElement socialPanelFooterMenu;
 
-    @FindBy(xpath = "//div[@class='row narrow static-content']//h1")
+    @FindBy(xpath = "//h1")
     private WebElement textH1FooterMenu;
 
     @FindBy(xpath = "//div[@class='row narrow static-content']//a")
@@ -165,6 +166,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement RegionDropDownIcon;
+    @FindBy(xpath = "//video")
+    private WebElement videoPlayer;
 
     public FooterMenuPage(WebDriver driver) {
         super(driver);
@@ -237,6 +240,15 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public List<WebElement> getAllLinksOnPage() {
 
         return allLinksOnPage;
+    }
+
+    public void clickAllLinks(int index) {
+        click(getAllLinksOnPage().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        createGeneric();
     }
 
 
@@ -348,5 +360,19 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public boolean isSocialPanelDisplayed() {
 
         return isElementDisplayed(socialPanelFooterMenu);
+    }
+    public String getCurrentSrcOfVideo() {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        return (String) executor.executeScript("return arguments[0].currentSrc;", videoPlayer);
+    }
+    public void pauseVideo() throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        executor.executeScript("return arguments[0].pause()", videoPlayer);
+    }
+    public CharityProjectPage playVideo() throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        executor.executeScript("return arguments[0].play()", videoPlayer);
+        Thread.sleep(5000);
+        return new CharityProjectPage(getDriver());
     }
 }

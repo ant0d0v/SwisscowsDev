@@ -44,15 +44,6 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
         return new WhoWeArePage(getDriver());
     }
 
-    public WhoWeArePage clickAllLinks(int index) {
-        click(getAllLinksOnPage().get(index));
-        if (getDriver().getWindowHandles().size() > 1) {
-            switchToAnotherWindow();
-        }
-
-        return createGeneric();
-    }
-
 
     public WhoWeArePage waitAllOptionsAreVisibleAndClickable() {
         areAllElementsVisibleAndClickable(products);

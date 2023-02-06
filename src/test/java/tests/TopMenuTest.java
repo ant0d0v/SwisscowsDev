@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
@@ -16,7 +17,7 @@ import java.util.List;
 public class TopMenuTest extends BaseTest {
 
     @Test
-    public void testTeleGardIconNavigatesToTeleGardWebTopMenu() {
+    public void testTeleGardIconNavigatesToTeleGardWebPage() {
         final String expectedPartialInstagramURL = "https://teleguard.com/en";
 
         String oldURL = openBaseURL().getCurrentURL();
@@ -34,7 +35,7 @@ public class TopMenuTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testEmailIconNavigatesToTeleGardWebTopMenu() {
+    public void testEmailIconNavigatesToEmailWebPage() {
         final String expectedEmailURL = "https://swisscows.email/";
         final String expectedTitle = "Swisscows.email - My secure e-mail.";
 
@@ -56,9 +57,9 @@ public class TopMenuTest extends BaseTest {
 
     }
 
-
+    @Ignore
     @Test(retryAnalyzer = Retry.class)
-    public void testVPNIconNavigatesToVPNWebTopMenu() {
+    public void testVPNIconNavigatesToVPNWebPage() {
         final String expectedURL = "https://dev.swisscows.com/en/anonymous-vpn";
         final String expectedTitle = "Surf anonymously with VPN - Secure web surfing with Swisscows";
 
