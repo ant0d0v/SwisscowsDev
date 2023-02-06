@@ -500,6 +500,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
 //        return new BulkPage(getDriver());
 //    }
 
+
+
     public MainPage clickLessOptionsDropDown() {
         click20(moreOptionsDropDown);
 

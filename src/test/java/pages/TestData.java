@@ -72,14 +72,14 @@ public class TestData {
     public static Object[][] footerMenuTestDataProvider() {
 
         return new Object[][] {
-                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "Search engine without tracking - Learn more about us"},
-                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Media Education - Extremely Safe Web for Children"},
-                {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Social projects - We support social projects"},
-                {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data center – Everything about the Swisscows data center"},
-                {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us | Swisscows"},
-                {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Surf anonymously with VPN - Secure web surfing with Swisscows"},
-                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "Set Swisscows as start page"},
-                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "Install Swisscows and use it as the default search"},
+                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "Anonymous search engine"},
+                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Swisscows as a search engine without tracking: the best alternative"},
+                {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Charity Project"},
+                {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data secure search engine"},
+                {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us"},
+                {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Anonymous web surfing with Swisscows"},
+                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "How to set Swisscows as your start page"},
+                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "How to use Swisscows as default search"},
 
 
         };
@@ -90,6 +90,16 @@ public class TestData {
         return new Object[][] {
                 {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Your private und anonymous search engine Swisscows"},
                 {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Privacy Policy | Swisscows"},
+
+        };
+    }
+
+    @DataProvider(name = "CharityProjectLinksData")
+    public static Object[][] CharityProjectLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Swisscows VPN", "/en/vpn", "https://dev.swisscows.com/en/anonymous-vpn",},
+                {1, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en"},
 
         };
     }

@@ -98,7 +98,7 @@ public class FooterMenuTest extends BaseTest {
     @Test
     public void testEducationFooterLinkNavigatesToEducationPage() {
         final String expectedURL = "https://dev.swisscows.com/en/media-education";
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
+        final String expectedTitle = "Media Education - Extremely Safe Web for Children";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
@@ -159,7 +159,7 @@ public class FooterMenuTest extends BaseTest {
     @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testWhoWeAreUsFooterLinkNavigatesToAboutUsPage() {
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
+        final String expectedTitle = "Search engine without tracking - Learn more about us";
         final String expectedUrl = "https://dev.swisscows.com/en/search-engine-no-tracking";
 
         final String oldURL = openBaseURL().getCurrentURL();
@@ -413,25 +413,26 @@ public class FooterMenuTest extends BaseTest {
 
 
 
-    @Ignore
+
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
-            int index, String linkName, String href, String expectedURL, String expectedTitle) throws InterruptedException {
+            int index, String linkName, String href, String expectedURL, String expectedH1Header)  {
 
         MainPage mainPage = openBaseURL();
 
         final String oldURL = mainPage.getCurrentURL();
-        final String oldTitle = mainPage.getTitle();
+        final String oldH1Header = mainPage.getH1Text();
 
         mainPage.scrollToFooterMenu().clickFooterMenu(index);
 
         String actualURL = mainPage.getCurrentURL();
-        String actualTitle = getDriver().getTitle();
+        String actualH1Header = mainPage.getH1Text();
 
         Assert.assertNotEquals(oldURL, actualURL);
-        Assert.assertNotEquals(oldTitle, actualTitle);
+        Assert.assertNotEquals(oldH1Header, actualH1Header);
         Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(actualH1Header, expectedH1Header);
+
     }
 
     @Test(dataProvider = "ExternalFooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)

@@ -1,6 +1,5 @@
 package pages.footer_menu;
-
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import pages.base_abstract.FooterMenuPage;
 
 public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
@@ -13,4 +12,8 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
 
         return new MediaEducationPage(getDriver());
     }
+
+
+
 }
+

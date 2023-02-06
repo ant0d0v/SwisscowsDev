@@ -47,12 +47,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']")
     private WebElement hamburgerDropDownContainerTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/our-initiatives']")
-    private WebElement ourInitiativesTopMenu;
-
-    @FindBy(xpath = TOP_MENU_ID + "//a[@href='/examples']")
-    private WebElement partnersTopMenu;
-
     @FindBy(xpath = TOP_MENU_ID + "//a")
     private List<WebElement> topMenus;
 
@@ -221,13 +215,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
-
-
-    /*public OurInitiativesPage clickOurInitiativesMenu() {
-        click(ourInitiativesTopMenu);
-
-        return new OurInitiativesPage(getDriver());
-    }*/
 
 
     public void clickTeleGuardTopMenu() {
