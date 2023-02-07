@@ -314,7 +314,7 @@ public abstract class BasePage {
 
     public void screen(String localPlace) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(localPlace));
+        FileUtils.copyFile(scrFile, new File("/Users/antonudovycenko/Desktop/Screen/" + localPlace));
     }
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {

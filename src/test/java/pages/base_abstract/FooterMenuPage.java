@@ -375,4 +375,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         Thread.sleep(5000);
         return new CharityProjectPage(getDriver());
     }
+    /*public long getDurationOfVideo() {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        return (Long) executor.executeScript("return arguments[0].duration", videoPlayer);
+    }*/
 }
