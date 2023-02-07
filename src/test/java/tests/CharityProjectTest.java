@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
+import utils.TestUtils;
 
 
 public class CharityProjectTest extends BaseTest {
@@ -19,6 +20,7 @@ public class CharityProjectTest extends BaseTest {
                 .clickCharityProjectFooterMenu();
 
         CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
+        TestUtils.waitForPageLoaded(getDriver());
         String source = charityProjectPage.getCurrentSrcOfVideo();
         charityProjectPage
                 .playVideo()
@@ -50,6 +52,31 @@ public class CharityProjectTest extends BaseTest {
             Assert.assertEquals(actualURL, expectedURL);
 
         }
+
+    @Test
+    public void testImageSwitchingFirstBlock() throws InterruptedException {
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToFooterMenu()
+                .clickCharityProjectFooterMenu();
+
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
+        TestUtils.waitForPageLoaded(getDriver());
+        charityProjectPage
+                .scrollToImageFirstBlock()
+                .clickImageFirstBlock();
+        String actual = charityProjectPage.getClassAttributeOfImage();
+
+        Assert.assertTrue(charityProjectPage.elementIsDisplayed());
+
+
+
+
+
+
+
+    }
 
     }
 
