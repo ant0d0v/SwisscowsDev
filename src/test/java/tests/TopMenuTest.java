@@ -447,11 +447,6 @@ public class TopMenuTest extends BaseTest {
             Assert.assertTrue(mainPage.isLoginIconDisplayed());
             Assert.assertEquals(actualUrl,expectedUrl);
 
-
-
-
-
-
     }
 
 }

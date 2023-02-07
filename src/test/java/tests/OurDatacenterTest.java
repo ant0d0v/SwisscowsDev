@@ -10,20 +10,19 @@ import pages.footer_menu.OurDatacenterPage;
 import utils.TestUtils;
 
 public class OurDatacenterTest extends BaseTest {
-@Ignore
+
     @Test
     public void testHTML5VideoPlayerDatacenter() throws Exception {
-        String expectedSource = "https://dev.swisscows.com/video/SWISSCOWS.mp4";
+        final String expectedSource = "https://dev.swisscows.com/video/SWISSCOWS.mp4";
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToFooterMenu()
                 .clickOurDatacenterPageFooterMenu();
-
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
         TestUtils.waitForPageLoaded(getDriver());
-        String source = ourDatacenterPage.getCurrentSrcOfVideo();
+        final String source = ourDatacenterPage.getCurrentSrcOfVideo();
         ourDatacenterPage
-                .playVideo()
+                .playVideoDatacenter()
                 .pauseVideo();
         ourDatacenterPage
                 .screen("DatacenterVideo.png");
@@ -46,7 +45,7 @@ public class OurDatacenterTest extends BaseTest {
                 .scrollToWhereToH2Header()
                 .clickAllLinks(index);
 
-        String actualURL = mainPage.getCurrentURL();
+        final String actualURL = mainPage.getCurrentURL();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualURL, expectedURL);
@@ -64,11 +63,11 @@ public class OurDatacenterTest extends BaseTest {
         TestUtils.waitForPageLoaded(getDriver());
         ourDatacenterPage
                 .scrollToSlider();
-        String oldAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
+        final String oldAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
 
         ourDatacenterPage
                 .doubleClickToSecondImageInSlider();
-        String newAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
+        final String newAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
         Assert.assertTrue(ourDatacenterPage.elementIsDisplayedInSlider());

@@ -251,10 +251,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         createGeneric();
     }
 
-
-
-
-
     public Generic clickFooterMenu(int index) {
         click(getInnerFooterMenuLinks().get(index));
         if (getDriver().getWindowHandles().size() > 1) {
@@ -331,13 +327,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         click20(twitterIconFooterMenu);
     }
 
-    public void clickTeleGuardIcon() {
-        click20(teleGuardIconFooterMenu);
-    }
-
-    public void clickOpenWeatherForBusinessFooterMenuLink() {
-        click(openWeatherForBusinessFooterMenuLink);
-    }
+    public void clickTeleGuardIcon() { click20(teleGuardIconFooterMenu);}
 
    /* public MainPage clickAskQuestionFooterMenu() {
         wait10ElementToBeClickable(askQuestionFooterMenu);
@@ -365,15 +355,26 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         return (String) executor.executeScript("return arguments[0].currentSrc;", videoPlayer);
     }
+    public CharityProjectPage pauseVideoCharity() throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        executor.executeScript("return arguments[0].pause()", videoPlayer);
+        return new CharityProjectPage(getDriver());
+    }
     public void pauseVideo() throws InterruptedException {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].pause()", videoPlayer);
     }
-    public CharityProjectPage playVideo() throws InterruptedException {
+    public CharityProjectPage playVideoCharity() throws InterruptedException {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].play()", videoPlayer);
         Thread.sleep(5000);
         return new CharityProjectPage(getDriver());
+    }
+    public OurDatacenterPage playVideoDatacenter() throws InterruptedException {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        executor.executeScript("return arguments[0].play()", videoPlayer);
+        Thread.sleep(5000);
+        return new OurDatacenterPage(getDriver());
     }
     /*public long getDurationOfVideo() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();

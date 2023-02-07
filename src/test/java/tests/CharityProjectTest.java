@@ -7,26 +7,22 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
-import utils.TestUtils;
-
 
 public class CharityProjectTest extends BaseTest {
-@Ignore
+    @Ignore
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
-        String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
+        final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToFooterMenu()
                 .clickCharityProjectFooterMenu();
 
-        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
-        TestUtils.waitForPageLoaded(getDriver());
-        String source = charityProjectPage.getCurrentSrcOfVideo();
+        final String source = charityProjectPage.getCurrentSrcOfVideo();
         charityProjectPage
-                .playVideo()
-                .pauseVideo();
-        charityProjectPage
+                .playVideoCharity()
+                .pauseVideoCharity()
                 .screen("CharityVideo.png");
         Assert.assertEquals(source, expectedSource);
     }
@@ -47,28 +43,23 @@ public class CharityProjectTest extends BaseTest {
                     .scrollToWhereToH2Header()
                     .clickAllLinks(index);
 
-            String actualURL = mainPage.getCurrentURL();
+            final String actualURL = mainPage.getCurrentURL();
 
             Assert.assertNotEquals(oldURL, actualURL);
             Assert.assertEquals(actualURL, expectedURL);
     }
     @Test
     public void testCharityProjectFirstSlider()  {
-
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToFooterMenu()
-                .clickCharityProjectFooterMenu();
-
-        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
-        TestUtils.waitForPageLoaded(getDriver());
-        charityProjectPage
+                .clickCharityProjectFooterMenu()
                 .scrollToFirstSlider();
-        String oldAttribute = charityProjectPage.getClassAttributeOfImageFirstSlider();
-
+        final String oldAttribute = charityProjectPage.getClassAttributeOfImageInFirstSlider();
         charityProjectPage
-                .doubleClickToTwoSecondInSlider();
-        String newAttribute = charityProjectPage.getClassAttributeOfImageFirstSlider();
+                .doubleClickToSecondImageInSlider();
+        final String newAttribute = charityProjectPage.getClassAttributeOfImageInFirstSlider();
 
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
@@ -77,24 +68,20 @@ public class CharityProjectTest extends BaseTest {
 
     @Test
     public void testCharityProjectSecondSlider()  {
-
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToFooterMenu()
-                .clickCharityProjectFooterMenu();
-
-        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
-        TestUtils.waitForPageLoaded(getDriver());
-        charityProjectPage
+                .clickCharityProjectFooterMenu()
                 .scrollToSecondSlider();
-        String oldAttribute = charityProjectPage.getClassAttributeOfImageSecondSlider();
+        final String oldAttribute = charityProjectPage.getClassAttributeOfImageInSecondSlider();
 
         charityProjectPage
                 .doubleClickToThirdImageInSlider();
-        String newAttribute = charityProjectPage.getClassAttributeOfImageSecondSlider();
+        final String newAttribute = charityProjectPage.getClassAttributeOfImageInSecondSlider();
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
-        Assert.assertTrue(charityProjectPage.elementIsDisplayedSecondSlider());
+        Assert.assertTrue(charityProjectPage.elementIsDisplayedInSecondSlider());
     }
 
     }
