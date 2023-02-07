@@ -312,9 +312,9 @@ public abstract class BasePage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    public void screen(String localPlace) throws IOException {
+    public void screen(String format) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File("/Users/antonudovycenko/Desktop/Screen/" + localPlace));
+        FileUtils.copyFile(scrFile, new File("/Users/antonudovycenko/Desktop/Screen/" + format));
     }
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {
