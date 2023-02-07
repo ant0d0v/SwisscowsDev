@@ -104,6 +104,16 @@ public class TestData {
         };
     }
 
+    @DataProvider(name = "OurDatacenterLinksData")
+    public static Object[][] OurDatacenterLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Swisscows.com", "/en", "https://dev.swisscows.com/en",},
+                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education"},
+
+        };
+    }
+
 
     @DataProvider(name = "ExternalFooterMenuData")
     public static Object[][] externalMenuTestDataProvider() {

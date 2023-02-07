@@ -13,7 +13,7 @@ import utils.TestUtils;
 public class CharityProjectTest extends BaseTest {
 @Ignore
     @Test
-    public void testHTML5VideoPlayer() throws Exception {
+    public void testHTML5VideoPlayerCharity() throws Exception {
         String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
         MainPage mainPage = openBaseURL();
         mainPage
@@ -27,7 +27,7 @@ public class CharityProjectTest extends BaseTest {
                 .playVideo()
                 .pauseVideo();
         charityProjectPage
-                .screen("/Users/antonudovycenko/Desktop/Screen/1.png");
+                .screen("CharityVideo.png");
         Assert.assertEquals(source, expectedSource);
     }
 
@@ -51,11 +51,9 @@ public class CharityProjectTest extends BaseTest {
 
             Assert.assertNotEquals(oldURL, actualURL);
             Assert.assertEquals(actualURL, expectedURL);
-
-        }
-@Ignore
+    }
     @Test
-    public void testImageSwitchingFirstBlock() throws InterruptedException {
+    public void testCharityProjectFirstSlider()  {
 
         MainPage mainPage = openBaseURL();
         mainPage
@@ -65,18 +63,38 @@ public class CharityProjectTest extends BaseTest {
         CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
         TestUtils.waitForPageLoaded(getDriver());
         charityProjectPage
-                .scrollToImageFirstBlock()
-                .clickImageFirstBlock();
-        String actual = charityProjectPage.getClassAttributeOfImage();
+                .scrollToFirstSlider();
+        String oldAttribute = charityProjectPage.getClassAttributeOfImageFirstSlider();
 
-        Assert.assertTrue(charityProjectPage.elementIsDisplayed());
-
-
-
+        charityProjectPage
+                .doubleClickToTwoSecondInSlider();
+        String newAttribute = charityProjectPage.getClassAttributeOfImageFirstSlider();
 
 
+        Assert.assertNotEquals(newAttribute,oldAttribute);
+        Assert.assertTrue(charityProjectPage.elementIsDisplayedFirstSlider());
+    }
 
+    @Test
+    public void testCharityProjectSecondSlider()  {
 
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToFooterMenu()
+                .clickCharityProjectFooterMenu();
+
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
+        TestUtils.waitForPageLoaded(getDriver());
+        charityProjectPage
+                .scrollToSecondSlider();
+        String oldAttribute = charityProjectPage.getClassAttributeOfImageSecondSlider();
+
+        charityProjectPage
+                .doubleClickToThirdImageInSlider();
+        String newAttribute = charityProjectPage.getClassAttributeOfImageSecondSlider();
+
+        Assert.assertNotEquals(newAttribute,oldAttribute);
+        Assert.assertTrue(charityProjectPage.elementIsDisplayedSecondSlider());
     }
 
     }
