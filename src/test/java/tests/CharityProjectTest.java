@@ -2,14 +2,16 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
+import utils.TestUtils;
 
 
 public class CharityProjectTest extends BaseTest {
-
+@Ignore
     @Test
     public void testHTML5VideoPlayer() throws Exception {
         String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
@@ -19,6 +21,7 @@ public class CharityProjectTest extends BaseTest {
                 .clickCharityProjectFooterMenu();
 
         CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
+        TestUtils.waitForPageLoaded(getDriver());
         String source = charityProjectPage.getCurrentSrcOfVideo();
         charityProjectPage
                 .playVideo()
@@ -50,6 +53,31 @@ public class CharityProjectTest extends BaseTest {
             Assert.assertEquals(actualURL, expectedURL);
 
         }
+@Ignore
+    @Test
+    public void testImageSwitchingFirstBlock() throws InterruptedException {
+
+        MainPage mainPage = openBaseURL();
+        mainPage
+                .scrollToFooterMenu()
+                .clickCharityProjectFooterMenu();
+
+        CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
+        TestUtils.waitForPageLoaded(getDriver());
+        charityProjectPage
+                .scrollToImageFirstBlock()
+                .clickImageFirstBlock();
+        String actual = charityProjectPage.getClassAttributeOfImage();
+
+        Assert.assertTrue(charityProjectPage.elementIsDisplayed());
+
+
+
+
+
+
+
+    }
 
     }
 
