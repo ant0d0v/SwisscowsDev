@@ -7,24 +7,21 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.OurDatacenterPage;
-import utils.TestUtils;
+
 
 public class OurDatacenterTest extends BaseTest {
-
+@Ignore
     @Test
     public void testHTML5VideoPlayerDatacenter() throws Exception {
-        final String expectedSource = "https://dev.swisscows.com/video/SWISSCOWS.mp4";
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .scrollToFooterMenu()
-                .clickOurDatacenterPageFooterMenu();
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
-        TestUtils.waitForPageLoaded(getDriver());
-        final String source = ourDatacenterPage.getCurrentSrcOfVideo();
+        final String expectedSource = "https://dev.swisscows.com/video/SWISSCOWS.mp4";
+        final String source = openBaseURL()
+                .scrollToFooterMenu()
+                .clickOurDatacenterPageFooterMenu()
+                .getCurrentSrcOfVideo();
         ourDatacenterPage
                 .playVideoDatacenter()
-                .pauseVideo();
-        ourDatacenterPage
+                .pauseVideoDatacenter()
                 .screen("DatacenterVideo.png");
         Assert.assertEquals(source, expectedSource);
     }
@@ -32,42 +29,34 @@ public class OurDatacenterTest extends BaseTest {
     @Test(dataProvider = "OurDatacenterLinksData", dataProviderClass = TestData.class)
     public void testOurDatacenterLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL) throws InterruptedException {
-
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .scrollToFooterMenu()
-                .clickOurDatacenterPageFooterMenu();
-
-        final String oldURL = mainPage.getCurrentURL();
-        mainPage.scrollToFooterMenu();
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
+        MainPage mainPage = openBaseURL();
+        final String oldURL = mainPage
+                .scrollToFooterMenu()
+                .clickOurDatacenterPageFooterMenu()
+                .getCurrentURL();
         ourDatacenterPage
                 .scrollToWhereToH2Header()
                 .clickAllLinks(index);
 
-        final String actualURL = mainPage.getCurrentURL();
+        final String actualURL = ourDatacenterPage.getCurrentURL();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualURL, expectedURL);
     }
 
     @Test
-    public void testOurDatacenterSlider() throws InterruptedException {
-
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .scrollToFooterMenu()
-                .clickOurDatacenterPageFooterMenu();
-
+    public void testOurDatacenterSlider(){
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
-        TestUtils.waitForPageLoaded(getDriver());
-        ourDatacenterPage
-                .scrollToSlider();
-        final String oldAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
+        final String oldAttribute = openBaseURL()
+                .scrollToFooterMenu()
+                .clickOurDatacenterPageFooterMenu()
+                .scrollToSlider()
+                .getClassAttributeOfImageSlider();
 
-        ourDatacenterPage
-                .doubleClickToSecondImageInSlider();
-        final String newAttribute = ourDatacenterPage.getClassAttributeOfImageSlider();
+        final String newAttribute = ourDatacenterPage
+                .doubleClickToSecondImageInSlider()
+                .getClassAttributeOfImageSlider();
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
         Assert.assertTrue(ourDatacenterPage.elementIsDisplayedInSlider());

@@ -10,14 +10,13 @@ public class ContactUsTest extends BaseTest {
     @Test
     public void testFormContactUs() {
         final String expectedSuccessMessage = "Thank you for contacting us!";
-        ContactUsPage contactUsPage = new ContactUsPage(getDriver());
         final String oldURL = openBaseURL().getCurrentURL();
         String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickContactUsPageFooterMenu()
                 .getCurrentURL();
 
-        String actualSuccessMessage = contactUsPage
+        String actualSuccessMessage = new ContactUsPage(getDriver())
                 .sendFormContactUs()
                 .getThanksMessage();
 
@@ -28,7 +27,6 @@ public class ContactUsTest extends BaseTest {
     @Test
     public void testContactUsButtonNavigateToCorrespondingPages() {
         final String expectedUrl = "https://dev.swisscows.com/en";
-        ContactUsPage contactUsPage = new ContactUsPage(getDriver());
         final String oldURL = openBaseURL().getCurrentURL();
 
         String newURL = new MainPage(getDriver())
@@ -36,7 +34,7 @@ public class ContactUsTest extends BaseTest {
                 .clickContactUsPageFooterMenu()
                 .getCurrentURL();
 
-        String actualUrl = contactUsPage
+        String actualUrl = new ContactUsPage(getDriver())
                 .sendFormContactUs()
                 .clickBackToSearchButton()
                 .getCurrentURL();
@@ -48,7 +46,6 @@ public class ContactUsTest extends BaseTest {
     @Test
     public void testPrivacyPolicyLinkNavigateToCorrespondingPages() {
         final String expectedUrl = "https://dev.swisscows.com/en/privacy";
-        ContactUsPage contactUsPage = new ContactUsPage(getDriver());
         String actualUrl = openBaseURL()
                     .scrollToFooter()
                     .clickContactUsPageFooterMenu()

@@ -10,7 +10,6 @@ import pages.base_abstract.FooterMenuPage;
 public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
     @FindBy(xpath = "//div/h2")
     private WebElement whereToH2Header;
-
     @FindBy(xpath = "//div[@class ='swiper-wrapper']/div[2]")
     private WebElement attributeSecondImageInSlider;
     @FindBy(xpath = "//img[@src ='/_next/image?url=%2Fimages%2Fdatacenter-img2.jpg&w=256&q=75']")
@@ -26,30 +25,33 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
 
         return new OurDatacenterPage(getDriver());
     }
+
     public OurDatacenterPage scrollToWhereToH2Header() {
         scrollByVisibleElement(whereToH2Header);
 
         return this;
     }
-    public void scrollToSlider() {
+
+    public OurDatacenterPage scrollToSlider() {
         scrollByVisibleElement(attributeSecondImageInSlider);
 
-        new OurDatacenterPage(getDriver());
+        return this;
     }
+
     public String getClassAttributeOfImageSlider() {
         return getAttribute(attributeSecondImageInSlider, "class");
     }
-    public void doubleClickToSecondImageInSlider() {
+    public OurDatacenterPage doubleClickToSecondImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(secondImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(secondImageInSlider));
+        return this;
     }
 
     public boolean elementIsDisplayedInSlider() {
 
         return isElementDisplayed(bigSecondImageInSlider);
     }
-
 
 
 }

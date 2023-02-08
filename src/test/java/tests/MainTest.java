@@ -341,7 +341,8 @@ public class MainTest extends BaseTest {
     public void testAdaptiveHomePageHasLogo() {
         MainPage mainPage =  openBaseURL();
 
-        mainPage.setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
+        mainPage
+                .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
 
         Assert.assertTrue(new MainPage(getDriver()).isHomePageLogoDisplayed());
         Assert.assertTrue(mainPage.isTittleWhySwisscowsIsDisplayed());

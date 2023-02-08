@@ -1,5 +1,7 @@
 package pages.base_abstract;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +17,10 @@ import pages.home.HomeAskQuestionPage;
 import pages.pages.top_menu.PricePage;
 import pages.pages.top_menu.WeatherDashboardPage;*/
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public abstract class FooterMenuPage<Generic> extends TopMenuPage {
@@ -35,6 +41,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Our Datacenter']")// Swisscows
     private WebElement OurDatacenterFooterMenu;
+    @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Donation']")// Swisscows
+    private WebElement donationFooterMenu;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[text()='Contact us']")//Swisscows
     private WebElement ContactusFooterMenu;
@@ -77,9 +85,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Data privacy']")//Swisscows
     private WebElement dataPrivacyFooterMenu;
-
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Donation']")//Swisscows
-    private WebElement donationFooterMenu;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu-bottom']/a")//Swisscows
     private List<WebElement> swisscowsFooterLinks;
@@ -286,6 +291,11 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return new OurDatacenterPage(getDriver());
     }
+    public DonationPage clickDonationPageFooterMenu() {
+        click(donationFooterMenu);
+
+        return new DonationPage(getDriver());
+    }
 
     public WhoWeArePage clickAboutUsFooterMenu() {
         click20(whoWeAreFooterMenu);
@@ -360,9 +370,10 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         executor.executeScript("return arguments[0].pause()", videoPlayer);
         return new CharityProjectPage(getDriver());
     }
-    public void pauseVideo() throws InterruptedException {
+    public OurDatacenterPage pauseVideoDatacenter() throws InterruptedException {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].pause()", videoPlayer);
+        return new OurDatacenterPage(getDriver());
     }
     public CharityProjectPage playVideoCharity() throws InterruptedException {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
@@ -375,6 +386,13 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         executor.executeScript("return arguments[0].play()", videoPlayer);
         Thread.sleep(5000);
         return new OurDatacenterPage(getDriver());
+    }
+    public String getPdfText(String pdfUrl) throws IOException {
+        URL url = new URL(pdfUrl);
+        InputStream is = url.openStream();
+        BufferedInputStream bis= new BufferedInputStream(is);
+        PDDocument doc = PDDocument.load(bis);
+        return  new PDFTextStripper().getText(doc);
     }
     /*public long getDurationOfVideo() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
