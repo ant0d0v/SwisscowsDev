@@ -173,6 +173,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     private WebElement RegionDropDownIcon;
     @FindBy(xpath = "//video")
     private WebElement videoPlayer;
+    @FindBy(xpath = "//div[@class='player']/iframe")
+    private WebElement videoPlayerYouTube;
 
     public FooterMenuPage(WebDriver driver) {
         super(driver);
@@ -252,7 +254,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
-
         createGeneric();
     }
 
@@ -387,6 +388,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         Thread.sleep(5000);
         return new OurDatacenterPage(getDriver());
     }
+
+
     public String getPdfText(String pdfUrl) throws IOException {
         URL url = new URL(pdfUrl);
         InputStream is = url.openStream();

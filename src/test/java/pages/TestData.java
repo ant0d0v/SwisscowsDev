@@ -113,6 +113,16 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "DonationLinksData")
+    public static Object[][] DonationLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Swisscows VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn","Anonymous web surfing with Swisscows"},
+                {1, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en","SCREENSHOTS"},
+                {2, "here", "/en/social-projects", "https://dev.swisscows.com/en/social-projects","Charity Project"},
+
+        };
+    }
 
 
     @DataProvider(name = "ExternalFooterMenuData")

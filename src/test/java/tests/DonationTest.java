@@ -4,7 +4,11 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import pages.TestData;
+import pages.footer_menu.CharityProjectPage;
 import pages.footer_menu.DonationPage;
+
+
 import java.io.IOException;
 
 public class DonationTest extends BaseTest {
@@ -18,10 +22,11 @@ public class DonationTest extends BaseTest {
                 .scrollToFooter()
                 .clickDonationPageFooterMenu()
                 .getCurrentURL();
-        String actualPdfLink = donationPage
+        ;
+        donationPage
                 .scrollToWherePaymentBlock()
-                .clickQrCodeChf()
-                .getCurrentURL();
+                .clickQrCodeChf();
+        String actualPdfLink = getExternalPageURL();
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualPdfLink,expectedPdfLink);
 
@@ -35,11 +40,36 @@ public class DonationTest extends BaseTest {
                 .scrollToFooter()
                 .clickDonationPageFooterMenu()
                 .getCurrentURL();
-        String actualPdfLink = donationPage
+        donationPage
                 .scrollToWherePaymentBlock()
-                .clickQrCodeEuro()
-                .getCurrentURL();
+                .clickQrCodeEuro();
+        String actualPdfLink = getExternalPageURL();
+
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualPdfLink,expectedPdfLink);
     }
+    @Test(dataProvider = "DonationLinksData", dataProviderClass = TestData.class)
+    public void testDonationLinksNavigateToCorrespondingPages(
+            int index, String linkName, String href, String expectedURL,String expectedH1Header) throws InterruptedException {
+        DonationPage donationPage = new DonationPage(getDriver());
+        MainPage mainPage = openBaseURL();
+        final String oldURL = mainPage
+                .scrollToFooterMenu()
+                .clickDonationPageFooterMenu()
+                .getCurrentURL();
+        final String oldH1Header = donationPage.getH1Text();
+
+        donationPage
+                .scrollToWhereH1Header()
+                .clickAllLinksToDonationPage(index);
+
+        final String actualURL = getExternalPageURL();
+        final String actualH1Header = donationPage.getH1Text();
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldH1Header, actualH1Header);
+        Assert.assertEquals(actualURL, expectedURL);
+        Assert.assertEquals(actualH1Header, expectedH1Header);
+    }
+
 }
