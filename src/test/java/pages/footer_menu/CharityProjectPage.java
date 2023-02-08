@@ -53,16 +53,18 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
         return new CharityProjectPage(getDriver());
     }
 
-    public void doubleClickToSecondImageInSlider() {
+    public CharityProjectPage doubleClickToSecondImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(secondImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(secondImageInSlider));
+        return this;
     }
 
-    public void doubleClickToThirdImageInSlider() {
+    public CharityProjectPage doubleClickToThirdImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(thirdImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(thirdImageInSlider));
+        return this;
     }
     public String getClassAttributeOfImageInFirstSlider() {
         return getAttribute(attributeSecondImageInFirstSlider, "class");
