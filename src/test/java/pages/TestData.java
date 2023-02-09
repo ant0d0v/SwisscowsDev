@@ -37,6 +37,31 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "LangSetAsStartTestData")
+    public static Object[][] LangSetAsStartDataProvider() {
+
+        return new Object[][]{
+                {1, "Deutsch", "Swisscows als Startseite festlegen"},
+                {2, "Français", "Utiliser Swisscows comme page d'accueil"},
+                {3, "Italiano",  "Impostare Swisscows come pagina iniziale"},
+                {6, "Latviešu",  "Vai vēlaties iestatīt \"Swisscows\" kā sākumlapu"},
+                {7, "Magyar",  "How to set Swisscows as your start page"},
+
+
+        };
+    }
+    @DataProvider(name = "LangMakaDefaultSearchTestData")
+    public static Object[][] LangMakaDefaultSearchDataProvider() {
+
+        return new Object[][]{
+                {1, "Deutsch", "Standardsuche verwenden"},
+                {2, "Français", "Utiliser la recherche par défaut"},
+                {3, "Italiano",  "Utilizzare ricerca standard"},
+                {6, "Latviešu",  "Vai vēlaties izmantot \"Swisscows\" meklēšanai"},
+                {7, "Magyar",  "Használja a Swisscows-t alapértelmezett keresőként"},
+
+        };
+    }
 
     @DataProvider(name = "RegionTopMenuTestData")
     public static Object[][] RegionTestDataProvider() {
@@ -101,6 +126,17 @@ public class TestData {
                 {0, "Swisscows VPN", "/en/vpn", "https://dev.swisscows.com/en/anonymous-vpn",},
                 {1, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en"},
 
+        };
+    }
+    @DataProvider(name = "MakeDefaultSearchLinksData")
+    public static Object[][] MakeDefaultSearchLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Install Swisscows", "https://addons.mozilla.org/en-US/firefox/addon/swisscows-search/", "https://addons.mozilla.org/en-US/firefox/addon/swisscows-search/",},
+                {1, "Install Swisscows", "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij", "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij"},
+                {2, "Install Swisscows", "https://swisscows.com/web?query=%s", "https://swisscows.com/en/web?query=%25s"},
+                {3, "Install Swisscows", "https://swisscows.com/web?query=%s", "https://swisscows.com/en/web?query=%25s"},
+                {4, "Install Swisscows", "https://microsoftedge.microsoft.com/addons/detail/swisscows/dlclfmjmfabgglmifagcjnjcpimekdmn", "https://microsoftedge.microsoft.com/addons/detail/swisscows/dlclfmjmfabgglmifagcjnjcpimekdmn"},
         };
     }
 

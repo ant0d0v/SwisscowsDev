@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
 import pages.accounts.LoginPage;
 import pages.accounts.UsersLoginPage;
+import pages.footer_menu.MakeDefaultSearchPage;
+import pages.footer_menu.SetAsStartPage;
 import pages.top_menu.VpnPage;
 import utils.TestUtils;
 
@@ -329,6 +331,26 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         }
 
         createGeneric();
+    }
+    public SetAsStartPage clickLangDropDownSetAsStart(int index) {
+        click(LangDropDownIcon);
+        click(getInnerLangMenuList().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        createGeneric();
+        return new SetAsStartPage(getDriver());
+    }
+    public MakeDefaultSearchPage clickLangDropDownMakeDefault(int index) {
+        click(LangDropDownIcon);
+        click(getInnerLangMenuList().get(index));
+        if (getDriver().getWindowHandles().size() > 1) {
+            switchToAnotherWindow();
+        }
+
+        createGeneric();
+        return new MakeDefaultSearchPage (getDriver());
     }
 
     public void clickRegionDropDown(int index) {

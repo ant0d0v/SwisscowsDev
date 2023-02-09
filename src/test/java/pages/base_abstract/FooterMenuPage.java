@@ -215,6 +215,10 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return  getColors(textsH1);
 
     }
+    public List<String> getH2FontSizes(){
+        return  getFontSizes(textsH2);
+
+    }
 
     public WebElement getAboutSwisscowsFooterMenu() {
 
@@ -338,6 +342,16 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         click(ContactusFooterMenu);
 
         return new ContactUsPage(getDriver());
+    }
+    public SetAsStartPage clickSetAsStartPageFooterMenu() {
+        click(setAsStartpageFooterMenu);
+
+        return new SetAsStartPage(getDriver());
+    }
+    public MakeDefaultSearchPage clickMakeDefaultSearchPageFooterMenu() {
+        click(makeDefaultSearchEngineFooterMenu);
+
+        return new MakeDefaultSearchPage(getDriver());
     }
 
     public void clickAppStoreIcon() {

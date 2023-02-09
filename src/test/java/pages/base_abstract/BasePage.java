@@ -141,6 +141,22 @@ public abstract class BasePage {
         return new ArrayList<>();
     }
 
+    protected List<String> getFontSizes(List<WebElement> list) {
+        if (list.size() > 0) {
+            getWait20().until(ExpectedConditions.visibilityOfAllElements(list));
+            List<String> FontSizeList = new ArrayList<>();
+            for (WebElement element : list) {
+                if (element.isEnabled() && element.isDisplayed()) {
+                    FontSizeList.add(element.getCssValue("font-size"));
+                }
+            }
+
+            return FontSizeList;
+        }
+
+        return new ArrayList<>();
+    }
+
     protected String getBackgroundColorInHEX(WebElement element) {
 
         return Color.fromString(getBackgroundColor(element)).asHex();

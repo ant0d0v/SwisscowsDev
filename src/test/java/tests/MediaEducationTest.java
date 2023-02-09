@@ -43,7 +43,7 @@ public class MediaEducationTest extends BaseTest {
 
 
     }
-@Ignore
+
     @Test
     public void testHTML5VideoYouTubePlayerMediaEducation() throws Exception {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
