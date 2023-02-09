@@ -9,7 +9,7 @@ import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
 
 public class CharityProjectTest extends BaseTest {
-@Ignore
+
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
         final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";

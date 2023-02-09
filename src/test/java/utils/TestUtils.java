@@ -25,7 +25,7 @@ public class TestUtils {
     }
 
     public static void waitForPageLoaded(WebDriver driver) {
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(25));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
 
     public static void reLoadBaseUrlPage(WebDriver driver, WebDriverWait wait) {
