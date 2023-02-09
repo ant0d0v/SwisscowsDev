@@ -153,6 +153,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = "//h1")
     private WebElement textH1FooterMenu;
+    @FindBy(xpath = "//h1")
+    private List<WebElement> textsH1;
+
+    @FindBy(xpath = "//h2")
+    private List<WebElement> textsH2;
+
 
     @FindBy(xpath = "//div[@class='row narrow static-content']//a")
     private List<WebElement> allLinksOnPage; // Swisscows
@@ -195,6 +201,19 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public String getH1Text() {
 
         return getText(textH1FooterMenu);
+    }
+    public List<String> getH1Texts() {
+
+        return getTexts(textsH1);
+    }
+
+    public List<String> getH2Texts() {
+
+        return getTexts(textsH2);
+    }
+    public List<String> getH1Colors(){
+        return  getColors(textsH1);
+
     }
 
     public WebElement getAboutSwisscowsFooterMenu() {

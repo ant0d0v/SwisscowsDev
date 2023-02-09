@@ -123,7 +123,22 @@ public abstract class BasePage {
     protected String getBackgroundColor(WebElement element) {
         wait10ElementToBeVisible(element);
 
-        return element.getCssValue("background-color");
+        return element.getCssValue("color");
+    }
+    protected List<String> getColors(List<WebElement> list) {
+        if (list.size() > 0) {
+            getWait20().until(ExpectedConditions.visibilityOfAllElements(list));
+            List<String> colorsList = new ArrayList<>();
+            for (WebElement element : list) {
+                if (element.isEnabled() && element.isDisplayed()) {
+                    colorsList.add(element.getCssValue("color"));
+                }
+            }
+
+            return colorsList;
+        }
+
+        return new ArrayList<>();
     }
 
     protected String getBackgroundColorInHEX(WebElement element) {

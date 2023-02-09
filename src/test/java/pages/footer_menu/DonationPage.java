@@ -39,15 +39,15 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
         return this;
     }
 
-    public void clickQrCodeChf() throws InterruptedException {
+    public DonationPage clickQrCodeChf() {
         click(qrCodeChf);
         switchToAnotherWindow();
-        sleep(2000);
+
+        return this;
     }
-    public DonationPage clickQrCodeEuro() throws InterruptedException {
+    public DonationPage clickQrCodeEuro()  {
         click(qrCodeEuro);
         switchToAnotherWindow();
-        sleep(2000);
         return  this;
     }
     public List<WebElement> getAllLinksOnPage() {
@@ -61,4 +61,5 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
         }
         createGeneric();
     }
+
 }

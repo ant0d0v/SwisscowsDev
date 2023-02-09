@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.MediaEducationPage;
 import java.io.IOException;
-
+import java.util.List;
 
 
 public class MediaEducationTest extends BaseTest {
@@ -57,9 +57,20 @@ public class MediaEducationTest extends BaseTest {
         mediaEducationPage.screen("mediaEducationPage.png");
         Assert.assertTrue(source.contains(expectedSource));
 
+    }
 
-
-
+    @Test
+    public void testH2TextsMediaEducationPage(){
+        List<String> expectedH1Texts = List.of(
+                "We attach great importance to family-friendly Internet content!",
+                "A safe Internet for our children - how children can learn to use digital media"
+        );
+        List<String> actualH1Texts = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMediaEducationFooterMenu()
+                .getH2Texts();
+        Assert.assertTrue(actualH1Texts.size() > 0);
+        Assert.assertEquals(actualH1Texts, expectedH1Texts);
 
 
     }
