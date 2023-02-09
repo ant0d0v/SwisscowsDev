@@ -7,6 +7,8 @@ import utils.TestUtils;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class DonationPage extends FooterMenuPage<DonationPage> {
     @FindBy(xpath = "//div[@class = 'payment-slip-block']")
     private WebElement paymentBlock;
@@ -37,15 +39,16 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
         return this;
     }
 
-    public void clickQrCodeChf() {
+    public void clickQrCodeChf() throws InterruptedException {
         click(qrCodeChf);
         switchToAnotherWindow();
-        TestUtils.waitForPageLoaded(getDriver());
+        sleep(2000);
     }
-    public void clickQrCodeEuro() {
+    public DonationPage clickQrCodeEuro() throws InterruptedException {
         click(qrCodeEuro);
         switchToAnotherWindow();
-        TestUtils.waitForPageLoaded(getDriver());
+        sleep(2000);
+        return  this;
     }
     public List<WebElement> getAllLinksOnPage() {
 

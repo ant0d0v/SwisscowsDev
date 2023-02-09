@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
 
+import static java.lang.Thread.sleep;
 
 
 public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
@@ -11,8 +12,10 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
     private WebElement linkPdf;
     @FindBy(xpath = "//div[@class = 'brochure-wrap']//a[@href='/docs/Medienerziehung_2020_06_EN.pdf']")
     private WebElement buttonOpenFlyer;
-    @FindBy(xpath = "//div[@class='player']")
+    @FindBy(xpath = "//div[@class='player']/iframe")
     private WebElement videoPlayerYouTube;
+    @FindBy(xpath = "//button[@class='ytp-large-play-button ytp-button ytp-large-play-button-red-bg']")
+    private WebElement videoPlayerYouTubeButtonPlay;
     public MediaEducationPage(WebDriver driver) {
         super(driver);
     }
@@ -45,6 +48,14 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
     public MediaEducationPage clickButtonOpenFlyer() {
         click(buttonOpenFlyer);
         return this;
+    }
+
+    public MediaEducationPage clickPlayerYouTube() throws InterruptedException {
+        wait10ElementToBeVisible(videoPlayerYouTube);
+        getDriver().switchTo().frame(videoPlayerYouTube);
+        click(videoPlayerYouTubeButtonPlay);
+        sleep(7000);
+        return  this;
     }
 
 

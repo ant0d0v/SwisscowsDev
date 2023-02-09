@@ -5,16 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.footer_menu.CharityProjectPage;
 import pages.footer_menu.DonationPage;
 
-
-import java.io.IOException;
 
 public class DonationTest extends BaseTest {
 
     @Test
-    public void testPdfLinkCHFDonation() throws IOException {
+    public void testPdfLinkCHFDonation() throws InterruptedException {
         DonationPage donationPage = new DonationPage(getDriver());
         final String expectedPdfLink = "https://dev.swisscows.com/docs/Swisscows_Donation_CHF_t.pdf";
         final String oldURL = openBaseURL().getCurrentURL();
@@ -32,7 +29,7 @@ public class DonationTest extends BaseTest {
 
     }
     @Test
-    public void testPdfLinkEuroDonation() throws IOException {
+    public void testPdfLinkEuroDonation() throws  InterruptedException {
         DonationPage donationPage = new DonationPage(getDriver());
         final String expectedPdfLink = "https://dev.swisscows.com/docs/Swisscows_Donation_EUR_t.pdf";
         final String oldURL = openBaseURL().getCurrentURL();
