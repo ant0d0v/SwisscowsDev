@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.footer_menu.CharityProjectPage;
 import pages.footer_menu.MediaEducationPage;
 import java.io.IOException;
 
@@ -44,17 +43,21 @@ public class MediaEducationTest extends BaseTest {
 
 
     }
-    @Ignore
+@Ignore
     @Test
-    public void testHTML5VideoPlayerCharity() throws Exception {
-        final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
+    public void testHTML5VideoYouTubePlayerMediaEducation() throws Exception {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
-        openBaseURL()
+        final String expectedSource = "https://www.youtube.com/";
+        final String source = openBaseURL()
                 .scrollToFooterMenu()
-                .clickMediaEducationFooterMenu();
-        mediaEducationPage
-                .scrollToWhereToVideoPlayerYouTube();
-        sleep(5000);
+                .clickMediaEducationFooterMenu()
+                .scrollToWhereToVideoPlayerYouTube()
+                .clickPlayerYouTube()
+                .getCurrentSrcOfVideo();
+        mediaEducationPage.screen("mediaEducationPage.png");
+        Assert.assertTrue(source.contains(expectedSource));
+
+
 
 
 
