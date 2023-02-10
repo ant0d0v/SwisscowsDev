@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
 import pages.base_abstract.FooterMenuPage;
 
+import java.util.List;
+
 public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
     @FindBy(xpath = "//div[@class = 'thanks-message']/h2")
     private WebElement thanksMessage;
@@ -82,6 +84,10 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
         clickCheckbox();
         clickSendButton();
         return new ContactUsPage(getDriver());
+    }
+    public String getColorPrivacyLink(){
+
+        return getBackgroundColor(privacyPolicyLink);
     }
 
 }

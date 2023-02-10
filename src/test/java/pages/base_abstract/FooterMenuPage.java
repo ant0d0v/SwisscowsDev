@@ -86,9 +86,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(xpath = FOOTER_MENU_ID + "//a[text() = 'Data privacy']")//Swisscows
     private WebElement dataPrivacyFooterMenu;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//div[@class = 'footer-menu-bottom']/a")//Swisscows
-    private List<WebElement> swisscowsFooterLinks;
-
     @FindBy(xpath = FOOTER_MENU_ID + "//a[@class = 'app-link'][2]")
     private WebElement downloadOnTheAppStoreLinkFooterMenu;
 
@@ -142,8 +139,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     @FindBy(xpath = FOOTER_MENU_ID + "//a") // Swisscows links
     private List<WebElement> footerMenuLinks;
 
-    @FindBy(xpath = FOOTER_MENU_ID + "//a[@href='https://openweather.co.uk/']")
-    private WebElement openWeatherForBusinessFooterMenuLink;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='app']//a")
     private List<WebElement> storePanelIconsFooterMenu; // Swisscows
@@ -181,6 +176,9 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     private WebElement videoPlayer;
     @FindBy(xpath = "//div[@class='player']/iframe")
     private WebElement videoPlayerYouTube;
+    @FindBy(xpath = "//a[@href='mailto: info@swisscows.com']")
+    private WebElement linkToEmail;
+
 
     public FooterMenuPage(WebDriver driver) {
         super(driver);
@@ -218,6 +216,13 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public List<String> getH2FontSizes(){
         return  getFontSizes(textsH2);
 
+    }
+    public String getColorEmail (){
+        return getBackgroundColor(linkToEmail);
+    }
+    public List <String> getColorLinks (){
+
+        return getColors(allLinksOnPage);
     }
 
     public WebElement getAboutSwisscowsFooterMenu() {
@@ -353,6 +358,16 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return new MakeDefaultSearchPage(getDriver());
     }
+    public PrivacyPolicyPage clickPrivacyPolicyPageFooterMenu() {
+        click(dataPrivacyFooterMenu);
+
+        return new PrivacyPolicyPage(getDriver());
+    }
+    public ImprintPage clickImprintPageFooterMenu() {
+        click(imprintFooterMenu);
+
+        return new ImprintPage(getDriver());
+    }
 
     public void clickAppStoreIcon() {
         click20(downloadOnTheAppStoreLinkFooterMenu);
@@ -430,6 +445,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         PDDocument doc = PDDocument.load(bis);
         return  new PDFTextStripper().getText(doc);
     }
+
     /*public long getDurationOfVideo() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         return (Long) executor.executeScript("return arguments[0].duration", videoPlayer);

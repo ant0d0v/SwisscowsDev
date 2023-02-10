@@ -65,6 +65,21 @@ public class SetAsStartTest extends BaseTest {
 
         Assert.assertEquals(actualH1texts, expectedH1text);
     }
+    @Test
+    public void testLinksColorsSetAsStartPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)"
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickSetAsStartPageFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
 
 
 }

@@ -98,5 +98,22 @@ public class DonationTest extends BaseTest {
         Assert.assertEquals(actualH1Colors, expectedH1Colors);
 
     }
+    @Test
+    public void testLinksColorsDonationPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)"
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickDonationPageFooterMenu()
+                .getColorLinksDonation();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
 
 }

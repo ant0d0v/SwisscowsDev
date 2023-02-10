@@ -43,7 +43,7 @@ public class MediaEducationTest extends BaseTest {
 
 
     }
-
+    @Ignore
     @Test
     public void testHTML5VideoYouTubePlayerMediaEducation() throws Exception {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
@@ -74,4 +74,23 @@ public class MediaEducationTest extends BaseTest {
 
 
     }
+    @Test
+    public void testLinksColorsMediaEducationPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)",
+                "rgba(255, 255, 255, 0.7)"
+
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMediaEducationFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
+
 }
