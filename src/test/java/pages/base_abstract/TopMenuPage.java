@@ -98,6 +98,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement LoginIconHamburgerMenu;
 
+    @FindBy(xpath = "//h3")
+    private List<WebElement> textsH3;
+
+    @FindBy(xpath = "//div[@class='faq-wrap']//p")
+    private List<WebElement> textsAnswers;
+
 
 
     public TopMenuPage(WebDriver driver) {
@@ -259,6 +265,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(hamburgerTopMenu);
 
         new MainPage(getDriver());
+    }
+    public List <String> getH3Texts() {
+
+        return getTexts(textsH3);
+    }
+    public List <String> getAnswersTexts() {
+
+        return getTexts(textsAnswers);
     }
 
     public void clickSetAsStartAppInHamburgerMenu() {

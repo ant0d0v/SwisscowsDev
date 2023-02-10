@@ -464,8 +464,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     }
 
-    public void clickAllQuestions(){
+    public MainPage clickAllQuestions(){
         clickAllElementsInList(homepageAllQuestion);
+        return new MainPage(getDriver());
     }
 
 

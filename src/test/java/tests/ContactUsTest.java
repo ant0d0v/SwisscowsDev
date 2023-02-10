@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.ContactUsPage;
 
-import java.util.List;
-
 public class ContactUsTest extends BaseTest {
     @Test
     public void testFormContactUs() {

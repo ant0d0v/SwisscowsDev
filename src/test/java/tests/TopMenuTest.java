@@ -112,7 +112,7 @@ public class TopMenuTest extends BaseTest {
 
         openBaseURL();
 
-        MainPage mainPage = new MainPage(getDriver());
+        MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenuIcon();
         String actualIfVisible = mainPage.getHamburgerMenuIsActiveValue();
 
@@ -140,7 +140,7 @@ public class TopMenuTest extends BaseTest {
     @Test
     public void testCompanyLogoNavigatesToBaseURL() {
         final String expectedURL = "https://dev.swisscows.com/en";
-        final String expectedTitle = "Your private und anonymous search engine Swisscows";
+        final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
         openBaseURL();
 

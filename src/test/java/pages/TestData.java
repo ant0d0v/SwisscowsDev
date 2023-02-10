@@ -67,18 +67,18 @@ public class TestData {
     public static Object[][] RegionTestDataProvider() {
 
         return new Object[][]{
-                {0, "Argentina", "https://dev.swisscows.com/en?region=es-AR","Your private und anonymous search engine Swisscows"},
-                {1, "Australia", "https://dev.swisscows.com/en?region=en-AU", "Your private und anonymous search engine Swisscows"},
-                {2, "Austria", "https://dev.swisscows.com/en?region=de-AT", "Your private und anonymous search engine Swisscows"},
-                {3, "Belgium(fr)", "https://dev.swisscows.com/en?region=fr-BE", "Your private und anonymous search engine Swisscows"},
-                {6, "Canada(en)", "https://dev.swisscows.com/en?region=en-CA", "Your private und anonymous search engine Swisscows"},
-                {7, "Canada(fr)", "https://dev.swisscows.com/en?region=fr-CA", "Your private und anonymous search engine Swisscows"},
-                {12, "France", "https://dev.swisscows.com/en?region=fr-FR", "Your private und anonymous search engine Swisscows"},
-                {13, "Germany", "https://dev.swisscows.com/en?region=de-DE", "Your private und anonymous search engine Swisscows"},
-                {18, "Italy", "https://dev.swisscows.com/en?region=it-IT", "Your private und anonymous search engine Swisscows"},
-                {37, "Switzerland(de)", "https://dev.swisscows.com/en?region=de-CH", "Your private und anonymous search engine Swisscows"},
-                {38, "Switzerland(fr)", "https://dev.swisscows.com/en?region=fr-CH", "Your private und anonymous search engine Swisscows"},
-                {45, "World-wide", "https://dev.swisscows.com/en?region=iv", "Your private und anonymous search engine Swisscows"},
+                {0, "Argentina", "https://dev.swisscows.com/en?region=es-AR","Your private and anonymous search engine Swisscows"},
+                {1, "Australia", "https://dev.swisscows.com/en?region=en-AU", "Your private and anonymous search engine Swisscows"},
+                {2, "Austria", "https://dev.swisscows.com/en?region=de-AT", "Your private and anonymous search engine Swisscows"},
+                {3, "Belgium(fr)", "https://dev.swisscows.com/en?region=fr-BE", "Your private and anonymous search engine Swisscows"},
+                {6, "Canada(en)", "https://dev.swisscows.com/en?region=en-CA", "Your private and anonymous search engine Swisscows"},
+                {7, "Canada(fr)", "https://dev.swisscows.com/en?region=fr-CA", "Your private and anonymous search engine Swisscows"},
+                {12, "France", "https://dev.swisscows.com/en?region=fr-FR", "Your private and anonymous search engine Swisscows"},
+                {13, "Germany", "https://dev.swisscows.com/en?region=de-DE", "Your private and anonymous search engine Swisscows"},
+                {18, "Italy", "https://dev.swisscows.com/en?region=it-IT", "Your private and anonymous search engine Swisscows"},
+                {37, "Switzerland(de)", "https://dev.swisscows.com/en?region=de-CH", "Your private and anonymous search engine Swisscows"},
+                {38, "Switzerland(fr)", "https://dev.swisscows.com/en?region=fr-CH", "Your private and anonymous search engine Swisscows"},
+                {45, "World-wide", "https://dev.swisscows.com/en?region=iv", "Your private and anonymous search engine Swisscows"},
 
         };
     }
@@ -113,7 +113,7 @@ public class TestData {
     public static Object[][] WhoWeAreLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Your private und anonymous search engine Swisscows"},
+                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Your private and anonymous search engine Swisscows"},
                 {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Privacy Policy | Swisscows"},
 
         };
