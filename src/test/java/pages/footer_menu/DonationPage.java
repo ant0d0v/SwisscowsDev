@@ -3,11 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
-import utils.TestUtils;
-
 import java.util.List;
 
-import static java.lang.Thread.sleep;
 
 public class DonationPage extends FooterMenuPage<DonationPage> {
     @FindBy(xpath = "//div[@class = 'payment-slip-block']")
@@ -60,6 +57,10 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
             switchToAnotherWindow();
         }
         createGeneric();
+    }
+    public List <String> getColorLinksDonation (){
+
+        return getColors(allLinksOnPage);
     }
 
 }

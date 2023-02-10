@@ -282,7 +282,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testCopyrightOnFooterMenu() {
-        final String expectedCopyright = "© Swisscows AG, 2022";
+        final String expectedCopyright = "© Swisscows AG, 2023";
 
         String actualCopyright = openBaseURL()
                 .scrollToFooterMenu()

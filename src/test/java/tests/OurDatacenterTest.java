@@ -8,6 +8,8 @@ import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.OurDatacenterPage;
 
+import java.util.List;
+
 
 public class OurDatacenterTest extends BaseTest {
 @Ignore
@@ -60,5 +62,22 @@ public class OurDatacenterTest extends BaseTest {
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
         Assert.assertTrue(ourDatacenterPage.elementIsDisplayedInSlider());
+    }
+    @Test
+    public void testLinksColorsDataCenterPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)"
+
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickOurDatacenterPageFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
     }
 }

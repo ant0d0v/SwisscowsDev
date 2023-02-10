@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.ContactUsPage;
 
+import java.util.List;
+
 public class ContactUsTest extends BaseTest {
     @Test
     public void testFormContactUs() {
@@ -53,6 +55,19 @@ public class ContactUsTest extends BaseTest {
                     .getCurrentURL();
 
         Assert.assertEquals(actualUrl, expectedUrl);
+    }
+
+    @Test
+    public void testLinksColorContactUsPage() {
+        String expectedLinksColors =
+                "rgba(223, 93, 93, 1)";
+        String actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickContactUsPageFooterMenu()
+                .getColorPrivacyLink();
+
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
     }
 
 }

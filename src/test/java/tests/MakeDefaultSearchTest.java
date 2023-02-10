@@ -47,7 +47,7 @@ public class MakeDefaultSearchTest extends BaseTest {
 
     @Test
     public void testH2FontSizesMakeDefaultSearchPage(){
-        List<String> expectedH1Colors = List.of(
+        List<String> expectedH1FontSizes = List.of(
                 "24px",
                 "24px",
                 "24px",
@@ -60,10 +60,9 @@ public class MakeDefaultSearchTest extends BaseTest {
                 .scrollToFooterMenu()
                 .clickMakeDefaultSearchPageFooterMenu()
                 .getH2FontSizes();
-        System.out.println(actualH2FontSizes);
 
         Assert.assertTrue(actualH2FontSizes.size() > 0);
-        Assert.assertEquals(actualH2FontSizes, expectedH1Colors);
+        Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
     @Test(dataProvider = "LangMakaDefaultSearchTestData", dataProviderClass = TestData.class)
     public void testLocalizationGoToCorrespondingLanguage(
@@ -86,6 +85,25 @@ public class MakeDefaultSearchTest extends BaseTest {
                 .scrollToWhereH2Tor();
 
         Assert.assertTrue(makeDefaultSearchPage.elementIsDisplayedAnimationImage());
+    }
+    @Test
+    public void testLinksColorsMakeDefaultSearchPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(255, 255, 255, 1)",
+                "rgba(255, 255, 255, 1)",
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)",
+                "rgba(255, 255, 255, 1)"
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMakeDefaultSearchPageFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
     }
 
 }

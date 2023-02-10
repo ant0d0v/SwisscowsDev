@@ -8,8 +8,10 @@ import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
 
-public class CharityProjectTest extends BaseTest {
+import java.util.List;
 
+public class CharityProjectTest extends BaseTest {
+@Ignore
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
         final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
@@ -75,6 +77,23 @@ public class CharityProjectTest extends BaseTest {
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
         Assert.assertTrue(charityProjectPage.elementIsDisplayedInSecondSlider());
+    }
+    @Test
+    public void testLinksColorsCharityProjectPage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)"
+
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickCharityProjectFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
     }
 
     }

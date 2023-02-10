@@ -7,6 +7,8 @@ import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.WhoWeArePage;
 
+import java.util.List;
+
 public class WhoWeAreTest extends BaseTest {
 
     @Test
@@ -49,6 +51,24 @@ public class WhoWeAreTest extends BaseTest {
             Assert.assertEquals(actualURL, expectedURL);
             Assert.assertEquals(actualTitle, expectedTitle);
         }
+    @Test
+    public void testLinksColorsWhoWeArePage() {
+        List<String> expectedLinksColors = List.of(
+                "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)"
+
+
+
+        );
+        List<String> actualLinksColors = openBaseURL()
+                .scrollToFooterMenu()
+                .clickAboutUsFooterMenu()
+                .getColorLinks();
+
+        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
 
 
 
