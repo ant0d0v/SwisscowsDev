@@ -22,7 +22,7 @@ public class CharityProjectTest extends BaseTest {
         charityProjectPage
                 .playVideoCharity()
                 .pauseVideoCharity()
-                .screen();
+                .screen("Charity.png");
 
         Assert.assertEquals(source, expectedSource);
     }

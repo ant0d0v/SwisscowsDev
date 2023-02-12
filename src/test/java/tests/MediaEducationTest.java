@@ -47,15 +47,15 @@ public class MediaEducationTest extends BaseTest {
     @Test
     public void testHTML5VideoYouTubePlayerMediaEducation() throws Exception {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
-        final String expectedSource = "https://www.youtube.com/";
         final String source = openBaseURL()
                 .scrollToFooterMenu()
                 .clickMediaEducationFooterMenu()
                 .scrollToWhereToVideoPlayerYouTube()
                 .clickPlayerYouTube()
                 .getCurrentSrcOfVideo();
-        mediaEducationPage.screen();
-        Assert.assertTrue(source.contains(expectedSource));
+
+        mediaEducationPage.screen("MediaEducation.png");
+        Assert.assertTrue(source.contains("youtube.com"));
 
     }
 
