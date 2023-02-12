@@ -113,8 +113,8 @@ public class TestData {
     public static Object[][] WhoWeAreLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Your private and anonymous search engine Swisscows"},
-                {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Privacy Policy | Swisscows"},
+                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Anonymous search engine"},
+                {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Swisscows Privacy Policy"},
 
         };
     }

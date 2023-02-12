@@ -27,7 +27,7 @@ public class WhoWeAreTest extends BaseTest {
     }
         @Test(dataProvider = "WhoWeAreLinksData", dataProviderClass = TestData.class)
         public void testWhoWeAreLinksNavigateToCorrespondingPages(
-        int index, String linkName, String href, String expectedURL, String expectedTitle) throws InterruptedException {
+        int index, String linkName, String href, String expectedURL, String expectedH1text) throws InterruptedException {
 
             MainPage mainPage = openBaseURL();
             mainPage
@@ -35,7 +35,7 @@ public class WhoWeAreTest extends BaseTest {
                     .clickAboutUsFooterMenu();
 
             final String oldURL = mainPage.getCurrentURL();
-            final String oldTitle = mainPage.getTitle();
+            final String oldH1Text = mainPage.getH1Text();
 
             mainPage.scrollToFooterMenu();
             WhoWeArePage whoWeArePage = new WhoWeArePage(getDriver());
@@ -44,12 +44,12 @@ public class WhoWeAreTest extends BaseTest {
                     .clickAllLinks(index);
 
             String actualURL = mainPage.getCurrentURL();
-            String actualTitle = getDriver().getTitle();
+            String actualH1Text = mainPage.getH1Text();
 
             Assert.assertNotEquals(oldURL, actualURL);
-            Assert.assertNotEquals(oldTitle, actualTitle);
+            Assert.assertNotEquals(oldH1Text, actualH1Text);
             Assert.assertEquals(actualURL, expectedURL);
-            Assert.assertEquals(actualTitle, expectedTitle);
+            Assert.assertEquals(actualH1Text, expectedH1text);
         }
     @Test
     public void testLinksColorsWhoWeArePage() {

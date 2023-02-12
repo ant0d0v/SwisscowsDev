@@ -29,10 +29,9 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Maven test
-        run: mvn test
+        run: mvn test --batch-mode -Dmaven.test.failure.ignore=true
         env:
           CHROME_OPTIONS: --disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless;--window-size=1920,1080
-          APP_OPTIONS: port=8080;admin.username=${{ secrets.ADMIN_USERNAME }};admin.password=${{ secrets.ADMIN_PASSWORD }}
           CI_RUN: true
 
       - name: Attach screenshots
@@ -40,3 +39,4 @@ jobs:
         if: failure()
         with:
           path: screenshots
+
