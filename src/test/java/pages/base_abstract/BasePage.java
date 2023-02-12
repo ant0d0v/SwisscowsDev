@@ -344,6 +344,7 @@ public abstract class BasePage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
+
     public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));

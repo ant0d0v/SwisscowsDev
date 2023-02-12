@@ -25,6 +25,7 @@ public class OurDatacenterTest extends BaseTest {
                 .playVideoDatacenter()
                 .pauseVideoDatacenter()
                 .screen("dataCentre.png");
+
         Assert.assertEquals(source, expectedSource);
     }
 

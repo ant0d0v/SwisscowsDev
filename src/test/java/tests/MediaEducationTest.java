@@ -53,8 +53,8 @@ public class MediaEducationTest extends BaseTest {
                 .scrollToWhereToVideoPlayerYouTube()
                 .clickPlayerYouTube()
                 .getCurrentSrcOfVideo();
-        mediaEducationPage.screen("MediaEducation.png");
 
+        mediaEducationPage.screen("MediaEducation.png");
         Assert.assertTrue(source.contains("youtube.com"));
 
     }
