@@ -44,7 +44,7 @@ public abstract class BaseTest {
 
     @AfterMethod
     protected void afterMethod(Method method, ITestResult result) {
-        if (!result.isSuccess()) {
+        if (!result.isSuccess()&& BaseUtils.isServerRun()) {
             BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
         }
         BaseUtils.logf("Execution time is %o sec\n\n", (result.getEndMillis() - result.getStartMillis()) / 1000);

@@ -43,7 +43,7 @@ public class MediaEducationTest extends BaseTest {
 
 
     }
-    @Ignore
+
     @Test
     public void testHTML5VideoYouTubePlayerMediaEducation() throws Exception {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
@@ -54,7 +54,7 @@ public class MediaEducationTest extends BaseTest {
                 .scrollToWhereToVideoPlayerYouTube()
                 .clickPlayerYouTube()
                 .getCurrentSrcOfVideo();
-        mediaEducationPage.screen("mediaEducationPage.png");
+        mediaEducationPage.screen();
         Assert.assertTrue(source.contains(expectedSource));
 
     }

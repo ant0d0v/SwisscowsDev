@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class OurDatacenterTest extends BaseTest {
-@Ignore
+
     @Test
     public void testHTML5VideoPlayerDatacenter() throws Exception {
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
@@ -24,7 +24,7 @@ public class OurDatacenterTest extends BaseTest {
         ourDatacenterPage
                 .playVideoDatacenter()
                 .pauseVideoDatacenter()
-                .screen("DatacenterVideo.png");
+                .screen();
         Assert.assertEquals(source, expectedSource);
     }
 

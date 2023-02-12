@@ -2,7 +2,6 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
@@ -11,7 +10,7 @@ import pages.footer_menu.CharityProjectPage;
 import java.util.List;
 
 public class CharityProjectTest extends BaseTest {
-@Ignore
+
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
         final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
@@ -23,7 +22,8 @@ public class CharityProjectTest extends BaseTest {
         charityProjectPage
                 .playVideoCharity()
                 .pauseVideoCharity()
-                .screen("CharityVideo.png");
+                .screen();
+
         Assert.assertEquals(source, expectedSource);
     }
 
