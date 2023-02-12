@@ -40,7 +40,3 @@ jobs:
         with:
           path: screenshots
 
-      - name: Publish Test Report
-        uses: starburstdata/action-testng-report@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
