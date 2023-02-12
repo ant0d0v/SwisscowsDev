@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+import pages.footer_menu.OurDatacenterPage;
 
 
 import java.io.File;
@@ -343,10 +344,11 @@ public abstract class BasePage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    public void screen() throws IOException {
+    public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File("screenshotsVideo/%s-%s.png"));
+        FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));
     }
+
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {
         List<WebElement> linksList = new ArrayList<>();

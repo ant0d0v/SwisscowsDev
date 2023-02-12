@@ -24,9 +24,10 @@ public class OurDatacenterTest extends BaseTest {
         ourDatacenterPage
                 .playVideoDatacenter()
                 .pauseVideoDatacenter()
-                .screen();
+                .screen("dataCentre.png");
         Assert.assertEquals(source, expectedSource);
     }
+
 
     @Test(dataProvider = "OurDatacenterLinksData", dataProviderClass = TestData.class)
     public void testOurDatacenterLinksNavigateToCorrespondingPages(
