@@ -36,7 +36,7 @@ public class PrivacyPolicyTest extends BaseTest {
     }
         @Test
         public void testH2FontSizesPrivacyPolicyPage(){
-            List<String> expectedH1FontSizes = List.of(
+            final List<String> expectedH1FontSizes = List.of(
                     "24px",
                     "24px",
                     "24px",
@@ -45,7 +45,7 @@ public class PrivacyPolicyTest extends BaseTest {
                     "24px"
 
             );
-            List<String>  actualH2FontSizes = openBaseURL()
+            final List<String>  actualH2FontSizes = openBaseURL()
                     .scrollToFooterMenu()
                     .clickPrivacyPolicyPageFooterMenu()
                     .getH2FontSizes();
@@ -55,12 +55,12 @@ public class PrivacyPolicyTest extends BaseTest {
         }
         @Test
         public void testLinksColorsPrivacyPolicyPage(){
-            List<String> expectedH1Colors = List.of(
+            final List<String> expectedH1Colors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
                     "rgba(223, 93, 93, 1)"
         );
-            List<String>  actualH1Colors = openBaseURL()
+            final List<String>  actualH1Colors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickPrivacyPolicyPageFooterMenu()
                 .getColorLinks();
