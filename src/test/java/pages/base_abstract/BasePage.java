@@ -205,7 +205,8 @@ public abstract class BasePage {
         for (WebElement element : allElements) {
             if (element.isEnabled() && element.isDisplayed()) {
                 wait10ElementToBeVisible(element);
-                wait10ElementToBeClickable(element).click();
+                wait10ElementToBeClickable(element);
+                clickByJavaScript(element);
             } else {
                 Reporter.log("Element " + element + " is not visible or not clickable ", true);
             }

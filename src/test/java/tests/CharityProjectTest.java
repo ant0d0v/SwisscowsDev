@@ -36,7 +36,6 @@ public class CharityProjectTest extends BaseTest {
                     .scrollToFooterMenu()
                     .clickCharityProjectFooterMenu()
                     .getCurrentURL();
-
             charityProjectPage
                     .scrollToWhereToH2Header()
                     .clickAllLinks(index);
@@ -80,13 +79,13 @@ public class CharityProjectTest extends BaseTest {
     }
     @Test
     public void testLinksColorsCharityProjectPage() {
-        List<String> expectedLinksColors = List.of(
+        final List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)"
 
 
         );
-        List<String> actualLinksColors = openBaseURL()
+        final List<String> actualLinksColors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickCharityProjectFooterMenu()
                 .getColorLinks();

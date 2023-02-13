@@ -48,7 +48,6 @@ public class FooterMenuTest extends BaseTest {
             }
 
             Assert.assertNotNull(url);
-
             String actualDomain = url.getHost();
 
             Assert.assertEquals(actualDomain, expectedDomain);
@@ -78,7 +77,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testAboutSwisscowsTexts() {
-        List<String> expectedSubscriptionTexts = List.of(
+        final List<String> expectedSubscriptionTexts = List.of(
                 "Who we are",
                 "Media Education",
                 "Charity Project",
@@ -86,7 +85,7 @@ public class FooterMenuTest extends BaseTest {
                 "Contact us"
         );
 
-        List<String> actualSubscriptionTexts =
+        final List<String> actualSubscriptionTexts =
                 openBaseURL()
                         .scrollToAboutSwisscowsFooterMenu()
                         .getAboutSwisscowsMenusTexts();
@@ -106,9 +105,8 @@ public class FooterMenuTest extends BaseTest {
                  .scrollToFooterMenu()
                  .clickMediaEducationFooterMenu();
 
-        TestUtils.waitForPageLoaded(getDriver());
-        String actualTitle = educationPagePage.getTitle();
-        String actualURL = educationPagePage.getCurrentURL();
+        final String actualTitle = educationPagePage.getTitle();
+        final String actualURL = educationPagePage.getCurrentURL();
 
         Assert.assertNotEquals(actualURL, oldURL);
         Assert.assertEquals(actualURL, expectedURL);
@@ -125,7 +123,6 @@ public class FooterMenuTest extends BaseTest {
         CharityProjectPage charityPagePage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickCharityProjectFooterMenu();
-        TestUtils.waitForPageLoaded(getDriver());
 
         String actualTitle = charityPagePage.getTitle();
         String actualURL = charityPagePage.getCurrentURL();
@@ -145,7 +142,6 @@ public class FooterMenuTest extends BaseTest {
         OurDatacenterPage OurDatacenterPage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickOurDatacenterPageFooterMenu();
-        TestUtils.waitForPageLoaded(getDriver());
 
         String actualTitle = OurDatacenterPage.getTitle();
         String actualURL = OurDatacenterPage.getCurrentURL();
@@ -187,10 +183,9 @@ public class FooterMenuTest extends BaseTest {
         ContactUsPage contactPage = new MainPage(getDriver())
                 .scrollToFooterMenu()
                 .clickContactUsPageFooterMenu();
-        TestUtils.waitForPageLoaded(getDriver());
 
-        String actualTitle = contactPage.getTitle();
-        String actualURL = contactPage.getCurrentURL();
+        final String actualTitle = contactPage.getTitle();
+        final String actualURL = contactPage.getCurrentURL();
 
         Assert.assertNotEquals(actualURL, oldURL);
         Assert.assertEquals(actualURL, expectedURL);
@@ -199,7 +194,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testOurProductsText() {
-        List<String> OurProductsTextTexts = List.of(
+        final List<String> OurProductsTextTexts = List.of(
                 "VPN",
                 "Swisscows.email",
                 "TeleGuard",
@@ -207,7 +202,7 @@ public class FooterMenuTest extends BaseTest {
                 "GetDigest"
         );
 
-        List<String> actualSubscriptionTexts =
+       final List<String> actualSubscriptionTexts =
                 openBaseURL()
                         .scrollToAboutSwisscowsFooterMenu()
                         .getOurProductsMenusTexts();
@@ -224,7 +219,7 @@ public class FooterMenuTest extends BaseTest {
         final String expectedAppStoreURL = "https://swisscows.email/";
         final String expectedTitle = "Swisscows.email - My secure e-mail.";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -247,7 +242,7 @@ public class FooterMenuTest extends BaseTest {
         final String expectedURL = "https://play.google.com/store/apps/details?id=com.swisscows.search";
         final String expectedTitle = "Swisscows Private Search - Apps on Google Play";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -266,7 +261,7 @@ public class FooterMenuTest extends BaseTest {
         final String expectedURL = "https://apps.apple.com/app/swisscows-privacy-search/id1581108092";
         final String expectedTitle = "Swisscows Private Search on the App Store";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -284,7 +279,7 @@ public class FooterMenuTest extends BaseTest {
     public void testCopyrightOnFooterMenu() {
         final String expectedCopyright = "© Swisscows AG, 2023";
 
-        String actualCopyright = openBaseURL()
+        final String actualCopyright = openBaseURL()
                 .scrollToFooterMenu()
                 .getCopyright();
 
@@ -295,7 +290,7 @@ public class FooterMenuTest extends BaseTest {
     public void testFacebookIconNavigatesToFacebookWeb() {
         final String expectedPartialFacebookURL = "facebook.com";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -313,7 +308,7 @@ public class FooterMenuTest extends BaseTest {
     public void testInstagramIconNavigatesToInstagramWeb() {
         final String expectedPartialInstagramURL = "https://www.instagram.com/swisscows.official/";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -330,7 +325,7 @@ public class FooterMenuTest extends BaseTest {
     public void testLinkedinIconNavigatesToLinkedinWeb() {
         final String expectedPartialFacebookURL = "linkedin.com";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -348,7 +343,7 @@ public class FooterMenuTest extends BaseTest {
     public void testTwitterIconNavigatesToTwitterWeb() {
         final String expectedPartialInstagramURL = "https://twitter.com/swisscows_ch";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -366,7 +361,7 @@ public class FooterMenuTest extends BaseTest {
     public void testTeleGardIconNavigatesToTeleGardWeb() {
         final String expectedPartialInstagramURL = "https://teleguard.com/en";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
 
         MainPage mainPage = new MainPage(getDriver());
 
@@ -394,7 +389,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testBlockImprintDonationDataPrivacyTexts() {
-        List<String> OurProductsTextTexts = List.of(
+        final List<String> OurProductsTextTexts = List.of(
                 "About Swisscows AG",
                 "Imprint",
                 "Data privacy",
@@ -402,7 +397,7 @@ public class FooterMenuTest extends BaseTest {
 
         );
 
-        List<String> actualSubscriptionTexts =
+        final List<String> actualSubscriptionTexts =
                 openBaseURL()
                         .scrollToAboutSwisscowsAGFooterMenu()
                         .getAboutSwisscowsAGMenusTexts();
@@ -416,7 +411,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
-            int index, String linkName, String href, String expectedURL, String expectedH1Header)  {
+        int index, String linkName, String href, String expectedURL, String expectedH1Header)  {
 
         MainPage mainPage = openBaseURL();
 
@@ -425,8 +420,8 @@ public class FooterMenuTest extends BaseTest {
 
         mainPage.scrollToFooterMenu().clickFooterMenu(index);
 
-        String actualURL = mainPage.getCurrentURL();
-        String actualH1Header = mainPage.getH1Text();
+        final String actualURL = mainPage.getCurrentURL();
+        final String actualH1Header = mainPage.getH1Text();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldH1Header, actualH1Header);
@@ -446,8 +441,8 @@ public class FooterMenuTest extends BaseTest {
 
         mainPage.scrollToFooterMenu().clickFooterMenuExternalLink(index);
 
-        String actualURL = getExternalPageURL();
-        String actualTitle = getExternalPageTitle();
+        final String actualURL = getExternalPageURL();
+        final String actualTitle = getExternalPageTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldTitle, actualTitle);
