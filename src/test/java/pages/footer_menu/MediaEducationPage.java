@@ -53,7 +53,7 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
     public MediaEducationPage clickPlayerYouTube() throws InterruptedException {
         wait10ElementToBeVisible(videoPlayerYouTube);
         getDriver().switchTo().frame(videoPlayerYouTube);
-        click(videoPlayerYouTubeButtonPlay);
+        clickByJavaScript(videoPlayerYouTubeButtonPlay);
         sleep(7000);
         return  this;
     }

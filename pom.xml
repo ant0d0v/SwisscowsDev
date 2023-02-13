@@ -98,7 +98,7 @@
                 -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
             </argLine>
             <systemPropertyVariables>
-                <allure.results.directory>target\site</allure.results.directory>
+                <allure.results.directory>target/site</allure.results.directory>
             </systemPropertyVariables>
             <suiteXmlFiles>
                 <suiteXmlFile>src/test/resources/${suiteXml}</suiteXmlFile>
