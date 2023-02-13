@@ -66,6 +66,7 @@ jobs:
         with:
           path: screenshots
 
+
       - name: Attach screenshotsVideo
         uses: actions/upload-artifact@v3
         with:
