@@ -7,3 +7,7 @@ local.properties
 debug.log
 .vscode
 .settings
+# Allure Report
+allure-results/
+.allure/
+target\allure-results
