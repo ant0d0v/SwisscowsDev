@@ -10,4 +10,4 @@ debug.log
 # Allure Report
 allure-results/
 .allure/*
-target\*
+target\\*
