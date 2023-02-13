@@ -22,6 +22,7 @@ public final class BaseUtils {
     private static final ChromeOptions chromeOptions;
     private static Properties properties;
 
+
     static {
         initProperties();
 
@@ -70,6 +71,7 @@ public final class BaseUtils {
 
         return driver;
     }
+
     static void captureScreenFile(WebDriver driver, String methodName, String className) {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File file = ts.getScreenshotAs(OutputType.FILE);
