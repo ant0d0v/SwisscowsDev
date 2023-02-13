@@ -79,8 +79,5 @@ public final class BaseUtils {
             e.printStackTrace();
         }
     }
-    public static void logf(String str, Object... arr) {
-        System.out.printf(str, arr);
-        System.out.println();
-    }
+
 }
