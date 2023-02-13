@@ -11,12 +11,12 @@ public class ContactUsTest extends BaseTest {
     public void testFormContactUs() {
         final String expectedSuccessMessage = "Thank you for contacting us!";
         final String oldURL = openBaseURL().getCurrentURL();
-        String actualURL = new MainPage(getDriver())
+        final String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickContactUsPageFooterMenu()
                 .getCurrentURL();
 
-        String actualSuccessMessage = new ContactUsPage(getDriver())
+        final String actualSuccessMessage = new ContactUsPage(getDriver())
                 .sendFormContactUs()
                 .getThanksMessage();
 
@@ -29,12 +29,12 @@ public class ContactUsTest extends BaseTest {
         final String expectedUrl = "https://dev.swisscows.com/en";
         final String oldURL = openBaseURL().getCurrentURL();
 
-        String newURL = new MainPage(getDriver())
+        final String newURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickContactUsPageFooterMenu()
                 .getCurrentURL();
 
-        String actualUrl = new ContactUsPage(getDriver())
+        final String actualUrl = new ContactUsPage(getDriver())
                 .sendFormContactUs()
                 .clickBackToSearchButton()
                 .getCurrentURL();
@@ -46,7 +46,7 @@ public class ContactUsTest extends BaseTest {
     @Test
     public void testPrivacyPolicyLinkNavigateToCorrespondingPages() {
         final String expectedUrl = "https://dev.swisscows.com/en/privacy";
-        String actualUrl = openBaseURL()
+        final String actualUrl = openBaseURL()
                     .scrollToFooter()
                     .clickContactUsPageFooterMenu()
                     .clickPrivacyPolicyLink()
@@ -57,9 +57,9 @@ public class ContactUsTest extends BaseTest {
 
     @Test
     public void testLinksColorContactUsPage() {
-        String expectedLinksColors =
+        final String expectedLinksColors =
                 "rgba(223, 93, 93, 1)";
-        String actualLinksColors = openBaseURL()
+        final String actualLinksColors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickContactUsPageFooterMenu()
                 .getColorPrivacyLink();

@@ -20,7 +20,7 @@ public class ImprintTest extends BaseTest {
     }
     @Test
     public void testSpanTextsImprintPage() {
-        List<String> expectedH2Texts = List.of(
+        final  List<String> expectedH2Texts = List.of(
                 "Swisscows AG\n"+"Bucherstrasse 2\n"+"9322 Egnach, Switzerland",
                 "+41 (0) 716 667 931",
                 "+41 (0) 716 667 930",
@@ -31,7 +31,7 @@ public class ImprintTest extends BaseTest {
                 "District Court",
                 "Commercial Register"
         );
-        List<String> actualH2Texts = openBaseURL()
+        final List<String> actualH2Texts = openBaseURL()
                 .scrollToFooterMenu()
                 .clickImprintPageFooterMenu()
                 .getTextsOnPage();
@@ -40,7 +40,7 @@ public class ImprintTest extends BaseTest {
     }
     @Test
     public void testTextsFontSizesImprintPage(){
-        List<String> expectedH1FontSizes = List.of(
+        final List<String> expectedH1FontSizes = List.of(
                 "20px",
                 "20px",
                 "20px",
@@ -51,7 +51,7 @@ public class ImprintTest extends BaseTest {
                 "20px",
                 "20px"
         );
-        List<String>  actualH2FontSizes = openBaseURL()
+        final List<String>  actualH2FontSizes = openBaseURL()
                 .scrollToFooterMenu()
                 .clickImprintPageFooterMenu()
                 .getTextsFontSizes();
@@ -62,9 +62,9 @@ public class ImprintTest extends BaseTest {
 
     @Test
     public void tesEmailLinkColorImprintPage(){
-        String expectedH1Colors =
+        final String expectedH1Colors =
                 "rgba(223, 93, 93, 1)";
-        String  actualH1Colors = openBaseURL()
+        final String  actualH1Colors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickImprintPageFooterMenu()
                 .getColorEmail();

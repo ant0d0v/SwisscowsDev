@@ -5,7 +5,18 @@
         <classes>
 
             <class name="tests.MediaEducationTest"/>
-
+            <class name="tests.WhoWeAreTest"/>
+            <class name="tests.TopMenuTest"/>
+            <class name="tests.SetAsStartTest"/>
+            <class name="tests.PrivacyPolicyTest"/>
+            <class name="tests.MakeDefaultSearchTest"/>
+            <class name="tests.FooterMenuTest"/>
+            <class name="tests.ContactUsTest"/>
+            <class name="tests.CharityProjectTest"/>
+            <class name="tests.DonationTest"/>
+            <class name="tests.ImprintTest"/>
+            <class name="tests.MainTest"/>
+            <class name="tests.OurDatacenterTest"/>
 
         </classes>
     </test>

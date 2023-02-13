@@ -15,11 +15,11 @@ public class DonationTest extends BaseTest {
     public void testPdfLinkCHFDonation() throws IOException {
         DonationPage donationPage = new DonationPage(getDriver());
         final String oldURL = openBaseURL().getCurrentURL();
-        String actualURL = new MainPage(getDriver())
+        final String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickDonationPageFooterMenu()
                 .getCurrentURL();
-        String pdfContent = donationPage
+        final String pdfContent = donationPage
                 .scrollToWherePaymentBlock()
                 .clickQrCodeChf()
                 .getPdfText("https://dev.swisscows.com/docs/Swisscows_Donation_CHF_t.pdf");
@@ -33,11 +33,11 @@ public class DonationTest extends BaseTest {
     public void testPdfLinkEuroDonation() throws IOException {
         DonationPage donationPage = new DonationPage(getDriver());
         final String oldURL = openBaseURL().getCurrentURL();
-        String actualURL = new MainPage(getDriver())
+        final String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickDonationPageFooterMenu()
                 .getCurrentURL();
-        String pdfContent = donationPage
+        final String pdfContent = donationPage
                 .scrollToWherePaymentBlock()
                 .clickQrCodeEuro()
                 .getPdfText("https://dev.swisscows.com/docs/Swisscows_Donation_EUR_t.pdf");
@@ -85,11 +85,11 @@ public class DonationTest extends BaseTest {
     }
     @Test
     public void testH1ColorsDonationPage(){
-        List<String> expectedH1Colors = List.of(
+        final List<String> expectedH1Colors = List.of(
                 "rgba(191, 0, 0, 1)",
                 "rgba(191, 0, 0, 1)"
         );
-        List<String>  actualH1Colors = openBaseURL()
+        final List<String>  actualH1Colors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickDonationPageFooterMenu()
                 .getH1Colors();
@@ -100,13 +100,13 @@ public class DonationTest extends BaseTest {
     }
     @Test
     public void testLinksColorsDonationPage() {
-        List<String> expectedLinksColors = List.of(
+        final List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)"
 
         );
-        List<String> actualLinksColors = openBaseURL()
+        final List<String> actualLinksColors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickDonationPageFooterMenu()
                 .getColorLinksDonation();
