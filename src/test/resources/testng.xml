@@ -3,7 +3,11 @@
 <suite name="All Test Suite">
     <test name="/Users/antonudovycenko/Desktop/Screen">
         <classes>
-            <class name="tests.MainTest"/>
+            <class name="tests.MediaEducationTest"/>
+            <class name="tests.CharityProjectTest"/>
+            <class name="tests.OurDatacenterTest"/>
+
+
 
         </classes>
     </test>
