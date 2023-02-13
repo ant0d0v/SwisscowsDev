@@ -3,9 +3,7 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
-
             <class name="tests.OurDatacenterTest"/>
-
         </classes>
     </test>
 </suite>
