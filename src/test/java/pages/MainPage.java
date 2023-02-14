@@ -61,7 +61,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][1]")
     private WebElement homepageBannerSwitchFirst; // Click on the first switch
 
-    @FindBy(xpath = "//div[@data-swiper-slide-index = '1']")
+    @FindBy(xpath = "//img[@src= 'https://api.dev.swisscows.com/b4r/aa0de0145ba54acab978665b92a8c082']")
     private WebElement homepageBannerImage; // Image of banner
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
@@ -423,8 +423,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
     public MainPage clickHomeBanner() {
-        click(homepageBanner);
-
+        Actions action = new Actions(getDriver());
+        action.doubleClick(homepageBanner).build().perform();
         return this;
     }
 
