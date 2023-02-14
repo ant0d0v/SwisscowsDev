@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-import pages.footer_menu.OurDatacenterPage;
+import pages.footer_menu.CharityProjectPage;
 
 
 import java.io.File;
@@ -345,10 +346,10 @@ public abstract class BasePage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-
-    public void screen(String name) throws IOException {
+    public CharityProjectPage screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));
+        return new CharityProjectPage(getDriver());
     }
 
 
