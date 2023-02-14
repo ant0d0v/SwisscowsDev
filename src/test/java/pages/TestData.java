@@ -103,6 +103,7 @@ public class TestData {
                 {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data secure search engine"},
                 {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us"},
                 {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Anonymous web surfing with Swisscows"},
+                {6, "Swisscows.email", "/en/swisscows-email", "https://dev.swisscows.com/en/swisscows-email", "A letter is your personal property!"},
                 {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "How to set Swisscows as your start page"},
                 {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "How to use Swisscows as default search"},
 
@@ -165,7 +166,6 @@ public class TestData {
     public static Object[][] externalMenuTestDataProvider() {
 
         return new Object[][] {
-                {6, "Swisscows.email", "https://swisscows.email/", "https://swisscows.email/", "Swisscows.email - My secure e-mail."},
                 {7, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en", "TeleGuard - secure messenger from Switzerland"},
                 {8, "HES", "https://hesbox.com/", "https://hesbox.com/en", "Enterprise Search Software for companies"},
                 {9, "GetDigest", "https://getdigest.com/", "https://getdigest.com/en", "GetDigest | Get a document summary. Fast!"},
