@@ -51,13 +51,13 @@ jobs:
         continue-on-error: true
         with:
           ref: allure
-          path: target/allure-results/*
+          path: allure
 
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          allure_results: allure-results
+          allure_results: target/allure-results/*
           gh_pages: allure
 
       - name: Deploy report to Github Pages
