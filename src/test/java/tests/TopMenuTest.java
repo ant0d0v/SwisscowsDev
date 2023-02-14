@@ -388,7 +388,7 @@ public class TopMenuTest extends BaseTest {
                 .clickHamburgerMenuIcon();
         mainPage
                 .clickThemeDropDownIcon();
-        List<String> actualList = mainPage.getLangMenuListTexts();// the same xpath as in theme
+        List<String> actualList = mainPage.getLangMenuListTexts();
 
         Assert.assertEquals(actualList, expectedList);
     }
