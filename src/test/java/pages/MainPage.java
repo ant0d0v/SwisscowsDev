@@ -666,7 +666,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
     public void waitForImageInBannerDisappeared() {
-        waitForElementIsDisappeared(homepageBannerImage);
+        wait20ElementToBeVisible(homepageBannerImage);
 
     }
 
