@@ -9,5 +9,5 @@ debug.log
 .settings
 # Allure Report
 allure-results/
-.allure/
+.allure
 target\\

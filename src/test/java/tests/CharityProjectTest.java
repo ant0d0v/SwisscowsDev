@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.Attachment;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -10,7 +11,6 @@ import pages.footer_menu.CharityProjectPage;
 import java.util.List;
 
 public class CharityProjectTest extends BaseTest {
-
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
         final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
@@ -22,7 +22,8 @@ public class CharityProjectTest extends BaseTest {
         charityProjectPage
                 .playVideoCharity()
                 .pauseVideoCharity()
-                .screen("Charity.png");
+                .screen("CharityProject.png");
+
 
         Assert.assertEquals(source, expectedSource);
     }
