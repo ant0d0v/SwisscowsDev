@@ -46,13 +46,10 @@ jobs:
           path: screenshotsVideo
 
       - name: Allure test
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
+        uses: actions/allure-report-action@master
         with:
-          gh_pages: gh-pages
-          artifacts:
-            path: target/allure-results/*
+          path: target/allure-results/*
+
 
 
 
