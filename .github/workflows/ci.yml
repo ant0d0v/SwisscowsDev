@@ -45,7 +45,6 @@ jobs:
         with:
           path: screenshotsVideo
 
-
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
