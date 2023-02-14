@@ -7,7 +7,7 @@ on:
 jobs:
   run-test:
     name: 'Run tests'
-    runs-on: MacBook-Air-Anton
+    runs-on: ubuntu-latest
 
     steps:
       - name: Git clone
