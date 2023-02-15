@@ -70,11 +70,11 @@ public class DonationTest extends BaseTest {
     }
     @Test
     public void testH1TextsDonationPage(){
-        List<String> expectedH1Texts = List.of(
+        final List<String> expectedH1Texts = List.of(
                 "Swisscows is the anonymous search engine",
                 "Helping and supporting"
         );
-        List<String> actualH1Texts = openBaseURL()
+        final List<String> actualH1Texts = openBaseURL()
                 .scrollToFooterMenu()
                 .clickDonationPageFooterMenu()
                 .getH1Texts();

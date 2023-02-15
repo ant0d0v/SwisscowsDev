@@ -245,6 +245,7 @@ public abstract class BasePage {
         }
     }
 
+
     protected void scrollByVisibleElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
@@ -345,6 +346,8 @@ public abstract class BasePage {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
+
+
 
     public CharityProjectPage screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);

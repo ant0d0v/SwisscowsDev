@@ -1,10 +1,23 @@
 package pages.top_menu;
 
 import org.openqa.selenium.WebDriver;
-import pages.base_abstract.FooterMenuPage;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 
 public class VpnPage extends TopMenuPage<VpnPage> {
+    @FindBy(xpath = "//div[@class='extensions']//div[1]//img")
+    private WebElement imageGoogleExtension;
+    @FindBy(xpath = "//img[@src='/images/icon-link-ff.svg']")
+    private WebElement imageMozillaExtension;
+    @FindBy(xpath = "//img[@src='/images/icon-link-browsers.svg']")
+    private WebElement imageOtherExtension;
+    @FindBy(xpath = "//div[@class='extensions']")
+    private WebElement allExtensionsBlock;
+    @FindBy(xpath = "//div[@class='extensions']")
+    private WebElement instructionsContainer;
+    @FindBy(xpath = "//div[@class='extensions']")
+    private WebElement subscriptionsVpn;
 
     public VpnPage(WebDriver driver) {
         super(driver);
@@ -13,5 +26,21 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     public VpnPage createGeneric() {
 
         return new VpnPage(getDriver());
+    }
+
+    public VpnPage switchToVpnPage() {
+        for (String windowHandle : getDriver().getWindowHandles()) {
+            if (getDriver().getWindowHandles().size() == 1) {
+                getDriver().switchTo().window(windowHandle);
+                break;
+            }
+
+        }
+        return this;
+    }
+    public VpnPage closeWindow() {
+        getDriver().close();
+        return this;
+
     }
 }

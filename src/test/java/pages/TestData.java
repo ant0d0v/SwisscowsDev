@@ -118,6 +118,25 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "VpnLinksData")
+    public static Object[][] VpnLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Swisscows account Register", "https://accounts.swisscows.com/register", "https://accounts.swisscows.com/register",
+                        "Registration made easy!"},
+                {1, "Google", "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
+                        "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
+                {2, "Mozilla", "https://addons.mozilla.org/firefox/addon/swisscows-vpn/",
+                        "https://addons.mozilla.org/en-GB/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
+                {3, "Learn More", "/en/vpn-instruction", "https://dev.swisscows.com/en/vpn-instruction",
+                        "Configuring Swisscows Proxy"},
+                {4, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
+                        "https://accounts.swisscows.com/Account/Login?ReturnUrl=%2Fsubscriptions%2Fvpn#monthly", "Sign in"},
+                {5, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
+                        "https://accounts.swisscows.com/Account/Login?ReturnUrl=%2Fsubscriptions%2Fvpn#annualy", "Sign in"},
+
+        };
+    }
 
     @DataProvider(name = "CharityProjectLinksData")
     public static Object[][] CharityProjectLinksTestDataProvider() {
