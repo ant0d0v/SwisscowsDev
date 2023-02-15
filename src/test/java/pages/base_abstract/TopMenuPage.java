@@ -7,9 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.accounts.LoginPage;
+import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
+import pages.top_menu.VpnInstructions;
 import pages.top_menu.VpnPage;
 import utils.TestUtils;
 
@@ -110,9 +112,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//div[@class='static-content']//div/a")
     private List<WebElement> allLinksOnPage;
 
+    @FindBy(xpath = "//div[@class = 'static-content']//a")
+    private List<WebElement> allLinks;
+
+
 
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
+    @FindBy(xpath = "//p//a[@href='https://accounts.swisscows.com/register']")
+    private WebElement registerLink;
+    @FindBy(xpath = "//p//a[@href='/en/vpn-instruction']")
+    private WebElement instructionsLink;
 
 
 
@@ -176,6 +186,21 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getListSize(hamburgerTopMenuDropdownList);
     }
+    public List<String> getH2FontSizes(){
+        return  getFontSizes(textsH2);
+
+    }
+    public RegisterPage clickRegisterLink() {
+        click(registerLink);
+        switchToAnotherWindow();
+        return new RegisterPage(getDriver());
+    }
+
+    public VpnInstructions clickInstructionsLink() {
+        click(instructionsLink);
+        switchToAnotherWindow();
+        return new VpnInstructions(getDriver());
+    }
 
     public String getHamburgerMenuIsActiveValue() {
 
@@ -213,6 +238,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(hamburgerTopMenu);
 
         return new MainPage(getDriver());
+    }
+    public List <String> getColorLinks (){
+
+        return getColors(allLinks);
     }
 
 
