@@ -127,7 +127,7 @@ public class TestData {
                 {1, "Google", "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
                         "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
                 {2, "Mozilla", "https://addons.mozilla.org/firefox/addon/swisscows-vpn/",
-                        "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/]", "Swisscows.VPN\nby Swisscows AG"},
+                        "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
                 {3, "Learn More", "/en/vpn-instruction", "https://dev.swisscows.com/en/vpn-instruction",
                         "Configuring Swisscows Proxy"},
                 {4, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
