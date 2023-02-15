@@ -36,8 +36,8 @@ public class TopMenuTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testEmailIconNavigatesToEmailWebPage() {
-        final String expectedEmailURL = "https://swisscows.email/";
-        final String expectedTitle = "Swisscows.email - My secure e-mail.";
+        final String expectedEmailURL = "https://dev.swisscows.com/en/swisscows-email";
+        final String expectedH1Text = "A letter is your personal property!";
 
         String oldURL = openBaseURL().getCurrentURL();
 
@@ -48,12 +48,12 @@ public class TopMenuTest extends BaseTest {
         mainPage.switchToExternalPage();
         TestUtils.waitForPageLoaded(getDriver());
 
-        String actualTitle = mainPage.getTitle();
+        String actualH1text = mainPage.getH1Text();
 
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(), expectedEmailURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
 
