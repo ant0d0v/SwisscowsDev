@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
+import pages.top_menu.VpnPage;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -858,6 +859,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
                 break;
             }
         }
+    }
+    public MainPage closeWindow() {
+        getDriver().close();
+        return this;
+
     }
 
 

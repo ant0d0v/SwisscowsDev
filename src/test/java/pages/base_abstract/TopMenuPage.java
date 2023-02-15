@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.accounts.LoginPage;
 import pages.accounts.UsersLoginPage;
@@ -20,7 +21,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private static final String TOP_MENU_ID = "//div[@class = 'badges animation-badges']";
     private static final String HAMBURGER_DROPDOWN_ID = "//button[@class = 'hamburger-menu']";
 
-    @FindBy(xpath = "//a[@class = 'logo']")
+    @FindBy(xpath = "//img[@alt = 'Swisscows']")
     private WebElement logo;
     @FindBy(xpath = TOP_MENU_ID) // 3 links [teleGuard, VPN, Email]
     private WebElement topMenuContainer;
@@ -100,6 +101,15 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//h3")
     private List<WebElement> textsH3;
+    @FindBy(xpath = "//h2")
+    private List<WebElement> textsH2;
+
+    @FindBy(xpath = "//h1")
+    private WebElement textsH1;
+
+    @FindBy(xpath = "//div[@class='static-content']//div/a")
+    private List<WebElement> allLinksOnPage;
+
 
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
@@ -174,7 +184,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public List<WebElement> getTopMenuLinks() {
 
-        return topMenuLinks;
+        return allLinksOnPage;
     }
 
     public void waitTopMenuToBeInvisible(){
@@ -205,12 +215,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
 
+
+
     public void clickTopMenuExternalLink (int index) {
         click(getTopMenuLinks().get(index));
-        if (getDriver().getWindowHandles().size() > 1) {
-            switchToAnotherWindow();
-            TestUtils.waitForPageLoaded(getDriver());
-        }
+        switchToAnotherWindow();
+        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
     public void setOriginalHandle() {
@@ -257,9 +267,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public VpnPage clickVPNTopMenu() {
         click(VPNTopMenu);
-
         return new VpnPage(getDriver());
     }
+
+
 
     public void clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
@@ -269,6 +280,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List <String> getH3Texts() {
 
         return getTexts(textsH3);
+    }
+    public List <String> getH2Texts() {
+
+        return getTexts(textsH2);
     }
     public List <String> getAnswersTexts() {
 
@@ -280,6 +295,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         new MainPage(getDriver());
     }
+
+
 
 
 
