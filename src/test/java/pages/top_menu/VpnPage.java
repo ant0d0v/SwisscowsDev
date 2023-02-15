@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
+import pages.footer_menu.PrivacyPolicyPage;
+import pages.footer_menu.WhoWeArePage;
 
 public class VpnPage extends TopMenuPage<VpnPage> {
     @FindBy(xpath = "//div[@class='extensions']//div[1]//img")
@@ -16,8 +18,8 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     private WebElement allExtensionsBlock;
     @FindBy(xpath = "//div[@class='extensions']")
     private WebElement instructionsContainer;
-    @FindBy(xpath = "//div[@class='extensions']")
-    private WebElement subscriptionsVpn;
+
+
 
     public VpnPage(WebDriver driver) {
         super(driver);
@@ -34,7 +36,6 @@ public class VpnPage extends TopMenuPage<VpnPage> {
                 getDriver().switchTo().window(windowHandle);
                 break;
             }
-
         }
         return this;
     }
@@ -43,4 +44,27 @@ public class VpnPage extends TopMenuPage<VpnPage> {
         return this;
 
     }
+    public VpnPage scrollToWhereToInstructions() {
+        scrollByVisibleElement(instructionsContainer);
+
+        return this;
+    }
+    public VpnPage scrollToWhereExtensionsBlock() {
+        scrollByVisibleElement(allExtensionsBlock);
+
+        return this;
+    }
+    public boolean isGoogleExtensionIconDisplayed() {
+
+        return isElementDisplayed(imageGoogleExtension);
+    }
+    public boolean isMozillaExtensionIconDisplayed() {
+
+        return isElementDisplayed(imageMozillaExtension);
+    }
+    public boolean isOtherExtensionIconDisplayed() {
+
+        return isElementDisplayed(imageOtherExtension);
+    }
+
 }
