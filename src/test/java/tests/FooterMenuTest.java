@@ -216,8 +216,8 @@ public class FooterMenuTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testSwisscowsEmailPageFooterNavigatesToSwisscowsEmailSite() {
-        final String expectedAppStoreURL = "https://swisscows.email/";
-        final String expectedTitle = "Swisscows.email - My secure e-mail.";
+        final String expectedEmailURL = "https://dev.swisscows.com/en/swisscows-email";
+        final String expectedH1Text = "A letter is your personal property!";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
@@ -225,14 +225,14 @@ public class FooterMenuTest extends BaseTest {
 
         mainPage.scrollToFooterMenu()
                 .clickSwisscowsEmail();
-
         mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualH1text =mainPage.getH1Text();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(), expectedAppStoreURL);
-        Assert.assertTrue(getExternalPageTitle().contains(expectedTitle),
-                " ExternalPageTitle does not contain 'Swisscows.email - My secure e-mail.' ");
+        Assert.assertEquals(getExternalPageURL(), expectedEmailURL);
+        Assert.assertTrue(actualH1text.contains(expectedH1Text),
+                " ExternalPageTitle does not contain 'A letter is your personal property!' ");
     }
 
 
