@@ -214,15 +214,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
-    public void switchToSecondWindow () {
-        for (String windowHandle : getDriver().getWindowHandles()) {
-            if (getDriver().getWindowHandles().size() == 1) {
-                getDriver().switchTo().window(windowHandle);
-                break;
-            }
-        }
 
-    }
 
 
     public void clickTopMenuExternalLink (int index) {

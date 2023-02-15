@@ -21,6 +21,8 @@ public class VpnTest extends BaseTest {
         );
         final List<String> actualH2Texts = openBaseURL()
                 .clickVPNTopMenu()
+                .closeWindow()
+                .switchToVpnPage()
                 .getH2Texts();
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
