@@ -111,8 +111,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class='static-content']//div/a")
     private List<WebElement> allLinksOnPage;
+
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
+
 
 
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
@@ -241,6 +243,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getColors(allLinks);
     }
+
+
 
     public void clickTopMenuExternalLink (int index) {
         click(getTopMenuLinks().get(index));

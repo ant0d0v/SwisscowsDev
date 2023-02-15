@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
+import pages.footer_menu.WhoWeArePage;
 import pages.top_menu.VpnPage;
 
 import java.util.List;
@@ -69,6 +70,7 @@ public class VpnTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualH1Text, expectedH1text);
     }
+
     @Test
     public void testLinksColorsVpnPage() {
         List<String> expectedLinksColors = List.of(
@@ -152,5 +154,4 @@ public class VpnTest extends BaseTest {
         Assert.assertTrue(vpnPagePage.isMozillaExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.isOtherExtensionIconDisplayed());
     }
-
 }
