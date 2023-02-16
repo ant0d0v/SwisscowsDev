@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.top_menu.EmailPage;
+import pages.top_menu.VpnPage;
 
 import java.util.List;
 
@@ -133,6 +134,18 @@ public class EmailTest extends BaseTest {
 
         Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
         Assert.assertTrue(actualTitle.contains("Sign in - Swisscows Account"));
+    }
+
+    @Test
+    public void testAllImageExist() {
+        EmailPage emailPage = openBaseURL()
+                .clickEmailTopMenu()
+                .closeWindow()
+                .switchToEmailPage();
+
+
+        Assert.assertTrue(emailPage.isLogoIconDisplayed());
+        Assert.assertTrue(emailPage.allElementsDisplayed());
     }
 
 

@@ -105,5 +105,19 @@ public class MakeDefaultSearchTest extends BaseTest {
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
     }
+    @Test
+    public void testAllIconsExistToMakeDefaultSearchPage() {
+
+        MakeDefaultSearchPage makeDefaultSearchPage = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMakeDefaultSearchPageFooterMenu();
+
+        Assert.assertTrue(makeDefaultSearchPage.allElementsDisplayed());
+        Assert.assertTrue(makeDefaultSearchPage.isLogoIconDisplayed());
+
+
+
+
+    }
 
 }

@@ -4,11 +4,13 @@ import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
 import pages.base_abstract.FooterMenuPage;
 
+import java.util.List;
+
 public class SetAsStartPage extends FooterMenuPage<SetAsStartPage> {
     @FindBy(xpath = "//a[@class='draglinks']")
     private WebElement dragLink;
-    @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
-    private WebElement LangDropDownIcon;
+    @FindBy(xpath = "//div[@class = 'row narrow static-content']//img")
+    private List<WebElement> allImageOnPageSetAsPage;
     public SetAsStartPage(WebDriver driver) {
         super(driver);
     }
@@ -20,6 +22,10 @@ public class SetAsStartPage extends FooterMenuPage<SetAsStartPage> {
     public MainPage clickDragLink(){
         click20(dragLink);
         return new MainPage(getDriver());
+    }
+    public boolean allElementsDisplayed() {
+
+        return areElementsInListDisplayed(allImageOnPageSetAsPage);
     }
 
 

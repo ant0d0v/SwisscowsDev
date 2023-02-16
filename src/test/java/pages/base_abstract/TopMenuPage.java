@@ -129,6 +129,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//p//a[@href='/en/vpn-instruction']")
     private WebElement instructionsLink;
 
+    @FindBy(xpath = "//div[@class = 'image']//img")
+    private List<WebElement> allImagesOnPage;
+
+
 
 
     public TopMenuPage(WebDriver driver) {
@@ -395,6 +399,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public boolean isLogoIconDisplayed() {
 
         return isElementDisplayed(logo);
+    }
+
+    public boolean allElementsDisplayed() {
+
+        return areElementsInListDisplayed(allImagesOnPage);
     }
     public UsersLoginPage clickSignInMenu() {
         click20(signInTopMenu);

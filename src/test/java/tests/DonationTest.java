@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.DonationPage;
+import pages.top_menu.EmailPage;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -114,6 +116,17 @@ public class DonationTest extends BaseTest {
         Assert.assertTrue(actualLinksColors.size() > 0);
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
+    }
+    @Test
+    public void testAllImageExistDonationPage() {
+        DonationPage donationPage = openBaseURL()
+                .scrollToFooterMenu()
+                .clickDonationPageFooterMenu();
+
+
+
+        Assert.assertTrue(donationPage.isLogoIconDisplayed());
+        Assert.assertTrue(donationPage.allElementsDisplayed());
     }
 
 }
