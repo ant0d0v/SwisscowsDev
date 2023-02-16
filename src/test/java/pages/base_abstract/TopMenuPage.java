@@ -11,6 +11,7 @@ import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
+import pages.top_menu.EmailPage;
 import pages.top_menu.VpnInstructions;
 import pages.top_menu.VpnPage;
 import utils.TestUtils;
@@ -111,16 +112,20 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class='static-content']//div/a")
     private List<WebElement> allLinksOnPage;
+    @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
+    private List<WebElement> allLinksOnEmailPage;
+
 
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
-
-
-
+    @FindBy(xpath = "//a[@href='#']")
+    private WebElement StartForFreeLink;
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
     @FindBy(xpath = "//p//a[@href='https://accounts.swisscows.com/register']")
     private WebElement registerLink;
+    @FindBy(xpath = "//a[@href='https://swisscows.email/mbox/index.php/login/oauth'][text()='install web-app']")
+    private WebElement InstallWebAppLink;
     @FindBy(xpath = "//p//a[@href='/en/vpn-instruction']")
     private WebElement instructionsLink;
 
@@ -195,6 +200,15 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToAnotherWindow();
         return new RegisterPage(getDriver());
     }
+    public RegisterPage clickInstallWebLink() {
+        click(InstallWebAppLink);
+        switchToAnotherWindow();
+        return new RegisterPage(getDriver());
+    }
+    public MainPage clickStartForFreeLink() {
+        click(StartForFreeLink);
+        return new  MainPage(getDriver());
+    }
 
     public VpnInstructions clickInstructionsLink() {
         click(instructionsLink);
@@ -210,6 +224,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<WebElement> getTopMenuLinks() {
 
         return allLinksOnPage;
+    }
+    public List<WebElement> getEmailLinks() {
+
+        return allLinksOnEmailPage;
     }
 
     public void waitTopMenuToBeInvisible(){
@@ -251,6 +269,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
+    public void clickAllLinksOnEmailPage(int index) {
+        click(getEmailLinks().get(index));
+        switchToAnotherWindow();
+        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+    }
 
     public void setOriginalHandle() {
 
@@ -270,16 +293,16 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
-    public void clickEmailTopMenu() {
-        click(EmailTopMenu);
-
-        new MainPage(getDriver());
-    }
-
     public void clickLanguagesTopMenu() {
         click(LangDropDownIcon);
 
         new MainPage(getDriver());
+    }
+
+    public EmailPage clickEmailTopMenu() {
+        click(EmailTopMenu);
+
+        return  new EmailPage(getDriver());
     }
 
     public void clickRegionTopMenu() {
