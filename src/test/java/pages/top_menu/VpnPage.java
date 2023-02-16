@@ -18,8 +18,6 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     private WebElement allExtensionsBlock;
     @FindBy(xpath = "//div[@class='extensions']")
     private WebElement instructionsContainer;
-    @FindBy(xpath = "//div[@class='extensions']")
-    private WebElement subscriptionsVpn;
 
     public VpnPage(WebDriver driver) {
         super(driver);

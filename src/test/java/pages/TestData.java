@@ -138,6 +138,16 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "EmailLinksData")
+    public static Object[][] EmailLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0,  "Sign in"},
+                {1,  "Sign in"},
+
+
+        };
+    }
 
     @DataProvider(name = "CharityProjectLinksData")
     public static Object[][] CharityProjectLinksTestDataProvider() {
