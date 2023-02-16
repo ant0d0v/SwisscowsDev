@@ -6,6 +6,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
+import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.OurDatacenterPage;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class OurDatacenterTest extends BaseTest {
     }
 
     @Test
-    public void testOurDatacenterSlider(){
+    public void testOurDatacenterSlider() {
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
         final String oldAttribute = openBaseURL()
                 .scrollToFooterMenu()
@@ -62,9 +63,10 @@ public class OurDatacenterTest extends BaseTest {
                 .doubleClickToSecondImageInSlider()
                 .getClassAttributeOfImageSlider();
 
-        Assert.assertNotEquals(newAttribute,oldAttribute);
+        Assert.assertNotEquals(newAttribute, oldAttribute);
         Assert.assertTrue(ourDatacenterPage.elementIsDisplayedInSlider());
     }
+
     @Test
     public void testLinksColorsDataCenterPage() {
         List<String> expectedLinksColors = List.of(
@@ -82,4 +84,5 @@ public class OurDatacenterTest extends BaseTest {
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
     }
+
 }

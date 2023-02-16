@@ -4,6 +4,9 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.TestData;
+import pages.footer_menu.MakeDefaultSearchPage;
+import pages.footer_menu.SetAsStartPage;
+
 import java.util.List;
 
 public class SetAsStartTest extends BaseTest {
@@ -23,20 +26,21 @@ public class SetAsStartTest extends BaseTest {
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
     }
-        @Test
-        public void testDragLinkNavigateToCorrespondingPage() {
-            final String expectedUrl = "https://swisscows.com/en";
-            String actualUrl = openBaseURL()
-                    .scrollToFooter()
-                    .clickSetAsStartPageFooterMenu()
-                    .clickDragLink()
-                    .getCurrentURL();
-
-            Assert.assertEquals(actualUrl, expectedUrl);
-        }
 
     @Test
-    public void testH2FontSizesSetAsStartPage(){
+    public void testDragLinkNavigateToCorrespondingPage() {
+        final String expectedUrl = "https://swisscows.com/en";
+        String actualUrl = openBaseURL()
+                .scrollToFooter()
+                .clickSetAsStartPageFooterMenu()
+                .clickDragLink()
+                .getCurrentURL();
+
+        Assert.assertEquals(actualUrl, expectedUrl);
+    }
+
+    @Test
+    public void testH2FontSizesSetAsStartPage() {
         List<String> expectedH1Colors = List.of(
                 "24px",
                 "24px",
@@ -44,7 +48,7 @@ public class SetAsStartTest extends BaseTest {
                 "24px",
                 "24px"
         );
-        List<String>  actualH2FontSizes = openBaseURL()
+        List<String> actualH2FontSizes = openBaseURL()
                 .scrollToFooterMenu()
                 .clickSetAsStartPageFooterMenu()
                 .getH2FontSizes();
@@ -53,6 +57,7 @@ public class SetAsStartTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1Colors);
     }
+
     @Test(dataProvider = "LangSetAsStartTestData", dataProviderClass = TestData.class)
     public void testLocalizationGoToCorrespondingLanguage(
             int index, String LangName, String expectedH1text) {
@@ -65,6 +70,7 @@ public class SetAsStartTest extends BaseTest {
 
         Assert.assertEquals(actualH1texts, expectedH1text);
     }
+
     @Test
     public void testLinksColorsSetAsStartPage() {
         List<String> expectedLinksColors = List.of(
@@ -81,6 +87,17 @@ public class SetAsStartTest extends BaseTest {
 
     }
 
+    @Test
+    public void testAllIconsExistToSetAsStartPage() {
 
+        SetAsStartPage setAsStartPage = openBaseURL()
+                .scrollToFooterMenu()
+                .clickSetAsStartPageFooterMenu();
+
+        Assert.assertTrue(setAsStartPage.allElementsDisplayed());
+        Assert.assertTrue(setAsStartPage.isLogoIconDisplayed());
+
+
+    }
 }
 

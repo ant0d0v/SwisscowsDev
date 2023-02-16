@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
 
+import java.util.List;
+
 public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
     @FindBy(xpath = "//div/h2")
     private WebElement whereToH2Header;
@@ -16,6 +18,7 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
     private WebElement secondImageInSlider;
     @FindBy(xpath = "//img[@src ='/_next/image?url=%2Fimages%2Fdatacenter-img3.jpg&w=1920&q=75']")
     private WebElement bigSecondImageInSlider;
+
 
     public OurDatacenterPage(WebDriver driver) {
         super(driver);
@@ -52,6 +55,7 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
 
         return isElementDisplayed(bigSecondImageInSlider);
     }
+
 
 
 }

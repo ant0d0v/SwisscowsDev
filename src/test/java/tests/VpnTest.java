@@ -153,5 +153,6 @@ public class VpnTest extends BaseTest {
         Assert.assertTrue(vpnPagePage.isGoogleExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.isMozillaExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.isOtherExtensionIconDisplayed());
+        Assert.assertTrue(vpnPagePage.allElementsDisplayed());
     }
 }
