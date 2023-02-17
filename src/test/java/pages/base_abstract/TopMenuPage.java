@@ -214,6 +214,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public VpnInstructionsPage clickInstructionsLink() {
         click(instructionsLink);
+        switchToAnotherWindow();
         return new VpnInstructionsPage(getDriver());
     }
 

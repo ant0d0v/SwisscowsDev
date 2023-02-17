@@ -19,19 +19,9 @@ public class VpnInstructionsPage extends TopMenuPage<VpnInstructionsPage> {
 
         return new VpnInstructionsPage(getDriver());
     }
-    public VpnInstructionsPage switchToVpnPage() {
-        for (String windowHandle : getDriver().getWindowHandles()) {
-            if (getDriver().getWindowHandles().size() == 1) {
-                getDriver().switchTo().window(windowHandle);
-                break;
-            }
-        }
+    public VpnInstructionsPage goToExternalPage() {
+        switchToExternalPage();
         return this;
-    }
-    public VpnInstructionsPage closeWindow() {
-        getDriver().close();
-        return this;
-
     }
     public VpnInstructionsPage clickVpnChromeLink() {
         click(vpnChromeLink);

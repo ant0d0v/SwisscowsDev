@@ -138,6 +138,18 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "VpnInstructionsLinksData")
+    public static Object[][] VpnInstructionLinksTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Google", "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
+                        "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
+                {1, "Mozilla", "https://addons.mozilla.org/firefox/addon/swisscows-vpn/",
+                        "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
+
+
+        };
+    }
     @DataProvider(name = "EmailLinksData")
     public static Object[][] EmailLinksTestDataProvider() {
 
