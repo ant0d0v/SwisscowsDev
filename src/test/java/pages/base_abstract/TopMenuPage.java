@@ -1,6 +1,5 @@
 package pages.base_abstract;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,9 +11,8 @@ import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
 import pages.top_menu.EmailPage;
-import pages.top_menu.VpnInstructions;
+import pages.top_menu.VpnInstructionsPage;
 import pages.top_menu.VpnPage;
-import utils.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,10 +212,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new  MainPage(getDriver());
     }
 
-    public VpnInstructions clickInstructionsLink() {
+    public VpnInstructionsPage clickInstructionsLink() {
         click(instructionsLink);
         switchToAnotherWindow();
-        return new VpnInstructions(getDriver());
+        return new VpnInstructionsPage(getDriver());
     }
 
     public String getHamburgerMenuIsActiveValue() {
