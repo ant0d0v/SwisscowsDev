@@ -116,7 +116,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
-    @FindBy(xpath = "//a[@href='#']")
+    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
     private WebElement StartForFreeLink;
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
@@ -460,6 +460,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<WebElement> getInnerRegionMenuList() {
 
         return innerRegionMenuList;
+    }
+    public RegisterPage switchToRegisterPage() {
+        switchToExternalPage();
+        return new RegisterPage(getDriver());
+
     }
 
 
