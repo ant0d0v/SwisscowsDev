@@ -19,7 +19,7 @@ public class VpnInstructionsPage extends TopMenuPage<VpnInstructionsPage> {
 
         return new VpnInstructionsPage(getDriver());
     }
-    public VpnInstructionsPage switchToVpnInstructionsPage() {
+    public VpnInstructionsPage switchToVpnPage() {
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (getDriver().getWindowHandles().size() == 1) {
                 getDriver().switchTo().window(windowHandle);

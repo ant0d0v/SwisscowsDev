@@ -79,15 +79,15 @@ public class VpnInstructionsTest extends BaseTest {
     public void testVpnChromeLinkNavigateToCorrespondingPage() {
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh";
        VpnInstructionsPage vpnInstructionsPage = openBaseURL()
-                .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
-                .clickInstructionsLink()
-                .closeWindow()
-                .switchToVpnInstructionsPage()
-                .clickVpnChromeLink()
-                .closeWindow()
-                .switchToVpnInstructionsPage();
+               .clickVPNTopMenu()
+               .closeWindow()
+               .switchToVpnPage()
+               .clickInstructionsLink()
+               .closeWindow()
+               .switchToVpnPage()
+               .clickVpnChromeLink()
+               .closeWindow()
+               .switchToVpnPage();
 
        final String actualUrl  = getExternalPageURL();
        final String actualTitle = getExternalPageTitle();
@@ -104,11 +104,10 @@ public class VpnInstructionsTest extends BaseTest {
                 .switchToVpnPage()
                 .clickInstructionsLink()
                 .closeWindow()
-                .switchToVpnInstructionsPage()
+                .switchToVpnPage()
                 .clickVpnMozillaLink()
                 .closeWindow()
-                .switchToVpnInstructionsPage();
-
+                .switchToVpnPage();
         final String actualUrl  = getExternalPageURL();
         final String actualTitle = getExternalPageTitle();
 
