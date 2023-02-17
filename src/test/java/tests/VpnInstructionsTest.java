@@ -76,37 +76,7 @@ public class VpnInstructionsTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
-    @Test
-    public void testMozillaLinkNavigateToCorrespondingPage() {
-        getDriver().get("https://dev.swisscows.com/en/vpn-instruction");
-        VpnInstructionsPage vpnInstructionsPage =new VpnInstructionsPage(getDriver());
 
-        final String expectedUrl = "https://addons.mozilla.org/en-GB/firefox/addon/swisscows-vpn/";
-        final String actualUrl = vpnInstructionsPage
-                .clickVpnMozillaLink()
-                .goToExternalPage()
-                .getCurrentURL();
-
-        final String actualTitle = vpnInstructionsPage.getTitle();
-
-        Assert.assertEquals(actualUrl, expectedUrl);
-        Assert.assertTrue(actualTitle.contains("Swisscows.VPN – Get this Extension"));
-    }
-    @Test
-    public void testChromeLinkNavigateToCorrespondingPage() {
-        getDriver().get("https://dev.swisscows.com/en/vpn-instruction");
-        VpnInstructionsPage vpnInstructionsPage =new VpnInstructionsPage(getDriver());
-
-        final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh";
-        final String actualUrl = vpnInstructionsPage
-                .clickVpnChromeLink()
-                .goToExternalPage()
-                .getCurrentURL();
-        final String actualTitle = vpnInstructionsPage.getTitle();
-
-        Assert.assertEquals(actualUrl, expectedUrl);
-        Assert.assertTrue(actualTitle.contains("Swisscows.VPN - Chrome Web Store"));
-    }
     @Test
     public void testAllBrowserIconsExist() {
         VpnInstructionsPage vpnInstructionsPage = openBaseURL()

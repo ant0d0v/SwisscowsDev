@@ -19,10 +19,6 @@ public class VpnInstructionsPage extends TopMenuPage<VpnInstructionsPage> {
 
         return new VpnInstructionsPage(getDriver());
     }
-    public VpnInstructionsPage goToExternalPage() {
-        switchToExternalPage();
-        return this;
-    }
     public VpnInstructionsPage clickVpnChromeLink() {
         click(vpnChromeLink);
 
