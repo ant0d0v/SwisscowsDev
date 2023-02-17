@@ -79,7 +79,7 @@ public class MediaEducationTest extends BaseTest {
         List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
-                "rgba(255, 255, 255, 0.7)"
+                "rgba(255, 255, 255, 1)"
 
 
         );
