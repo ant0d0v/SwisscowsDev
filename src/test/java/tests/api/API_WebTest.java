@@ -52,7 +52,7 @@ public class API_WebTest extends BaseTest {
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .clickEnter()
-                .waitTopMenuToBeInvisible();
+                .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(requests);
         for (int i = 0; i < requests.size(); i += 2) {

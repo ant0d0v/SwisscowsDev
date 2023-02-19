@@ -5,8 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 
+import java.util.List;
+
 public class WebPage extends TopMenuPage<WebPage> {
-    @FindBy(xpath = "//div[@class='web-results']")
+    @FindBy(xpath = "//div[@class='web-results']//article")
     private WebElement webResultContainer;
     public WebPage(WebDriver driver) {
         super(driver);
@@ -17,7 +19,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     public WebPage waitUntilVisibilityWebResult() {
-        wait10ElementToBeVisible(webResultContainer);
+        wait20ElementToBeVisible(webResultContainer);
 
         return this;
     }
