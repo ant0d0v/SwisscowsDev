@@ -1,6 +1,5 @@
 package pages.base_abstract;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,8 +10,18 @@ import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
+
 import pages.top_menu.*;
 import utils.TestUtils;
+
+
+import pages.top_menu.*;
+import utils.TestUtils;
+
+import pages.top_menu.EmailPage;
+import pages.top_menu.VpnInstructionsPage;
+import pages.top_menu.VpnPage;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +128,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
-    @FindBy(xpath = "//a[@href='#']")
+    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
     private WebElement StartForFreeLink;
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
@@ -131,8 +140,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement instructionsLink;
     @FindBy(xpath = "//a[text()='Music']")
     private WebElement musicButton;
+
     @FindBy(xpath = "//a[text()='Images']")
     private WebElement imageButton;
+
 
     @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
     private WebElement choiceInDropdownMenu;
@@ -226,10 +237,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new  MainPage(getDriver());
     }
 
-    public VpnInstructions clickInstructionsLink() {
+    public VpnInstructionsPage clickInstructionsLink() {
         click(instructionsLink);
         switchToAnotherWindow();
-        return new VpnInstructions(getDriver());
+        return new VpnInstructionsPage(getDriver());
     }
 
     public String getHamburgerMenuIsActiveValue() {
@@ -392,6 +403,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MusicPage(getDriver());
     }
+
     public ImagePage clickImageButton() {
         clickEnter(imageButton);
 
@@ -400,6 +412,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public void clickChoiceInDropDownList() {
         wait20ElementToBeVisible(searchDropdownMenu);
         click(choiceInDropdownMenu);
+
+
+    public void clickParisInDropDownList() {
+        wait20ElementToBeVisible(searchDropdownMenu);
+        click(choiceInDropdownMenu);
+
 
     }
     public void clickSearchFieldHeader() {
@@ -499,8 +517,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return innerRegionMenuList;
     }
+    public RegisterPage switchToRegisterPage() {
+        switchToExternalPage();
+        return new RegisterPage(getDriver());
 
-
+    }
 
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);

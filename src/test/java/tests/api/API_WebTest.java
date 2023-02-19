@@ -45,7 +45,9 @@ public class API_WebTest extends BaseTest {
     static List<String> weatherDescriptionList = new ArrayList<>();
 
     @Test
+
     public void test_API_CNTRequest_OpenWebURL()  {
+
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpRequestsContain("/web/search?");
@@ -70,6 +72,7 @@ public class API_WebTest extends BaseTest {
 
     @Test
     public void test_API_CNTResponse_OpenWebURL() {
+
         List<String> responses = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpResponsesContain("/web/search?");
@@ -95,6 +98,7 @@ public class API_WebTest extends BaseTest {
     @Test
     public void test_API_CNTRequests_Suggest() throws InterruptedException {
 
+
         WebPage webPage = new WebPage(getDriver());
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
@@ -115,6 +119,7 @@ public class API_WebTest extends BaseTest {
                 .contains("dev.swisscows.com/web/search?query=ronaldo"));
 
         webPage.clickSearchFieldHeader();
+
         webPage.clickChoiceInDropDownList();
         sleep(2000);
 
@@ -130,6 +135,7 @@ public class API_WebTest extends BaseTest {
         Assert.assertTrue(requests.get(requests.size() - 1)
                 .contains("dev.swisscows.com/web/search?query=ronaldo+cristiano"));
     }
+
 
     @Test
     public void test_API_HttpRequestResponse_WhenSearchingCityCountry() {
@@ -151,6 +157,11 @@ public class API_WebTest extends BaseTest {
         Assert.assertEquals(response.statusCode(), 200);*/
 
         /*Reporter.log("Response: " + response.body(), true);
+
+        Assert.assertEquals(response.statusCode(), 200);
+
+        Reporter.log("Response: " + response.body(), true);
+
 
         final JSONObject obj = new JSONObject(response.body());
         final JSONArray weather = obj.getJSONArray("weather");
@@ -189,9 +200,15 @@ public class API_WebTest extends BaseTest {
         Reporter.log(String.valueOf(actualUIWeatherCondition), true);
 
         Assert.assertEquals(actualUIWeatherCondition.get(1), expectedCityCountry);
+
         Assert.assertEquals(actualUIWeatherCondition.get(2), expectedCurrentTemp);*/
     }
 /*
+
+        Assert.assertEquals(actualUIWeatherCondition.get(2), expectedCurrentTemp);
+    }
+
+
     @Test
     public void test_API_RAResponse_WhenSearchingCityCountry() {
         Current obj = given()

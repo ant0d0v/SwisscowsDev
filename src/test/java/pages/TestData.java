@@ -98,7 +98,7 @@ public class TestData {
 
         return new Object[][] {
                 {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "The search engine without tracking – Swisscows"},
-                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Swisscows as a search engine without tracking: the best alternative"},
+                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Swisscows – media education"},
                 {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Charity Project"},
                 {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data secure search engine"},
                 {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us"},
