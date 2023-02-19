@@ -4,6 +4,7 @@
     <test name="/Users/">
         <classes>
             <class name="tests.api.API_WebTest"/>
+            <class name="tests.api.API_ImageTest"/>
             <!--<class name="tests.EmailTest"/>
 
             <class name="tests.WhoWeAreTest"/>

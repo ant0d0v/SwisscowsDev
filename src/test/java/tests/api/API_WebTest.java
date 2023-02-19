@@ -45,7 +45,7 @@ public class API_WebTest extends BaseTest {
     static List<String> weatherDescriptionList = new ArrayList<>();
 
     @Test
-    public void test_API_CNTRequest_OpenBaseURL()  {
+    public void test_API_CNTRequest_OpenWebURL()  {
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpRequestsContain("/web/search?");
@@ -69,7 +69,7 @@ public class API_WebTest extends BaseTest {
     }
 
     @Test
-    public void test_API_CNTResponse_OpenBaseURL() {
+    public void test_API_CNTResponse_OpenWebURL() {
         List<String> responses = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpResponsesContain("/web/search?");
@@ -93,7 +93,7 @@ public class API_WebTest extends BaseTest {
     }
 
     @Test
-    public void test_API_CNTRequests_WhenSearchingCityCountry() throws InterruptedException {
+    public void test_API_CNTRequests_Suggest() throws InterruptedException {
 
         WebPage webPage = new WebPage(getDriver());
         List<String> requests = new CaptureNetworkTraffic()
@@ -115,8 +115,7 @@ public class API_WebTest extends BaseTest {
                 .contains("dev.swisscows.com/web/search?query=ronaldo"));
 
         webPage.clickSearchFieldHeader();
-        webPage.clickParisInDropDownList();
-
+        webPage.clickChoiceInDropDownList();
         sleep(2000);
 
         Assert.assertNotNull(requests);
@@ -132,11 +131,11 @@ public class API_WebTest extends BaseTest {
                 .contains("dev.swisscows.com/web/search?query=ronaldo+cristiano"));
     }
 
- /*   @Test
+    @Test
     public void test_API_HttpRequestResponse_WhenSearchingCityCountry() {
-        try {
+        /*try {
             final HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI(PARIS_URL_WEATHER))
+                    .uri(new URI("https://cdn.swisscows.com/image?"))
                     .GET()
                     .build();
 
@@ -149,9 +148,9 @@ public class API_WebTest extends BaseTest {
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.body());
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), 200);*/
 
-        Reporter.log("Response: " + response.body(), true);
+        /*Reporter.log("Response: " + response.body(), true);
 
         final JSONObject obj = new JSONObject(response.body());
         final JSONArray weather = obj.getJSONArray("weather");
@@ -190,9 +189,9 @@ public class API_WebTest extends BaseTest {
         Reporter.log(String.valueOf(actualUIWeatherCondition), true);
 
         Assert.assertEquals(actualUIWeatherCondition.get(1), expectedCityCountry);
-        Assert.assertEquals(actualUIWeatherCondition.get(2), expectedCurrentTemp);
+        Assert.assertEquals(actualUIWeatherCondition.get(2), expectedCurrentTemp);*/
     }
-
+/*
     @Test
     public void test_API_RAResponse_WhenSearchingCityCountry() {
         Current obj = given()

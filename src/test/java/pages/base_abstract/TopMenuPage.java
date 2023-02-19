@@ -131,6 +131,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement instructionsLink;
     @FindBy(xpath = "//a[text()='Music']")
     private WebElement musicButton;
+    @FindBy(xpath = "//a[text()='Images']")
+    private WebElement imageButton;
+
     @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
     private WebElement choiceInDropdownMenu;
 
@@ -389,10 +392,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MusicPage(getDriver());
     }
-    public void clickParisInDropDownList() {
+    public ImagePage clickImageButton() {
+        clickEnter(imageButton);
+
+        return new ImagePage(getDriver());
+    }
+    public void clickChoiceInDropDownList() {
         wait20ElementToBeVisible(searchDropdownMenu);
         click(choiceInDropdownMenu);
-
 
     }
     public void clickSearchFieldHeader() {
