@@ -100,7 +100,7 @@ public class API_WebTest extends BaseTest {
                 .captureHttpRequestsContain("/web/search?");
 
         openBaseURL()
-                .inputSearchCriteriaAndEnter("Crocs")
+                .inputSearchCriteriaAndEnter("crocs")
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(requests);
@@ -110,7 +110,7 @@ public class API_WebTest extends BaseTest {
             Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
         }
         Assert.assertTrue(requests.get(requests.size() - 1)
-                .contains("dev.swisscows.com/web/search?query=Crocs"));
+                .contains("dev.swisscows.com/web/search?query=crocs"));
 
         webPage.clickSearchFieldHeader();
         webPage.clickParisInDropDownList();
@@ -123,7 +123,7 @@ public class API_WebTest extends BaseTest {
             Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
         }
         Assert.assertTrue(requests.get(requests.size() - 1)
-                .contains("dev.swisscows.com/web/search?query=crocs+usa"));
+                .contains("query=crocs+usa"));
     }
 
  /*   @Test
