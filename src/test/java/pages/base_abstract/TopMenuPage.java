@@ -10,6 +10,10 @@ import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
+
+import pages.top_menu.*;
+import utils.TestUtils;
+
 import pages.top_menu.EmailPage;
 import pages.top_menu.VpnInstructionsPage;
 import pages.top_menu.VpnPage;
@@ -33,8 +37,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//div[@class='input-search-wrap']")
     private WebElement searchBoxMainPage;
 
-    @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
+    @FindBy(xpath = "//input[@class ='input-search']")
     private WebElement searchFieldTopMenu;
+    @FindBy(xpath = "//button[@type = 'submit']")
+    private WebElement searchButton;
 
     @FindBy(xpath = TOP_MENU_ID + "//a[3]")
     private WebElement TeleGuardTopMenu;
@@ -112,7 +118,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> allLinksOnPage;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
     private List<WebElement> allLinksOnEmailPage;
-
+    @FindBy(className = "suggestions")
+    private WebElement searchDropdownMenu;// swisscows
 
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
@@ -126,9 +133,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement InstallWebAppLink;
     @FindBy(xpath = "//p//a[@href='/en/vpn-instruction']")
     private WebElement instructionsLink;
+    @FindBy(xpath = "//a[text()='Music']")
+    private WebElement musicButton;
+    @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
+    private WebElement choiceInDropdownMenu;
 
     @FindBy(xpath = "//div[@class = 'image']//img")
     private List<WebElement> allImagesOnPage;
+    @FindBy(xpath = "//input[@class = 'input-search']")
+    private WebElement searchCityField; // swisscows
+
+
 
 
 
@@ -354,20 +369,40 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-  /*  public FindPage inputSearchCriteriaIntoSearchField(String text) {
+    public WebPage inputSearchCriteriaIntoSearchField(String text) {
         if (!getText(searchFieldTopMenu).isEmpty() && !getText(searchFieldTopMenu).isBlank()) {
             clear(searchFieldTopMenu);
         }
         input(text, searchFieldTopMenu);
 
-        return new FindPage(getDriver());
+        return new WebPage(getDriver());
     }
 
-    public FindPage clickEnter() {
+    public WebPage clickEnter() {
         clickEnter(searchFieldTopMenu);
 
-        return new FindPage(getDriver());
-    }*/
+        return new WebPage(getDriver());
+    }
+    public WebPage clickSearchButton() {
+        clickEnter(searchButton);
+
+        return new WebPage(getDriver());
+    }
+    public MusicPage clickMusicButton() {
+        clickEnter(musicButton);
+
+        return new MusicPage(getDriver());
+    }
+    public void clickParisInDropDownList() {
+        wait20ElementToBeVisible(searchDropdownMenu);
+        click(choiceInDropdownMenu);
+
+
+    }
+    public void clickSearchFieldHeader() {
+        click(searchCityField);
+
+    }
 
     public boolean isPlaceholderDisplayed() {
 
@@ -469,10 +504,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-   /* public FindPage inputSearchCriteriaAndEnter(String text) {
+    public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
 
-        return new FindPage(getDriver());
-    }*/
+        return new WebPage(getDriver());
+    }
 }
