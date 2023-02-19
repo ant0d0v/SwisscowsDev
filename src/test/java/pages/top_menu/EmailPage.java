@@ -34,6 +34,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
         return this;
 
     }
+
     public EmailPage scrollToWhereToInstallEmail() {
         scrollByVisibleElement(InstallWebAppLink);
 
