@@ -109,16 +109,19 @@ public class EmailTest extends BaseTest {
     }
     @Test
     public void testStartForFreeLinkLinkNavigateToCorrespondingPage() {
-        final String expectedUrl = "https://dev.swisscows.com/en";
-        final String actualUrl = openBaseURL()
+        final String expectedTitle = "Sign in - Swisscows Account";
+        openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
                 .clickStartForFreeLink()
-                .getCurrentURL();
+                .switchToRegisterPage();
+
+        final String actualUrl = getExternalPageURL();
         final String actualTitle = new MainPage(getDriver()).getTitle();
-        Assert.assertEquals(actualUrl, expectedUrl);
-        Assert.assertTrue(actualTitle.contains("Your private and anonymous search engine Swisscows"));
+
+        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
+        Assert.assertEquals(actualTitle,expectedTitle);
     }
 
     @Test
