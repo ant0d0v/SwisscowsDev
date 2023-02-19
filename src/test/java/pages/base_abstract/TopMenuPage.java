@@ -14,6 +14,7 @@ import pages.footer_menu.SetAsStartPage;
 import pages.top_menu.EmailPage;
 import pages.top_menu.VpnInstructions;
 import pages.top_menu.VpnPage;
+import pages.top_menu.WebPage;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -35,8 +36,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//div[@class='input-search-wrap']")
     private WebElement searchBoxMainPage;
 
-    @FindBy(xpath = TOP_MENU_ID + "//input[@class ='input-search']")
+    @FindBy(xpath = "//input[@class ='input-search']")
     private WebElement searchFieldTopMenu;
+    @FindBy(xpath = "//button[@type = 'submit']")
+    private WebElement searchButton;
 
     @FindBy(xpath = TOP_MENU_ID + "//a[3]")
     private WebElement TeleGuardTopMenu;
@@ -356,20 +359,25 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-  /*  public FindPage inputSearchCriteriaIntoSearchField(String text) {
+    public WebPage inputSearchCriteriaIntoSearchField(String text) {
         if (!getText(searchFieldTopMenu).isEmpty() && !getText(searchFieldTopMenu).isBlank()) {
             clear(searchFieldTopMenu);
         }
         input(text, searchFieldTopMenu);
 
-        return new FindPage(getDriver());
+        return new WebPage(getDriver());
     }
 
-    public FindPage clickEnter() {
+    public WebPage clickEnter() {
         clickEnter(searchFieldTopMenu);
 
-        return new FindPage(getDriver());
-    }*/
+        return new WebPage(getDriver());
+    }
+    public WebPage clickSearchButton() {
+        clickEnter(searchButton);
+
+        return new WebPage(getDriver());
+    }
 
     public boolean isPlaceholderDisplayed() {
 
@@ -466,10 +474,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-   /* public FindPage inputSearchCriteriaAndEnter(String text) {
+    public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
 
-        return new FindPage(getDriver());
-    }*/
+        return new WebPage(getDriver());
+    }
 }

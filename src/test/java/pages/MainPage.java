@@ -415,14 +415,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-
-
-    public MainPage clickSearchButton() {
-        click(searchButton);
-
-        return this;
-    }
-
     public MainPage clickHomeBanner() {
         Actions action = new Actions(getDriver());
         action.doubleClick(homepageBanner).build().perform();
