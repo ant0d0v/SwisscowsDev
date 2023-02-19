@@ -78,6 +78,7 @@ public class API_WebTest extends BaseTest {
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Crocs")
+                .clickEnter()
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(responses);
