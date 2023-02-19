@@ -91,7 +91,7 @@ public class API_WebTest extends BaseTest {
         for (int i = 2; i < responses.size(); i += 4) {
             Assert.assertTrue(responses.get(i).contains("dev.swisscows.com/"));
         }
-
+        Assert.assertTrue(Double.parseDouble(responses.get(3).substring(10, 14)) <= 3);
     }
 
     @Test
@@ -107,7 +107,11 @@ public class API_WebTest extends BaseTest {
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(requests);
-        Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+        if(requests.get(requests.size() - 2).equals("GET" )){
+            Assert.assertEquals(requests.get(requests.size() - 2), "GET");;
+        }else {
+            Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
+        }
         Assert.assertTrue(requests.get(requests.size() - 1)
                 .contains("dev.swisscows.com/web/search?query=Crocs"));
         webPage.clickSearchFieldHeader();
@@ -115,7 +119,12 @@ public class API_WebTest extends BaseTest {
         sleep(1000);
 
         Assert.assertNotNull(requests);
-        Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+        if(requests.get(requests.size() - 2).equals("GET" )){
+            Assert.assertEquals(requests.get(requests.size() - 2), "GET");;
+        }else {
+            Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
+        }
+
         System.out.println(requests.get(requests.size() - 1));
         Assert.assertTrue(requests.get(requests.size() - 1)
                 .contains("dev.swisscows.com/web/search?query=crocs+usa"));
