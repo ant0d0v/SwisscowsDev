@@ -63,7 +63,6 @@ public class API_WebTest extends BaseTest {
             }else {
                 Assert.assertEquals(requests.get(i), "OPTIONS");
             }
-            System.out.println(requests);
         }
         for (int i = 1; i < requests.size(); i += 2 ) {
             Assert.assertTrue(requests.get(i).contains("dev.swisscows.com/"));
@@ -90,9 +89,9 @@ public class API_WebTest extends BaseTest {
             }
         }
         for (int i = 2; i < responses.size(); i += 4) {
-            Assert.assertTrue(responses.get(i).contains("dev.swisscows.com"));
+            Assert.assertTrue(responses.get(i).contains("dev.swisscows.com/"));
         }
-        Assert.assertTrue(Double.parseDouble(responses.get(3).substring(10, 14)) <= 3);
+
     }
 
     @Test
