@@ -114,7 +114,7 @@ public class API_WebTest extends BaseTest {
 
         webPage.clickSearchFieldHeader();
         webPage.clickParisInDropDownList();
-        sleep(1000);
+        sleep(2000);
 
         Assert.assertNotNull(requests);
         if(requests.get(requests.size() - 2).equals("GET" )){
@@ -122,8 +122,6 @@ public class API_WebTest extends BaseTest {
         }else {
             Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
         }
-
-        System.out.println(requests.get(requests.size() - 1));
         Assert.assertTrue(requests.get(requests.size() - 1)
                 .contains("dev.swisscows.com/web/search?query=crocs+usa"));
     }
