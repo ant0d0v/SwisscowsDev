@@ -52,7 +52,6 @@ public class API_WebTest extends BaseTest {
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
-                .clickEnter()
                 .waitUntilVisibilityWebResult();
 
 
@@ -77,7 +76,6 @@ public class API_WebTest extends BaseTest {
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Crocs")
-                .clickEnter()
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(responses);
@@ -103,7 +101,6 @@ public class API_WebTest extends BaseTest {
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Crocs")
-                .clickEnter()
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(requests);
@@ -114,6 +111,7 @@ public class API_WebTest extends BaseTest {
         }
         Assert.assertTrue(requests.get(requests.size() - 1)
                 .contains("dev.swisscows.com/web/search?query=Crocs"));
+
         webPage.clickSearchFieldHeader();
         webPage.clickParisInDropDownList();
         sleep(1000);
