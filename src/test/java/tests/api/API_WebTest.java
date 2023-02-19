@@ -45,7 +45,9 @@ public class API_WebTest extends BaseTest {
     static List<String> weatherDescriptionList = new ArrayList<>();
 
     @Test
+
     public void test_API_CNTRequest_OpenWebURL()  {
+
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpRequestsContain("/web/search?");
@@ -70,6 +72,7 @@ public class API_WebTest extends BaseTest {
 
     @Test
     public void test_API_CNTResponse_OpenWebURL() {
+
         List<String> responses = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpResponsesContain("/web/search?");
@@ -93,7 +96,9 @@ public class API_WebTest extends BaseTest {
     }
 
     @Test
+
     public void test_API_CNTRequests_Suggest() throws InterruptedException {
+
 
         WebPage webPage = new WebPage(getDriver());
         List<String> requests = new CaptureNetworkTraffic()
@@ -116,6 +121,7 @@ public class API_WebTest extends BaseTest {
 
         webPage.clickSearchFieldHeader();
         webPage.clickChoiceInDropDownList();
+
         sleep(2000);
 
         Assert.assertNotNull(requests);

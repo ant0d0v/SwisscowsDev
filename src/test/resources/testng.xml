@@ -6,7 +6,9 @@
             <class name="tests.api.API_WebTest"/>
             <class name="tests.api.API_ImageTest"/>
             <!--<class name="tests.EmailTest"/>
-
+            <class name="tests.VpnTest"/>
+            <class name="tests.EmailTest"/>
+            <class name="tests.VpnInstructionsTest"/>
             <class name="tests.WhoWeAreTest"/>
             <class name="tests.TopMenuTest"/>
             <class name="tests.SetAsStartTest"/>
