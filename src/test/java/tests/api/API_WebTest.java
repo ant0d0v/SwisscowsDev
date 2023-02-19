@@ -94,36 +94,42 @@ public class API_WebTest extends BaseTest {
 
     @Test
     public void test_API_CNTRequests_WhenSearchingCityCountry() throws InterruptedException {
+
         WebPage webPage = new WebPage(getDriver());
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpRequestsContain("/web/search?");
 
         openBaseURL()
-                .inputSearchCriteriaAndEnter("crocs")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(requests);
-        if(requests.get(requests.size() - 2).equals("GET" )){
-            Assert.assertEquals(requests.get(requests.size() - 2), "GET");;
-        }else {
+        if (requests.get(requests.size() - 2).equals("GET")) {
+            Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+            ;
+        } else {
             Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
         }
         Assert.assertTrue(requests.get(requests.size() - 1)
-                .contains("dev.swisscows.com/web/search?query=crocs"));
+                .contains("dev.swisscows.com/web/search?query=ronaldo"));
 
         webPage.clickSearchFieldHeader();
         webPage.clickParisInDropDownList();
+
         sleep(2000);
 
         Assert.assertNotNull(requests);
-        if(requests.get(requests.size() - 2).equals("GET" )){
-            Assert.assertEquals(requests.get(requests.size() - 2), "GET");;
-        }else {
+        System.out.println(requests);
+        if (requests.get(requests.size() - 2).equals("GET")) {
+            Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+            ;
+        } else {
             Assert.assertEquals(requests.get(requests.size() - 2), "OPTIONS");
         }
+        System.out.println(requests);
         Assert.assertTrue(requests.get(requests.size() - 1)
-                .contains("query=crocs+usa"));
+                .contains("dev.swisscows.com/web/search?query=ronaldo+cristiano"));
     }
 
  /*   @Test
