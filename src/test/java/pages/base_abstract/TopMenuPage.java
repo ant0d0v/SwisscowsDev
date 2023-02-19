@@ -11,10 +11,7 @@ import pages.accounts.RegisterPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
-import pages.top_menu.EmailPage;
-import pages.top_menu.VpnInstructions;
-import pages.top_menu.VpnPage;
-import pages.top_menu.WebPage;
+import pages.top_menu.*;
 import utils.TestUtils;
 
 import java.util.ArrayList;
@@ -117,7 +114,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> allLinksOnPage;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
     private List<WebElement> allLinksOnEmailPage;
-
+    @FindBy(className = "suggestions")
+    private WebElement searchDropdownMenu;// swisscows
 
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
@@ -131,9 +129,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement InstallWebAppLink;
     @FindBy(xpath = "//p//a[@href='/en/vpn-instruction']")
     private WebElement instructionsLink;
+    @FindBy(xpath = "//a[text()='Music']")
+    private WebElement musicButton;
+    @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
+    private WebElement choiceInDropdownMenu;
 
     @FindBy(xpath = "//div[@class = 'image']//img")
     private List<WebElement> allImagesOnPage;
+    @FindBy(xpath = "//input[@class = 'input-search']")
+    private WebElement searchCityField; // swisscows
+
+
 
 
 
@@ -377,6 +383,21 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(searchButton);
 
         return new WebPage(getDriver());
+    }
+    public MusicPage clickMusicButton() {
+        clickEnter(musicButton);
+
+        return new MusicPage(getDriver());
+    }
+    public void clickParisInDropDownList() {
+        wait20ElementToBeVisible(searchDropdownMenu);
+        click(choiceInDropdownMenu);
+
+
+    }
+    public void clickSearchFieldHeader() {
+        click(searchCityField);
+
     }
 
     public boolean isPlaceholderDisplayed() {

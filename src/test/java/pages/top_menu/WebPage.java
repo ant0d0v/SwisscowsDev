@@ -3,6 +3,7 @@ package pages.top_menu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return this;
     }
+
 }

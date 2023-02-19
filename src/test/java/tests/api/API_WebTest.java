@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import pages.top_menu.WebPage;
 import utils.DateTimeUtils;
 import utils.TestUtils;
 
@@ -44,7 +45,7 @@ public class API_WebTest extends BaseTest {
     static List<String> weatherDescriptionList = new ArrayList<>();
 
     @Test
-    public void test_API_CNTRequest_OpenBaseURL() throws InterruptedException {
+    public void test_API_CNTRequest_OpenBaseURL()  {
         List<String> requests = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
                 .captureHttpRequestsContain("/web/search?");
@@ -54,65 +55,73 @@ public class API_WebTest extends BaseTest {
                 .clickEnter()
                 .waitUntilVisibilityWebResult();
 
+
         Assert.assertNotNull(requests);
         for (int i = 0; i < requests.size(); i += 2) {
             if(requests.get(i).equals("GET" )){
                 Assert.assertEquals(requests.get(i), "GET");
-            }if(requests.get(i).equals("OPTIONS")) {
+            }else {
                 Assert.assertEquals(requests.get(i), "OPTIONS");
             }
+            System.out.println(requests);
         }
         for (int i = 1; i < requests.size(); i += 2 ) {
             Assert.assertTrue(requests.get(i).contains("dev.swisscows.com/"));
         }
     }
 
-    /*@Test
+    @Test
     public void test_API_CNTResponse_OpenBaseURL() {
         List<String> responses = new CaptureNetworkTraffic()
                 .setUpDevTool(getDriver())
-                .captureHttpResponsesContain("weather");
+                .captureHttpResponsesContain("/web/search?");
 
-        openBaseURL();
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("Crocs")
+                .waitUntilVisibilityWebResult();
 
         Assert.assertNotNull(responses);
         for (int i = 0; i < responses.size(); i += 4) {
-            Assert.assertEquals(responses.get(i), "200");
-        }
-        for (int i = 1; i < responses.size(); i += 4) {
-            Assert.assertEquals(responses.get(i), "OK");
+            if(responses.get(i).equals("200" )){
+                Assert.assertEquals(responses.get(i), "200");
+            }else{
+                Assert.assertEquals(responses.get(i), "204");
+            }
         }
         for (int i = 2; i < responses.size(); i += 4) {
-            Assert.assertTrue(responses.get(i).contains("openweathermap.org/"));
+            Assert.assertTrue(responses.get(i).contains("dev.swisscows.com"));
         }
         Assert.assertTrue(Double.parseDouble(responses.get(3).substring(10, 14)) <= 3);
-    }*/
-
- /*   @Test
-    public void test_API_CNTRequests_WhenSearchingCityCountry() {
-        List<String> requestsSearchButton = new CaptureNetworkTraffic()
-                .setUpDevTool(getDriver())
-                .captureHttpRequestsContain("weather");
-
-        MainPage mainPage = openBaseURL()
-                .clickSearchCityField()
-                .inputSearchCriteria("Paris")
-                .clickSearchButton();
-
-        Assert.assertNotNull(requestsSearchButton);
-        Assert.assertEquals(requestsSearchButton.get(requestsSearchButton.size() - 2), "GET");
-        Assert.assertTrue(requestsSearchButton.get(requestsSearchButton.size() - 1)
-                .contains("openweathermap.org/data/2.5/find?q=Paris"));
-
-        mainPage.clickParisInDropDownList();
-
-        Assert.assertNotNull(requestsSearchButton);
-        Assert.assertEquals(requestsSearchButton.get(requestsSearchButton.size() - 2), "GET");
-        Assert.assertTrue(requestsSearchButton.get(requestsSearchButton.size() - 1)
-                .contains("openweathermap.org/data/2.5/onecall?lat=48.8534&lon=2.3488"));
     }
 
     @Test
+    public void test_API_CNTRequests_WhenSearchingCityCountry() throws InterruptedException {
+        WebPage webPage = new WebPage(getDriver());
+        List<String> requests = new CaptureNetworkTraffic()
+                .setUpDevTool(getDriver())
+                .captureHttpRequestsContain("/web/search?");
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("Crocs")
+                .clickEnter()
+                .waitUntilVisibilityWebResult();
+
+        Assert.assertNotNull(requests);
+        Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+        Assert.assertTrue(requests.get(requests.size() - 1)
+                .contains("dev.swisscows.com/web/search?query=Crocs"));
+        webPage.clickSearchFieldHeader();
+        webPage.clickParisInDropDownList();
+        sleep(1000);
+
+        Assert.assertNotNull(requests);
+        Assert.assertEquals(requests.get(requests.size() - 2), "GET");
+        System.out.println(requests.get(requests.size() - 1));
+        Assert.assertTrue(requests.get(requests.size() - 1)
+                .contains("dev.swisscows.com/web/search?query=crocs+usa"));
+    }
+
+ /*   @Test
     public void test_API_HttpRequestResponse_WhenSearchingCityCountry() {
         try {
             final HttpRequest request = HttpRequest.newBuilder()

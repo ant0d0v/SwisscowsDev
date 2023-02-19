@@ -26,7 +26,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//button[@class = 'search-submit']")
     private WebElement searchButton; // swisscows
 
-    @FindBy(className = "search-dropdown-menu")
+    @FindBy(className = "suggestions")
     private WebElement searchDropdownMenu;// swisscows
 
     @FindBy(xpath = "//div[@class = 'logo-home']//h1")
@@ -461,17 +461,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         clickAllElementsInList(homepageAllQuestion);
         return new MainPage(getDriver());
     }
-
-
-
-
-    public MainPage clickParisInDropDownList() {
-        wait20ElementToBeVisible(searchDropdownMenu);
-        click(parisFRChoiceInDropdownMenu);
-
-        return this;
-    }
-
 
     public MainPage clickIconOnDifferentWeatherPopUp(WebElement element) {
         click(element);
