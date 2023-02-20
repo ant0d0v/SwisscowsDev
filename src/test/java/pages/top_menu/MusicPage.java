@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 
+import java.util.List;
+
 import static java.lang.Thread.sleep;
 
 public class MusicPage extends TopMenuPage<MusicPage> {
@@ -20,12 +22,21 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement playButtonAttribute;
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
+    @FindBy(xpath = "//article[1]/div[1]/span[1]")
+    private WebElement durationAttribute;
+
     @FindBy(xpath = "//article[1]")
     private WebElement previousTrackAttribute;
     @FindBy(xpath = "//div[@class = 'timeline']")
     private WebElement progressbar;
+    @FindBy(xpath = "//button[@class = 'button shuffle']")
+    private WebElement shuffleButton;
+    @FindBy(xpath = "//div[@class = 'buttons']//button[1]")
+    private WebElement shuffleButtonAttribute;
     @FindBy(xpath = "//div[@class = 'progress-bar']//div[@style]")
     private WebElement progressbarFirsTrack;
+    @FindBy(xpath = "//div[@class = 'tracks']//h2")
+    private List<WebElement> allTracks;
 
 
     public MusicPage(WebDriver driver) {
@@ -43,12 +54,16 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     }
     public MusicPage clickPlayButton() throws InterruptedException {
         click(firstPlayButton);
-        sleep(5000);
+        sleep(4000);
 
         return new MusicPage(getDriver());
     }
     public MusicPage clickPauseButton() {
         click(firstPlayButton);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage clickShuffleButton() {
+        click(shuffleButton);
         return new MusicPage(getDriver());
     }
     public MusicPage clickForwardButton() {
@@ -59,6 +74,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(previousButton);
         return new MusicPage(getDriver());
     }
+    public List <String> getTitleAllTracks() {
+
+        return getTexts(allTracks);
+    }
 
     public MusicPage clickToProgressbar() {
         click(progressbar);
@@ -68,6 +87,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public String getPlayButtonAttribute() {
 
         return getAttribute(playButtonAttribute, "xlink:href");
+    }
+    public String getShuffleButtonAttribute() {
+
+        return getAttribute(shuffleButtonAttribute, "class");
     }
     public String getNextTrackAttribute() {
 
@@ -80,5 +103,13 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public String getVolumeInProgressbarAttribute()  {
 
         return getAttribute(progressbarFirsTrack, "style");
+    }
+    public String getVolumeDurationAttribute()  {
+
+        return getAttribute(durationAttribute, "class");
+    }
+    public String getVolumeDuration()  {
+
+        return getText(durationAttribute);
     }
 }
