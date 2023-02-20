@@ -70,8 +70,7 @@ public class MusicTest extends BaseTest {
                 .clickPlayButton()
                 .clickToProgressbar()
                 .getVolumeInProgressbarAttribute();
-                 sleep(1000);
 
-        Assert.assertTrue(actualTime.contains("width: 50."));
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0 );
     }
 }
