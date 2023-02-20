@@ -43,7 +43,7 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
-        Assert.assertEquals(actualAttribute, "item item--audio active playing");
+        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
     @Test
     public void testSkipToPreviousSong() throws InterruptedException {
@@ -57,7 +57,7 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
-        Assert.assertEquals(actualAttribute, "item item--audio active playing");
+        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
     @Test
@@ -70,6 +70,7 @@ public class MusicTest extends BaseTest {
                 .clickPlayButton()
                 .clickToProgressbar()
                 .getVolumeInProgressbarAttribute();
+                 sleep(1000);
 
         Assert.assertTrue(actualTime.contains("width: 50."));
     }

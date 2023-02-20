@@ -77,7 +77,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getAttribute(previousTrackAttribute, "class");
     }
-    public String getVolumeInProgressbarAttribute() {
+    public String getVolumeInProgressbarAttribute()  {
 
         return getAttribute(progressbarFirsTrack, "style");
     }
