@@ -355,7 +355,6 @@ public abstract class BasePage {
         return new CharityProjectPage(getDriver());
     }
 
-
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {
         List<WebElement> linksList = new ArrayList<>();
 
