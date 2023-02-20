@@ -17,11 +17,12 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ImagePage(getDriver());
     }
-    public ImagePage clickFirstImageInImagesResult() {
+    public void clickFirstImageInImagesResult() {
         wait20ElementToBeVisible(firstImageInImagesResult);
         click(firstImageInImagesResult);
-        return new ImagePage(getDriver());
+        new ImagePage(getDriver());
 
     }
+
 
 }

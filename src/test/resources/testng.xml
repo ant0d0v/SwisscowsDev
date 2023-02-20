@@ -5,6 +5,7 @@
         <classes>
             <class name="tests.api.API_WebTest"/>
             <class name="tests.api.API_ImageTest"/>
+            <class name="tests.MusicTest"></class>
             <!--<class name="tests.EmailTest"/>
             <class name="tests.VpnTest"/>
             <class name="tests.EmailTest"/>
