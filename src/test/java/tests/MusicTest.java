@@ -74,6 +74,4 @@ public class MusicTest extends BaseTest {
 
         Assert.assertTrue(actualTime.contains("width: 50."));
     }
-
-
-    }
+}
