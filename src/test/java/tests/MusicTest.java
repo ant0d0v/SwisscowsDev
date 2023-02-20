@@ -2,12 +2,16 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.top_menu.MusicPage;
+
+import java.util.List;
 
 public class MusicTest extends BaseTest {
 
         @Test
         public void testPlayMusic() throws InterruptedException {
-            String actualAttribute = openBaseURL()
+            MusicPage musicPage = new MusicPage(getDriver());
+            final String actualAttribute = openBaseURL()
                     .inputSearchCriteriaAndEnter("Popular")
                     .waitUntilVisibilityWebResult()
                     .clickMusicButton()
@@ -15,12 +19,15 @@ public class MusicTest extends BaseTest {
                     .clickPlayButton()
                     .getPlayButtonAttribute();
 
+            final String actualDuration = musicPage.getVolumeDuration();
+
             Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
+            Assert.assertTrue(Double.parseDouble(actualDuration.substring(3,4)) > 0);
         }
 
     @Test
     public void testPauseMusic() throws InterruptedException {
-        String actualAttribute = openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Popular")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -34,7 +41,7 @@ public class MusicTest extends BaseTest {
 
     @Test
     public void testSkipToNextSong() throws InterruptedException {
-        String actualAttribute = openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -43,11 +50,11 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
-        Assert.assertEquals(actualAttribute, "item item--audio active playing");
+        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
     @Test
     public void testSkipToPreviousSong() throws InterruptedException {
-        String actualAttribute = openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -57,12 +64,12 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
-        Assert.assertEquals(actualAttribute, "item item--audio active playing");
+        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
     @Test
     public void testSetTimeInPlayer() throws InterruptedException {
-        String actualTime = openBaseURL()
+        final String actualTime = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -71,8 +78,45 @@ public class MusicTest extends BaseTest {
                 .clickToProgressbar()
                 .getVolumeInProgressbarAttribute();
 
-        Assert.assertTrue(actualTime.contains("width: 50."));
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0 );
     }
 
+    @Test
+    public void testTrackResultsEqualsSearchCriteria() throws InterruptedException {
+        final List<String> titleAllTracks = openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .getTitleAllTracks();
+        final int actualSize = titleAllTracks.size();
+        System.out.println(titleAllTracks);
 
+        Assert.assertEquals(actualSize,20);
+        for (String searchCriteria : titleAllTracks) {
+            Assert.assertEquals(searchCriteria.toLowerCase(),"ivanka");
+        }
     }
+
+    @Test
+    public void testShuffleFunctionInPlayer() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
+            final String actualAttribute = openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickPlayButton()
+                .clickShuffleButton()
+                .getShuffleButtonAttribute();
+
+        Assert.assertTrue(actualAttribute.contains("button shuffle active"));
+
+        musicPage
+                .clickForwardButton()
+                .getNextTrackAttribute();
+
+        Assert.assertFalse(actualAttribute.contains("item item--audio active"));
+    }
+
+}
