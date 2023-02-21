@@ -8,22 +8,22 @@ import java.util.List;
 
 public class MusicTest extends BaseTest {
 
-        @Test
-        public void testPlayMusic() throws InterruptedException {
-            MusicPage musicPage = new MusicPage(getDriver());
-            final String actualAttribute = openBaseURL()
-                    .inputSearchCriteriaAndEnter("Popular")
-                    .waitUntilVisibilityWebResult()
-                    .clickMusicButton()
-                    .waitUntilVisibilityAudioResult()
-                    .clickPlayButton()
-                    .getPlayButtonAttribute();
+    @Test
+    public void testPlayMusic() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
+        final String actualAttribute = openBaseURL()
+                .inputSearchCriteriaAndEnter("Popular")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickPlayButton()
+                .getPlayButtonAttribute();
 
-            final String actualDuration = musicPage.getVolumeDuration();
+        final String actualDuration = musicPage.getVolumeDuration();
 
-            Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
-            Assert.assertTrue(Double.parseDouble(actualDuration.substring(3,4)) > 0);
-        }
+        Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
+        Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
+    }
 
     @Test
     public void testPauseMusic() throws InterruptedException {
@@ -52,6 +52,7 @@ public class MusicTest extends BaseTest {
 
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
+
     @Test
     public void testSkipToPreviousSong() throws InterruptedException {
         final String actualAttribute = openBaseURL()
@@ -78,7 +79,7 @@ public class MusicTest extends BaseTest {
                 .clickToProgressbar()
                 .getVolumeInProgressbarAttribute();
 
-        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0 );
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
     }
 
     @Test
@@ -92,16 +93,16 @@ public class MusicTest extends BaseTest {
         final int actualSize = titleAllTracks.size();
         System.out.println(titleAllTracks);
 
-        Assert.assertEquals(actualSize,20);
+        Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertEquals(searchCriteria.toLowerCase(),"ivanka");
+            Assert.assertEquals(searchCriteria.toLowerCase(), "ivanka");
         }
     }
 
     @Test
     public void testShuffleFunctionInPlayer() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
-            final String actualAttribute = openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -119,4 +120,48 @@ public class MusicTest extends BaseTest {
         Assert.assertFalse(actualAttribute.contains("item item--audio active"));
     }
 
+    @Test
+    public void testAddTrackInTheFavorite() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
+        final String actualValueFirstTrack = openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .signIn()
+                .clickFavoriteIcon()
+                .getFirstTrackAttribute();
+        final String expectedValueFirstTrackInFavorite =
+                musicPage
+                        .clickFavoritePlaylist()
+                        .getFirstTrackAttribute();
+
+
+        Assert.assertEquals(actualValueFirstTrack, expectedValueFirstTrackInFavorite);
+        Assert.assertTrue(musicPage.favoriteIsDisplayed());
+
+
+    }
+
+    @Test
+    public void testDeleteTrackFromFavorite() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .signIn();
+        final String actualH2Title = musicPage
+                .clickFavoritePlaylist()
+                .clickFavoriteIconInPlaylist()
+                .getErrorTitleInFavoritePlaylist();
+
+
+
+        Assert.assertTrue(actualH2Title.contains("No items found"));
+
+    }
 }
