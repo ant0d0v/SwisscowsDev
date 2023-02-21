@@ -3,12 +3,13 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.top_menu.MusicPage;
+import tests.retrytest.Retry;
 
 import java.util.List;
 
 public class MusicTest extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPlayMusic() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
@@ -25,7 +26,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPauseMusic() throws InterruptedException {
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Popular")
@@ -39,7 +40,7 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(actualAttribute, "/images/icons.svg#play");
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSkipToNextSong() throws InterruptedException {
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Skofka")
@@ -53,7 +54,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSkipToPreviousSong() throws InterruptedException {
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -68,7 +69,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSetTimeInPlayer() throws InterruptedException {
         final String actualTime = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -82,7 +83,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testTrackResultsEqualsSearchCriteria() throws InterruptedException {
         final List<String> titleAllTracks = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -99,7 +100,7 @@ public class MusicTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testShuffleFunctionInPlayer() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
@@ -120,7 +121,7 @@ public class MusicTest extends BaseTest {
         Assert.assertFalse(actualAttribute.contains("item item--audio active"));
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAddTrackInTheFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualValueFirstTrack = openBaseURL()
@@ -144,7 +145,7 @@ public class MusicTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
