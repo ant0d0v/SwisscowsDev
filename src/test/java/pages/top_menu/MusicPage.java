@@ -37,6 +37,14 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement progressbarFirsTrack;
     @FindBy(xpath = "//div[@class = 'tracks']//h2")
     private List<WebElement> allTracks;
+    @FindBy(xpath = "//h2[text() ='My favorite tracks']")
+    private WebElement favoriteContainer;
+    @FindBy(xpath = "//article[@class='item item--audio']//img[1]")
+    private WebElement valueFirstImage;
+    @FindBy(xpath = "//div[@class='error']//h2[@class]")
+    private WebElement h2TitleErrorInFavorite;
+    @FindBy(xpath = "//button[@class='button favorite active']")
+    private WebElement favoriteIconInPlaylist;
 
 
     public MusicPage(WebDriver driver) {
@@ -52,6 +60,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return new MusicPage(getDriver());
     }
+
     public MusicPage clickPlayButton() throws InterruptedException {
         click(firstPlayButton);
         sleep(4000);
@@ -62,6 +71,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(firstPlayButton);
         return new MusicPage(getDriver());
     }
+
     public MusicPage clickShuffleButton() {
         click(shuffleButton);
         return new MusicPage(getDriver());
@@ -81,6 +91,15 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
     public MusicPage clickToProgressbar() {
         click(progressbar);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage clickFavoritePlaylist() {
+        click(favoriteContainer);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage clickFavoriteIconInPlaylist() throws InterruptedException {
+        sleep(1000);
+        click(favoriteIconInPlaylist);
         return new MusicPage(getDriver());
     }
 
@@ -104,12 +123,20 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getAttribute(progressbarFirsTrack, "style");
     }
-    public String getVolumeDurationAttribute()  {
-
-        return getAttribute(durationAttribute, "class");
+    public String getFirstTrackAttribute() throws InterruptedException {
+        sleep(1000);
+        return getAttribute( valueFirstImage, "src");
     }
     public String getVolumeDuration()  {
 
         return getText(durationAttribute);
+    }
+    public String getErrorTitleInFavoritePlaylist()  {
+
+        return getText(h2TitleErrorInFavorite);
+    }
+    public boolean favoriteIsDisplayed() {
+        return isElementDisplayed(favoriteContainer);
+
     }
 }
