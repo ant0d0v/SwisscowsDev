@@ -1,6 +1,5 @@
 package pages.base_abstract;
 
-import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -61,6 +60,7 @@ public abstract class BasePage {
 
         return actions;
     }
+
 
     public String getTitle() {
 
@@ -126,6 +126,11 @@ public abstract class BasePage {
         wait10ElementToBeVisible(element);
 
         return element.getCssValue("color");
+    }
+    protected String getBackgroundHoverColor(WebElement element) {
+        wait10ElementToBeVisible(element);
+
+        return element.getCssValue("background-color");
     }
     protected List<String> getColors(List<WebElement> list) {
         if (list.size() > 0) {
@@ -218,6 +223,29 @@ public abstract class BasePage {
 
         element.clear();
     }
+    protected void hover(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public List<String> hoverToElements(List<WebElement> buttons) throws InterruptedException {
+        Actions actions = new Actions(getDriver());
+        List<String> colorList = new ArrayList<>();
+
+        for (WebElement button :  buttons) {
+            actions.moveToElement(button).perform();
+            if (button.isEnabled() && button.isDisplayed()) {
+                colorList.add(button.getCssValue("background-color"));
+
+            }
+        }
+        return colorList;
+    }
+
 
     protected void input(String text, WebElement element) {
 

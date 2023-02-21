@@ -250,6 +250,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return allLinksOnEmailPage;
     }
+    public List<String> getHoverColorsLinks() throws InterruptedException {
+
+        return  hoverToElements(allLinksOnEmailPage);
+    }
+
 
     public void waitTopMenuToBeInvisible(){
         wait10ElementToBeInVisible(topMenuContainer);
@@ -452,6 +457,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new UsersLoginPage(getDriver());
     }
+
+
 
     public String getEnteredValue() {
 
