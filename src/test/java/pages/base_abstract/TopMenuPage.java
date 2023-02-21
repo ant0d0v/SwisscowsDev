@@ -138,6 +138,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement musicButton;
     @FindBy(xpath = "//a[text()='Images']")
     private WebElement imageButton;
+    @FindBy(xpath = "//button[@class ='button favorite'][1]")
+    private WebElement favoriteIcon;
 
     @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
     private WebElement choiceInDropdownMenu;
@@ -147,7 +149,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//input[@class = 'input-search']")
     private WebElement searchCityField; // swisscows
 
-
+    @FindBy(xpath = "//h2[text() ='My favorite tracks']")
+    private WebElement favoriteContainer;
 
 
 
@@ -458,7 +461,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new UsersLoginPage(getDriver());
     }
 
-
+    public MusicPage clickFavoriteIcon() {
+        wait10ElementToBeVisible(favoriteIcon);
+        click(favoriteIcon);
+        return new MusicPage(getDriver());
+    }
 
     public String getEnteredValue() {
 
