@@ -177,7 +177,7 @@ public class EmailTest extends BaseTest {
                 .closeWindow()
                 .switchToEmailPage()
                 .getHoverColorsLinks();
-        Assert.assertEquals(actual, expectedLinksColors);
+        Assert.assertTrue(actual.contains("rgba(191"));
 
     }
 

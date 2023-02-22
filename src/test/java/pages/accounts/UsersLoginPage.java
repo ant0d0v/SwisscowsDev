@@ -10,11 +10,11 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
 
     @FindBy(xpath = "//div[@class = 'panel-body']")
     WebElement notification;
-    @FindBy(xpath = "//input[@type = 'email']")
+    @FindBy(xpath = "//input[@class ='input email']")
     private WebElement userEmail;
     @FindBy(xpath = "//input[@type = 'password']")
     private WebElement userPassword;
-    @FindBy(xpath = "//button[@class = 'button primary']")
+    @FindBy(xpath = "//button[@class = 'btn-submit']")
     private WebElement submitButton;
     @FindBy(xpath = "//a[@href='/users/sign_up']")
     private WebElement createAccountLink;
