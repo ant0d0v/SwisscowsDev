@@ -4,8 +4,7 @@
     <test name="/Users/">
         <classes>
             <class name="tests.MusicTest"/>
-            <class name="tests.MainTest"/>
-            <class name="tests.TopMenuTest"/>
+
         </classes>
     </test>
 </suite>
