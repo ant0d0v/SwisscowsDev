@@ -42,6 +42,7 @@ public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testSkipToNextSong() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Skofka")
                 .waitUntilVisibilityWebResult()
@@ -51,11 +52,13 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
+        Assert.assertNotEquals(actualAttribute,musicPage.getPreviousTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
     @Test(retryAnalyzer = Retry.class)
     public void testSkipToPreviousSong() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
@@ -66,6 +69,7 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
+        Assert.assertNotEquals(actualAttribute,musicPage.getNextTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
@@ -92,7 +96,7 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult()
                 .getTitleAllTracks();
         final int actualSize = titleAllTracks.size();
-        System.out.println(titleAllTracks);
+
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
@@ -155,13 +159,17 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult()
                 .clickHamburgerMenu()
                 .signIn();
+
+        final String oldUrl = musicPage.getCurrentURL();
+
         final String actualH2Title = musicPage
                 .clickFavoritePlaylist()
                 .clickFavoriteIconInPlaylist()
                 .getErrorTitleInFavoritePlaylist();
 
+        final String newUrl = musicPage.getCurrentURL();
 
-
+        Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
 
     }
