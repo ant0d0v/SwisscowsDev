@@ -225,23 +225,20 @@ public abstract class BasePage {
     }
     protected void hover(WebElement element) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(element).perform();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        actions.moveToElement(element).build().perform();
+
     }
     public List<String> hoverToElements(List<WebElement> buttons) throws InterruptedException {
         Actions actions = new Actions(getDriver());
         List<String> colorList = new ArrayList<>();
 
         for (WebElement button :  buttons) {
-            actions.moveToElement(button).perform();
+            actions.moveToElement(button).build().perform();
             if (button.isEnabled() && button.isDisplayed()) {
                 colorList.add(button.getCssValue("background-color"));
 
             }
+
         }
         return colorList;
     }
