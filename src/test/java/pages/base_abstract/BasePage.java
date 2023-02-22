@@ -225,23 +225,20 @@ public abstract class BasePage {
     }
     protected void hover(WebElement element) {
         Actions actions = new Actions(driver);
-        actions.moveToElement(element).perform();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        actions.moveToElement(element).build().perform();
+
     }
     public List<String> hoverToElements(List<WebElement> buttons) throws InterruptedException {
         Actions actions = new Actions(getDriver());
         List<String> colorList = new ArrayList<>();
 
         for (WebElement button :  buttons) {
-            actions.moveToElement(button).perform();
+            actions.moveToElement(button).build().perform();
             if (button.isEnabled() && button.isDisplayed()) {
                 colorList.add(button.getCssValue("background-color"));
 
             }
+
         }
         return colorList;
     }
@@ -316,7 +313,7 @@ public abstract class BasePage {
         return getWait20().until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected void waitForUrlContains(String text) {
+    public void waitForUrlContains(String text) {
         getWait10().until(ExpectedConditions.urlContains(text));
     }
 
@@ -377,10 +374,10 @@ public abstract class BasePage {
 
 
 
-    public CharityProjectPage screen(String name) throws IOException {
+    public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));
-        return new CharityProjectPage(getDriver());
+        new CharityProjectPage(getDriver());
     }
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {

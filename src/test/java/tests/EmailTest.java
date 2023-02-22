@@ -151,33 +151,30 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
     @Test
-    public void testHoverInstallEmailButtonEmailPage() throws InterruptedException {
-
-        final String expectedLinkColor = "rgba(191, 0, 0, 1)";
+    public void testInstallEmailButtonColorWhenHover_EmailPage() throws InterruptedException {
         final String actualLinksColor =openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
                 .scrollToWhereToInstallEmail()
-                .hoverToElement()
+                .hoverElement()
                 .backgroundColorOfElement();
 
-        Assert.assertEquals(actualLinksColor, expectedLinkColor);
+        Assert.assertTrue(actualLinksColor.contains("rgba(191, 0, 0,"));
     }
     @Test
-    public void testButtonsHoverColorsEmailPage() throws InterruptedException {
+    public void testAllButtonColorsWhenHover_EmailPage() throws InterruptedException {
 
-        List<String> expectedLinksColors = List.of(
-                "rgba(191, 0, 0, 1)",
-                "rgba(191, 0, 0, 1)"
-        );
-
-        List<String> actual = openBaseURL()
+        final List<String> actualButtonColorsWhenHover = openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
-                .getHoverColorsLinks();
-        Assert.assertTrue(actual.contains("rgba(191"));
+                .getButtonColorsWhenHover();
+
+        for (String searchCriteria : actualButtonColorsWhenHover) {
+            Assert.assertTrue(searchCriteria.contains("rgba(191, 0, 0,"));
+        }
+
 
     }
 

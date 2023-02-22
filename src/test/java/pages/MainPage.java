@@ -23,12 +23,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//input[@class = 'input-search'][@placeholder = 'Your search. Your business.']")
     private WebElement searchCityField; // swisscows
 
-    @FindBy(xpath = "//button[@class = 'search-submit']")
-    private WebElement searchButton; // swisscows
-
-    @FindBy(className = "suggestions")
-    private WebElement searchDropdownMenu;// swisscows
-
     @FindBy(xpath = "//div[@class = 'logo-home']//h1")
     private WebElement logoHome; // swisscows
 
@@ -103,27 +97,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class='mobile-padding']/h1/span")
     private WebElement colorAndFontSizeOfH1Header;
 
-    @FindBy(xpath = "//p[@class='title-section']")
-    private WebElement tittleWhySwisscows;
-
-    @FindBy(xpath = "//div[@class='block block-1']")
-    private WebElement WhySwisscowsBlock1;
-
-    @FindBy(xpath = "//div[@class='block block-2']")
-    private WebElement WhySwisscowsBlock2;
-
-    @FindBy(xpath = "//div[@class='block block-3']")
-    private WebElement WhySwisscowsBlock3;
-
-    @FindBy(xpath = "//div[@class='control-el']")
-    private WebElement locationButton;
-
-    @FindBy(xpath = "//div[text()='Metric: °C, m/s']")
-    private WebElement metricButton;
-
-    @FindBy(xpath = "//div[text()='Imperial: °F, mph']")
-    private WebElement imperialButton;
-
     @FindBy(xpath = "//div[@class='current-temp']/span")
     private WebElement currentTempAndUnit;
 
@@ -139,23 +112,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class='widget-notification']")
     private WebElement resultErrorWidget;
 
-    @FindBy(xpath = "//ul[@class = 'search-dropdown-menu']/li/span[text() = 'Paris, FR ']")
-    private WebElement parisFRChoiceInDropdownMenu;
-
-    @FindBy(xpath = "//span[text()='45.787, -87.904']")
-    private WebElement cityNorway;
-
-    @FindBy(className = "activeIcon")
-    private List<WebElement> activeIconsInDifferentWeatherContainer;
-
     @FindBy(className = "activeIcon")
     private WebElement activeIcon;
 
     @FindBy(xpath = "//div[@class='day-list-values']/div/span")
     private List<WebElement> dayListValues;
-
-    @FindBy(id = "dialogTitle")
-    private WebElement h3DialogTitle;
 
     @FindBy(xpath = "//div[@class='footer-full-inner-wrap']")
     private WebElement footerPanelContainer;
@@ -168,9 +129,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//ul[@class = 'suggestions']//li")
     private List<WebElement> suggestListMainPage;
-
-    @FindBy(xpath = "//div[@class='more-options']")
-    private WebElement moreOptionsDropDown;
 
     @FindBy(xpath = "//input[@type='number']")
     private WebElement temperatureInputInDifferentWeatherContainer;
@@ -185,15 +143,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     private List<WebElement> apiIcons;
     @FindBy(xpath = "//div[@class='section orange-background white-text']")
     private WebElement orangeBackground;
-
-    @FindBy(xpath = "//div[@class = 'mobile-padding']/h1")
-    private WebElement mainPageHeader1;
-
-    @FindBy(xpath = "//span[@class = 'white-text']")
-    private WebElement mainPageHeader2;
-
-    @FindBy(xpath = "//div[@class='dropdown-selector']")
-    private WebElement dataSourceDropDown;
 
     @FindBy(xpath = "//div[@class='owm-selector open']//ul[@class='dropdown-menu']/li")
     private List<WebElement> dataSourceOptions;
@@ -247,6 +196,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
     private WebElement searchField;
     @FindBy(xpath =  "//a[@class = 'userinfo']")
     private WebElement nicknameHamburgerMenu;
+    @FindBy(xpath =  "//div/img")
+    private List<WebElement> allImagesMainPage;
+    @FindBy(xpath =  "//h2")
+    private List<WebElement> h2TextsMainPage;
+    @FindBy(xpath =  "//div//p[@class='title-section']")
+    private List<WebElement> h1TextsMainPage;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -256,8 +211,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return new MainPage(getDriver());
     }
+    public List <String> getH2TextsMainPage() {
 
-    public String getCityCountryName() {
+        return getTexts(h2TextsMainPage);
+    }
+    public List <String> getH1TextsMainPage() {
+
+        return getTexts(h1TextsMainPage);
+    }
+
+    public String getMainTittleName() {
 
         return getText(h1HomeTitle);
     }
@@ -267,9 +230,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getBackgroundColor(colorAndFontSizeOfH1Header);
     }
 
-    public String getH1FontSize() {
+    public List<String> getH1FontSizes() {
 
-        return getFontSize(colorAndFontSizeOfH1Header);
+        return getFontSizes(h1TextsMainPage);
     }
 
     public int getAmountOftListOfQuestion() {
@@ -281,15 +244,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getAttribute(seeLoading, attribute);
     }
+    public String getTextPopupInstall() {
 
-    public List<WebElement> getListOfQuestion() {
-
-        return questionList;
-    }
-
-    public String getErrorText() {
-
-        return getText(resultErrorWidget);
+        return getText(googlePopupInstall);
     }
 
     public String getErrorButtonBackgroundColor() {
@@ -367,34 +324,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getListSize(getDisplayedAPIIcons());
     }
 
-    public String getH1Header() {
-
-        return getText(mainPageHeader1);
-    }
-
-    public List<String> getDataSourceOptionsTexts() {
-
-        return getTexts(dataSourceOptions);
-    }
 
     public List<String> getListOfEightDaysDataText() {
         scrollByVisibleElement(currentDateFromEightDaysForecast);
 
         return getTexts(listOfEightDaysData);
     }
-    public String getH2Header() {
-
-        return getText(mainPageHeader2);
-    }
 
     public String getAdditionalInfoText() {
 
         return getAttribute(anyAdditionalInfoTextarea, "_value");
-    }
-
-    public String getEmailTextBoxText() {
-
-        return getAttribute(emailTextBox, "_value");
     }
 
     public String getCurrentTemp() {
@@ -468,40 +407,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-
-    public MainPage clickLocationButton() {
-        click20(locationButton);
-
-        return this;
-    }
-
-
-//    public BulkPage clickBulks() {
-//        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-//        executor.executeScript("arguments[0].click()", bulkLink);
-//
-//        return new BulkPage(getDriver());
-//    }
-
-
-
-    public MainPage clickLessOptionsDropDown() {
-        click20(moreOptionsDropDown);
-
-        return this;
-    }
-
     public void clickUpKeyInTemperatureInput() {
         clickArrowUp(temperatureInputInDifferentWeatherContainer);
 
     }
 
-    public MainPage clickDataSourceDropDown() {
-        scrollByVisibleElement(dataSourceDropDown);
-        click20(dataSourceDropDown);
-
-        return this;
-    }
 
     public MainPage clickFirstDataSourceOption() {
         click(dataSourceOptions.get(0));
@@ -542,38 +452,20 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage waitUntilDifferentWeatherPopUpIsVisible() {
-        wait10ElementToBeVisible(differentWeatherPopUpContainer);
-
-        return this;
-    }
-
     public boolean isPopupGoogleDisplayed() {
 
         return isElementDisplayed(googlePopupInstall);
     }
 
-    public boolean isTittleWhySwisscowsIsDisplayed() {
 
-        return isElementDisplayed(tittleWhySwisscows);
-    }
-
-    public boolean isDisplayedWhySwisscowsBlock1() {
-
-        return isElementDisplayed(WhySwisscowsBlock1);
-    }
-    public boolean isDisplayedWhySwisscowsBlock2() {
-
-        return isElementDisplayed(WhySwisscowsBlock2);
-    }
-    public boolean isDisplayedWhySwisscowsBlock3() {
-
-        return isElementDisplayed(WhySwisscowsBlock3);
-    }
 
     public boolean suggestIsDisplayed() {
 
         return isElementDisplayed(suggestMainPage);
+    }
+    public boolean allImagesDisplayed() {
+
+        return areElementsInListDisplayed(allImagesMainPage);
     }
 
     public boolean homePageBannerIsDisplayed() {
@@ -605,22 +497,24 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public void clickThemeLight() {
+    public MainPage clickThemeLight() {
         click(secondValueOfLight);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
-    public void clickThemeDark() {
+    public MainPage clickThemeDark() {
         click(thirdValueOfDark);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
 
-    public void clickBannerSwitch() {
+    public MainPage clickBannerSwitch() {
         click(homepageBannerSwitchSecond);
+        return this;
     }
-    public void clickBannerSwitchFirst() {
+    public MainPage clickBannerSwitchFirst() {
         click(homepageBannerSwitchFirst);
+        return this;
     }
 
 
@@ -685,10 +579,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public boolean isLocationButtonDisplayed() {
-
-        return isElementDisplayed(locationButton);
-    }
 
     public MainPage scrollToQuestions() {
         scrollByVisibleElement(homepageQuestion6);

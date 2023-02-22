@@ -95,10 +95,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     }
     public MusicPage clickFavoritePlaylist() {
         click(favoriteContainer);
+        waitForUrlContains("https://dev.swisscows.com/en/music/my?query=");
         return new MusicPage(getDriver());
     }
-    public MusicPage clickFavoriteIconInPlaylist() throws InterruptedException {
-        sleep(1000);
+    public MusicPage clickFavoriteIconInPlaylist() {
+        waitForUrlContains("https://dev.swisscows.com/en/music/my?query=");
         click(favoriteIconInPlaylist);
         return new MusicPage(getDriver());
     }
@@ -124,7 +125,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return getAttribute(progressbarFirsTrack, "style");
     }
     public String getFirstTrackAttribute() throws InterruptedException {
-        sleep(1000);
         return getAttribute( valueFirstImage, "src");
     }
     public String getVolumeDuration()  {

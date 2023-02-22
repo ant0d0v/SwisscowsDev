@@ -3,12 +3,9 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
-
-
-            <class name="tests.EmailTest"/>
-
-
-
+            <class name="tests.MusicTest"/>
+            <class name="tests.MainTest"/>
+            <class name="tests.TopMenuTest"/>
         </classes>
     </test>
 </suite>
