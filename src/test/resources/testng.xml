@@ -4,7 +4,9 @@
     <test name="/Users/">
         <classes>
 
+
             <class name="tests.EmailTest"/>
+
 
 
         </classes>
