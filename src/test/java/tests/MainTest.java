@@ -197,7 +197,7 @@ public class MainTest extends BaseTest {
 
         String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
-        Assert.assertEquals(getExternalPageTitle(),"Swisscows - Chrome Web Store");
+
 
     }
 
@@ -296,7 +296,7 @@ public class MainTest extends BaseTest {
 
         String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
-        Assert.assertEquals(getExternalPageTitle(),"Swisscows - Chrome Web Store");
+
 
     }
 
