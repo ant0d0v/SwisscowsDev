@@ -5,7 +5,8 @@
         <classes>
 
 
-            <class name="tests.EmailTest"/>
+            <class name="tests.TopMenuTest"/>
+            <class name="tests.MainTest"/>
 
 
 

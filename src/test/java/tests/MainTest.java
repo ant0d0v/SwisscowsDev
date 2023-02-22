@@ -1,4 +1,5 @@
 package tests;
+import api.model.Sys;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -59,16 +60,6 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testHomePageBanner() {
-
-        MainPage mainPage = openBaseURL();
-
-        Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
-    }
-
-
-
-    @Test
     public void testHomePageBannerClickable () {
 
         final String expectedUrl = "https://dev.swisscows.com/en/music?query=popular+music";
@@ -82,7 +73,6 @@ public class MainTest extends BaseTest {
                 .clickHomeBanner()
                 .switchToAnotherWindow();
 
-        TestUtils.waitForPageLoaded(getDriver());
         final String actualUrl = mainPage.getCurrentURL();
 
         Assert.assertNotEquals(oldUrl,actualUrl);
@@ -94,13 +84,14 @@ public class MainTest extends BaseTest {
         final String expectedValue = "swiper-slide swiper-slide-next";
 
         MainPage mainPage = openBaseURL();
-        mainPage
-                .clickBannerSwitch();
-        final String valueSecondSwitch = mainPage.getClassAttributeSwitchSecond();
 
-        mainPage
-                .clickBannerSwitchFirst();
-        final String valueFirstSwitch = mainPage.getClassAttributeSwitchFirst();
+        final String valueSecondSwitch = mainPage
+                .clickBannerSwitch()
+                .getClassAttributeSwitchSecond();
+
+        final String valueFirstSwitch = mainPage
+                .clickBannerSwitchFirst()
+                .getClassAttributeSwitchFirst();
 
         Assert.assertEquals(valueFirstSwitch,expectedValue);
         Assert.assertNotEquals(valueSecondSwitch,valueFirstSwitch);
@@ -117,6 +108,7 @@ public class MainTest extends BaseTest {
                 .waitForImageInBannerDisappeared();
         final String actualValue = mainPage.getClassAttributeSwitchSecond();
 
+        Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
         Assert.assertEquals(actualValue,expectedValue);
 
 
@@ -130,37 +122,24 @@ public class MainTest extends BaseTest {
 
         mainPage.inputSearchCriteria(query);
 
-
     }
-
-    //Check that all questions were open
     @Test
     public void testQuestionAndAnswersWasOpened() {
 
         final String expectedClass = "faq open";
 
-        MainPage mainPage = openBaseURL();
-
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .scrollToQuestions()
                 .clickAllQuestions();
 
-        String actualClassAttributeQuestion1 = mainPage.getClassAttributeQuestion1();
-        String actualClassAttributeQuestion2 = mainPage.getClassAttributeQuestion2();
-        String actualClassAttributeQuestion3 = mainPage.getClassAttributeQuestion3();
-        String actualClassAttributeQuestion4 = mainPage.getClassAttributeQuestion4();
-        String actualClassAttributeQuestion5 = mainPage.getClassAttributeQuestion5();
-        String actualClassAttributeQuestion6 = mainPage.getClassAttributeQuestion6();
-
-        Assert.assertEquals(actualClassAttributeQuestion1,expectedClass);
-        Assert.assertEquals(actualClassAttributeQuestion2,expectedClass);
-        Assert.assertEquals(actualClassAttributeQuestion3,expectedClass);
-        Assert.assertEquals(actualClassAttributeQuestion4,expectedClass);
-        Assert.assertEquals(actualClassAttributeQuestion5,expectedClass);
-        Assert.assertEquals(actualClassAttributeQuestion6,expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion1(),expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion2(),expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion3(),expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion4(),expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion5(),expectedClass);
+        Assert.assertEquals(mainPage.getClassAttributeQuestion6(),expectedClass);
 
     }
-    //Check that the issue is closes
     @Test
     public void testQuestionAndAnswersOpenAndClose() {
 
@@ -172,14 +151,16 @@ public class MainTest extends BaseTest {
         mainPage
                 .scrollToQuestions()
                 .clickQuestion1();
-        String actualClassAttributeQuestionOpen = mainPage.getClassAttributeQuestion1();
+        final String actualClassAttributeQuestionOpen = mainPage.getClassAttributeQuestion1();
+
         Assert.assertEquals(actualClassAttributeQuestionOpen,expectedClassOpen);
 
         mainPage
                 .clickQuestion1()
                 .waitForAnswerToBeInvisible();
 
-        String actualClassAttributeQuestionCloses = mainPage.getClassAttributeQuestion1();
+        final String actualClassAttributeQuestionCloses = mainPage.getClassAttributeQuestion1();
+
         Assert.assertEquals(actualClassAttributeQuestionCloses,expectedClassCloses);
 
 
@@ -216,6 +197,7 @@ public class MainTest extends BaseTest {
 
         String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
+        Assert.assertEquals(getExternalPageTitle(),"Swisscows - Chrome Web Store");
 
     }
 
@@ -244,7 +226,7 @@ public class MainTest extends BaseTest {
         mainPage.switchToAnotherWindow();
 
         String actualLearnMoreUrl = getExternalPageURL();
-
+        Assert.assertEquals(getExternalPageTitle(),"Enterprise Search Software for companies");
         Assert.assertEquals(actualLearnMoreUrl,expectedUrl);
 
 
@@ -262,6 +244,7 @@ public class MainTest extends BaseTest {
 
         String actualFanShopUrl = getExternalPageURL();
 
+        Assert.assertEquals(getExternalPageTitle(),"Swisscows Fanshop für Kleider und Geschenke für Fans");
         Assert.assertEquals(actualFanShopUrl,expectedUrl);
 
 
@@ -277,8 +260,9 @@ public class MainTest extends BaseTest {
                 .clickLinkWiebeBlogInOurService();
         mainPage.switchToAnotherWindow();
 
-        String actualWiebeBlogUrl = getExternalPageURL();
+        final String actualWiebeBlogUrl = getExternalPageURL();
 
+        Assert.assertEquals(getExternalPageTitle(),"Blog - Andreas Wiebe");
         Assert.assertEquals(actualWiebeBlogUrl,expectedUrl);
 
 
@@ -290,7 +274,10 @@ public class MainTest extends BaseTest {
         mainPage
                 .waitForPopupGoogleInstallToBeVisible();
 
+
         Assert.assertTrue(mainPage.isPopupGoogleDisplayed());
+        Assert.assertEquals(mainPage.getTextPopupInstall(),"Install Swisscows\n" + "at Google Chrome\n"
+                + "Stay with us and set Swisscows as your default search engine.");
 
 
     }
@@ -309,19 +296,59 @@ public class MainTest extends BaseTest {
 
         String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
+        Assert.assertEquals(getExternalPageTitle(),"Swisscows - Chrome Web Store");
 
     }
 
     @Test
-    public void testBlockWhySwisscowsIsDisplayed() {
+    public void testAllImagesIsDisplayed_MainPage() {
+        MainPage mainPage = new MainPage(getDriver());
+        final List<String> expectedH2Texts = List.of(
+                "Our anonymous search engine does not store your data!",
+                "Anonymous search engine with own search index",
+                "Family friendly, secure and anonymous search engine with own search index"
 
-        MainPage mainPage = openBaseURL();
+        );
+        final List<String> actualH2Texts = openBaseURL()
+                .getH2TextsMainPage();
 
-        Assert.assertTrue(mainPage.isTittleWhySwisscowsIsDisplayed());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock1());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock2());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock3());
+        Assert.assertTrue(actualH2Texts.size() > 0);
 
+        Assert.assertEquals(actualH2Texts, expectedH2Texts);
+        Assert.assertTrue(mainPage.allImagesDisplayed());
+
+    }
+    @Test
+    public void testH1textIsCorrect_MainPage() {
+        MainPage mainPage = new MainPage(getDriver());
+        final List<String> expectedH2Texts = List.of(
+                "Our Services",
+                "Questions and Answers",
+                "Why Swisscows?"
+
+        );
+        final List<String> actualH2Texts = openBaseURL()
+                .getH1TextsMainPage();
+
+        Assert.assertTrue(actualH2Texts.size() > 0);
+
+        Assert.assertEquals(actualH2Texts, expectedH2Texts);
+        Assert.assertEquals(mainPage.getMainTittleName(),"Anonymous search engine");
+
+
+    }
+    @Test
+    public void testTextsFontSizes_MainPage(){
+        final List<String> expectedH1FontSizes = List.of(
+                "24px",
+                "24px",
+                "24px"
+        );
+        final List<String>  actualH2FontSizes = openBaseURL()
+                .getH2FontSizes();
+
+        Assert.assertTrue(actualH2FontSizes.size() > 0);
+        Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
 
     @Test
@@ -346,10 +373,8 @@ public class MainTest extends BaseTest {
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
 
         Assert.assertTrue(new MainPage(getDriver()).isHomePageLogoDisplayed());
-        Assert.assertTrue(mainPage.isTittleWhySwisscowsIsDisplayed());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock1());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock2());
-        Assert.assertTrue(mainPage.isDisplayedWhySwisscowsBlock3());
+        Assert.assertTrue(mainPage.allImagesDisplayed());
+
 
     }
     @Test

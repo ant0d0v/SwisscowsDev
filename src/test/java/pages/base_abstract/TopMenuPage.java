@@ -340,10 +340,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
-    public void clickThemeDropDownIcon() {
+    public MainPage clickThemeDropDownIcon() {
         click(ThemeDropDownIcon);
 
-        new MainPage(getDriver());
+       return new MainPage(getDriver());
     }
 
     public VpnPage clickVPNTopMenu() {
@@ -353,10 +353,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
 
-    public void clickHamburgerMenuIcon() {
+    public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
     public List <String> getH3Texts() {
 
@@ -501,7 +501,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MakeDefaultSearchPage (getDriver());
     }
 
-    public void clickRegionDropDown(int index) {
+    public MainPage clickRegionDropDown(int index) {
         click(RegionDropDownIcon);
         click(getInnerRegionMenuList().get(index));
         if (getDriver().getWindowHandles().size() > 1) {
@@ -509,6 +509,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         }
 
         createGeneric();
+        return new MainPage(getDriver());
     }
 
     public List<WebElement> getInnerLangMenuList() {

@@ -231,10 +231,10 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLocalizationDropdownMenuIsAvailableAndHasOptions_TopMenu() {
-        final int expectedNumberOfOptionsHamburgerMenu = 10;
+        final int expectedNumberOfOptionsHamburgerMenu = 11;
         final List<String> expectedHamburgerMenuListTexts = List.of(
-                "English", "Deutsch", "Français", "Italiano", "Español",
-                "Nederlands", "Latviešu", "Magyar", "Русский", "Українська"
+                "English", "Deutsch", "Español","Français", "Italiano", "Latviešu",
+                "Magyar","Nederlands", "Portugal", "Русский", "Українська"
         );
         openBaseURL()
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU)
@@ -264,10 +264,12 @@ public class TopMenuTest extends BaseTest {
         final String oldURL = mainPage.getCurrentURL();
         final String oldTitle = mainPage.getTitle();
 
-        mainPage.clickHamburgerMenu().clickLangDropDown(index);
-        TestUtils.waitForPageLoaded(getDriver());
-        String actualURL = mainPage.getCurrentURL();
-        String actualTitle = getDriver().getTitle();
+        mainPage
+                .clickHamburgerMenu()
+                .clickLangDropDown(index);
+
+        final String actualURL = mainPage.getCurrentURL();
+        final String actualTitle = getDriver().getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldTitle, actualTitle);
@@ -313,11 +315,13 @@ public class TopMenuTest extends BaseTest {
         MainPage mainPage = openBaseURL();
 
         final String oldURL = mainPage.getCurrentURL();
+        mainPage
+                .clickHamburgerMenu()
+                .clickRegionDropDown(index)
+                .waitForUrlContains("https://dev.swisscows.com/en?region=");
 
-        mainPage.clickHamburgerMenu().clickRegionDropDown(index);
-        sleep(3000);
-        String actualURL = mainPage.getCurrentURL();
-        String actualTitle = getDriver().getTitle();
+        final String actualURL = mainPage.getCurrentURL();
+        final String actualTitle = getDriver().getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualURL, expectedURL);
@@ -328,11 +332,11 @@ public class TopMenuTest extends BaseTest {
     public void testThemeIsDefaultFirstOpenSite() {
         final String expectedValue = "active";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .clickHamburgerMenu()
                 .clickThemeDropDownIcon();
-        String actualValue = mainPage.getClassAttributeThemeDefault();
+
+        final String actualValue = mainPage.getClassAttributeThemeDefault();
 
         Assert.assertEquals(actualValue, expectedValue);
 
@@ -342,17 +346,14 @@ public class TopMenuTest extends BaseTest {
     public void tesThemeChanged() throws InterruptedException {
         final String expectedValue = "active";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .clickHamburgerMenu()
-                .clickThemeDropDownIcon();
-        mainPage
-                .clickThemeLight();
-        mainPage
+                .clickThemeDropDownIcon()
+                .clickThemeLight()
                 .clickHamburgerMenu()
                 .clickThemeDropDownIcon();
 
-        String actualValueLight = mainPage.getClassAttributeThemeLight();
+        final String actualValueLight = mainPage.getClassAttributeThemeLight();
 
         Assert.assertEquals(actualValueLight, expectedValue);
     }
@@ -361,14 +362,12 @@ public class TopMenuTest extends BaseTest {
     public void tesThemeOfBodyChanged() throws InterruptedException {
         final String expectedValue = "dark";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .clickHamburgerMenu()
-                .clickThemeDropDownIcon();
-        mainPage
+                .clickThemeDropDownIcon()
                 .clickThemeDark();
 
-        String actualValueLight = mainPage.getClassAttributeBodyOfSite();
+        final String actualValueLight = mainPage.getClassAttributeBodyOfSite();
 
         Assert.assertEquals(actualValueLight, expectedValue);
 
@@ -383,12 +382,11 @@ public class TopMenuTest extends BaseTest {
 
         );
 
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .clickHamburgerMenuIcon();
-        mainPage
+        MainPage mainPage = openBaseURL()
+                .clickHamburgerMenuIcon()
                 .clickThemeDropDownIcon();
-        List<String> actualList = mainPage.getLangMenuListTexts();
+
+        final List<String> actualList = mainPage.getLangMenuListTexts();
 
         Assert.assertEquals(actualList, expectedList);
     }

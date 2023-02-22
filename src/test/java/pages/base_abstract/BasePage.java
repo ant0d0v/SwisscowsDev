@@ -313,7 +313,7 @@ public abstract class BasePage {
         return getWait20().until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected void waitForUrlContains(String text) {
+    public void waitForUrlContains(String text) {
         getWait10().until(ExpectedConditions.urlContains(text));
     }
 
@@ -374,10 +374,10 @@ public abstract class BasePage {
 
 
 
-    public CharityProjectPage screen(String name) throws IOException {
+    public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));
-        return new CharityProjectPage(getDriver());
+        new CharityProjectPage(getDriver());
     }
 
     public List<WebElement> getAllHTTPSLinks(List<WebElement> allLinks) {
