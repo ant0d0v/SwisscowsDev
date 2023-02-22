@@ -45,7 +45,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
         return this;
     }
-    public EmailPage hoverToElement(){
+    public EmailPage hoverElement(){
         hover(InstallWebAppLink);
         return  this;
 
