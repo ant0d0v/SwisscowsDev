@@ -171,6 +171,5 @@ public class MusicTest extends BaseTest {
 
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
-
     }
 }
