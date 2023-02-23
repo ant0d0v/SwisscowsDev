@@ -54,7 +54,9 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
+
         Assert.assertNotEquals(actualAttribute, musicPage.getPreviousTrackAttribute());
+        Assert.assertNotEquals(actualAttribute,musicPage.getPreviousTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
@@ -71,7 +73,9 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
+
         Assert.assertNotEquals(actualAttribute, musicPage.getNextTrackAttribute());
+        Assert.assertNotEquals(actualAttribute,musicPage.getNextTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
@@ -200,8 +204,8 @@ public class MusicTest extends BaseTest {
                 .getErrorTitleInFavoritePlaylist();
 
         final String newUrl = musicPage.getCurrentURL();
-
-        Assert.assertNotEquals(newUrl, oldUrl);
+       
+       Assert.assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
     }
 
@@ -252,6 +256,10 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
         }
+
+        Assert.assertNotEquals(newUrl,oldUrl);
+        Assert.assertTrue(actualH2Title.contains("No items found"));
+
     }
 
 }
