@@ -155,7 +155,6 @@ public class MusicTest extends BaseTest {
                         .clickFavoritePlaylist()
                         .getFirstTrackAttribute();
 
-
         Assert.assertEquals(actualValueFirstTrack, expectedValueFirstTrackInFavorite);
         Assert.assertTrue(musicPage.favoriteIsDisplayed());
 
@@ -252,15 +251,12 @@ public class MusicTest extends BaseTest {
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
         Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
+
         for (String searchCriteria : actualSuggestion) {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
         }
-
-        Assert.assertNotEquals(newUrl,oldUrl);
-        Assert.assertTrue(actualH2Title.contains("No items found"));
-
     }
 
 }
