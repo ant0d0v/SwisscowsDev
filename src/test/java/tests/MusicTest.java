@@ -99,8 +99,8 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult()
                 .getTitleAllTracks();
         final int actualSize = titleAllTracks.size();
-
         final List<String> titleAllPlaylist = musicPage.getTitleAllPlaylist();
+
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
