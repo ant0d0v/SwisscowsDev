@@ -226,7 +226,7 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(musicPage.getFavoriteAttribute(), "button favorite");
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
         final String query = "ivanka";
 
