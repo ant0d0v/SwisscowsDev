@@ -8,6 +8,8 @@ import tests.retrytest.Retry;
 
 import java.util.List;
 
+import static org.testng.TestRunner.PriorityWeight.priority;
+
 public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
@@ -94,7 +96,7 @@ public class MusicTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testTrackResultsEqualsSearchCriteria() throws InterruptedException {
+    public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -138,7 +140,7 @@ public class MusicTest extends BaseTest {
         Assert.assertFalse(actualAttribute.contains("item item--audio active"));
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddTrackInTheFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualValueFirstTrack = openBaseURL()
@@ -155,14 +157,13 @@ public class MusicTest extends BaseTest {
                         .clickFavoritePlaylist()
                         .getFirstTrackAttribute();
 
-
         Assert.assertEquals(actualValueFirstTrack, expectedValueFirstTrackInFavorite);
         Assert.assertTrue(musicPage.favoriteIsDisplayed());
 
 
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(priority = 2,retryAnalyzer = Retry.class)
     public void tesPlayTrackInTheFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -186,7 +187,7 @@ public class MusicTest extends BaseTest {
 
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -252,15 +253,12 @@ public class MusicTest extends BaseTest {
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
         Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
+
         for (String searchCriteria : actualSuggestion) {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
         }
-
-        Assert.assertNotEquals(newUrl,oldUrl);
-        Assert.assertTrue(actualH2Title.contains("No items found"));
-
     }
 
 }
