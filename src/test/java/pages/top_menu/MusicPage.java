@@ -3,6 +3,7 @@ package pages.top_menu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
@@ -33,10 +34,16 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement shuffleButton;
     @FindBy(xpath = "//div[@class = 'buttons']//button[1]")
     private WebElement shuffleButtonAttribute;
+    @FindBy(xpath = "//button[@class = 'button favorite']")
+    private WebElement favoriteButton;
     @FindBy(xpath = "//div[@class = 'progress-bar']//div[@style]")
     private WebElement progressbarFirsTrack;
     @FindBy(xpath = "//div[@class = 'tracks']//h2")
     private List<WebElement> allTracks;
+    @FindBy(xpath = "//button[@title='Play/Pause']")
+    private List<WebElement> allPlayButton;
+    @FindBy(xpath = "//button[@class='button favorite']")
+    private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//h2[text() ='My favorite tracks']")
     private WebElement favoriteContainer;
     @FindBy(xpath = "//article[@class='item item--audio']//img[1]")
@@ -45,6 +52,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement h2TitleErrorInFavorite;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private WebElement favoriteIconInPlaylist;
+    @FindBy(xpath = "//button[@class='button favorite active']")
+    private List<WebElement> allActiveHeartButtons;
+    @FindBy(xpath = "//div[@class='playlists']/a/h2")
+    private List<WebElement> titleAllPlaylist;
 
 
     public MusicPage(WebDriver driver) {
@@ -84,6 +95,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(previousButton);
         return new MusicPage(getDriver());
     }
+    public MusicPage clickOnAllActiveHeart() {
+        clickAllElementsInList(allActiveHeartButtons);
+        return new MusicPage(getDriver());
+    }
+
     public List <String> getTitleAllTracks() {
 
         return getTexts(allTracks);
@@ -112,6 +128,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getAttribute(shuffleButtonAttribute, "class");
     }
+    public String getFavoriteAttribute() {
+
+        return getAttribute(favoriteButton, "class");
+    }
     public String getNextTrackAttribute() {
 
         return getAttribute(nextTrackAttributes, "class");
@@ -139,4 +159,15 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return isElementDisplayed(favoriteContainer);
 
     }
+    public List<String> getTitleAllPlaylist() {
+        return getTexts(titleAllPlaylist);
+
+    }
+    public boolean playButtonsIsDisplayed() {
+        return areElementsInListDisplayed(allPlayButton);
+
+    }
+
+
+
 }

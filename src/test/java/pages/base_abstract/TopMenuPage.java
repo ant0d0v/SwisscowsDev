@@ -147,10 +147,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//div[@class = 'image']//img")
     private List<WebElement> allImagesOnPage;
     @FindBy(xpath = "//input[@class = 'input-search']")
-    private WebElement searchCityField; // swisscows
+    private WebElement searchFieldHeader; // swisscows
 
     @FindBy(xpath = "//h2[text() ='My favorite tracks']")
     private WebElement favoriteContainer;
+    @FindBy(xpath = "//button[@class='button favorite']")
+    private List<WebElement> allHeartButtons;
+
 
 
 
@@ -272,6 +275,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
+    }
+    public MusicPage clickOnAllHeart()  {
+        clickAllElementsInList(allHeartButtons);
+        return new MusicPage(getDriver());
     }
 
     public MainPage logOut() {
@@ -416,9 +423,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(choiceInDropdownMenu);
 
     }
-    public void clickSearchFieldHeader() {
-        click(searchCityField);
-
+    public WebPage clickSearchFieldHeader() {
+        click(searchFieldHeader);
+        return new WebPage(getDriver());
     }
 
     public boolean isPlaceholderDisplayed() {

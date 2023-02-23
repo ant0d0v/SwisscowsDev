@@ -2,6 +2,7 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 
@@ -22,6 +23,7 @@ public class MusicTest extends BaseTest {
 
         final String actualDuration = musicPage.getVolumeDuration();
 
+        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
         Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
     }
@@ -52,6 +54,8 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
+
+        Assert.assertNotEquals(actualAttribute, musicPage.getPreviousTrackAttribute());
         Assert.assertNotEquals(actualAttribute,musicPage.getPreviousTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
@@ -69,6 +73,8 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
+
+        Assert.assertNotEquals(actualAttribute, musicPage.getNextTrackAttribute());
         Assert.assertNotEquals(actualAttribute,musicPage.getNextTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
@@ -89,6 +95,7 @@ public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testTrackResultsEqualsSearchCriteria() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
@@ -98,9 +105,15 @@ public class MusicTest extends BaseTest {
         final int actualSize = titleAllTracks.size();
 
 
+        final List<String> titleAllPlaylist = musicPage.getTitleAllPlaylist();
+
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
             Assert.assertEquals(searchCriteria.toLowerCase(), "ivanka");
+        }
+        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
+        for (String search : titleAllPlaylist) {
+            Assert.assertEquals(search.toLowerCase(), "ivanka");
         }
     }
 
@@ -150,6 +163,30 @@ public class MusicTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = Retry.class)
+    public void tesPlayTrackInTheFavorite() throws InterruptedException {
+        MusicPage musicPage = new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .signIn();
+
+        final String actualAttribute = musicPage
+                .clickFavoritePlaylist()
+                .clickPlayButton()
+                .getPreviousTrackAttribute();
+
+        final String actualDuration = musicPage.getVolumeDuration();
+
+        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
+        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
+        Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
+
+    }
+
+    @Test(retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -169,7 +206,61 @@ public class MusicTest extends BaseTest {
 
         final String newUrl = musicPage.getCurrentURL();
 
-        Assert.assertNotEquals(newUrl,oldUrl);
+        Assert.assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
     }
+
+    @Test(retryAnalyzer = Retry.class)
+    public void testAddAfterDeleteSeveralTracksFromFavorite() {
+        MusicPage musicPage = new MusicPage(getDriver());
+        final List<String> actualTracks = openBaseURL()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .signIn()
+                .clickOnAllHeart()
+                .clickFavoritePlaylist()
+                .getTitleAllTracks();
+
+        Assert.assertEquals(actualTracks.size(), 20);
+        musicPage
+                .clickOnAllActiveHeart()
+                .clickSearchButton();
+
+        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
+        Assert.assertEquals(musicPage.getFavoriteAttribute(), "button favorite");
+
+    }
+
+    @Test(retryAnalyzer = Retry.class)
+    public void testSuggestEqualsSearchCriteria() {
+        final String query = "ivanka";
+
+        MainPage mainPage = openBaseURL();
+        openBaseURL()
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .clickSearchFieldHeader();
+        mainPage
+                .waitForSuggestToBeVisible();
+
+        final List<String> actualSuggestion = mainPage.getAllElementsText();
+
+        final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
+
+        Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
+        for (String searchCriteria : actualSuggestion) {
+            Assert.assertTrue(mainPage.suggestIsDisplayed());
+            Assert.assertTrue(actualSizeSuggest > 0);
+            Assert.assertTrue(searchCriteria.contains(query));
+        }
+
+        Assert.assertNotEquals(newUrl,oldUrl);
+        Assert.assertTrue(actualH2Title.contains("No items found"));
+
+    }
+
 }
