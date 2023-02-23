@@ -556,7 +556,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public void waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
 
-
     }
     public void waitForPopupGoogleInstallToBeVisible() {
         wait20ElementToBeVisible(googlePopupInstall);
