@@ -54,7 +54,7 @@ public class MusicTest extends BaseTest {
                 .clickForwardButton()
                 .getNextTrackAttribute();
 
-        Assert.assertNotEquals(actualAttribute,musicPage.getPreviousTrackAttribute());
+        Assert.assertNotEquals(actualAttribute, musicPage.getPreviousTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
@@ -71,7 +71,7 @@ public class MusicTest extends BaseTest {
                 .clickBackButton()
                 .getPreviousTrackAttribute();
 
-        Assert.assertNotEquals(actualAttribute,musicPage.getNextTrackAttribute());
+        Assert.assertNotEquals(actualAttribute, musicPage.getNextTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
     }
 
@@ -106,7 +106,7 @@ public class MusicTest extends BaseTest {
         for (String searchCriteria : titleAllTracks) {
             Assert.assertEquals(searchCriteria.toLowerCase(), "ivanka");
         }
-        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(),3);
+        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         for (String search : titleAllPlaylist) {
             Assert.assertEquals(search.toLowerCase(), "ivanka");
         }
@@ -156,6 +156,7 @@ public class MusicTest extends BaseTest {
 
 
     }
+
     @Test(retryAnalyzer = Retry.class)
     public void tesPlayTrackInTheFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
@@ -167,7 +168,7 @@ public class MusicTest extends BaseTest {
                 .clickHamburgerMenu()
                 .signIn();
 
-       final String  actualAttribute = musicPage
+        final String actualAttribute = musicPage
                 .clickFavoritePlaylist()
                 .clickPlayButton()
                 .getPreviousTrackAttribute();
@@ -200,13 +201,14 @@ public class MusicTest extends BaseTest {
 
         final String newUrl = musicPage.getCurrentURL();
 
-        Assert.assertNotEquals(newUrl,oldUrl);
+        Assert.assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
     }
+
     @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        final List<String> actualTracks =openBaseURL()
+        final List<String> actualTracks = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -217,22 +219,23 @@ public class MusicTest extends BaseTest {
                 .clickFavoritePlaylist()
                 .getTitleAllTracks();
 
-        Assert.assertEquals(actualTracks.size(),20);
+        Assert.assertEquals(actualTracks.size(), 20);
         musicPage
                 .clickOnAllActiveHeart()
                 .clickSearchButton();
 
-        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(),3);
+        Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         Assert.assertEquals(musicPage.getFavoriteAttribute(), "button favorite");
 
     }
+
     @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
         final String query = "ivanka";
 
         MainPage mainPage = openBaseURL();
         openBaseURL()
-                .inputSearchCriteriaAndEnter( query)
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .clickSearchFieldHeader();
@@ -243,13 +246,12 @@ public class MusicTest extends BaseTest {
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
-        Assert.assertEquals(mainPage.getAllElementsText().size(),5);
+        Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
         for (String searchCriteria : actualSuggestion) {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
-
 
 }
