@@ -21,6 +21,8 @@ import pages.top_menu.VpnPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public abstract class TopMenuPage<Generic> extends BasePage {
 
     private static final String TOP_MENU_ID = "//div[@class = 'badges animation-badges']";
@@ -337,8 +339,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
-    public void clickLanguagesTopMenu() {
-        clickByJavaScript(LangDropDownIcon);
+    public void clickLanguagesTopMenu() throws InterruptedException {
+        click20(LangDropDownIcon);
+        sleep(1000);
 
         new MainPage(getDriver());
     }

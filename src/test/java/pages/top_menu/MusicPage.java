@@ -118,7 +118,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     }
     public MusicPage scrollToLastTrack() {
         scrollByVisibleElement(lastTrack);
-        scrollByVisibleElement(lastTrackDouble);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {

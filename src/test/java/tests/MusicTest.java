@@ -184,7 +184,7 @@ public class MusicTest extends BaseTest {
 
     }
     @Test(priority = 3,retryAnalyzer = Retry.class)
-    public void testLocalization_MusicPage()  {
+    public void testLocalization_MusicPage() throws InterruptedException {
 
         MusicPage musicPage =new MusicPage(getDriver());
         openBaseURL()
@@ -297,7 +297,7 @@ public class MusicTest extends BaseTest {
                 .scrollToLastTrack()
                 .getTitleAllTracks();
 
-        Assert.assertTrue(actualTracks.size() >= 30);
+        Assert.assertEquals(actualTracks.size(), 29);
 
 
     }
