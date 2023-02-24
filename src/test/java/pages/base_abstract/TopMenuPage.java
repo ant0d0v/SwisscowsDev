@@ -339,9 +339,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new MainPage(getDriver());
     }
 
-    public void clickLanguagesTopMenu() throws InterruptedException {
+    public void clickLanguagesTopMenu() {
         click20(LangDropDownIcon);
-        sleep(1000);
 
         new MainPage(getDriver());
     }

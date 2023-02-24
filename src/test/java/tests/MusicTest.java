@@ -200,6 +200,7 @@ public class MusicTest extends BaseTest {
                 .signIn()
                 .clickHamburgerMenu()
                 .clickLanguagesTopMenu();
+        sleep(1000);
         musicPage
                 .clickLangDeutsch();
 
