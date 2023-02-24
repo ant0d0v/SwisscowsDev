@@ -121,6 +121,7 @@ public class TestData {
 
         };
     }
+
     @DataProvider(name = "VpnLinksData")
     public static Object[][] VpnLinksTestDataProvider() {
 

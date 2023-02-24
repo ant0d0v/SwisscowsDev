@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement playButtonAttribute;
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
+    @FindBy(xpath = "//article[20]")
+    private WebElement lastTrack;
+    @FindBy(xpath = "//article[29]")
+    private WebElement lastTrackDouble;
     @FindBy(xpath = "//article[1]/div[1]/span[1]")
     private WebElement durationAttribute;
 
@@ -50,12 +55,15 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement valueFirstImage;
     @FindBy(xpath = "//div[@class='error']//h2[@class]")
     private WebElement h2TitleErrorInFavorite;
+    @FindBy(xpath = "//nav[@class='menu-summary']//li[4]/a")
+    private WebElement h2TitleInFavorite;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private WebElement favoriteIconInPlaylist;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private List<WebElement> allActiveHeartButtons;
     @FindBy(xpath = "//div[@class='playlists']/a/h2")
     private List<WebElement> titleAllPlaylist;
+
 
 
     public MusicPage(WebDriver driver) {
@@ -83,6 +91,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
 
+
     public MusicPage clickShuffleButton() {
         click(shuffleButton);
         return new MusicPage(getDriver());
@@ -100,13 +109,17 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
 
-    public List <String> getTitleAllTracks() {
-
+    public List <String> getTitleAllTracks()  {
         return getTexts(allTracks);
     }
 
+
     public MusicPage clickToProgressbar() {
         click(progressbar);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage scrollToLastTrack() {
+        scrollByVisibleElement(lastTrack);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {
@@ -154,6 +167,14 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public String getErrorTitleInFavoritePlaylist()  {
 
         return getText(h2TitleErrorInFavorite);
+    }
+    public String getFontSizeErrorTitleInFavoritePlaylist()  {
+
+        return getFontSize(h2TitleErrorInFavorite);
+    }
+    public String getTitlePlaylist()  {
+
+        return getText(h2TitleInFavorite);
     }
     public boolean favoriteIsDisplayed() {
         return isElementDisplayed(favoriteContainer);

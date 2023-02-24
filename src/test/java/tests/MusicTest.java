@@ -5,10 +5,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
-
 import java.util.List;
-
-import static org.testng.TestRunner.PriorityWeight.priority;
 
 public class MusicTest extends BaseTest {
 
@@ -186,6 +183,33 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
+    @Test(retryAnalyzer = Retry.class)
+    public void testLocalization_MusicPage() {
+
+        MusicPage musicPage =new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult();
+
+        final String oldURL = musicPage.getCurrentURL();
+        final String oldText =musicPage.getTitlePlaylist();
+
+        musicPage.clickHamburgerMenu();
+        musicPage.clickLanguagesTopMenu();
+        musicPage.clickLangDeutsch();
+
+        final String actualURL = musicPage.getCurrentURL();
+        final String actualText =musicPage.getTitlePlaylist();
+
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldText, actualText);
+        Assert.assertEquals(actualURL,"https://dev.swisscows.com/de/music?query=ivanka");
+        Assert.assertEquals(actualText,"Musik");
+
+    }
 
     @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
@@ -205,10 +229,12 @@ public class MusicTest extends BaseTest {
                 .clickFavoriteIconInPlaylist()
                 .getErrorTitleInFavoritePlaylist();
 
+
         final String newUrl = musicPage.getCurrentURL();
 
         Assert.assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
+        Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -258,6 +284,43 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
+        }
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testScrollToNextPage() throws InterruptedException {
+        MusicPage musicPage= new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("Lady gaga")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .scrollToLastTrack();
+        sleep(1000);
+        final List<String> actualTracks = musicPage.getTitleAllTracks();
+
+        Assert.assertEquals(actualTracks.size(), 29);
+
+
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testRegionalSearch_MusicPage() {
+        MusicPage musicPage =new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .waitForUrlContains("https://dev.swisscows.com/en/music?query=ivanka&region=");
+
+        final String actualRegion = musicPage.getCurrentURL();
+        final List<String> titleAllTracks = musicPage.getTitleAllTracks();
+
+        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/music?query=ivanka&region=de-DE");
+        for (String search : titleAllTracks) {
+            Assert.assertEquals(search.toLowerCase(), "ivanka");
         }
     }
 
