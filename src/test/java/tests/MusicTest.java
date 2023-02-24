@@ -5,10 +5,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
-
 import java.util.List;
-
-import static org.testng.TestRunner.PriorityWeight.priority;
 
 public class MusicTest extends BaseTest {
 
@@ -186,8 +183,37 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
-
     @Test(priority = 3,retryAnalyzer = Retry.class)
+    public void testLocalization_MusicPage()  {
+
+        MusicPage musicPage =new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult();
+
+        final String oldURL = musicPage.getCurrentURL();
+        final String oldH1Text = musicPage.getTitlePlaylist();
+        musicPage
+                .clickHamburgerMenu()
+                .signIn()
+                .clickHamburgerMenu()
+                .clickLanguagesTopMenu();
+        musicPage
+                .clickLangDeutsch();
+
+        String actualURL = musicPage.getCurrentURL();
+        String actualH1Text =musicPage.getTitlePlaylist();
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldH1Text, actualH1Text);
+        Assert.assertEquals(actualURL,"https://dev.swisscows.com/de/music?query=ivanka");
+        Assert.assertEquals(actualH1Text,"Meine Lieblingslieder");
+
+    }
+
+    @Test(priority = 4,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -259,6 +285,44 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(actualSizeSuggest > 0);
             Assert.assertTrue(searchCriteria.contains(query));
         }
+    }
+    @Test
+    public void testScrollToNextPage() {
+
+        final List<String> actualTracks = openBaseURL()
+                .inputSearchCriteriaAndEnter("Lady gaga")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .scrollToLastTrack()
+                .getTitleAllTracks();
+
+        Assert.assertTrue(actualTracks.size() >= 40);
+
+
+    }
+    @Test
+    public void testRegionalSearch_MusicPage() {
+        MusicPage musicPage =new MusicPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .waitForUrlContains("https://dev.swisscows.com/en/music?query=ivanka&region=");
+
+        final String actualRegion = musicPage.getCurrentURL();
+        final List<String> titleAllTracks = musicPage.getTitleAllTracks();
+
+        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/music?query=ivanka&region=de-DE");
+        for (String search : titleAllTracks) {
+            Assert.assertEquals(search.toLowerCase(), "ivanka");
+        }
+
+
     }
 
 }

@@ -23,6 +23,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement playButtonAttribute;
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
+    @FindBy(xpath = "//article[20]")
+    private WebElement lastTrack;
+    @FindBy(xpath = "//article[29]")
+    private WebElement lastTrackDouble;
     @FindBy(xpath = "//article[1]/div[1]/span[1]")
     private WebElement durationAttribute;
 
@@ -50,6 +54,8 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement valueFirstImage;
     @FindBy(xpath = "//div[@class='error']//h2[@class]")
     private WebElement h2TitleErrorInFavorite;
+    @FindBy(xpath = "//div[@class='row row-page-results']//a//h2[1]")
+    private WebElement h2TitleInFavorite;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private WebElement favoriteIconInPlaylist;
     @FindBy(xpath = "//button[@class='button favorite active']")
@@ -83,6 +89,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
 
+
     public MusicPage clickShuffleButton() {
         click(shuffleButton);
         return new MusicPage(getDriver());
@@ -107,6 +114,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
     public MusicPage clickToProgressbar() {
         click(progressbar);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage scrollToLastTrack() {
+        scrollByVisibleElement(lastTrack);
+        scrollByVisibleElement(lastTrackDouble);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {
@@ -154,6 +166,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public String getErrorTitleInFavoritePlaylist()  {
 
         return getText(h2TitleErrorInFavorite);
+    }
+    public String getTitlePlaylist()  {
+        waitForUrlContains("https://dev.swisscows.com/");
+        return getText(h2TitleInFavorite);
     }
     public boolean favoriteIsDisplayed() {
         return isElementDisplayed(favoriteContainer);

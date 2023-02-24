@@ -11,7 +11,6 @@ import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
 import pages.top_menu.*;
-import utils.TestUtils;
 
 
 import pages.top_menu.EmailPage;
@@ -94,6 +93,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement RegionDropDownIcon;
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[14]")
+    private WebElement RegionGerman;
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][3]")
     private WebElement ThemeDropDownIcon;
@@ -143,6 +144,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
     private WebElement choiceInDropdownMenu;
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[2]")
+    private WebElement langDeutschInHamburgerMenu;
 
     @FindBy(xpath = "//div[@class = 'image']//img")
     private List<WebElement> allImagesOnPage;
@@ -293,6 +296,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    public MainPage clickRegionGerman() {
+        click(RegionGerman);
+
+        return new MainPage(getDriver());
+    }
     public List <String> getColorLinks (){
 
         return getColors(allLinks);
@@ -341,10 +349,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return  new EmailPage(getDriver());
     }
 
-    public void clickRegionTopMenu() {
+    public MainPage clickRegionTopMenu() {
         click(RegionDropDownIcon);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
 
     public MainPage clickThemeDropDownIcon() {
@@ -472,6 +480,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         wait10ElementToBeVisible(favoriteIcon);
         click(favoriteIcon);
         return new MusicPage(getDriver());
+    }
+    public WebPage clickLangDeutsch() {
+        click(langDeutschInHamburgerMenu);
+        return new WebPage(getDriver());
     }
 
     public String getEnteredValue() {
