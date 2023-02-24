@@ -200,7 +200,6 @@ public class MusicTest extends BaseTest {
                 .signIn()
                 .clickHamburgerMenu()
                 .clickLanguagesTopMenu();
-        sleep(1000);
         musicPage
                 .clickLangDeutsch();
 
@@ -288,15 +287,16 @@ public class MusicTest extends BaseTest {
         }
     }
     @Test(retryAnalyzer = Retry.class)
-    public void testScrollToNextPage() {
-
-        final List<String> actualTracks = openBaseURL()
+    public void testScrollToNextPage() throws InterruptedException {
+        MusicPage musicPage= new MusicPage(getDriver());
+        openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .scrollToLastTrack()
-                .getTitleAllTracks();
+                .scrollToLastTrack();
+        sleep(1000);
+        final List<String> actualTracks = musicPage.getTitleAllTracks();
 
         Assert.assertEquals(actualTracks.size(), 29);
 

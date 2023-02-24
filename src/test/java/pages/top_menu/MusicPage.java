@@ -107,8 +107,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
 
-    public List <String> getTitleAllTracks() {
-
+    public List <String> getTitleAllTracks()  {
         return getTexts(allTracks);
     }
 
