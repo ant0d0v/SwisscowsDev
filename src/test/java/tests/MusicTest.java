@@ -183,8 +183,8 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
-    @Test(priority = 3,retryAnalyzer = Retry.class)
-    public void testLocalization_MusicPage() throws InterruptedException {
+    @Test(retryAnalyzer = Retry.class)
+    public void testLocalization_MusicPage() {
 
         MusicPage musicPage =new MusicPage(getDriver());
         openBaseURL()
@@ -195,14 +195,10 @@ public class MusicTest extends BaseTest {
 
         final String oldURL = musicPage.getCurrentURL();
         final String oldText =musicPage.getTitlePlaylist();
-        musicPage
-                .clickHamburgerMenu()
-                .signIn()
-                .clickHamburgerMenu();
-        musicPage
-                .clickLanguagesDropdown();
-        musicPage
-                .clickLangDeutsch();
+
+        musicPage.clickHamburgerMenu();
+        musicPage.clickLanguagesTopMenu();
+        musicPage.clickLangDeutsch();
 
         final String actualURL = musicPage.getCurrentURL();
         final String actualText =musicPage.getTitlePlaylist();
@@ -215,7 +211,7 @@ public class MusicTest extends BaseTest {
 
     }
 
-    @Test(priority = 4,retryAnalyzer = Retry.class)
+    @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite() throws InterruptedException {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()

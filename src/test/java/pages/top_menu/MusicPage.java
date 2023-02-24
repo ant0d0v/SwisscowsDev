@@ -63,8 +63,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private List<WebElement> allActiveHeartButtons;
     @FindBy(xpath = "//div[@class='playlists']/a/h2")
     private List<WebElement> titleAllPlaylist;
-    @FindBy(xpath = "//div[@class ='menu popup']//div[2]")
-    private WebElement languageDropdown;
+
 
 
     public MusicPage(WebDriver driver) {
@@ -113,11 +112,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public List <String> getTitleAllTracks()  {
         return getTexts(allTracks);
     }
-    public MusicPage clickLanguagesDropdown() {
-        click20(languageDropdown);
 
-        return new MusicPage(getDriver());
-    }
 
     public MusicPage clickToProgressbar() {
         click(progressbar);

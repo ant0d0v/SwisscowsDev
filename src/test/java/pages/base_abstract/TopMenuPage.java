@@ -485,6 +485,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MusicPage(getDriver());
     }
     public WebPage clickLangDeutsch() {
+        wait10ElementToBeVisible(langDeutschInHamburgerMenu);
         click(langDeutschInHamburgerMenu);
         return new WebPage(getDriver());
     }
