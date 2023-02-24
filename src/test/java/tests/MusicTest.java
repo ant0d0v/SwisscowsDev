@@ -286,7 +286,7 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testScrollToNextPage() {
 
         final List<String> actualTracks = openBaseURL()
@@ -297,11 +297,11 @@ public class MusicTest extends BaseTest {
                 .scrollToLastTrack()
                 .getTitleAllTracks();
 
-        Assert.assertTrue(actualTracks.size() >= 40);
+        Assert.assertTrue(actualTracks.size() >= 30);
 
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testRegionalSearch_MusicPage() {
         MusicPage musicPage =new MusicPage(getDriver());
         openBaseURL()

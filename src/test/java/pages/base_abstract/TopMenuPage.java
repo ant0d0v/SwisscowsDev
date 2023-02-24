@@ -338,7 +338,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public void clickLanguagesTopMenu() {
-        click(LangDropDownIcon);
+        clickByJavaScript(LangDropDownIcon);
 
         new MainPage(getDriver());
     }
