@@ -183,7 +183,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
-    @Test
+    @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testLocalization_MusicPage() throws InterruptedException {
 
         MusicPage musicPage =new MusicPage(getDriver());
@@ -233,10 +233,12 @@ public class MusicTest extends BaseTest {
                 .clickFavoriteIconInPlaylist()
                 .getErrorTitleInFavoritePlaylist();
 
+
         final String newUrl = musicPage.getCurrentURL();
 
         Assert.assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(actualH2Title.contains("No items found"));
+        Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
 
     @Test(retryAnalyzer = Retry.class)
