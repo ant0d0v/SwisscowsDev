@@ -322,8 +322,6 @@ public class MusicTest extends BaseTest {
         for (String search : titleAllTracks) {
             Assert.assertEquals(search.toLowerCase(), "ivanka");
         }
-
-
     }
 
 }
