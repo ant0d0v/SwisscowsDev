@@ -183,7 +183,7 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
-    @Test(priority = 3,retryAnalyzer = Retry.class)
+    @Test
     public void testLocalization_MusicPage() throws InterruptedException {
 
         MusicPage musicPage =new MusicPage(getDriver());
@@ -194,22 +194,24 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult();
 
         final String oldURL = musicPage.getCurrentURL();
-        final String oldH1Text = musicPage.getTitlePlaylist();
+        final String oldText =musicPage.getTitlePlaylist();
         musicPage
                 .clickHamburgerMenu()
                 .signIn()
-                .clickHamburgerMenu()
-                .clickLanguagesTopMenu();
+                .clickHamburgerMenu();
+        musicPage
+                .clickLanguagesDropdown();
         musicPage
                 .clickLangDeutsch();
 
-        String actualURL = musicPage.getCurrentURL();
-        String actualH1Text =musicPage.getTitlePlaylist();
+        final String actualURL = musicPage.getCurrentURL();
+        final String actualText =musicPage.getTitlePlaylist();
+
 
         Assert.assertNotEquals(oldURL, actualURL);
-        Assert.assertNotEquals(oldH1Text, actualH1Text);
+        Assert.assertNotEquals(oldText, actualText);
         Assert.assertEquals(actualURL,"https://dev.swisscows.com/de/music?query=ivanka");
-        Assert.assertEquals(actualH1Text,"Meine Lieblingslieder");
+        Assert.assertEquals(actualText,"Musik");
 
     }
 

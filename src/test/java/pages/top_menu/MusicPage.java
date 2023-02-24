@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement valueFirstImage;
     @FindBy(xpath = "//div[@class='error']//h2[@class]")
     private WebElement h2TitleErrorInFavorite;
-    @FindBy(xpath = "//div[@class='row row-page-results']//a//h2[1]")
+    @FindBy(xpath = "//nav[@class='menu-summary']//li[4]/a")
     private WebElement h2TitleInFavorite;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private WebElement favoriteIconInPlaylist;
@@ -62,6 +63,8 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private List<WebElement> allActiveHeartButtons;
     @FindBy(xpath = "//div[@class='playlists']/a/h2")
     private List<WebElement> titleAllPlaylist;
+    @FindBy(xpath = "//div[@class ='menu popup']//div[2]")
+    private WebElement languageDropdown;
 
 
     public MusicPage(WebDriver driver) {
@@ -109,6 +112,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
     public List <String> getTitleAllTracks()  {
         return getTexts(allTracks);
+    }
+    public MusicPage clickLanguagesDropdown() {
+        click20(languageDropdown);
+
+        return new MusicPage(getDriver());
     }
 
     public MusicPage clickToProgressbar() {
@@ -166,7 +174,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return getText(h2TitleErrorInFavorite);
     }
     public String getTitlePlaylist()  {
-        waitForUrlContains("https://dev.swisscows.com/");
+
         return getText(h2TitleInFavorite);
     }
     public boolean favoriteIsDisplayed() {

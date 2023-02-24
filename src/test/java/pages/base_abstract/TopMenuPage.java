@@ -156,6 +156,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//h2[text() ='My favorite tracks']")
     private WebElement favoriteContainer;
+
     @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
 
