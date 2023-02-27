@@ -28,6 +28,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement firstVideoResult;
     @FindBy(xpath = "//div[@class='video-player']//iframe")
     private WebElement imageAttribute;
+    @FindBy(xpath = "//div[@class='video-player']//img")
+    private WebElement srcAttribute;
     public VideoPage(WebDriver driver) {
         super(driver);
     }
@@ -63,8 +65,9 @@ public class VideoPage extends TopMenuPage<VideoPage> {
 
         return getAttribute(imageAttribute, "src");
     }
-    public String getCurrentSrcOfVideo() {
-        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-        return (String) executor.executeScript("return arguments[0].currentSrc;", imageAttribute);
+    public String getProxyImageAttribute() {
+
+        return getAttribute(srcAttribute, "src");
     }
+
 }

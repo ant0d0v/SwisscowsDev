@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -128,6 +127,22 @@ public class VideoTest extends BaseTest {
         final String actualSrc = videoPage.getVideoImageAttribute();
 
         Assert.assertTrue(actualSrc.contains("youtube.com"));
+
+    }
+    @Test
+    public void testImageProxy_VideoPage() throws InterruptedException, IOException {
+        VideoPage videoPage = new VideoPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickFirstVideoResult()
+                .clickPlayerYouTubeVideo()
+                .screen("proxy.png");
+        final String actualSrc = videoPage.getProxyImageAttribute();
+
+        Assert.assertTrue(actualSrc.contains("https://cdn.swisscows.com/"));
 
     }
 }
