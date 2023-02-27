@@ -4,10 +4,8 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.footer_menu.MediaEducationPage;
 import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
-import tests.retrytest.Retry;
 
 import java.io.IOException;
 import java.util.List;
