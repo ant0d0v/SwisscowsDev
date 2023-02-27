@@ -139,6 +139,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement instructionsLink;
     @FindBy(xpath = "//a[text()='Music']")
     private WebElement musicButton;
+    @FindBy(xpath = "//a[text()='Video']")
+    private WebElement videoButton;
     @FindBy(xpath = "//a[text()='Images']")
     private WebElement imageButton;
     @FindBy(xpath = "//button[@class ='button favorite'][1]")
@@ -417,6 +419,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(searchButton);
 
         return new WebPage(getDriver());
+    }
+    public VideoPage clickVideoButton() {
+        clickEnter(videoButton);
+
+        return new VideoPage(getDriver());
     }
     public MusicPage clickMusicButton() {
         clickEnter(musicButton);
