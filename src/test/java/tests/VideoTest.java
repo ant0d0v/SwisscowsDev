@@ -131,7 +131,5 @@ public class VideoTest extends BaseTest {
 
         Assert.assertTrue(actualSrc.contains("youtube.com"));
 
-
-
     }
 }
