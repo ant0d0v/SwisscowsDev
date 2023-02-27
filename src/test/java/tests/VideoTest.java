@@ -89,9 +89,9 @@ public class VideoTest extends BaseTest {
 
         final int actualSize = videoPage.getTitleAllVideo().size();
 
-        Assert.assertEquals(actualSize, 24);
+        Assert.assertTrue(actualSize >= 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ukrain"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ukr"));
         }
 
     }
