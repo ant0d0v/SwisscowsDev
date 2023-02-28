@@ -172,7 +172,7 @@ public class VideoTest extends BaseTest {
     @Test
     public void testCancelFilterSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
-        final List<String> durationAllVideo = openBaseURL()
+         openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
