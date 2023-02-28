@@ -161,10 +161,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
-
-
-
-
+    @FindBy(xpath = "//div[@class ='filters-button']")
+    private WebElement filterButton;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -435,6 +433,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(imageButton);
 
         return new ImagePage(getDriver());
+    }
+    public VideoPage clickFilterButton() {
+        click(filterButton);
+
+        return new VideoPage(getDriver());
     }
     public void clickChoiceInDropDownList() {
         wait20ElementToBeVisible(searchDropdownMenu);

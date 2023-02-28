@@ -277,6 +277,7 @@ public abstract class BasePage {
     }
 
     protected void goBack() {
+
         getDriver().navigate().back();
     }
 

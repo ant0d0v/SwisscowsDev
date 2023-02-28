@@ -30,6 +30,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement imageAttribute;
     @FindBy(xpath = "//div[@class='video-player']//img")
     private WebElement srcAttribute;
+    @FindBy(xpath = "//div[@class ='button-menu'][3]")
+    private WebElement durationButton;
+    @FindBy(xpath = "//div[3]")
+    private WebElement durationAttribute;
+    @FindBy(xpath = "//div[@class][3]//ul//li[2]")
+    private WebElement shortButtonInDropdownDuration;
+    @FindBy(xpath = "//article[@class ='item-video']//figure//span")
+    private List<WebElement> listDurationAllVideo;
     public VideoPage(WebDriver driver) {
         super(driver);
     }
@@ -44,7 +52,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
 
         return new VideoPage(getDriver());
     }
+    public List <String> getListDurationAllVideo()  {
+
+        return getTexts(listDurationAllVideo);
+    }
     public List <String> getTitleAllVideo()  {
+
         return getTexts(h2AllVideo);
     }
     public List <String> getTitleInRelatedSearches()  {
@@ -61,6 +74,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         click(firstVideoResult);
         return new VideoPage(getDriver());
     }
+    public VideoPage clickDurationButton() {
+        click(durationButton);
+        return new VideoPage(getDriver());
+    }
+    public VideoPage clickShortInDropdownDuration() {
+        click(shortButtonInDropdownDuration);
+        return new VideoPage(getDriver());
+    }
     public String getVideoImageAttribute() {
 
         return getAttribute(imageAttribute, "src");
@@ -68,6 +89,10 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public String getProxyImageAttribute() {
 
         return getAttribute(srcAttribute, "src");
+    }
+    public String getDurationButtonAttribute() {
+
+        return getAttribute(durationAttribute, "class");
     }
 
 }

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -145,4 +146,52 @@ public class VideoTest extends BaseTest {
         Assert.assertTrue(actualSrc.contains("https://cdn.swisscows.com/"));
 
     }
+    @Test
+    public void testFilterSearch_VideoPage() {
+        VideoPage videoPage = new VideoPage(getDriver());
+         openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickFilterButton()
+                .clickDurationButton();
+        Assert.assertEquals(videoPage.getDurationButtonAttribute(),"button-menu open");
+
+        videoPage
+                .clickShortInDropdownDuration()
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+        final List<String> durationAllVideo = videoPage.getListDurationAllVideo();
+
+
+        for (String search : durationAllVideo) {
+            Assert.assertTrue((Integer.parseInt(search.substring(1, 2)) <= 4));
+        }
+        Assert.assertEquals(videoPage.getCurrentURL(),"https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+    }
+    @Test
+    public void testCancelFilterSearch_VideoPage() {
+        VideoPage videoPage = new VideoPage(getDriver());
+         openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickFilterButton()
+                .clickDurationButton()
+                .clickShortInDropdownDuration()
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+
+
+        final String oldUrl = videoPage.getCurrentURL();
+        videoPage
+                .clickFilterButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka");
+
+        final String newUrl = videoPage.getCurrentURL();
+
+        Assert.assertNotEquals(newUrl,oldUrl);
+        Assert.assertEquals(newUrl,"https://dev.swisscows.com/en/video?query=ivanka");
+    }
+
 }
