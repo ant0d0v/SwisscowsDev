@@ -158,10 +158,10 @@ public class VideoTest extends BaseTest {
                 .clickDurationButton();
         Assert.assertEquals(videoPage.getDurationButtonAttribute(),"button-menu open");
 
-        final List<String> durationAllVideo = videoPage
+        videoPage
                 .clickShortInDropdownDuration()
-                .waitUntilVisibilityVideoResult()
-                .getListDurationAllVideo();
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+        final List<String> durationAllVideo = videoPage.getListDurationAllVideo();
 
 
         for (String search : durationAllVideo) {
