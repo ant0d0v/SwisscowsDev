@@ -193,5 +193,4 @@ public class VideoTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,"https://dev.swisscows.com/en/video?query=ivanka");
     }
-
 }
