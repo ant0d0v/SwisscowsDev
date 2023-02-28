@@ -180,8 +180,8 @@ public class VideoTest extends BaseTest {
                 .clickFilterButton()
                 .clickDurationButton()
                 .clickShortInDropdownDuration()
-                .waitUntilVisibilityVideoResult()
-                .getListDurationAllVideo();
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+
 
         final String oldUrl = videoPage.getCurrentURL();
         videoPage
