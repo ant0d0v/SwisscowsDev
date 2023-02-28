@@ -186,11 +186,12 @@ public class VideoTest extends BaseTest {
         final String oldUrl = videoPage.getCurrentURL();
         videoPage
                 .clickFilterButton()
-                .waitUntilVisibilityVideoResult();
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka");
 
         final String newUrl = videoPage.getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,"https://dev.swisscows.com/en/video?query=ivanka");
     }
+
 }
