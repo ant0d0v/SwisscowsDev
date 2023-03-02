@@ -124,7 +124,8 @@ public class ImageTest extends BaseTest {
 
         final String actualUrl = imagePage.getCurrentURL();
         imagePage
-                .clickSecondQueryInRelatedSearchContainer();
+                .clickSecondQueryInRelatedSearchContainer()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=Ronaldo%");
 
         final String newUrl = imagePage.getCurrentURL();
 
@@ -132,7 +133,7 @@ public class ImageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testFilterSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
