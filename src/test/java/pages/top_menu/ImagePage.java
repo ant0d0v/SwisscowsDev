@@ -34,7 +34,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
-    @FindBy(xpath = "(//div[@class ='related-queries']//a)[position() < 5]")
+    @FindBy(xpath = "(//section//div[@class ='related-queries']//a)[position() < 6]")
     private List<WebElement> relatedSearchesImages;
     @FindBy(xpath = "//div[@class='widget-slider']//img")
     private List<WebElement> adsImages;
