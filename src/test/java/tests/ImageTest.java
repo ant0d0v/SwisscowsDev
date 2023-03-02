@@ -97,7 +97,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .clickHamburgerMenuIcon()
+                .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo&region=");
