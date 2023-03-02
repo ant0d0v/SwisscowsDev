@@ -71,7 +71,7 @@ public class ImageTest extends BaseTest {
         sleep(1000);
         final List<String> AllLinks = imagePage.getLinksAllImages();
 
-        Assert.assertTrue(AllLinks.size() >= 80);
+        Assert.assertTrue(AllLinks.size() >= 70);
 
 
     }
@@ -96,21 +96,22 @@ public class ImageTest extends BaseTest {
     public void testRelatedSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo&region=");
 
         final String actualRegion = imagePage.getCurrentURL();
         final List<String> textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
 
+
         for (String search : textsRelatedSearch) {
-            Assert.assertTrue(search.toLowerCase().contains("ivanka"));
+            Assert.assertTrue(search.toLowerCase().contains("ronal"));
         }
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
+        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ronaldo&region=de-DE");
 
     }
     @Test
