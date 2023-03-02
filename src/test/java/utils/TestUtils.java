@@ -24,6 +24,7 @@ public class TestUtils {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ON_LOAD_CONTAINER));
     }
 
+
     public static void waitForPageLoaded(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }

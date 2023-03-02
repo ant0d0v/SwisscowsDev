@@ -18,6 +18,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public abstract class BasePage {
     private WebDriver driver;
     private WebDriverWait webDriverWait20;
@@ -183,6 +185,12 @@ public abstract class BasePage {
     protected void click(WebElement element) {
         wait10ElementToBeVisible(element);
         wait10ElementToBeClickable(element).click();
+    }
+    protected void clickElementUntilInvisible(WebElement element) {
+        while (element.isEnabled() && element.isDisplayed()) {
+            clickByJavaScript(element);
+        }
+
     }
 
     protected void click20(WebElement element) {
