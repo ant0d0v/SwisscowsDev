@@ -154,7 +154,6 @@ public class ImageTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
         final String imageAttribute = imagePage.getAttributeAllImage();
 
-        System.out.println(imageAttribute);
 
            Assert.assertTrue(imageAttribute.contains("max-width: 360px"));
        }
