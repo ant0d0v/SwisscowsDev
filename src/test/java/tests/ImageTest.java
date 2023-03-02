@@ -180,5 +180,4 @@ public class ImageTest extends BaseTest {
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
 
         }
-
 }
