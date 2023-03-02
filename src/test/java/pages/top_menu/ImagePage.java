@@ -9,6 +9,8 @@ import pages.base_abstract.TopMenuPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class ImagePage extends TopMenuPage<ImagePage> {
     @FindBy(xpath = "//div[@class='images-results']//figure")
     private WebElement firstImageInImagesResult;
@@ -88,8 +90,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ArrayList<>();
     }
-    public String getTitleInRelatedSearchesImages() {
-        waitForElementIsDisappeared(loader);
+    public String getTitleInRelatedSearchesImages() throws InterruptedException {
+        sleep(1000);
         return getText(relatedSearchesImage);
     }
     public String getAttributeAllImage() {

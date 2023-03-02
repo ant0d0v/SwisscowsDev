@@ -91,7 +91,7 @@ public class ImageTest extends BaseTest {
 
     }
     @Test
-    public void testRelatedSearch_ImagePage() {
+    public void testRelatedSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
