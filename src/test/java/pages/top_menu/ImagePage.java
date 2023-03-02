@@ -71,11 +71,9 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
 
     public String getTitleFirstImage()  {
-
         return getText(h2FirstImage);
     }
     public List<String> getAltAllImages() {
-        waitForElementIsDisappeared(loader);
         if (AltAttributeAllImage.size() > 0) {
             getWait20().until(ExpectedConditions.visibilityOfAllElements(AltAttributeAllImage));
             List<String> ListAttribute = new ArrayList<>();
@@ -91,7 +89,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ArrayList<>();
     }
     public List<String> getTitleInRelatedSearchesImages() {
-        waitForElementIsDisappeared(loader);
+
         return getTexts(relatedSearchesImages);
     }
     public String getAttributeAllImage() {
