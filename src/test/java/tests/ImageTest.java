@@ -150,12 +150,14 @@ public class ImageTest extends BaseTest {
                 .clickFilterButton();
        imagePage
                 .clickSizeButton()
-                .clickSmallSizeInDropdownSize()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
+                .clickSmallSizeInDropdownSize();
+
         final String imageAttribute = imagePage.getAttributeAllImage();
 
 
            Assert.assertTrue(imageAttribute.contains("max-width: 360px"));
+           Assert.assertEquals(imagePage.getCurrentURL(),
+                   "https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
        }
 
     @Test(retryAnalyzer = Retry.class)
