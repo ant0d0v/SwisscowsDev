@@ -103,12 +103,10 @@ public class ImageTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo&region=");
 
         final String actualRegion = imagePage.getCurrentURL();
-        final List<String> textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
+        final String textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
 
+            Assert.assertTrue(textsRelatedSearch.toLowerCase().contains("ronaldo"));
 
-        for (String search : textsRelatedSearch) {
-            Assert.assertTrue(search.toLowerCase().contains("ronal"));
-        }
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ronaldo&region=de-DE");
 
     }
