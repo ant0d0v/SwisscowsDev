@@ -22,8 +22,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement sizeButton;
     @FindBy(xpath = "//div[@class][2]//li[2]")
     private WebElement SmallInDropdownSize;
-    @FindBy(xpath = "(//figure)[position() < 15]")
-    private List<WebElement> imagesAttribute;
+    @FindBy(xpath = "//figure[1]")
+    private WebElement imageAttribute;
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][2]")
@@ -42,6 +42,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement secondQueryInRelatedSearchContainer;
     @FindBy(xpath = "//button[@class='search-submit']")
     private WebElement searchButton;
+    @FindBy(xpath = "//div[@class='three-bounce']")
+    private WebElement loader;
 
 
 
@@ -73,6 +75,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return getText(h2FirstImage);
     }
     public List<String> getAltAllImages() {
+        waitForElementIsDisappeared(loader);
         if (AltAttributeAllImage.size() > 0) {
             getWait20().until(ExpectedConditions.visibilityOfAllElements(AltAttributeAllImage));
             List<String> ListAttribute = new ArrayList<>();
@@ -88,22 +91,12 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ArrayList<>();
     }
     public List<String> getTitleInRelatedSearchesImages() {
+        waitForElementIsDisappeared(loader);
         return getTexts(relatedSearchesImages);
     }
-    public List<String> getAttributeAllImages() {
-        if (imagesAttribute.size() > 0) {
-            getWait20().until(ExpectedConditions.visibilityOfAllElements(imagesAttribute));
-            List<String> ListAttribute = new ArrayList<>();
-            for (WebElement element : imagesAttribute) {
-                if (element.isEnabled() && element.isDisplayed()) {
-                    ListAttribute.add(element.getAttribute("style"));
-                }
-            }
-
-            return ListAttribute;
-        }
-
-        return new ArrayList<>();
+    public String getAttributeAllImage() {
+        waitForElementIsDisappeared(loader);
+        return getAttribute(imageAttribute,"style");
     }
     public ImagePage clickSizeButton() {
         click(sizeButton);

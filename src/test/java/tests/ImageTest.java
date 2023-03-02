@@ -97,7 +97,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .clickHamburgerMenu()
+                .clickHamburgerMenuIcon()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo&region=");
@@ -119,7 +119,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .clickHamburgerMenu()
+                .clickHamburgerMenuIcon()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
@@ -144,7 +144,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("photo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .clickHamburgerMenu()
+                .clickHamburgerMenuIcon()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .clickFilterButton();
@@ -152,15 +152,13 @@ public class ImageTest extends BaseTest {
                 .clickSizeButton()
                 .clickSmallSizeInDropdownSize()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
-        final List<String> sizeAllImages = imagePage.getAttributeAllImages();
+        final String imageAttribute = imagePage.getAttributeAllImage();
 
+        System.out.println(imageAttribute);
 
-
-        for (String search : sizeAllImages) {
-           Assert.assertTrue(search.contains("360px"));
+           Assert.assertTrue(imageAttribute.contains("max-width: 360px"));
        }
 
-    }
     @Test(retryAnalyzer = Retry.class)
     public void testNextButtonAndPrevButtonAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
