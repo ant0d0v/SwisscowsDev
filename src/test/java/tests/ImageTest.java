@@ -5,8 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.ImagePage;
-import pages.top_menu.MusicPage;
-import pages.top_menu.VideoPage;
 import tests.retrytest.Retry;
 
 import java.util.List;
@@ -155,7 +153,8 @@ public class ImageTest extends BaseTest {
                 .clickSmallSizeInDropdownSize()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
         final List<String> sizeAllImages = imagePage.getAttributeAllImages();
-        System.out.println(sizeAllImages);
+
+
 
         for (String search : sizeAllImages) {
            Assert.assertTrue(search.contains("360px"));
