@@ -1,12 +1,10 @@
 package tests;
-
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.ImagePage;
 import tests.retrytest.Retry;
-
 import java.util.List;
 
 public class ImageTest extends BaseTest {
