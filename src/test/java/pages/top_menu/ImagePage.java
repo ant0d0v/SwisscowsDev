@@ -89,7 +89,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ArrayList<>();
     }
     public String getTitleInRelatedSearchesImages() {
-
+        waitForElementIsDisappeared(loader);
         return getText(relatedSearchesImage);
     }
     public String getAttributeAllImage() {
