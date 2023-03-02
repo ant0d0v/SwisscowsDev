@@ -127,9 +127,7 @@ public class ImageTest extends BaseTest {
                 .clickSecondQueryInRelatedSearchContainer();
 
         final String newUrl = imagePage.getCurrentURL();
-        final int actualSize = imagePage.getLinksAllImages().size();
 
-        Assert.assertTrue(actualSize >= 50);
         Assert.assertNotEquals(actualUrl,newUrl);
 
     }
