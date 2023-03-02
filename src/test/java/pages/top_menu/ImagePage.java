@@ -22,7 +22,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement sizeButton;
     @FindBy(xpath = "//div[@class][2]//li[2]")
     private WebElement SmallInDropdownSize;
-    @FindBy(xpath = "//figure")
+    @FindBy(xpath = "(//figure)[position() < 15]")
     private List<WebElement> imagesAttribute;
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;

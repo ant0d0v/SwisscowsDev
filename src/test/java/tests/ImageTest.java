@@ -157,7 +157,7 @@ public class ImageTest extends BaseTest {
         System.out.println(sizeAllImages);
 
         for (String search : sizeAllImages) {
-           Assert.assertTrue(search.contains("36px"));
+           Assert.assertTrue(search.contains("360px"));
        }
 
     }
