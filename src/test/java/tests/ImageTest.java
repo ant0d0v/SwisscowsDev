@@ -124,8 +124,7 @@ public class ImageTest extends BaseTest {
 
         final String actualUrl = imagePage.getCurrentURL();
         imagePage
-                .clickSecondQueryInRelatedSearchContainer()
-                .getAltAllImages();
+                .clickSecondQueryInRelatedSearchContainer();
 
         final String newUrl = imagePage.getCurrentURL();
         final int actualSize = imagePage.getLinksAllImages().size();
