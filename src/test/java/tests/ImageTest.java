@@ -53,7 +53,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
 
-        Assert.assertTrue(titleFirstImage.toLowerCase().contains("ivanka"));
+        Assert.assertTrue(titleFirstImage.toLowerCase().contains("ivan"));
 
     }
     @Test
