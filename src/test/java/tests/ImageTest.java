@@ -174,6 +174,5 @@ public class ImageTest extends BaseTest {
         imagePage
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
-
     }
 }
