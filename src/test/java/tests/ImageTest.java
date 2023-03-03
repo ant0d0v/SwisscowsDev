@@ -141,11 +141,11 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderIsDisappeared()
                 .clickFilterButton();
 
-       final String actualTitleImage = imagePage
+       imagePage
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .waitForLoaderIsDisappeared()
-                .getAttributeImage();
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=");
+        final String actualTitleImage = imagePage.getAttributeImage();
 
             Assert.assertTrue(actualTitleImage.toLowerCase().contains("red"));
             Assert.assertEquals(imagePage.getCurrentURL(),
