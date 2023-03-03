@@ -164,7 +164,6 @@ public class ImageTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=crocs+price&region=de-DE");
-
         imagePage
                 .clickNextButton();
         Assert.assertTrue(imagePage.lastImageInAdsIsDisplayed());
