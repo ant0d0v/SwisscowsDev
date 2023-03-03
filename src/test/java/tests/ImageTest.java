@@ -177,10 +177,10 @@ public class ImageTest extends BaseTest {
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("test")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
 
         final String actualAttributePrevImage = imagePage
@@ -202,10 +202,10 @@ public class ImageTest extends BaseTest {
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("test")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=test");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
         final String AttributeImageInResult = imagePage
                 .waitForImageIsVisible()
@@ -221,10 +221,10 @@ public class ImageTest extends BaseTest {
     public void testNextButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldoo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
 
         final String actualAttributeSecondImage = imagePage
@@ -239,10 +239,10 @@ public class ImageTest extends BaseTest {
     public void testCloseButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
         TestUtils.waitForPageLoaded(getDriver());
 
