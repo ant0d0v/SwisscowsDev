@@ -128,7 +128,6 @@ public class ImageTest extends BaseTest {
         final String newUrl = imagePage.getCurrentURL();
 
         Assert.assertNotEquals(actualUrl,newUrl);
-
     }
 
     @Test
