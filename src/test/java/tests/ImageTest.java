@@ -46,10 +46,10 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
 
         final String actualRegion = imagePage.getCurrentURL();
-        TestUtils.waitForPageLoaded(getDriver());
+
         final String titleFirstImage = imagePage
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
@@ -106,7 +106,7 @@ public class ImageTest extends BaseTest {
         final String actualRegion = imagePage.getCurrentURL();
         final String textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
 
-            Assert.assertTrue(textsRelatedSearch.toLowerCase().contains("ronaldo"));
+        Assert.assertTrue(textsRelatedSearch.toLowerCase().contains("ronaldo"));
 
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ronaldo&region=de-DE");
 
@@ -134,25 +134,30 @@ public class ImageTest extends BaseTest {
     }
 
     @Test
-    public void testFilterSearch_ImagePage() {
+    public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
-       openBaseURL()
+        openBaseURL()
                 .inputSearchCriteriaAndEnter("photo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForLoaderIsDisappeared()
                 .clickFilterButton();
 
-       imagePage
-                .clickColorButton()
+        imagePage
+                .clickColorButton();
+        sleep(1000);
+        imagePage
                 .clickRedColorInDropdownColors()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=");
-        final String actualTitleImage = imagePage.getAttributeImage();
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=Red");
 
-            Assert.assertTrue(actualTitleImage.toLowerCase().contains("red"));
-            Assert.assertEquals(imagePage.getCurrentURL(),
-                   "https://dev.swisscows.com/en/images?query=photo&color=Red");
-       }
+        final String actualTitleImage = imagePage
+                .clickFirstImageInImagesResult()
+                .getTitleFirstImage();
+
+        Assert.assertTrue(actualTitleImage.contains("Red"));
+        Assert.assertEquals(imagePage.getCurrentURL(),
+                "https://dev.swisscows.com/en/images?query=photo&color=Red");
+    }
 
 
     @Test(retryAnalyzer = Retry.class)
@@ -173,4 +178,85 @@ public class ImageTest extends BaseTest {
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
+    @Test
+    public void testPrevButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualAttributePrevImage = imagePage
+                .clickFirstImageInImagesResult()
+                .clickNextButtonInSideImageview()
+                .getAttributeFirstImage();
+
+        final String newAttributePrevImage = imagePage
+                .clickPrevButtonInSideImageview()
+                .getAttributeFirstImage();
+
+        Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
+        Assert.assertTrue(newAttributePrevImage.contains("active"));
+    }
+    @Test
+    public void testImageInResultEqualsImageInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("test")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=test");
+
+        final String AttributeImageInResult = imagePage
+                .waitForImageIsVisible()
+                .getAttributeHrefImage();
+
+
+        final String AttributeImageInSideView = imagePage
+                .clickFirstImageInImagesResult()
+                .getAttributeHrefImageInSideView();
+
+        Assert.assertEquals(AttributeImageInResult,AttributeImageInSideView);
+    }
+    @Test
+    public void testNextButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+
+        final String actualAttributeSecondImage = imagePage
+                .waitForImageIsVisible()
+                .clickFirstImageInImagesResult()
+                .clickNextButtonInSideImageview()
+                .getAttributeSecondImage();
+
+        Assert.assertEquals(actualAttributeSecondImage,"item--image active");
+    }
+    @Test
+    public void testCloseButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualAttributePrevImage = imagePage
+                .clickFirstImageInImagesResult()
+                .clickCloseButtonInSideImageview()
+                .waitForImageIsVisible()
+                .getAttributeFirstImage();
+
+        Assert.assertEquals(actualAttributePrevImage,"item--image");
+    }
 }
+

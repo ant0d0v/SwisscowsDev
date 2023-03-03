@@ -24,28 +24,45 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement colorButton;
     @FindBy(xpath = "//div[@class][3]//li[4]")
     private WebElement redInDropdownColor;
-    @FindBy(xpath = "//figure[1]//img")
+    @FindBy(xpath = "//div[@class='images-results']//figure[1]")
     private WebElement imageAttribute;
+
+    @FindBy(xpath = "//div[@class= 'images-results']//figure[1]//a")
+    private WebElement imageAttributeHref;
+
+    @FindBy(xpath = "//div[@class= 'image-view aside fade in']//a")
+    private WebElement imageAttributeHrefInSideImageview;
+
+    @FindBy(xpath = "//figure[2]")
+    private WebElement secondImageAttribute;
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][2]")
     private WebElement nextButtonInAds;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][1]")
     private WebElement prevButtonInAds;
+    @FindBy(xpath = "//button[@class='next']")
+    private WebElement nextButtonInSideImageview;
+    @FindBy(xpath = "//button[@class='prev']")
+    private WebElement prevButtonInSideImageview;
+    @FindBy(xpath = "//button[@class='close']")
+    private WebElement closeButtonInSideImageview;
     @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
+
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
-    @FindBy(xpath = "//div[@class='widget-slider']//img")
-    private List<WebElement> adsImages;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
     private WebElement secondQueryInRelatedSearchContainer;
-    @FindBy(xpath = "//button[@class='search-submit']")
-    private WebElement searchButton;
+
     @FindBy(xpath = "//div[@class='three-bounce']")
     private WebElement loader;
+    @FindBy(xpath = "//ul[@class='popup menu']")
+    private WebElement dropdownLisOfColor;
+    @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 10]")
+    private List<WebElement> allImages;
 
 
 
@@ -58,7 +75,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstImageInImagesResult() {
-        wait20ElementToBeVisible(firstImageInImagesResult);
         click(firstImageInImagesResult);
         return new ImagePage(getDriver());
 
@@ -94,16 +110,46 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         sleep(1000);
         return getText(relatedSearchesImage);
     }
-    public String getAttributeImage() {
+    public String getAttributeFirstImage() {
         wait10ElementToBeVisible(imageAttribute);
-        return getAttribute(imageAttribute,"alt");
+        return getAttribute(imageAttribute,"class");
+    }
+    public String getAttributeSecondImage() {
+        wait10ElementToBeVisible(secondImageAttribute);
+        return getAttribute(secondImageAttribute,"class");
+    }
+    public String getAttributeHrefImage() {
+        wait10ElementToBeVisible(imageAttributeHref);
+        return getAttribute(imageAttributeHref,"src");
+    }
+    public String getAttributeHrefImageInSideView() {
+        wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
+        return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
     public ImagePage waitForLoaderIsDisappeared (){
         waitForElementIsDisappeared(loader);
         return this;
     }
+    public ImagePage waitForImageIsVisible(){
+        for (WebElement image : allImages) {
+            wait10ElementToBeVisible(image);
+        }
+        return this;
+    }
     public ImagePage clickColorButton() {
         click(colorButton);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickNextButtonInSideImageview() {
+        clickByJavaScript(nextButtonInSideImageview);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickPrevButtonInSideImageview() {
+        click(prevButtonInSideImageview);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickCloseButtonInSideImageview() {
+        click(closeButtonInSideImageview);
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
@@ -122,6 +168,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
 
     public ImagePage clickRedColorInDropdownColors() {
+        wait10ElementToBeVisible(dropdownLisOfColor);
         click(redInDropdownColor);
         return new ImagePage(getDriver());
     }
