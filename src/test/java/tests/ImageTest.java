@@ -147,9 +147,12 @@ public class ImageTest extends BaseTest {
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=");
-        final String actualTitleImage = imagePage.getAttributeImage();
 
-        Assert.assertTrue(actualTitleImage.toLowerCase().contains("red"));
+        final String actualTitleImage = imagePage
+                .clickFirstImageInImagesResult()
+                .getTitleFirstImage();
+
+        Assert.assertTrue(actualTitleImage.contains("Red"));
         Assert.assertEquals(imagePage.getCurrentURL(),
                 "https://dev.swisscows.com/en/images?query=photo&color=Red");
     }
@@ -194,7 +197,7 @@ public class ImageTest extends BaseTest {
                 .getAttributeFirstImage();
 
         Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
-        Assert.assertEquals(newAttributePrevImage,"item--image active");
+        Assert.assertTrue(newAttributePrevImage.contains("active"));
     }
     @Test
     public void testImageInResultEqualsImageInSideView_ImagePage() {

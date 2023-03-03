@@ -51,14 +51,12 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
+
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
-    @FindBy(xpath = "//div[@class='widget-slider']//img")
-    private List<WebElement> adsImages;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
     private WebElement secondQueryInRelatedSearchContainer;
-    @FindBy(xpath = "//button[@class='search-submit']")
-    private WebElement searchButton;
+
     @FindBy(xpath = "//div[@class='three-bounce']")
     private WebElement loader;
 
@@ -108,10 +106,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     public String getTitleInRelatedSearchesImages() throws InterruptedException {
         sleep(1000);
         return getText(relatedSearchesImage);
-    }
-    public String getAttributeImage() {
-        wait10ElementToBeVisible(imageAttribute);
-        return getAttribute(imageAttribute,"alt");
     }
     public String getAttributeFirstImage() {
         wait10ElementToBeVisible(imageAttribute);
