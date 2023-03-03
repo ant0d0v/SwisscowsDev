@@ -131,27 +131,29 @@ public class ImageTest extends BaseTest {
 
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testFilterSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
-        openBaseURL()
+       openBaseURL()
                 .inputSearchCriteriaAndEnter("photo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .clickHamburgerMenuIcon()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
+                .waitForLoaderIsDisappeared()
                 .clickFilterButton();
-       imagePage
-                .clickSizeButton()
-                .clickSmallSizeInDropdownSize();
 
-        final String imageAttribute = imagePage.getAttributeAllImage();
+       final List <String> actualTitleAllImage = imagePage
+                .clickColorButton()
+                .clickRedColorInDropdownColors()
+                .getAltAllImages();
+        ;
 
-
-           Assert.assertTrue(imageAttribute.contains("max-width: 360px"));
+        final int actualSize = imagePage.getLinksAllImages().size();
+        Assert.assertTrue(actualSize >= 50);
+        for (String searchCriteria : actualTitleAllImage) {
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("red"));
+        }
            Assert.assertEquals(imagePage.getCurrentURL(),
-                   "https://dev.swisscows.com/en/images?query=photo&region=de-DE&size=Small");
+                   "https://dev.swisscows.com/en/images?query=photo&color=Red");
        }
 
     @Test(retryAnalyzer = Retry.class)

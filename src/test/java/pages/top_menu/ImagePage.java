@@ -20,10 +20,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private List<WebElement> AltAttributeAllImage;
     @FindBy(xpath = "//figure[40]")
     private WebElement lastImage;
-    @FindBy(xpath = "//div[@class='button-menu'][2]")
-    private WebElement sizeButton;
-    @FindBy(xpath = "//div[@class][2]//li[2]")
-    private WebElement SmallInDropdownSize;
+    @FindBy(xpath = "//div[@class='button-menu color']")
+    private WebElement colorButton;
+    @FindBy(xpath = "//div[@class][3]//li[4]")
+    private WebElement redInDropdownColor;
     @FindBy(xpath = "//figure[1]")
     private WebElement imageAttribute;
     @FindBy(xpath = "//figure//a")
@@ -98,8 +98,12 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         waitForElementIsDisappeared(loader);
         return getAttribute(imageAttribute,"style");
     }
-    public ImagePage clickSizeButton() {
-        click(sizeButton);
+    public ImagePage waitForLoaderIsDisappeared (){
+        waitForElementIsDisappeared(loader);
+        return this;
+    }
+    public ImagePage clickColorButton() {
+        click(colorButton);
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
@@ -117,8 +121,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         clickElementUntilInvisible(prevButtonInAds);
     }
 
-    public ImagePage clickSmallSizeInDropdownSize() {
-        click(SmallInDropdownSize);
+    public ImagePage clickRedColorInDropdownColors() {
+        click(redInDropdownColor);
         return new ImagePage(getDriver());
     }
     public boolean lastImageInAdsIsDisplayed() {

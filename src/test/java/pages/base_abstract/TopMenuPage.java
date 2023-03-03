@@ -435,7 +435,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new ImagePage(getDriver());
     }
     public VideoPage clickFilterButton() {
-        click(filterButton);
+        clickByJavaScript(filterButton);
 
         return new VideoPage(getDriver());
     }
