@@ -46,10 +46,10 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
 
         final String actualRegion = imagePage.getCurrentURL();
-        TestUtils.waitForPageLoaded(getDriver());
+
         final String titleFirstImage = imagePage
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
@@ -146,7 +146,7 @@ public class ImageTest extends BaseTest {
         imagePage
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=Red");
 
         final String actualTitleImage = imagePage
                 .clickFirstImageInImagesResult()

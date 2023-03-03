@@ -59,6 +59,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     @FindBy(xpath = "//div[@class='three-bounce']")
     private WebElement loader;
+    @FindBy(xpath = "//ul[@class='popup menu']")
+    private WebElement dropdownLisOfColor;
 
 
 
@@ -129,6 +131,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
     public ImagePage clickColorButton() {
         click(colorButton);
+        wait10ElementToBeVisible(dropdownLisOfColor);
         return new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
