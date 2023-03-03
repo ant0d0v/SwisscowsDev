@@ -35,18 +35,24 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     @FindBy(xpath = "//figure[2]")
     private WebElement secondImageAttribute;
+
+    @FindBy(xpath = "//figure[1]//img")
+    private WebElement imageAttribute;
+
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][2]")
     private WebElement nextButtonInAds;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][1]")
     private WebElement prevButtonInAds;
+
     @FindBy(xpath = "//button[@class='next']")
     private WebElement nextButtonInSideImageview;
     @FindBy(xpath = "//button[@class='prev']")
     private WebElement prevButtonInSideImageview;
     @FindBy(xpath = "//button[@class='close']")
     private WebElement closeButtonInSideImageview;
+
     @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
@@ -147,6 +153,61 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
     public ImagePage clickCloseButtonInSideImageview() {
         click(closeButtonInSideImageview);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickSecondQueryInRelatedSearchContainer() {
+
+        clickByJavaScript(secondQueryInRelatedSearchContainer);
+
+        return new ImagePage(getDriver());
+    }
+    public void clickNextButton() {
+
+        clickElementUntilInvisible(nextButtonInAds);
+
+
+        return getTexts(allLinksImages);
+
+    }
+    public void clickPrevButton() {
+
+
+        clickElementUntilInvisible(prevButtonInAds);
+    }
+
+
+    public String getTitleFirstImage()  {
+        return getText(h2FirstImage);
+    }
+    public List<String> getAltAllImages() {
+        if (AltAttributeAllImage.size() > 0) {
+            getWait20().until(ExpectedConditions.visibilityOfAllElements(AltAttributeAllImage));
+            List<String> ListAttribute = new ArrayList<>();
+            for (WebElement element : AltAttributeAllImage) {
+                if (element.isEnabled() && element.isDisplayed()) {
+                    ListAttribute.add(element.getAttribute("alt"));
+                }
+            }
+
+            return ListAttribute;
+        }
+
+        return new ArrayList<>();
+    }
+    public String getTitleInRelatedSearchesImages() throws InterruptedException {
+        sleep(1000);
+        return getText(relatedSearchesImage);
+    }
+    public String getAttributeImage() {
+        wait10ElementToBeVisible(imageAttribute);
+        return getAttribute(imageAttribute,"alt");
+    }
+    public ImagePage waitForLoaderIsDisappeared (){
+        waitForElementIsDisappeared(loader);
+        return this;
+    }
+    public ImagePage clickColorButton() {
+        click(colorButton);
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {

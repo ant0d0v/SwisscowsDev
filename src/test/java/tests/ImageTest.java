@@ -173,6 +173,7 @@ public class ImageTest extends BaseTest {
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
+
     @Test
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
@@ -253,5 +254,7 @@ public class ImageTest extends BaseTest {
         Assert.assertEquals(actualAttributePrevImage,"item--image");
 
     }
+}
+
 }
 
