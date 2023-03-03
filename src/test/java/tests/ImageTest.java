@@ -3,8 +3,11 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import pages.TestData;
 import pages.top_menu.ImagePage;
 import tests.retrytest.Retry;
+import utils.TestUtils;
+
 import java.util.List;
 
 public class ImageTest extends BaseTest {
@@ -46,6 +49,7 @@ public class ImageTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=");
 
         final String actualRegion = imagePage.getCurrentURL();
+        TestUtils.waitForPageLoaded(getDriver());
         final String titleFirstImage = imagePage
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
