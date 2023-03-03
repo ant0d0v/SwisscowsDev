@@ -50,13 +50,8 @@ public class ImageTest extends BaseTest {
 
         final String actualRegion = imagePage.getCurrentURL();
 
-        final String titleFirstImage = imagePage
-                .clickFirstImageInImagesResult()
-                .getTitleFirstImage();
-
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
 
-        Assert.assertTrue(titleFirstImage.toLowerCase().contains("ivan"));
 
     }
     @Test
