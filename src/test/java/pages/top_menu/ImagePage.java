@@ -107,7 +107,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
 
-        click(secondQueryInRelatedSearchContainer);
+        clickByJavaScript(secondQueryInRelatedSearchContainer);
 
         return new ImagePage(getDriver());
     }
