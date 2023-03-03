@@ -95,6 +95,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return getText(relatedSearchesImage);
     }
     public String getAttributeImage() {
+        wait10ElementToBeVisible(imageAttribute);
         return getAttribute(imageAttribute,"alt");
     }
     public ImagePage waitForLoaderIsDisappeared (){
