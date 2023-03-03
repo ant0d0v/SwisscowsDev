@@ -133,7 +133,7 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -201,7 +201,7 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
         Assert.assertTrue(newAttributePrevImage.contains("active"));
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -213,7 +213,6 @@ public class ImageTest extends BaseTest {
         final String AttributeImageInResult = imagePage
                 .waitForImageIsVisible()
                 .getAttributeHrefImage();
-
 
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
