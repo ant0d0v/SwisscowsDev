@@ -61,6 +61,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement loader;
     @FindBy(xpath = "//ul[@class='popup menu']")
     private WebElement dropdownLisOfColor;
+    @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 10]")
+    private List<WebElement> allImages;
 
 
 
@@ -73,7 +75,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstImageInImagesResult() {
-        wait20ElementToBeVisible(firstImageInImagesResult);
         click(firstImageInImagesResult);
         return new ImagePage(getDriver());
 
@@ -129,13 +130,19 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         waitForElementIsDisappeared(loader);
         return this;
     }
+    public ImagePage waitForImageIsVisible(){
+        for (WebElement image : allImages) {
+            wait10ElementToBeVisible(image);
+        }
+        return this;
+    }
     public ImagePage clickColorButton() {
-        click(colorButton);
+        clickByJavaScript(colorButton);
         wait10ElementToBeVisible(dropdownLisOfColor);
         return new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
-        click(nextButtonInSideImageview);
+        clickByJavaScript(nextButtonInSideImageview);
         return new ImagePage(getDriver());
     }
     public ImagePage clickPrevButtonInSideImageview() {

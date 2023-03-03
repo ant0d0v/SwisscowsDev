@@ -228,9 +228,9 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
 
-        TestUtils.waitForPageLoaded(getDriver());
 
         final String actualAttributeSecondImage = imagePage
+                .waitForImageIsVisible()
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeSecondImage();
@@ -251,6 +251,7 @@ public class ImageTest extends BaseTest {
         final String actualAttributePrevImage = imagePage
                 .clickFirstImageInImagesResult()
                 .clickCloseButtonInSideImageview()
+                .waitForImageIsVisible()
                 .getAttributeFirstImage();
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
