@@ -141,20 +141,21 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderIsDisappeared()
                 .clickFilterButton();
 
-       final List <String> actualTitleAllImage = imagePage
+       final String actualTitleImage = imagePage
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .getAltAllImages();
-        ;
+                .waitForLoaderIsDisappeared()
+                .getAttributeImage();
+
 
         final int actualSize = imagePage.getLinksAllImages().size();
         Assert.assertTrue(actualSize >= 50);
-        for (String searchCriteria : actualTitleAllImage) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("red"));
-        }
-           Assert.assertEquals(imagePage.getCurrentURL(),
+
+            Assert.assertTrue(actualTitleImage.toLowerCase().contains("red"));
+            Assert.assertEquals(imagePage.getCurrentURL(),
                    "https://dev.swisscows.com/en/images?query=photo&color=Red");
        }
+
 
     @Test(retryAnalyzer = Retry.class)
     public void testNextButtonAndPrevButtonAdvertising_ImagePage() {

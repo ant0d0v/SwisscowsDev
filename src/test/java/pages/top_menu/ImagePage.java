@@ -24,7 +24,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement colorButton;
     @FindBy(xpath = "//div[@class][3]//li[4]")
     private WebElement redInDropdownColor;
-    @FindBy(xpath = "//figure[1]")
+    @FindBy(xpath = "//figure[1]//img")
     private WebElement imageAttribute;
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;
@@ -94,9 +94,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         sleep(1000);
         return getText(relatedSearchesImage);
     }
-    public String getAttributeAllImage() {
-        waitForElementIsDisappeared(loader);
-        return getAttribute(imageAttribute,"style");
+    public String getAttributeImage() {
+        return getAttribute(imageAttribute,"alt");
     }
     public ImagePage waitForLoaderIsDisappeared (){
         waitForElementIsDisappeared(loader);
