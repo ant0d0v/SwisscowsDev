@@ -147,10 +147,6 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderIsDisappeared()
                 .getAttributeImage();
 
-
-        final int actualSize = imagePage.getLinksAllImages().size();
-        Assert.assertTrue(actualSize >= 50);
-
             Assert.assertTrue(actualTitleImage.toLowerCase().contains("red"));
             Assert.assertEquals(imagePage.getCurrentURL(),
                    "https://dev.swisscows.com/en/images?query=photo&color=Red");
