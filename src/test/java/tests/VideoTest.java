@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
-
 import java.io.IOException;
 import java.util.List;
 
