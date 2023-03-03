@@ -133,7 +133,7 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testFilterSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
