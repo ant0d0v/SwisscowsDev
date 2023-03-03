@@ -137,8 +137,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return this;
     }
     public ImagePage clickColorButton() {
-        clickByJavaScript(colorButton);
-        wait10ElementToBeVisible(dropdownLisOfColor);
+        click(colorButton);
         return new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
@@ -169,6 +168,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
 
     public ImagePage clickRedColorInDropdownColors() {
+        wait10ElementToBeVisible(dropdownLisOfColor);
         click(redInDropdownColor);
         return new ImagePage(getDriver());
     }
