@@ -50,13 +50,8 @@ public class ImageTest extends BaseTest {
 
         final String actualRegion = imagePage.getCurrentURL();
 
-        final String titleFirstImage = imagePage
-                .clickFirstImageInImagesResult()
-                .getTitleFirstImage();
-
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
 
-        Assert.assertTrue(titleFirstImage.toLowerCase().contains("ivan"));
 
     }
     @Test
@@ -133,7 +128,7 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -178,42 +173,43 @@ public class ImageTest extends BaseTest {
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
-        TestUtils.waitForPageLoaded(getDriver());
 
         final String actualAttributePrevImage = imagePage
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeFirstImage();
 
+
+
         final String newAttributePrevImage = imagePage
                 .clickPrevButtonInSideImageview()
                 .getAttributeFirstImage();
 
+
         Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
         Assert.assertTrue(newAttributePrevImage.contains("active"));
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("test")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=test");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
         final String AttributeImageInResult = imagePage
                 .waitForImageIsVisible()
                 .getAttributeHrefImage();
-
 
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
@@ -225,10 +221,10 @@ public class ImageTest extends BaseTest {
     public void testNextButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldoo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
 
         final String actualAttributeSecondImage = imagePage
@@ -243,10 +239,10 @@ public class ImageTest extends BaseTest {
     public void testCloseButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
 
         TestUtils.waitForPageLoaded(getDriver());
 

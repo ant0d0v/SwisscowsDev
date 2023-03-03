@@ -26,13 +26,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement redInDropdownColor;
     @FindBy(xpath = "//div[@class='images-results']//figure[1]")
     private WebElement imageAttribute;
-
     @FindBy(xpath = "//div[@class= 'images-results']//figure[1]//a")
     private WebElement imageAttributeHref;
-
     @FindBy(xpath = "//div[@class= 'image-view aside fade in']//a")
     private WebElement imageAttributeHrefInSideImageview;
-
     @FindBy(xpath = "//figure[2]")
     private WebElement secondImageAttribute;
     @FindBy(xpath = "//figure//a")
