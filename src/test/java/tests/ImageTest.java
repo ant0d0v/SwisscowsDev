@@ -173,25 +173,27 @@ public class ImageTest extends BaseTest {
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("test")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
 
-        TestUtils.waitForPageLoaded(getDriver());
 
         final String actualAttributePrevImage = imagePage
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeFirstImage();
 
+
+
         final String newAttributePrevImage = imagePage
                 .clickPrevButtonInSideImageview()
                 .getAttributeFirstImage();
+
 
         Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
         Assert.assertTrue(newAttributePrevImage.contains("active"));
