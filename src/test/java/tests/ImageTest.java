@@ -133,8 +133,8 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test(retryAnalyzer = Retry.class)
-    public void testFilterSearch_ImagePage() {
+    @Test
+    public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("photo")
@@ -144,7 +144,9 @@ public class ImageTest extends BaseTest {
                 .clickFilterButton();
 
         imagePage
-                .clickColorButton()
+                .clickColorButton();
+        sleep(1000);
+        imagePage
                 .clickRedColorInDropdownColors()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=Red");
 
@@ -203,15 +205,15 @@ public class ImageTest extends BaseTest {
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+                .inputSearchCriteriaAndEnter("test")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
-
-        TestUtils.waitForPageLoaded(getDriver());
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=test");
 
         final String AttributeImageInResult = imagePage
+                .waitForImageIsVisible()
                 .getAttributeHrefImage();
+
 
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
