@@ -251,7 +251,6 @@ public class ImageTest extends BaseTest {
                 .getAttributeFirstImage();
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
-
     }
 }
 
