@@ -24,14 +24,29 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement colorButton;
     @FindBy(xpath = "//div[@class][3]//li[4]")
     private WebElement redInDropdownColor;
-    @FindBy(xpath = "//figure[1]//img")
+    @FindBy(xpath = "//div[@class='images-results']//figure[1]")
     private WebElement imageAttribute;
+
+    @FindBy(xpath = "//div[@class= 'images-results']//figure[1]//a")
+    private WebElement imageAttributeHref;
+
+    @FindBy(xpath = "//div[@class= 'image-view aside fade in']//a")
+    private WebElement imageAttributeHrefInSideImageview;
+
+    @FindBy(xpath = "//figure[2]")
+    private WebElement secondImageAttribute;
     @FindBy(xpath = "//figure//a")
     private List<WebElement> allLinksImages;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][2]")
     private WebElement nextButtonInAds;
     @FindBy(xpath = "//div[@class='images-results']//button[@class][1]")
     private WebElement prevButtonInAds;
+    @FindBy(xpath = "//button[@class='next']")
+    private WebElement nextButtonInSideImageview;
+    @FindBy(xpath = "//button[@class='prev']")
+    private WebElement prevButtonInSideImageview;
+    @FindBy(xpath = "//button[@class='close']")
+    private WebElement closeButtonInSideImageview;
     @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
@@ -98,12 +113,40 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttribute);
         return getAttribute(imageAttribute,"alt");
     }
+    public String getAttributeFirstImage() {
+        wait10ElementToBeVisible(imageAttribute);
+        return getAttribute(imageAttribute,"class");
+    }
+    public String getAttributeSecondImage() {
+        wait10ElementToBeVisible(secondImageAttribute);
+        return getAttribute(secondImageAttribute,"class");
+    }
+    public String getAttributeHrefImage() {
+        wait10ElementToBeVisible(imageAttributeHref);
+        return getAttribute(imageAttributeHref,"src");
+    }
+    public String getAttributeHrefImageInSideView() {
+        wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
+        return getAttribute(imageAttributeHrefInSideImageview,"src");
+    }
     public ImagePage waitForLoaderIsDisappeared (){
         waitForElementIsDisappeared(loader);
         return this;
     }
     public ImagePage clickColorButton() {
         click(colorButton);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickNextButtonInSideImageview() {
+        click(nextButtonInSideImageview);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickPrevButtonInSideImageview() {
+        click(prevButtonInSideImageview);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickCloseButtonInSideImageview() {
+        click(closeButtonInSideImageview);
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {

@@ -173,4 +173,85 @@ public class ImageTest extends BaseTest {
                 .clickPrevButton();
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
+    @Test
+    public void testPrevButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualAttributePrevImage = imagePage
+                .clickFirstImageInImagesResult()
+                .clickNextButtonInSideImageview()
+                .getAttributeFirstImage();
+
+        final String newAttributePrevImage = imagePage
+                .clickPrevButtonInSideImageview()
+                .getAttributeFirstImage();
+
+        Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
+        Assert.assertEquals(newAttributePrevImage,"item--image active");
+    }
+    @Test
+    public void testImageInResultEqualsImageInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String AttributeImageInResult = imagePage
+                .getAttributeHrefImage();
+
+        final String AttributeImageInSideView = imagePage
+                .clickFirstImageInImagesResult()
+                .getAttributeHrefImageInSideView();
+
+        Assert.assertEquals(AttributeImageInResult,AttributeImageInSideView);
+    }
+    @Test
+    public void testNextButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualAttributeSecondImage = imagePage
+                .clickFirstImageInImagesResult()
+                .clickNextButtonInSideImageview()
+                .getAttributeSecondImage();
+
+        Assert.assertEquals(actualAttributeSecondImage,"item--image active");
+    }
+    @Test
+    public void testCloseButtonInSideView_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka");
+
+        TestUtils.waitForPageLoaded(getDriver());
+
+        final String actualAttributePrevImage = imagePage
+                .clickFirstImageInImagesResult()
+                .clickCloseButtonInSideImageview()
+                .getAttributeFirstImage();
+
+        Assert.assertEquals(actualAttributePrevImage,"item--image");
+
+    }
 }
+
