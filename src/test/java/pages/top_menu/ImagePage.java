@@ -1,11 +1,13 @@
 package pages.top_menu;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 
+import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +62,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement loader;
     @FindBy(xpath = "//ul[@class='popup menu']")
     private WebElement dropdownLisOfColor;
-    @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 10]")
+    @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 5]")
     private List<WebElement> allImages;
     @FindBy(xpath = "//a[@class ='item favorite']")
     private WebElement favoriteItem;
@@ -86,6 +88,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     }
     public ImagePage clickFavoriteItem() {
+        wait10ElementToBeVisible(favoriteItem);
         click(favoriteItem);
         return this;
 
@@ -143,7 +146,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
     public ImagePage waitForImageIsVisible(){
         for (WebElement image : allImages) {
-            wait10ElementToBeVisible(image);
+            wait20ElementToBeVisible(image);
         }
         return this;
     }
@@ -169,9 +172,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ImagePage(getDriver());
     }
-    public void clickNextButton() {
+    public ImagePage clickNextButton() {
 
         clickElementUntilInvisible(nextButtonInAds);
+        return this;
     }
     public void clickPrevButton() {
 
@@ -194,8 +198,16 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     }
     public boolean favoriteItemIsDisplayed() {
-        wait10ElementToBeVisible(favoriteItem);
+        getDriver().navigate().refresh();
         return isElementDisplayed(favoriteItem);
 
     }
+    public ImagePage favoriteItemOnPage() {
+        getDriver().navigate().refresh();
+        getDriver().findElement(By.xpath("//a[@class ='item favorite']"));
+        return new ImagePage(getDriver());
+
+    }
+
+
 }

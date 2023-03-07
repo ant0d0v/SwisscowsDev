@@ -1,13 +1,17 @@
 package tests;
 import base.BaseTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.ImagePage;
+import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 import utils.TestUtils;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ImageTest extends BaseTest {
     @Test
@@ -238,22 +242,22 @@ public class ImageTest extends BaseTest {
     public void testCloseButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("rep")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
+                .waitForUrlContains("https://dev.swisscows.com/en/images?query=rep");
 
         TestUtils.waitForPageLoaded(getDriver());
 
         final String actualAttributePrevImage = imagePage
+                .waitForImageIsVisible()
                 .clickFirstImageInImagesResult()
                 .clickCloseButtonInSideImageview()
-                .waitForImageIsVisible()
                 .getAttributeFirstImage();
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
     }
-    @Test
+    @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -270,7 +274,7 @@ public class ImageTest extends BaseTest {
 
 
     }
-    @Test
+    @Test(priority = 2,retryAnalyzer = Retry.class)
     public void testAddedImageEqualImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -279,17 +283,105 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .clickHamburgerMenu()
                 .signIn();
-        final String AttributeImageInSideView = imagePage
-                .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
-                .getAttributeHrefImageInSideView();
         imagePage
                 .clickFavoriteItem()
                 .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+        final String AttributeImageInSideView = imagePage
+                .clickFirstImageInImagesResult()
+                .getAttributeHrefImageInSideView();
 
 
         Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
 
     }
+    @Test(priority = 3)
+    public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
+        MusicPage musicPage =new MusicPage(getDriver());
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .clickHamburgerMenu()
+                .signIn();
+        imagePage
+                .clickFavoriteItem()
+                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+        imagePage
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonInSideImageview();
+        getDriver().navigate().refresh();
+        final String actualH2Title = musicPage.getErrorTitleInFavoritePlaylist();
+
+        Assert.assertTrue(actualH2Title.contains("No items found"));
+        Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
+    }
+    @Test(priority = 4)
+    public void testAddSeveralImagesInFavorite_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .clickHamburgerMenu()
+                .signIn();
+        imagePage
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonInSideImageview()
+                .clickNextButtonInSideImageview()
+                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteItem()
+                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+
+
+        Assert.assertTrue(imagePage.getLinksAllImages().size() == 2);
+    }
+    @Test(priority = 5)
+    public void testChangeLanguageInFavorite_ImagePage() {
+            ImagePage imagePage = new ImagePage(getDriver());
+            openBaseURL()
+                    .inputSearchCriteriaAndEnter("ronaldo")
+                    .waitUntilVisibilityWebResult()
+                    .clickImageButton()
+                    .clickHamburgerMenuIcon()
+                    .signIn();
+            imagePage
+                    .clickFavoriteItem()
+                    .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+            imagePage
+                    .clickHamburgerMenu()
+                    .clickLanguagesTopMenu();
+            imagePage
+                    .clickLangDeutsch();
+
+            Assert.assertEquals(imagePage.getCurrentURL(),"https://dev.swisscows.com/de/images/my?query=ronaldo");
+            Assert.assertEquals(imagePage.getTitle(),"Meine Bilder - Swisscows");
+
+    }
+        @Test(priority = 6)
+        public void testDeletedSeveralImagesInFavorite_ImagePage () {
+            ImagePage imagePage = new ImagePage(getDriver());
+            openBaseURL()
+                    .inputSearchCriteriaAndEnter("ronaldo")
+                    .waitUntilVisibilityWebResult()
+                    .clickImageButton()
+                    .clickHamburgerMenuIcon()
+                    .signIn();
+
+            imagePage
+                    .clickFirstImageInImagesResult()
+                    .clickFavoriteButtonInSideImageview()
+                    .clickNextButtonInSideImageview()
+                    .clickFavoriteButtonInSideImageview();
+            try {
+                imagePage.favoriteItemOnPage();
+                Assert.fail("Item is present on the page!");
+            } catch (org.openqa.selenium.NoSuchElementException e) {
+
+            }
+
+
+        }
+
 }
 
