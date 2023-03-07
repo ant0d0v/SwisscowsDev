@@ -86,6 +86,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     }
     public ImagePage clickFavoriteItem() {
+        wait10ElementToBeVisible(favoriteItem);
         click(favoriteItem);
         return this;
 

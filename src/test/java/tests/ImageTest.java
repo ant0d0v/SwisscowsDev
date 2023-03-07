@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.ImagePage;
+import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 import utils.TestUtils;
 
@@ -253,7 +254,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
     }
-    @Test
+    @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -270,7 +271,7 @@ public class ImageTest extends BaseTest {
 
 
     }
-    @Test
+    @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testAddedImageEqualImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
@@ -279,16 +280,36 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .clickHamburgerMenu()
                 .signIn();
-        final String AttributeImageInSideView = imagePage
-                .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
-                .getAttributeHrefImageInSideView();
         imagePage
                 .clickFavoriteItem()
                 .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+        final String AttributeImageInSideView = imagePage
+                .clickFirstImageInImagesResult()
+                .getAttributeHrefImageInSideView();
 
 
         Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
+
+    }
+    @Test(priority = 2)
+    public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
+
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .clickHamburgerMenu()
+                .signIn();
+        imagePage
+                .clickFavoriteItem()
+                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+        imagePage
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonInSideImageview();
+
+        Assert.assertEquals(imagePage.getCurrentURL(),"https://dev.swisscows.com/en/images/my?query=ronaldo" );
+
 
     }
 }
