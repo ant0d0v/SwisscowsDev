@@ -296,7 +296,7 @@ public class ImageTest extends BaseTest {
     }
     @Test(priority = 3)
     public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
-
+        MusicPage musicPage =new MusicPage(getDriver());
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -310,8 +310,11 @@ public class ImageTest extends BaseTest {
         imagePage
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonInSideImageview();
+        getDriver().navigate().refresh();
+        final String actualH2Title = musicPage.getErrorTitleInFavoritePlaylist();
 
-        Assert.assertEquals(imagePage.getCurrentURL(),"https://dev.swisscows.com/en/images/my?query=ronaldo" );
+        Assert.assertTrue(actualH2Title.contains("No items found"));
+        Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
     @Test(priority = 4)
     public void testAddSeveralImagesInFavorite_ImagePage() {
