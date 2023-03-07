@@ -309,8 +309,6 @@ public class ImageTest extends BaseTest {
                 .clickFavoriteButtonInSideImageview();
 
         Assert.assertEquals(imagePage.getCurrentURL(),"https://dev.swisscows.com/en/images/my?query=ronaldo" );
-
-
     }
 }
 
