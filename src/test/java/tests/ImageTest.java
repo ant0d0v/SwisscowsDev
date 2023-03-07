@@ -3,7 +3,6 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.TestData;
 import pages.top_menu.ImagePage;
 import tests.retrytest.Retry;
 import utils.TestUtils;
@@ -253,6 +252,44 @@ public class ImageTest extends BaseTest {
                 .getAttributeFirstImage();
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
+    }
+    @Test
+    public void testAddImageInFavorite_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .clickHamburgerMenu()
+                .signIn();
+       imagePage
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonInSideImageview();
+
+        Assert.assertTrue(imagePage.favoriteItemIsDisplayed());
+
+
+    }
+    @Test
+    public void testAddedImageEqualImageInFavorite_ImagePage() {
+        ImagePage imagePage = new ImagePage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .clickHamburgerMenu()
+                .signIn();
+        final String AttributeImageInSideView = imagePage
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonInSideImageview()
+                .getAttributeHrefImageInSideView();
+        imagePage
+                .clickFavoriteItem()
+                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+
+
+        Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
+
     }
 }
 

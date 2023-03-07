@@ -44,6 +44,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement prevButtonInSideImageview;
     @FindBy(xpath = "//button[@class='close']")
     private WebElement closeButtonInSideImageview;
+    @FindBy(xpath = "//button[@class ='bookmark']")
+    private WebElement favoriteButtonInSideImageview;
     @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
@@ -60,6 +62,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement dropdownLisOfColor;
     @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 10]")
     private List<WebElement> allImages;
+    @FindBy(xpath = "//a[@class ='item favorite']")
+    private WebElement favoriteItem;
 
 
 
@@ -73,12 +77,22 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
     public ImagePage clickFirstImageInImagesResult() {
         click(firstImageInImagesResult);
-        return new ImagePage(getDriver());
+        return this;
 
     }
-    public MusicPage scrollToLastImage() {
+    public ImagePage clickFavoriteButtonInSideImageview() {
+        click(favoriteButtonInSideImageview);
+        return this;
+
+    }
+    public ImagePage clickFavoriteItem() {
+        click(favoriteItem);
+        return this;
+
+    }
+    public ImagePage scrollToLastImage() {
         scrollByVisibleElement(lastImage);
-        return new MusicPage(getDriver());
+        return new ImagePage(getDriver());
     }
     public List <String> getLinksAllImages()  {
 
@@ -177,6 +191,11 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     public boolean firstImageInAdsIsDisplayed() {
         wait10ElementToBeVisible(firstImageInAds);
         return isElementDisplayed(firstImageInAds);
+
+    }
+    public boolean favoriteItemIsDisplayed() {
+        wait10ElementToBeVisible(favoriteItem);
+        return isElementDisplayed(favoriteItem);
 
     }
 }
