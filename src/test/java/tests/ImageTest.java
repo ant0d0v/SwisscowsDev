@@ -334,7 +334,7 @@ public class ImageTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
 
 
-        Assert.assertTrue(imagePage.getLinksAllImages().size() == 2);
+        Assert.assertEquals(imagePage.getLinksAllImages().size(), 2);
     }
     @Test(priority = 5)
     public void testChangeLanguageInFavorite_ImagePage() {
@@ -359,7 +359,7 @@ public class ImageTest extends BaseTest {
 
     }
         @Test(priority = 6)
-        public void testDeletedSeveralImagesInFavorite_ImagePage () {
+        public void testDeletedSeveralImagesFromFavorite_ImagePage () {
             ImagePage imagePage = new ImagePage(getDriver());
             openBaseURL()
                     .inputSearchCriteriaAndEnter("ronaldo")

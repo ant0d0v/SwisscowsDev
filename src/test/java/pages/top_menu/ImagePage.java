@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 
-import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,9 +149,9 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         }
         return this;
     }
-    public ImagePage clickColorButton() {
+    public void clickColorButton() {
         click(colorButton);
-        return new ImagePage(getDriver());
+        new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
         clickByJavaScript(nextButtonInSideImageview);
@@ -172,10 +171,9 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ImagePage(getDriver());
     }
-    public ImagePage clickNextButton() {
+    public void clickNextButton() {
 
         clickElementUntilInvisible(nextButtonInAds);
-        return this;
     }
     public void clickPrevButton() {
 
@@ -202,10 +200,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return isElementDisplayed(favoriteItem);
 
     }
-    public ImagePage favoriteItemOnPage() {
+    public void favoriteItemOnPage() {
         getDriver().navigate().refresh();
         getDriver().findElement(By.xpath("//a[@class ='item favorite']"));
-        return new ImagePage(getDriver());
+        new ImagePage(getDriver());
 
     }
 
