@@ -7,6 +7,8 @@ import pages.base_abstract.TopMenuPage;
 import pages.footer_menu.PrivacyPolicyPage;
 import pages.footer_menu.WhoWeArePage;
 
+import java.util.List;
+
 public class VpnPage extends TopMenuPage<VpnPage> {
     @FindBy(xpath = "//div[@class='extensions']//div[1]//img")
     private WebElement imageGoogleExtension;
@@ -18,6 +20,11 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     private WebElement allExtensionsBlock;
     @FindBy(xpath = "//div[@class='extensions']")
     private WebElement instructionsContainer;
+
+    @FindBy(xpath = "//div[@class='static-content']//div[@class= 'subs']//a//p[5]")
+    private List<WebElement> allLinksOnVpnPage;
+    @FindBy(xpath = "//div[@class='static-content']//a[1]")
+    private WebElement startNowButtonVpnPage;
 
     public VpnPage(WebDriver driver) {
         super(driver);
@@ -64,6 +71,23 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     public boolean isOtherExtensionIconDisplayed() {
 
         return isElementDisplayed(imageOtherExtension);
+    }
+    public List<String> getButtonColorsWhenHover() throws InterruptedException {
+
+        return  getBackgroundHoverColorsOfElements(allLinksOnVpnPage);
+    }
+    public List<String> getButtonColors() throws InterruptedException {
+
+        return  getBackgroundColorsOfElements(allLinksOnVpnPage);
+    }
+    public String backgroundColorOfElement() {
+        return getBackgroundHoverColor(startNowButtonVpnPage);
+
+    }
+    public VpnPage hoverElement(){
+        hover(startNowButtonVpnPage);
+        return  this;
+
     }
 
 }

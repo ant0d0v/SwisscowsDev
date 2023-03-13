@@ -130,8 +130,9 @@ public abstract class BasePage {
         return element.getCssValue("color");
     }
     protected String getBackgroundHoverColor(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].dispatchEvent(new MouseEvent('mouseover', {bubbles: true, cancelable: true}));", element);
         wait10ElementToBeVisible(element);
-
         return element.getCssValue("background-color");
     }
     protected List<String> getColors(List<WebElement> list) {
@@ -236,12 +237,25 @@ public abstract class BasePage {
         actions.moveToElement(element).build().perform();
 
     }
-    public List<String> hoverToElements(List<WebElement> buttons) throws InterruptedException {
+    public List<String> getBackgroundHoverColorsOfElements(List<WebElement> buttons) throws InterruptedException {
         Actions actions = new Actions(getDriver());
         List<String> colorList = new ArrayList<>();
 
         for (WebElement button :  buttons) {
             actions.moveToElement(button).build().perform();
+            if (button.isEnabled() && button.isDisplayed()) {
+                colorList.add(button.getCssValue("background-color"));
+
+            }
+
+        }
+        return colorList;
+    }
+    public List<String> getBackgroundColorsOfElements(List<WebElement> buttons) throws InterruptedException {
+
+        List<String> colorList = new ArrayList<>();
+
+        for (WebElement button :  buttons) {
             if (button.isEnabled() && button.isDisplayed()) {
                 colorList.add(button.getCssValue("background-color"));
 

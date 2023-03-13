@@ -135,9 +135,9 @@ public class TestData {
                 {3, "Learn More", "/en/vpn-instruction", "https://dev.swisscows.com/en/vpn-instruction",
                         "Configuring Swisscows Proxy"},
                 {4, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
-                        "https://accounts.swisscows.com/Account/Login?ReturnUrl=%2Fsubscriptions%2Fvpn#monthly", "Sign in"},
+                        "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
                 {5, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
-                        "https://accounts.swisscows.com/Account/Login?ReturnUrl=%2Fsubscriptions%2Fvpn#annualy", "Sign in"},
+                        "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
 
         };
     }
@@ -145,8 +145,8 @@ public class TestData {
     public static Object[][] EmailLinksTestDataProvider() {
 
         return new Object[][] {
-                {0,  "Sign in"},
-                {1,  "Sign in"},
+                {0, "Login"},
+                {1, "Login"},
 
 
         };

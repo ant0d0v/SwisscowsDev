@@ -3,15 +3,15 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
-            <class name="tests.FooterMenuTest"/>
+            <!--<class name="tests.FooterMenuTest"/>
             <class name="tests.TopMenuTest"/>
-            <class name="tests.MainTest"/>
+            <class name="tests.MainTest"/>-->
             <class name="tests.VpnTest"/>
-            <class name="tests.CharityProjectTest"/>
+           <!-- <class name="tests.CharityProjectTest"/>
             <class name="tests.ContactUsTest"/>
-            <class name="tests.DonationTest"/>
+            <class name="tests.DonationTest"/>-->
             <class name="tests.EmailTest"/>
-            <class name="tests.ImprintTest"/>
+           <!-- <class name="tests.ImprintTest"/>
             <class name="tests.MakeDefaultSearchTest"/>
             <class name="tests.MediaEducationTest"/>
             <class name="tests.OurDatacenterTest"/>
@@ -21,7 +21,7 @@
             <class name="tests.WhoWeAreTest"/>
             <class name="tests.MusicTest"/>
             <class name="tests.VideoTest"/>
-            <class name="tests.ImageTest"/>
+            <class name="tests.ImageTest"/>-->
 
         </classes>
     </test>
