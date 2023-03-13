@@ -2,16 +2,10 @@ package pages.top_menu;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import pages.MainPage;
-import pages.accounts.RegisterPage;
 import pages.base_abstract.TopMenuPage;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
 
 
 public class EmailPage extends TopMenuPage<EmailPage> {

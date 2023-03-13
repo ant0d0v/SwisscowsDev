@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.ContactUsPage;
+import pages.footer_menu.MediaEducationPage;
 
 public class ContactUsTest extends BaseTest {
     @Test
@@ -65,6 +66,21 @@ public class ContactUsTest extends BaseTest {
                 .getColorPrivacyLink();
 
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
+    @Test
+    public void testSendButtonColorWhenHover_ContactUsPage() throws InterruptedException {
+        ContactUsPage contactUsPage  = new ContactUsPage (getDriver());
+        final String oldButtonColor = openBaseURL()
+                .scrollToFooterMenu()
+                .clickContactUsPageFooterMenu()
+                .backgroundColorOfElement();
+
+        final String newButtonColor  = contactUsPage
+                .hoverElement()
+                .backgroundColorOfElement();
+
+        Assert.assertNotEquals(newButtonColor,oldButtonColor);
 
     }
 

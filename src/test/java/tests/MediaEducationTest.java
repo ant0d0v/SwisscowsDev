@@ -6,6 +6,8 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.MediaEducationPage;
+import pages.top_menu.EmailPage;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -90,6 +92,22 @@ public class MediaEducationTest extends BaseTest {
 
         Assert.assertTrue(actualLinksColors.size() > 0);
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
+
+    }
+    @Test
+    public void testOpenFlyerButtonColorWhenHover_MediaEducationPage() throws InterruptedException {
+        MediaEducationPage mediaEducationPage  = new MediaEducationPage (getDriver());
+        final String oldButtonColor = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMediaEducationFooterMenu()
+                .scrollToWhereToLinkPdf()
+                .backgroundColorOfElement();
+
+        final String newButtonColor  = mediaEducationPage
+                .hoverElement()
+                .backgroundColorOfElement();
+
+        Assert.assertNotEquals(newButtonColor,oldButtonColor);
 
     }
 

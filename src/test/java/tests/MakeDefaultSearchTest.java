@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.MakeDefaultSearchPage;
+import pages.top_menu.EmailPage;
 
 import java.util.List;
 
@@ -116,7 +117,19 @@ public class MakeDefaultSearchTest extends BaseTest {
         Assert.assertTrue(makeDefaultSearchPage.isLogoIconDisplayed());
 
 
+    }
+    @Test
+    public void testAllButtonColorsWhenHover_makeDefaultSearchPage() throws InterruptedException {
+        MakeDefaultSearchPage makeDefaultSearchPage = new MakeDefaultSearchPage(getDriver());
+        final List<String> oldButtonColorsWhenHover = openBaseURL()
+                .scrollToFooterMenu()
+                .clickMakeDefaultSearchPageFooterMenu()
+                .getButtonColors();
 
+        final List<String> newButtonColorsWhenHover = makeDefaultSearchPage
+                .getButtonColorsWhenHover();
+
+        Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
 
     }
 

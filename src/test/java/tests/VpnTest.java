@@ -2,15 +2,12 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.footer_menu.WhoWeArePage;
-import pages.top_menu.EmailPage;
 import pages.top_menu.VpnPage;
-
 import java.util.List;
-
 public class VpnTest extends BaseTest {
     @Test
     public void testH2TextsVpnPage() {
@@ -47,9 +44,10 @@ public class VpnTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+
     @Test(dataProvider = "VpnLinksData", dataProviderClass = TestData.class)
     public void testVpnLinksNavigateToCorrespondingPages(
-            int index, String linkName, String href, String expectedURL, String expectedH1text) throws InterruptedException {
+            int index, String expectedURL, String expectedH1text){
         VpnPage vpnPage = new VpnPage(getDriver());
 
         MainPage mainPage = openBaseURL();
@@ -96,13 +94,13 @@ public class VpnTest extends BaseTest {
     }
 
     @Test
-    public void testTextsFontSizesVpnPage(){
+    public void testTextsFontSizesVpnPage() {
         final List<String> expectedH1FontSizes = List.of(
                 "40px",
                 "40px",
                 "40px"
         );
-        final List<String>  actualH2FontSizes = openBaseURL()
+        final List<String> actualH2FontSizes = openBaseURL()
                 .clickVPNTopMenu()
                 .closeWindow()
                 .switchToVpnPage()
@@ -111,6 +109,7 @@ public class VpnTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
+
     @Test
     public void testRegisterLinkNavigateToCorrespondingPage() {
         final String expectedUrl = "https://accounts.swisscows.com/register";
@@ -126,6 +125,7 @@ public class VpnTest extends BaseTest {
         Assert.assertEquals(actualUrl, expectedUrl);
         Assert.assertTrue(actualTitle.contains("Register - Swisscows Accounts"));
     }
+
     @Test
     public void testInstructionLinkNavigateToCorrespondingPage() {
         final String expectedUrl = "https://dev.swisscows.com/en/vpn-instruction";
@@ -142,6 +142,7 @@ public class VpnTest extends BaseTest {
         Assert.assertEquals(actualUrl, expectedUrl);
         Assert.assertTrue(actualTitle.contains("Configuring Swisscows Proxy"));
     }
+
     @Test
     public void testExtensionsIconsExist() {
         VpnPage vpnPagePage = openBaseURL()
@@ -156,6 +157,7 @@ public class VpnTest extends BaseTest {
         Assert.assertTrue(vpnPagePage.isOtherExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.allElementsDisplayed());
     }
+
     @Test
     public void testAllButtonColorsWhenHover_VpnPage() throws InterruptedException {
         VpnPage vpnPage = new VpnPage(getDriver());
@@ -163,15 +165,17 @@ public class VpnTest extends BaseTest {
                 .clickVPNTopMenu()
                 .closeWindow()
                 .switchToVpnPage()
-                .getButtonColors();;
+                .getButtonColors();
+
 
         final List<String> newButtonColorsWhenHover = vpnPage
                 .getButtonColorsWhenHover();
 
-        Assert.assertNotEquals(newButtonColorsWhenHover,oldButtonColorsWhenHover);
+        Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
     }
+
     @Test
-    public void testStarNowButtonColorWhenHover_VpnPage() throws InterruptedException {
+    public void testStarNowButtonColorWhenHover_VpnPage(){
         VpnPage vpnPage = new VpnPage(getDriver());
         final String oldButtonColor = openBaseURL()
                 .clickVPNTopMenu()
@@ -179,10 +183,11 @@ public class VpnTest extends BaseTest {
                 .switchToVpnPage()
                 .backgroundColorOfElement();
 
-        final String newButtonColor  = vpnPage
+        final String newButtonColor = vpnPage
                 .hoverElement()
                 .backgroundColorOfElement();
 
-        Assert.assertNotEquals(newButtonColor,oldButtonColor);
+        Assert.assertNotEquals(newButtonColor, oldButtonColor);
     }
+
 }

@@ -2,16 +2,18 @@ package tests;
 
 import base.BaseTest;
 import org.testng.Assert;
+
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.VpnInstructionsPage;
-
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
-    public class VpnInstructionsTest extends BaseTest {
-        @Test
-        public void testH2TextsVpnInstructionsPage() {
-            final List<String> expectedH2Texts = List.of(
+public class VpnInstructionsTest extends BaseTest {
+    @Test
+    public void testH2TextsVpnInstructionsPage() {
+        final List<String> expectedH2Texts = List.of(
                     "Safari Browser (Mac OS)",
                     "Brave Browser",
                     "Opera Browser",
@@ -22,24 +24,24 @@ import java.util.List;
                     "Android OS"
 
             );
-            final List<String> actualH2Texts = openBaseURL()
+        final List<String> actualH2Texts = openBaseURL()
                     .clickVPNTopMenu()
                     .closeWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .getH2Texts();
 
-            Assert.assertTrue(actualH2Texts.size() > 0);
-            Assert.assertEquals(actualH2Texts, expectedH2Texts);
-        }
+        Assert.assertTrue(actualH2Texts.size() > 0);
+        Assert.assertEquals(actualH2Texts, expectedH2Texts);
+    }
 
-        @Test
-        public void testVpnLogoNavigatesToBaseURL() {
-            final String expectedURL = "https://dev.swisscows.com/en";
-            final String expectedTitle = "Your private and anonymous search engine Swisscows";
+    @Test
+    public void testVpnLogoNavigatesToBaseURL() {
+        final String expectedURL = "https://dev.swisscows.com/en";
+        final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
-            MainPage mainPage = openBaseURL();
-            final String actualURL = mainPage
+        MainPage mainPage = openBaseURL();
+        final String actualURL = mainPage
                     .clickVPNTopMenu()
                     .closeWindow()
                     .switchToVpnPage()
@@ -47,15 +49,14 @@ import java.util.List;
                     .clickLogo()
                     .getCurrentURL();
 
-            final String actualTitle = mainPage.getTitle();
+        final String actualTitle = mainPage.getTitle();
 
-            Assert.assertEquals(actualURL, expectedURL);
-            Assert.assertEquals(actualTitle, expectedTitle);
-        }
-
-        @Test
-        public void testTextsFontSizesVpnInstructionsPage(){
-            final List<String> expectedH1FontSizes = List.of(
+        Assert.assertEquals(actualURL, expectedURL);
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    @Test
+    public void testTextsFontSizesVpnInstructionsPage() {
+        final List<String> expectedH1FontSizes = List.of(
                     "24px",
                     "24px",
                     "24px",
@@ -65,27 +66,64 @@ import java.util.List;
                     "24px",
                     "24px"
             );
-            final List<String>  actualH2FontSizes = openBaseURL()
+        final List<String> actualH2FontSizes = openBaseURL()
                     .clickVPNTopMenu()
                     .closeWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .getH2FontSizes();
 
-            Assert.assertTrue(actualH2FontSizes.size() > 0);
-            Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
-        }
+        Assert.assertTrue(actualH2FontSizes.size() > 0);
+        Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
+    }
 
-        @Test
-        public void testAllBrowserIconsExist() {
-            VpnInstructionsPage vpnInstructionsPage = openBaseURL()
+    @Test
+    public void testAllBrowserIconsExist() {
+        VpnInstructionsPage vpnInstructionsPage = openBaseURL()
                     .clickVPNTopMenu()
                     .closeWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink();
 
-            Assert.assertTrue(vpnInstructionsPage.isLogoIconDisplayed());
-            Assert.assertTrue(vpnInstructionsPage.allElementsDisplayed());
+        Assert.assertTrue(vpnInstructionsPage.isLogoIconDisplayed());
+        Assert.assertTrue(vpnInstructionsPage.allElementsDisplayed());
+    }
+    @Test
+    public void testVpnExtensionsLinksNavigateToCorrespondingWebSites() {
+        final List<String> links = List.of(
+                "https://chrome.google.com/webstore/detail/swisscowsvpnn",
+                "https://addons.mozilla.org/en-GB/firefox/addon/swisscows-vpn/"
+
+        );
+
+        final List<String> expectedDomains = List.of(
+                "chrome.google.com",
+                "addons.mozilla.org"
+
+        );
+        openBaseURL()
+                .clickVPNTopMenu()
+                .closeWindow()
+                .switchToVpnPage()
+                .clickInstructionsLink();
+
+        Assert.assertEquals(links.size(), expectedDomains.size());
+
+        for (int i = 0; i < links.size(); i++) {
+            String expectedDomain = expectedDomains.get(i);
+
+            URL url = null;
+            try {
+                url = new URL(links.get(i));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+            Assert.assertNotNull(url);
+            String actualDomain = url.getHost();
+
+            Assert.assertEquals(actualDomain, expectedDomain);
         }
     }
+}
 

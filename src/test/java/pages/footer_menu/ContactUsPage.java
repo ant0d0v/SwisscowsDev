@@ -89,5 +89,15 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
 
         return getBackgroundColor(privacyPolicyLink);
     }
+    public ContactUsPage hoverElement() throws InterruptedException {
+        hover(sendButton);
+        return  this;
+
+    }
+
+    public String backgroundColorOfElement() {
+        return getBackgroundHoverColor(sendButton);
+
+    }
 
 }

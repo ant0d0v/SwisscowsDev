@@ -3,6 +3,7 @@ package pages.footer_menu;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
+import pages.top_menu.EmailPage;
 
 import static java.lang.Thread.sleep;
 
@@ -56,6 +57,16 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
         clickByJavaScript(videoPlayerYouTubeButtonPlay);
         sleep(7000);
         return  this;
+    }
+    public MediaEducationPage hoverElement() throws InterruptedException {
+        hover(buttonOpenFlyer);
+        return  this;
+
+    }
+
+    public String backgroundColorOfElement() {
+        return getBackgroundHoverColor(buttonOpenFlyer);
+
     }
 
 

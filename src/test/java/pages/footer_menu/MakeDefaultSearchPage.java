@@ -10,6 +10,8 @@ public class MakeDefaultSearchPage extends FooterMenuPage<MakeDefaultSearchPage>
     private WebElement animationImage;
     @FindBy(xpath = "//div[@class = 'row narrow static-content']//img")
     private List<WebElement> allImageOnPageMakePage;
+    @FindBy(xpath = "//a[@class='button']")
+    private List<WebElement> allButtonsOnMakeDefaultPage;
     @FindBy(xpath = "//h2[text()='Tor']")
     private WebElement h2Tor;
     public MakeDefaultSearchPage(WebDriver driver) {
@@ -33,5 +35,15 @@ public class MakeDefaultSearchPage extends FooterMenuPage<MakeDefaultSearchPage>
 
         return areElementsInListDisplayed(allImageOnPageMakePage);
     }
+    public List<String> getButtonColorsWhenHover() throws InterruptedException {
+
+        return  getBackgroundHoverColorsOfElements(allButtonsOnMakeDefaultPage);
+    }
+    public List<String> getButtonColors() throws InterruptedException {
+
+        return  getBackgroundColorsOfElements(allButtonsOnMakeDefaultPage);
+    }
+
+
 
 }
