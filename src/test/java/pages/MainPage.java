@@ -434,6 +434,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
+
     public MainPage scrollToLastElementInDropdownRegion() {
         scrollByVisibleElement(getLastElementInDropdownRegion());
 

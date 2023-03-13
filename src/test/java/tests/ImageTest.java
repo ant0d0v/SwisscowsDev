@@ -1,7 +1,5 @@
 package tests;
 import base.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -9,9 +7,8 @@ import pages.top_menu.ImagePage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 import utils.TestUtils;
-
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 public class ImageTest extends BaseTest {
     @Test

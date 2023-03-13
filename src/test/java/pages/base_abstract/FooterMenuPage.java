@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.footer_menu.*;
+import pages.top_menu.WebPage;
 /*import pages.MainPage;
 import pages.WeatherStationsPage;
 import pages.footer_menu.WhoWeArePage;
@@ -388,18 +389,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     public void clickTeleGuardIcon() { click20(teleGuardIconFooterMenu);}
 
-   /* public MainPage clickAskQuestionFooterMenu() {
-        wait10ElementToBeClickable(askQuestionFooterMenu);
-        click20(askQuestionFooterMenu);
-
-        return new MainPage(getDriver());
-    }
-
-    public HomeAskQuestionPage switchToHomeAskQuestionPage() {
-        switchToAnotherWindow();
-
-        return new HomeAskQuestionPage(getDriver());
-    }*/
 
     public boolean isStorePanelDisplayed() {
 

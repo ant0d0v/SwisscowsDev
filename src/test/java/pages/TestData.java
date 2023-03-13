@@ -208,6 +208,18 @@ public class TestData {
 
         };
     }
+    @DataProvider(name = "ExternalFooterSearchMenuData")
+    public static Object[][] externalMenuTestDataProviderFooterSearch() {
+
+        return new Object[][] {
+                {0, "Learn more about", "https://company.swisscows.com/en", "https://company.swisscows.com/en", "Swisscows AG |Startpage"},
+                {6, "googlePlay", "https://play.google.com/store/apps/details?id=com.swisscows.search", "https://play.google.com/store/apps/details?id=com.swisscows.search", "Swisscows Private Search - Apps on Google Play"},
+                {7, "appStore", "https://apps.apple.com/app/swisscows-privacy-search/id1581108092", "https://apps.apple.com/app/swisscows-privacy-search/id1581108092", "Swisscows Private Search on the App Store"},
+
+
+
+        };
+    }
 
     @DataProvider(name = "SignInCredentials")
     public static Object[][] signInWithInvalidCredentialsTestDataProvider() {
