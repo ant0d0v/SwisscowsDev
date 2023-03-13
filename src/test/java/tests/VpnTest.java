@@ -123,7 +123,7 @@ public class VpnTest extends BaseTest {
         final String actualTitle = getExternalPageTitle();
 
         Assert.assertEquals(actualUrl, expectedUrl);
-        Assert.assertTrue(actualTitle.contains("Registration made easy! - Swisscows Account"));
+        Assert.assertTrue(actualTitle.contains("Register - Swisscows Accounts"));
     }
     @Test
     public void testInstructionLinkNavigateToCorrespondingPage() {
