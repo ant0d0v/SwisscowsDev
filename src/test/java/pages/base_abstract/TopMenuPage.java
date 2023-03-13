@@ -262,10 +262,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return allLinksOnEmailPage;
     }
-    public List<String> getButtonColorsWhenHover() throws InterruptedException {
-
-        return  hoverToElements(allLinksOnEmailPage);
-    }
 
 
     public void waitTopMenuToBeInvisible(){

@@ -15,8 +15,10 @@ import static java.lang.Thread.sleep;
 
 
 public class EmailPage extends TopMenuPage<EmailPage> {
-    @FindBy(xpath = "//a[@href='https://swisscows.email/mbox/index.php/login/oauth'][text()='install web-app']")
+    @FindBy(xpath = "//div[@class='popup popup-install']//a")
     private WebElement InstallWebAppLink;
+    @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
+    private List<WebElement> allLinksOnEmailPage;
     public EmailPage(WebDriver driver) {
         super(driver);
     }
@@ -45,7 +47,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
         return this;
     }
-    public EmailPage hoverElement(){
+    public EmailPage hoverElement() throws InterruptedException {
         hover(InstallWebAppLink);
         return  this;
 
@@ -54,5 +56,13 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     public String backgroundColorOfElement() {
         return getBackgroundHoverColor(InstallWebAppLink);
 
+    }
+    public List<String> getButtonColorsWhenHover() throws InterruptedException {
+
+        return  getBackgroundHoverColorsOfElements(allLinksOnEmailPage);
+    }
+    public List<String> getButtonColors() throws InterruptedException {
+
+        return  getBackgroundColorsOfElements(allLinksOnEmailPage);
     }
 }

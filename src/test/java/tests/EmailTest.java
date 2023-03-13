@@ -69,7 +69,7 @@ public class EmailTest extends BaseTest {
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldH1Text, actualH1Text);
-        Assert.assertTrue(actualURL.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
+        Assert.assertTrue(actualURL.contains("https://accounts.swisscows.com/login?ReturnUrl="));
         Assert.assertEquals(actualH1Text, expectedH1text);
     }
 
@@ -137,8 +137,8 @@ public class EmailTest extends BaseTest {
                 .getCurrentURL();
         final String actualTitle = getExternalPageTitle();
 
-        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
-        Assert.assertTrue(actualTitle.contains("Login - Swisscows Accounts"));
+        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/login?ReturnUrl"));
+        Assert.assertTrue(actualTitle.contains("Login"));
     }
 
     @Test
@@ -152,32 +152,38 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(emailPage.isLogoIconDisplayed());
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
-    /*@Test
+    @Test
     public void testInstallEmailButtonColorWhenHover_EmailPage() throws InterruptedException {
-        final String actualLinksColor =openBaseURL()
+        EmailPage emailPage = new EmailPage(getDriver());
+        final String oldButtonColor = openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
                 .scrollToWhereToInstallEmail()
+                .backgroundColorOfElement();
+
+        final String newButtonColor  = emailPage
                 .hoverElement()
                 .backgroundColorOfElement();
 
-        Assert.assertTrue(actualLinksColor.contains("rgba(191, 0, 0,"));
-    }*/
-    /*@Test
+
+        Assert.assertNotEquals(newButtonColor,oldButtonColor);
+    }
+   @Test
     public void testAllButtonColorsWhenHover_EmailPage() throws InterruptedException {
+       EmailPage emailPage = new EmailPage(getDriver());
+       final List<String> oldButtonColorsWhenHover = openBaseURL()
+               .clickEmailTopMenu()
+               .closeWindow()
+               .switchToEmailPage()
+               .getButtonColors();
 
-        final List<String> actualButtonColorsWhenHover = openBaseURL()
-                .clickEmailTopMenu()
-                .closeWindow()
-                .switchToEmailPage()
-                .getButtonColorsWhenHover();
+       final List<String> newButtonColorsWhenHover = emailPage
+               .getButtonColorsWhenHover();
 
-        for (String searchCriteria : actualButtonColorsWhenHover) {
-            Assert.assertTrue(searchCriteria.contains("rgba(191, 0, 0,"));
-        }*/
+       Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
 
-
+   }
 
 
 }

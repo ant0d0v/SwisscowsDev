@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.WhoWeArePage;
+import pages.top_menu.EmailPage;
 import pages.top_menu.VpnPage;
 
 import java.util.List;
@@ -154,5 +155,34 @@ public class VpnTest extends BaseTest {
         Assert.assertTrue(vpnPagePage.isMozillaExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.isOtherExtensionIconDisplayed());
         Assert.assertTrue(vpnPagePage.allElementsDisplayed());
+    }
+    @Test
+    public void testAllButtonColorsWhenHover_VpnPage() throws InterruptedException {
+        VpnPage vpnPage = new VpnPage(getDriver());
+        final List<String> oldButtonColorsWhenHover = openBaseURL()
+                .clickVPNTopMenu()
+                .closeWindow()
+                .switchToVpnPage()
+                .getButtonColors();;
+
+        final List<String> newButtonColorsWhenHover = vpnPage
+                .getButtonColorsWhenHover();
+
+        Assert.assertNotEquals(newButtonColorsWhenHover,oldButtonColorsWhenHover);
+    }
+    @Test
+    public void testStarNowButtonColorWhenHover_VpnPage() throws InterruptedException {
+        VpnPage vpnPage = new VpnPage(getDriver());
+        final String oldButtonColor = openBaseURL()
+                .clickVPNTopMenu()
+                .closeWindow()
+                .switchToVpnPage()
+                .backgroundColorOfElement();
+
+        final String newButtonColor  = vpnPage
+                .hoverElement()
+                .backgroundColorOfElement();
+
+        Assert.assertNotEquals(newButtonColor,oldButtonColor);
     }
 }
