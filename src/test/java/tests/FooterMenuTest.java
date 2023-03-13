@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.*;
+import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.TestUtils;
 
@@ -448,6 +449,54 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertNotEquals(oldTitle, actualTitle);
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    @Test
+    public void testCopyrightOnFooterSearchPages() {
+        final String expectedCopyright = "© Swisscows AG, 2023";
+
+        final String actualCopyright = openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .scrollToFooterSearchPages()
+                .getCopyright();
+
+        Assert.assertEquals(actualCopyright, expectedCopyright);
+    }
+    @Test(dataProvider = "ExternalFooterSearchMenuData", dataProviderClass = TestData.class)
+    public void testExternalFooterSearchLinksNavigateToCorrespondingPages(
+            int index, String linkName, String href, String expectedURL, String expectedTitle) {
+        WebPage webPage = new WebPage(getDriver());
+
+        openBaseURL();
+
+        final String oldURL = webPage.getCurrentURL();
+        final String oldTitle = webPage.getTitle();
+
+        webPage
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .scrollToFooterSearchPages()
+                .clickFooterSearchMenuExternalLink(index);
+
+        final String actualURL = getExternalPageURL();
+        final String actualTitle = getExternalPageTitle();
+
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldTitle, actualTitle);
+        Assert.assertEquals(actualURL, expectedURL);
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    @Test
+    public void testFooterSearchMenuLinksAmount() {
+        final int expectedLinks = 8;
+
+        int actualLinks = openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .scrollToFooterSearchPages()
+                .getFooterMenuLinksCount();
+
+        Assert.assertEquals(actualLinks, expectedLinks);
     }
 
 }
