@@ -47,8 +47,9 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
         return this;
     }
-    public EmailPage hoverElement(){
+    public EmailPage hoverElement() throws InterruptedException {
         hover(InstallWebAppLink);
+        sleep(1000);
         return  this;
 
     }

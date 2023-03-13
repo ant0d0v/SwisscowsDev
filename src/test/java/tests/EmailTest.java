@@ -137,8 +137,8 @@ public class EmailTest extends BaseTest {
                 .getCurrentURL();
         final String actualTitle = getExternalPageTitle();
 
-        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
-        Assert.assertTrue(actualTitle.contains("Login - Swisscows Accounts"));
+        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/login?ReturnUrl"));
+        Assert.assertTrue(actualTitle.contains("Login"));
     }
 
     @Test
