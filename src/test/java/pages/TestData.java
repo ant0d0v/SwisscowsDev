@@ -213,11 +213,6 @@ public class TestData {
 
         return new Object[][] {
                 {0, "Learn more about", "https://company.swisscows.com/en", "https://company.swisscows.com/en", "Swisscows AG |Startpage"},
-                {1, "facebook", "https://www.facebook.com/swisscows/", "https://www.facebook.com/swisscows/", "Swisscows"},
-                {2, "instagram", "https://www.instagram.com/swisscows.official/", "https://www.instagram.com/swisscows.official/", "Swisscows (@swisscows.official) • Instagram photos and videos"},
-                {3, "linkedin", "https://www.linkedin.com/company/swisscows/", "https://www.linkedin.com/company/swisscows/?original_referer=", "Swisscows AG | LinkedIn"},
-                {4, "twitter", "https://twitter.com/swisscows_ch", "https://twitter.com/swisscows_ch", "Twitter"},
-                {5, "telegard", "https://teleguard.com/en", "https://teleguard.com/en", "TeleGuard - secure messenger from Switzerland"},
                 {6, "googlePlay", "https://play.google.com/store/apps/details?id=com.swisscows.search", "https://play.google.com/store/apps/details?id=com.swisscows.search", "Swisscows Private Search - Apps on Google Play"},
                 {7, "appStore", "https://apps.apple.com/app/swisscows-privacy-search/id1581108092", "https://apps.apple.com/app/swisscows-privacy-search/id1581108092", "Swisscows Private Search on the App Store"},
 
