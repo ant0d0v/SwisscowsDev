@@ -234,7 +234,7 @@ public class TopMenuTest extends BaseTest {
         final int expectedNumberOfOptionsHamburgerMenu = 11;
         final List<String> expectedHamburgerMenuListTexts = List.of(
                 "English", "Deutsch", "Español","Français", "Italiano", "Latviešu",
-                "Magyar","Nederlands", "Portugal", "Русский", "Українська"
+                "Magyar","Nederlands", "Português", "Русский", "Українська"
         );
         openBaseURL()
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU)

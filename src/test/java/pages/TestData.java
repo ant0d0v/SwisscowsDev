@@ -44,10 +44,10 @@ public class TestData {
 
         return new Object[][]{
                 {1, "Deutsch", "Swisscows als Startseite festlegen"},
-                {2, "Français", "Utiliser Swisscows comme page d'accueil"},
-                {3, "Italiano",  "Impostare Swisscows come pagina iniziale"},
-                {6, "Latviešu",  "Vai vēlaties iestatīt \"Swisscows\" kā sākumlapu"},
-                {7, "Magyar",  "How to set Swisscows as your start page"},
+                {2, "Español", "Establecer Swisscows como página de inicio"},
+                {3, "Français",  "Utiliser Swisscows comme page d'accueil"},
+                {6, "Magyar",  "How to set Swisscows as your start page"},
+                {7, "Nederlands",  "How to set Swisscows as your start page"},
 
 
         };
@@ -57,10 +57,10 @@ public class TestData {
 
         return new Object[][]{
                 {1, "Deutsch", "Standardsuche verwenden"},
-                {2, "Français", "Utiliser la recherche par défaut"},
-                {3, "Italiano",  "Utilizzare ricerca standard"},
-                {6, "Latviešu",  "Vai vēlaties izmantot \"Swisscows\" meklēšanai"},
-                {7, "Magyar",  "Használja a Swisscows-t alapértelmezett keresőként"},
+                {2, "Español", "Use la búsqueda estándar"},
+                {3, "Français",  "Utiliser la recherche par défaut"},
+                {6, "Magyar",  "Használja a Swisscows-t alapértelmezett keresőként"},
+                {7, "Nederlands",  "How to use Swisscows as default search"},
 
         };
     }
@@ -127,7 +127,7 @@ public class TestData {
 
         return new Object[][] {
                 {0, "Swisscows account Register", "https://accounts.swisscows.com/register", "https://accounts.swisscows.com/register",
-                        "Registration made easy!"},
+                        "Register"},
                 {1, "Google", "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
                         "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
                 {2, "Mozilla", "https://addons.mozilla.org/firefox/addon/swisscows-vpn/",

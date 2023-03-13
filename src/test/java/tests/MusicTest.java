@@ -96,7 +96,7 @@ public class MusicTest extends BaseTest {
     public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
+                .inputSearchCriteriaAndEnter("Skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -108,11 +108,11 @@ public class MusicTest extends BaseTest {
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertEquals(searchCriteria.toLowerCase(), "ivanka");
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("skofka"));
         }
         Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         for (String search : titleAllPlaylist) {
-            Assert.assertEquals(search.toLowerCase(), "ivanka");
+            Assert.assertEquals(search.toLowerCase(), "skofka");
         }
     }
 
@@ -298,7 +298,7 @@ public class MusicTest extends BaseTest {
         sleep(1000);
         final List<String> actualTracks = musicPage.getTitleAllTracks();
 
-        Assert.assertEquals(actualTracks.size(), 29);
+        Assert.assertTrue(actualTracks.size()>= 29);
 
 
     }

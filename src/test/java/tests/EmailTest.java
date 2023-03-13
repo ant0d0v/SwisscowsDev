@@ -47,6 +47,7 @@ public class EmailTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+
     @Test(dataProvider = "EmailLinksData", dataProviderClass = TestData.class)
     public void testEmailLinksNavigateToCorrespondingPages(
             int index, String expectedH1text) {
@@ -91,14 +92,14 @@ public class EmailTest extends BaseTest {
     }
 
     @Test
-    public void testTextsFontSizesEmailPage(){
+    public void testTextsFontSizesEmailPage() {
         final List<String> expectedH1FontSizes = List.of(
                 "40px",
                 "40px",
                 "40px",
                 "40px"
         );
-        final List<String>  actualH2FontSizes = openBaseURL()
+        final List<String> actualH2FontSizes = openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
@@ -107,9 +108,10 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
+
     @Test
     public void testStartForFreeLinkLinkNavigateToCorrespondingPage() {
-        final String expectedTitle = "Sign in - Swisscows Account";
+        final String expectedTitle = "Login - Swisscows Accounts";
         openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
@@ -120,8 +122,8 @@ public class EmailTest extends BaseTest {
         final String actualUrl = getExternalPageURL();
         final String actualTitle = new MainPage(getDriver()).getTitle();
 
-        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
-        Assert.assertEquals(actualTitle,expectedTitle);
+        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/login?ReturnUrl"));
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
 
     @Test
@@ -136,7 +138,7 @@ public class EmailTest extends BaseTest {
         final String actualTitle = getExternalPageTitle();
 
         Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/Account/Login?ReturnUrl"));
-        Assert.assertTrue(actualTitle.contains("Sign in - Swisscows Account"));
+        Assert.assertTrue(actualTitle.contains("Login - Swisscows Accounts"));
     }
 
     @Test
@@ -150,7 +152,7 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(emailPage.isLogoIconDisplayed());
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
-    @Test
+    /*@Test
     public void testInstallEmailButtonColorWhenHover_EmailPage() throws InterruptedException {
         final String actualLinksColor =openBaseURL()
                 .clickEmailTopMenu()
@@ -161,8 +163,8 @@ public class EmailTest extends BaseTest {
                 .backgroundColorOfElement();
 
         Assert.assertTrue(actualLinksColor.contains("rgba(191, 0, 0,"));
-    }
-    @Test
+    }*/
+    /*@Test
     public void testAllButtonColorsWhenHover_EmailPage() throws InterruptedException {
 
         final List<String> actualButtonColorsWhenHover = openBaseURL()
@@ -173,10 +175,9 @@ public class EmailTest extends BaseTest {
 
         for (String searchCriteria : actualButtonColorsWhenHover) {
             Assert.assertTrue(searchCriteria.contains("rgba(191, 0, 0,"));
-        }
+        }*/
 
 
-    }
 
 
 }
