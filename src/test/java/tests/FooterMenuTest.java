@@ -536,5 +536,4 @@ public class FooterMenuTest extends BaseTest {
             Assert.assertEquals(actualDomain, expectedDomain);
         }
     }
-
 }
