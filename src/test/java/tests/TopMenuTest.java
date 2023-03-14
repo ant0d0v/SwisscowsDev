@@ -541,7 +541,7 @@ public class TopMenuTest extends BaseTest {
 
         final String  actualValueHeartIcon = newsPage
                 .clickNewsButton()
-                .waitCharityValueCountChanged("2")
+                .waitUntilVisibilityNewsResult()
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
