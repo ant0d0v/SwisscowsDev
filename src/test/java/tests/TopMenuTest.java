@@ -411,7 +411,7 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLoginUserAndNicknameIsDysplaed() throws InterruptedException {
-        final String expectedNick = "a.qa@swisscows.email";
+        final String expectedNick = "a" +"\n" +"a.qa@swisscows.email";
 
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
@@ -541,7 +541,7 @@ public class TopMenuTest extends BaseTest {
 
         final String  actualValueHeartIcon = newsPage
                 .clickNewsButton()
-                .waitCharityValueCountChanged("1")
+                .waitCharityValueCountChanged("2")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
