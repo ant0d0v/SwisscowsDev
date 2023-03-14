@@ -545,7 +545,6 @@ public class TopMenuTest extends BaseTest {
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
-
     }
     @Test
     public void testHeartIconMessageIsDysplaed_SearchPages() {
