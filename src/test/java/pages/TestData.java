@@ -126,18 +126,12 @@ public class TestData {
     public static Object[][] VpnLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows account Register", "https://accounts.swisscows.com/register", "https://accounts.swisscows.com/register",
-                        "Register"},
-                {1, "Google", "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
-                        "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
-                {2, "Mozilla", "https://addons.mozilla.org/firefox/addon/swisscows-vpn/",
-                        "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
-                {3, "Learn More", "/en/vpn-instruction", "https://dev.swisscows.com/en/vpn-instruction",
-                        "Configuring Swisscows Proxy"},
-                {4, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
-                        "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
-                {5, "Swisscows account Sign In", "https://accounts.swisscows.com/subscriptions/vpn#monthly",
-                        "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
+                {0,"https://accounts.swisscows.com/register", "Register"},
+                {1, "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
+                {2, "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
+                {3, "https://dev.swisscows.com/en/vpn-instruction", "Configuring Swisscows Proxy"},
+                {4, "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
+                {5, "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
 
         };
     }

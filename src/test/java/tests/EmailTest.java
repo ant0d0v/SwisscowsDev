@@ -153,21 +153,18 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
     @Test
-    public void testInstallEmailButtonColorWhenHover_EmailPage() throws InterruptedException {
+    public void testStartAndInstallButtonsColorsWhenHover_EmailPage() throws InterruptedException {
         EmailPage emailPage = new EmailPage(getDriver());
-        final String oldButtonColor = openBaseURL()
+        final List<String> oldButtonColorsWhenHover = openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
-                .scrollToWhereToInstallEmail()
-                .backgroundColorOfElement();
+                .getButtonStartAndInstallColors();
 
-        final String newButtonColor  = emailPage
-                .hoverElement()
-                .backgroundColorOfElement();
+        final List<String> newButtonColorsWhenHover   = emailPage
+                .getButtonsStartAndInstallColorsWhenHover();
 
-
-        Assert.assertNotEquals(newButtonColor,oldButtonColor);
+        Assert.assertNotEquals(newButtonColorsWhenHover,oldButtonColorsWhenHover);
     }
    @Test
     public void testAllButtonColorsWhenHover_EmailPage() throws InterruptedException {
