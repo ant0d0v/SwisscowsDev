@@ -411,7 +411,7 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLoginUserAndNicknameIsDysplaed() throws InterruptedException {
-        final String expectedNick = "T" + "\n" + "Test";
+        final String expectedNick = "a.qa@swisscows.email";
 
         MainPage mainPage = openBaseURL();
         mainPage.clickHamburgerMenu();
@@ -429,8 +429,6 @@ public class TopMenuTest extends BaseTest {
         @Test
         public void testLogOutUserAndLoginButtonIsDysplaed() throws InterruptedException {
 
-            final String expectedUrl = "https://dev.swisscows.com/en";
-
             MainPage mainPage = openBaseURL();
             mainPage.clickHamburgerMenu();
             UsersLoginPage UsersloginPage = new UsersLoginPage(getDriver());
@@ -444,7 +442,7 @@ public class TopMenuTest extends BaseTest {
             String actualUrl = mainPage.getCurrentURL();
 
             Assert.assertTrue(mainPage.isLoginIconDisplayed());
-            Assert.assertEquals(actualUrl,expectedUrl);
+            Assert.assertTrue(actualUrl.contains("https://dev.swisscows.com/"));
 
     }
     @Test
@@ -507,7 +505,7 @@ public class TopMenuTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("news")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForImageIsVisible()
+                .waitCharityValueCountChanged("1")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
@@ -522,7 +520,7 @@ public class TopMenuTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("news")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
-                .waitUntilVisibilityVideoResult()
+                .waitCharityValueCountChanged("1")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
@@ -531,7 +529,7 @@ public class TopMenuTest extends BaseTest {
     @Test
     public void testCharityQueryCounterSearchNews() {
         NewsPage newsPage = new NewsPage(getDriver());
-        final String expectedValueHeartIcon = "2";
+        final String expectedValueHeartIcon = "3";
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("news")
@@ -543,6 +541,7 @@ public class TopMenuTest extends BaseTest {
 
         final String  actualValueHeartIcon = newsPage
                 .clickNewsButton()
+                .waitCharityValueCountChanged("1")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);

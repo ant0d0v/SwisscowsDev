@@ -440,7 +440,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new ImagePage(getDriver());
     }
     public NewsPage clickNewsButton() {
-        clickEnter(imageButton);
+        clickEnter(newsButton);
 
         return new NewsPage(getDriver());
     }
@@ -528,10 +528,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         goBack();
         return new MainPage(getDriver());
     }
-    public MainPage waitForCityCountryNameChanged(String oldText) {
+    public WebPage waitCharityValueCountChanged(String oldText) {
         waitTextToBeChanged(valueHeartIcon, oldText);
 
-        return new MainPage(getDriver());
+        return new WebPage(getDriver());
     }
 
     public void clickLangDropDown(int index) {
