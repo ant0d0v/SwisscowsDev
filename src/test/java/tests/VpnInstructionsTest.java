@@ -91,7 +91,7 @@ public class VpnInstructionsTest extends BaseTest {
     @Test
     public void testVpnExtensionsLinksNavigateToCorrespondingWebSites() {
         final List<String> links = List.of(
-                "https://chrome.google.com/webstore/detail/swisscowsvpnn",
+                "https://chrome.google.com/webstore/detail/swisscowsvpn",
                 "https://addons.mozilla.org/en-GB/firefox/addon/swisscows-vpn/"
 
         );

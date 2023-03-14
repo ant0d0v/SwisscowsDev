@@ -30,6 +30,7 @@ public final class BaseUtils {
         if (options != null) {
             for (String argument : options.split(";")) {
                 chromeOptions.addArguments(argument);
+                chromeOptions.addArguments("--remote-allow-origins=*");
             }
         }
 
