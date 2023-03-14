@@ -4,7 +4,6 @@
     <test name="/Users/">
         <classes>
             <class name="tests.VideoTest"/>
-
         </classes>
     </test>
 </suite>
