@@ -16,7 +16,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private List<WebElement> h2AllVideo;
     @FindBy(xpath = "//div[@class='video-results']//article")
     private WebElement videoResultContainer;
-    @FindBy(xpath = "//div[@class='related-searches']//li")
+    @FindBy(xpath = "//div[@class='related-searches']//li//a")
     private List<WebElement> listRelatedSearches;
     @FindBy(xpath = "//div[@class = 'brochure-wrap']//a[@href='/docs/Medienerziehung_2020_06_EN.pdf']")
     private WebElement buttonOpenFlyer;
@@ -93,6 +93,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public String getDurationButtonAttribute() {
 
         return getAttribute(durationAttribute, "class");
+    }
+    public List<String> getTextsColorsWhenHover() throws InterruptedException {
+
+        return  getHoverColorsOfElements(listRelatedSearches);
+    }
+    public List<String> getTextColors() throws InterruptedException {
+
+        return  getColorsOfElements(listRelatedSearches);
     }
 
 }

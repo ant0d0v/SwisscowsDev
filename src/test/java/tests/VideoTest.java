@@ -192,5 +192,23 @@ public class VideoTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,"https://dev.swisscows.com/en/video?query=ivanka");
     }
+    @Test
+    public void testHoverTextsRelatedSearch_VideoPage() throws InterruptedException {
+        VideoPage videoPage = new VideoPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ronaldo&region=");
+
+        final List<String> oldTextsColorsWhenHover = videoPage.getTextColors();
+        final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();
+
+        Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
+    }
 
 }
