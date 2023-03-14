@@ -563,5 +563,4 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualTextHeartPopup,expectedTextHeartPopup);
 
     }
-
 }
