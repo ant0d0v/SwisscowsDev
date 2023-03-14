@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v110.network.Network;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
