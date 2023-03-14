@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.accounts.UsersLoginPage;
+import pages.top_menu.NewsPage;
 import pages.top_menu.VpnPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
@@ -444,6 +445,123 @@ public class TopMenuTest extends BaseTest {
 
             Assert.assertTrue(mainPage.isLoginIconDisplayed());
             Assert.assertEquals(actualUrl,expectedUrl);
+
+    }
+    @Test
+    public void testHeartIconMessageIsDysplaed_MainPage() {
+
+        final String expectedTextHeartPopup = "This is the number of your Swisscows searches."
+                + " On average, 50 search queries finance a children's meal.";
+
+        final String  actualTextHeartPopup = openBaseURL()
+                .clickHeartIcon()
+                .getHeartPopupMessage();
+
+
+        Assert.assertEquals(actualTextHeartPopup,expectedTextHeartPopup);
+
+    }
+    @Test
+    public void testCharityQueryCounterAtTheBeginning_MainPage() {
+
+        final String expectedValueHeartIcon = "0";
+
+        final String  actualValueHeartIcon = openBaseURL()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testCharityQueryCounterAfterReloadPage_MainPage() {
+        final String expectedValueHeartIcon = "0";
+
+        final String  actualValueHeartIcon = openBaseURL()
+                .refreshMainPage()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testCharityQueryCounterSearchAndReloadPage_MainPage() {
+
+        final String expectedValueHeartIcon = "1";
+
+        final String  actualValueHeartIcon = openBaseURL()
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
+                .goBackToMainPage()
+                .refreshMainPage()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testCharityQueryCounterSearchImage() {
+
+        final String expectedValueHeartIcon = "2";
+
+        final String  actualValueHeartIcon = openBaseURL()
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitForImageIsVisible()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testCharityQueryCounterSearchVideo() {
+
+        final String expectedValueHeartIcon = "2";
+
+        final String  actualValueHeartIcon = openBaseURL()
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testCharityQueryCounterSearchNews() {
+        NewsPage newsPage = new NewsPage(getDriver());
+        final String expectedValueHeartIcon = "2";
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=news&region=de-DE");
+
+        final String  actualValueHeartIcon = newsPage
+                .clickNewsButton()
+                .getValueHeartIcon();
+
+        Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
+
+    }
+    @Test
+    public void testHeartIconMessageIsDysplaed_SearchPages() {
+
+        final String expectedTextHeartPopup = "This is the number of your Swisscows searches."
+                + " On average, 50 search queries finance a children's meal.";
+
+        final String  actualTextHeartPopup = openBaseURL()
+                .inputSearchCriteriaAndEnter("123")
+                .waitUntilVisibilityWebResult()
+                .clickHeartIcon()
+                .getHeartPopupMessage();
+
+
+        Assert.assertEquals(actualTextHeartPopup,expectedTextHeartPopup);
 
     }
 

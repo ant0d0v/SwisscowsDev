@@ -225,20 +225,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getText(h1HomeTitle);
     }
 
-    public String getH1Color() {
-
-        return getBackgroundColor(colorAndFontSizeOfH1Header);
-    }
-
-    public List<String> getH1FontSizes() {
-
-        return getFontSizes(h1TextsMainPage);
-    }
-
-    public int getAmountOftListOfQuestion() {
-
-        return getListSize(questionList);
-    }
 
     public String getLoadingText(String attribute) {
 
@@ -283,10 +269,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return "Wrong description";
     }
 
-    public String getNotificationMessage() {
-
-        return getText(notificationMessage);
-    }
 
     public List<WebElement> getDisplayedAPIIcons() {
         List<WebElement> displayedIcons = new ArrayList<>();
@@ -324,12 +306,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getListSize(getDisplayedAPIIcons());
     }
 
-
-    public List<String> getListOfEightDaysDataText() {
-        scrollByVisibleElement(currentDateFromEightDaysForecast);
-
-        return getTexts(listOfEightDaysData);
-    }
 
     public String getAdditionalInfoText() {
 
@@ -447,12 +423,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage waitForCityCountryNameChanged(String oldText) {
-        waitTextToBeChanged(h1HomeTitle, oldText);
-
-        return this;
-    }
-
     public boolean isPopupGoogleDisplayed() {
 
         return isElementDisplayed(googlePopupInstall);
@@ -535,12 +505,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return getListSize(suggestListMainPage);
     }
 
-    public MainPage scrollToPageBottom() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        return this;
-    }
 
     public void waitForImageInBannerDisappeared() {
         wait20ElementToBeVisible(homepageBannerImage);

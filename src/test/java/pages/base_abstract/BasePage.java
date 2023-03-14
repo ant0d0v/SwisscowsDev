@@ -329,6 +329,10 @@ public abstract class BasePage {
 
         getDriver().navigate().back();
     }
+    protected void refreshPage() {
+
+        getDriver().navigate().refresh();
+    }
 
     protected void selectOption(WebElement element, String text) {
         Select option = new Select(element);
