@@ -143,6 +143,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement videoButton;
     @FindBy(xpath = "//a[text()='Images']")
     private WebElement imageButton;
+    @FindBy(xpath = "//a[text()='News']")
+    private WebElement newsButton;
     @FindBy(xpath = "//button[@class ='button favorite'][1]")
     private WebElement favoriteIcon;
 
@@ -163,6 +165,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//div[@class ='filters-button']")
     private WebElement filterButton;
+    @FindBy(xpath = "//div[@class= 'badge']")
+    private WebElement heartIcon;
+    @FindBy(xpath = "//div[@class= 'search-counter']//div[@class='popup']//p[2]")
+    private WebElement popupHeartIcon;
+    @FindBy(xpath = "//span[@class= 'header-icon-title header-icon-title--charity']")
+    private WebElement valueHeartIcon;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -384,15 +392,16 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getTexts(textsAnswers);
     }
+    public String getHeartPopupMessage() {
+
+        return getText(popupHeartIcon);
+    }
 
     public void clickSetAsStartAppInHamburgerMenu() {
         click(setAsStartAppHamburgerMenu);
 
         new MainPage(getDriver());
     }
-
-
-
 
 
     public WebPage inputSearchCriteriaIntoSearchField(String text) {
@@ -430,6 +439,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new ImagePage(getDriver());
     }
+    public NewsPage clickNewsButton() {
+        clickEnter(newsButton);
+
+        return new NewsPage(getDriver());
+    }
     public VideoPage clickFilterButton() {
         clickByJavaScript(filterButton);
 
@@ -443,6 +457,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public WebPage clickSearchFieldHeader() {
         click(searchFieldHeader);
         return new WebPage(getDriver());
+    }
+    public MainPage clickHeartIcon() {
+        click(heartIcon);
+
+        return new MainPage(getDriver());
     }
 
     public boolean isPlaceholderDisplayed() {
@@ -496,10 +515,25 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new WebPage(getDriver());
     }
 
-    public String getEnteredValue() {
+    public String getValueHeartIcon() {
 
-        return getAttribute(searchFieldTopMenu, "value");
+        return getText(valueHeartIcon);
     }
+    public MainPage refreshMainPage() {
+        refreshPage();
+        wait10ElementToBeVisible(heartIcon);
+        return new MainPage(getDriver());
+    }
+    public MainPage goBackToMainPage() {
+        goBack();
+        return new MainPage(getDriver());
+    }
+    public WebPage waitCharityValueCountChanged(String oldText) {
+        waitTextToBeChanged(valueHeartIcon, oldText);
+
+        return new WebPage(getDriver());
+    }
+
     public void clickLangDropDown(int index) {
         click(LangDropDownIcon);
         click(getInnerLangMenuList().get(index));
