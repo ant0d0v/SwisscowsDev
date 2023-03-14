@@ -251,6 +251,20 @@ public abstract class BasePage {
         }
         return colorList;
     }
+    public List<String> getHoverColorsOfElements(List<WebElement> buttons) throws InterruptedException {
+        Actions actions = new Actions(getDriver());
+        List<String> colorList = new ArrayList<>();
+
+        for (WebElement button :  buttons) {
+            actions.moveToElement(button).build().perform();
+            if (button.isEnabled() && button.isDisplayed()) {
+                colorList.add(button.getCssValue("color"));
+
+            }
+
+        }
+        return colorList;
+    }
     public List<String> getBackgroundColorsOfElements(List<WebElement> buttons) throws InterruptedException {
 
         List<String> colorList = new ArrayList<>();
@@ -258,6 +272,19 @@ public abstract class BasePage {
         for (WebElement button :  buttons) {
             if (button.isEnabled() && button.isDisplayed()) {
                 colorList.add(button.getCssValue("background-color"));
+
+            }
+
+        }
+        return colorList;
+    }
+    public List<String> getColorsOfElements(List<WebElement> buttons) throws InterruptedException {
+
+        List<String> colorList = new ArrayList<>();
+
+        for (WebElement button :  buttons) {
+            if (button.isEnabled() && button.isDisplayed()) {
+                colorList.add(button.getCssValue("color"));
 
             }
 

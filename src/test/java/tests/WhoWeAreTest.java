@@ -70,8 +70,5 @@ public class WhoWeAreTest extends BaseTest {
 
     }
 
-
-
-
-    }
+}
 
