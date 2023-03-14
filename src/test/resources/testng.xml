@@ -4,6 +4,7 @@
     <test name="/Users/">
         <classes>
             <class name="tests.EmailTest"/>
+            <class name="tests.VpnPageTest"/>
             <class name="tests.VpnInstructionsTest"/>
         </classes>
     </test>
