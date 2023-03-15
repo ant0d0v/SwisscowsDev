@@ -217,16 +217,16 @@ public class FooterMenuTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testSwisscowsEmailPageFooterNavigatesToSwisscowsEmailSite() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedEmailURL = "https://dev.swisscows.com/en/swisscows-email";
         final String expectedH1Text = "A letter is your personal property!";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
-
-        mainPage.scrollToFooterMenu()
-                .clickSwisscowsEmail();
-        mainPage.switchToExternalPage();
+        mainPage
+                .scrollToFooterMenu()
+                .clickSwisscowsEmail()
+                .switchToExternalPage();
 
         final String actualH1text =mainPage.getH1Text();
 
@@ -240,17 +240,16 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testGooglePlayIconNavigatesToGooglePlayWeb() {
+        final String oldURL = openBaseURL().getCurrentURL();
         final String expectedURL = "https://play.google.com/store/apps/details?id=com.swisscows.search";
         final String expectedTitle = "Swisscows Private Search - Apps on Google Play";
 
-        final String oldURL = openBaseURL().getCurrentURL();
-
         MainPage mainPage = new MainPage(getDriver());
 
-        mainPage.scrollToFooterMenu()
-                .clickGooglePlayIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickGooglePlayIcon()
+                .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(), expectedURL);
@@ -315,7 +314,6 @@ public class FooterMenuTest extends BaseTest {
                 .scrollToFooterMenu()
                 .clickInstagramIcon()
                 .switchToExternalPage();
-
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
