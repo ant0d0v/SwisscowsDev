@@ -63,6 +63,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> topMenus;
     @FindBy(xpath = "//a[@class='badge-email']")
     private WebElement emailTopMenuSearch;
+
     @FindBy(xpath = "//a[@class='badge-vpn']")
     private WebElement vpnTopMenuSearch;
     @FindBy(xpath = "//a[@class='badge-tg']")

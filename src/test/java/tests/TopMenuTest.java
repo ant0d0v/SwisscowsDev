@@ -557,6 +557,7 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
+
     @Test
     public void testVpnIconNavigatesToVpnPage_SearchPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -592,4 +593,5 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedTitle);
 
     }
+
 }
