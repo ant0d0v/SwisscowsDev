@@ -557,4 +557,39 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
+    @Test
+    public void testVpnIconNavigatesToVpnPage_SearchPage() {
+        MainPage mainPage = new MainPage(getDriver());
+        final String expectedURL = "https://dev.swisscows.com/en/anonymous-vpn";
+        final String expectedTitle = "Anonymous web surfing with Swisscows";
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickVpnTopMenuSearch()
+                .switchToExternalPage();
+
+        final String actualH1text = mainPage.getH1Text();
+
+        Assert.assertEquals(getExternalPageURL(), expectedURL);
+        Assert.assertEquals(actualH1text,expectedTitle);
+
+    }
+    @Test
+    public void testTeleGuardIconNavigatesToTeleGuardPage_SearchPage() {
+        final String expectedURL = "https://teleguard.com/en";
+        final String expectedTitle = "TeleGuard - secure messenger from Switzerland";
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
+                .waitUntilVisibilityWebResult()
+                .clickTeleGuardTopMenuSearch()
+                .switchToExternalPage();
+
+        final String actualH1text = getExternalPageTitle();
+
+        Assert.assertEquals(getExternalPageURL(), expectedURL);
+        Assert.assertEquals(actualH1text,expectedTitle);
+
+    }
 }

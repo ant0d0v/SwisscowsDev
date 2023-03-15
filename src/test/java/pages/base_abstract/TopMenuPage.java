@@ -63,6 +63,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> topMenus;
     @FindBy(xpath = "//a[@class='badge-email']")
     private WebElement emailTopMenuSearch;
+    @FindBy(xpath = "//a[@class='badge-vpn']")
+    private WebElement vpnTopMenuSearch;
+    @FindBy(xpath = "//a[@class='badge-tg']")
+    private WebElement teleGuardTopMenuSearch;
 
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
@@ -362,6 +366,16 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         wait10ElementToBeVisible(emailTopMenuSearch);
         click(emailTopMenuSearch);
         return  new LoginPage (getDriver());
+    }
+    public VpnPage clickVpnTopMenuSearch() {
+        wait10ElementToBeVisible(vpnTopMenuSearch);
+        click(vpnTopMenuSearch);
+        return  new VpnPage (getDriver());
+    }
+    public MainPage clickTeleGuardTopMenuSearch() {
+        wait10ElementToBeVisible(teleGuardTopMenuSearch);
+        click(teleGuardTopMenuSearch);
+        return  new MainPage (getDriver());
     }
 
     public MainPage clickRegionTopMenu() {
