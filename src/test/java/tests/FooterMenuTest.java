@@ -315,7 +315,6 @@ public class FooterMenuTest extends BaseTest {
                 .clickInstagramIcon()
                 .switchToExternalPage();
 
-
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
 
