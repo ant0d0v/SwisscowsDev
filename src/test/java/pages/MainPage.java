@@ -333,21 +333,25 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public MainPage clickHomeBanner() {
         Actions action = new Actions(getDriver());
         action.doubleClick(homepageBanner).build().perform();
+        switchToAnotherWindow();
         return this;
     }
 
-    public void clickLinkLearnMoreInOurService() {
+    public MainPage clickLinkLearnMoreInOurService() {
         click(linkLearnMoreInOurService);
+        return new MainPage(getDriver());
 
     }
 
-    public void clickLinkFanShopInOurService() {
+    public MainPage clickLinkFanShopInOurService() {
         click(linkFanShopInOurService);
+        return new MainPage(getDriver());
 
     }
 
-    public void clickLinkWiebeBlogInOurService() {
+    public MainPage clickLinkWiebeBlogInOurService() {
         click(linkWiebeBlogInOurService);
+        return new MainPage(getDriver());
 
     }
     public MainPage clickQuestion1() {
@@ -367,8 +371,10 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-    public void clickLinkInQuestion4() {
+    public MainPage clickLinkInQuestion4() {
         click(linkInQuestion4);
+        switchToAnotherWindow();
+        return new MainPage(getDriver());
 
     }
 
@@ -506,9 +512,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-    public void waitForImageInBannerDisappeared() {
+    public MainPage waitForImageInBannerDisappeared() {
         wait20ElementToBeVisible(homepageBannerImage);
-
+      return new MainPage(getDriver());
     }
 
     public void waitForFooterPanelToBeVisible() {
@@ -522,14 +528,15 @@ public class MainPage extends FooterMenuPage<MainPage> {
         wait20ElementToBeVisible(suggestMainPage);
 
     }
-    public void waitForPopupGoogleInstallToBeVisible() {
+    public MainPage waitForPopupGoogleInstallToBeVisible() {
         wait20ElementToBeVisible(googlePopupInstall);
-
+        return new MainPage(getDriver());
 
     }
 
-    public void waitForAnswerToBeInvisible(){
+    public MainPage waitForAnswerToBeInvisible(){
       wait10ElementToBeInVisible(homepageOneAnswer);
+      return new MainPage(getDriver());
 
     }
 

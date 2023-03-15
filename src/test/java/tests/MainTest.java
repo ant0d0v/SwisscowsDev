@@ -67,13 +67,10 @@ public class MainTest extends BaseTest {
         MainPage mainPage = openBaseURL();
 
         final String oldUrl  = mainPage.getCurrentURL();
-        mainPage
-                .waitForImageInBannerDisappeared();
-        mainPage
+        final String actualUrl = mainPage
+                .waitForImageInBannerDisappeared()
                 .clickHomeBanner()
-                .switchToAnotherWindow();
-
-        final String actualUrl = mainPage.getCurrentURL();
+                .getCurrentURL();
 
         Assert.assertNotEquals(oldUrl,actualUrl);
         Assert.assertEquals(actualUrl,expectedUrl);
@@ -100,13 +97,12 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
-
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedValue = "swiper-slide swiper-slide-active";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .waitForImageInBannerDisappeared();
-        final String actualValue = mainPage.getClassAttributeSwitchSecond();
+        final String actualValue = openBaseURL()
+                .waitForImageInBannerDisappeared()
+                .getClassAttributeSwitchSecond();
 
         Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
         Assert.assertEquals(actualValue,expectedValue);
@@ -115,12 +111,16 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testCursorInSearchField() {
+    public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
 
         MainPage mainPage = openBaseURL();
 
-        mainPage.inputSearchCriteria(query);
+        mainPage
+                .inputSearchCriteria(query)
+                .clickSearchButton()
+                .waitUntilVisibilityWebResult();
+        Assert.assertEquals(getExternalPageURL(),"https://dev.swisscows.com/en/web?query=test");
 
     }
     @Test
@@ -148,18 +148,17 @@ public class MainTest extends BaseTest {
 
         MainPage mainPage = openBaseURL();
 
-        mainPage
+        final String actualClassAttributeQuestionOpen = mainPage
                 .scrollToQuestions()
-                .clickQuestion1();
-        final String actualClassAttributeQuestionOpen = mainPage.getClassAttributeQuestion1();
+                .clickQuestion1()
+                .getClassAttributeQuestion1();
 
         Assert.assertEquals(actualClassAttributeQuestionOpen,expectedClassOpen);
 
-        mainPage
+        final String actualClassAttributeQuestionCloses = mainPage
                 .clickQuestion1()
-                .waitForAnswerToBeInvisible();
-
-        final String actualClassAttributeQuestionCloses = mainPage.getClassAttributeQuestion1();
+                .waitForAnswerToBeInvisible()
+                .getClassAttributeQuestion1();
 
         Assert.assertEquals(actualClassAttributeQuestionCloses,expectedClassCloses);
 
@@ -171,12 +170,11 @@ public class MainTest extends BaseTest {
         final String expectedUrl = "https://dev.swisscows.com/en/default-search";
 
         MainPage mainPage = openBaseURL();
-        mainPage
+        final String actualUrl =mainPage
                 .scrollToQuestions()
                 .clickQuestion4()
-                .clickLinkInQuestion4();
-        mainPage.switchToAnotherWindow();
-        String actualUrl = mainPage.getCurrentURL();
+                .clickLinkInQuestion4()
+                .getCurrentURL();
 
         Assert.assertEquals(actualUrl,expectedUrl);
 
@@ -194,8 +192,8 @@ public class MainTest extends BaseTest {
                 .clickInstallGoogleBlockPopup()
                 .switchToAnotherWindow();
 
+        final String actualUrl = getExternalPageURL();
 
-        String actualUrl = getExternalPageURL();
         Assert.assertEquals(actualUrl,expectedUrl);
 
 
@@ -219,13 +217,13 @@ public class MainTest extends BaseTest {
     public void testClickebleLinkLearnMore() {
         final String expectedUrl = "https://hesbox.com/en";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        openBaseURL()
                 .scrollToOurService()
-                .clickLinkLearnMoreInOurService();
-        mainPage.switchToAnotherWindow();
+                .clickLinkLearnMoreInOurService()
+                .switchToAnotherWindow();
 
-        String actualLearnMoreUrl = getExternalPageURL();
+       final String actualLearnMoreUrl = getExternalPageURL();
+
         Assert.assertEquals(getExternalPageTitle(),"Enterprise Search Software for companies");
         Assert.assertEquals(actualLearnMoreUrl,expectedUrl);
 
@@ -239,10 +237,10 @@ public class MainTest extends BaseTest {
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToOurService()
-                .clickLinkFanShopInOurService();
-        mainPage.switchToAnotherWindow();
+                .clickLinkFanShopInOurService()
+                .switchToAnotherWindow();
 
-        String actualFanShopUrl = getExternalPageURL();
+        final String actualFanShopUrl = getExternalPageURL();
 
         Assert.assertEquals(getExternalPageTitle(),"Swisscows Fanshop für Kleider und Geschenke für Fans");
         Assert.assertEquals(actualFanShopUrl,expectedUrl);
@@ -257,8 +255,8 @@ public class MainTest extends BaseTest {
         MainPage mainPage = openBaseURL();
         mainPage
                 .scrollToOurService()
-                .clickLinkWiebeBlogInOurService();
-        mainPage.switchToAnotherWindow();
+                .clickLinkWiebeBlogInOurService()
+                .switchToAnotherWindow();
 
         final String actualWiebeBlogUrl = getExternalPageURL();
 
@@ -289,12 +287,12 @@ public class MainTest extends BaseTest {
 
         MainPage mainPage = openBaseURL();
         mainPage
-                .waitForPopupGoogleInstallToBeVisible();
-        mainPage
+                .waitForPopupGoogleInstallToBeVisible()
                 .clickPopupGoogle()
                 .switchToAnotherWindow();
 
-        String actualUrl = getExternalPageURL();
+        final String actualUrl = getExternalPageURL();
+
         Assert.assertEquals(actualUrl,expectedUrl);
 
 
