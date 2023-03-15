@@ -61,6 +61,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = TOP_MENU_ID + "//a")
     private List<WebElement> topMenus;
+    @FindBy(xpath = "//a[@class='badge-email']")
+    private WebElement emailTopMenuSearch;
 
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
@@ -272,8 +274,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
 
-    public void waitTopMenuToBeInvisible(){
+    public MainPage waitTopMenuToBeInvisible(){
         wait10ElementToBeInVisible(topMenuContainer);
+        return new MainPage(getDriver());
 
     }
 
@@ -338,22 +341,27 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
 
-    public void clickTeleGuardTopMenu() {
+    public MainPage clickTeleGuardTopMenu() {
         click(TeleGuardTopMenu);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
 
-    public void clickLanguagesTopMenu() {
+    public MainPage clickLanguagesTopMenu() {
         click20(LangDropDownIcon);
 
-        new MainPage(getDriver());
+        return new MainPage(getDriver());
     }
 
     public EmailPage clickEmailTopMenu() {
         click(EmailTopMenu);
 
         return  new EmailPage(getDriver());
+    }
+    public LoginPage clickEmailTopMenuSearch() {
+        wait10ElementToBeVisible(emailTopMenuSearch);
+        click(emailTopMenuSearch);
+        return  new LoginPage (getDriver());
     }
 
     public MainPage clickRegionTopMenu() {
@@ -397,10 +405,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getText(popupHeartIcon);
     }
 
-    public void clickSetAsStartAppInHamburgerMenu() {
+    public SetAsStartPage clickSetAsStartAppInHamburgerMenu() {
         click(setAsStartAppHamburgerMenu);
+        switchToAnotherWindow();
 
-        new MainPage(getDriver());
+        return new SetAsStartPage(getDriver());
     }
 
 
