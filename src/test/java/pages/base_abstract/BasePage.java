@@ -308,7 +308,7 @@ public abstract class BasePage {
         getDriver().manage().window().setSize(new Dimension(width, height));
     }
 
-    protected void switchToAnotherWindow() {
+    public void switchToAnotherWindow() {
         String originalWindow = getDriver().getWindowHandle();
 
         for (String windowHandle : getDriver().getWindowHandles()) {
