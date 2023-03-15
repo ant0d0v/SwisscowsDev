@@ -139,7 +139,7 @@ public class VpnPageTest extends BaseTest {
                 .clickInstructionsLink()
                 .getCurrentURL();
         final String actualTitle = new MainPage(getDriver()).getH1Text();
-        System.out.println(actualTitle);
+
 
         Assert.assertEquals(actualUrl, expectedUrl);
         Assert.assertTrue(actualTitle.contains("Configuring Swisscows Proxy"));

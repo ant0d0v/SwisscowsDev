@@ -16,12 +16,15 @@ public class WhoWeAreTest extends BaseTest {
         final String expectedH1Text = "The search engine without tracking – Swisscows";
 
         MainPage mainPage = openBaseURL();
-        String oldUrl = mainPage.getCurrentURL();
-        String actualText1 = mainPage
+
+        final String oldUrl = mainPage.getCurrentURL();
+        final String actualText1 = mainPage
                 .scrollToFooter()
                 .clickAboutUsFooterMenu()
                 .getH1Text();
-        String newUrl = mainPage.getCurrentURL();
+
+        final String newUrl = mainPage.getCurrentURL();
+
         Assert.assertNotEquals(oldUrl, newUrl);
         Assert.assertEquals(actualText1, expectedH1Text);
     }
@@ -53,14 +56,14 @@ public class WhoWeAreTest extends BaseTest {
         }
     @Test
     public void testLinksColorsWhoWeArePage() {
-        List<String> expectedLinksColors = List.of(
+        final List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)"
 
 
 
         );
-        List<String> actualLinksColors = openBaseURL()
+        final List<String> actualLinksColors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickAboutUsFooterMenu()
                 .getColorLinks();
