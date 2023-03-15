@@ -7,7 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
 import pages.footer_menu.*;
+import pages.top_menu.EmailPage;
 import pages.top_menu.WebPage;
 /*import pages.MainPage;
 import pages.WeatherStationsPage;
@@ -333,16 +335,20 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return new WhoWeArePage(getDriver());
     }
 
-    public void clickInstagramIcon() {
+    public MainPage clickInstagramIcon() {
         click20(instagramIconFooterMenu);
+        return new MainPage(getDriver());
     }
 
-    public void clickLinkedinIcon() {
+    public MainPage clickLinkedinIcon() {
         click20(linkedinIconFooterMenu);
+        return new MainPage(getDriver());
     }
 
-    public void clickSwisscowsEmail() {
+    public EmailPage clickSwisscowsEmail() {
+
         click20(SwisscowsEmailFooterMenu);
+        return new EmailPage(getDriver());
     }
     public ContactUsPage clickContactUsPageFooterMenu() {
         click(ContactusFooterMenu);
@@ -370,24 +376,31 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return new ImprintPage(getDriver());
     }
 
-    public void clickAppStoreIcon() {
+    public MainPage clickAppStoreIcon() {
         click20(downloadOnTheAppStoreLinkFooterMenu);
+        return new MainPage(getDriver());
     }
 
 
-    public void clickGooglePlayIcon() {
+    public MainPage clickGooglePlayIcon() {
         click20(downloadGooglePlayLinkFooterMenu);
+        return new MainPage(getDriver());
     }
 
-    public void clickFacebookIcon() {
+    public MainPage clickFacebookIcon() {
         click20(facebookIconFooterMenu);
+        return new MainPage(getDriver());
     }
 
-    public void clickTwitterIcon() {
+    public MainPage clickTwitterIcon() {
         click20(twitterIconFooterMenu);
+        return new MainPage(getDriver());
     }
 
-    public void clickTeleGuardIcon() { click20(teleGuardIconFooterMenu);}
+    public MainPage clickTeleGuardIcon() {
+        click20(teleGuardIconFooterMenu);
+        return new MainPage(getDriver());
+    }
 
 
     public boolean isStorePanelDisplayed() {

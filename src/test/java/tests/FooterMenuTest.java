@@ -267,9 +267,8 @@ public class FooterMenuTest extends BaseTest {
         MainPage mainPage = new MainPage(getDriver());
 
         mainPage.scrollToFooterMenu()
-                .clickAppStoreIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+                .clickAppStoreIcon()
+                .switchToExternalPage();;
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(), expectedURL);
@@ -289,16 +288,16 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testFacebookIconNavigatesToFacebookWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialFacebookURL = "facebook.com";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickFacebookIcon()
+                .switchToExternalPage();
 
-        mainPage.scrollToFooterMenu()
-                .clickFacebookIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
@@ -307,16 +306,16 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testInstagramIconNavigatesToInstagramWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialInstagramURL = "https://www.instagram.com/swisscows.official/";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickInstagramIcon()
+                .switchToExternalPage();
 
-        mainPage.scrollToFooterMenu()
-                .clickInstagramIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
@@ -324,16 +323,15 @@ public class FooterMenuTest extends BaseTest {
     }
     @Test
     public void testLinkedinIconNavigatesToLinkedinWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialFacebookURL = "linkedin.com";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
-
-        mainPage.scrollToFooterMenu()
-                .clickLinkedinIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickLinkedinIcon()
+                .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
@@ -342,16 +340,15 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testTwitterIconNavigatesToTwitterWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialInstagramURL = "https://twitter.com/swisscows_ch";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
-
-        mainPage.scrollToFooterMenu()
-                .clickTwitterIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickTwitterIcon()
+                .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
@@ -360,16 +357,15 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testTeleGardIconNavigatesToTeleGardWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialInstagramURL = "https://teleguard.com/en";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        MainPage mainPage = new MainPage(getDriver());
-
-        mainPage.scrollToFooterMenu()
-                .clickTeleGuardIcon();
-        mainPage.switchToExternalPage();
-        TestUtils.waitForPageLoaded(getDriver());
+        mainPage
+                .scrollToFooterMenu()
+                .clickTeleGuardIcon()
+                .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
@@ -419,7 +415,9 @@ public class FooterMenuTest extends BaseTest {
         final String oldURL = mainPage.getCurrentURL();
         final String oldH1Header = mainPage.getH1Text();
 
-        mainPage.scrollToFooterMenu().clickFooterMenu(index);
+        mainPage
+                .scrollToFooterMenu()
+                .clickFooterMenu(index);
 
         final String actualURL = mainPage.getCurrentURL();
         final String actualH1Header = mainPage.getH1Text();
@@ -440,7 +438,9 @@ public class FooterMenuTest extends BaseTest {
         final String oldURL = mainPage.getCurrentURL();
         final String oldTitle = mainPage.getTitle();
 
-        mainPage.scrollToFooterMenu().clickFooterMenuExternalLink(index);
+        mainPage
+                .scrollToFooterMenu()
+                .clickFooterMenuExternalLink(index);
 
         final String actualURL = getExternalPageURL();
         final String actualTitle = getExternalPageTitle();
