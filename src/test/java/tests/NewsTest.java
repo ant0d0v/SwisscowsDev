@@ -167,6 +167,7 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityNewsResult()
                 .getAttributeSecondButtonPagination();
 
+        Assert.assertTrue(newsPage.allImageIsDisplayed());
         Assert.assertEquals(actualAttribute,"number active");
 
     }
@@ -193,5 +194,28 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(oldTitle,newTitle);
 
     }
+    /*@Test
+    public void testUsingFilter_NewsPage() {
+        NewsPage newsPage = new NewsPage (getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .clickNewsButton()
+                .clickFilterButton()
+                .clickPreviousPagePagination()
+                .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE");
+
+        final String oldTitle = newsPage.getTitleNews();
+        final String newTitle = newsPage
+                .waitUntilVisibilityNewsResult()
+                .getTitleNews();
+
+        Assert.assertTrue(newsPage.allImageIsDisplayed());
+        Assert.assertEquals(oldTitle,newTitle);
+
+    }*/
 
 }
