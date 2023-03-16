@@ -117,7 +117,7 @@ public class EmailTest extends BaseTest {
                 .closeWindow()
                 .switchToEmailPage()
                 .clickStartForFreeLink()
-                .switchToRegisterPage();
+                .switchToExternalPage();
 
         final String actualUrl = getExternalPageURL();
         final String actualTitle = new MainPage(getDriver()).getTitle();

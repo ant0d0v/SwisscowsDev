@@ -251,6 +251,18 @@ public abstract class BasePage {
         }
         return colorList;
     }
+    public List<String> getSrcOfElements(List<WebElement> images){
+        List<String> colorList = new ArrayList<>();
+
+        for (WebElement image :  images) {
+            if (image.isEnabled() && image.isDisplayed()) {
+                colorList.add(image.getAttribute("src"));
+
+            }
+
+        }
+        return colorList;
+    }
     public List<String> getHoverColorsOfElements(List<WebElement> buttons) throws InterruptedException {
         Actions actions = new Actions(getDriver());
         List<String> colorList = new ArrayList<>();
@@ -299,9 +311,8 @@ public abstract class BasePage {
     }
 
     protected void inputAfterClear(WebElement element, String text) {
-        click(element);
-        clear(element);
-        input(text, element);
+        element.clear();
+        element.sendKeys(text);
     }
 
     protected void setWindowDimensions(int width, int height) {

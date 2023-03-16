@@ -178,6 +178,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement popupHeartIcon;
     @FindBy(xpath = "//span[@class= 'header-icon-title header-icon-title--charity']")
     private WebElement valueHeartIcon;
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
+    private WebElement regionBrazil;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
+    private WebElement thirdPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[4]")
+    private WebElement attributeThirdPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
+    private WebElement attributeSecondPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[1]")
+    private WebElement previousPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[last()]")
+    private WebElement nextPagePagination;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -316,6 +328,30 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    public NewsPage clickThirdPagePagination() {
+        click(thirdPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickPreviousPagePagination() {
+        click(previousPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickNextPagePagination() {
+        click(nextPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+
+    public String getAttributeThirdButtonPagination() {
+
+        return getAttribute(attributeThirdPagePagination,"class");
+    }
+    public String getAttributeSecondButtonPagination() {
+
+        return getAttribute(attributeSecondPagePagination,"class");
+    }
     public List <String> getColorLinks (){
 
         return getColors(allLinks);
@@ -428,13 +464,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
 
-    public WebPage inputSearchCriteriaIntoSearchField(String text) {
+    public void inputSearchCriteriaIntoSearchField(String text) {
         if (!getText(searchFieldTopMenu).isEmpty() && !getText(searchFieldTopMenu).isBlank()) {
             clear(searchFieldTopMenu);
         }
         input(text, searchFieldTopMenu);
 
-        return new WebPage(getDriver());
+        new WebPage(getDriver());
     }
 
     public WebPage clickEnter() {
@@ -473,24 +509,24 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new VideoPage(getDriver());
     }
+    public NewsPage clickRegionBrazil() {
+        click(regionBrazil);
+
+        return new NewsPage(getDriver());
+    }
     public void clickChoiceInDropDownList() {
         wait20ElementToBeVisible(searchDropdownMenu);
         click(choiceInDropdownMenu);
 
     }
-    public WebPage clickSearchFieldHeader() {
+    public void clickSearchFieldHeader() {
         click(searchFieldHeader);
-        return new WebPage(getDriver());
+        new WebPage(getDriver());
     }
     public MainPage clickHeartIcon() {
         click(heartIcon);
 
         return new MainPage(getDriver());
-    }
-
-    public boolean isPlaceholderDisplayed() {
-
-        return isElementDisplayed(searchBoxMainPage);
     }
 
     public boolean isHamburgerDropdownContainerDisplayed() {
@@ -533,10 +569,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(favoriteIcon);
         return new MusicPage(getDriver());
     }
-    public WebPage clickLangDeutsch() {
+    public void clickLangDeutsch() {
         wait10ElementToBeVisible(langDeutschInHamburgerMenu);
         click(langDeutschInHamburgerMenu);
-        return new WebPage(getDriver());
+        new WebPage(getDriver());
+    }
+    public NewsPage searchAfterClearSearchField(String text) {
+        inputAfterClear(searchFieldHeader,text);
+        return new NewsPage(getDriver());
     }
 
     public String getValueHeartIcon() {
@@ -606,11 +646,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<WebElement> getInnerRegionMenuList() {
 
         return innerRegionMenuList;
-    }
-    public RegisterPage switchToRegisterPage() {
-        switchToExternalPage();
-        return new RegisterPage(getDriver());
-
     }
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
