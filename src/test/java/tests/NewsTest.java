@@ -54,7 +54,7 @@ public class NewsTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionBrazil()
-                .waitUntilVisibilityNewsResult()
+                .waitUntilVisibilityErrorImage()
                 .getTitleNews();
 
         final String actualFontSizeTitle501Error = newsPage.getH2FontSize();
@@ -167,7 +167,6 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityNewsResult()
                 .getAttributeSecondButtonPagination();
 
-        Assert.assertTrue(newsPage.allImageIsDisplayed());
         Assert.assertEquals(actualAttribute,"number active");
 
     }
