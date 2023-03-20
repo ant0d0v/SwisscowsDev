@@ -258,7 +258,6 @@ public class WebPageTest extends BaseTest {
                 .waitForImageIsVisibleInNewsWidget()
                 .getTittleNewsWidget();
 
-
         Assert.assertTrue(webPage.imagesInNewsWidgetIsDisplayed());
         Assert.assertEquals(actualTitle,expectedTitle);
 
