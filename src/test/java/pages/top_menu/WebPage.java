@@ -35,7 +35,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     private List<WebElement> listRelatedSearches;
     @FindBy(xpath = "//div[@class='related-searches fade in']//li//a[1]")
     private WebElement firstTitleRelatedSearches;
-    @FindBy(xpath = "//section[@class='page-results']//article")
+    @FindBy(xpath = "//article[@class = 'item-web']//h2")
     private List<WebElement> listWebResult;
     @FindBy(xpath = "//p[@class='hint'][text()]")
     private WebElement didYpuMeanMessage;
@@ -166,6 +166,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getTexts(listRelatedSearches);
     }
     public List <String> getTitleInWebResult()  {
+
         return getTexts(listWebResult);
     }
     public WebPage clickFirstTitleInRelatedSearches()  {
@@ -225,6 +226,16 @@ public class WebPage extends TopMenuPage<WebPage> {
             getWait10().until(driver -> (Boolean) js.executeScript(
                     "return arguments[0].complete && typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0;",
                     image));
+        }
+        return this;
+
+    }
+    public WebPage waitTitlesIsVisibleInWebResult(){
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (WebElement title : listWebResult) {
+            getWait10().until(driver -> (Boolean) js.executeScript(
+                    "return arguments[0].complete && typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0;",
+                    title));
         }
         return this;
 

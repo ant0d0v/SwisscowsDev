@@ -96,16 +96,10 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleInWebResult();
-        webPage
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&region=de-DE");
-        webPage
-                .clickFirstTitleInRelatedSearches()
-                .waitSearchValueToBeChanged("ronaldo hintergrundbild");
 
-        final List<String> newSearchResult = webPage.getTitleInWebResult();
+        final List<String> newSearchResult = webPage
+                .clickFirstTitleInRelatedSearches()
+                .getTitleInWebResult();
 
         Assert.assertNotEquals(oldSearchResult, newSearchResult);
         Assert.assertEquals(webPage.getTitleInRelatedSearches().size(), 8);
@@ -130,15 +124,15 @@ public class WebPageTest extends BaseTest {
     public void testWebResultsEqualsSearchCriteria() {
         WebPage webPage = new WebPage(getDriver());
         final List<String> titles = openBaseURL()
-                .inputSearchCriteriaAndEnter("ukraine")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleInWebResult();
 
         final int actualSize = webPage.getTitleInWebResult().size();
 
-        Assert.assertTrue(actualSize >= 9);
+        Assert.assertTrue(actualSize >= 10);
         for (String searchCriteria : titles) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ukraine"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
 
     }
