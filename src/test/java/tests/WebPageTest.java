@@ -245,7 +245,6 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertNotEquals(getExternalPageURL(),oldUrl);
 
-
     }
     @Test
     public void testImagesAndTitleIsDysplaedInNewsWidget_WebPage() {
