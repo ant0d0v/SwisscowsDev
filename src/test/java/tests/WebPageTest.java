@@ -36,9 +36,10 @@ public class WebPageTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
+
     @Test
-    public void test404PageError_WebPage(){
-        WebPage webPage = new WebPage (getDriver());
+    public void test404PageError_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"yquwhjsbcfkjascgfiaff%^$&\"";
         final String expectedFontSizeTitle404Error = "40px";
@@ -50,10 +51,11 @@ public class WebPageTest extends BaseTest {
 
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
-        Assert.assertEquals(actualTitle404Error,expectedTitle404Error);
+        Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle404Error,expectedFontSizeTitle404Error);
+        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
+
     @Test
     public void testHoverTextsRelatedSearch_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
@@ -66,9 +68,10 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
     }
+
     @Test
     public void testRelatedSearchCriteria_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
@@ -80,15 +83,16 @@ public class WebPageTest extends BaseTest {
         final String actualRegion = webPage.getCurrentURL();
         final List<String> titleAllVideo = webPage.getTitleInRelatedSearches();
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/web?query=ronaldo&region=de-DE");
+        Assert.assertEquals(actualRegion, "https://dev.swisscows.com/en/web?query=ronaldo&region=de-DE");
         for (String search : titleAllVideo) {
             Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
         }
     }
+
     @Test
     public void testClickSearchCriteriaInRelatedSearch_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
-        final List <String> oldSearchResult =openBaseURL()
+        WebPage webPage = new WebPage(getDriver());
+        final List<String> oldSearchResult = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleInWebResult();
@@ -101,12 +105,13 @@ public class WebPageTest extends BaseTest {
                 .clickFirstTitleInRelatedSearches()
                 .waitSearchValueToBeChanged("ronaldo hintergrundbild");
 
-        final List <String> newSearchResult  = webPage.getTitleInWebResult();
+        final List<String> newSearchResult = webPage.getTitleInWebResult();
 
-        Assert.assertNotEquals(oldSearchResult,newSearchResult);
-        Assert.assertEquals(webPage.getTitleInRelatedSearches().size(),8);
+        Assert.assertNotEquals(oldSearchResult, newSearchResult);
+        Assert.assertEquals(webPage.getTitleInRelatedSearches().size(), 8);
 
     }
+
     @Test
     public void testSearchFieldDidYouMeanMessage_webPage() {
 
@@ -117,12 +122,13 @@ public class WebPageTest extends BaseTest {
                 .getTextDidYpuMeanMessage();
 
 
-        Assert.assertNotEquals(expectedResult,actualResult);
+        Assert.assertNotEquals(expectedResult, actualResult);
 
     }
+
     @Test
-    public void testWebResultsEqualsSearchCriteria(){
-        WebPage webPage = new WebPage (getDriver());
+    public void testWebResultsEqualsSearchCriteria() {
+        WebPage webPage = new WebPage(getDriver());
         final List<String> titles = openBaseURL()
                 .inputSearchCriteriaAndEnter("ukraine")
                 .waitUntilVisibilityWebResult()
@@ -136,9 +142,10 @@ public class WebPageTest extends BaseTest {
         }
 
     }
+
     @Test
     public void testNextButtonAndPrevButtonVideoWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo video")
                 .waitUntilVisibilityWebResult()
@@ -154,9 +161,10 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.firstImageInVideoWidgetIsDisplayed());
 
     }
+
     @Test
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo video")
                 .waitUntilVisibilityWebResult()
@@ -169,9 +177,10 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20video&region=de-DE"));
 
     }
+
     @Test
     public void testOpenVideoInVideoWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo video")
@@ -185,12 +194,13 @@ public class WebPageTest extends BaseTest {
                 .waitIUntilVisiblyVideoPlayer();
 
         Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20video&region=de-DE&id"));
-        Assert.assertEquals(getExternalPageTitle(),expectedTitle);
+        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
 
     }
+
     @Test
     public void testClickMoreImageButtonInImageWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle = "ronaldo in Images search - Swisscows";
         openBaseURL()
@@ -199,13 +209,14 @@ public class WebPageTest extends BaseTest {
                 .clickMoreImagesInVideoWidget()
                 .waitForImageIsVisible();
 
-        Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/images?query=ronaldo");
-        Assert.assertEquals(webPage.getTitle(),expectedTitle);
+        Assert.assertEquals(webPage.getCurrentURL(), "https://dev.swisscows.com/en/images?query=ronaldo");
+        Assert.assertEquals(webPage.getTitle(), expectedTitle);
 
     }
+
     @Test
     public void testImagesAndTitleIsDysplaedInImageWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Images for flover";
 
         final String actualTitle = openBaseURL()
@@ -216,12 +227,13 @@ public class WebPageTest extends BaseTest {
 
 
         Assert.assertTrue(webPage.imagesInImageWidgetIsDisplayed());
-        Assert.assertEquals(actualTitle,expectedTitle);
+        Assert.assertEquals(actualTitle, expectedTitle);
 
     }
+
     @Test
     public void testOpenImageInTheImageWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -231,13 +243,14 @@ public class WebPageTest extends BaseTest {
                 .clickFirstImageInImageWidget()
                 .switchToExternalPage();
 
-        Assert.assertNotEquals(getExternalPageURL(),oldUrl);
+        Assert.assertNotEquals(getExternalPageURL(), oldUrl);
 
 
     }
+
     @Test
     public void testOpenNewsInTheNewsWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -247,12 +260,13 @@ public class WebPageTest extends BaseTest {
                 .clickFirstNewsInNewsWidget()
                 .switchToExternalPage();
 
-        Assert.assertNotEquals(getExternalPageURL(),oldUrl);
+        Assert.assertNotEquals(getExternalPageURL(), oldUrl);
 
     }
+
     @Test
     public void testImagesAndTitleIsDysplaedInNewsWidget_WebPage() {
-        WebPage webPage = new WebPage (getDriver());
+        WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "News for ronaldo";
 
         final String actualTitle = openBaseURL()
@@ -262,8 +276,7 @@ public class WebPageTest extends BaseTest {
                 .getTittleNewsWidget();
 
         Assert.assertTrue(webPage.imagesInNewsWidgetIsDisplayed());
-        Assert.assertEquals(actualTitle,expectedTitle);
+        Assert.assertEquals(actualTitle, expectedTitle);
 
     }
-
 }
