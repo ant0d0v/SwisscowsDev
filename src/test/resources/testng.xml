@@ -4,6 +4,7 @@
     <test name="/Users/">
         <classes>
             <class name="tests.NewsTest"/>
+            <class name="tests.WebTest"/>
         </classes>
     </test>
 </suite>
