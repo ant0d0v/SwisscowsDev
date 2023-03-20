@@ -597,11 +597,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new WebPage(getDriver());
     }
-    public WebPage waitSearchValueToBeChanged(String oldText) {
-        waitTextToBeChanged(searchFieldHeader, oldText);
-
-        return new WebPage(getDriver());
-    }
 
     public void clickLangDropDown(int index) {
         click(LangDropDownIcon);

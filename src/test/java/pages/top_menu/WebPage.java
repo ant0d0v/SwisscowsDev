@@ -230,16 +230,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return this;
 
     }
-    public WebPage waitTitlesIsVisibleInWebResult(){
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        for (WebElement title : listWebResult) {
-            getWait10().until(driver -> (Boolean) js.executeScript(
-                    "return arguments[0].complete && typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0;",
-                    title));
-        }
-        return this;
 
-    }
     public WebPage waitForImageIsVisibleInNewsWidget(){
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement image : imagesInNewsWidget) {
