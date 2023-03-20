@@ -202,10 +202,10 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testImagesAndTitleIsDysplaedInImageWidget_WebPage() {
         WebPage webPage = new WebPage (getDriver());
-        final String expectedTitle = "Images for ronaldo";
+        final String expectedTitle = "Images for flover";
 
         final String actualTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("flover")
                 .waitUntilVisibilityWebResult()
                 .waitForImageIsVisibleInImagesWidget()
                 .getTittleImagesWidget();

@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -52,10 +53,13 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement buttonMoreImages;
     @FindBy(xpath = "//div[@class='video-player']")
     private WebElement videoPlayer;
-    @FindBy(xpath = "//div[@class='widget-images']//figure//img")
+    @FindBy(xpath = "//div[@class='widget-images']//figure//img[@src]")
     private List<WebElement>imagesInImageWidget;
+    @FindBy(xpath = "//div[@class='widget-images']")
+    private WebElement frameImageWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img")
     private List<WebElement>imagesInNewsWidget;
+
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
     private WebElement firstImageInImageWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
@@ -162,7 +166,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getTexts(listRelatedSearches);
     }
     public List <String> getTitleInWebResult()  {
-
+       areAllElementsVisibleAndClickable(listWebResult);
         return getTexts(listWebResult);
     }
     public WebPage clickFirstTitleInRelatedSearches()  {
@@ -217,19 +221,39 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     }
     public WebPage waitForImageIsVisibleInImagesWidget(){
-        areAllElementsVisibleAndClickable(imagesInImageWidget);
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (WebElement image : imagesInImageWidget) {
+            getWait10().until(driver -> (Boolean) js.executeScript(
+                    "return arguments[0].complete && typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0;",
+                    image));
+        }
         return this;
+
     }
     public WebPage waitForImageIsVisibleInNewsWidget(){
-        areAllElementsVisibleAndClickable(imagesInNewsWidget);
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (WebElement image : imagesInNewsWidget) {
+            getWait10().until(driver -> (Boolean) js.executeScript(
+                    "return arguments[0].complete && typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0;",
+                    image));
+        }
         return this;
+
     }
-    public boolean imagesInImageWidgetIsDisplayed(){
-        return areElementsInListDisplayed(imagesInImageWidget);
-    }
-    public boolean imagesInNewsWidgetIsDisplayed(){
-        return areElementsInListDisplayed(imagesInNewsWidget);
+    public boolean imagesInImageWidgetIsDisplayed() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (WebElement image : imagesInImageWidget) {
+         return (Boolean) js.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0", image);
+        }
+        return imagesInNewsWidgetIsDisplayed();
     }
 
+    public boolean imagesInNewsWidgetIsDisplayed(){
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        for (WebElement image : imagesInNewsWidget) {
+            return (Boolean) js.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0", image);
+        }
+        return imagesInNewsWidgetIsDisplayed();
+    }
 
 }

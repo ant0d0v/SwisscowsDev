@@ -66,10 +66,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     @FindBy(xpath = "//a[@class ='item favorite']")
     private WebElement favoriteItem;
 
-
-
-
-
     public ImagePage(WebDriver driver) {
         super(driver);
     }
