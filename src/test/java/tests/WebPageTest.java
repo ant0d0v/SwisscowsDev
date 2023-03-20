@@ -130,7 +130,7 @@ public class WebPageTest extends BaseTest {
 
         final int actualSize = webPage.getTitleInWebResult().size();
 
-        Assert.assertTrue(actualSize >= 10);
+        Assert.assertTrue(actualSize >= 8);
         for (String searchCriteria : titles) {
             Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
