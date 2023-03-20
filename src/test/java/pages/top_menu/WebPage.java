@@ -17,6 +17,19 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement footerSearchCopyright;
     @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']//a")
     private List<WebElement> innerFooterMenuLink;
+    @FindBy(xpath = "//div[@class='news-results']//figure")
+    private WebElement newsResultContainer;
+    @FindBy(xpath = "//h2[@class = 'title']")
+    private WebElement h2Text;
+
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
+    private WebElement regionBrazil;
+    @FindBy(xpath = "//div[@class='image']//img")
+    private WebElement errorImage;
+    @FindBy(xpath = "//figure//img")
+    private List<WebElement> allImageNewsPage;
+    @FindBy(xpath = "//ul[@class='pagination']//li[3]")
+    private WebElement secondPagePagination;
     public WebPage(WebDriver driver) {
         super(driver);
     }
@@ -52,6 +65,44 @@ public class WebPage extends TopMenuPage<WebPage> {
         areAllElementsVisibleAndClickable(innerFooterMenuLink);
 
         return getListSize(innerFooterMenuLink);
+    }
+
+    public WebPage waitUntilVisibilityErrorImage() {
+        wait20ElementToBeVisible(errorImage);
+
+        return new WebPage(getDriver());
+    }
+    public String getTitleH2Text()  {
+
+        return getText(h2Text);
+    }
+
+    public String getH2FontSize(){
+        return  getFontSize(h2Text);
+
+    }
+    public NewsPage clickRegionBrazil() {
+        click(regionBrazil);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickFirstPost() {
+        click(h2Text);
+
+        return new NewsPage(getDriver());
+    }
+
+    public boolean  errorImageIsDisplayed() {
+
+        return isElementDisplayed(errorImage);
+    }
+    public boolean  allImageIsDisplayed() {
+        areAllElementsVisibleAndClickable(allImageNewsPage);
+        return areElementsInListDisplayed(allImageNewsPage);
+    }
+    public List<String> getSrsOfImages() {
+
+        return getSrcOfElements(allImageNewsPage);
     }
 
 

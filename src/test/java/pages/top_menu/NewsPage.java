@@ -20,6 +20,8 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     private List<WebElement> allImageNewsPage;
     @FindBy(xpath = "//ul[@class='pagination']//li[3]")
     private WebElement secondPagePagination;
+    @FindBy(xpath = "//h2[@class = 'title']")
+    private List<WebElement> h2Texts;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -42,6 +44,10 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     public String getTitleNews()  {
 
         return getText(h2News);
+    }
+    public List<String> getTitleH2Texts()  {
+
+        return getTexts(h2Texts);
     }
     public String getH2FontSize(){
         return  getFontSize(h2News);
