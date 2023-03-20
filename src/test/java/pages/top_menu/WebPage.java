@@ -21,6 +21,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement newsResultContainer;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2Text;
+
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
     @FindBy(xpath = "//div[@class='image']//img")
@@ -75,6 +76,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(h2Text);
     }
+
     public String getH2FontSize(){
         return  getFontSize(h2Text);
 

@@ -168,6 +168,7 @@ public class NewsTest extends BaseTest {
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
+        Assert.assertEquals(newsPage.getTitleH2Texts().size(),10);
         Assert.assertEquals(actualAttribute,"number active");
 
     }
@@ -191,6 +192,7 @@ public class NewsTest extends BaseTest {
                 .getTitleNews();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
+        Assert.assertEquals(newsPage.getTitleH2Texts().size(),10);
         Assert.assertEquals(oldTitle,newTitle);
 
     }
