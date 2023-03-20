@@ -264,5 +264,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.imagesInNewsWidgetIsDisplayed());
         Assert.assertEquals(actualTitle,expectedTitle);
 
+
     }
+
 }
