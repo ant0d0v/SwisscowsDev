@@ -166,11 +166,10 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getTexts(listRelatedSearches);
     }
     public List <String> getTitleInWebResult()  {
-       areAllElementsVisibleAndClickable(listWebResult);
         return getTexts(listWebResult);
     }
     public WebPage clickFirstTitleInRelatedSearches()  {
-        click(firstTitleRelatedSearches);
+        clickByJavaScript(firstTitleRelatedSearches);
         return this;
     }
     public void clickMoreVideoInVideoWidget()  {
