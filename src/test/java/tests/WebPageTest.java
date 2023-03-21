@@ -41,10 +41,10 @@ public class WebPageTest extends BaseTest {
     public void test404PageError_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle404Error = "No results found for \"yquwhjsbcfkjascgfiaff%^$&\"";
+        final String expectedTitle404Error = "No results found for \"yquwhjsbcfkjascgfiaff%^$&dsadsadaddsadsadsadsaddsadsad\"";
         final String expectedFontSizeTitle404Error = "40px";
         final String actualTitle404Error = openBaseURL()
-                .inputSearchCriteriaAndEnter("yquwhjsbcfkjascgfiaff%^$&")
+                .inputSearchCriteriaAndEnter("yquwhjsbcfkjascgfiaff%^$&dsadsadaddsadsadsadsaddsadsad")
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
 
