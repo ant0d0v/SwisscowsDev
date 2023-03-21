@@ -163,6 +163,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     }
     public List<String> getAdsList(){
+        wait10ElementToBeVisible(firstAds);
         return  getTexts(adsList);
 
     }

@@ -480,10 +480,12 @@ public class WebPageTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionGerman();
         final String actualAdsText = webPage.getAdsText_WebPage();
+        final int actualSizes = webPage
+                .getAdsList().size();
 
 
         Assert.assertEquals(actualAdsText,expectedAdsText);
-        Assert.assertTrue(webPage.getAdsList().size()>= 1);
+        Assert.assertTrue(actualSizes >= 1);
 
 
     }
