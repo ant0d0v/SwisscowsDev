@@ -472,7 +472,7 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testAdvertising_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        final String expectedAdsText = "Ads by Microsoft ";
+        final String expectedAdsText = "Ads by Microsoft Data privacy";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("price")
                 .waitUntilVisibilityWebResult()
