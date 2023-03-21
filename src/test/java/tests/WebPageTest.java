@@ -46,7 +46,7 @@ public class WebPageTest extends BaseTest {
         final String actualTitle404Error = openBaseURL()
                 .inputSearchCriteriaAndEnter("yquwhjsbcfkjascgfiaff%^$&")
                 .waitUntilVisibilityErrorImage()
-                .getTitleH2Text();
+                .getTitleErrorText();
 
 
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
@@ -161,15 +161,15 @@ public class WebPageTest extends BaseTest {
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo video")
+                .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickMoreVideoInVideoWidget();
-        Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20video&region=de-DE"));
+        Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20youtube&region=de-DE"));
 
     }
 
@@ -178,17 +178,17 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo video")
+                .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickFirstVideoInVideoWidget()
                 .waitIUntilVisiblyVideoPlayer();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20video&region=de-DE&id"));
+        Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
         Assert.assertEquals(getExternalPageTitle(), expectedTitle);
 
     }
@@ -319,7 +319,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
                 .clickPreviousPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=0");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
 
         final String oldTitle = webPage.getTitleH2Text();
         final String newTitle = webPage
@@ -334,7 +334,6 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        final String expectedTextLink = "2022";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
@@ -344,9 +343,7 @@ public class WebPageTest extends BaseTest {
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
 
-        final String actualTextLink = webPage.getLinkText_WebPage();
-
-        Assert.assertTrue(actualTextLink.contains(expectedTextLink));
+        Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
 

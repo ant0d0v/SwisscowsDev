@@ -22,6 +22,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement newsResultContainer;
     @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;
+    @FindBy(xpath = "//h2[@class = 'title']")
+    private WebElement h2TextError;
     @FindBy(xpath = "//article[@class = 'item-web']//a[1]")
     private WebElement linkText;
 
@@ -70,15 +72,15 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement titleImageWidget;
     @FindBy(xpath = "//div[@class='widget']//p[@class='widget-title'][text()='News for ']")
     private WebElement titleNewsWidget;
-    @FindBy(xpath = "//div['web-results']//ul[@class]//li[3]")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[3]")
     private WebElement thirdPagePagination;
-    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[4]")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[4]")
     private WebElement attributeThirdPagePagination;
-    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[3]")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[3]")
     private WebElement attributeSecondPagePagination;
-    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[1]")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[@class='named previous']")
     private WebElement previousPagePagination;
-    @FindBy(xpath = "//div['web-results']//ul[@class]//li[last()]")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[last()]")
     private WebElement nextPagePagination;
     @FindBy(xpath = "//div[@class = 'filters']//div[@class='button-menu']")
     private WebElement buttonDateInFilter;
@@ -136,13 +138,16 @@ public class WebPage extends TopMenuPage<WebPage> {
         wait10ElementToBeVisible(h2Text);
         return getText(h2Text);
     }
+    public String getTitleErrorText()  {
+        return getText(h2TextError);
+    }
     public String getTextDidYpuMeanMessage()  {
 
         return getText(didYpuMeanMessage);
     }
 
     public String getH2FontSize(){
-        return  getFontSize(h2Text);
+        return  getFontSize(h2TextError);
 
     }
     public String getTittleImagesWidget(){
@@ -294,7 +299,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage (getDriver());
     }
     public WebPage  clickPreviousPagePagination_WebPage() {
-        click(previousPagePagination);
+        clickByJavaScript(previousPagePagination);
 
         return new WebPage (getDriver());
     }
