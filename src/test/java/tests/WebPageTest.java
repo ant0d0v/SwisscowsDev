@@ -335,6 +335,7 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+
         final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
