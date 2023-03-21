@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -335,17 +336,24 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
+        final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
+        webPage
                 .clickFilterButton();
         webPage
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
 
+        final String newTitle = webPage
+                .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
+
         Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
 
 
@@ -369,5 +377,86 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
+    }
+    @Test
+    public void testOpenWebPreview_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickPreviewButton()
+                .waitUntilVisibilityScreenshot();
+
+        Assert.assertTrue(webPage.screenshotIsDisplayed());
+
+    }
+    @Test
+    public void testCloseWebPreview_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickPreviewButton()
+                .waitUntilVisibilityScreenshot()
+                .clickCloseInScreenshot();
+
+        try {
+            webPage.screenshotIsDisplayedWebPage();
+            Assert.fail("Item is present on the page!");
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+
+        }
+
+    }
+    @Test
+    public void testOpenSiteInPreview_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String oldUrl = openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .getCurrentURL();
+        webPage
+                .clickPreviewButton()
+                .waitUntilVisibilityScreenshot()
+                .clickOpenButtonInScreenshot()
+                .switchToExternalPage();
+
+        Assert.assertNotEquals(getExternalPageURL(),oldUrl);
+
+    }
+    @Test
+    public void testOpenTrackersInPreview_WebPage() {
+
+        final List<String> trackersSize = openBaseURL()
+                .inputSearchCriteriaAndEnter("asdasd")
+                .waitUntilVisibilityWebResult()
+                .clickPreviewButton()
+                .waitUntilVisibilityScreenshot()
+                .clickTrackersButtonInScreenshot()
+                .getTrackersInScreenshot();
+
+
+        Assert.assertTrue(trackersSize.size() >= 2);
+
+    }
+    @Test
+    public void testClickScreenshotButtonInPreview_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("asdasd")
+                .waitUntilVisibilityWebResult()
+                .clickPreviewButton()
+                .waitUntilVisibilityScreenshot()
+                .clickTrackersButtonInScreenshot()
+                .clickTrackersButtonInScreenshot()
+                .waitUntilVisibilityScreenshot();
+
+        Assert.assertTrue(webPage.screenshotIsDisplayed());
+
+
+
     }
 }

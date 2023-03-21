@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -86,6 +87,20 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement buttonDateInFilter;
     @FindBy(xpath = "//div[@class = 'filters']//ul[@class='popup menu']//li[5]")
     private WebElement pastYearDateInDropDownOfFilter;
+    @FindBy(xpath = "//button[@class ='preview-link'][1]")
+    private WebElement previewButton;
+    @FindBy(xpath = "//div[@class ='screenshot fade in']//img")
+    private WebElement previewFrame;
+    @FindBy(xpath = "//button[@class ='close mobile-hidden']")
+    private WebElement closeButtonInScreenshot;
+    @FindBy(xpath = "//a[@class ='button button-preview mobile-hidden']")
+    private WebElement openButtonInScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']")
+    private WebElement trackersButtonInScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']//section")
+    private List<WebElement>trackersInScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']//section")
+    private WebElement trackersScreenshot;
 
 
     public WebPage(WebDriver driver) {
@@ -110,6 +125,10 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(footerSearchCopyright);
     }
+    public List<String> getTrackersInScreenshot() {
+        wait10ElementToBeVisible(trackersScreenshot);
+        return getTexts(trackersInScreenshot);
+    }
     public String getLinkText_WebPage() {
        wait10ElementToBeVisible(linkText);
         return getText(linkText);
@@ -131,6 +150,11 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     public WebPage waitUntilVisibilityErrorImage() {
         wait20ElementToBeVisible(errorImage);
+
+        return new WebPage(getDriver());
+    }
+    public WebPage waitUntilVisibilityScreenshot() {
+        wait20ElementToBeVisible(previewFrame);
 
         return new WebPage(getDriver());
     }
@@ -167,6 +191,19 @@ public class WebPage extends TopMenuPage<WebPage> {
         click(h2Text);
 
         return new NewsPage(getDriver());
+    }
+    public WebPage clickPreviewButton() {
+        click(previewButton);
+        return new WebPage(getDriver());
+    }
+    public WebPage clickOpenButtonInScreenshot() {
+        click(openButtonInScreenshot);
+        return new WebPage(getDriver());
+    }
+    public WebPage clickTrackersButtonInScreenshot() {
+        wait10ElementToBeVisible(trackersButtonInScreenshot);
+        click(trackersButtonInScreenshot);
+        return new WebPage(getDriver());
     }
     public WebPage clickButtonDateInFilter() {
         click(buttonDateInFilter);
@@ -219,6 +256,11 @@ public class WebPage extends TopMenuPage<WebPage> {
         click(buttonMoreImages);
         return new ImagePage(getDriver());
     }
+    public WebPage clickCloseInScreenshot()  {
+
+        click(closeButtonInScreenshot);
+        return new WebPage(getDriver());
+    }
     public ImagePage clickFirstImageInImageWidget()  {
 
         clickByJavaScript(firstImageInImageWidget);
@@ -245,6 +287,17 @@ public class WebPage extends TopMenuPage<WebPage> {
     public boolean lastImageInVideoWidgetIsDisplayed() {
         wait10ElementToBeVisible(lastImageInVideoWidget);
         return isElementDisplayed(lastImageInVideoWidget);
+
+    }
+    public boolean screenshotIsDisplayed() {
+
+        return isElementDisplayed(previewFrame);
+
+    }
+    public void screenshotIsDisplayedWebPage() {
+        getDriver().navigate().refresh();
+        getDriver().findElement(By.xpath("//div[@class ='screenshot fade in']"));
+        new WebPage(getDriver());
 
     }
     public boolean firstImageInVideoWidgetIsDisplayed() {
