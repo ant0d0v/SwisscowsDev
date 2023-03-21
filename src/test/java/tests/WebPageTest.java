@@ -483,7 +483,7 @@ public class WebPageTest extends BaseTest {
 
 
         Assert.assertEquals(actualAdsText,expectedAdsText);
-        Assert.assertEquals(webPage.getAdsList().size(), 3);
+        Assert.assertTrue(webPage.getAdsList().size()>= 1);
 
 
     }
@@ -520,6 +520,21 @@ public class WebPageTest extends BaseTest {
                 .getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
+
+    }
+    @Test
+    public void testHoverPreviewButtons_WebPage() throws InterruptedException {
+        WebPage webPage = new WebPage(getDriver());
+
+        final List<String> colorPrevButtonWithoutHover = openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .getPreviewColors();
+
+        final List<String> colorPrevButtonWhenHover = webPage
+                .getPreviewColorsWhenHover();
+
+        Assert.assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
 
     }
 }

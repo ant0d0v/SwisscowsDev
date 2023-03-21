@@ -79,6 +79,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement pastYearDateInDropDownOfFilter;
     @FindBy(xpath = "//button[@class ='preview-link'][1]")
     private WebElement previewButton;
+    @FindBy(xpath = "//button[@class ='preview-link']")
+    private List<WebElement> listPreviewButtons;
     @FindBy(xpath = "//div[@class ='screenshot fade in']//img")
     private WebElement previewFrame;
     @FindBy(xpath = "//button[@class ='close mobile-hidden']")
@@ -179,6 +181,14 @@ public class WebPage extends TopMenuPage<WebPage> {
     public List<String> getTextColors() throws InterruptedException {
 
         return  getColorsOfElements(listRelatedSearches);
+    }
+    public List<String> getPreviewColorsWhenHover() throws InterruptedException {
+
+        return  getHoverColorsOfElements(listPreviewButtons);
+    }
+    public List<String> getPreviewColors() throws InterruptedException {
+
+        return  getColorsOfElements(listPreviewButtons);
     }
     public String getAttributeThirdButtonPagination() {
 
