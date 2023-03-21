@@ -41,13 +41,10 @@ public class WebPageTest extends BaseTest {
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
         final String expectedFontSizeTitle404Error = "40px";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("rona")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .searchAfterClearSearchField("@#@$%^$^dasdsad1231")
-                .clickEnter();
+                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
 
         final String actualTitle404Error = webPage
                 .waitUntilVisibilityErrorImage()
