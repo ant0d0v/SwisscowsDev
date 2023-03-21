@@ -22,6 +22,16 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     private WebElement secondPagePagination;
     @FindBy(xpath = "//h2[@class = 'title']")
     private List<WebElement> h2Texts;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
+    private WebElement thirdPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[4]")
+    private WebElement attributeThirdPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
+    private WebElement attributeSecondPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[1]")
+    private WebElement previousPagePagination;
+    @FindBy(xpath = "//div['news-results']//ul[@class]//li[last()]")
+    private WebElement nextPagePagination;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -75,6 +85,30 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     public List<String> getSrsOfImages() {
 
         return getSrcOfElements(allImageNewsPage);
+    }
+    public NewsPage clickThirdPagePagination() {
+        click(thirdPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickPreviousPagePagination() {
+        click(previousPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickNextPagePagination() {
+        click(nextPagePagination);
+
+        return new NewsPage(getDriver());
+    }
+
+    public String getAttributeThirdButtonPagination() {
+
+        return getAttribute(attributeThirdPagePagination,"class");
+    }
+    public String getAttributeSecondButtonPagination() {
+
+        return getAttribute(attributeSecondPagePagination,"class");
     }
 
 }

@@ -4,9 +4,6 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.top_menu.ImagePage;
-import pages.top_menu.NewsPage;
-import pages.top_menu.VideoPage;
 import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 
@@ -41,20 +38,24 @@ public class WebPageTest extends BaseTest {
     public void test404PageError_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle404Error = "No results found for \"yquwhjsbcfkjascgfiaff%^$&\"";
+        final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
         final String expectedFontSizeTitle404Error = "40px";
-        final String actualTitle404Error = openBaseURL()
-                .inputSearchCriteriaAndEnter("yquwhjsbcfkjascgfiaff%^$&")
+        openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
+
+        final String actualTitle404Error = webPage
                 .waitUntilVisibilityErrorImage()
-                .getTitleH2Text();
-
-
+                .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
+
 
     @Test
     public void testHoverTextsRelatedSearch_WebPage() throws InterruptedException {
@@ -134,6 +135,7 @@ public class WebPageTest extends BaseTest {
         for (String searchCriteria : titles) {
             Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
+        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
 
     }
 
@@ -160,15 +162,15 @@ public class WebPageTest extends BaseTest {
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo video")
+                .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickMoreVideoInVideoWidget();
-        Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20video&region=de-DE"));
+        Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20youtube&region=de-DE"));
 
     }
 
@@ -177,17 +179,17 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo video")
+                .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickFirstVideoInVideoWidget()
                 .waitIUntilVisiblyVideoPlayer();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20video&region=de-DE&id"));
+        Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
         Assert.assertEquals(getExternalPageTitle(), expectedTitle);
 
     }
@@ -271,5 +273,101 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(webPage.imagesInNewsWidgetIsDisplayed());
         Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    @Test
+    public void testAnyNumberInPaging_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult();
+        final String oldTitle = webPage.getTitleH2Text();
+        webPage
+                .clickThirdPagePagination_WebPage()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=20");
+
+        final String newTitle = webPage.getTitleH2Text();
+        final String actualAttribute = webPage
+                .waitUntilVisibilityWebResult()
+                .getAttributeThirdButtonPagination();
+
+        Assert.assertNotEquals(oldTitle,newTitle);
+        Assert.assertEquals(actualAttribute,"number active");
+
+    }
+    @Test
+    public void testNextButtonInPaging_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickNextPagePagination_WebPage()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=10");
+
+        final String actualAttribute = webPage
+                .waitUntilVisibilityWebResult()
+                .getAttributeSecondButtonPagination();
+
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
+        Assert.assertEquals(actualAttribute,"number active");
+
+    }
+    @Test
+    public void testPreviousButtonInPaging_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickNextPagePagination_WebPage()
+                .clickPreviousPagePagination_WebPage()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+
+        final String oldTitle = webPage.getTitleH2Text();
+        final String newTitle = webPage
+                .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
+
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
+        Assert.assertEquals(oldTitle,newTitle);
+
+    }
+    @Test
+    public void testUsingFilter_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickFilterButton();
+        webPage
+                .clickButtonDateInFilter()
+                .clickPastYearInDropDownOfFilter()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
+
+        Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
+
+
+    }
+    @Test
+    public void testCancelFilter_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickFilterButton();
+
+        webPage
+                .clickButtonDateInFilter()
+                .clickPastYearInDropDownOfFilter()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
+        webPage
+                .clickFilterButton()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
     }
 }
