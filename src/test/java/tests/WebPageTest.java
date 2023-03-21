@@ -43,12 +43,15 @@ public class WebPageTest extends BaseTest {
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
         final String expectedFontSizeTitle404Error = "40px";
-        final String actualTitle404Error = openBaseURL()
+        openBaseURL()
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
                 .waitUntilVisibilityErrorImage()
-                .getTitleErrorText();
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&region=");
 
-
+        final String actualTitle404Error = webPage.getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
