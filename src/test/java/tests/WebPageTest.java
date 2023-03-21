@@ -4,9 +4,6 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.top_menu.ImagePage;
-import pages.top_menu.NewsPage;
-import pages.top_menu.VideoPage;
 import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 
