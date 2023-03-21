@@ -335,17 +335,24 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
+        final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
+        webPage
                 .clickFilterButton();
         webPage
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
 
+        final String newTitle = webPage
+                .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
+
         Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
 
 
