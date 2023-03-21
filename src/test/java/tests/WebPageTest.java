@@ -296,7 +296,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testNextButtonInPaging_WebPage() {
+    public void testNextButtonInPaging_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -304,8 +304,8 @@ public class WebPageTest extends BaseTest {
                 .clickNextPagePagination_WebPage()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=10");
 
+        sleep(1000);
         final String actualAttribute = webPage
-                .waitUntilVisibilityWebResult()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
