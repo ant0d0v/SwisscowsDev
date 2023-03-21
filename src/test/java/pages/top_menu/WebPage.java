@@ -20,8 +20,10 @@ public class WebPage extends TopMenuPage<WebPage> {
     private List<WebElement> innerFooterMenuLink;
     @FindBy(xpath = "//div[@class='news-results']//figure")
     private WebElement newsResultContainer;
-    @FindBy(xpath = "//h2[@class = 'title']")
+    @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;
+    @FindBy(xpath = "//article[@class = 'item-web']//a[1]")
+    private WebElement linkText;
 
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
@@ -68,6 +70,22 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement titleImageWidget;
     @FindBy(xpath = "//div[@class='widget']//p[@class='widget-title'][text()='News for ']")
     private WebElement titleNewsWidget;
+    @FindBy(xpath = "//div['web-results']//ul[@class]//li[3]")
+    private WebElement thirdPagePagination;
+    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[4]")
+    private WebElement attributeThirdPagePagination;
+    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[3]")
+    private WebElement attributeSecondPagePagination;
+    @FindBy(xpath = "//div['web-results']//ul[@class='pagination']//li[1]")
+    private WebElement previousPagePagination;
+    @FindBy(xpath = "//div['web-results']//ul[@class]//li[last()]")
+    private WebElement nextPagePagination;
+    @FindBy(xpath = "//div[@class = 'filters']//div[@class='button-menu']")
+    private WebElement buttonDateInFilter;
+    @FindBy(xpath = "//div[@class = 'filters']//ul[@class='popup menu']//li[5]")
+    private WebElement pastYearDateInDropDownOfFilter;
+
+
     public WebPage(WebDriver driver) {
         super(driver);
     }
@@ -90,6 +108,10 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(footerSearchCopyright);
     }
+    public String getLinkText_WebPage() {
+       wait10ElementToBeVisible(linkText);
+        return getText(linkText);
+    }
     public List<WebElement> getInnerFooterMenuLinks() {
 
         return innerFooterMenuLink;
@@ -111,7 +133,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     public String getTitleH2Text()  {
-
+        wait10ElementToBeVisible(h2Text);
         return getText(h2Text);
     }
     public String getTextDidYpuMeanMessage()  {
@@ -140,6 +162,16 @@ public class WebPage extends TopMenuPage<WebPage> {
         click(h2Text);
 
         return new NewsPage(getDriver());
+    }
+    public WebPage clickButtonDateInFilter() {
+        click(buttonDateInFilter);
+
+        return new WebPage(getDriver());
+    }
+    public WebPage clickPastYearInDropDownOfFilter() {
+        click(pastYearDateInDropDownOfFilter);
+
+        return new WebPage(getDriver());
     }
 
     public boolean  errorImageIsDisplayed() {
@@ -255,6 +287,30 @@ public class WebPage extends TopMenuPage<WebPage> {
             return (Boolean) js.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0", image);
         }
         return imagesInNewsWidgetIsDisplayed();
+    }
+    public WebPage clickThirdPagePagination_WebPage() {
+        click(thirdPagePagination);
+
+        return new WebPage (getDriver());
+    }
+    public WebPage  clickPreviousPagePagination_WebPage() {
+        click(previousPagePagination);
+
+        return new WebPage (getDriver());
+    }
+    public WebPage clickNextPagePagination_WebPage() {
+        click(nextPagePagination);
+
+        return new WebPage(getDriver());
+    }
+
+    public String getAttributeThirdButtonPagination() {
+
+        return getAttribute(attributeThirdPagePagination,"class");
+    }
+    public String getAttributeSecondButtonPagination() {
+
+        return getAttribute(attributeSecondPagePagination,"class");
     }
 
 }

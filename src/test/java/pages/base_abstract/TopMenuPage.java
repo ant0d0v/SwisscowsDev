@@ -180,16 +180,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
-    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
-    private WebElement thirdPagePagination;
-    @FindBy(xpath = "//div['news-results']//ul[@class]//li[4]")
-    private WebElement attributeThirdPagePagination;
-    @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")
-    private WebElement attributeSecondPagePagination;
-    @FindBy(xpath = "//div['news-results']//ul[@class]//li[1]")
-    private WebElement previousPagePagination;
-    @FindBy(xpath = "//div['news-results']//ul[@class]//li[last()]")
-    private WebElement nextPagePagination;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -327,30 +317,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(RegionGerman);
 
         return new MainPage(getDriver());
-    }
-    public NewsPage clickThirdPagePagination() {
-        click(thirdPagePagination);
-
-        return new NewsPage(getDriver());
-    }
-    public NewsPage clickPreviousPagePagination() {
-        click(previousPagePagination);
-
-        return new NewsPage(getDriver());
-    }
-    public NewsPage clickNextPagePagination() {
-        click(nextPagePagination);
-
-        return new NewsPage(getDriver());
-    }
-
-    public String getAttributeThirdButtonPagination() {
-
-        return getAttribute(attributeThirdPagePagination,"class");
-    }
-    public String getAttributeSecondButtonPagination() {
-
-        return getAttribute(attributeSecondPagePagination,"class");
     }
     public List <String> getColorLinks (){
 
