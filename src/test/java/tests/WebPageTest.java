@@ -62,6 +62,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
 
+
     @Test
     public void testHoverTextsRelatedSearch_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
