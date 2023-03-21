@@ -1,13 +1,10 @@
 package tests;
 
 import base.BaseTest;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.WebPage;
-import tests.retrytest.Retry;
-
 import java.util.List;
 
 public class WebPageTest extends BaseTest {
@@ -456,7 +453,90 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(webPage.screenshotIsDisplayed());
 
+    }
+    @Test
+    public void testChangeLanguage_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .clickHamburgerMenu()
+                .clickLanguagesTopMenu()
+                .clickLangDeutsch();
 
+
+        Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/de/web?query=ronaldo");
+        Assert.assertTrue(webPage.getTitle().contains("in Web suchen - Swisscows"));
+
+    }
+    @Test
+    public void testAdvertising_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+        final String expectedAdsText = "Ads by Microsoft Data privacy";
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("price")
+                .waitUntilVisibilityWebResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman();
+        final String actualAdsText = webPage.getAdsText_WebPage();
+        final int actualSizes = webPage
+                .getAdsList().size();
+
+
+        Assert.assertEquals(actualAdsText,expectedAdsText);
+        Assert.assertTrue(actualSizes >= 1);
+
+
+    }
+    @Test
+    public void testOpenAdvertising_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String oldUrl = openBaseURL()
+                .inputSearchCriteriaAndEnter("price")
+                .waitUntilVisibilityWebResult()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .getCurrentURL();
+
+        final String newUrl = webPage
+                .clickFirstAds()
+                .getCurrentURL();
+
+        Assert.assertNotEquals(newUrl,oldUrl);
+
+    }
+    @Test
+    public void testOpenAnyLinkInWebResult_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String oldUrl = openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .getCurrentURL();
+
+        final String newUrl = webPage
+                .clickFirstLinkInWebResult()
+                .getCurrentURL();
+
+        Assert.assertNotEquals(newUrl,oldUrl);
+
+    }
+    @Test
+    public void testHoverPreviewButtons_WebPage() throws InterruptedException {
+        WebPage webPage = new WebPage(getDriver());
+
+        final List<String> colorPrevButtonWithoutHover = openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
+                .getPreviewColors();
+
+        final List<String> colorPrevButtonWhenHover = webPage
+                .getPreviewColorsWhenHover();
+
+        Assert.assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
 
     }
 }

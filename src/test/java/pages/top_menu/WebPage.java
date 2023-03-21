@@ -19,29 +19,22 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement footerSearchCopyright;
     @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']//a")
     private List<WebElement> innerFooterMenuLink;
-    @FindBy(xpath = "//div[@class='news-results']//figure")
-    private WebElement newsResultContainer;
     @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2TextError;
-    @FindBy(xpath = "//article[@class = 'item-web']//a[1]")
-    private WebElement linkText;
-
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
     @FindBy(xpath = "//div[@class='image']//img")
     private WebElement errorImage;
-    @FindBy(xpath = "//figure//img")
-    private List<WebElement> allImageNewsPage;
-    @FindBy(xpath = "//ul[@class='pagination']//li[3]")
-    private WebElement secondPagePagination;
     @FindBy(xpath = "//div[@class='related-searches fade in']//li//a")
     private List<WebElement> listRelatedSearches;
     @FindBy(xpath = "//div[@class='related-searches fade in']//li//a[1]")
     private WebElement firstTitleRelatedSearches;
     @FindBy(xpath = "//article[@class = 'item-web']//h2")
     private List<WebElement> listWebResult;
+    @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
+    private WebElement firstLinkWebResult;
     @FindBy(xpath = "//p[@class='hint'][text()]")
     private WebElement didYpuMeanMessage;
     @FindBy(xpath = "//button[@class][2]")
@@ -60,11 +53,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement videoPlayer;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[@src]")
     private List<WebElement>imagesInImageWidget;
-    @FindBy(xpath = "//div[@class='widget-images']")
-    private WebElement frameImageWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img")
     private List<WebElement>imagesInNewsWidget;
-
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
     private WebElement firstImageInImageWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
@@ -89,6 +79,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement pastYearDateInDropDownOfFilter;
     @FindBy(xpath = "//button[@class ='preview-link'][1]")
     private WebElement previewButton;
+    @FindBy(xpath = "//button[@class ='preview-link']")
+    private List<WebElement> listPreviewButtons;
     @FindBy(xpath = "//div[@class ='screenshot fade in']//img")
     private WebElement previewFrame;
     @FindBy(xpath = "//button[@class ='close mobile-hidden']")
@@ -101,6 +93,12 @@ public class WebPage extends TopMenuPage<WebPage> {
     private List<WebElement>trackersInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers fade in']//section")
     private WebElement trackersScreenshot;
+    @FindBy(xpath = "//div[@class='a11t-privacy']")
+    private WebElement adsText;
+    @FindBy(xpath = "//div[@class='a11t']//article")
+    private List<WebElement> adsList;
+    @FindBy(xpath = "//div[@class='a11t']//article//a[1]")
+    private WebElement firstAds;
 
 
     public WebPage(WebDriver driver) {
@@ -111,27 +109,21 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return new WebPage(getDriver());
     }
-    public WebPage waitUntilVisibilityWebResult() {
-        wait20ElementToBeVisible(webResultContainer);
 
-        return this;
-    }
-    public WebPage scrollToFooterSearchPages() {
-        scrollByVisibleElement(footerFooterSearchPages);
-
-        return new WebPage(getDriver());
-    }
     public String getCopyright() {
 
         return getText(footerSearchCopyright);
     }
+    public String getTitleH2Text()  {
+        wait10ElementToBeVisible(h2Text);
+        return getText(h2Text);
+    }
+    public String getAdsText_WebPage() {
+        return getText(adsText);
+    }
     public List<String> getTrackersInScreenshot() {
         wait10ElementToBeVisible(trackersScreenshot);
         return getTexts(trackersInScreenshot);
-    }
-    public String getLinkText_WebPage() {
-       wait10ElementToBeVisible(linkText);
-        return getText(linkText);
     }
     public List<WebElement> getInnerFooterMenuLinks() {
 
@@ -148,20 +140,8 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getListSize(innerFooterMenuLink);
     }
 
-    public WebPage waitUntilVisibilityErrorImage() {
-        wait20ElementToBeVisible(errorImage);
 
-        return new WebPage(getDriver());
-    }
-    public WebPage waitUntilVisibilityScreenshot() {
-        wait20ElementToBeVisible(previewFrame);
 
-        return new WebPage(getDriver());
-    }
-    public String getTitleH2Text()  {
-        wait10ElementToBeVisible(h2Text);
-        return getText(h2Text);
-    }
     public String getTitleErrorText()  {
         return getText(h2TextError);
     }
@@ -182,18 +162,58 @@ public class WebPage extends TopMenuPage<WebPage> {
         return  getText(titleNewsWidget);
 
     }
+    public List<String> getAdsList(){
+        wait10ElementToBeVisible(firstAds);
+        return  getTexts(adsList);
+
+    }
+    public List <String> getTitleInRelatedSearches()  {
+        return
+                getTexts(listRelatedSearches);
+    }
+    public List <String> getTitleInWebResult()  {
+
+        return getTexts(listWebResult);
+    }
+    public List<String> getTextsColorsWhenHover() throws InterruptedException {
+
+        return  getHoverColorsOfElements(listRelatedSearches);
+    }
+    public List<String> getTextColors() throws InterruptedException {
+
+        return  getColorsOfElements(listRelatedSearches);
+    }
+    public List<String> getPreviewColorsWhenHover() throws InterruptedException {
+
+        return  getHoverColorsOfElements(listPreviewButtons);
+    }
+    public List<String> getPreviewColors() throws InterruptedException {
+
+        return  getColorsOfElements(listPreviewButtons);
+    }
+    public String getAttributeThirdButtonPagination() {
+
+        return getAttribute(attributeThirdPagePagination,"class");
+    }
+    public String getAttributeSecondButtonPagination() {
+
+        return getAttribute(attributeSecondPagePagination,"class");
+    }
     public NewsPage clickRegionBrazil() {
         click(regionBrazil);
 
         return new NewsPage(getDriver());
     }
-    public NewsPage clickFirstPost() {
-        click(h2Text);
-
-        return new NewsPage(getDriver());
-    }
     public WebPage clickPreviewButton() {
         click(previewButton);
+        return new WebPage(getDriver());
+    }
+    public WebPage clickFirstAds() {
+        click(firstAds);
+        return new WebPage(getDriver());
+    }
+    public WebPage clickFirstLinkInWebResult() {
+        click(firstLinkWebResult);
         return new WebPage(getDriver());
     }
     public WebPage clickOpenButtonInScreenshot() {
@@ -216,33 +236,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
 
-    public boolean  errorImageIsDisplayed() {
 
-        return isElementDisplayed(errorImage);
-    }
-    public boolean  allImageIsDisplayed() {
-        areAllElementsVisibleAndClickable(allImageNewsPage);
-        return areElementsInListDisplayed(allImageNewsPage);
-    }
-    public List<String> getSrsOfImages() {
-
-        return getSrcOfElements(allImageNewsPage);
-    }
-    public List<String> getTextsColorsWhenHover() throws InterruptedException {
-
-        return  getHoverColorsOfElements(listRelatedSearches);
-    }
-    public List<String> getTextColors() throws InterruptedException {
-
-        return  getColorsOfElements(listRelatedSearches);
-    }
-    public List <String> getTitleInRelatedSearches()  {
-        return getTexts(listRelatedSearches);
-    }
-    public List <String> getTitleInWebResult()  {
-
-        return getTexts(listWebResult);
-    }
     public WebPage clickFirstTitleInRelatedSearches()  {
         clickByJavaScript(firstTitleRelatedSearches);
         return this;
@@ -271,6 +265,21 @@ public class WebPage extends TopMenuPage<WebPage> {
         clickByJavaScript(firstNewsInNewsWidget);
         return new ImagePage(getDriver());
     }
+    public WebPage clickThirdPagePagination_WebPage() {
+        click(thirdPagePagination);
+
+        return new WebPage (getDriver());
+    }
+    public WebPage  clickPreviousPagePagination_WebPage() {
+        clickByJavaScript(previousPagePagination);
+
+        return new WebPage (getDriver());
+    }
+    public WebPage clickNextPagePagination_WebPage() {
+        click(nextPagePagination);
+
+        return new WebPage(getDriver());
+    }
     public void clickNextButtonVideoWidget() {
 
         clickElementUntilInvisible(nextButtonInVideoWidget);
@@ -289,10 +298,29 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(lastImageInVideoWidget);
 
     }
+    public WebPage waitUntilVisibilityWebResult() {
+        wait20ElementToBeVisible(webResultContainer);
+
+        return this;
+    }
+    public WebPage waitUntilVisibilityErrorImage() {
+        wait20ElementToBeVisible(errorImage);
+
+        return new WebPage(getDriver());
+    }
+    public WebPage waitUntilVisibilityScreenshot() {
+        wait20ElementToBeVisible(previewFrame);
+
+        return new WebPage(getDriver());
+    }
     public boolean screenshotIsDisplayed() {
 
         return isElementDisplayed(previewFrame);
 
+    }
+    public boolean  errorImageIsDisplayed() {
+
+        return isElementDisplayed(errorImage);
     }
     public void screenshotIsDisplayedWebPage() {
         getDriver().navigate().refresh();
@@ -346,29 +374,11 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
         return imagesInNewsWidgetIsDisplayed();
     }
-    public WebPage clickThirdPagePagination_WebPage() {
-        click(thirdPagePagination);
 
-        return new WebPage (getDriver());
-    }
-    public WebPage  clickPreviousPagePagination_WebPage() {
-        clickByJavaScript(previousPagePagination);
-
-        return new WebPage (getDriver());
-    }
-    public WebPage clickNextPagePagination_WebPage() {
-        click(nextPagePagination);
+    public WebPage scrollToFooterSearchPages() {
+        scrollByVisibleElement(footerFooterSearchPages);
 
         return new WebPage(getDriver());
-    }
-
-    public String getAttributeThirdButtonPagination() {
-
-        return getAttribute(attributeThirdPagePagination,"class");
-    }
-    public String getAttributeSecondButtonPagination() {
-
-        return getAttribute(attributeSecondPagePagination,"class");
     }
 
 }
