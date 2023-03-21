@@ -45,13 +45,14 @@ public class WebPageTest extends BaseTest {
         final String expectedFontSizeTitle404Error = "40px";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
-                .waitUntilVisibilityErrorImage()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=%40%23%40%24%25%5E%24%5Edasdsad1231&region=de-DE");
 
-        final String actualTitle404Error = webPage.getTitleErrorText();
+        final String actualTitle404Error = webPage
+                .waitUntilVisibilityErrorImage()
+                .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
