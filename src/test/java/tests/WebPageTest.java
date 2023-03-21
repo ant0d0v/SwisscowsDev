@@ -44,11 +44,13 @@ public class WebPageTest extends BaseTest {
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
         final String expectedFontSizeTitle404Error = "40px";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
+                .inputSearchCriteriaAndEnter("rona")
+                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=%40%23%40%24%25%5E%24%5Edasdsad1231&region=de-DE");
+                .searchAfterClearSearchField("@#@$%^$^dasdsad1231")
+                .clickEnter();
 
         final String actualTitle404Error = webPage
                 .waitUntilVisibilityErrorImage()
