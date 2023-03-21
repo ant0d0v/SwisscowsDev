@@ -371,5 +371,6 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
+
     }
 }
