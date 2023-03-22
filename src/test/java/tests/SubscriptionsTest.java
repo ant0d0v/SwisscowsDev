@@ -6,9 +6,8 @@ import org.testng.annotations.Test;
 import pages.accounts.SubscriptionsPage;
 
 public class SubscriptionsTest extends BaseTest {
-    @Test
+    @Test(priority = 1)
     public void testBuySubscriptionPlatinum() throws InterruptedException {
-        SubscriptionsPage subscriptionsPage= new SubscriptionsPage(getDriver());
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
         final String actualSuccessfulMessage = openBaseURL()
@@ -30,7 +29,7 @@ public class SubscriptionsTest extends BaseTest {
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
-    @Test
+    @Test(priority = 2)
     public void testCheckSubscriptionPlatinum() throws InterruptedException {
         final String expectedAttribute = "item active";
         final String actualAttribute = openBaseURL()
@@ -46,9 +45,8 @@ public class SubscriptionsTest extends BaseTest {
         Assert.assertEquals(actualAttribute,expectedAttribute);
 
     }
-    @Test
+    @Test(priority = 3)
     public void testBuyVpnSubscriptionPlatinum() throws InterruptedException {
-        SubscriptionsPage subscriptionsPage= new SubscriptionsPage(getDriver());
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
         final String actualSuccessfulMessage = openBaseURL()
@@ -70,7 +68,7 @@ public class SubscriptionsTest extends BaseTest {
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
-    @Test
+    @Test(priority = 4)
     public void testUpgradeSubscription() throws InterruptedException {
         SubscriptionsPage subscriptionsPage= new SubscriptionsPage(getDriver());
         final String expectedAttribute = "item active";
