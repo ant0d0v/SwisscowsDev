@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.accounts.LoginPage;
 import pages.accounts.RegisterPage;
+import pages.accounts.SubscriptionsPage;
 import pages.accounts.UsersLoginPage;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.SetAsStartPage;
@@ -180,6 +181,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
+    @FindBy(xpath = "//div[@class ='account']")
+    private WebElement accountInHamburgerMenu;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -391,6 +394,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(ThemeDropDownIcon);
 
        return new MainPage(getDriver());
+    }
+    public SubscriptionsPage clickAccountInHamburgerMenu() {
+
+        click(accountInHamburgerMenu);
+        return new SubscriptionsPage (getDriver());
     }
 
     public VpnPage clickVPNTopMenu() {

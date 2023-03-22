@@ -6,11 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Reporter;
 import pages.base_abstract.FooterMenuPage;
+import pages.base_abstract.TopMenuPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ProfileTopMenu<Generic> extends FooterMenuPage<Generic> {
+public abstract class ProfileTopMenu<Generic> extends TopMenuPage<Generic> {
 
     @FindBy(xpath = "//li[@class='user-li']/a")
     private WebElement signInTopMenu;

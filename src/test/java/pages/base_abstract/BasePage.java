@@ -187,6 +187,9 @@ public abstract class BasePage {
         wait10ElementToBeVisible(element);
         wait10ElementToBeClickable(element).click();
     }
+    protected void waitFrame(WebElement element) {
+        getWait10().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
+    }
     protected void clickElementUntilInvisible(WebElement element) {
         while (element.isEnabled() && element.isDisplayed()) {
             clickByJavaScript(element);
@@ -308,6 +311,11 @@ public abstract class BasePage {
     protected void input(String text, WebElement element) {
 
         element.sendKeys(text);
+    }
+    protected void inputJavaScript(String text, WebElement element) {
+
+        JavascriptExecutor javaScriptExecutor = (JavascriptExecutor)getDriver();
+        javaScriptExecutor.executeScript("arguments[0].value='"+text+"';", element);
     }
 
     protected void inputAfterClear(WebElement element, String text) {

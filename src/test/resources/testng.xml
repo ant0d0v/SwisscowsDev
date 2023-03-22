@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
-            <class name="tests.WebPageTest"/>
+            <class name="tests.SubscriptionsTest"/>
         </classes>
     </test>
 </suite>
