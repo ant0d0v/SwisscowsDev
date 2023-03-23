@@ -32,7 +32,7 @@ public class AutobahnTest extends BaseTest {
 
         final String expectedErrorMessage = "Too many requests";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("\"iphone totti forover \"")
+                .inputSearchCriteriaAndEnter("\"iphone\"")
                 .waitUntilVisibilityWebResult();
 
         for (int i = 0; i < queries.length; i++)  {
@@ -50,7 +50,7 @@ public class AutobahnTest extends BaseTest {
     public void testRegularBot() throws InterruptedException {
         final String random = TestUtils.getRandomName();
         WebPage webPage = new WebPage(getDriver());
-        String[] queries = { random,random,random,random,random,random,random,random,random,random
+        String[] queries = { "iphone",random,random,random,random,random,random,random,random,random
                 + random,random,random,random,random,random,random,random,random,random
                 + random,random,random,random,random,random,random,random,random,random
                 + random,random,random,random,random,random,random,random,random,random
