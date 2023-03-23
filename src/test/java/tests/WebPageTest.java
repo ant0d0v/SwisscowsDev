@@ -534,7 +534,9 @@ public class WebPageTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionGerman();
         ;
-        final String actualAdsText = webPage.getAdsText_WebPage();
+        final String actualAdsText = webPage
+                .waitUntilVisibilityWebResult()
+                .getAdsText_WebPage();
         final int actualSizes = webPage
                 .getAdsList().size();
 
