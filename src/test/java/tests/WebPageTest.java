@@ -544,7 +544,6 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualAdsText,expectedAdsText);
         Assert.assertTrue(actualSizes >= 1);
 
-
     }
     @Test
     public void testOpenAdvertising_WebPage() {
