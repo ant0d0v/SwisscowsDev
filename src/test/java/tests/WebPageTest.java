@@ -327,7 +327,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test
-    public void testAnyNumberInPaging_WebPage() {
+    public void testAnyNumberInPaging_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -335,6 +335,8 @@ public class WebPageTest extends BaseTest {
         final String oldTitle = webPage.getTitleH2Text();
         webPage
                 .clickThirdPagePagination_WebPage();
+
+        sleep(1000);
 
         final String newTitle = webPage
                 .waitUntilVisibilityWebResult()
@@ -411,7 +413,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testCancelFilter_WebPage() {
+    public void testCancelFilter_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
 
         openBaseURL()
@@ -424,8 +426,8 @@ public class WebPageTest extends BaseTest {
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
         webPage
-                .clickFilterButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+                .clickFilterButton();
+        sleep(1000);
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
