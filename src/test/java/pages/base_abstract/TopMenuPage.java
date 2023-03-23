@@ -28,24 +28,8 @@ import static java.lang.Thread.sleep;
 public abstract class TopMenuPage<Generic> extends BasePage {
 
     private static final String TOP_MENU_ID = "//div[@class = 'badges animation-badges']";
-    private static final String HAMBURGER_DROPDOWN_ID = "//button[@class = 'hamburger-menu']";
-
-    @FindBy(xpath = "//img[@alt = 'Swisscows']")
-    private WebElement logo;
-    @FindBy(xpath = TOP_MENU_ID) // 3 links [teleGuard, VPN, Email]
+    @FindBy(xpath = TOP_MENU_ID)
     private WebElement topMenuContainer;
-
-    @FindBy(xpath = TOP_MENU_ID + "//a") // 3 links [teleGuard, VPN, Email]
-    private List<WebElement> topMenuLinks;
-
-    @FindBy(xpath = TOP_MENU_ID + "//div[@class='input-search-wrap']")
-    private WebElement searchBoxMainPage;
-
-    @FindBy(xpath = "//input[@class ='input-search']")
-    private WebElement searchFieldTopMenu;
-    @FindBy(xpath = "//button[@type = 'submit']")
-    private WebElement searchButton;
-
     @FindBy(xpath = TOP_MENU_ID + "//a[3]")
     private WebElement TeleGuardTopMenu;
 
@@ -63,6 +47,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = TOP_MENU_ID + "//a")
     private List<WebElement> topMenus;
+    @FindBy(xpath = "//img[@alt = 'Swisscows']")
+    private WebElement logo;
+    @FindBy(xpath = "//input[@class ='input-search']")
+    private WebElement searchFieldTopMenu;
+    @FindBy(xpath = "//button[@type = 'submit']")
+    private WebElement searchButton;
     @FindBy(xpath = "//a[@class='badge-email']")
     private WebElement emailTopMenuSearch;
 
@@ -74,8 +64,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//button[@class ='login']")
     private WebElement signInTopMenu;
 
-    @FindBy(xpath= "//div[@class ='account']")
-    private WebElement userInfoContainer;
+    @FindBy(xpath= "//button[@type='reset']")
+    private WebElement clearButton;
 
     @FindBy(xpath = "//button[@type = 'button']")
     private WebElement hamburgerTopMenu;
@@ -123,17 +113,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> textsH3;
     @FindBy(xpath = "//h2")
     private List<WebElement> textsH2;
-
-    @FindBy(xpath = "//article//h2")
-    private WebElement titleFirstResult;
-
     @FindBy(xpath = "//div[@class='static-content']//div/a")
     private List<WebElement> allLinksOnPage;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
     private List<WebElement> allLinksOnEmailPage;
     @FindBy(className = "suggestions")
-    private WebElement searchDropdownMenu;// swisscows
-
+    private WebElement searchDropdownMenu;
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
     @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
@@ -165,11 +150,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//div[@class = 'image']//img")
     private List<WebElement> allImagesOnPage;
     @FindBy(xpath = "//input[@class = 'input-search']")
-    private WebElement searchFieldHeader; // swisscows
-
-    @FindBy(xpath = "//h2[text() ='My favorite tracks']")
-    private WebElement favoriteContainer;
-
+    private WebElement searchFieldHeader;
+    @FindBy(xpath = "//div[@class='three-bounce']//div")
+    private WebElement loader;
     @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//div[@class ='filters-button']")
@@ -194,11 +177,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public int topMenuLinkAmount() {
 
         return getListSize(topMenus);
-    }
-
-    public String getInnerTextOfPlaceholder(String attribute) {
-
-        return getAttribute(searchFieldTopMenu, attribute);
     }
 
     protected WebElement getLastElementInDropdownRegion() {
@@ -407,8 +385,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new VpnPage(getDriver());
     }
 
-
-
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
@@ -553,13 +529,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         inputAfterClear(searchFieldHeader,text);
         return new NewsPage(getDriver());
     }
-    public NewsPage searchAfterClear(String text) {
-        clear(searchFieldHeader);
+    public void searchAfterClear(String text){
+        click(clearButton);
+        getWait10().until(ExpectedConditions.textToBePresentInElementValue(searchFieldHeader, ""));
         searchFieldHeader.sendKeys(text);
         searchFieldHeader.sendKeys(Keys.RETURN);
-        clickEnter();
-        wait10ElementToBeVisible(titleFirstResult);
-        return new NewsPage(getDriver());
+
+        new NewsPage(getDriver());
     }
 
     public String getValueHeartIcon() {
@@ -636,6 +612,5 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new WebPage(getDriver());
     }
-
 
 }
