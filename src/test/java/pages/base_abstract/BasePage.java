@@ -187,9 +187,7 @@ public abstract class BasePage {
         wait10ElementToBeVisible(element);
         wait10ElementToBeClickable(element).click();
     }
-    protected void waitFrame(WebElement element) {
-        getWait10().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
-    }
+
     protected void clickElementUntilInvisible(WebElement element) {
         while (element.isEnabled() && element.isDisplayed()) {
             clickByJavaScript(element);

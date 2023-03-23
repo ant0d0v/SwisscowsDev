@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -123,8 +124,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = "//h2")
     private List<WebElement> textsH2;
 
-    @FindBy(xpath = "//h1")
-    private WebElement textsH1;
+    @FindBy(xpath = "//article//h2")
+    private WebElement titleFirstResult;
 
     @FindBy(xpath = "//div[@class='static-content']//div/a")
     private List<WebElement> allLinksOnPage;
@@ -550,6 +551,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public NewsPage searchAfterClearSearchField(String text) {
         inputAfterClear(searchFieldHeader,text);
+        return new NewsPage(getDriver());
+    }
+    public NewsPage searchAfterClear(String text) {
+        clear(searchFieldHeader);
+        searchFieldHeader.sendKeys(text);
+        searchFieldHeader.sendKeys(Keys.RETURN);
+        clickEnter();
+        wait10ElementToBeVisible(titleFirstResult);
         return new NewsPage(getDriver());
     }
 
