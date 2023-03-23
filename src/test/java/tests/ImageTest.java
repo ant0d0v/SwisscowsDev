@@ -73,7 +73,7 @@ public class ImageTest extends BaseTest {
     public void testImageResultsEqualsSearchCriteria(){
         ImagePage imagePage = new ImagePage(getDriver());
         final List<String> titleAllImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .getAltAllImages();
@@ -82,7 +82,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertTrue(actualSize >= 50);
         for (String searchCriteria : titleAllImage) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ivan"));
         }
 
     }

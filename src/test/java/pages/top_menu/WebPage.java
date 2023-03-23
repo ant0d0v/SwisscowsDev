@@ -127,6 +127,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {
+        wait10ElementToBeVisible(adsText);
         return getText(adsText);
     }
     public List<String> getTrackersInScreenshot() {

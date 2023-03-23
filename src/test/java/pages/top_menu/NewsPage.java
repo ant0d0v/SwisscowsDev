@@ -79,7 +79,11 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return isElementDisplayed(errorImage);
     }
     public boolean  allImageIsDisplayed() {
-        areAllElementsVisibleAndClickable(allImageNewsPage);
+
+        for (WebElement image : allImageNewsPage) {
+                wait10ElementToBeVisible(image);
+        }
+
         return areElementsInListDisplayed(allImageNewsPage);
     }
     public List<String> getSrsOfImages() {

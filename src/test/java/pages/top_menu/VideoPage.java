@@ -26,7 +26,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement videoPlayerYouTube;
     @FindBy(xpath = "//button[@class='button button-warning']")
     private WebElement videoPlayerYouTubeButtonOk;
-    @FindBy(xpath = "//article")
+    @FindBy(xpath = "//article//h2[1]")
     private WebElement firstVideoResult;
     @FindBy(xpath = "//div[@class='video-player']//iframe")
     private WebElement imageAttribute;
@@ -77,7 +77,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return  this;
     }
     public VideoPage clickFirstVideoResult() {
-        click(firstVideoResult);
+        click20(firstVideoResult);
         return new VideoPage(getDriver());
     }
     public VideoPage clickDurationButton() {

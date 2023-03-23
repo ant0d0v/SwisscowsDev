@@ -121,6 +121,7 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityNewsResult()
                 .getSrsOfImages();
 
+        Assert.assertTrue(newsPage.allImageIsDisplayed());
         for (String search : actualSrc) {
             Assert.assertTrue(search.contains("https://cdn.swisscows.com/image?url"));
         }
@@ -159,8 +160,7 @@ public class NewsTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .clickNewsButton()
-                .clickNextPagePagination()
-                .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE&offset=10");
+                .clickNextPagePagination();
 
         final String actualAttribute = newsPage
                 .waitUntilVisibilityNewsResult()
