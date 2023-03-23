@@ -39,7 +39,7 @@ public class NewsTest extends BaseTest {
         }
     }
     @Test
-    public void testRegionWithoutNews_NewsPage(){
+    public void testError501UnsupportedRegion_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
         final String expectedFontSizeTitle501Error = "40px";

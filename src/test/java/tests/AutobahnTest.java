@@ -9,7 +9,7 @@ import utils.TestUtils;
 
 public class AutobahnTest extends BaseTest {
     @Test
-    public void testBrazilianBots() throws InterruptedException {
+    public void testBrazilianBotsAndError429Page() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         String[] queries = { "\"iphone totti forover  \"",
                 "\"iphone totti forover  \"",
@@ -44,10 +44,11 @@ public class AutobahnTest extends BaseTest {
             }
         }
         Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertEquals(webPage.getH2FontSize(),"40px");
 
     }
     @Test
-    public void testRegularBot() throws InterruptedException {
+    public void testRegularBotAndError429Page() throws InterruptedException {
         final String random = TestUtils.getRandomName();
         WebPage webPage = new WebPage(getDriver());
         String[] queries = { "iphone",random,random,random,random,random,random,random,random,random
@@ -86,5 +87,6 @@ public class AutobahnTest extends BaseTest {
             }
         }
         Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertEquals(webPage.getH2FontSize(),"40px");
     }
 }

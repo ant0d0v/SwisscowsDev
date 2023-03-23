@@ -33,7 +33,7 @@ public class WebPageTest extends BaseTest {
     }
 
     @Test
-    public void test404PageError_WebPage() {
+    public void test202NoResultsFoundPageError_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
@@ -45,6 +45,63 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
 
         final String actualTitle404Error = webPage
+                .waitUntilVisibilityErrorImage()
+                .getTitleErrorText();
+        final String actualFontSizeTitle404Error = webPage.getH2FontSize();
+
+        Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
+        Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+    }
+    @Test
+    public void testError450RequestIsBlocked_WebPage() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String expectedTitle404Error = "No results found for \"porn\"";
+        final String expectedFontSizeTitle404Error = "40px";
+        openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("porn");
+
+        final String actualTitle404Error = webPage
+                .waitUntilVisibilityErrorImage()
+                .getTitleErrorText();
+        final String actualFontSizeTitle404Error = webPage.getH2FontSize();
+
+        Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
+        Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+    }
+    @Test
+    public void testError404PageNotFound() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String expectedTitle404Error = "Page not found";
+        final String expectedFontSizeTitle404Error = "40px";
+
+
+        final String actualTitle404Error = webPage
+                .open404Page()
+                .waitUntilVisibilityErrorImage()
+                .getTitleErrorText();
+        final String actualFontSizeTitle404Error = webPage.getH2FontSize();
+
+        Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
+        Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+    }
+    @Test
+    public void testError500UnknownError() {
+        WebPage webPage = new WebPage(getDriver());
+
+        final String expectedTitle404Error = "Oops! Something is wrong";
+        final String expectedFontSizeTitle404Error = "40px";
+
+
+        final String actualTitle404Error = webPage
+                .open500Page()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
