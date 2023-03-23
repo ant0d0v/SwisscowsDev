@@ -369,6 +369,9 @@ public abstract class BasePage {
     protected void wait10ElementToBeInVisible(WebElement element) {
         getWait10().until(ExpectedConditions.invisibilityOf(element));
     }
+    protected void wait10ElementToBeEmpty(WebElement element) {
+        getWait10().until(ExpectedConditions.textToBePresentInElement(element, ""));
+    }
 
     protected void wait20ElementToBeVisible(WebElement element) {
         getWait20().until(ExpectedConditions.visibilityOf(element));
