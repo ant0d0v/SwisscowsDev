@@ -591,6 +591,5 @@ public class WebPageTest extends BaseTest {
                 .getPreviewColorsWhenHover();
 
         Assert.assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
-
     }
 }
