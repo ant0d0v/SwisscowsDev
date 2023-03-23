@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -151,7 +152,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private List<WebElement> allImagesOnPage;
     @FindBy(xpath = "//input[@class = 'input-search']")
     private WebElement searchFieldHeader;
-    @FindBy(xpath = "//div[@class='three-bounce']//div")
+    @FindBy(xpath = "//div[@class='three-bounce']//div[1]")
     private WebElement loader;
     @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
@@ -529,11 +530,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         inputAfterClear(searchFieldHeader,text);
         return new NewsPage(getDriver());
     }
-    public void searchAfterClear(String text){
+    public void searchAfterClear(String text) throws InterruptedException {
         click(clearButton);
-        getWait10().until(ExpectedConditions.textToBePresentInElementValue(searchFieldHeader, ""));
+        wait10ElementToBeEmpty(searchFieldHeader);
         searchFieldHeader.sendKeys(text);
-        searchFieldHeader.sendKeys(Keys.RETURN);
+        clickEnter();
+
 
         new NewsPage(getDriver());
     }

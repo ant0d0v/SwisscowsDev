@@ -4,6 +4,7 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.top_menu.WebPage;
+import utils.TestUtils;
 
 
 public class AutobahnTest extends BaseTest {
@@ -15,11 +16,16 @@ public class AutobahnTest extends BaseTest {
                 "\"iphone totti forover \"",
                 "\"iphone totti forover \"",
                 "\"iphone totti forover \"",
-                "\"iphone totti forover  \"",
-                "\"iphone totti forover  \"",
                 "\"iphone totti forover \"",
                 "\"iphone totti forover \"",
-                "\"iphone totti forover \""
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+                "\"iphone totti forover \"",
+
         };
 
         final String expectedErrorMessage = "Too many requests";
@@ -40,21 +46,26 @@ public class AutobahnTest extends BaseTest {
     }
     @Test
     public void testRegularBot() throws InterruptedException {
+        final String random = TestUtils.getRandomName();
         WebPage webPage = new WebPage(getDriver());
-        String[] queries = { "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
-                + "iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone","iphone"
+        String[] queries = { random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+                + random,random,random,random,random,random,random,random,random,random
+
 
 
         };
