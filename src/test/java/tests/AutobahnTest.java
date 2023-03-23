@@ -73,6 +73,5 @@ public class AutobahnTest extends BaseTest {
             }
         }
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-
     }
 }
