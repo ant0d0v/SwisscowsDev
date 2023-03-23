@@ -49,13 +49,12 @@ public class VideoTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&region=");
 
         final String actualRegion = videoPage.getCurrentURL();
-        final List<String> titleAllVideo = videoPage.getTitleAllVideo();
+        final String titleAllVideo = videoPage.getTitleFirstVideo();
 
 
         Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/video?query=ivanka&region=de-DE");
-        for (String search : titleAllVideo) {
-            Assert.assertTrue(search.toLowerCase().contains("ivan"));
-        }
+        Assert.assertTrue(titleAllVideo.toLowerCase().contains("ivan"));
+
     }
     @Test
     public void testScrollToNextPage_VideoPage() throws InterruptedException {

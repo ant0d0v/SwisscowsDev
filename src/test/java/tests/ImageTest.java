@@ -82,7 +82,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertTrue(actualSize >= 50);
         for (String searchCriteria : titleAllImage) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronal"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
 
     }

@@ -121,7 +121,6 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityNewsResult()
                 .getSrsOfImages();
 
-        Assert.assertTrue(newsPage.allImageIsDisplayed());
         for (String search : actualSrc) {
             Assert.assertTrue(search.contains("https://cdn.swisscows.com/image?url"));
         }

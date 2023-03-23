@@ -14,6 +14,8 @@ import static java.lang.Thread.sleep;
 public class VideoPage extends TopMenuPage<VideoPage> {
     @FindBy(xpath = "//h2[@class = 'title']")
     private List<WebElement> h2AllVideo;
+    @FindBy(xpath = "//h2[@class = 'title'][1]")
+    private WebElement h2FirstVideo;
     @FindBy(xpath = "//div[@class='video-results']//article")
     private WebElement videoResultContainer;
     @FindBy(xpath = "//div[@class='related-searches']//li//a")
@@ -59,6 +61,10 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public List <String> getTitleAllVideo()  {
 
         return getTexts(h2AllVideo);
+    }
+    public String getTitleFirstVideo()  {
+
+        return getText(h2FirstVideo);
     }
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);

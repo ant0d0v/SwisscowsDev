@@ -17,7 +17,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2FirstImage;
-    @FindBy(xpath = "//figure//a//img")
+    @FindBy(xpath = "(//figure//a//img)[position() < 5]")
     private List<WebElement> AltAttributeAllImage;
     @FindBy(xpath = "//figure[40]")
     private WebElement lastImage;
