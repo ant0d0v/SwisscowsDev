@@ -39,7 +39,7 @@ public class NewsTest extends BaseTest {
         }
     }
     @Test
-    public void testRegionWithoutNews_NewsPage(){
+    public void testError501UnsupportedRegion_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
         final String expectedFontSizeTitle501Error = "40px";
@@ -160,8 +160,7 @@ public class NewsTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionGerman()
                 .clickNewsButton()
-                .clickNextPagePagination()
-                .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE&offset=10");
+                .clickNextPagePagination();
 
         final String actualAttribute = newsPage
                 .waitUntilVisibilityNewsResult()

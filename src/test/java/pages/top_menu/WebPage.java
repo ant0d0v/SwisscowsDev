@@ -109,6 +109,14 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return new WebPage(getDriver());
     }
+    public WebPage open404Page() {
+        getDriver().get("https://swisscows.com/en/qwerty");
+        return new WebPage(getDriver());
+    }
+    public WebPage open500Page() {
+        getDriver().get(" https://swisscows.com/en/music?query= ");
+        return new WebPage(getDriver());
+    }
 
     public String getCopyright() {
 
@@ -119,6 +127,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {
+        wait10ElementToBeVisible(adsText);
         return getText(adsText);
     }
     public List<String> getTrackersInScreenshot() {

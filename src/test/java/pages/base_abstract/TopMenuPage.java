@@ -166,6 +166,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[42]")
+    private WebElement regionUkraine;
     @FindBy(xpath = "//div[@class ='account']")
     private WebElement accountInHamburgerMenu;
 
@@ -292,6 +294,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickHamburgerMenu() {
+        wait10ElementToBeVisible(hamburgerTopMenu);
         click(hamburgerTopMenu);
 
         return new MainPage(getDriver());
@@ -463,6 +466,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public NewsPage clickRegionBrazil() {
         click(regionBrazil);
+
+        return new NewsPage(getDriver());
+    }
+    public NewsPage clickRegionUkraine() {
+        click(regionUkraine);
 
         return new NewsPage(getDriver());
     }
