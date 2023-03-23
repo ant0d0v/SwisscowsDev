@@ -334,10 +334,11 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult();
         final String oldTitle = webPage.getTitleH2Text();
         webPage
-                .clickThirdPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=20");
+                .clickThirdPagePagination_WebPage();
 
-        final String newTitle = webPage.getTitleH2Text();
+        final String newTitle = webPage
+                .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
         final String actualAttribute = webPage
                 .waitUntilVisibilityWebResult()
                 .getAttributeThirdButtonPagination();
@@ -524,7 +525,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testAdvertising_WebPage() {
+    public void testAdvertising_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
         openBaseURL()
@@ -533,7 +534,7 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman();
-        ;
+        sleep(1000);
         final String actualAdsText = webPage
                 .waitUntilVisibilityWebResult()
                 .getAdsText_WebPage();
