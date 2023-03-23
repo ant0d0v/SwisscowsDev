@@ -41,7 +41,7 @@ public class WebPageTest extends BaseTest {
         openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
-                .clickRegionGerman()
+                .clickRegionUkraine()
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
 
         final String actualTitle404Error = webPage
@@ -60,9 +60,6 @@ public class WebPageTest extends BaseTest {
         final String expectedTitle404Error = "No results found for \"porn\"";
         final String expectedFontSizeTitle404Error = "40px";
         openBaseURL()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
                 .inputSearchCriteriaAndEnter("porn");
 
         final String actualTitle404Error = webPage
