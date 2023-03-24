@@ -46,6 +46,7 @@ public class WebPageTest extends BaseTest {
 
         final String actualTitle404Error = webPage
                 .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
