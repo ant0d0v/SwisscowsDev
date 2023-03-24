@@ -33,7 +33,7 @@ public class WebPageTest extends BaseTest {
     }
 
     @Test
-    public void test202NoResultsFoundPageError_WebPage() {
+    public void test202NoResultsFoundPageError_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
@@ -45,7 +45,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
 
         final String actualTitle404Error = webPage
-                .waitUntilVisibilityErrorImage()
+                .waitUntilLoaderToBeInvisible()
                 .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
