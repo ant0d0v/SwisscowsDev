@@ -333,14 +333,13 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult();
         final String oldTitle = webPage.getTitleH2Text();
-        webPage
-                .clickThirdPagePagination_WebPage();
+
 
         final String newTitle = webPage
+                .clickThirdPagePagination_WebPage()
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
         final String actualAttribute = webPage
-                .waitUntilLoaderToBeInvisible()
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
