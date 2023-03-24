@@ -33,7 +33,7 @@ public class WebPageTest extends BaseTest {
     }
 
     @Test
-    public void test202NoResultsFoundPageError_WebPage() {
+    public void test202NoResultsFoundPageError_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
@@ -45,6 +45,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
 
         final String actualTitle404Error = webPage
+                .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
@@ -200,7 +201,7 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=de-DE");
         webPage
                 .clickNextButtonVideoWidget();
         Assert.assertTrue(webPage.lastImageInVideoWidgetIsDisplayed());
@@ -333,13 +334,14 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult();
         final String oldTitle = webPage.getTitleH2Text();
-        webPage
-                .clickThirdPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=20");
 
-        final String newTitle = webPage.getTitleH2Text();
+
+        final String newTitle = webPage
+                .clickThirdPagePagination_WebPage()
+                .waitUntilLoaderToBeInvisible()
+                .getTitleH2Text();
+
         final String actualAttribute = webPage
-                .waitUntilVisibilityWebResult()
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
@@ -347,7 +349,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testNextButtonInPaging_WebPage() throws InterruptedException {
+    public void testNextButtonInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -355,7 +357,6 @@ public class WebPageTest extends BaseTest {
                 .clickNextPagePagination_WebPage()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=10");
 
-        sleep(1000);
         final String actualAttribute = webPage
                 .getAttributeSecondButtonPagination();
 
@@ -365,21 +366,19 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testPreviousButtonInPaging_WebPage() {
+    public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
+                .waitUntilLoaderToBeInvisible()
                 .clickPreviousPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+                .waitUntilLoaderToBeInvisible();
 
         final String oldTitle = webPage.getTitleH2Text();
-        final String newTitle = webPage
-                .waitUntilVisibilityWebResult()
-                .getTitleH2Text();
+        final String newTitle = webPage.getTitleH2Text();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
         Assert.assertEquals(oldTitle,newTitle);
 
@@ -391,15 +390,12 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleH2Text();
-        webPage
-                .clickFilterButton();
-        webPage
-                .clickButtonDateInFilter()
-                .clickPastYearInDropDownOfFilter()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
 
         final String newTitle = webPage
-                .waitUntilVisibilityWebResult()
+                .clickFilterButtonWeb()
+                .clickButtonDateInFilter()
+                .clickPastYearInDropDownOfFilter()
+                .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
         Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
@@ -410,21 +406,19 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testCancelFilter_WebPage() {
+    public void testCancelFilter_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
-                .clickFilterButton();
-
-        webPage
+                .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
         webPage
-                .clickFilterButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+                .clickFilterButtonWeb()
+                .waitUntilLoaderToBeInvisible();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
@@ -524,7 +518,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testAdvertising_WebPage() {
+    public void testAdvertising_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
         openBaseURL()
@@ -533,9 +527,9 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman();
-        ;
+
         final String actualAdsText = webPage
-                .waitUntilVisibilityWebResult()
+                .waitUntilLoaderToBeInvisible()
                 .getAdsText_WebPage();
         final int actualSizes = webPage
                 .getAdsList().size();
@@ -543,7 +537,6 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertEquals(actualAdsText,expectedAdsText);
         Assert.assertTrue(actualSizes >= 1);
-
 
     }
     @Test
