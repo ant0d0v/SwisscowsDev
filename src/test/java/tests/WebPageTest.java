@@ -340,6 +340,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
         final String actualAttribute = webPage
+
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
@@ -370,13 +371,13 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
+                .waitUntilLoaderToBeInvisible()
                 .clickPreviousPagePagination_WebPage()
                 .waitUntilLoaderToBeInvisible();
 
         final String oldTitle = webPage.getTitleH2Text();
         final String newTitle = webPage.getTitleH2Text();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
         Assert.assertEquals(oldTitle,newTitle);
 

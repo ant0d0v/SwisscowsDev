@@ -1,14 +1,12 @@
 package pages.top_menu;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static java.lang.Thread.sleep;
 
@@ -73,7 +71,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement attributeThirdPagePagination;
     @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[3]")
     private WebElement attributeSecondPagePagination;
-    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[@class='named previous']")
+    @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[1]")
     private WebElement previousPagePagination;
     @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[last()]")
     private WebElement nextPagePagination;
@@ -186,17 +184,10 @@ public class WebPage extends TopMenuPage<WebPage> {
                 getTexts(listRelatedSearches);
     }
     public WebPage waitUntilLoaderToBeInvisible() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        while(!(Boolean)js.executeScript("return arguments[0].offsetHeight > 0", loader)) {
-            try {
-               sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+           wait10ElementToBeVisible(loader);
+            return new WebPage(getDriver());
         }
 
-        return  new WebPage(getDriver());
-    }
 
 
     public List <String> getTitleInWebResult()  {
@@ -219,7 +210,6 @@ public class WebPage extends TopMenuPage<WebPage> {
         return  getColorsOfElements(listPreviewButtons);
     }
     public String getAttributeThirdButtonPagination() {
-
         return getAttribute(attributeThirdPagePagination,"class");
     }
     public String getAttributeSecondButtonPagination() {
@@ -300,7 +290,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage (getDriver());
     }
     public WebPage  clickPreviousPagePagination_WebPage() {
-        clickByJavaScript(previousPagePagination);
+        click20(previousPagePagination);
 
         return new WebPage (getDriver());
     }
