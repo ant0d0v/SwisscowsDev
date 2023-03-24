@@ -200,7 +200,7 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=");
+                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=de-DE");
         webPage
                 .clickNextButtonVideoWidget();
         Assert.assertTrue(webPage.lastImageInVideoWidgetIsDisplayed());
@@ -336,8 +336,6 @@ public class WebPageTest extends BaseTest {
         webPage
                 .clickThirdPagePagination_WebPage();
 
-        sleep(1000);
-
         final String newTitle = webPage
                 .waitUntilVisibilityWebResult()
                 .getTitleH2Text();
@@ -358,7 +356,6 @@ public class WebPageTest extends BaseTest {
                 .clickNextPagePagination_WebPage()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=10");
 
-        sleep(1000);
         final String actualAttribute = webPage
                 .getAttributeSecondButtonPagination();
 
@@ -427,7 +424,8 @@ public class WebPageTest extends BaseTest {
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
         webPage
                 .clickFilterButton();
-        sleep(1000);
+        webPage
+                .waitUntilLoaderToBeInvisible();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
@@ -536,9 +534,9 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman();
-        sleep(1000);
+
         final String actualAdsText = webPage
-                .waitUntilVisibilityWebResult()
+                .waitUntilLoaderToBeInvisible()
                 .getAdsText_WebPage();
         final int actualSizes = webPage
                 .getAdsList().size();

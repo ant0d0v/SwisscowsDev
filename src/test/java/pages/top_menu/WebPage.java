@@ -11,7 +11,7 @@ import pages.base_abstract.TopMenuPage;
 import java.util.List;
 
 public class WebPage extends TopMenuPage<WebPage> {
-    @FindBy(xpath = "//div[@class='web-results']//article")
+    @FindBy(xpath = "//div[@class='web-results']//article[1]")
     private WebElement webResultContainer;
     @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']")
     private WebElement footerFooterSearchPages;
@@ -21,7 +21,9 @@ public class WebPage extends TopMenuPage<WebPage> {
     private List<WebElement> innerFooterMenuLink;
     @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;
-    @FindBy(xpath = "//h2[@class = 'title']")
+    @FindBy(xpath = "//div[@class ='web-results']//article[@class = 'item-web']//h2")
+    private List<WebElement> h2Texts;
+    @FindBy(xpath = "//div[@class='error']//h2[@class = 'title']")
     private WebElement h2TextError;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
@@ -95,6 +97,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement trackersScreenshot;
     @FindBy(xpath = "//div[@class='a11t-privacy']")
     private WebElement adsText;
+    @FindBy(xpath = "//div[@class='three-bounce']")
+    private WebElement loader;
     @FindBy(xpath = "//div[@class='a11t']//article")
     private List<WebElement> adsList;
     @FindBy(xpath = "//div[@class='a11t']//article//a[1]")
@@ -123,11 +127,13 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getText(footerSearchCopyright);
     }
     public String getTitleH2Text()  {
-        wait10ElementToBeVisible(h2Text);
+
+        for (WebElement text : h2Texts) {
+            wait10ElementToBeVisible(text);
+        }
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {
-        wait10ElementToBeVisible(adsText);
         return getText(adsText);
     }
     public List<String> getTrackersInScreenshot() {
@@ -180,8 +186,13 @@ public class WebPage extends TopMenuPage<WebPage> {
         return
                 getTexts(listRelatedSearches);
     }
-    public List <String> getTitleInWebResult()  {
+    public WebPage waitUntilLoaderToBeInvisible()  {
+        wait10ElementToBeInVisible(loader);
+        return  new WebPage(getDriver());
+    }
 
+
+    public List <String> getTitleInWebResult()  {
         return getTexts(listWebResult);
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
@@ -205,7 +216,9 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getAttribute(attributeThirdPagePagination,"class");
     }
     public String getAttributeSecondButtonPagination() {
-
+        for (WebElement text : h2Texts) {
+            wait10ElementToBeVisible(text);
+        }
         return getAttribute(attributeSecondPagePagination,"class");
     }
     public NewsPage clickRegionBrazil() {
