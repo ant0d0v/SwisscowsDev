@@ -365,7 +365,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testPreviousButtonInPaging_WebPage() {
+    public void testPreviousButtonInPaging_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -383,21 +383,19 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testUsingFilter_WebPage() {
+    public void testUsingFilter_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleH2Text();
-        webPage
-                .clickFilterButton();
-        webPage
-                .clickButtonDateInFilter()
-                .clickPastYearInDropDownOfFilter()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
+
+        webPage.clickFilterButton();
 
         final String newTitle = webPage
-                .waitUntilVisibilityWebResult()
+                .clickButtonDateInFilter()
+                .clickPastYearInDropDownOfFilter()
+                .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
         Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));

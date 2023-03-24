@@ -10,6 +10,8 @@ import pages.base_abstract.TopMenuPage;
 
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class WebPage extends TopMenuPage<WebPage> {
     @FindBy(xpath = "//div[@class='web-results']//article[1]")
     private WebElement webResultContainer;
@@ -97,7 +99,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement trackersScreenshot;
     @FindBy(xpath = "//div[@class='a11t-privacy']")
     private WebElement adsText;
-    @FindBy(xpath = "//div[@class='three-bounce']")
+    @FindBy(className ="three-bounce")
     private WebElement loader;
     @FindBy(xpath = "//div[@class='a11t']//article")
     private List<WebElement> adsList;
@@ -183,8 +185,16 @@ public class WebPage extends TopMenuPage<WebPage> {
         return
                 getTexts(listRelatedSearches);
     }
-    public WebPage waitUntilLoaderToBeInvisible()  {
-        wait10ElementToBeInVisible(loader);
+    public WebPage waitUntilLoaderToBeInvisible() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        while(!(Boolean)js.executeScript("return arguments[0].offsetHeight > 0", loader)) {
+            try {
+               sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         return  new WebPage(getDriver());
     }
 
