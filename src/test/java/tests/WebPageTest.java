@@ -33,7 +33,7 @@ public class WebPageTest extends BaseTest {
     }
 
     @Test
-    public void test202NoResultsFoundPageError_WebPage() throws InterruptedException {
+    public void test202NoResultsFoundPageError_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
@@ -327,7 +327,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualTitle, expectedTitle);
     }
     @Test
-    public void testAnyNumberInPaging_WebPage() throws InterruptedException {
+    public void testAnyNumberInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -339,8 +339,8 @@ public class WebPageTest extends BaseTest {
                 .clickThirdPagePagination_WebPage()
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
-        final String actualAttribute = webPage
 
+        final String actualAttribute = webPage
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
@@ -348,7 +348,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testNextButtonInPaging_WebPage() throws InterruptedException {
+    public void testNextButtonInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -365,7 +365,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testPreviousButtonInPaging_WebPage() throws InterruptedException {
+    public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -383,16 +383,15 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testUsingFilter_WebPage() throws InterruptedException {
+    public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .getTitleH2Text();
 
-        webPage.clickFilterButton();
-
         final String newTitle = webPage
+                .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
                 .waitUntilLoaderToBeInvisible()
@@ -406,21 +405,18 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testCancelFilter_WebPage() throws InterruptedException {
+    public void testCancelFilter_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
-                .clickFilterButton();
-
-        webPage
+                .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
                 .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
         webPage
-                .clickFilterButton();
-        webPage
+                .clickFilterButtonWeb()
                 .waitUntilLoaderToBeInvisible();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
@@ -521,7 +517,7 @@ public class WebPageTest extends BaseTest {
 
     }
     @Test
-    public void testAdvertising_WebPage() throws InterruptedException {
+    public void testAdvertising_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
         openBaseURL()

@@ -183,7 +183,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return
                 getTexts(listRelatedSearches);
     }
-    public WebPage waitUntilLoaderToBeInvisible() throws InterruptedException {
+    public WebPage waitUntilLoaderToBeInvisible(){
            wait10ElementToBeVisible(loader);
             return new WebPage(getDriver());
         }

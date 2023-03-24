@@ -464,6 +464,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new VideoPage(getDriver());
     }
+    public WebPage clickFilterButtonWeb() {
+        clickByJavaScript(filterButton);
+
+        return new WebPage(getDriver());
+    }
     public NewsPage clickRegionBrazil() {
         click(regionBrazil);
 
