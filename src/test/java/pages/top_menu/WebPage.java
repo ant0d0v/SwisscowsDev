@@ -128,9 +128,6 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
     public String getTitleH2Text()  {
 
-        for (WebElement text : h2Texts) {
-            wait10ElementToBeVisible(text);
-        }
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {

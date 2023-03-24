@@ -337,10 +337,10 @@ public class WebPageTest extends BaseTest {
                 .clickThirdPagePagination_WebPage();
 
         final String newTitle = webPage
-                .waitUntilVisibilityWebResult()
+                .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
         final String actualAttribute = webPage
-                .waitUntilVisibilityWebResult()
+                .waitUntilLoaderToBeInvisible()
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
@@ -372,12 +372,10 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
                 .clickPreviousPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo");
+                .waitUntilLoaderToBeInvisible();
 
         final String oldTitle = webPage.getTitleH2Text();
-        final String newTitle = webPage
-                .waitUntilVisibilityWebResult()
-                .getTitleH2Text();
+        final String newTitle = webPage.getTitleH2Text();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
