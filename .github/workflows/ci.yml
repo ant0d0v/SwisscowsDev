@@ -46,10 +46,7 @@ jobs:
           path: screenshots
 
       - name: Generate Allure Report
-        run: |
-            wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.14.0/allure-commandline-2.14.0.zip
-            unzip -q allure-commandline-2.14.0.zip
-            allure-commandline-2.14.0/allure generate target/allure-results --clean -o target/allure-report
+      - run: allure generate target/allure-results --clean -o target/allure-report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v2
