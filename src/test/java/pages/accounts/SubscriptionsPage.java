@@ -60,6 +60,8 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     private WebElement proceedButton;
     @FindBy(xpath = "//div[@class = 'product checkout success']//h1")
     private WebElement successfulMessage;
+    @FindBy(xpath = "//img[@src ='./images/payment-illustration-success.svg']")
+    private WebElement successfulImage;
 
     public SubscriptionsPage(WebDriver driver) {
 
@@ -79,6 +81,10 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     public SubscriptionsPage clickSeeAllLink() {
         wait10ElementToBeVisible(seeAllLink);
         click(seeAllLink);
+        return new SubscriptionsPage (getDriver());
+    }
+    public SubscriptionsPage waitSuccessImage() {
+        wait20ElementToBeVisible(successfulImage);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {

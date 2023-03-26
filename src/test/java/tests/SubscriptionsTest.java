@@ -26,7 +26,9 @@ public class SubscriptionsTest extends BaseTest {
                 .payByCard()
                 .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-platinum/buy/success");
 
-        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver()).getTextSuccessfulMessage();
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
+                .waitSuccessImage()
+                .getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
@@ -66,7 +68,9 @@ public class SubscriptionsTest extends BaseTest {
                 .payByCard()
                 .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-vpn-standard/buy/success");
 
-        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver()).getTextSuccessfulMessage();
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
+                .waitSuccessImage()
+                .getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
