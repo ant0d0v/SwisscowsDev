@@ -126,7 +126,7 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         getDriver().switchTo().frame(cardNumberFrame);
         click(cardNumber);
         String name = "4111111111111111";
-        inputJavaScript(name,cardNumber);
+        input(name,cardNumber);
 
 
 
