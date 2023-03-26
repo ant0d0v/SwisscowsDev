@@ -472,7 +472,7 @@ public class TopMenuTest extends BaseTest {
     }
     @Test
     public void testCharityQueryCounterSearchVideo() {
-        WebPage webPage  = new WebPage(getDriver());
+        VideoPage videoPage  = new VideoPage(getDriver());
 
         final String expectedValueHeartIcon = "2";
 
@@ -481,8 +481,8 @@ public class TopMenuTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton();
 
-        final String  actualValueHeartIcon = webPage
-                .waitUntilLoaderToBeInvisible()
+        final String  actualValueHeartIcon = videoPage
+                .waitUntilVisibilityVideoResult()
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
