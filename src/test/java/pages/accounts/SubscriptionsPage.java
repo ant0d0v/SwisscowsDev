@@ -153,7 +153,6 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         return new SubscriptionsPage(getDriver());
     }
     public String getTextSuccessfulMessage() {
-        wait20ElementToBeVisible(successfulMessage);
         return getText(successfulMessage);
     }
     public String getAttributePlatinumSubscription() {

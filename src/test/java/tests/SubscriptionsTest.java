@@ -10,7 +10,7 @@ public class SubscriptionsTest extends BaseTest {
     public void testBuySubscriptionPlatinum() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
-        final String actualSuccessfulMessage = openBaseURL()
+        openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
                 .waitTopMenuToBeInvisible()
@@ -24,8 +24,9 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
                 .payByCard()
-                .getTextSuccessfulMessage();
+                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-platinum/buy/success");
 
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver()).getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
@@ -49,7 +50,7 @@ public class SubscriptionsTest extends BaseTest {
     public void testBuyVpnSubscriptionPlatinum() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
-        final String actualSuccessfulMessage = openBaseURL()
+        openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
                 .waitTopMenuToBeInvisible()
@@ -63,8 +64,9 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
                 .payByCard()
-                .getTextSuccessfulMessage();
+                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-vpn-standard/buy/success");
 
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver()).getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
