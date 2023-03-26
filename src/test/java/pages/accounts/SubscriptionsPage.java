@@ -17,12 +17,12 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     @FindBy(xpath = "//a[@href='/products']")
     private WebElement seeAllLink;
 
-    @FindBy(xpath = "//button[@class='buy-btn'][1]")
+    @FindBy(xpath = "//article[1]//button")
     private WebElement buyNowButtonOfPlatinumSubscription;
     @FindBy(xpath = "//article[4]//button")
     private WebElement buyNowButtonOfVpnSubscription;
 
-    @FindBy(xpath = "//button[@class='btn-submit']")
+    @FindBy(xpath = "//div[@class ='modal']//button[@class='btn-submit']")
     private WebElement confirmButtonInPopup;
 
     @FindBy(xpath = "//a[@class='btn-submit']")
@@ -62,6 +62,8 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     private WebElement successfulMessage;
     @FindBy(xpath = "//img[@src ='./images/payment-illustration-success.svg']")
     private WebElement successfulImage;
+    @FindBy(xpath = "//img[@src ='./images/payment-illustration.svg']")
+    private WebElement paymentImage;
 
     public SubscriptionsPage(WebDriver driver) {
 
@@ -85,6 +87,7 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     }
     public SubscriptionsPage waitSuccessImage() {
         wait20ElementToBeVisible(successfulImage);
+        wait10ElementToBeVisible(successfulMessage);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
