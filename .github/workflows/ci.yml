@@ -1,55 +1,33 @@
-name: CI
+name: Allure Report
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches:
+      - main
 
 jobs:
-  run-test:
-    name: 'Run tests'
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Git clone
+      - name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
-      - name: Install JDK
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          java-version: 11
 
-      - name: Сache maven
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
+      - name: Install Maven
+        run: sudo apt-get install -y maven
 
-      - name: Maven test
-        run: mvn -B package --file pom.xml
-        env:
-          CHROME_OPTIONS: --disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless;--window-size=1920,1080
-          CI_RUN: true
-
-      - name: Attach Tests screenshots
-        uses: actions/upload-artifact@v3
-        with:
-          path: screenshotsVideo
-
-      - name: Attach Bug screenshots
-        uses: actions/upload-artifact@v3
-        if: failure()
-        with:
-          path: screenshots
+      - name: Build and Test
+        run: mvn clean test
 
       - name: Generate Allure Report
         uses: dorny/setup-allure@v1
         with:
-        version: 2.13.9
-                   - run: allure generate target/allure-results --clean -o target/allure-report
+          version: 2.13.9
+      - run: allure generate target/allure-results --clean -o target/allure-report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v2
