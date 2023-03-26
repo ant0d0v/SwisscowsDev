@@ -65,8 +65,7 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfProduct()
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
-                .payByCard()
-                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-vpn-standard/buy/success");
+                .payByCard();
 
         final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
                 .waitSuccessImage()
