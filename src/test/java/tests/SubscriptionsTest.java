@@ -10,7 +10,7 @@ public class SubscriptionsTest extends BaseTest {
     public void testBuySubscriptionPlatinum() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
-        final String actualSuccessfulMessage = openBaseURL()
+        openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
                 .waitTopMenuToBeInvisible()
@@ -24,8 +24,11 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
                 .payByCard()
-                .getTextSuccessfulMessage();
+                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-platinum/buy/success");
 
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
+                .waitSuccessImage()
+                .getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }
@@ -49,7 +52,7 @@ public class SubscriptionsTest extends BaseTest {
     public void testBuyVpnSubscriptionPlatinum() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
-        final String actualSuccessfulMessage = openBaseURL()
+        openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
                 .waitTopMenuToBeInvisible()
@@ -62,9 +65,11 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfProduct()
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
-                .payByCard()
-                .getTextSuccessfulMessage();
+                .payByCard();
 
+        final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
+                .waitSuccessImage()
+                .getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
 
     }

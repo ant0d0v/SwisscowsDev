@@ -559,6 +559,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public MainPage refreshMainPage() {
         refreshPage();
+        waitTopMenuToBeInvisible();
         wait10ElementToBeVisible(heartIcon);
         return new MainPage(getDriver());
     }

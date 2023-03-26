@@ -8,7 +8,9 @@ import pages.MainPage;
 import pages.TestData;
 import pages.accounts.UsersLoginPage;
 import pages.top_menu.NewsPage;
+import pages.top_menu.VideoPage;
 import pages.top_menu.VpnPage;
+import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
 import utils.TestUtils;
@@ -470,14 +472,17 @@ public class TopMenuTest extends BaseTest {
     }
     @Test
     public void testCharityQueryCounterSearchVideo() {
+        VideoPage videoPage  = new VideoPage(getDriver());
 
         final String expectedValueHeartIcon = "2";
 
-        final String  actualValueHeartIcon = openBaseURL()
+        openBaseURL()
                 .inputSearchCriteriaAndEnter("news")
                 .waitUntilVisibilityWebResult()
-                .clickVideoButton()
-                .waitCharityValueCountChanged("1")
+                .clickVideoButton();
+
+        final String  actualValueHeartIcon = videoPage
+                .waitUntilVisibilityVideoResult()
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);

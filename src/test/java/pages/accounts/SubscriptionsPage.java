@@ -17,12 +17,12 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     @FindBy(xpath = "//a[@href='/products']")
     private WebElement seeAllLink;
 
-    @FindBy(xpath = "//button[@class='buy-btn'][1]")
+    @FindBy(xpath = "//article[1]//button")
     private WebElement buyNowButtonOfPlatinumSubscription;
     @FindBy(xpath = "//article[4]//button")
     private WebElement buyNowButtonOfVpnSubscription;
 
-    @FindBy(xpath = "//button[@class='btn-submit']")
+    @FindBy(xpath = "//div[@class ='modal']//button[@class='btn-submit']")
     private WebElement confirmButtonInPopup;
 
     @FindBy(xpath = "//a[@class='btn-submit']")
@@ -60,6 +60,10 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     private WebElement proceedButton;
     @FindBy(xpath = "//div[@class = 'product checkout success']//h1")
     private WebElement successfulMessage;
+    @FindBy(xpath = "//img[@src ='./images/payment-illustration-success.svg']")
+    private WebElement successfulImage;
+    @FindBy(xpath = "//img[@src ='./images/payment-illustration.svg']")
+    private WebElement paymentImage;
 
     public SubscriptionsPage(WebDriver driver) {
 
@@ -81,12 +85,17 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         click(seeAllLink);
         return new SubscriptionsPage (getDriver());
     }
+    public SubscriptionsPage waitSuccessImage() {
+        wait20ElementToBeVisible(successfulImage);
+        wait10ElementToBeVisible(successfulMessage);
+        return new SubscriptionsPage (getDriver());
+    }
     public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
-        click(buyNowButtonOfPlatinumSubscription);
+        clickByJavaScript(buyNowButtonOfPlatinumSubscription);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickBuyNowButtonOfVpnSubscription() {
-        click(buyNowButtonOfVpnSubscription);
+        clickByJavaScript(buyNowButtonOfVpnSubscription);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickConfirmButtonInPopup() {
@@ -117,7 +126,7 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         getDriver().switchTo().frame(cardNumberFrame);
         click(cardNumber);
         String name = "4111111111111111";
-        inputJavaScript(name,cardNumber);
+        input(name,cardNumber);
 
 
 
@@ -153,7 +162,6 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         return new SubscriptionsPage(getDriver());
     }
     public String getTextSuccessfulMessage() {
-        wait20ElementToBeVisible(successfulMessage);
         return getText(successfulMessage);
     }
     public String getAttributePlatinumSubscription() {
