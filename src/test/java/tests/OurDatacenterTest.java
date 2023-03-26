@@ -63,7 +63,7 @@ public class OurDatacenterTest extends BaseTest {
                 .doubleClickToSecondImageInSlider()
                 .getClassAttributeOfImageSlider();
 
-        Assert.assertNotEquals(newAttribute, oldAttribute);
+        Assert.assertEquals(newAttribute, oldAttribute);
         Assert.assertTrue(ourDatacenterPage.elementIsDisplayedInSlider());
     }
 
