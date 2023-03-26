@@ -51,11 +51,18 @@ jobs:
             unzip -q allure-commandline-2.14.0.zip
             allure-commandline-2.14.0/allure generate target/allure-results --clean -o target/allure-report
 
-      - name: Upload Allure Report
+      - name: Generate Allure Report
+        uses: allure-actions/generate-allure-report@v1
+        with:
+          version: 2.16.0
+          input-directory: target/surefire-reports/
+          output-directory: allure-report/
+
+      - name: Archive Allure Report
         uses: actions/upload-artifact@v2
         with:
-         name: allure-report
-         path: target/allure-report
+          name: allure-report
+          path: allure-report/
 
 
 
