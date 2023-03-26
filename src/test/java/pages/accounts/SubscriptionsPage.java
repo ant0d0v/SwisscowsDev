@@ -91,11 +91,11 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
-        click(buyNowButtonOfPlatinumSubscription);
+        clickByJavaScript(buyNowButtonOfPlatinumSubscription);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickBuyNowButtonOfVpnSubscription() {
-        click(buyNowButtonOfVpnSubscription);
+        clickByJavaScript(buyNowButtonOfVpnSubscription);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickConfirmButtonInPopup() {
