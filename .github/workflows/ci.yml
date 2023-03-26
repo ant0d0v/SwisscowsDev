@@ -36,6 +36,7 @@ jobs:
 
       - name: Attach Tests screenshots
         uses: actions/upload-artifact@v3
+        if: success()
         with:
           path: screenshotsVideo
 
@@ -44,20 +45,6 @@ jobs:
         if: failure()
         with:
           path: screenshots
-
-      - name: Generate Allure Report
-        uses: dorny/setup-allure@v2
-        with:
-          version: 2.0.1
-      - run: |
-          allure generate --clean
-          allure open
-
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v2
-        with:
-           name: allure-report
-           path: allure-report
 
 
 
