@@ -45,6 +45,26 @@ jobs:
         with:
           path: screenshots
 
+      - name: Generate Allure Report
+        uses: dorny/setup-allure@v2
+        with:
+          version: 2.14.0
+      - run: |
+          allure generate --clean
+          allure open
+
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v2
+        with:
+           name: allure-report
+           path: allure-report
+
+
+
+
+
+
+
 
 
 
