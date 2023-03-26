@@ -48,7 +48,7 @@ jobs:
       - name: Generate Allure Report
         uses: dorny/setup-allure@v2
         with:
-          version: 2.14.0
+          version: 2.8.1
       - run: |
           allure generate --clean
           allure open
