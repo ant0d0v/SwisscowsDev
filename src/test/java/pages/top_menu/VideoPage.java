@@ -40,7 +40,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement shortButtonInDropdownDuration;
     @FindBy(xpath = "//article[@class ='item-video']//figure//span")
     private List<WebElement> listDurationAllVideo;
-    @FindBy(xpath = "//article[20]")
+    @FindBy(xpath = "//article[20]//figure//img")
     private WebElement lastVideo;
     public VideoPage(WebDriver driver) {
         super(driver);
@@ -92,6 +92,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     public VideoPage scrollToLastVideo() {
         scrollToLastElement(lastVideo);
+        wait10ElementToBeVisible(lastVideo);
         return new VideoPage(getDriver());
     }
     public String getVideoImageAttribute() {

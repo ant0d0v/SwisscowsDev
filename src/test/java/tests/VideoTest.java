@@ -70,7 +70,7 @@ public class VideoTest extends BaseTest {
                 .scrollToLastVideo()
                 .getTitleAllVideo();
 
-        Assert.assertNotEquals(newSize ,oldSize);
+        Assert.assertNotEquals(newSize.size() ,oldSize.size());
 
 
     }
