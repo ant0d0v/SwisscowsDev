@@ -441,7 +441,7 @@ public class TopMenuTest extends BaseTest {
 
     }
     @Test
-    public void testCharityQueryCounterSearchAndReloadPage_MainPage() {
+    public void testCharityQueryCounterSearch_MainPage() {
 
         final String expectedValueHeartIcon = "1";
 
