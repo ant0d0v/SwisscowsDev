@@ -84,6 +84,7 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityVideoResult()
                 .getTitleAllVideo();
 
+
         final int actualSize = videoPage.getTitleAllVideo().size();
 
         Assert.assertTrue(actualSize >= 20);
