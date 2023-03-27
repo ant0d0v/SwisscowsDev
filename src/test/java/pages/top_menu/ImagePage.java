@@ -19,7 +19,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement h2FirstImage;
     @FindBy(xpath = "(//figure//a//img)[position() < 5]")
     private List<WebElement> AltAttributeAllImage;
-    @FindBy(xpath = "//figure[40]")
+    @FindBy(xpath = "//figure[50]")
     private WebElement lastImage;
     @FindBy(xpath = "//div[@class='button-menu color']")
     private WebElement colorButton;

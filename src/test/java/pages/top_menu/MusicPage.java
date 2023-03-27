@@ -24,7 +24,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement playButtonAttribute;
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
-    @FindBy(xpath = "//article[20]")
+    @FindBy(xpath = "//article[24]")
     private WebElement lastTrack;
     @FindBy(xpath = "//article[29]")
     private WebElement lastTrackDouble;
