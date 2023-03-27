@@ -119,6 +119,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
     public MusicPage scrollToLastTrack() {
+        wait10ElementToBeVisible(lastTrack);
         scrollByVisibleElement(lastTrack);
         return new MusicPage(getDriver());
     }

@@ -65,8 +65,9 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult();
-        videoResult.scrollToLastTrack();
-        sleep(1000);
+        videoResult
+                .scrollToLastTrack();
+
         final List<String> titleAllVideo = videoPage.getTitleAllVideo();
 
         Assert.assertTrue(titleAllVideo.size() >= 40);

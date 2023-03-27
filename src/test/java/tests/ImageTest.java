@@ -261,6 +261,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
        imagePage
@@ -278,6 +279,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -299,6 +301,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -320,6 +323,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -340,6 +344,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
+                    .waitForLoaderIsDisappeared()
                     .clickHamburgerMenuIcon()
                     .signIn();
             imagePage
@@ -362,6 +367,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
+                    .waitForLoaderIsDisappeared()
                     .clickHamburgerMenuIcon()
                     .signIn();
 

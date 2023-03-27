@@ -294,7 +294,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickHamburgerMenu() {
-        wait10ElementToBeVisible(hamburgerTopMenu);
         click(hamburgerTopMenu);
 
         return new MainPage(getDriver());
