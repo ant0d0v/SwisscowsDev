@@ -92,7 +92,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     public VideoPage scrollToLastVideo() {
         scrollToLastElement(lastVideo);
-        wait10ElementToBeVisible(lastVideo);
         return new VideoPage(getDriver());
     }
     public String getVideoImageAttribute() {

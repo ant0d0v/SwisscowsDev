@@ -350,7 +350,7 @@ public abstract class BasePage {
     }
     protected void scrollToLastElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("window.scrollBy(0,4000)", element);
+        js.executeScript("window.scrollBy(0,6000)", element);
     }
 
     protected void goBack() {
