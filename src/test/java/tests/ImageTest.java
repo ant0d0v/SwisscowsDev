@@ -67,7 +67,7 @@ public class ImageTest extends BaseTest {
 
         final List<String> AllLinks = imagePage.getLinksAllImages();
 
-        Assert.assertTrue(AllLinks.size() > 60);
+        Assert.assertEquals(AllLinks.size(),100);
 
 
     }

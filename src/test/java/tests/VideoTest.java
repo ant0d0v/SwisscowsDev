@@ -70,7 +70,7 @@ public class VideoTest extends BaseTest {
 
         final List<String> titleAllVideo = videoPage.getTitleAllVideo();
 
-        Assert.assertTrue(titleAllVideo.size() >= 25);
+        Assert.assertEquals(titleAllVideo.size() ,48);
 
 
     }
