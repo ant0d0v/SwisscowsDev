@@ -479,7 +479,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
-                .waitUntilVisibilityScreenshot()
+                .waitUntilVisibilityScreenshotButton()
                 .clickTrackersButtonInScreenshot()
                 .getTrackersInScreenshot();
 
@@ -494,8 +494,9 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
-                .waitUntilVisibilityScreenshot()
+                .waitUntilVisibilityTrackerButton()
                 .clickTrackersButtonInScreenshot()
+                .waitUntilVisibilityScreenshotButton()
                 .clickTrackersButtonInScreenshot()
                 .waitUntilVisibilityScreenshot();
 
