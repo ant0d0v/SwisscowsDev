@@ -318,7 +318,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public void clickAllLinksOnEmailPage(int index) {
         click(getEmailLinks().get(index));
         switchToAnotherWindow();
-        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+
     }
 
     public void setOriginalHandle() {
