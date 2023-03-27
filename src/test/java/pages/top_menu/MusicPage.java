@@ -24,7 +24,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement playButtonAttribute;
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
-    @FindBy(xpath = "//article[24]")
+    @FindBy(xpath = "//article[20]")
     private WebElement lastTrack;
     @FindBy(xpath = "//article[29]")
     private WebElement lastTrackDouble;
@@ -119,7 +119,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
     public MusicPage scrollToLastTrack() {
-        wait10ElementToBeVisible(lastTrack);
         scrollByVisibleElement(lastTrack);
         return new MusicPage(getDriver());
     }

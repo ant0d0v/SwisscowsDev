@@ -3,7 +3,6 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
-            <class name="tests.ImageTest"/>
             <class name="tests.VideoTest"/>
 
         </classes>

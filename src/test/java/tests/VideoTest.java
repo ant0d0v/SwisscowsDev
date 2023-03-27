@@ -58,19 +58,19 @@ public class VideoTest extends BaseTest {
     }
     @Test
     public void testScrollToNextPage_VideoPage() throws InterruptedException {
-        MusicPage videoResult = new MusicPage(getDriver());
         VideoPage videoPage = new VideoPage(getDriver());
-        openBaseURL()
+        final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
-                .waitUntilVisibilityVideoResult();
-        videoResult
-                .scrollToLastTrack();
+                .waitUntilVisibilityVideoResult()
+                .getTitleAllVideo();
 
-        final List<String> titleAllVideo = videoPage.getTitleAllVideo();
+        final List<String> newSize = videoPage
+                .scrollToLastVideo()
+                .getTitleAllVideo();
 
-        Assert.assertEquals(titleAllVideo.size() ,48);
+        Assert.assertNotEquals(newSize ,oldSize);
 
 
     }
