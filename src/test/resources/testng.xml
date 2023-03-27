@@ -3,6 +3,7 @@
 <suite name="All Test Suite">
     <test name="/Users/">
         <classes>
+            <class name="tests.SummaryTest"/>
             <class name="tests.SubscriptionsTest"/>
             <class name="tests.TopMenuTest"/>
             <class name="tests.FooterMenuTest"/>

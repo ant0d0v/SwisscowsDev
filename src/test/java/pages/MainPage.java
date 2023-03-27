@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
+import pages.top_menu.WebPage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,6 +126,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
     private List<WebElement> allImagesMainPage;
     @FindBy(xpath =  "//h2")
     private List<WebElement> h2TextsMainPage;
+    @FindBy(xpath =  "//body")
+    private WebElement summaryPage;
     @FindBy(xpath =  "//div//p[@class='title-section']")
     private List<WebElement> h1TextsMainPage;
 
@@ -134,6 +138,18 @@ public class MainPage extends FooterMenuPage<MainPage> {
     public MainPage createGeneric() {
 
         return new MainPage(getDriver());
+    }
+    public MainPage openVersionTxtPageSwisscows() {
+        getDriver().get("https://dev.swisscows.com/version.txt");
+        return new MainPage(getDriver());
+    }
+    public MainPage openVersionTxtPageAccount() {
+        getDriver().get("https://accounts.dev.swisscows.com/version.txt");
+        return new MainPage(getDriver());
+    }
+    public String getTextInSummaryPage() {
+
+        return getText(summaryPage);
     }
     public List <String> getH2TextsMainPage() {
 
