@@ -91,7 +91,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return new VideoPage(getDriver());
     }
     public VideoPage scrollToLastVideo() throws InterruptedException {
-        scrollByVisibleElement(lastVideo);
+        scroll();
         sleep(1000);
         return new VideoPage(getDriver());
     }

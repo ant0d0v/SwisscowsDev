@@ -1,8 +1,10 @@
 package pages.top_menu;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
@@ -19,7 +21,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement h2FirstImage;
     @FindBy(xpath = "(//figure//a//img)[position() < 5]")
     private List<WebElement> AltAttributeAllImage;
-    @FindBy(xpath = "//figure[50]")
+    @FindBy(xpath = "//figure[40]//img")
     private WebElement lastImage;
     @FindBy(xpath = "//div[@class='button-menu color']")
     private WebElement colorButton;
@@ -90,8 +92,9 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return this;
 
     }
-    public ImagePage scrollToLastImage() {
+    public ImagePage scrollToLastImage() throws InterruptedException {
         scrollByVisibleElement(lastImage);
+        sleep(1000);
         return new ImagePage(getDriver());
     }
     public List <String> getLinksAllImages()  {

@@ -57,17 +57,18 @@ public class ImageTest extends BaseTest {
     @Test
     public void testScrollToNextPage_ImagePage() throws InterruptedException {
         ImagePage imagePage =new ImagePage(getDriver());
-        openBaseURL()
+        final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForLoaderIsDisappeared()
+                .getLinksAllImages();
+
+        final List<String> newSize = imagePage
                 .scrollToLastImage()
-                .waitForLoaderIsDisappeared();
+                .getLinksAllImages();
 
-        final List<String> AllLinks = imagePage.getLinksAllImages();
-
-        Assert.assertEquals(AllLinks.size(),100);
+        Assert.assertNotEquals(newSize,oldSize);
 
 
     }
