@@ -355,7 +355,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&offset=10");
+                .waitUntilLoaderToBeInvisible();
 
         final String actualAttribute = webPage
                 .getAttributeSecondButtonPagination();
