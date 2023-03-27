@@ -90,8 +90,9 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         click(shortButtonInDropdownDuration);
         return new VideoPage(getDriver());
     }
-    public VideoPage scrollToLastVideo() {
+    public VideoPage scrollToLastVideo() throws InterruptedException {
         scrollToLastElement(lastVideo);
+        sleep(1000);
         return new VideoPage(getDriver());
     }
     public String getVideoImageAttribute() {
