@@ -552,7 +552,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public String getValueHeartIcon() {
-
+        wait10ElementToBeVisible(valueHeartIcon);
         return getText(valueHeartIcon);
     }
     public MainPage refreshMainPage() {
