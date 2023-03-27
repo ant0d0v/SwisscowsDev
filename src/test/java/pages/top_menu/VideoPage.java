@@ -114,5 +114,4 @@ public class VideoPage extends TopMenuPage<VideoPage> {
 
         return  getColorsOfElements(listRelatedSearches);
     }
-
 }
