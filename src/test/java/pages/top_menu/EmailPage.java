@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
 
 
 public class EmailPage extends TopMenuPage<EmailPage> {

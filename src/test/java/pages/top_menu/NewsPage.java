@@ -18,8 +18,6 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     private WebElement errorImage;
     @FindBy(xpath = "//figure//img")
     private List<WebElement> allImageNewsPage;
-    @FindBy(xpath = "//ul[@class='pagination']//li[3]")
-    private WebElement secondPagePagination;
     @FindBy(xpath = "//h2[@class = 'title']")
     private List<WebElement> h2Texts;
     @FindBy(xpath = "//div['news-results']//ul[@class]//li[3]")

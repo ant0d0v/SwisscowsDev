@@ -20,8 +20,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement videoResultContainer;
     @FindBy(xpath = "//div[@class='related-searches']//li//a")
     private List<WebElement> listRelatedSearches;
-    @FindBy(xpath = "//div[@class = 'brochure-wrap']//a[@href='/docs/Medienerziehung_2020_06_EN.pdf']")
-    private WebElement buttonOpenFlyer;
+
     @FindBy(xpath = "//div[@class='content']")
     private WebElement videoPlayerYouTube;
     @FindBy(xpath = "//button[@class='button button-warning']")
@@ -40,8 +39,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement shortButtonInDropdownDuration;
     @FindBy(xpath = "//article[@class ='item-video']//figure//span")
     private List<WebElement> listDurationAllVideo;
-    @FindBy(xpath = "//article[20]//figure//img")
-    private WebElement lastVideo;
     public VideoPage(WebDriver driver) {
         super(driver);
     }

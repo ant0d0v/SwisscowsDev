@@ -4,11 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
-
 import java.util.List;
-import java.util.NoSuchElementException;
-
-import static java.lang.Thread.sleep;
 
 public class WebPage extends TopMenuPage<WebPage> {
     @FindBy(xpath = "//div[@class='web-results']//article[1]")
