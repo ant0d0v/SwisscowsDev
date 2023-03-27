@@ -26,8 +26,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement nextTrackAttributes;
     @FindBy(xpath = "//article[20]")
     private WebElement lastTrack;
-    @FindBy(xpath = "//article[29]")
-    private WebElement lastTrackDouble;
     @FindBy(xpath = "//article[1]/div[1]/span[1]")
     private WebElement durationAttribute;
 
@@ -47,8 +45,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private List<WebElement> allTracks;
     @FindBy(xpath = "//button[@title='Play/Pause']")
     private List<WebElement> allPlayButton;
-    @FindBy(xpath = "//button[@class='button favorite']")
-    private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//h2[text() ='My favorite tracks']")
     private WebElement favoriteContainer;
     @FindBy(xpath = "//article[@class='item item--audio']//img[1]")

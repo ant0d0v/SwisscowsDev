@@ -139,11 +139,10 @@ public class NewsTest extends BaseTest {
         final String oldTitle = newsPage.getTitleNews();
         newsPage
                  .clickThirdPagePagination()
-                 .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE&offset=20");
+                 .waitUntilLoaderToBeInvisible();
 
         final String newTitle = newsPage.getTitleNews();
         final String actualAttribute = newsPage
-                .waitUntilVisibilityNewsResult()
                 .getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
@@ -163,7 +162,7 @@ public class NewsTest extends BaseTest {
                 .clickNextPagePagination();
 
         final String actualAttribute = newsPage
-                .waitUntilVisibilityNewsResult()
+                .waitUntilLoaderToBeInvisible()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());

@@ -294,7 +294,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickHamburgerMenu() {
-        wait10ElementToBeVisible(hamburgerTopMenu);
         click(hamburgerTopMenu);
 
         return new MainPage(getDriver());
@@ -319,7 +318,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public void clickAllLinksOnEmailPage(int index) {
         click(getEmailLinks().get(index));
         switchToAnotherWindow();
-        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+
     }
 
     public void setOriginalHandle() {
@@ -352,7 +351,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return  new EmailPage(getDriver());
     }
     public LoginPage clickEmailTopMenuSearch() {
-        wait10ElementToBeVisible(emailTopMenuSearch);
+        waitForElementIsDisappeared(loader);
         click(emailTopMenuSearch);
         return  new LoginPage (getDriver());
     }
@@ -388,7 +387,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(VPNTopMenu);
         return new VpnPage(getDriver());
     }
-
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
@@ -554,7 +552,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public String getValueHeartIcon() {
-
+        wait10ElementToBeVisible(valueHeartIcon);
         return getText(valueHeartIcon);
     }
     public MainPage refreshMainPage() {

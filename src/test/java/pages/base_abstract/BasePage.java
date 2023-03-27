@@ -348,6 +348,10 @@ public abstract class BasePage {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
+    protected void scroll() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollBy(0,6000)");
+    }
 
     protected void goBack() {
 

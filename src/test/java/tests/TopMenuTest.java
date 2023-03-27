@@ -441,7 +441,7 @@ public class TopMenuTest extends BaseTest {
 
     }
     @Test
-    public void testCharityQueryCounterSearchAndReloadPage_MainPage() {
+    public void testCharityQueryCounterSearchAndGoBack_MainPage() {
 
         final String expectedValueHeartIcon = "1";
 
@@ -596,7 +596,6 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(getExternalPageURL(), expectedURL);
         Assert.assertEquals(actualH1text,expectedTitle);
-
     }
 
 }

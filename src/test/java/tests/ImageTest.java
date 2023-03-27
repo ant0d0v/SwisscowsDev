@@ -57,15 +57,18 @@ public class ImageTest extends BaseTest {
     @Test
     public void testScrollToNextPage_ImagePage() throws InterruptedException {
         ImagePage imagePage =new ImagePage(getDriver());
-        openBaseURL()
+        final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .scrollToLastImage();
-        sleep(1000);
-        final List<String> AllLinks = imagePage.getLinksAllImages();
+                .waitForLoaderIsDisappeared()
+                .getLinksAllImages();
 
-        Assert.assertTrue(AllLinks.size() >= 70);
+        final List<String> newSize = imagePage
+                .scrollToLastImage()
+                .getLinksAllImages();
+
+        Assert.assertNotEquals(newSize,oldSize);
 
 
     }
@@ -221,7 +224,7 @@ public class ImageTest extends BaseTest {
     public void testNextButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldoo")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
@@ -261,6 +264,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
        imagePage
@@ -278,6 +282,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -299,6 +304,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -320,6 +326,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
+                .waitForLoaderIsDisappeared()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -340,6 +347,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
+                    .waitForLoaderIsDisappeared()
                     .clickHamburgerMenuIcon()
                     .signIn();
             imagePage
@@ -362,6 +370,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
+                    .waitForLoaderIsDisappeared()
                     .clickHamburgerMenuIcon()
                     .signIn();
 

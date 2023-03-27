@@ -44,11 +44,5 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
         return new WhoWeArePage(getDriver());
     }
 
-
-    public WhoWeArePage waitAllOptionsAreVisibleAndClickable() {
-        areAllElementsVisibleAndClickable(products);
-
-        return this;
-    }
 }
 
