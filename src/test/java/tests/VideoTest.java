@@ -72,7 +72,6 @@ public class VideoTest extends BaseTest {
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
 
-
     }
     @Test
     public void testVideoResultsEqualsSearchCriteria(){
