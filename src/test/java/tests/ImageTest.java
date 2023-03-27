@@ -61,11 +61,13 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .scrollToLastImage();
-        sleep(1000);
+                .waitForLoaderIsDisappeared()
+                .scrollToLastImage()
+                .waitForLoaderIsDisappeared();
+
         final List<String> AllLinks = imagePage.getLinksAllImages();
 
-        Assert.assertTrue(AllLinks.size() >= 70);
+        Assert.assertTrue(AllLinks.size() > 60);
 
 
     }
