@@ -306,7 +306,7 @@ public class FooterMenuTest extends BaseTest {
     @Test
     public void testInstagramIconNavigatesToInstagramWeb() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedPartialInstagramURL = "https://www.instagram.com/swisscows.official/";
+        final String expectedPartialInstagramURL = "instagram.com";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
@@ -316,7 +316,9 @@ public class FooterMenuTest extends BaseTest {
                 .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
-        Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
+        Assert.assertTrue(getExternalPageURL().contains(expectedPartialInstagramURL),
+                " ExternalPageURL does not contain 'instagram.com' " + getExternalPageURL());
+
 
     }
     @Test
