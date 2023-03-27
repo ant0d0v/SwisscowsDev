@@ -155,6 +155,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
+        wait10ElementToBeVisible(nextButtonInSideImageview);
         clickByJavaScript(nextButtonInSideImageview);
         return new ImagePage(getDriver());
     }

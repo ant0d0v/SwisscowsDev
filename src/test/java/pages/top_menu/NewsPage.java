@@ -30,6 +30,8 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     private WebElement previousPagePagination;
     @FindBy(xpath = "//div['news-results']//ul[@class]//li[last()]")
     private WebElement nextPagePagination;
+    @FindBy(className ="three-bounce")
+    private WebElement loader;
 
     public NewsPage(WebDriver driver) {
         super(driver);
@@ -88,7 +90,12 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return getSrcOfElements(allImageNewsPage);
     }
+    public NewsPage waitUntilLoaderToBeInvisible(){
+        wait10ElementToBeInVisible(loader);
+        return new NewsPage(getDriver());
+    }
     public NewsPage clickThirdPagePagination() {
+
         click(thirdPagePagination);
 
         return new NewsPage(getDriver());

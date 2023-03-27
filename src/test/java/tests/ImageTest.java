@@ -224,7 +224,7 @@ public class ImageTest extends BaseTest {
     public void testNextButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldoo")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");

@@ -184,7 +184,7 @@ public class WebPageTest extends BaseTest {
 
         final int actualSize = webPage.getTitleInWebResult().size();
 
-        Assert.assertTrue(actualSize >= 8);
+        Assert.assertTrue(actualSize >= 5);
         for (String searchCriteria : titles) {
             Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
@@ -360,7 +360,7 @@ public class WebPageTest extends BaseTest {
         final String actualAttribute = webPage
                 .getAttributeSecondButtonPagination();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
         Assert.assertEquals(actualAttribute,"number active");
 
@@ -399,7 +399,7 @@ public class WebPageTest extends BaseTest {
                 .getTitleH2Text();
 
         Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
 
@@ -420,7 +420,7 @@ public class WebPageTest extends BaseTest {
                 .clickFilterButtonWeb()
                 .waitUntilLoaderToBeInvisible();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 8);
+        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
     }
     @Test

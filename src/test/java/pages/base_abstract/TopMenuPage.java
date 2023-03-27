@@ -351,7 +351,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return  new EmailPage(getDriver());
     }
     public LoginPage clickEmailTopMenuSearch() {
-        wait10ElementToBeVisible(emailTopMenuSearch);
+        waitForElementIsDisappeared(loader);
         click(emailTopMenuSearch);
         return  new LoginPage (getDriver());
     }
@@ -387,7 +387,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(VPNTopMenu);
         return new VpnPage(getDriver());
     }
-
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
