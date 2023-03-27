@@ -50,7 +50,7 @@ public class EmailTest extends BaseTest {
 
     @Test(dataProvider = "EmailLinksData", dataProviderClass = TestData.class)
     public void testEmailLinksNavigateToCorrespondingPages(
-            int index, String expectedH1text) {
+            int index, String expectedTittle) {
         EmailPage emailPage = new EmailPage(getDriver());
 
         MainPage mainPage = openBaseURL();
@@ -60,17 +60,17 @@ public class EmailTest extends BaseTest {
                 .switchToEmailPage();
 
         final String oldURL = mainPage.getCurrentURL();
-        final String oldH1Text = mainPage.getH1Text();
+        final String oldTittle = mainPage.getTitle();
         emailPage
                 .clickAllLinksOnEmailPage(index);
 
         final String actualURL = mainPage.getCurrentURL();
-        final String actualH1Text = mainPage.getH1Text();
+        final String actualTittle = mainPage.getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
-        Assert.assertNotEquals(oldH1Text, actualH1Text);
+        Assert.assertNotEquals(oldTittle, actualTittle);
         Assert.assertTrue(actualURL.contains("https://accounts.swisscows.com/login?ReturnUrl="));
-        Assert.assertEquals(actualH1Text, expectedH1text);
+        Assert.assertEquals(actualTittle, expectedTittle);
     }
 
     @Test

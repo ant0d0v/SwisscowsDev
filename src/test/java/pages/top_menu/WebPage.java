@@ -87,10 +87,13 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement openButtonInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers fade in']")
     private WebElement trackersButtonInScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']//span")
+    private WebElement screenshotButtonInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers fade in']//section")
     private List<WebElement>trackersInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers fade in']//section")
     private WebElement trackersScreenshot;
+
     @FindBy(xpath = "//div[@class='a11t-privacy']")
     private WebElement adsText;
     @FindBy(className ="three-bounce")
@@ -236,7 +239,6 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     public WebPage clickTrackersButtonInScreenshot() {
-        wait10ElementToBeVisible(trackersButtonInScreenshot);
         click(trackersButtonInScreenshot);
         return new WebPage(getDriver());
     }
@@ -323,8 +325,18 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return new WebPage(getDriver());
     }
+    public WebPage waitUntilVisibilityTrackerButton() {
+        wait10ElementToBeVisible(trackersButtonInScreenshot);
+
+        return new WebPage(getDriver());
+    }
+    public WebPage waitUntilVisibilityScreenshotButton() {
+        wait10ElementToBeVisible(screenshotButtonInScreenshot);
+
+        return new WebPage(getDriver());
+    }
     public WebPage waitUntilVisibilityScreenshot() {
-        wait20ElementToBeVisible(previewFrame);
+        wait10ElementToBeVisible(previewFrame);
 
         return new WebPage(getDriver());
     }

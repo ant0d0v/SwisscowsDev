@@ -139,8 +139,8 @@ public class TestData {
     public static Object[][] EmailLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Login"},
-                {1, "Login"},
+                {0, "Login - Swisscows Accounts"},
+                {1, "Login - Swisscows Accounts"},
 
 
         };
