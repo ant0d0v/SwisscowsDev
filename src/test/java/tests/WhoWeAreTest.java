@@ -72,6 +72,5 @@ public class WhoWeAreTest extends BaseTest {
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
     }
-
 }
 
