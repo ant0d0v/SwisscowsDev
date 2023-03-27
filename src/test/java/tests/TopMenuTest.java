@@ -596,7 +596,6 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(getExternalPageURL(), expectedURL);
         Assert.assertEquals(actualH1text,expectedTitle);
-
     }
 
 }
