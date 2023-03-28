@@ -45,11 +45,7 @@ jobs:
         with:
           path: screenshots
 
-      - name: Generate Test Report
-        uses: mikepenz/junit-test-reporter@v2.1.0
-        with:
-            report_paths: "**/testng-results.xml"
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 

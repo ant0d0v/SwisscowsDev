@@ -125,6 +125,5 @@ public class VpnInstructionsTest extends BaseTest {
             Assert.assertEquals(actualDomain, expectedDomain);
         }
     }
-
 }
 
