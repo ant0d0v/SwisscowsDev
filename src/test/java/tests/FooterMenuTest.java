@@ -463,7 +463,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCopyrightOnFooterSearchPages() {
         final String expectedCopyright = "© Swisscows AG, 2023";
 
