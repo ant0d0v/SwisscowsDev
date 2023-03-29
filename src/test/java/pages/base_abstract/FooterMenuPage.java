@@ -269,6 +269,14 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return getListSize(storePanelIconsFooterMenu);
     }
+    public List<String> getLinkColorsFooterMenu() throws InterruptedException {
+
+        return  getColorsOfElements(footerMenuLinks);
+    }
+    public List<String> getLinksColorsWhenHoverFooterMenu() throws InterruptedException {
+
+        return  getHoverColorsOfElements(footerMenuLinks);
+    }
 
     public List<WebElement> getInnerFooterMenuLinks() {
 

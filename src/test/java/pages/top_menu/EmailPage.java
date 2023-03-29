@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 import java.util.List;
 
@@ -16,6 +17,10 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     private WebElement InstallWebAppLink;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
     private List<WebElement> allLinksOnEmailPage;
+    @FindBy(xpath = "//a[@href='https://swisscows.email/en/help']")
+    private WebElement supportButton;
+    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
+    private WebElement StartForFreeLink;
     public EmailPage(WebDriver driver) {
         super(driver);
     }
@@ -38,19 +43,21 @@ public class EmailPage extends TopMenuPage<EmailPage> {
         return this;
 
     }
+    public EmailPage clickSupportButton() {
+        click(supportButton);
+        return new  EmailPage(getDriver());
+    }
+    public EmailPage clickStartForFreeLink() {
+        click(StartForFreeLink);
+        return new  EmailPage(getDriver());
+    }
 
     public EmailPage scrollToWhereToInstallEmail() {
         scrollByVisibleElement(InstallWebAppLink);
 
         return this;
     }
-    public EmailPage hoverElement() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].dispatchEvent(new MouseEvent('mouseover', {bubbles: true, cancelable: true}));", InstallWebAppLink);
 
-        return  this;
-
-    }
 
     public List<String> getButtonColorsWhenHover() throws InterruptedException {
 

@@ -1,7 +1,5 @@
 package pages.base_abstract;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -122,8 +120,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement searchDropdownMenu;
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
-    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
-    private WebElement StartForFreeLink;
+
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
     @FindBy(xpath = "//p//a[@href='https://accounts.swisscows.com/register']")
@@ -230,6 +227,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return  getFontSizes(textsH2);
 
     }
+    public int getCountImagesOnPage()  {
+
+        return  getListSize(allImagesOnPage);
+    }
     public RegisterPage clickRegisterLink() {
         click(registerLink);
         switchToAnotherWindow();
@@ -239,10 +240,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(InstallWebAppLink);
         switchToAnotherWindow();
         return new RegisterPage(getDriver());
-    }
-    public MainPage clickStartForFreeLink() {
-        click(StartForFreeLink);
-        return new  MainPage(getDriver());
     }
 
     public VpnInstructionsPage clickInstructionsLink() {
@@ -588,6 +585,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         createGeneric();
         return new SetAsStartPage(getDriver());
     }
+
     public MakeDefaultSearchPage clickLangDropDownMakeDefault(int index) {
         click(LangDropDownIcon);
         click(getInnerLangMenuList().get(index));

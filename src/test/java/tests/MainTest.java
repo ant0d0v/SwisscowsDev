@@ -4,6 +4,8 @@ import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
+import pages.TestData;
+import pages.top_menu.EmailPage;
 import utils.ProjectConstants;
 import utils.TestUtils;
 import java.util.List;
@@ -212,57 +214,38 @@ public class MainTest extends BaseTest {
 
 
     }
+    @Test(dataProvider = "ServicesBlockLinksData", dataProviderClass = TestData.class)
+    public void testServicesBlockLinksNavigateToCorrespondingPages(
+            int index, String expectedTittle,String expectedUrl) {
 
-    @Test
-    public void testClickebleLinkLearnMore() {
-        final String expectedUrl = "https://hesbox.com/en";
+        MainPage mainPage = openBaseURL()
+                .scrollToOurService();
 
-        openBaseURL()
-                .scrollToOurService()
-                .clickLinkLearnMoreInOurService()
-                .switchToAnotherWindow();
-
-       final String actualLearnMoreUrl = getExternalPageURL();
-
-        Assert.assertEquals(getExternalPageTitle(),"Enterprise Search Software for companies");
-        Assert.assertEquals(actualLearnMoreUrl,expectedUrl);
-
-
-    }
-
-    @Test
-    public void testClickebleLinkFanShop() {
-        final String expectedUrl = "https://swisscows-fanshop.com/";
-
-        MainPage mainPage = openBaseURL();
+        final String oldURL = mainPage.getCurrentURL();
+        final String oldTittle = mainPage.getTitle();
         mainPage
-                .scrollToOurService()
-                .clickLinkFanShopInOurService()
-                .switchToAnotherWindow();
+                .clickServicesBlockLinks(index);
 
-        final String actualFanShopUrl = getExternalPageURL();
+        final String actualURL = mainPage.getCurrentURL();
+        final String actualTittle = mainPage.getTitle();
 
-        Assert.assertEquals(getExternalPageTitle(),"Swisscows Fanshop für Kleider und Geschenke für Fans");
-        Assert.assertEquals(actualFanShopUrl,expectedUrl);
-
-
+        Assert.assertNotEquals(oldURL, actualURL);
+        Assert.assertNotEquals(oldTittle, actualTittle);
+        Assert.assertEquals(actualURL,expectedUrl);
+        Assert.assertEquals(actualTittle, expectedTittle);
     }
-
     @Test
-    public void testClickebleLinkWiebeBlog() {
-        final String expectedUrl = "https://awiebe.org/";
-
-        MainPage mainPage = openBaseURL();
-        mainPage
+    public void testHoverServicesBlockButtons() throws InterruptedException {
+        MainPage mainPage = new MainPage(getDriver());
+        final List<String> oldButtonColorsWhenHover = openBaseURL()
                 .scrollToOurService()
-                .clickLinkWiebeBlogInOurService()
-                .switchToAnotherWindow();
+                .getLinkColorsServicesBlock();
 
-        final String actualWiebeBlogUrl = getExternalPageURL();
 
-        Assert.assertEquals(getExternalPageTitle(),"Blog - Andreas Wiebe");
-        Assert.assertEquals(actualWiebeBlogUrl,expectedUrl);
+        final List<String> newButtonColorsWhenHover = mainPage
+                .getLinksColorsWhenHoverServicesBlock();
 
+        Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
 
     }
     @Test
@@ -299,7 +282,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testAllImagesIsDisplayed_MainPage() {
+    public void testAllImagesAndTextsIsDisplayedWhySwisscowsBlock_MainPage() {
         MainPage mainPage = new MainPage(getDriver());
         final List<String> expectedH2Texts = List.of(
                 "Our anonymous search engine does not store your data!",

@@ -25,15 +25,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//div[@class='services-blocks']")
     private WebElement ourServiceContainer;
 
-    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://hesbox.com/']")
-    private WebElement linkLearnMoreInOurService;
-
-    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://swisscows-fanshop.com']")
-    private WebElement linkFanShopInOurService;
-
-    @FindBy(xpath = "//div[@class='services-blocks']//a[@href='https://awiebe.org/']")
-    private WebElement linkWiebeBlogInOurService;
-
     @FindBy(xpath = "//ul[@class = 'suggestions']/li")
     private List<WebElement> allChoicesInSuggestion;
 
@@ -130,6 +121,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
     private WebElement summaryPage;
     @FindBy(xpath =  "//div//p[@class='title-section']")
     private List<WebElement> h1TextsMainPage;
+    @FindBy(xpath =  "//div[@class='services-blocks']//a")
+    private List<WebElement> linksServicesBlock;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -194,23 +187,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage clickLinkLearnMoreInOurService() {
-        click(linkLearnMoreInOurService);
-        return new MainPage(getDriver());
-
-    }
-
-    public MainPage clickLinkFanShopInOurService() {
-        click(linkFanShopInOurService);
-        return new MainPage(getDriver());
-
-    }
-
-    public MainPage clickLinkWiebeBlogInOurService() {
-        click(linkWiebeBlogInOurService);
-        return new MainPage(getDriver());
-
-    }
     public MainPage clickQuestion1() {
         click(homepageQuestionOne);
 
@@ -456,6 +432,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getAttribute(homepageQuestion6,"class");
     }
+    public List<String> getLinkColorsServicesBlock() throws InterruptedException {
+
+        return  getColorsOfElements(linksServicesBlock);
+    }
+    public List<String> getLinksColorsWhenHoverServicesBlock() throws InterruptedException {
+
+        return  getHoverColorsOfElements(linksServicesBlock);
+    }
 
 
     public List<String> getAllElementsText() {
@@ -466,6 +450,15 @@ public class MainPage extends FooterMenuPage<MainPage> {
             textList.add(element.getText().toLowerCase());
         }
         return textList;
+    }
+    public List<WebElement> getServicesBlockLinks() {
+
+        return linksServicesBlock;
+    }
+    public void clickServicesBlockLinks(int index) {
+        click(getServicesBlockLinks().get(index));
+        switchToAnotherWindow();
+
     }
 
 

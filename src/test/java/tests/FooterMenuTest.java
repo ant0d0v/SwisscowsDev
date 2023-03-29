@@ -383,6 +383,19 @@ public class FooterMenuTest extends BaseTest {
 
         Assert.assertEquals(actualLinks, expectedLinks);
     }
+    @Test
+    public void testHoverFooterMenuLinks() throws InterruptedException {
+        MainPage mainPage = new MainPage(getDriver());
+        final List<String> oldButtonColorsWhenHover = openBaseURL()
+                .scrollToFooterMenu()
+                .getLinkColorsFooterMenu();
+
+        final List<String> newButtonColorsWhenHover = mainPage
+                .getLinksColorsWhenHoverFooterMenu();
+
+        Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
+
+    }
 
     @Test
     public void testBlockImprintDonationDataPrivacyTexts() {
