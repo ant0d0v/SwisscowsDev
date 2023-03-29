@@ -17,7 +17,8 @@ public class EmailTest extends BaseTest {
                 "Advantages",
                 "What we guarantee with Swisscows.email:",
                 "Prices",
-                "Install Swisscows.email"
+                "Install Swisscows.email",
+                "FAQ and Support"
 
         );
         final List<String> actualH2Texts = openBaseURL()
@@ -49,7 +50,7 @@ public class EmailTest extends BaseTest {
     }
 
     @Test(dataProvider = "EmailLinksData", dataProviderClass = TestData.class)
-    public void testEmailLinksNavigateToCorrespondingPages(
+    public void testPriceLinksNavigateToCorrespondingPages(
             int index, String expectedTittle) {
         EmailPage emailPage = new EmailPage(getDriver());
 
@@ -79,6 +80,8 @@ public class EmailTest extends BaseTest {
                 "rgba(255, 255, 255, 1)",
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
+                "rgba(223, 93, 93, 1)",
+                "rgba(255, 255, 255, 1)",
                 "rgba(255, 255, 255, 1)"
         );
         List<String> actualLinksColors = openBaseURL()
@@ -87,13 +90,14 @@ public class EmailTest extends BaseTest {
                 .switchToEmailPage()
                 .getColorLinks();
 
-        Assert.assertTrue(actualLinksColors.size() > 0);
+        Assert.assertEquals(actualLinksColors.size(), 6);
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
     }
 
     @Test
     public void testTextsFontSizesEmailPage() {
         final List<String> expectedH1FontSizes = List.of(
+                "40px",
                 "40px",
                 "40px",
                 "40px",
@@ -125,6 +129,22 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/login?ReturnUrl"));
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+    @Test
+    public void testSupportLinkNavigateToCorrespondingPage() {
+        final String expectedTitle = "Swisscows.email - My secure e-mail.";
+        openBaseURL()
+                .clickEmailTopMenu()
+                .closeWindow()
+                .switchToEmailPage()
+                .clickSupportButton()
+                .switchToExternalPage();
+
+        final String actualUrl = getExternalPageURL();
+        final String actualTitle = new MainPage(getDriver()).getTitle();
+
+        Assert.assertEquals(actualUrl,"https://swisscows.email/en/help/");
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
 
     @Test
     public void testInstallWebLinkNavigateToCorrespondingPage() {
@@ -142,18 +162,19 @@ public class EmailTest extends BaseTest {
     }
 
     @Test
-    public void testAllImageExist() {
+    public void testAllImageExist()  {
+        final int expectedCountImages = 54;
         EmailPage emailPage = openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage();
 
-
+        Assert.assertEquals(emailPage.getCountImagesOnPage(),expectedCountImages);
         Assert.assertTrue(emailPage.isLogoIconDisplayed());
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
     @Test
-    public void testStartAndInstallButtonsColorsWhenHover_EmailPage() throws InterruptedException {
+    public void testStartAndInstallAndSupportButtonsColorsWhenHover_EmailPage() throws InterruptedException {
         EmailPage emailPage = new EmailPage(getDriver());
         final List<String> oldButtonColorsWhenHover = openBaseURL()
                 .clickEmailTopMenu()
@@ -167,7 +188,7 @@ public class EmailTest extends BaseTest {
         Assert.assertNotEquals(newButtonColorsWhenHover,oldButtonColorsWhenHover);
     }
    @Test
-    public void testAllButtonColorsWhenHover_EmailPage() throws InterruptedException {
+    public void testOrderByButtonsColorsWhenHover_EmailPage() throws InterruptedException {
        EmailPage emailPage = new EmailPage(getDriver());
        final List<String> oldButtonColorsWhenHover = openBaseURL()
                .clickEmailTopMenu()

@@ -141,6 +141,18 @@ public class TestData {
         return new Object[][] {
                 {0, "Login - Swisscows Accounts"},
                 {1, "Login - Swisscows Accounts"},
+                {2, "Login - Swisscows Accounts"},
+
+
+        };
+    }
+    @DataProvider(name = "ServicesBlockLinksData")
+    public static Object[][] ServicesBlockLinksDataDataProvider() {
+
+        return new Object[][] {
+                {0, "Enterprise Search Software for companies", "https://hesbox.com/en"},
+                {1, "Swisscows Fanshop für Kleider und Geschenke für Fans","https://swisscows-fanshop.com/"},
+                {2, "Blog - Andreas Wiebe","https://awiebe.org/"},
 
 
         };
