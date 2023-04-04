@@ -19,8 +19,10 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     private List<WebElement> allLinksOnEmailPage;
     @FindBy(xpath = "//a[@href='https://swisscows.email/en/help']")
     private WebElement supportButton;
-    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
+    @FindBy(xpath = "//div[@class='content']//a[@href='https://accounts.swisscows.com/register']")
     private WebElement StartForFreeLink;
+    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
+    private WebElement loginLink;
     public EmailPage(WebDriver driver) {
         super(driver);
     }
@@ -49,6 +51,10 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     }
     public EmailPage clickStartForFreeLink() {
         click(StartForFreeLink);
+        return new  EmailPage(getDriver());
+    }
+    public EmailPage clickLoginLink() {
+        click(loginLink);
         return new  EmailPage(getDriver());
     }
 
