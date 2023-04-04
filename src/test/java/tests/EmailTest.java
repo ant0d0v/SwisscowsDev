@@ -51,7 +51,7 @@ public class EmailTest extends BaseTest {
 
     @Test(dataProvider = "EmailLinksData", dataProviderClass = TestData.class)
     public void testPriceLinksNavigateToCorrespondingPages(
-            int index, String expectedTittle) {
+            int index, String expectedTittle, String expectedUrl) {
         EmailPage emailPage = new EmailPage(getDriver());
 
         MainPage mainPage = openBaseURL();
@@ -65,18 +65,19 @@ public class EmailTest extends BaseTest {
         emailPage
                 .clickAllLinksOnEmailPage(index);
 
-        final String actualURL = mainPage.getCurrentURL();
+        final String actualURL = mainPage.getFormattedURL();
         final String actualTittle = mainPage.getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldTittle, actualTittle);
-        Assert.assertTrue(actualURL.contains("https://accounts.swisscows.com/login?ReturnUrl="));
+        Assert.assertEquals(actualURL, expectedUrl);
         Assert.assertEquals(actualTittle, expectedTittle);
     }
 
     @Test
     public void testLinksColorsEmailPage() {
         List<String> expectedLinksColors = List.of(
+                "rgba(255, 255, 255, 1)",
                 "rgba(255, 255, 255, 1)",
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
@@ -90,7 +91,7 @@ public class EmailTest extends BaseTest {
                 .switchToEmailPage()
                 .getColorLinks();
 
-        Assert.assertEquals(actualLinksColors.size(), 6);
+        Assert.assertEquals(actualLinksColors.size(), 7);
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
     }
 
@@ -115,12 +116,28 @@ public class EmailTest extends BaseTest {
 
     @Test
     public void testStartForFreeLinkLinkNavigateToCorrespondingPage() {
-        final String expectedTitle = "Login - Swisscows Accounts";
+        final String expectedTitle = "Register - Swisscows Accounts";
         openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
                 .switchToEmailPage()
                 .clickStartForFreeLink()
+                .switchToExternalPage();
+
+        final String actualUrl = getExternalPageURL();
+        final String actualTitle = new MainPage(getDriver()).getTitle();
+
+        Assert.assertTrue(actualUrl.contains("https://accounts.swisscows.com/register"));
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
+    @Test
+    public void testLoginLinkLinkNavigateToCorrespondingPage() {
+        final String expectedTitle = "Login - Swisscows Accounts";
+        openBaseURL()
+                .clickEmailTopMenu()
+                .closeWindow()
+                .switchToEmailPage()
+                .clickLoginLink()
                 .switchToExternalPage();
 
         final String actualUrl = getExternalPageURL();
@@ -174,7 +191,7 @@ public class EmailTest extends BaseTest {
         Assert.assertTrue(emailPage.allElementsDisplayed());
     }
     @Test
-    public void testStartAndInstallAndSupportButtonsColorsWhenHover_EmailPage() throws InterruptedException {
+    public void testStartLoginAndInstallAndSupportButtonsColorsWhenHover_EmailPage() throws InterruptedException {
         EmailPage emailPage = new EmailPage(getDriver());
         final List<String> oldButtonColorsWhenHover = openBaseURL()
                 .clickEmailTopMenu()

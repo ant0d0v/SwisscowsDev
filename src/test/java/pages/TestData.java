@@ -136,12 +136,12 @@ public class TestData {
         };
     }
     @DataProvider(name = "EmailLinksData")
-    public static Object[][] EmailLinksTestDataProvider() {
+    public static Object[][] EmailLinksTestDataProvider () {
 
         return new Object[][] {
-                {0, "Login - Swisscows Accounts"},
-                {1, "Login - Swisscows Accounts"},
-                {2, "Login - Swisscows Accounts"},
+                {0, "Login - Swisscows Accounts", "uthorize%3Fresponse_typ"},
+                {1, "Login - Swisscows Accounts","swisscows-email-standar"},
+                {2, "Login - Swisscows Accounts","swisscows-email-premium"},
 
 
         };
