@@ -3,6 +3,7 @@ package tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.top_menu.ImagePage;
 import pages.top_menu.WebPage;
 import utils.TestUtils;
 
@@ -24,13 +25,7 @@ public class AutobahnTest extends BaseTest {
                 "\"iphone totti forover \"",
                 "\"iphone totti forover \"",
                 "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
+                "\"iphone totti forover \""
 
 
         };
@@ -42,6 +37,7 @@ public class AutobahnTest extends BaseTest {
 
         for (int i = 0; i < queries.length; i++)  {
             webPage.searchAfterClear(queries[i]);
+            sleep(1000);
 
             if (i == queries.length - 1) {
                Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));

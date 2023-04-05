@@ -33,7 +33,7 @@ public class SubscriptionsTest extends BaseTest {
 
     }
     @Test(priority = 2)
-    public void testCheckSubscriptionPlatinum() throws InterruptedException {
+    public void testCheckSubscriptionEmailStandard() throws InterruptedException {
         final String expectedAttribute = "item active";
         final String actualAttribute = openBaseURL()
                 .clickHamburgerMenu()
