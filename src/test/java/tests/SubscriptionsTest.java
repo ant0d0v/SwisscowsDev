@@ -7,7 +7,7 @@ import pages.accounts.SubscriptionsPage;
 
 public class SubscriptionsTest extends BaseTest {
     @Test(priority = 1)
-    public void testBuySubscriptionPlatinum() throws InterruptedException {
+    public void testBuySubscriptionEmailStandard() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
         openBaseURL()
@@ -24,7 +24,7 @@ public class SubscriptionsTest extends BaseTest {
                 .clickBuyNowButtonOfMonthlyPlan()
                 .clickMethodCard()
                 .payByCard()
-                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-platinum/buy/success");
+                .waitForUrlContains("https://accounts.dev.swisscows.com/products/swisscows-email-standard/buy/success");
 
         final String actualSuccessfulMessage = new SubscriptionsPage(getDriver())
                 .waitSuccessImage()
@@ -49,7 +49,7 @@ public class SubscriptionsTest extends BaseTest {
 
     }
     @Test(priority = 3)
-    public void testBuyVpnSubscriptionPlatinum() throws InterruptedException {
+    public void testBuySubscriptionPlatinum() throws InterruptedException {
         final String expectedSuccessfulMessage = "Congratulations,\n"
                 + "the payment was successful!";
         openBaseURL()
