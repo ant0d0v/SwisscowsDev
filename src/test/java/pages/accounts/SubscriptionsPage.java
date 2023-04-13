@@ -22,7 +22,7 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     @FindBy(xpath = "//article[4]//button")
     private WebElement buyNowButtonOfVpnSubscription;
 
-    @FindBy(xpath = "//div[@class ='modal']//button[@class='btn-submit']")
+    @FindBy(xpath = "//div[@class ='content-box']//button[@class='btn-submit']")
     private WebElement confirmButtonInPopup;
 
     @FindBy(xpath = "//a[@class='btn-submit']")
