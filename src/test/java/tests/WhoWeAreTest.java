@@ -70,7 +70,6 @@ public class WhoWeAreTest extends BaseTest {
 
         Assert.assertTrue(actualLinksColors.size() > 0);
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
-
     }
 }
 

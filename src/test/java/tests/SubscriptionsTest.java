@@ -30,7 +30,6 @@ public class SubscriptionsTest extends BaseTest {
                 .waitSuccessImage()
                 .getTextSuccessfulMessage();
         Assert.assertEquals(actualSuccessfulMessage,expectedSuccessfulMessage);
-
     }
     @Test(priority = 2)
     public void testCheckSubscriptionEmailStandard() throws InterruptedException {
