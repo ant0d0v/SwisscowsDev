@@ -18,9 +18,9 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     private WebElement seeAllLink;
 
     @FindBy(xpath = "//article[1]//button")
-    private WebElement buyNowButtonOfPlatinumSubscription;
+    private WebElement buyNowButtonOfEmailStandardSubscription;
     @FindBy(xpath = "//article[4]//button")
-    private WebElement buyNowButtonOfVpnSubscription;
+    private WebElement buyNowButtonOfPlatinumSubscription;
 
     @FindBy(xpath = "//div[@class ='content-box']//button[@class='btn-submit']")
     private WebElement confirmButtonInPopup;
@@ -40,9 +40,9 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     @FindBy(xpath = "//input[@id='name']")
     private WebElement userName;
     @FindBy(xpath = "//article[1]")
-    private WebElement attributePlatinumSubscription ;
+    private WebElement attributeEmailStandardSubscription;
     @FindBy(xpath = "//article[4]")
-    private WebElement attributeVpnSubscription ;
+    private WebElement attributePlatinumSubscription;
 
     @FindBy(xpath = "//div[3]//iframe")
     private WebElement cardNumberFrame;
@@ -90,12 +90,12 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         wait10ElementToBeVisible(successfulMessage);
         return new SubscriptionsPage (getDriver());
     }
-    public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
-        clickByJavaScript(buyNowButtonOfPlatinumSubscription);
+    public SubscriptionsPage clickBuyNowButtonOfEmailStandardSubscription() {
+        clickByJavaScript(buyNowButtonOfEmailStandardSubscription);
         return new SubscriptionsPage (getDriver());
     }
-    public SubscriptionsPage clickBuyNowButtonOfVpnSubscription() {
-        clickByJavaScript(buyNowButtonOfVpnSubscription);
+    public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
+        clickByJavaScript(buyNowButtonOfPlatinumSubscription);
         return new SubscriptionsPage (getDriver());
     }
     public SubscriptionsPage clickConfirmButtonInPopup() {
@@ -164,12 +164,12 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     public String getTextSuccessfulMessage() {
         return getText(successfulMessage);
     }
+    public String getAttributeEmailStandardSubscription() {
+        wait10ElementToBeVisible(attributeEmailStandardSubscription);
+        return getAttribute(attributeEmailStandardSubscription,"class");
+    }
     public String getAttributePlatinumSubscription() {
         wait10ElementToBeVisible(attributePlatinumSubscription);
         return getAttribute(attributePlatinumSubscription,"class");
-    }
-    public String getAttributeVpnSubscription() {
-        wait10ElementToBeVisible(attributeVpnSubscription);
-        return getAttribute(attributeVpnSubscription,"class");
     }
 }

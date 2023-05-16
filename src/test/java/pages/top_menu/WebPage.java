@@ -179,8 +179,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     }
     public List <String> getTitleInRelatedSearches()  {
-        return
-                getTexts(listRelatedSearches);
+        return getTexts(listRelatedSearches);
     }
     public WebPage waitUntilLoaderToBeInvisible(){
            wait10ElementToBeVisible(loader);

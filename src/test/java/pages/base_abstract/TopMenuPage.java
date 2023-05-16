@@ -291,7 +291,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickHamburgerMenu() {
-        click(hamburgerTopMenu);
+        click20(hamburgerTopMenu);
 
         return new MainPage(getDriver());
     }

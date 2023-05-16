@@ -261,15 +261,15 @@ public class TopMenuTest extends BaseTest {
     public void testRegionDropdownMenuIsAvailableAndHasOptions_TopMenu() {
         MainPage mainPage = new MainPage(getDriver());
 
-        final int expectedNumberOfOptionsHamburgerMenu = 46;
+        final int expectedNumberOfOptionsHamburgerMenu = 48;
         final List<String> expectedHamburgerMenuListTexts = List.of(
-                "Argentina", "Australia", "Austria", "Belgium (fr)", "Belgium (nl)",
-                "Brazil", "Canada (en)", "Canada (fr)", "Chile", "China", "Denmark", "Finland", "France",
-                "Germany", "Hong Kong SAR", "Hungary", "India", "Indonesia", "Italy", "Japan",
+                "Argentina", "Australia", "Austria", "Belgium (FR)", "Belgium (NL)",
+                "Brazil", "Canada (EN)", "Canada (FR)", "Chile", "China", "Denmark", "Finland", "France",
+                "Germany", "Hong Kong SAR", "Hungary", "India", "Indonesia","Ireland", "Italy", "Japan",
                 "Kazakhstan", "Korea", "Latvia", "Malaysia", "Mexico", "Netherlands",
-                "New Zealand", "Nigeria", "Norway", "Philippines", "Poland", "Portugal", "Russia", "Saudi Arabia", "South Africa"
-                , "Spain", "Sweden", "Switzerland (de)", "Switzerland (fr)", "Taiwan", "Turkey", "Ukraine", "United Kingdom"
-                , "United States (en)", "United States (es)", "World-wide"
+                "New Zealand", "Nigeria", "Norway","Paraguay", "Philippines", "Poland", "Portugal", "Russia", "Saudi Arabia", "South Africa"
+                , "Spain", "Sweden", "Switzerland (DE)", "Switzerland (FR)", "Taiwan", "Turkey", "Ukraine", "United Kingdom"
+                , "United States (EN)", "United States (ES)", "World-wide"
         );
         final int actualNumberOfOptionsHamburgerMenu =openBaseURL()
                 .clickHamburgerMenuIcon()

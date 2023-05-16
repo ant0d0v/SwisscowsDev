@@ -13,12 +13,11 @@ public class SubscriptionsTest extends BaseTest {
         openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
                 .clickHamburgerMenu()
                 .clickAccountInHamburgerMenu()
                 .clickSubscriptionIcon()
                 .clickSeeAllLink()
-                .clickBuyNowButtonOfPlatinumSubscription()
+                .clickBuyNowButtonOfEmailStandardSubscription()
                 .clickConfirmButtonInPopup()
                 .clickBuyNowButtonOfProduct()
                 .clickBuyNowButtonOfMonthlyPlan()
@@ -37,12 +36,11 @@ public class SubscriptionsTest extends BaseTest {
         final String actualAttribute = openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
                 .clickHamburgerMenu()
                 .clickAccountInHamburgerMenu()
                 .clickSubscriptionIcon()
                 .clickSeeAllLink()
-                .getAttributePlatinumSubscription();
+                .getAttributeEmailStandardSubscription();
 
         Assert.assertEquals(actualAttribute,expectedAttribute);
 
@@ -54,12 +52,11 @@ public class SubscriptionsTest extends BaseTest {
         openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
                 .clickHamburgerMenu()
                 .clickAccountInHamburgerMenu()
                 .clickSubscriptionIcon()
                 .clickSeeAllLink()
-                .clickBuyNowButtonOfVpnSubscription()
+                .clickBuyNowButtonOfPlatinumSubscription()
                 .clickConfirmButtonInPopup()
                 .clickBuyNowButtonOfProduct()
                 .clickBuyNowButtonOfMonthlyPlan()
@@ -79,15 +76,14 @@ public class SubscriptionsTest extends BaseTest {
         final String actualAttribute = openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
                 .clickHamburgerMenu()
                 .clickAccountInHamburgerMenu()
                 .clickSubscriptionIcon()
                 .clickSeeAllLink()
-                .getAttributeVpnSubscription();
+                .getAttributePlatinumSubscription();
 
         Assert.assertEquals(actualAttribute,expectedAttribute);
-        Assert.assertEquals(subscriptionsPage.getAttributePlatinumSubscription(),"item");
+        Assert.assertEquals(subscriptionsPage.getAttributeEmailStandardSubscription(),"item");
 
     }
 }

@@ -144,6 +144,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         waitForElementIsDisappeared(loader);
         return this;
     }
+    public ImagePage waitForLoaderIsInvisible (){
+        wait10ElementToBeInVisible(loader);
+        return this;
+    }
     public ImagePage waitForImageIsVisible(){
         for (WebElement image : allImages) {
             wait20ElementToBeVisible(image);
