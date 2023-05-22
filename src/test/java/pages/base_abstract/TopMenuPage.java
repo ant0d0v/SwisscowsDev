@@ -35,7 +35,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a[2]")
     private WebElement VPNTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[1]")
+    @FindBy(xpath = "//header//a[@class = 'badge-email']//img")
     private WebElement EmailTopMenu;
 
     @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']//a[@href = '/en/set-as-startpage']")
@@ -66,7 +66,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath= "//button[@type='reset']")
     private WebElement clearButton;
 
-    @FindBy(xpath = "//button[@type = 'button']")
+    @FindBy(xpath = "//header//button[@type = 'button']")
     private WebElement hamburgerTopMenu;
 
     @FindBy(xpath = "//div[@class ='menu popup']//a")
@@ -163,7 +163,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
-    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[42]")
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[44]")
     private WebElement regionUkraine;
     @FindBy(xpath = "//div[@class ='account']")
     private WebElement accountInHamburgerMenu;
@@ -343,7 +343,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public EmailPage clickEmailTopMenu() {
-        click(EmailTopMenu);
+        click20(EmailTopMenu);
 
         return  new EmailPage(getDriver());
     }
@@ -382,8 +382,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public VpnPage clickVPNTopMenu() {
         click(VPNTopMenu);
+        switchToExternalPage();
         return new VpnPage(getDriver());
     }
+
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
@@ -547,6 +549,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         new NewsPage(getDriver());
     }
+
 
     public String getValueHeartIcon() {
         return getText(valueHeartIcon);

@@ -38,7 +38,7 @@ public class TopMenuTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testEmailIconNavigatesToEmailWebPage() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedEmailURL = "https://dev.swisscows.com/en/swisscows-email";
+        final String expectedEmailURL = ProjectConstants.DOMAIN +"/en/swisscows-email";
         final String expectedH1Text = "A letter is your personal property!";
 
         String oldURL = openBaseURL().getCurrentURL();
@@ -54,24 +54,20 @@ public class TopMenuTest extends BaseTest {
 
     }
 
-    @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testVPNIconNavigatesToVPNWebPage() {
-        final String expectedURL = "https://dev.swisscows.com/en/anonymous-vpn";
-        final String expectedTitle = "Surf anonymously with VPN - Secure web surfing with Swisscows";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
         MainPage mainPage = new MainPage(getDriver());
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/anonymous-vpn";
+        final String expectedTitle = ProjectConstants.TITLE_VPN_PAGE ;
 
-        VpnPage vpnPage = mainPage
-                .clickVPNTopMenu();
-        mainPage
-                .switchToExternalPage();
-        String actualURL = vpnPage
+        final String oldURL = openBaseURL()
                 .getCurrentURL();
 
-        String actualTitle = vpnPage.getTitle();
+        String actualURL = mainPage
+                .clickVPNTopMenu()
+                .getCurrentURL();
+
+        final String actualTitle = mainPage.getTitle();
 
         Assert.assertNotEquals(actualURL, oldURL);
         Assert.assertEquals(actualURL, expectedURL);
@@ -90,7 +86,8 @@ public class TopMenuTest extends BaseTest {
                 "Our Datacenter",
                 "Contact us",
                 "Data privacy",
-                "Donation"
+                "Donation",
+                "Support"
         );
 
         final List actualList = openBaseURL()
@@ -133,8 +130,8 @@ public class TopMenuTest extends BaseTest {
     @Test
     public void testCompanyLogoNavigatesToBaseURL() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedURL = "https://dev.swisscows.com/en";
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
+        final String expectedURL = ProjectConstants.DOMAIN +"/en";
+        final String expectedTitle = ProjectConstants.TITLE_MAIN_PAGE;
 
         openBaseURL()
                 .clickHamburgerMenuIcon()
@@ -152,21 +149,20 @@ public class TopMenuTest extends BaseTest {
     @Test(dataProvider = "TopMenuTestData", dataProviderClass = TestData.class)
     public void testEachTopMenuNavigatesToCorrespondingPage(
             int index, String menuName, String href, String expectedURL) {
+        MainPage mainPage = new MainPage(getDriver());
 
-        MainPage mainPage = openBaseURL();
 
-        String oldURL = mainPage.getCurrentURL();
+        final String oldURL = openBaseURL()
+                .getCurrentURL();
 
         mainPage.clickTopMenu(index);
 
-        String actualURL = getDriver().getCurrentUrl();
+        final String actualURL = getDriver().getCurrentUrl();
 
 
         if (index != 0) {
             Assert.assertNotEquals(actualURL, oldURL);
-
         }
-
         if (index != 6) {
             Assert.assertEquals(actualURL, expectedURL);
         } else {
@@ -178,11 +174,11 @@ public class TopMenuTest extends BaseTest {
     @Test
     public void testHamburgerMenuIsAvailableAndHasOptions_TopMenu() {
         MainPage mainPage = new MainPage(getDriver());
-        final int expectedNumberOfOptionsHamburgerMenu = 11;
+        final int expectedNumberOfOptionsHamburgerMenu = 12;
         final List<String> expectedHamburgerMenuListTexts = List.of(
                 "Integration", "Set as Startpage", "Make a Default Search Engine", "About Swisscows", "Who we are",
                 "Media Education", "Charity Project", "Our Datacenter", "Contact us", "Data privacy",
-                "Donation"
+                "Donation", "Support"
         );
         final int actualNumberOfOptionsHamburgerMenu = openBaseURL()
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU)
@@ -200,7 +196,7 @@ public class TopMenuTest extends BaseTest {
 
     @Test
     public void testLoginMenuNavigatesToAccountPage() {
-        final String expectedURLPartial = "accounts.dev.swisscows.com";
+        final String expectedURLPartial = ProjectConstants.URL_ACCOUNTS;
         final String oldURL = openBaseURL().getCurrentURL();
 
         String actualURL = new MainPage(getDriver())
@@ -287,7 +283,7 @@ public class TopMenuTest extends BaseTest {
 
     @Test(dataProvider = "RegionTopMenuTestData", dataProviderClass = TestData.class)
     public void testRegionNavigateToCorrespondingPages(
-            int index, String LangName, String expectedURL, String expectedTitle) throws InterruptedException {
+            int index, String LangName, String expectedURL, String expectedTitle){
 
         MainPage mainPage = openBaseURL();
 
@@ -295,7 +291,7 @@ public class TopMenuTest extends BaseTest {
         mainPage
                 .clickHamburgerMenu()
                 .clickRegionDropDown(index)
-                .waitForUrlContains("https://dev.swisscows.com/en?region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en?region=");
 
         final String actualURL = mainPage.getCurrentURL();
         final String actualTitle = getDriver().getTitle();
@@ -401,7 +397,7 @@ public class TopMenuTest extends BaseTest {
                     .getCurrentURL();
 
             Assert.assertTrue(mainPage.isLoginIconDisplayed());
-            Assert.assertTrue(actualUrl.contains("https://dev.swisscows.com/"));
+            Assert.assertTrue(actualUrl.contains(ProjectConstants.DOMAIN));
 
     }
     @Test
@@ -499,7 +495,7 @@ public class TopMenuTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=news&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/web?query=news&region=de-DE");
 
         final String  actualValueHeartIcon = newsPage
                 .clickNewsButton()
@@ -566,7 +562,7 @@ public class TopMenuTest extends BaseTest {
     @Test
     public void testVpnIconNavigatesToVpnPage_SearchPage() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedURL = "https://dev.swisscows.com/en/anonymous-vpn";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/anonymous-vpn";
         final String expectedTitle = "Anonymous web surfing with Swisscows";
 
         openBaseURL()

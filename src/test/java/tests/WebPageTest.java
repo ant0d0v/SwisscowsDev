@@ -5,6 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.WebPage;
+import utils.ProjectConstants;
+
 import java.util.List;
 
 public class WebPageTest extends BaseTest {
@@ -38,16 +40,15 @@ public class WebPageTest extends BaseTest {
 
         final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
         final String expectedFontSizeTitle404Error = "40px";
-        openBaseURL()
+
+        final String actualTitle404Error = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
-                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231");
-
-        final String actualTitle404Error = webPage
-                .waitUntilLoaderToBeInvisible()
+                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
+
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
@@ -60,12 +61,13 @@ public class WebPageTest extends BaseTest {
 
         final String expectedTitle404Error = "No results found for \"porn\"";
         final String expectedFontSizeTitle404Error = "40px";
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("porn");
 
-        final String actualTitle404Error = webPage
+
+        final String actualTitle404Error =openBaseURL()
+                .inputSearchCriteriaAndEnter("porn")
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
+
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
@@ -132,12 +134,12 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo&region=");
 
         final String actualRegion = webPage.getCurrentURL();
         final List<String> titleAllVideo = webPage.getTitleInRelatedSearches();
 
-        Assert.assertEquals(actualRegion, "https://dev.swisscows.com/en/web?query=ronaldo&region=de-DE");
+        Assert.assertEquals(actualRegion, ProjectConstants.DOMAIN + "/en/web?query=ronaldo&region=de-DE");
         for (String search : titleAllVideo) {
             Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
         }
@@ -178,7 +180,7 @@ public class WebPageTest extends BaseTest {
     public void testWebResultsEqualsSearchCriteria() {
         WebPage webPage = new WebPage(getDriver());
         final List<String> titles = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("ukraine")
                 .waitUntilVisibilityWebResult()
                 .getTitleInWebResult();
 
@@ -186,9 +188,9 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(actualSize >= 5);
         for (String searchCriteria : titles) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ukraine"));
         }
-        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"ukraine in Web search - Swisscows");
 
     }
 
@@ -201,7 +203,7 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+video&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo+video&region=de-DE");
         webPage
                 .clickNextButtonVideoWidget();
         Assert.assertTrue(webPage.lastImageInVideoWidgetIsDisplayed());
@@ -220,10 +222,10 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickMoreVideoInVideoWidget();
-        Assert.assertTrue(getExternalPageURL().contains("https://dev.swisscows.com/en/video?query=ronaldo%20youtube&region=de-DE"));
+        Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo%20youtube&region=de-DE"));
 
     }
 
@@ -237,12 +239,12 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo+youtube&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo+youtube&region=");
         webPage
                 .clickFirstVideoInVideoWidget()
                 .waitIUntilVisiblyVideoPlayer();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains("https://dev.swisscows.com/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
+        Assert.assertTrue(webPage.getCurrentURL().contains(ProjectConstants.DOMAIN + "/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
         Assert.assertEquals(getExternalPageTitle(), expectedTitle);
 
     }
@@ -258,7 +260,7 @@ public class WebPageTest extends BaseTest {
                 .clickMoreImagesInVideoWidget()
                 .waitForImageIsVisible();
 
-        Assert.assertEquals(webPage.getCurrentURL(), "https://dev.swisscows.com/en/images?query=ronaldo");
+        Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=ronaldo");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);
 
     }
@@ -285,14 +287,14 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("flovers")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
-        webPage
+        final String newUrl = webPage
                 .clickFirstImageInImageWidget()
-                .switchToExternalPage();
+                .getCurrentURL();
 
-        Assert.assertNotEquals(getExternalPageURL(), oldUrl);
+        Assert.assertNotEquals(newUrl, oldUrl);
 
 
     }
@@ -302,14 +304,18 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("ukraine")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
-        webPage
-                .clickFirstNewsInNewsWidget()
-                .switchToExternalPage();
 
-        Assert.assertNotEquals(getExternalPageURL(), oldUrl);
+        final String newUrl = webPage
+                .clickFirstNewsInNewsWidget()
+                .getCurrentURL();
+
+        Assert.assertNotEquals(newUrl, oldUrl);
 
     }
 
@@ -398,7 +404,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains(("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year")));
+        Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=ronaldo&freshness=Year")));
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
@@ -415,13 +421,13 @@ public class WebPageTest extends BaseTest {
                 .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
-                .waitForUrlContains("https://dev.swisscows.com/en/web?query=ronaldo&freshness=Year");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo&freshness=Year");
         webPage
                 .clickFilterButtonWeb()
                 .waitUntilLoaderToBeInvisible();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
-        Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/en/web?query=ronaldo");
+        Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/web?query=ronaldo");
     }
     @Test
     public void testOpenWebPreview_WebPage() {
@@ -514,7 +520,7 @@ public class WebPageTest extends BaseTest {
                 .clickLangDeutsch();
 
 
-        Assert.assertEquals(webPage.getCurrentURL(),"https://dev.swisscows.com/de/web?query=ronaldo");
+        Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/de/web?query=ronaldo");
         Assert.assertTrue(webPage.getTitle().contains("in Web suchen - Swisscows"));
 
     }

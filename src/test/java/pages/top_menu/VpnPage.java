@@ -16,6 +16,7 @@ public class VpnPage extends TopMenuPage<VpnPage> {
     private WebElement imageMozillaExtension;
     @FindBy(xpath = "//img[@src='/images/icon-link-browsers.svg']")
     private WebElement imageOtherExtension;
+
     @FindBy(xpath = "//div[@class='extensions']")
     private WebElement allExtensionsBlock;
     @FindBy(xpath = "//div[@class='extensions']")
@@ -60,6 +61,7 @@ public class VpnPage extends TopMenuPage<VpnPage> {
 
         return this;
     }
+
     public boolean isGoogleExtensionIconDisplayed() {
 
         return isElementDisplayed(imageGoogleExtension);

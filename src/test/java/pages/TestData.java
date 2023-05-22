@@ -1,6 +1,7 @@
 package pages;
 
 import org.testng.annotations.DataProvider;
+import utils.ProjectConstants;
 
 public class TestData {
 
@@ -8,15 +9,16 @@ public class TestData {
     public static Object[][] topMenuTestDataProvider() {
 
         return new Object[][]{
-                {0, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage"},
-                {1, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search"},
-                {2, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking"},
-                {3, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education"},
-                {4, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects"},
-                {5, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine"},
-                {6, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact"},
-                {7, "Data privacy", "/en/privacy", "https://dev.swisscows.com/en/privacy"},
-                {8, "Donation", "/en/donation", "https://dev.swisscows.com/en/donation"},
+                {0, "Set as Startpage", "/en/set-as-startpage", ProjectConstants.DOMAIN + "/en/set-as-startpage"},
+                {1, "Make a Default Search Engine", "/en/default-search", ProjectConstants.DOMAIN +"/en/default-search"},
+                {2, "Who we are", "/en/search-engine-no-tracking", ProjectConstants.DOMAIN + "/en/search-engine-no-tracking"},
+                {3, "Media Education", "/en/media-education", ProjectConstants.DOMAIN + "/en/media-education"},
+                {4, "Charity Project", "/en/social-projects", ProjectConstants.DOMAIN + "/en/social-projects"},
+                {5, "Our Datacenter", "/en/data-safe-search-engine", ProjectConstants.DOMAIN +"/en/data-safe-search-engine"},
+                {6, "Contact us", "/en/contact", ProjectConstants.DOMAIN + "/en/contact"},
+                {7, "Data privacy", "/en/privacy", ProjectConstants.DOMAIN +"/en/privacy"},
+                {8, "Donation", "/en/donation", ProjectConstants.DOMAIN + "/en/donation"},
+                {9, "Support", "/", "https://support.swisscows.com/"},
 
         };
     }
@@ -99,15 +101,15 @@ public class TestData {
     public static Object[][] footerMenuTestDataProvider() {
 
         return new Object[][] {
-                {0, "Who we are", "/en/search-engine-no-tracking", "https://dev.swisscows.com/en/search-engine-no-tracking", "The search engine without tracking – Swisscows"},
-                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education", "Swisscows – media education"},
-                {2, "Charity Project", "/en/social-projects", "https://dev.swisscows.com/en/social-projects", "Charity Project"},
-                {3, "Our Datacenter", "/en/data-safe-search-engine", "https://dev.swisscows.com/en/data-safe-search-engine", "Data secure search engine"},
-                {4, "Contact us", "/en/contact", "https://dev.swisscows.com/en/contact", "Contact us"},
-                {5, "VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn", "Anonymous web surfing with Swisscows"},
-                {6, "Swisscows.email", "/en/swisscows-email", "https://dev.swisscows.com/en/swisscows-email", "A letter is your personal property!"},
-                {12, "Set as Startpage", "/en/set-as-startpage", "https://dev.swisscows.com/en/set-as-startpage", "How to set Swisscows as your start page"},
-                {13, "Make a Default Search Engine", "/en/default-search", "https://dev.swisscows.com/en/default-search", "How to use Swisscows as default search"},
+                {0, "Who we are", "/en/search-engine-no-tracking", ProjectConstants.DOMAIN + "/en/search-engine-no-tracking", "The search engine without tracking – Swisscows"},
+                {1, "Media Education", "/en/media-education", ProjectConstants.DOMAIN + "/en/media-education", "Swisscows – media education"},
+                {2, "Charity Project", "/en/social-projects", ProjectConstants.DOMAIN + "/en/social-projects", "Charity Project"},
+                {3, "Our Datacenter", "/en/data-safe-search-engine", ProjectConstants.DOMAIN + "/en/data-safe-search-engine", "Data secure search engine"},
+                {4, "Contact us", "/en/contact", ProjectConstants.DOMAIN + "/en/contact", "Contact us"},
+                {5, "VPN", "/en/anonymous-vpn", ProjectConstants.DOMAIN + "/en/anonymous-vpn", "Anonymous web surfing with Swisscows"},
+                {6, "Swisscows.email", "/en/swisscows-email", ProjectConstants.DOMAIN + "/en/swisscows-email", "A letter is your personal property!"},
+                {13, "Set as Startpage", "/en/set-as-startpage", ProjectConstants.DOMAIN + "/en/set-as-startpage", "How to set Swisscows as your start page"},
+                {14, "Make a Default Search Engine", "/en/default-search", ProjectConstants.DOMAIN + "/en/default-search", "How to use Swisscows as default search"},
 
 
         };
@@ -116,8 +118,8 @@ public class TestData {
     public static Object[][] WhoWeAreLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows", "/en", "https://dev.swisscows.com/en", "Anonymous search engine"},
-                {1, "privacy policy", "/en/privacy", "https://dev.swisscows.com/en/privacy", "Swisscows Privacy Policy"},
+                {0, "Swisscows", "/en", ProjectConstants.DOMAIN + "/en", "Anonymous search engine"},
+                {1, "privacy policy", "/en/privacy", ProjectConstants.DOMAIN + "/en/privacy", "Swisscows Privacy Policy"},
 
         };
     }
@@ -129,7 +131,7 @@ public class TestData {
                 {0,"https://accounts.swisscows.com/register", "Register"},
                 {1, "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh", "chrome web store"},
                 {2, "https://addons.mozilla.org/en-US/firefox/addon/swisscows-vpn/", "Swisscows.VPN\nby Swisscows AG"},
-                {3, "https://dev.swisscows.com/en/vpn-instruction", "Configuring Swisscows Proxy"},
+                {3, ProjectConstants.DOMAIN +"/en/vpn-instruction", "Configuring Swisscows Proxy"},
                 {4, "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
                 {5, "https://accounts.swisscows.com/login?ReturnUrl=%2Fproducts%2Fswisscows-vpn-standard", "Login"},
 
@@ -209,6 +211,7 @@ public class TestData {
                 {9, "GetDigest", "https://getdigest.com/", "https://getdigest.com/en", "GetDigest | Get a document summary. Fast!"},
                 {10, "Fan-shop", "https://swisscows-fanshop.com", "https://swisscows-fanshop.com/", "Swisscows Fanshop für Kleider und Geschenke für Fans"},
                 {11, "Swisscows Blog", "https://blog.swisscows.com/", "https://blog.swisscows.com/", "Blog - Swisscows AG"},
+                {12, "Swisscows Support", "https://support.swisscows.com", "https://support.swisscows.com/", "Swisscows Support"},
 
 
 

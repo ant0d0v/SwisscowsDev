@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
+import utils.ProjectConstants;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -46,13 +48,13 @@ public class VideoTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=");
 
         final String actualRegion = videoPage.getCurrentURL();
         final String titleAllVideo = videoPage.getTitleFirstVideo();
 
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/video?query=ivanka&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=de-DE");
         Assert.assertTrue(titleAllVideo.toLowerCase().contains("ivan"));
 
     }
@@ -103,12 +105,12 @@ public class VideoTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ronaldo&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=");
 
         final String actualRegion = videoPage.getCurrentURL();
         final List<String> titleAllVideo = videoPage.getTitleInRelatedSearches();
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/video?query=ronaldo&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
         for (String search : titleAllVideo) {
             Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
         }
@@ -159,14 +161,14 @@ public class VideoTest extends BaseTest {
 
         videoPage
                 .clickShortInDropdownDuration()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
         final List<String> durationAllVideo = videoPage.getListDurationAllVideo();
 
 
         for (String search : durationAllVideo) {
             Assert.assertTrue((Integer.parseInt(search.substring(1, 2)) <= 4));
         }
-        Assert.assertEquals(videoPage.getCurrentURL(),"https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+        Assert.assertEquals(videoPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
     }
     @Test
     public void testCancelFilterSearch_VideoPage() {
@@ -179,18 +181,18 @@ public class VideoTest extends BaseTest {
                 .clickFilterButton()
                 .clickDurationButton()
                 .clickShortInDropdownDuration()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka&videoLength=Short");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
 
 
         final String oldUrl = videoPage.getCurrentURL();
         videoPage
                 .clickFilterButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ivanka");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka");
 
         final String newUrl = videoPage.getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
-        Assert.assertEquals(newUrl,"https://dev.swisscows.com/en/video?query=ivanka");
+        Assert.assertEquals(newUrl,ProjectConstants.DOMAIN + "/en/video?query=ivanka");
     }
     @Test
     public void testHoverTextsRelatedSearch_VideoPage() throws InterruptedException {
@@ -203,7 +205,7 @@ public class VideoTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/video?query=ronaldo&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=");
 
         final List<String> oldTextsColorsWhenHover = videoPage.getTextColors();
         final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();

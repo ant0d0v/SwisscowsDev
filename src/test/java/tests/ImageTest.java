@@ -6,6 +6,7 @@ import pages.MainPage;
 import pages.top_menu.ImagePage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
+import utils.ProjectConstants;
 import utils.TestUtils;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class ImageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
@@ -46,11 +47,11 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=ivanka&region=de-DE");
 
         final String actualRegion = imagePage.getCurrentURL();
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ivanka&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN +"/en/images?query=ivanka&region=de-DE");
 
 
     }
@@ -99,14 +100,14 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=ronaldo&region=");
 
         final String actualRegion = imagePage.getCurrentURL();
         final String textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
 
         Assert.assertTrue(textsRelatedSearch.toLowerCase().contains("ronaldo"));
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/images?query=ronaldo&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN +"/en/images?query=ronaldo&region=de-DE");
 
     }
     @Test
@@ -119,12 +120,12 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenuIcon()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=ronaldo");
 
         final String actualUrl = imagePage.getCurrentURL();
         imagePage
                 .clickSecondQueryInRelatedSearchContainer()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=Ronaldo%");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=Ronaldo%");
 
         final String newUrl = imagePage.getCurrentURL();
 
@@ -139,14 +140,10 @@ public class ImageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitForLoaderIsDisappeared()
-                .clickFilterButton();
-
-        imagePage
-                .clickColorButton();
-        sleep(1000);
-        imagePage
+                .clickFilterButton_ImagePage()
+                .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=photo&color=Red");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=photo&color=Red");
 
         final String actualTitleImage = imagePage
                 .clickFirstImageInImagesResult()
@@ -154,7 +151,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertTrue(actualTitleImage.contains("Red"));
         Assert.assertEquals(imagePage.getCurrentURL(),
-                "https://dev.swisscows.com/en/images?query=photo&color=Red");
+                ProjectConstants.DOMAIN +"/en/images?query=photo&color=Red");
     }
 
 
@@ -168,7 +165,7 @@ public class ImageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=crocs+price&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=crocs+price&region=de-DE");
         imagePage
                 .clickNextButton();
         Assert.assertTrue(imagePage.lastImageInAdsIsDisplayed());
@@ -183,15 +180,13 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=ronaldo");
 
 
         final String actualAttributePrevImage = imagePage
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeFirstImage();
-
-
 
         final String newAttributePrevImage = imagePage
                 .clickPrevButtonInSideImageview()
@@ -208,7 +203,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=ronaldo");
 
         final String AttributeImageInResult = imagePage
                 .waitForImageIsVisible()
@@ -227,7 +222,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=ronaldo");
 
 
         final String actualAttributeSecondImage = imagePage
@@ -245,7 +240,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("rep")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForUrlContains("https://dev.swisscows.com/en/images?query=rep");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=rep");
 
         TestUtils.waitForPageLoaded(getDriver());
 
@@ -287,7 +282,7 @@ public class ImageTest extends BaseTest {
                 .signIn();
         imagePage
                 .clickFavoriteItem()
-                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images/my?query=ronaldo");
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
                 .getAttributeHrefImageInSideView();
@@ -309,7 +304,7 @@ public class ImageTest extends BaseTest {
                 .signIn();
         imagePage
                 .clickFavoriteItem()
-                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
         imagePage
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonInSideImageview();
@@ -335,7 +330,7 @@ public class ImageTest extends BaseTest {
                 .clickNextButtonInSideImageview()
                 .clickFavoriteButtonInSideImageview()
                 .clickFavoriteItem()
-                .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
 
 
         Assert.assertEquals(imagePage.getLinksAllImages().size(), 2);
@@ -352,14 +347,14 @@ public class ImageTest extends BaseTest {
                     .signIn();
             imagePage
                     .clickFavoriteItem()
-                    .waitForUrlContains("https://dev.swisscows.com/en/images/my?query=ronaldo");
+                    .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
             imagePage
                     .clickHamburgerMenu()
                     .clickLanguagesTopMenu();
             imagePage
                     .clickLangDeutsch();
 
-            Assert.assertEquals(imagePage.getCurrentURL(),"https://dev.swisscows.com/de/images/my?query=ronaldo");
+            Assert.assertEquals(imagePage.getCurrentURL(),ProjectConstants.DOMAIN + "/de/images/my?query=ronaldo");
             Assert.assertEquals(imagePage.getTitle(),"Meine Bilder - Swisscows");
 
     }

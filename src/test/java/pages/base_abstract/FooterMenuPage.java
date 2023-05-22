@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.footer_menu.*;
 import pages.top_menu.EmailPage;
-import pages.top_menu.WebPage;
 /*import pages.MainPage;
 import pages.WeatherStationsPage;
 import pages.footer_menu.WhoWeArePage;
@@ -138,6 +137,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='footer-menu-bottom']//a")
     private List<WebElement> aboutSwisscowsAGList;
+    @FindBy(xpath = FOOTER_MENU_ID + "//ul[3]//li")
+    private List<WebElement> ourServicesText;
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a") // Swisscows links
     private List<WebElement> footerMenuLinks;
@@ -200,7 +201,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
     public String getH1Text() {
-
         return getText(textH1FooterMenu);
     }
     public List<String> getH1Texts() {
@@ -247,6 +247,10 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public List<String> getAboutSwisscowsAGMenusTexts() {
 
         return getTexts(aboutSwisscowsAGList);
+    }
+    public List<String> getOurServicesTexts() {
+
+        return getTexts(ourServicesText);
     }
 
     public List<String> getOurProductsMenusTexts() {
@@ -354,7 +358,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
     public EmailPage clickSwisscowsEmail() {
-
         click20(SwisscowsEmailFooterMenu);
         return new EmailPage(getDriver());
     }

@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.NewsPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class NewsTest extends BaseTest {
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
@@ -76,11 +77,12 @@ public class NewsTest extends BaseTest {
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .getCurrentURL();
-        newsPage
+
+        final String newUrl = newsPage
                 .clickFirstPost()
-                .switchToAnotherWindow();
+                .getCurrentURL();
         ;
-        Assert.assertNotEquals(getExternalPageURL(), oldUrl);
+        Assert.assertNotEquals(newUrl, oldUrl);
     }
     @Test
     public void testSearchField_NewsPage(){
@@ -98,7 +100,7 @@ public class NewsTest extends BaseTest {
         newsPage
                 .searchAfterClearSearchField("Ronaldo")
                 .clickEnter()
-                .waitForUrlContains("https://dev.swisscows.com/en/news?query=Ronaldo&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=Ronaldo&region=de-DE");
 
         final String newTextFirstNews = newsPage
                 .waitUntilVisibilityNewsResult()
@@ -182,7 +184,7 @@ public class NewsTest extends BaseTest {
                 .clickNewsButton()
                 .clickNextPagePagination()
                 .clickPreviousPagePagination()
-                .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=news&region=de-DE");
 
         final String oldTitle = newsPage.getTitleNews();
         final String newTitle = newsPage

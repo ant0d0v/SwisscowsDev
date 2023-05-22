@@ -70,6 +70,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     }
     public NewsPage clickFirstPost() {
         click(h2News);
+        switchToAnotherWindow();
 
         return new NewsPage(getDriver());
     }

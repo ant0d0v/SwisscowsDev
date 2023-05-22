@@ -53,6 +53,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
+    @FindBy(xpath = "//div[@class ='filters-button']")
+    private WebElement filterButton;
 
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
@@ -154,9 +156,15 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         }
         return this;
     }
-    public void clickColorButton() {
+    public ImagePage clickColorButton() throws InterruptedException {
         click(colorButton);
-        new ImagePage(getDriver());
+        sleep(1000);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage clickFilterButton_ImagePage() {
+        clickByJavaScript(filterButton);
+
+        return new ImagePage(getDriver());
     }
     public ImagePage clickNextButtonInSideImageview() {
         wait10ElementToBeVisible(nextButtonInSideImageview);

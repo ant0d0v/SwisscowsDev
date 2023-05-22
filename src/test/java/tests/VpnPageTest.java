@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.top_menu.VpnPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -21,8 +22,6 @@ public class VpnPageTest extends BaseTest {
         );
         final List<String> actualH2Texts = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .getH2Texts();
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
@@ -30,14 +29,12 @@ public class VpnPageTest extends BaseTest {
 
     @Test
     public void testVpnLogoNavigatesToBaseURL() {
-        final String expectedURL = "https://dev.swisscows.com/en";
+        final String expectedURL = ProjectConstants.DOMAIN +"/en";
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
         MainPage mainPage = openBaseURL();
         final String actualURL = mainPage
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .clickLogo()
                 .getCurrentURL();
 
@@ -51,11 +48,10 @@ public class VpnPageTest extends BaseTest {
     public void testVpnLinksNavigateToCorrespondingPages(
             int index, String expectedURL, String expectedH1text){
         VpnPage vpnPage = new VpnPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
 
-        MainPage mainPage = openBaseURL();
-        mainPage
-                .clickVPNTopMenu()
-                .closeWindow()
+        openBaseURL()
+                .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage();
 
         final String oldURL = mainPage.getCurrentURL();
@@ -87,8 +83,6 @@ public class VpnPageTest extends BaseTest {
         );
         List<String> actualLinksColors = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .getColorLinks();
 
         Assert.assertTrue(actualLinksColors.size() > 0);
@@ -104,8 +98,6 @@ public class VpnPageTest extends BaseTest {
         );
         final List<String> actualH2FontSizes = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .getH2FontSizes();
 
         Assert.assertTrue(actualH2FontSizes.size() > 0);
@@ -114,10 +106,11 @@ public class VpnPageTest extends BaseTest {
 
     @Test
     public void testRegisterLinkNavigateToCorrespondingPage() {
+        VpnPage vpnPage = new VpnPage(getDriver());
         final String expectedUrl = "https://accounts.swisscows.com/register";
+
         final String actualUrl = openBaseURL()
-                .clickVPNTopMenu()
-                .closeWindow()
+                .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage()
                 .scrollToWhereToInstructions()
                 .clickRegisterLink()
@@ -130,10 +123,11 @@ public class VpnPageTest extends BaseTest {
 
     @Test
     public void testInstructionLinkNavigateToCorrespondingPage() {
-        final String expectedUrl = "https://dev.swisscows.com/en/vpn-instruction";
+        final String expectedUrl = ProjectConstants.DOMAIN + "/en/vpn-instruction";
+        VpnPage vpnPage = new VpnPage(getDriver());
+
         final String actualUrl = openBaseURL()
-                .clickVPNTopMenu()
-                .closeWindow()
+                .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage()
                 .scrollToWhereToInstructions()
                 .clickInstructionsLink()
@@ -149,8 +143,6 @@ public class VpnPageTest extends BaseTest {
     public void testExtensionsIconsExist() {
         VpnPage vpnPagePage = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .scrollToWhereExtensionsBlock();
 
         Assert.assertTrue(vpnPagePage.isLogoIconDisplayed());
@@ -165,8 +157,6 @@ public class VpnPageTest extends BaseTest {
         VpnPage vpnPage = new VpnPage(getDriver());
         final List<String> oldButtonColorsWhenHover = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .getButtonColors();
 
 
@@ -181,8 +171,6 @@ public class VpnPageTest extends BaseTest {
         VpnPage vpnPage = new VpnPage(getDriver());
         final String oldButtonColor = openBaseURL()
                 .clickVPNTopMenu()
-                .closeWindow()
-                .switchToVpnPage()
                 .backgroundColorOfElement();
 
         final String newButtonColor = vpnPage

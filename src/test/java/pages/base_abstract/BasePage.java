@@ -271,6 +271,15 @@ public abstract class BasePage {
         }
         return colorList;
     }
+    public List<String> getAttributeClassAllElements(List<WebElement> elements){
+        List<String> elementList = new ArrayList<>();
+
+        for (WebElement element :  elements) {
+            elementList.add(element.getAttribute("class"));
+            }
+
+        return elementList;
+    }
     public List<String> getHoverColorsOfElements(List<WebElement> buttons) throws InterruptedException {
         Actions actions = new Actions(getDriver());
         List<String> colorList = new ArrayList<>();

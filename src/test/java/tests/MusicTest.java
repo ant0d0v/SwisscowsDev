@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
+import utils.ProjectConstants;
+
 import java.util.List;
 
 public class MusicTest extends BaseTest {
@@ -206,7 +208,7 @@ public class MusicTest extends BaseTest {
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldText, actualText);
-        Assert.assertEquals(actualURL,"https://dev.swisscows.com/de/music?query=ivanka");
+        Assert.assertEquals(actualURL, ProjectConstants.DOMAIN + "/de/music?query=ivanka");
         Assert.assertEquals(actualText,"Musik");
 
     }
@@ -295,7 +297,7 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .scrollToLastTrack();
-        sleep(1000);
+        ;
         final List<String> actualTracks = musicPage.getTitleAllTracks();
 
         Assert.assertTrue(actualTracks.size()>= 29);
@@ -313,12 +315,12 @@ public class MusicTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/music?query=ivanka&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=ivanka&region=");
 
         final String actualRegion = musicPage.getCurrentURL();
         final List<String> titleAllTracks = musicPage.getTitleAllTracks();
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/music?query=ivanka&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=ivanka&region=de-DE");
         for (String search : titleAllTracks) {
             Assert.assertEquals(search.toLowerCase(), "ivanka");
         }

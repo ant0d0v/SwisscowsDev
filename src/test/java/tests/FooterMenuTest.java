@@ -8,6 +8,7 @@ import pages.TestData;
 import pages.footer_menu.*;
 import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
+import utils.ProjectConstants;
 import utils.TestUtils;
 
 import java.net.MalformedURLException;
@@ -97,7 +98,7 @@ public class FooterMenuTest extends BaseTest {
     @Ignore
     @Test
     public void testEducationFooterLinkNavigatesToEducationPage() {
-        final String expectedURL = "https://dev.swisscows.com/en/media-education";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/media-education";
         final String expectedTitle = "Media Education - Extremely Safe Web for Children";
 
         final String oldURL = openBaseURL().getCurrentURL();
@@ -116,7 +117,7 @@ public class FooterMenuTest extends BaseTest {
     @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testCharityProjectFooterLinkNavigatesToCharityProjectPage() {
-        final String expectedURL = "https://dev.swisscows.com/en/social-projects";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/social-projects";
         final String expectedTitle = "Social projects - We support social projects";
 
         final String oldURL = openBaseURL().getCurrentURL();
@@ -135,7 +136,7 @@ public class FooterMenuTest extends BaseTest {
     @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testOurDatacenterPageFooterLinkNavigatesToOurDatacenterPagePage() {
-        final String expectedURL = "https://dev.swisscows.com/en/data-safe-search-engine";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/data-safe-search-engine";
         final String expectedTitle = "Data center – Everything about the Swisscows data center";
 
         final String oldURL = openBaseURL().getCurrentURL();
@@ -157,7 +158,7 @@ public class FooterMenuTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testWhoWeAreUsFooterLinkNavigatesToAboutUsPage() {
         final String expectedTitle = "Search engine without tracking - Learn more about us";
-        final String expectedUrl = "https://dev.swisscows.com/en/search-engine-no-tracking";
+        final String expectedUrl = ProjectConstants.DOMAIN + "/en/search-engine-no-tracking";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
@@ -176,7 +177,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testContactUsPageFooterLinkNavigatesToContactUsPage() {
-        final String expectedURL = "https://dev.swisscows.com/en/contact";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en/contact";
         final String expectedTitle = "Contact us | Swisscows";
 
         final String oldURL = openBaseURL().getCurrentURL();
@@ -218,17 +219,19 @@ public class FooterMenuTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testSwisscowsEmailPageFooterNavigatesToSwisscowsEmailSite() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedEmailURL = "https://dev.swisscows.com/en/swisscows-email";
+        final String expectedEmailURL = ProjectConstants.DOMAIN + "/en/swisscows-email";
         final String expectedH1Text = "A letter is your personal property!";
 
-        final String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL()
+                .getCurrentURL();
 
         mainPage
                 .scrollToFooterMenu()
                 .clickSwisscowsEmail()
                 .switchToExternalPage();
 
-        final String actualH1text =mainPage.getH1Text();
+        final String actualH1text = mainPage
+                .getH1Text();
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
         Assert.assertEquals(getExternalPageURL(), expectedEmailURL);
@@ -240,12 +243,11 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testGooglePlayIconNavigatesToGooglePlayWeb() {
-        final String oldURL = openBaseURL().getCurrentURL();
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedURL = "https://play.google.com/store/apps/details?id=com.swisscows.search";
         final String expectedTitle = "Swisscows Private Search - Apps on Google Play";
 
-        MainPage mainPage = new MainPage(getDriver());
-
+        final String oldURL = openBaseURL().getCurrentURL();
         mainPage
                 .scrollToFooterMenu()
                 .clickGooglePlayIcon()
@@ -258,12 +260,11 @@ public class FooterMenuTest extends BaseTest {
 
     @Test
     public void testAppStoreIconNavigatesToAppStoreWeb() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedURL = "https://apps.apple.com/app/swisscows-privacy-search/id1581108092";
         final String expectedTitle = "Swisscows Private Search on the App Store";
 
         final String oldURL = openBaseURL().getCurrentURL();
-
-        MainPage mainPage = new MainPage(getDriver());
 
         mainPage.scrollToFooterMenu()
                 .clickAppStoreIcon()
@@ -375,7 +376,7 @@ public class FooterMenuTest extends BaseTest {
 
     @Test(priority = -5)
     public void testFooterMenuLinksAmount() {
-        final int expectedLinks = 25;
+        final int expectedLinks = 26;
 
         int actualLinks = openBaseURL()
                 .scrollToFooterMenu()
@@ -411,6 +412,23 @@ public class FooterMenuTest extends BaseTest {
                 openBaseURL()
                         .scrollToAboutSwisscowsAGFooterMenu()
                         .getAboutSwisscowsAGMenusTexts();
+
+        Assert.assertTrue(actualSubscriptionTexts.size() > 0);
+        Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
+    }
+    @Test
+    public void testBlockOurServicesTexts() {
+        final List<String> OurProductsTextTexts = List.of(
+                "Our Services",
+                "Fan-shop",
+                "Swisscows Blog",
+                "Support"
+
+        );
+
+        final List<String> actualSubscriptionTexts = openBaseURL()
+                        .scrollToAboutSwisscowsAGFooterMenu()
+                        .getOurServicesTexts();
 
         Assert.assertTrue(actualSubscriptionTexts.size() > 0);
         Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
