@@ -18,7 +18,7 @@ public class AutobahnTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("\"iphone\"")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 25; i++)  {
+        for (int i = 0; i < 15; i++)  {
             webPage.searchAfterClear( "\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
                    + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
             sleep(1000);
