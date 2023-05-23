@@ -567,6 +567,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public String getValueHeartIcon() {
         return getText(valueHeartIcon);
     }
+    public NewsPage waitValueHeartIconToBeChanged() {
+        waitTextToBeChanged(valueHeartIcon,"2");
+
+        return new NewsPage(getDriver());
+    }
     public MainPage refreshMainPage() {
         refreshPage();
         wait10ElementToBeVisible(heartIcon);

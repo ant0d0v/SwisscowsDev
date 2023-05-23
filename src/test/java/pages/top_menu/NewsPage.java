@@ -46,6 +46,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return new NewsPage(getDriver());
     }
+
     public NewsPage waitUntilVisibilityErrorImage() {
         wait20ElementToBeVisible(errorImage);
 

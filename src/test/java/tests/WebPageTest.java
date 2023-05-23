@@ -322,10 +322,13 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testImagesAndTitleIsDysplaedInNewsWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        final String expectedTitle = "News for ronaldo";
+        final String expectedTitle = "News for ukraine";
 
         final String actualTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("ukraine")
                 .waitUntilVisibilityWebResult()
                 .waitForImageIsVisibleInNewsWidget()
                 .getTittleNewsWidget();

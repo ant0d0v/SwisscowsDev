@@ -38,9 +38,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "(//span[contains (@class ,'swiper-pagination-bullet')])[position() =1]")
     private WebElement homepageBannerSwitchFirst;
 
-    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/be94588d61a04cd6849392dd3884464d'])[position() =2]")
+    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/be94588d61a04cd6849392dd3884464d'])[position() = 2]")
     private WebElement homepageBannerImageOfEmail;
-    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/991b8059be404bb2ac04c6ad90662351'])[position() =2]")
+    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/991b8059be404bb2ac04c6ad90662351'])[position() = 2]")
     private WebElement homepageBannerImageOfMusic;
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
@@ -285,12 +285,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return new MainPage(getDriver());
     }
 
-    public MainPage clickBannerSwitch() {
-        click(homepageBannerSwitchSecond);
+    public MainPage clickBannerSwitchSecond() {
+        clickByJavaScript(homepageBannerSwitchSecond);
         return this;
     }
     public MainPage clickBannerSwitchFirst() {
-        click(homepageBannerSwitchFirst);
+        clickByJavaScript(homepageBannerSwitchFirst);
         return this;
     }
 

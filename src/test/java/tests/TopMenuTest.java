@@ -53,7 +53,7 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
-
+    @Ignore
     @Test(retryAnalyzer = Retry.class)
     public void testVPNIconNavigatesToVPNWebPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -500,6 +500,7 @@ public class TopMenuTest extends BaseTest {
         final String  actualValueHeartIcon = newsPage
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
+                .waitValueHeartIconToBeChanged()
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);

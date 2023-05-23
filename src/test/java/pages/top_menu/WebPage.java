@@ -51,7 +51,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement videoPlayer;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[@src]")
     private List<WebElement>imagesInImageWidget;
-    @FindBy(xpath = "//div[@class='widget-images']//figure//img")
+    @FindBy(xpath = "//div[@class ='widget']//a[@class='widget-news']//figure//img[@src]")
     private List<WebElement>imagesInNewsWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
     private WebElement firstImageInImageWidget;

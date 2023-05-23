@@ -85,12 +85,11 @@ public class MainTest extends BaseTest {
 
         final String valueFirstSwitch = mainPage
                 .clickBannerSwitchFirst()
-                .waitForImageInBannerVisibleOfMusic()
                 .getClassAttributeSwitchFirst();
 
 
         final String valueSecondSwitch = mainPage
-                .clickBannerSwitch()
+                .clickBannerSwitchSecond()
                 .waitForImageInBannerVisibleOfEmail()
                 .getClassAttributeSwitchSecond();
 
