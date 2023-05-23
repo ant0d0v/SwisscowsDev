@@ -11,7 +11,7 @@ import utils.ProjectConstants;
 import java.util.List;
 
 public class NewsTest extends BaseTest {
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testSuggestEqualsSearchCriteria_NewsSearch() {
         final String query = "ivanka";
 
@@ -40,7 +40,7 @@ public class NewsTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testError501UnsupportedRegion_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
@@ -65,7 +65,7 @@ public class NewsTest extends BaseTest {
         Assert.assertTrue(newsPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle501Error,expectedFontSizeTitle501Error);
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testOpenNewsPost_NewsPage() {
         NewsPage newsPage = new NewsPage(getDriver());
 
@@ -85,7 +85,7 @@ public class NewsTest extends BaseTest {
         ;
         Assert.assertNotEquals(newUrl, oldUrl);
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testSearchField_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
 
@@ -100,7 +100,7 @@ public class NewsTest extends BaseTest {
                 .getTitleNews();
         newsPage
                 .searchAfterClearSearchField("Ronaldo")
-                .clickEnter()
+                .clickSearchButton()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=Ronaldo&region=de-DE");
 
         final String newTextFirstNews = newsPage
@@ -129,7 +129,7 @@ public class NewsTest extends BaseTest {
             Assert.assertTrue(search.contains("https://cdn.swisscows.com/image?url"));
         }
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testAnyNumberInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
          openBaseURL()
@@ -152,7 +152,7 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testNextButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         openBaseURL()
@@ -173,7 +173,7 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testPreviousButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         openBaseURL()
@@ -197,28 +197,6 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(oldTitle,newTitle);
 
     }
-    /*@Test
-    public void testUsingFilter_NewsPage() {
-        NewsPage newsPage = new NewsPage (getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("news")
-                .waitUntilVisibilityWebResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .clickNewsButton()
-                .clickFilterButton()
-                .clickPreviousPagePagination()
-                .waitForUrlContains("https://dev.swisscows.com/en/news?query=news&region=de-DE");
 
-        final String oldTitle = newsPage.getTitleNews();
-        final String newTitle = newsPage
-                .waitUntilVisibilityNewsResult()
-                .getTitleNews();
-
-        Assert.assertTrue(newsPage.allImageIsDisplayed());
-        Assert.assertEquals(oldTitle,newTitle);
-
-    }*/
 
 }

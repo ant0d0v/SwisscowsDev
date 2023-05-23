@@ -35,7 +35,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a[2]")
     private WebElement VPNTopMenu;
 
-    @FindBy(xpath = "//header//a[@class = 'badge-email']//img")
+    @FindBy(xpath = "//header//a[@class = 'badge-email']//span")
     private WebElement EmailTopMenu;
 
     @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']//a[@href = '/en/set-as-startpage']")
@@ -157,7 +157,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement loader;
     @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
-    @FindBy(xpath = "//div[@class ='filters-button']")
+    @FindBy(xpath = "//div[@class ='filters-button']//*[name() = 'svg']")
     private WebElement filterButton;
     @FindBy(xpath = "//div[@class= 'badge']")
     private WebElement heartIcon;
@@ -352,8 +352,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public EmailPage clickEmailTopMenu() {
-        click20(EmailTopMenu);
 
+        click20(EmailTopMenu);
         return  new EmailPage(getDriver());
     }
     public LoginPage clickEmailTopMenuSearch() {
@@ -475,7 +475,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new VideoPage(getDriver());
     }
     public WebPage clickFilterButtonWeb() {
-        clickByJavaScript(filterButton);
+        click20(filterButton);
 
         return new WebPage(getDriver());
     }
