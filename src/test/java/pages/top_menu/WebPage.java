@@ -136,6 +136,10 @@ public class WebPage extends TopMenuPage<WebPage> {
         wait10ElementToBeVisible(trackersScreenshot);
         return getTexts(trackersInScreenshot);
     }
+    public WebPage refreshWebPage() {
+        refreshPage();
+        return new WebPage(getDriver());
+    }
     public List<WebElement> getInnerFooterMenuLinks() {
 
         return innerFooterMenuLink;

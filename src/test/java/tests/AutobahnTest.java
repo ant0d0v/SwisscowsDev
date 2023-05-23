@@ -12,34 +12,17 @@ public class AutobahnTest extends BaseTest {
     @Test
     public void testBrazilianBotsAndError429Page() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
-        String[] queries = { "\"iphone totti forover  \"",
-                "\"iphone totti forover  \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \"",
-                "\"iphone totti forover \""
-
-
-        };
 
         final String expectedErrorMessage = "Too many requests";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("\"iphone\"")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < queries.length; i++)  {
-            webPage.searchAfterClear(queries[i]);
+        for (int i = 0; i < 25; i++)  {
+            webPage.searchAfterClear( "\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
+                   + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
             sleep(1000);
-
-            if (i == queries.length - 1) {
+            if (i == 11 - 1) {
                Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
                 break;
             }
@@ -50,41 +33,16 @@ public class AutobahnTest extends BaseTest {
     }
     @Test
     public void testRegularBotAndError429Page() throws InterruptedException {
-        final String random = TestUtils.getRandomName();
         WebPage webPage = new WebPage(getDriver());
-        String[] queries = { "iphone",random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-                + random,random,random,random,random,random,random,random,random,random
-
-
-
-        };
 
         final String expectedErrorMessage = "Too many requests";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < queries.length; i++)  {
-            webPage.searchAfterClear(queries[i]);
-
-            if (i == queries.length - 1) {
+        for (int i = 0; i < 130; i++)  {
+            webPage.searchAfterClear(TestUtils.getRandomName());
+            if (i == 130 - 1) {
                 Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
                 break;
             }

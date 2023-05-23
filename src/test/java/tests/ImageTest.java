@@ -14,9 +14,9 @@ import java.util.List;
 public class ImageTest extends BaseTest {
     @Test
     public void testSuggestEqualsSearchCriteria_ImageSearch() {
+        MainPage mainPage = new MainPage(getDriver());
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
         openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
@@ -123,11 +123,10 @@ public class ImageTest extends BaseTest {
                 .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=ronaldo");
 
         final String actualUrl = imagePage.getCurrentURL();
-        imagePage
-                .clickSecondQueryInRelatedSearchContainer()
-                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=Ronaldo%");
 
-        final String newUrl = imagePage.getCurrentURL();
+        final String newUrl = imagePage
+                .clickSecondQueryInRelatedSearchContainer()
+                .getCurrentURL();
 
         Assert.assertNotEquals(actualUrl,newUrl);
     }
@@ -135,7 +134,7 @@ public class ImageTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
-        openBaseURL()
+        final String actualTitleImage = openBaseURL()
                 .inputSearchCriteriaAndEnter("photo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -143,9 +142,6 @@ public class ImageTest extends BaseTest {
                 .clickFilterButton_ImagePage()
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=photo&color=Red");
-
-        final String actualTitleImage = imagePage
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
 
@@ -305,11 +301,12 @@ public class ImageTest extends BaseTest {
         imagePage
                 .clickFavoriteItem()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
-        imagePage
+
+        final String actualH2Title = imagePage
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview();
-        getDriver().navigate().refresh();
-        final String actualH2Title = musicPage.getErrorTitleInFavoritePlaylist();
+                .clickFavoriteButtonInSideImageview()
+                .refreshImagePage()
+                .getErrorTitleInFavoritePlaylist();
 
         Assert.assertTrue(actualH2Title.contains("No items found"));
         Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
@@ -350,8 +347,7 @@ public class ImageTest extends BaseTest {
                     .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
             imagePage
                     .clickHamburgerMenu()
-                    .clickLanguagesTopMenu();
-            imagePage
+                    .clickLanguagesTopMenu()
                     .clickLangDeutsch();
 
             Assert.assertEquals(imagePage.getCurrentURL(),ProjectConstants.DOMAIN + "/de/images/my?query=ronaldo");

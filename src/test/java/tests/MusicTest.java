@@ -196,14 +196,15 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult();
 
         final String oldURL = musicPage.getCurrentURL();
-        final String oldText =musicPage.getTitlePlaylist();
+        final String oldText = musicPage.getTitlePlaylist();
 
-        musicPage.clickHamburgerMenu();
-        musicPage.clickLanguagesTopMenu();
-        musicPage.clickLangDeutsch();
+        musicPage
+                .clickHamburgerMenu()
+                .clickLanguagesTopMenu()
+                .clickLangDeutsch();
 
         final String actualURL = musicPage.getCurrentURL();
-        final String actualText =musicPage.getTitlePlaylist();
+        final String actualText = musicPage.getTitlePlaylist();
 
 
         Assert.assertNotEquals(oldURL, actualURL);
@@ -265,18 +266,18 @@ public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
+        MainPage mainPage = new MainPage(getDriver());
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
         openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 

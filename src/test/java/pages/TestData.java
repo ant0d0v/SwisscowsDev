@@ -27,16 +27,16 @@ public class TestData {
     public static Object[][] LangTestDataProvider() {
 
         return new Object[][]{
-                {1, "Deutsch", "https://dev.swisscows.com/de","Deine private und anonyme Suchmaschine Swisscows"},
-                {2, "Español", "https://dev.swisscows.com/es", "Su buscador privado y anónimo Swisscows"},
-                {3, "Français", "https://dev.swisscows.com/fr", "Votre moteur de recherche privé et anonyme Swisscows"},
-                {4, "Italiano", "https://dev.swisscows.com/it", "Il tuo motore di ricerca privato e anonimo Swisscows"},
-                {5, "Latviešu", "https://dev.swisscows.com/lv", "Jūsu privātā un anonīma meklētājprogramma Swisscows"},
-                {6, "Magyar", "https://dev.swisscows.com/hu", "Az Ön privát és névtelen keresőmotorja, Swisscows"},
-                {7, "Nederlands", "https://dev.swisscows.com/nl", "Uw privé en anonieme zoekmachine Swisscows"},
-                {8, "Portugal", "https://dev.swisscows.com/pt", "O teu motor de busca privado e anónimo Swisscows"},
-                {9, "Русский", "https://dev.swisscows.com/ru", "Swisscows - Ваша приватная и анонимная поисковая система"},
-                {10, "Українська", "https://dev.swisscows.com/uk", "Swisscows - Ваша приватна та анонімна пошукова система"},
+                {1, "Deutsch", ProjectConstants.DOMAIN +"/de","Deine private und anonyme Suchmaschine Swisscows"},
+                {2, "Español", ProjectConstants.DOMAIN +"/es", "Su buscador privado y anónimo Swisscows"},
+                {3, "Français", ProjectConstants.DOMAIN +"/fr", "Votre moteur de recherche privé et anonyme Swisscows"},
+                {4, "Italiano", ProjectConstants.DOMAIN +"/it", "Il tuo motore di ricerca privato e anonimo Swisscows"},
+                {5, "Latviešu", ProjectConstants.DOMAIN +"/lv", "Jūsu privātā un anonīma meklētājprogramma Swisscows"},
+                {6, "Magyar", ProjectConstants.DOMAIN +"/hu", "Az Ön privát és névtelen keresőmotorja, Swisscows"},
+                {7, "Nederlands", ProjectConstants.DOMAIN +"/nl", "Uw privé en anonieme zoekmachine Swisscows"},
+                {8, "Portugal", ProjectConstants.DOMAIN +"/pt", "O teu motor de busca privado e anónimo Swisscows"},
+                {9, "Русский", ProjectConstants.DOMAIN +"/ru", "Swisscows - Ваша приватная и анонимная поисковая система"},
+                {10, "Українська", ProjectConstants.DOMAIN +"/uk", "Swisscows - Ваша приватна та анонімна пошукова система"},
 
 
         };
@@ -71,18 +71,18 @@ public class TestData {
     public static Object[][] RegionTestDataProvider() {
 
         return new Object[][]{
-                {0, "Argentina", "https://dev.swisscows.com/en?region=es-AR","Your private and anonymous search engine Swisscows"},
-                {1, "Australia", "https://dev.swisscows.com/en?region=en-AU", "Your private and anonymous search engine Swisscows"},
-                {2, "Austria", "https://dev.swisscows.com/en?region=de-AT", "Your private and anonymous search engine Swisscows"},
-                {3, "Belgium(fr)", "https://dev.swisscows.com/en?region=fr-BE", "Your private and anonymous search engine Swisscows"},
-                {6, "Canada(en)", "https://dev.swisscows.com/en?region=en-CA", "Your private and anonymous search engine Swisscows"},
-                {7, "Canada(fr)", "https://dev.swisscows.com/en?region=fr-CA", "Your private and anonymous search engine Swisscows"},
-                {12, "France", "https://dev.swisscows.com/en?region=fr-FR", "Your private and anonymous search engine Swisscows"},
-                {13, "Germany", "https://dev.swisscows.com/en?region=de-DE", "Your private and anonymous search engine Swisscows"},
-                {19, "Italy", "https://dev.swisscows.com/en?region=it-IT", "Your private and anonymous search engine Swisscows"},
-                {39, "Switzerland(de)", "https://dev.swisscows.com/en?region=de-CH", "Your private and anonymous search engine Swisscows"},
-                {40, "Switzerland(fr)", "https://dev.swisscows.com/en?region=fr-CH", "Your private and anonymous search engine Swisscows"},
-                {47, "World-wide", "https://dev.swisscows.com/en?region=iv", "Your private and anonymous search engine Swisscows"},
+                {0, "Argentina", ProjectConstants.DOMAIN +"/en?region=es-AR","Your private and anonymous search engine Swisscows"},
+                {1, "Australia", ProjectConstants.DOMAIN +"/en?region=en-AU", "Your private and anonymous search engine Swisscows"},
+                {2, "Austria", ProjectConstants.DOMAIN +"/en?region=de-AT", "Your private and anonymous search engine Swisscows"},
+                {3, "Belgium(fr)", ProjectConstants.DOMAIN + "/en?region=fr-BE", "Your private and anonymous search engine Swisscows"},
+                {6, "Canada(en)", ProjectConstants.DOMAIN + "/en?region=en-CA", "Your private and anonymous search engine Swisscows"},
+                {7, "Canada(fr)", ProjectConstants.DOMAIN + "/en?region=fr-CA", "Your private and anonymous search engine Swisscows"},
+                {12, "France", ProjectConstants.DOMAIN +"/en?region=fr-FR", "Your private and anonymous search engine Swisscows"},
+                {13, "Germany", ProjectConstants.DOMAIN + "/en?region=de-DE", "Your private and anonymous search engine Swisscows"},
+                {19, "Italy", ProjectConstants.DOMAIN +"/en?region=it-IT", "Your private and anonymous search engine Swisscows"},
+                {39, "Switzerland(de)", ProjectConstants.DOMAIN +"/en?region=de-CH", "Your private and anonymous search engine Swisscows"},
+                {40, "Switzerland(fr)", ProjectConstants.DOMAIN +"/en?region=fr-CH", "Your private and anonymous search engine Swisscows"},
+                {47, "World-wide", ProjectConstants.DOMAIN +"/en?region=iv", "Your private and anonymous search engine Swisscows"},
 
         };
     }
@@ -91,8 +91,8 @@ public class TestData {
     public static Object[][] externalTopMenuTestDataProvider() {
 
         return new Object[][]{
-                {8, "Blog", "https://dev.swisscows.com/en/privacy", "https://dev.swisscows.com/en/privacy", "Blog "},
-                {9, "For Business", "https://dev.swisscows.com/en/privacy", "https://dev.swisscows.com/en/privacy", "for business"}
+                {8, "Blog", ProjectConstants.DOMAIN +"/en/privacy", "https://dev.swisscows.com/en/privacy", "Blog "},
+                {9, "For Business", ProjectConstants.DOMAIN +"/en/privacy", "https://dev.swisscows.com/en/privacy", "for business"}
         };
     }
 
@@ -164,7 +164,7 @@ public class TestData {
     public static Object[][] CharityProjectLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows VPN", "/en/vpn", "https://dev.swisscows.com/en/anonymous-vpn",},
+                {0, "Swisscows VPN", "/en/vpn", ProjectConstants.DOMAIN + "/en/anonymous-vpn",},
                 {1, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en"},
 
         };
@@ -185,8 +185,8 @@ public class TestData {
     public static Object[][] OurDatacenterLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows.com", "/en", "https://dev.swisscows.com/en",},
-                {1, "Media Education", "/en/media-education", "https://dev.swisscows.com/en/media-education"},
+                {0, "Swisscows.com", "/en", ProjectConstants.DOMAIN +"/en",},
+                {1, "Media Education", "/en/media-education", ProjectConstants.DOMAIN + "/en/media-education"},
 
         };
     }
@@ -194,9 +194,9 @@ public class TestData {
     public static Object[][] DonationLinksTestDataProvider() {
 
         return new Object[][] {
-                {0, "Swisscows VPN", "/en/anonymous-vpn", "https://dev.swisscows.com/en/anonymous-vpn","Anonymous web surfing with Swisscows"},
+                {0, "Swisscows VPN", "/en/anonymous-vpn", ProjectConstants.DOMAIN +"/en/anonymous-vpn","Anonymous web surfing with Swisscows"},
                 {1, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en","SCREENSHOTS"},
-                {2, "here", "/en/social-projects", "https://dev.swisscows.com/en/social-projects","Charity Project"},
+                {2, "here", "/en/social-projects", ProjectConstants.DOMAIN +"/en/social-projects","Charity Project"},
 
         };
     }

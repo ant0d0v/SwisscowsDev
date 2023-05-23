@@ -22,10 +22,10 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 

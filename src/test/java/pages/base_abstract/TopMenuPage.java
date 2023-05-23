@@ -90,6 +90,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
     private WebElement LangDropDownIcon;
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[2]")
+    private WebElement langGermany;
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement RegionDropDownIcon;
@@ -120,6 +122,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement searchDropdownMenu;
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
+    @FindBy(xpath = "//div[@class='error']//h2[@class]")
+    private WebElement h2TitleErrorInFavorite;
 
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
@@ -300,6 +304,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    public MainPage clickGermanyLang() {
+        click(langGermany);
+
+        return new MainPage(getDriver());
+    }
     public List <String> getColorLinks (){
 
         return getColors(allLinks);
@@ -450,6 +459,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(imageButton);
 
         return new ImagePage(getDriver());
+    }
+    public String getErrorTitleInFavoritePlaylist()  {
+
+        return getText(h2TitleErrorInFavorite);
     }
     public NewsPage clickNewsButton() {
         clickEnter(newsButton);

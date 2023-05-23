@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
+import utils.ProjectConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement firstImageInAds;
     @FindBy(xpath = "//div[@class ='filters-button']")
     private WebElement filterButton;
-
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
@@ -93,6 +94,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         click(favoriteItem);
         return this;
 
+    }
+    public ImagePage refreshImagePage(){
+        refreshPage();
+        return new ImagePage(getDriver());
     }
     public ImagePage scrollToLastImage() throws InterruptedException {
         scrollByVisibleElement(lastImage);
@@ -180,9 +185,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
-
         clickByJavaScript(secondQueryInRelatedSearchContainer);
-
+        waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=Ronaldo%");
         return new ImagePage(getDriver());
     }
     public void clickNextButton() {
@@ -197,6 +201,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     public ImagePage clickRedColorInDropdownColors() {
         wait10ElementToBeVisible(dropdownLisOfColor);
         click(redInDropdownColor);
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=photo&color=Red");
         return new ImagePage(getDriver());
     }
     public boolean lastImageInAdsIsDisplayed() {

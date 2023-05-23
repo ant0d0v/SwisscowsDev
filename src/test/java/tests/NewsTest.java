@@ -139,11 +139,11 @@ public class NewsTest extends BaseTest {
                  .clickRegionGerman()
                  .clickNewsButton();
         final String oldTitle = newsPage.getTitleNews();
-        newsPage
-                 .clickThirdPagePagination()
-                 .waitUntilLoaderToBeInvisible();
+        final String newTitle = newsPage
+                .clickThirdPagePagination()
+                .waitUntilLoaderToBeInvisible()
+                .getTitleNews();
 
-        final String newTitle = newsPage.getTitleNews();
         final String actualAttribute = newsPage
                 .getAttributeThirdButtonPagination();
 

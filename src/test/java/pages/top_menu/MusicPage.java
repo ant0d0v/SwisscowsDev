@@ -162,10 +162,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getText(durationAttribute);
     }
-    public String getErrorTitleInFavoritePlaylist()  {
 
-        return getText(h2TitleErrorInFavorite);
-    }
     public String getFontSizeErrorTitleInFavoritePlaylist()  {
 
         return getFontSize(h2TitleErrorInFavorite);
