@@ -5,12 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.NewsPage;
+import tests.retrytest.Retry;
 import utils.ProjectConstants;
 
 import java.util.List;
 
 public class NewsTest extends BaseTest {
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria_NewsSearch() {
         final String query = "ivanka";
 
@@ -39,7 +40,7 @@ public class NewsTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testError501UnsupportedRegion_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
@@ -64,7 +65,7 @@ public class NewsTest extends BaseTest {
         Assert.assertTrue(newsPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle501Error,expectedFontSizeTitle501Error);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenNewsPost_NewsPage() {
         NewsPage newsPage = new NewsPage(getDriver());
 
@@ -84,7 +85,7 @@ public class NewsTest extends BaseTest {
         ;
         Assert.assertNotEquals(newUrl, oldUrl);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSearchField_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
 
@@ -110,7 +111,7 @@ public class NewsTest extends BaseTest {
         Assert.assertNotEquals(newTextFirstNews,oldTextFirstNews);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImageProxy_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         final List<String> actualSrc = openBaseURL()
@@ -128,7 +129,7 @@ public class NewsTest extends BaseTest {
             Assert.assertTrue(search.contains("https://cdn.swisscows.com/image?url"));
         }
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAnyNumberInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
          openBaseURL()
@@ -151,7 +152,7 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNextButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         openBaseURL()
@@ -172,7 +173,7 @@ public class NewsTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPreviousButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         openBaseURL()

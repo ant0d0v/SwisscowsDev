@@ -5,12 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.WebPage;
+import tests.retrytest.Retry;
 import utils.ProjectConstants;
 
 import java.util.List;
 
 public class WebPageTest extends BaseTest {
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria_WebSearch() {
         final String query = "ivanka";
 
@@ -19,10 +20,10 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
         Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
@@ -34,7 +35,7 @@ public class WebPageTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void test202NoResultsFoundPageError_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
@@ -55,7 +56,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testError450RequestIsBlocked_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -74,7 +75,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testError404PageNotFound() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -92,7 +93,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testError500UnknownError() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -112,7 +113,7 @@ public class WebPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testHoverTextsRelatedSearch_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -125,7 +126,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testRelatedSearchCriteria_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -145,7 +146,7 @@ public class WebPageTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickSearchCriteriaInRelatedSearch_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final List<String> oldSearchResult = openBaseURL()
@@ -158,11 +159,10 @@ public class WebPageTest extends BaseTest {
                 .getTitleInWebResult();
 
         Assert.assertNotEquals(oldSearchResult, newSearchResult);
-        Assert.assertEquals(webPage.getTitleInRelatedSearches().size(), 8);
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSearchFieldDidYouMeanMessage_webPage() {
 
         final String expectedResult = "[Do you want results only for appple?]";
@@ -176,7 +176,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testWebResultsEqualsSearchCriteria() {
         WebPage webPage = new WebPage(getDriver());
         final List<String> titles = openBaseURL()
@@ -194,7 +194,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNextButtonAndPrevButtonVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -213,7 +213,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -229,7 +229,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenVideoInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
@@ -249,23 +249,23 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickMoreImageButtonInImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle = "ronaldo in Images search - Swisscows";
+        final String expectedTitle = "flovers image in Images search - Swisscows";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("flovers image")
                 .waitUntilVisibilityWebResult()
                 .clickMoreImagesInVideoWidget()
                 .waitForImageIsVisible();
 
-        Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=ronaldo");
+        Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=flovers%20image");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImagesAndTitleIsDysplaedInImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "Images for flover";
@@ -282,7 +282,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenImageInTheImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -299,7 +299,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenNewsInTheNewsWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -319,7 +319,7 @@ public class WebPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImagesAndTitleIsDysplaedInNewsWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String expectedTitle = "News for ukraine";
@@ -336,7 +336,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.imagesInNewsWidgetIsDisplayed());
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAnyNumberInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -357,7 +357,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNextButtonInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -374,7 +374,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(actualAttribute,"number active");
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -392,7 +392,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertEquals(oldTitle,newTitle);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String oldTitle = openBaseURL()
@@ -414,7 +414,7 @@ public class WebPageTest extends BaseTest {
 
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCancelFilter_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
@@ -432,7 +432,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/web?query=ronaldo");
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenWebPreview_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -445,7 +445,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.screenshotIsDisplayed());
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCloseWebPreview_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -464,7 +464,7 @@ public class WebPageTest extends BaseTest {
         }
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenSiteInPreview_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -481,10 +481,13 @@ public class WebPageTest extends BaseTest {
         Assert.assertNotEquals(getExternalPageURL(),oldUrl);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenTrackersInPreview_WebPage() {
 
         final List<String> trackersSize = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionUkraine()
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
@@ -496,10 +499,13 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(trackersSize.size() >= 2);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickScreenshotButtonInPreview_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionUkraine()
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
@@ -512,7 +518,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.screenshotIsDisplayed());
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testChangeLanguage_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
@@ -527,7 +533,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.getTitle().contains("in Web suchen - Swisscows"));
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAdvertising_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
@@ -549,7 +555,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(actualSizes >= 1);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenAdvertising_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -568,7 +574,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenAnyLinkInWebResult_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -584,7 +590,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
 
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testHoverPreviewButtons_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
 

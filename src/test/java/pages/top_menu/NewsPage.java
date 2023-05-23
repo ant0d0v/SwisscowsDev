@@ -8,7 +8,7 @@ import pages.base_abstract.TopMenuPage;
 import java.util.List;
 
 public class NewsPage extends TopMenuPage<NewsPage> {
-    @FindBy(xpath = "//div[@class='news-results']//figure")
+    @FindBy(xpath = "//div[@class='news-results']")
     private WebElement newsResultContainer;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2News;
