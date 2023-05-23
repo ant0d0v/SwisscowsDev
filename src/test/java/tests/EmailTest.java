@@ -149,7 +149,7 @@ public class EmailTest extends BaseTest {
     }
     @Test
     public void testSupportLinkNavigateToCorrespondingPage() {
-        final String expectedTitle = "Swisscows.email - My secure e-mail.";
+        final String expectedTitle = "Swisscows Support (Page 1)";
         openBaseURL()
                 .clickEmailTopMenu()
                 .closeWindow()
