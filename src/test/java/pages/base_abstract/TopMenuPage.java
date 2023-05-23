@@ -35,7 +35,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath = TOP_MENU_ID + "//a[2]")
     private WebElement VPNTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[1]")
+    @FindBy(xpath = "//header//a[@class = 'badge-email']//img")
     private WebElement EmailTopMenu;
 
     @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']//a[@href = '/en/set-as-startpage']")
@@ -66,7 +66,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @FindBy(xpath= "//button[@type='reset']")
     private WebElement clearButton;
 
-    @FindBy(xpath = "//button[@type = 'button']")
+    @FindBy(xpath = "//header//button[@type = 'button']")
     private WebElement hamburgerTopMenu;
 
     @FindBy(xpath = "//div[@class ='menu popup']//a")
@@ -90,6 +90,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
     private WebElement LangDropDownIcon;
+    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[2]")
+    private WebElement langGermany;
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement RegionDropDownIcon;
@@ -120,6 +122,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement searchDropdownMenu;
     @FindBy(xpath = "//div[@class = 'static-content']//a")
     private List<WebElement> allLinks;
+    @FindBy(xpath = "//div[@class='error']//h2[@class]")
+    private WebElement h2TitleErrorInFavorite;
 
     @FindBy(xpath = "//div[@class='faq-wrap']//p")
     private List<WebElement> textsAnswers;
@@ -163,7 +167,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
     private WebElement regionBrazil;
-    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[42]")
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[44]")
     private WebElement regionUkraine;
     @FindBy(xpath = "//div[@class ='account']")
     private WebElement accountInHamburgerMenu;
@@ -291,12 +295,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickHamburgerMenu() {
-        click(hamburgerTopMenu);
+        click20(hamburgerTopMenu);
 
         return new MainPage(getDriver());
     }
     public MainPage clickRegionGerman() {
         click(RegionGerman);
+
+        return new MainPage(getDriver());
+    }
+    public MainPage clickGermanyLang() {
+        click(langGermany);
 
         return new MainPage(getDriver());
     }
@@ -343,7 +352,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public EmailPage clickEmailTopMenu() {
-        click(EmailTopMenu);
+        click20(EmailTopMenu);
 
         return  new EmailPage(getDriver());
     }
@@ -382,8 +391,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public VpnPage clickVPNTopMenu() {
         click(VPNTopMenu);
+        switchToExternalPage();
         return new VpnPage(getDriver());
     }
+
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
@@ -448,6 +459,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter(imageButton);
 
         return new ImagePage(getDriver());
+    }
+    public String getErrorTitleInFavoritePlaylist()  {
+
+        return getText(h2TitleErrorInFavorite);
     }
     public NewsPage clickNewsButton() {
         clickEnter(newsButton);
@@ -548,8 +563,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         new NewsPage(getDriver());
     }
 
+
     public String getValueHeartIcon() {
         return getText(valueHeartIcon);
+    }
+    public NewsPage waitValueHeartIconToBeChanged() {
+        waitTextToBeChanged(valueHeartIcon,"2");
+
+        return new NewsPage(getDriver());
     }
     public MainPage refreshMainPage() {
         refreshPage();

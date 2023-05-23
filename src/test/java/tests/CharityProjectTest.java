@@ -7,13 +7,14 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.CharityProjectPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
 public class CharityProjectTest extends BaseTest {
     @Test
     public void testHTML5VideoPlayerCharity() throws Exception {
-        final String expectedSource = "https://dev.swisscows.com/video/SwisscowsCharityVideo_EN.mp4";
+        final String expectedSource = ProjectConstants.DOMAIN + "/video/SwisscowsCharityVideo_EN.mp4";
         CharityProjectPage charityProjectPage = new CharityProjectPage(getDriver());
         final String source = openBaseURL()
                 .scrollToFooterMenu()

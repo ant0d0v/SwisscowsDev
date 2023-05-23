@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.VpnInstructionsPage;
+import utils.ProjectConstants;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -25,8 +27,7 @@ public class VpnInstructionsTest extends BaseTest {
 
             );
         final List<String> actualH2Texts = openBaseURL()
-                    .clickVPNTopMenu()
-                    .closeWindow()
+                    .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .getH2Texts();
@@ -37,13 +38,12 @@ public class VpnInstructionsTest extends BaseTest {
 
     @Test
     public void testVpnLogoNavigatesToBaseURL() {
-        final String expectedURL = "https://dev.swisscows.com/en";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en";
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
         MainPage mainPage = openBaseURL();
         final String actualURL = mainPage
-                    .clickVPNTopMenu()
-                    .closeWindow()
+                    .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .clickLogo()
@@ -67,8 +67,7 @@ public class VpnInstructionsTest extends BaseTest {
                     "24px"
             );
         final List<String> actualH2FontSizes = openBaseURL()
-                    .clickVPNTopMenu()
-                    .closeWindow()
+                    .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .getH2FontSizes();
@@ -80,8 +79,7 @@ public class VpnInstructionsTest extends BaseTest {
     @Test
     public void testAllBrowserIconsExist() {
         VpnInstructionsPage vpnInstructionsPage = openBaseURL()
-                    .clickVPNTopMenu()
-                    .closeWindow()
+                    .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink();
 
@@ -102,8 +100,7 @@ public class VpnInstructionsTest extends BaseTest {
 
         );
         openBaseURL()
-                .clickVPNTopMenu()
-                .closeWindow()
+                .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage()
                 .clickInstructionsLink();
 

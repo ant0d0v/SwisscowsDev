@@ -18,7 +18,6 @@ public class MainTest extends BaseTest {
         final int expectedSizeSuggest = 5;
 
         MainPage mainPage = openBaseURL();
-
         mainPage
                 .clickSearchField()
                 .inputSearchCriteria(query)
@@ -62,15 +61,15 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testHomePageBannerClickable () {
+    public void testHomePageBannerClickableAndRedirectToCorrespondingPage() {
+        MainPage mainPage = new MainPage(getDriver());
+        final String expectedUrl = ProjectConstants.DOMAIN_WITHOUT_DEV + "/en/music?query=new+charts+2022";
 
-        final String expectedUrl = "https://dev.swisscows.com/en/music?query=popular+music";
+        final String oldUrl  = openBaseURL()
+                .getCurrentURL();
 
-        MainPage mainPage = openBaseURL();
-
-        final String oldUrl  = mainPage.getCurrentURL();
         final String actualUrl = mainPage
-                .waitForImageInBannerDisappeared()
+                .waitForImageInBannerVisibleOfMusic()
                 .clickHomeBanner()
                 .getCurrentURL();
 
@@ -80,30 +79,32 @@ public class MainTest extends BaseTest {
     @Test
     public void testHomePageBannerSwitching ()  {
 
-        final String expectedValue = "swiper-slide swiper-slide-next";
+        final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
         MainPage mainPage = openBaseURL();
-
-        final String valueSecondSwitch = mainPage
-                .clickBannerSwitch()
-                .getClassAttributeSwitchSecond();
 
         final String valueFirstSwitch = mainPage
                 .clickBannerSwitchFirst()
                 .getClassAttributeSwitchFirst();
 
+
+        final String valueSecondSwitch = mainPage
+                .clickBannerSwitchSecond()
+                .waitForImageInBannerVisibleOfEmail()
+                .getClassAttributeSwitchSecond();
+
         Assert.assertEquals(valueFirstSwitch,expectedValue);
-        Assert.assertNotEquals(valueSecondSwitch,valueFirstSwitch);
+        Assert.assertEquals(valueSecondSwitch,valueFirstSwitch);
 
     }
 
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedValue = "swiper-slide swiper-slide-active";
+        final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
         final String actualValue = openBaseURL()
-                .waitForImageInBannerDisappeared()
+                .waitForImageInBannerVisibleOfEmail()
                 .getClassAttributeSwitchSecond();
 
         Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
@@ -122,24 +123,29 @@ public class MainTest extends BaseTest {
                 .inputSearchCriteria(query)
                 .clickSearchButton()
                 .waitUntilVisibilityWebResult();
-        Assert.assertEquals(getExternalPageURL(),"https://dev.swisscows.com/en/web?query=test");
+        Assert.assertEquals(getExternalPageURL(),ProjectConstants.DOMAIN + "/en/web?query=test");
 
     }
     @Test
     public void testQuestionAndAnswersWasOpened() {
 
-        final String expectedClass = "faq open";
+        final List<String> expectedAttribute = List.of(
+                "faq open",
+                "faq open",
+                "faq open",
+                "faq open",
+                "faq open",
+                "faq open"
 
-        MainPage mainPage = openBaseURL()
+        );
+
+        final List<String> actualAttribute = openBaseURL()
                 .scrollToQuestions()
-                .clickAllQuestions();
+                .clickAllQuestions()
+                .getClassAttributeAllQuestions();
 
-        Assert.assertEquals(mainPage.getClassAttributeQuestion1(),expectedClass);
-        Assert.assertEquals(mainPage.getClassAttributeQuestion2(),expectedClass);
-        Assert.assertEquals(mainPage.getClassAttributeQuestion3(),expectedClass);
-        Assert.assertEquals(mainPage.getClassAttributeQuestion4(),expectedClass);
-        Assert.assertEquals(mainPage.getClassAttributeQuestion5(),expectedClass);
-        Assert.assertEquals(mainPage.getClassAttributeQuestion6(),expectedClass);
+        Assert.assertEquals(actualAttribute,expectedAttribute);
+
 
     }
     @Test
@@ -169,7 +175,7 @@ public class MainTest extends BaseTest {
     @Test
     public void testLinkIn4Question() {
 
-        final String expectedUrl = "https://dev.swisscows.com/en/default-search";
+        final String expectedUrl = ProjectConstants.DOMAIN + "/en/default-search";
 
         MainPage mainPage = openBaseURL();
         final String actualUrl =mainPage
@@ -188,8 +194,7 @@ public class MainTest extends BaseTest {
 
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        openBaseURL()
                 .scrollToBlockGooglePopup()
                 .clickInstallGoogleBlockPopup()
                 .switchToAnotherWindow();
@@ -210,7 +215,7 @@ public class MainTest extends BaseTest {
                 .waitForFooterPanelToBeVisible();
 
         int actualUrl = mainPage.getAllLinks().size();
-        Assert.assertEquals(actualUrl, 25);
+        Assert.assertEquals(actualUrl, 26);
 
 
     }

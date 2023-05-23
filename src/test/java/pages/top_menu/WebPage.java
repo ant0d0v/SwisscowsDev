@@ -51,11 +51,11 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement videoPlayer;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[@src]")
     private List<WebElement>imagesInImageWidget;
-    @FindBy(xpath = "//div[@class='widget-images']//figure//img")
+    @FindBy(xpath = "//div[@class ='widget']//a[@class='widget-news']//figure//img[@src]")
     private List<WebElement>imagesInNewsWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
     private WebElement firstImageInImageWidget;
-    @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
+    @FindBy(xpath = "(//a[@class='widget-news'])[position() =1]")
     private WebElement firstNewsInNewsWidget;
     @FindBy(xpath = "//div[@class='widget']//p[@class='widget-title'][text()='Images for ']")
     private WebElement titleImageWidget;
@@ -136,6 +136,10 @@ public class WebPage extends TopMenuPage<WebPage> {
         wait10ElementToBeVisible(trackersScreenshot);
         return getTexts(trackersInScreenshot);
     }
+    public WebPage refreshWebPage() {
+        refreshPage();
+        return new WebPage(getDriver());
+    }
     public List<WebElement> getInnerFooterMenuLinks() {
 
         return innerFooterMenuLink;
@@ -179,8 +183,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     }
     public List <String> getTitleInRelatedSearches()  {
-        return
-                getTexts(listRelatedSearches);
+        return getTexts(listRelatedSearches);
     }
     public WebPage waitUntilLoaderToBeInvisible(){
            wait10ElementToBeVisible(loader);
@@ -275,11 +278,13 @@ public class WebPage extends TopMenuPage<WebPage> {
     public ImagePage clickFirstImageInImageWidget()  {
 
         clickByJavaScript(firstImageInImageWidget);
+        switchToAnotherWindow();
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstNewsInNewsWidget()  {
 
         clickByJavaScript(firstNewsInNewsWidget);
+        switchToAnotherWindow();
         return new ImagePage(getDriver());
     }
     public WebPage clickThirdPagePagination_WebPage() {

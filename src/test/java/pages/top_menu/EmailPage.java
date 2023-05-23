@@ -17,7 +17,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     private WebElement InstallWebAppLink;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
     private List<WebElement> allLinksOnEmailPage;
-    @FindBy(xpath = "//a[@href='https://swisscows.email/en/help']")
+    @FindBy(xpath = "//a[@href='https://support.swisscows.com/swisscows-email/']")
     private WebElement supportButton;
     @FindBy(xpath = "//div[@class='content']//a[@href='https://accounts.swisscows.com/register']")
     private WebElement StartForFreeLink;

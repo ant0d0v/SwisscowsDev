@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.ContactUsPage;
 import pages.footer_menu.MediaEducationPage;
+import utils.ProjectConstants;
 
 public class ContactUsTest extends BaseTest {
     @Test
@@ -27,7 +28,7 @@ public class ContactUsTest extends BaseTest {
 
     @Test
     public void testContactUsButtonNavigateToCorrespondingPages() {
-        final String expectedUrl = "https://dev.swisscows.com/en";
+        final String expectedUrl = ProjectConstants.DOMAIN +"/en";
         final String oldURL = openBaseURL().getCurrentURL();
 
         final String newURL = new MainPage(getDriver())
@@ -46,7 +47,7 @@ public class ContactUsTest extends BaseTest {
 
     @Test
     public void testPrivacyPolicyLinkNavigateToCorrespondingPages() {
-        final String expectedUrl = "https://dev.swisscows.com/en/privacy";
+        final String expectedUrl = ProjectConstants.DOMAIN + "/en/privacy";
         final String actualUrl = openBaseURL()
                     .scrollToFooter()
                     .clickContactUsPageFooterMenu()

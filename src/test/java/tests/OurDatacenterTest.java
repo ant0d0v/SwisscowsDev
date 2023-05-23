@@ -8,6 +8,7 @@ import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.OurDatacenterPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -15,12 +16,30 @@ import java.util.List;
 public class OurDatacenterTest extends BaseTest {
 
     @Test
-    public void testHTML5VideoPlayerDatacenter() throws Exception {
+    public void testHTML5VideoPlayer_Datacenter() throws Exception {
         OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
-        final String expectedSource = "https://dev.swisscows.com/video/SWISSCOWS.mp4";
+        final String expectedSource = ProjectConstants.DOMAIN + "/video/swisscows-promo.mp4";
         final String source = openBaseURL()
                 .scrollToFooterMenu()
                 .clickOurDatacenterPageFooterMenu()
+                .getCurrentSrcOfVideo();
+        ourDatacenterPage
+                .playVideoDatacenter()
+                .pauseVideoDatacenter()
+                .screen("dataCentre.png");
+
+        Assert.assertEquals(source, expectedSource);
+    }
+    @Test
+    public void testHTML5VideoPlayerUsingGermanyLocalization_Datacenter() throws Exception {
+        OurDatacenterPage ourDatacenterPage = new OurDatacenterPage(getDriver());
+        final String expectedSource = ProjectConstants.DOMAIN + "/video/SWISSCOWS.mp4";
+        final String source = openBaseURL()
+                .scrollToFooterMenu()
+                .clickOurDatacenterPageFooterMenu()
+                .clickHamburgerMenu()
+                .clickLanguagesTopMenu()
+                .clickGermanyLang()
                 .getCurrentSrcOfVideo();
         ourDatacenterPage
                 .playVideoDatacenter()

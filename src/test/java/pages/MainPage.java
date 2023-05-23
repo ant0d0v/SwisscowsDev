@@ -5,7 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
-import pages.top_menu.WebPage;
+import pages.top_menu.MusicPage;
+import pages.top_menu.VpnPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +31,17 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//div[@class = 'bnnr-widget']")
     private WebElement homepageBanner;
-    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-active']")
-    private WebElement homepageBannerSwitchSecondValue;
 
-    @FindBy(xpath = "//div[@class = 'swiper-slide swiper-slide-next']")
-    private WebElement homepageBannerSwitchFirstValue;
-
-    @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][2]")
+    @FindBy(xpath = "(//span[contains (@class ,'swiper-pagination-bullet')])[position() =2]")
     private WebElement homepageBannerSwitchSecond;
 
-    @FindBy(xpath = "//span[@class ='swiper-pagination-bullet'][1]")
+    @FindBy(xpath = "(//span[contains (@class ,'swiper-pagination-bullet')])[position() =1]")
     private WebElement homepageBannerSwitchFirst;
 
-    @FindBy(xpath = "//img[@src= 'https://api.dev.swisscows.com/b4r/aa0de0145ba54acab978665b92a8c082']")
-    private WebElement homepageBannerImage;
+    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/be94588d61a04cd6849392dd3884464d'])[position() = 2]")
+    private WebElement homepageBannerImageOfEmail;
+    @FindBy(xpath = "(//img[@src= 'https://api.dev.swisscows.com/b4r/991b8059be404bb2ac04c6ad90662351'])[position() = 2]")
+    private WebElement homepageBannerImageOfMusic;
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
     private WebElement homepageQuestion1;
@@ -51,19 +49,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
     @FindBy(xpath = "//h3[@class='question'][1]")
     private WebElement homepageQuestionOne;
 
-    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[2]")
-    private WebElement homepageQuestion2;
-
-    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[3]")
-    private WebElement homepageQuestion3;
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[4]")
     private WebElement homepageQuestion4;
 
     @FindBy(xpath = "//p//a[@href='/en/default-search']")
     private WebElement linkInQuestion4;
-
-    @FindBy(xpath = "//div[@class= 'faq-wrap']//div[5]")
-    private WebElement homepageQuestion5;
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[6]")
     private WebElement homepageQuestion6;
@@ -94,6 +84,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//footer[@class='footer-full']//a[@href]")
     private List<WebElement> allLinks;
+    @FindBy(xpath = "//div[@class= 'faq-wrap']//div")
+    private List<WebElement> attributeAllQuestions;
 
     @FindBy(xpath = "//input[@class ='input-search']")
     private WebElement searchBoxTopMenu;
@@ -103,6 +95,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     @FindBy(xpath = "//body[@class ='dark']")
     private static WebElement bodyIsDark;
+    @FindBy(xpath =  "//div[@class = 'badges animation-badges']//a[2]")
+    private WebElement VPNTopMenu;
 
     @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[2]")
     private static WebElement secondValueOfLight;
@@ -180,11 +174,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    public MainPage clickHomeBanner() {
+    public MusicPage clickHomeBanner() {
         Actions action = new Actions(getDriver());
         action.doubleClick(homepageBanner).build().perform();
         switchToAnotherWindow();
-        return this;
+        return new MusicPage(getDriver());
     }
 
     public MainPage clickQuestion1() {
@@ -291,12 +285,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return new MainPage(getDriver());
     }
 
-    public MainPage clickBannerSwitch() {
-        click(homepageBannerSwitchSecond);
+    public MainPage clickBannerSwitchSecond() {
+        clickByJavaScript(homepageBannerSwitchSecond);
         return this;
     }
     public MainPage clickBannerSwitchFirst() {
-        click(homepageBannerSwitchFirst);
+        clickByJavaScript(homepageBannerSwitchFirst);
         return this;
     }
 
@@ -307,9 +301,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-    public MainPage waitForImageInBannerDisappeared() {
-        wait20ElementToBeVisible(homepageBannerImage);
+    public MainPage waitForImageInBannerVisibleOfEmail() {
+        wait20ElementToBeVisible(homepageBannerImageOfEmail);
       return new MainPage(getDriver());
+    }
+    public MainPage waitForImageInBannerVisibleOfMusic() {
+        wait20ElementToBeVisible(homepageBannerImageOfMusic);
+        return new MainPage(getDriver());
     }
 
     public void waitForFooterPanelToBeVisible() {
@@ -319,9 +317,15 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-    public void waitForSuggestToBeVisible() {
+    public MainPage waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
+        return new MainPage(getDriver());
 
+    }
+    public VpnPage clickVPNTopMenuAndCloseWindow() {
+        click(VPNTopMenu);
+        closeWindow();
+        return new VpnPage(getDriver());
     }
     public MainPage waitForPopupGoogleInstallToBeVisible() {
         wait20ElementToBeVisible(googlePopupInstall);
@@ -387,11 +391,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
     public String getClassAttributeSwitchSecond() {
 
-        return getAttribute(homepageBannerSwitchSecondValue, "class");
+        return getAttribute(homepageBannerSwitchSecond, "class");
     }
    public String getClassAttributeSwitchFirst() {
 
-     return getAttribute(homepageBannerSwitchFirstValue, "class");
+     return getAttribute(homepageBannerSwitchFirst, "class");
    }
 
     public String getClassAttributeThemeDefault() {
@@ -412,26 +416,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getAttribute(homepageQuestion1,"class");
     }
-    public String getClassAttributeQuestion2() {
+    public List<String> getClassAttributeAllQuestions() {
 
-        return getAttribute(homepageQuestion2,"class");
+        return getAttributeClassAllElements(attributeAllQuestions);
     }
-    public String getClassAttributeQuestion3() {
 
-        return getAttribute(homepageQuestion3,"class");
-    }
-    public String getClassAttributeQuestion4() {
-
-        return getAttribute(homepageQuestion4,"class");
-    }
-    public String getClassAttributeQuestion5() {
-
-        return getAttribute(homepageQuestion5,"class");
-    }
-    public String getClassAttributeQuestion6() {
-
-        return getAttribute(homepageQuestion6,"class");
-    }
     public List<String> getLinkColorsServicesBlock() throws InterruptedException {
 
         return  getColorsOfElements(linksServicesBlock);

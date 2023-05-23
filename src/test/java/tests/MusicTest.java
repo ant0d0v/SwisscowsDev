@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
+import utils.ProjectConstants;
+
 import java.util.List;
 
 public class MusicTest extends BaseTest {
@@ -194,19 +196,20 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult();
 
         final String oldURL = musicPage.getCurrentURL();
-        final String oldText =musicPage.getTitlePlaylist();
+        final String oldText = musicPage.getTitlePlaylist();
 
-        musicPage.clickHamburgerMenu();
-        musicPage.clickLanguagesTopMenu();
-        musicPage.clickLangDeutsch();
+        musicPage
+                .clickHamburgerMenu()
+                .clickLanguagesTopMenu()
+                .clickLangDeutsch();
 
         final String actualURL = musicPage.getCurrentURL();
-        final String actualText =musicPage.getTitlePlaylist();
+        final String actualText = musicPage.getTitlePlaylist();
 
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldText, actualText);
-        Assert.assertEquals(actualURL,"https://dev.swisscows.com/de/music?query=ivanka");
+        Assert.assertEquals(actualURL, ProjectConstants.DOMAIN + "/de/music?query=ivanka");
         Assert.assertEquals(actualText,"Musik");
 
     }
@@ -263,18 +266,18 @@ public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
+        MainPage mainPage = new MainPage(getDriver());
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
         openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .clickSearchFieldHeader();
-        mainPage
-                .waitForSuggestToBeVisible();
 
-        final List<String> actualSuggestion = mainPage.getAllElementsText();
+        final List<String> actualSuggestion = mainPage
+                .waitForSuggestToBeVisible()
+                .getAllElementsText();
 
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
@@ -295,7 +298,7 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .scrollToLastTrack();
-        sleep(1000);
+        ;
         final List<String> actualTracks = musicPage.getTitleAllTracks();
 
         Assert.assertTrue(actualTracks.size()>= 29);
@@ -313,12 +316,12 @@ public class MusicTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains("https://dev.swisscows.com/en/music?query=ivanka&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=ivanka&region=");
 
         final String actualRegion = musicPage.getCurrentURL();
         final List<String> titleAllTracks = musicPage.getTitleAllTracks();
 
-        Assert.assertEquals(actualRegion,"https://dev.swisscows.com/en/music?query=ivanka&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=ivanka&region=de-DE");
         for (String search : titleAllTracks) {
             Assert.assertEquals(search.toLowerCase(), "ivanka");
         }

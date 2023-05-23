@@ -7,6 +7,7 @@ import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.DonationPage;
 import pages.top_menu.EmailPage;
+import utils.ProjectConstants;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +25,7 @@ public class DonationTest extends BaseTest {
         final String pdfContent = donationPage
                 .scrollToWherePaymentBlock()
                 .clickQrCodeChf()
-                .getPdfText("https://dev.swisscows.com/docs/Swisscows_Donation_CHF_t.pdf");
+                .getPdfText(ProjectConstants.DOMAIN +"/docs/Swisscows_Donation_CHF_t.pdf");
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertTrue(pdfContent.contains(""));
@@ -42,7 +43,7 @@ public class DonationTest extends BaseTest {
         final String pdfContent = donationPage
                 .scrollToWherePaymentBlock()
                 .clickQrCodeEuro()
-                .getPdfText("https://dev.swisscows.com/docs/Swisscows_Donation_EUR_t.pdf");
+                .getPdfText(ProjectConstants.DOMAIN + "/docs/Swisscows_Donation_EUR_t.pdf");
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertTrue(pdfContent.contains(""));

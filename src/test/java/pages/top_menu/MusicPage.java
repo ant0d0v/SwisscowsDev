@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -114,17 +115,18 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(progressbar);
         return new MusicPage(getDriver());
     }
-    public MusicPage scrollToLastTrack() {
+    public MusicPage scrollToLastTrack() throws InterruptedException {
         scrollByVisibleElement(lastTrack);
+        sleep(1000);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {
         click(favoriteContainer);
-        waitForUrlContains("https://dev.swisscows.com/en/music/my?query=");
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/music/my?query=");
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoriteIconInPlaylist() {
-        waitForUrlContains("https://dev.swisscows.com/en/music/my?query=");
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/music/my?query=");
         click(favoriteIconInPlaylist);
         return new MusicPage(getDriver());
     }
@@ -160,10 +162,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getText(durationAttribute);
     }
-    public String getErrorTitleInFavoritePlaylist()  {
 
-        return getText(h2TitleErrorInFavorite);
-    }
     public String getFontSizeErrorTitleInFavoritePlaylist()  {
 
         return getFontSize(h2TitleErrorInFavorite);

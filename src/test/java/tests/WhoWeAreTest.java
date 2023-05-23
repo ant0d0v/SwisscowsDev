@@ -18,6 +18,7 @@ public class WhoWeAreTest extends BaseTest {
         MainPage mainPage = openBaseURL();
 
         final String oldUrl = mainPage.getCurrentURL();
+
         final String actualText1 = mainPage
                 .scrollToFooter()
                 .clickAboutUsFooterMenu()
@@ -31,23 +32,22 @@ public class WhoWeAreTest extends BaseTest {
         @Test(dataProvider = "WhoWeAreLinksData", dataProviderClass = TestData.class)
         public void testWhoWeAreLinksNavigateToCorrespondingPages(
         int index, String linkName, String href, String expectedURL, String expectedH1text) throws InterruptedException {
+            WhoWeArePage whoWeArePage = new WhoWeArePage(getDriver());
+            MainPage mainPage = new MainPage(getDriver());
 
-            MainPage mainPage = openBaseURL();
-            mainPage
+            final String oldURL = openBaseURL()
                     .scrollToFooterMenu()
-                    .clickAboutUsFooterMenu();
+                    .clickAboutUsFooterMenu()
+                    .getCurrentURL();
 
-            final String oldURL = mainPage.getCurrentURL();
             final String oldH1Text = mainPage.getH1Text();
 
-            mainPage.scrollToFooterMenu();
-            WhoWeArePage whoWeArePage = new WhoWeArePage(getDriver());
             whoWeArePage
                     .scrollToWhereToH2Header()
                     .clickAllLinks(index);
 
-            String actualURL = mainPage.getCurrentURL();
-            String actualH1Text = mainPage.getH1Text();
+            final String actualURL = mainPage.getCurrentURL();
+            final String actualH1Text = mainPage.getH1Text();
 
             Assert.assertNotEquals(oldURL, actualURL);
             Assert.assertNotEquals(oldH1Text, actualH1Text);
@@ -59,8 +59,6 @@ public class WhoWeAreTest extends BaseTest {
         final List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)"
-
-
 
         );
         final List<String> actualLinksColors = openBaseURL()

@@ -56,8 +56,8 @@ public class PrivacyPolicyTest extends BaseTest {
         @Test
         public void testLinksColorsPrivacyPolicyPage(){
             final List<String> expectedH1Colors = List.of(
-                "rgba(223, 93, 93, 1)",
-                "rgba(223, 93, 93, 1)",
+                    "rgba(223, 93, 93, 1)",
+                    "rgba(223, 93, 93, 1)",
                     "rgba(223, 93, 93, 1)"
         );
             final List<String>  actualH1Colors = openBaseURL()

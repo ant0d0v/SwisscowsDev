@@ -58,10 +58,20 @@ public class TestUtils {
                 .random(length,
                         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
     }
+    public static String getRandomNameForBrazilBots(int length) {
+
+        return RandomStringUtils
+                .random(length,
+                        "abcdefghijklmnopqrst");
+    }
 
     public static String getRandomName() {
 
         return getRandomName(7);
+    }
+    public static String getRandomNameForBrazilBots() {
+
+        return getRandomNameForBrazilBots(7);
     }
 
     public static int convertStringToInt(String text) {

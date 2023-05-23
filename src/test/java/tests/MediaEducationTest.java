@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.MediaEducationPage;
 import pages.top_menu.EmailPage;
+import utils.ProjectConstants;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,30 +17,35 @@ public class MediaEducationTest extends BaseTest {
     @Test
     public void testPdfLinkMediaEducation() throws IOException {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
-        final String oldURL = openBaseURL().getCurrentURL();
-        String actualURL = new MainPage(getDriver())
+
+        final String oldURL = openBaseURL()
+                .getCurrentURL();
+        final String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickMediaEducationFooterMenu()
                 .getCurrentURL();
+
         String pdfContent = mediaEducationPage
                 .scrollToWhereToLinkPdf()
                 .clickLinkPdf()
-                .getPdfText("https://dev.swisscows.com/docs/Medienerziehung_2020_06_EN.pdf");
+                .getPdfText(ProjectConstants.DOMAIN + "/docs/Medienerziehung_2020_06_EN.pdf");
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertTrue(pdfContent.contains("Digital" + "\n" + "media education"));
     }
     @Test
     public void testPdfButtonOpenFlyerMediaEducation() throws IOException {
         MediaEducationPage mediaEducationPage = new MediaEducationPage(getDriver());
-        final String oldURL = openBaseURL().getCurrentURL();
-        String actualURL = new MainPage(getDriver())
+        final String oldURL = openBaseURL()
+                .getCurrentURL();
+        final  String actualURL = new MainPage(getDriver())
                 .scrollToFooter()
                 .clickMediaEducationFooterMenu()
                 .getCurrentURL();
+
         String pdfContent = mediaEducationPage
                 .scrollToWhereToButtonOpenFlyer()
                 .clickButtonOpenFlyer()
-                .getPdfText("https://dev.swisscows.com/docs/Medienerziehung_2020_06_EN.pdf");
+                .getPdfText(ProjectConstants.DOMAIN + "/docs/Medienerziehung_2020_06_EN.pdf");
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertTrue(pdfContent.contains("Digital" + "\n" + "media education"));
 
@@ -63,11 +69,11 @@ public class MediaEducationTest extends BaseTest {
 
     @Test
     public void testH2TextsMediaEducationPage(){
-        List<String> expectedH1Texts = List.of(
+        final List<String> expectedH1Texts = List.of(
                 "We attach great importance to family-friendly Internet content!",
                 "A safe Internet for our children - how children can learn to use digital media"
         );
-        List<String> actualH1Texts = openBaseURL()
+        final List<String> actualH1Texts = openBaseURL()
                 .scrollToFooterMenu()
                 .clickMediaEducationFooterMenu()
                 .getH2Texts();
@@ -78,14 +84,14 @@ public class MediaEducationTest extends BaseTest {
     }
     @Test
     public void testLinksColorsMediaEducationPage() {
-        List<String> expectedLinksColors = List.of(
+        final List<String> expectedLinksColors = List.of(
                 "rgba(223, 93, 93, 1)",
                 "rgba(223, 93, 93, 1)",
                 "rgba(255, 255, 255, 1)"
 
 
         );
-        List<String> actualLinksColors = openBaseURL()
+        final List<String> actualLinksColors = openBaseURL()
                 .scrollToFooterMenu()
                 .clickMediaEducationFooterMenu()
                 .getColorLinks();

@@ -7,6 +7,7 @@ import pages.MainPage;
 import pages.TestData;
 import pages.top_menu.EmailPage;
 import pages.top_menu.VpnPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class EmailTest extends BaseTest {
 
     @Test
     public void testEmailLogoNavigatesToBaseURL() {
-        final String expectedURL = "https://dev.swisscows.com/en";
+        final String expectedURL = ProjectConstants.DOMAIN + "/en";
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
         MainPage mainPage = openBaseURL();
@@ -159,7 +160,7 @@ public class EmailTest extends BaseTest {
         final String actualUrl = getExternalPageURL();
         final String actualTitle = new MainPage(getDriver()).getTitle();
 
-        Assert.assertEquals(actualUrl,"https://swisscows.email/en/help/");
+        Assert.assertEquals(actualUrl,"https://support.swisscows.com/swisscows-email/");
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 
