@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
+import pages.accounts.LoginPage;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
@@ -17,7 +18,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
-    @FindBy(xpath = "//div[@class='images-results']//figure")
+    @FindBy(xpath = "//div[@class='images-results']//figure[1]")
     private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2FirstImage;
@@ -99,6 +100,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         refreshPage();
         return new ImagePage(getDriver());
     }
+
     public ImagePage scrollToLastImage() throws InterruptedException {
         scrollByVisibleElement(lastImage);
         sleep(1000);

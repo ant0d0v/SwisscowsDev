@@ -377,7 +377,6 @@ public class ImageTest extends BaseTest {
 
             }
 
-
         }
 
 }

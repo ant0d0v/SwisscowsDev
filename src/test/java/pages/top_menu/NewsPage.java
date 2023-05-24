@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -53,7 +54,6 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return new NewsPage(getDriver());
     }
     public String getTitleNews()  {
-
         return getText(h2News);
     }
     public List<String> getTitleH2Texts()  {
@@ -97,19 +97,19 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return new NewsPage(getDriver());
     }
     public NewsPage clickThirdPagePagination() {
-
         click(thirdPagePagination);
-
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=20");
         return new NewsPage(getDriver());
     }
     public NewsPage clickPreviousPagePagination() {
         click(previousPagePagination);
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE");
 
         return new NewsPage(getDriver());
     }
     public NewsPage clickNextPagePagination() {
         click(nextPagePagination);
-
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=10");
         return new NewsPage(getDriver());
     }
 
