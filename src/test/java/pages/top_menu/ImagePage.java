@@ -18,7 +18,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
-    @FindBy(xpath = "//div[@class='images-results']//figure[1]")
+    @FindBy(xpath = "//figure[1]")
     private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2FirstImage;
@@ -56,7 +56,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
-    @FindBy(xpath = "//div[@class ='filters-button']")
+    @FindBy(xpath = "//div[@class ='filters-button']//*[name() = 'svg']")
     private WebElement filterButton;
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
@@ -81,7 +81,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstImageInImagesResult() {
-        click(firstImageInImagesResult);
+        click20(firstImageInImagesResult);
         return this;
 
     }
@@ -169,7 +169,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFilterButton_ImagePage() {
-        clickByJavaScript(filterButton);
+        click20(filterButton);
 
         return new ImagePage(getDriver());
     }
@@ -192,11 +192,11 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public void clickNextButton() {
-
+        wait10ElementToBeVisible(nextButtonInAds);
         clickElementUntilInvisible(nextButtonInAds);
     }
     public void clickPrevButton() {
-
+        wait10ElementToBeVisible(nextButtonInAds);
         clickElementUntilInvisible(prevButtonInAds);
     }
 

@@ -131,7 +131,7 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         final String actualTitleImage = openBaseURL()
@@ -142,6 +142,7 @@ public class ImageTest extends BaseTest {
                 .clickFilterButton_ImagePage()
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
+                .waitForLoaderIsDisappeared()
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
 
@@ -155,12 +156,12 @@ public class ImageTest extends BaseTest {
     public void testNextButtonAndPrevButtonAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("crocs price")
-                .waitUntilVisibilityWebResult()
-                .clickImageButton()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("crocs price")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
                 .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=crocs+price&region=de-DE");
         imagePage
                 .clickNextButton();
