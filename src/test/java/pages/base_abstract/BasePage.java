@@ -454,12 +454,7 @@ public abstract class BasePage {
     }
 
     public void waitForElementIsDisappeared(WebElement element) {
-        getWait20().until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public String getClassAttribute(WebElement element) {
-
-        return getAttribute(element, "class");
+        getWait10().until(ExpectedConditions.visibilityOf(element));
     }
 
     public void switchToExternalPage() {

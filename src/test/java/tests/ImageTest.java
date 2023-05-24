@@ -57,12 +57,12 @@ public class ImageTest extends BaseTest {
     }
     @Test
     public void testScrollToNextPage_ImagePage() throws InterruptedException {
-        ImagePage imagePage =new ImagePage(getDriver());
+        ImagePage imagePage = new ImagePage(getDriver());
         final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .getLinksAllImages();
 
         final List<String> newSize = imagePage
@@ -131,14 +131,14 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualUrl,newUrl);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         final String actualTitleImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("photo")
+                .inputSearchCriteriaAndEnter("color")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickFilterButton_ImagePage()
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
@@ -147,7 +147,7 @@ public class ImageTest extends BaseTest {
 
         Assert.assertTrue(actualTitleImage.contains("Red"));
         Assert.assertEquals(imagePage.getCurrentURL(),
-                ProjectConstants.DOMAIN +"/en/images?query=photo&color=Red");
+                ProjectConstants.DOMAIN +"/en/images?query=color&color=Red");
     }
 
 
@@ -155,12 +155,12 @@ public class ImageTest extends BaseTest {
     public void testNextButtonAndPrevButtonAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("crocs price")
-                .waitUntilVisibilityWebResult()
-                .clickImageButton()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("crocs price")
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
                 .waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=crocs+price&region=de-DE");
         imagePage
                 .clickNextButton();
@@ -255,7 +255,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
        imagePage
@@ -273,7 +273,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -295,7 +295,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -318,7 +318,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -339,7 +339,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitForLoaderIsDisappeared()
+                    .waitForLoaderToBeVisible()
                     .clickHamburgerMenuIcon()
                     .signIn();
             imagePage
@@ -361,7 +361,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitForLoaderIsDisappeared()
+                    .waitForLoaderToBeVisible()
                     .clickHamburgerMenuIcon()
                     .signIn();
 
