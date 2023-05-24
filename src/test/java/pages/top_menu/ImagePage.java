@@ -1,14 +1,10 @@
 package pages.top_menu;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.MainPage;
-import pages.accounts.LoginPage;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
@@ -18,7 +14,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
-    @FindBy(xpath = "//figure[1]")
+    @FindBy(xpath = "//figure//img[1]")
     private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2FirstImage;
@@ -81,7 +77,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstImageInImagesResult() {
-        click20(firstImageInImagesResult);
+        clickByJavaScript(firstImageInImagesResult);
         return this;
 
     }
@@ -149,12 +145,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
-    public ImagePage waitForLoaderIsDisappeared (){
-        waitForElementIsDisappeared(loader);
-        return this;
-    }
-    public ImagePage waitForLoaderIsInvisible (){
-        wait10ElementToBeInVisible(loader);
+    public ImagePage waitForLoaderToBeVisible(){
+        wait10ElementToBeVisible(loader);
         return this;
     }
     public ImagePage waitForImageIsVisible(){
@@ -196,14 +188,14 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         clickElementUntilInvisible(nextButtonInAds);
     }
     public void clickPrevButton() {
-        wait10ElementToBeVisible(nextButtonInAds);
+        wait10ElementToBeVisible(prevButtonInAds);
         clickElementUntilInvisible(prevButtonInAds);
     }
 
     public ImagePage clickRedColorInDropdownColors() {
         wait10ElementToBeVisible(dropdownLisOfColor);
         click(redInDropdownColor);
-        waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=photo&color=Red");
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=color&color=Red");
         return new ImagePage(getDriver());
     }
     public boolean lastImageInAdsIsDisplayed() {

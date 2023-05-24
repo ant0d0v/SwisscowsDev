@@ -57,12 +57,12 @@ public class ImageTest extends BaseTest {
     }
     @Test
     public void testScrollToNextPage_ImagePage() throws InterruptedException {
-        ImagePage imagePage =new ImagePage(getDriver());
+        ImagePage imagePage = new ImagePage(getDriver());
         final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .getLinksAllImages();
 
         final List<String> newSize = imagePage
@@ -135,20 +135,19 @@ public class ImageTest extends BaseTest {
     public void testFilterSearch_ImagePage() throws InterruptedException {
         ImagePage imagePage = new ImagePage(getDriver());
         final String actualTitleImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("photo")
+                .inputSearchCriteriaAndEnter("color")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickFilterButton_ImagePage()
                 .clickColorButton()
                 .clickRedColorInDropdownColors()
-                .waitForLoaderIsDisappeared()
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
 
         Assert.assertTrue(actualTitleImage.contains("Red"));
         Assert.assertEquals(imagePage.getCurrentURL(),
-                ProjectConstants.DOMAIN +"/en/images?query=photo&color=Red");
+                ProjectConstants.DOMAIN +"/en/images?query=color&color=Red");
     }
 
 
@@ -256,7 +255,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
        imagePage
@@ -274,7 +273,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -296,7 +295,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -319,7 +318,7 @@ public class ImageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitForLoaderIsDisappeared()
+                .waitForLoaderToBeVisible()
                 .clickHamburgerMenu()
                 .signIn();
         imagePage
@@ -340,7 +339,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitForLoaderIsDisappeared()
+                    .waitForLoaderToBeVisible()
                     .clickHamburgerMenuIcon()
                     .signIn();
             imagePage
@@ -362,7 +361,7 @@ public class ImageTest extends BaseTest {
                     .inputSearchCriteriaAndEnter("ronaldo")
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitForLoaderIsDisappeared()
+                    .waitForLoaderToBeVisible()
                     .clickHamburgerMenuIcon()
                     .signIn();
 
