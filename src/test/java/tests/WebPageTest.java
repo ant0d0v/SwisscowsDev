@@ -427,7 +427,7 @@ public class WebPageTest extends BaseTest {
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=chat+jpg&freshness=Year");
         webPage
                 .clickFilterButtonWeb()
-                .waitUntilLoaderToBeInvisible();
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=chat+jpg");
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
         Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/web?query=chat+jpg");
@@ -574,7 +574,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
 
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testOpenAnyLinkInWebResult_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 

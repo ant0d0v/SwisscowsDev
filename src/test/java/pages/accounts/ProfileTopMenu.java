@@ -59,7 +59,7 @@ public abstract class ProfileTopMenu<Generic> extends TopMenuPage<Generic> {
 
         return new LoginPage(getDriver());
     }
-
+    @Override
     public LoginPage signIn() {
         clickSignInMenu()
                 .clickClearInputRegularUserEmail()

@@ -17,11 +17,11 @@ public class NewsTest extends BaseTest {
 
         MainPage mainPage = openBaseURL();
         openBaseURL()
-                .inputSearchCriteriaAndEnter(query)
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .clickSearchFieldHeader();
@@ -46,11 +46,11 @@ public class NewsTest extends BaseTest {
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
         final String expectedFontSizeTitle501Error = "40px";
         final String actualTitle501Error = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .clickHamburgerMenu()
@@ -70,11 +70,11 @@ public class NewsTest extends BaseTest {
         NewsPage newsPage = new NewsPage(getDriver());
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .getCurrentURL();
@@ -90,11 +90,11 @@ public class NewsTest extends BaseTest {
         NewsPage newsPage = new NewsPage (getDriver());
 
         final String oldTextFirstNews = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("Ivanka")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .getTitleNews();
@@ -115,11 +115,11 @@ public class NewsTest extends BaseTest {
     public void testImageProxy_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         final List<String> actualSrc = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
                 .getSrsOfImages();
@@ -133,16 +133,18 @@ public class NewsTest extends BaseTest {
     public void testAnyNumberInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
          openBaseURL()
-                 .inputSearchCriteriaAndEnter("news")
-                 .waitUntilVisibilityWebResult()
                  .clickHamburgerMenu()
                  .clickRegionTopMenu()
                  .clickRegionGerman()
+                 .inputSearchCriteriaAndEnter("ronaldo")
+                 .waitUntilVisibilityWebResult()
                  .clickNewsButton();
-        final String oldTitle = newsPage.getTitleNews();
+        final String oldTitle = newsPage
+                .waitUntilVisibilityNewsResult()
+                .getTitleNews();
         final String newTitle = newsPage
                 .clickThirdPagePagination()
-                .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityNewsResult()
                 .getTitleNews();
 
         final String actualAttribute = newsPage
@@ -156,16 +158,16 @@ public class NewsTest extends BaseTest {
     public void testNextButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("news")
-                .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
+                .waitUntilVisibilityNewsResult()
                 .clickNextPagePagination();
 
         final String actualAttribute = newsPage
-                .waitUntilLoaderToBeInvisible()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
@@ -176,25 +178,26 @@ public class NewsTest extends BaseTest {
     @Test
     public void testPreviousButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("news")
-                .waitUntilVisibilityWebResult()
+        final String oldTitle = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
+                .inputSearchCriteriaAndEnter("ronaldo")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
+                .waitUntilVisibilityNewsResult()
                 .clickNextPagePagination()
-                .clickPreviousPagePagination()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=news&region=de-DE");
+                .getTitleNews();
 
-        final String oldTitle = newsPage.getTitleNews();
         final String newTitle = newsPage
+                .clickPreviousPagePagination()
                 .waitUntilVisibilityNewsResult()
                 .getTitleNews();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
         Assert.assertEquals(newsPage.getTitleH2Texts().size(),10);
-        Assert.assertEquals(oldTitle,newTitle);
+        Assert.assertNotEquals(oldTitle,newTitle);
+        Assert.assertEquals(newsPage.getCurrentURL(),ProjectConstants.DOMAIN+"/en/news?query=ronaldo&region=de-DE&offset=0");
 
     }
 
