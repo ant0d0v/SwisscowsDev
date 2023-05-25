@@ -151,8 +151,8 @@ public class MusicTest extends BaseTest {
                 .signIn()
                 .clickFavoriteIcon()
                 .getFirstTrackAttribute();
-        final String expectedValueFirstTrackInFavorite =
-                musicPage
+
+        final String expectedValueFirstTrackInFavorite = musicPage
                         .clickFavoritePlaylist()
                         .getFirstTrackAttribute();
 

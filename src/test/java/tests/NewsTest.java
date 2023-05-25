@@ -132,16 +132,16 @@ public class NewsTest extends BaseTest {
     @Test
     public void testAnyNumberInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
-         openBaseURL()
+        final String oldTitle = openBaseURL()
                  .clickHamburgerMenu()
                  .clickRegionTopMenu()
                  .clickRegionGerman()
                  .inputSearchCriteriaAndEnter("ronaldo")
                  .waitUntilVisibilityWebResult()
-                 .clickNewsButton();
-        final String oldTitle = newsPage
-                .waitUntilVisibilityNewsResult()
-                .getTitleNews();
+                 .clickNewsButton()
+                 .waitUntilVisibilityNewsResult()
+                 .getTitleNews();
+
         final String newTitle = newsPage
                 .clickThirdPagePagination()
                 .waitUntilVisibilityNewsResult()
@@ -157,7 +157,7 @@ public class NewsTest extends BaseTest {
     @Test
     public void testNextButtonInPaging_NewsPage() {
         NewsPage newsPage = new NewsPage (getDriver());
-        openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
@@ -165,9 +165,7 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
-                .clickNextPagePagination();
-
-        final String actualAttribute = newsPage
+                .clickNextPagePagination()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
