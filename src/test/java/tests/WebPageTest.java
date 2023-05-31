@@ -572,7 +572,6 @@ public class WebPageTest extends BaseTest {
                 .getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
-
     }
     @Test
     public void testOpenAnyLinkInWebResult_WebPage() {
