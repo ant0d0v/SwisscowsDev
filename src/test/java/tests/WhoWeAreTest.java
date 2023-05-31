@@ -13,9 +13,9 @@ public class WhoWeAreTest extends BaseTest {
 
     @Test
     public void testH1text() {
-        final String expectedH1Text = "The search engine without tracking – Swisscows";
-
         MainPage mainPage = openBaseURL();
+
+        final String expectedH1Text = "The search engine without tracking – Swisscows";
 
         final String oldUrl = mainPage.getCurrentURL();
 
