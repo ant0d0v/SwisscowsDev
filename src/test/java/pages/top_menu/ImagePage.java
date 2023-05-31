@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
+import pages.accounts.LoginPage;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
@@ -58,6 +60,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement relatedSearchesImage;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
     private WebElement secondQueryInRelatedSearchContainer;
+    @FindBy(xpath = "//header//button[@type = 'button']")
+    private WebElement hamburgerTopMenu;
 
     @FindBy(xpath = "//div[@class='three-bounce']")
     private WebElement loader;
@@ -219,5 +223,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         new ImagePage(getDriver());
 
     }
+
 
 }

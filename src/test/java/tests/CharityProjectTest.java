@@ -42,7 +42,8 @@ public class CharityProjectTest extends BaseTest {
                     .scrollToWhereToH2Header()
                     .clickAllLinks(index);
 
-            final String actualURL = mainPage.getCurrentURL();
+            final String actualURL = mainPage
+                    .getCurrentURL();
 
             Assert.assertNotEquals(oldURL, actualURL);
             Assert.assertEquals(actualURL, expectedURL);
