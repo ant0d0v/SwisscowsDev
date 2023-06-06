@@ -27,7 +27,6 @@
             <class name="tests.PrivacyPolicyTest"/>
             <class name="tests.ImprintTest"/>
             <class name="tests.AutobahnTest"/>
-
         </classes>
     </test>
 </suite>
