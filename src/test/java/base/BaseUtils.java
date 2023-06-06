@@ -15,35 +15,27 @@ import java.time.Duration;
 import java.util.Properties;
 
 public final class BaseUtils {
+    private static final String ENV_CHROME_OPTIONS = "CHROME_OPTIONS";
+
+    private static final String ENV_APP_OPTIONS = "APP_OPTIONS";
 
     static final String PREFIX_PROP = "default.";
-    private static final String ENV_CHROME_OPTIONS = "CHROME_OPTIONS";
+
     private static final String PROP_CHROME_OPTIONS = PREFIX_PROP + ENV_CHROME_OPTIONS.toLowerCase();
-    private static final ChromeOptions chromeOptions;
+
     private static Properties properties;
-
-    static {
-        initProperties();
-
-        chromeOptions = new ChromeOptions();
-
-        String options = properties.getProperty(PROP_CHROME_OPTIONS);
-        if (options != null) {
-            for (String argument : options.split(";")) {
-                chromeOptions.addArguments(argument);
-                chromeOptions.addArguments("--no-sandbox");
-                chromeOptions.addArguments("--remote-allow-origins=*");
-            }
-        }
-
-        WebDriverManager.chromedriver().setup();
-    }
-
     private static void initProperties() {
         if (properties == null) {
             properties = new Properties();
             if (isServerRun()) {
                 properties.setProperty(PROP_CHROME_OPTIONS, System.getenv(ENV_CHROME_OPTIONS));
+
+                if (System.getenv(ENV_APP_OPTIONS) != null) {
+                    for (String option : System.getenv(ENV_APP_OPTIONS).split(";")) {
+                        String[] optionArr = option.split("=");
+                        properties.setProperty(PREFIX_PROP + optionArr[0], optionArr[1]);
+                    }
+                }
             } else {
                 try {
                     InputStream inputStream = BaseUtils.class.getClassLoader().getResourceAsStream("local.properties");
@@ -59,6 +51,23 @@ public final class BaseUtils {
         }
     }
 
+    private static final ChromeOptions chromeOptions;
+
+    static {
+        initProperties();
+
+        chromeOptions = new ChromeOptions();
+        String options = properties.getProperty(PROP_CHROME_OPTIONS);
+        if (options != null) {
+            for (String argument : options.split(";")) {
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                chromeOptions.addArguments(argument);
+            }
+        }
+
+        WebDriverManager.chromedriver().setup();
+    }
+
     static Properties getProperties() {
         return properties;
     }
@@ -68,10 +77,16 @@ public final class BaseUtils {
     }
 
     static WebDriver createDriver() {
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        return new ChromeDriver(chromeOptions);
+    }
 
-        return driver;
+    public static void log(String str) {
+        System.out.println(str);
+    }
+
+    public static void logf(String str, Object... arr) {
+        System.out.printf(str, arr);
+        System.out.println();
     }
     static void captureScreenFile(WebDriver driver, String methodName, String className) {
         TakesScreenshot ts = (TakesScreenshot) driver;
@@ -82,8 +97,5 @@ public final class BaseUtils {
             e.printStackTrace();
         }
     }
-    public static void logf(String str, Object... arr) {
-        System.out.printf(str, arr);
-        System.out.println();
-    }
+
 }
