@@ -117,12 +117,11 @@ public class MainTest extends BaseTest {
     public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
 
-        MainPage mainPage = openBaseURL();
-
-        mainPage
+        openBaseURL()
                 .inputSearchCriteria(query)
                 .clickSearchButton()
                 .waitUntilVisibilityWebResult();
+
         Assert.assertEquals(getExternalPageURL(),ProjectConstants.DOMAIN + "/en/web?query=test");
 
     }
@@ -256,10 +255,8 @@ public class MainTest extends BaseTest {
     @Test
     public void testPopupIsDysplaed() {
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .waitForPopupGoogleInstallToBeVisible();
-
 
         Assert.assertTrue(mainPage.isPopupGoogleDisplayed());
         Assert.assertEquals(mainPage.getTextPopupInstall(),"Install Swisscows\n" + "at Google Chrome\n"
@@ -273,8 +270,7 @@ public class MainTest extends BaseTest {
 
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
 
-        MainPage mainPage = openBaseURL();
-        mainPage
+        openBaseURL()
                 .waitForPopupGoogleInstallToBeVisible()
                 .clickPopupGoogle()
                 .switchToAnotherWindow();
@@ -296,7 +292,7 @@ public class MainTest extends BaseTest {
 
         );
         final List<String> actualH2Texts = openBaseURL()
-                .getH2TextsMainPage();
+                .getH2Texts();
 
         Assert.assertTrue(actualH2Texts.size() > 0);
 
@@ -353,12 +349,10 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testAdaptiveHomePageHasLogo() {
-        MainPage mainPage =  openBaseURL();
-
-        mainPage
+        MainPage mainPage =  openBaseURL()
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU);
 
-        Assert.assertTrue(new MainPage(getDriver()).isHomePageLogoDisplayed());
+        Assert.assertTrue(mainPage.isHomePageLogoDisplayed());
         Assert.assertTrue(mainPage.allImagesDisplayed());
 
 

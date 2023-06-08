@@ -137,14 +137,25 @@ public class TestData {
 
         };
     }
-    @DataProvider(name = "EmailLinksData")
-    public static Object[][] EmailLinksTestDataProvider () {
+    @DataProvider(name = "LinksOfPriceContainersData")
+    public static Object[][] EmailLinksOfPriceContainersTestDataProvider() {
 
         return new Object[][] {
-                {0, "Login - Swisscows Accounts", "uthorize%3Fresponse_typ"},
-                {1, "Login - Swisscows Accounts","swisscows-email-standar"},
-                {2, "Login - Swisscows Accounts","swisscows-email-premium"},
+                {0, "Login - Swisscows Accounts", "swisscows-email-standar"},
+                {1, "Login - Swisscows Accounts","swisscows-email-premium"},
+                {2, "Login - Swisscows Accounts","uthorize%3Fresponse_typ"},
+                {3, "Login - Swisscows Accounts","swisscows-email-standar"},
+                {4, "Login - Swisscows Accounts","swisscows-email-premium"}
 
+        };
+    }
+    @DataProvider(name = "LinksOfEmailPageData")
+    public static Object[][] LinksOfEmailPageTestDataProvider() {
+
+        return new Object[][] {
+                {0, "Register - Swisscows Accounts", "Register"},
+                {1, "Login - Swisscows Accounts","Login"},
+                {2, "Swisscows Support (Page 1)",""},
 
         };
     }
