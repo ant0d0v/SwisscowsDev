@@ -92,6 +92,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement LangDropDownIcon;
     @FindBy(xpath = "//ul[@class ='menu-dropdown-list']//li[2]")
     private WebElement langGermany;
+    @FindBy(xpath = "//h1")
+    private WebElement textH1;
 
     @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
     private WebElement RegionDropDownIcon;
@@ -261,11 +263,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return allLinksOnPage;
     }
-    public List<WebElement> getEmailLinks() {
-
-        return allLinksOnEmailPage;
-    }
-
 
     public MainPage waitTopMenuToBeInvisible(){
         wait10ElementToBeInVisible(topMenuContainer);
@@ -321,12 +318,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
-    public void clickAllLinksOnEmailPage(int index) {
-        click(getEmailLinks().get(index));
-        switchToAnotherWindow();
-
-    }
-
     public void setOriginalHandle() {
 
         getDriver().getWindowHandle();
@@ -407,6 +398,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List <String> getH2Texts() {
 
         return getTexts(textsH2);
+    }
+    public String getH1Text() {
+
+        return getText(textH1);
     }
     public List <String> getAnswersTexts() {
 

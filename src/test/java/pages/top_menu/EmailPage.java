@@ -1,10 +1,8 @@
 package pages.top_menu;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 import java.util.List;
 
@@ -16,13 +14,9 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     @FindBy(xpath = "//div[@class='popup popup-install']//a[@class='button']")
     private WebElement InstallWebAppLink;
     @FindBy(xpath = "//div[@class='static-content']//a[@class='button outline']")
-    private List<WebElement> allLinksOnEmailPage;
-    @FindBy(xpath = "//a[@href='https://support.swisscows.com/swisscows-email/']")
-    private WebElement supportButton;
-    @FindBy(xpath = "//div[@class='content']//a[@href='https://accounts.swisscows.com/register']")
-    private WebElement StartForFreeLink;
-    @FindBy(xpath = "//div[@class='content']//a[@href='https://swisscows.email/mbox/index.php/login/oauth']")
-    private WebElement loginLink;
+    private List<WebElement> allLinksOfPriceContainers;
+    @FindBy(xpath = "//div[@class='content']//a")
+    private List<WebElement> linksOfEmailPage;
     public EmailPage(WebDriver driver) {
         super(driver);
     }
@@ -45,17 +39,21 @@ public class EmailPage extends TopMenuPage<EmailPage> {
         return this;
 
     }
-    public EmailPage clickSupportButton() {
-        click(supportButton);
-        return new  EmailPage(getDriver());
+    public void clickAllLinksOfPriceContainers(int index) {
+        click(getLinksOfPriceContainers().get(index));
+        switchToAnotherWindow();
     }
-    public EmailPage clickStartForFreeLink() {
-        click(StartForFreeLink);
-        return new  EmailPage(getDriver());
+    public void clickLinksOfEmailPage(int index) {
+        click(getLinksOfEmailPage().get(index));
+        switchToAnotherWindow();
     }
-    public EmailPage clickLoginLink() {
-        click(loginLink);
-        return new  EmailPage(getDriver());
+    public List<WebElement> getLinksOfPriceContainers() {
+
+        return allLinksOfPriceContainers;
+    }
+    public List<WebElement> getLinksOfEmailPage() {
+
+        return linksOfEmailPage;
     }
 
     public EmailPage scrollToWhereToInstallEmail() {
@@ -67,11 +65,11 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
     public List<String> getButtonColorsWhenHover() throws InterruptedException {
 
-        return  getBackgroundHoverColorsOfElements(allLinksOnEmailPage);
+        return  getBackgroundHoverColorsOfElements(allLinksOfPriceContainers);
     }
     public List<String> getButtonColors() throws InterruptedException {
 
-        return  getBackgroundColorsOfElements(allLinksOnEmailPage);
+        return  getBackgroundColorsOfElements(allLinksOfPriceContainers);
     }
     public List<String> getButtonsStartAndInstallColorsWhenHover() throws InterruptedException {
 
