@@ -42,6 +42,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
     public void clickAllLinksOfPriceContainers(int index) {
         click(getLinksOfPriceContainers().get(index));
         switchToAnotherWindow();
+        waitForUrlContains("https://accounts.swisscows.com/login?ReturnUrl");
     }
     public void clickLinksOfEmailPage(int index) {
         click(getLinksOfEmailPage().get(index));
