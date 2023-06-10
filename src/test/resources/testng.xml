@@ -11,7 +11,7 @@
 <!--            <class name="tests.WebPageTest"/>-->
 <!--            <class name="tests.NewsTest"/>-->
 <!--            <class name="tests.ImageTest"/>-->
-<!--            <class name="tests.VideoTest"/>-->
+            <class name="tests.VideoTest"/>
             <class name="tests.MusicTest"/>
 <!--            <class name="tests.WhoWeAreTest"/>-->
 <!--            <class name="tests.MediaEducationTest"/>-->

@@ -361,10 +361,6 @@ public abstract class BasePage {
     protected void scrollByVisibleElementActions(WebElement element) {
         getActions().moveToElement(element).perform();
     }
-    protected void scroll() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("window.scrollBy(0,6000)");
-    }
 
     protected void goBack() {
 
