@@ -12,7 +12,29 @@ import java.util.List;
 public class MusicTest extends BaseTest {
 
     @Test(retryAnalyzer = Retry.class)
-    public void testPlayMusic() throws InterruptedException {
+    public void testPlayTrack(){
+        MusicPage musicPage = new MusicPage(getDriver());
+
+        final String actualAttribute = openBaseURL()
+                .inputSearchCriteriaAndEnter("Popular")
+                .waitUntilVisibilityWebResult()
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult()
+                .clickPlayButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .getPlayButtonAttribute();
+
+        final String actualDuration = musicPage.getVolumeDurationFirstTrack();
+
+
+        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
+        Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
+        Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
+
+    }
+
+    @Test(retryAnalyzer = Retry.class)
+    public void testClickPauseOfTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Popular")
@@ -20,31 +42,18 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .getPlayButtonAttribute();
-
-        final String actualDuration = musicPage.getVolumeDuration();
-
-        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
-        Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
-        Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
-    }
-
-    @Test(retryAnalyzer = Retry.class)
-    public void testPauseMusic() throws InterruptedException {
-        final String actualAttribute = openBaseURL()
-                .inputSearchCriteriaAndEnter("Popular")
-                .waitUntilVisibilityWebResult()
-                .clickMusicButton()
-                .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
                 .clickPauseButton()
                 .getPlayButtonAttribute();
 
+        final String actualDuration = musicPage.getVolumeDurationFirstTrack();
+
         Assert.assertEquals(actualAttribute, "/images/icons.svg#play");
+        Assert.assertEquals(actualDuration,"0:03");
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testSkipToNextSong() throws InterruptedException {
+    public void testSwitchToNextTrack() {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Skofka")
@@ -52,43 +61,54 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .clickForwardButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .clickNextButton()
+                .waitUntilTimeOfSecondTrackToBeChanged("0:03")
                 .getNextTrackAttribute();
 
+        final String actualDuration = musicPage.getVolumeDurationSecondTrack();
 
         Assert.assertNotEquals(actualAttribute, musicPage.getPreviousTrackAttribute());
-        Assert.assertNotEquals(actualAttribute,musicPage.getPreviousTrackAttribute());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
+        Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testSkipToPreviousSong() throws InterruptedException {
+        public void testSwitchToPreviousTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
-        final String actualAttribute = openBaseURL()
+        final String actualAttributeNextTrack = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .clickForwardButton()
-                .clickBackButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:01")
+                .clickNextButton()
+                .waitUntilTimeOfSecondTrackToBeChanged("0:01")
+                .getNextTrackAttribute();
+
+        final String actualAttributePrevTrack = musicPage
+                .clickPreviousButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .getPreviousTrackAttribute();
 
 
-        Assert.assertNotEquals(actualAttribute, musicPage.getNextTrackAttribute());
-        Assert.assertNotEquals(actualAttribute,musicPage.getNextTrackAttribute());
-        Assert.assertTrue(actualAttribute.contains("item item--audio active"));
+        Assert.assertEquals(actualAttributeNextTrack, actualAttributePrevTrack);
+        Assert.assertNotEquals(actualAttributePrevTrack,musicPage.getNextTrackAttribute());
+        Assert.assertTrue(actualAttributePrevTrack.contains("item item--audio active"));
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testSetTimeInPlayer() throws InterruptedException {
+    public void testSetTimeInPlayer(){
         final String actualTime = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .clickToProgressbar()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .setTimeOfProgressbar()
+                .waitUntilTimeOfFirstTrackToBeChanged("1:50")
                 .getVolumeInProgressbarAttribute();
 
         Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
@@ -119,7 +139,7 @@ public class MusicTest extends BaseTest {
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testShuffleFunctionInPlayer() throws InterruptedException {
+    public void testShuffleFunctionInPlayer() {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -127,20 +147,21 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
                 .clickShuffleButton()
                 .getShuffleButtonAttribute();
 
         Assert.assertTrue(actualAttribute.contains("button shuffle active"));
 
         musicPage
-                .clickForwardButton()
+                .clickNextButton()
                 .getNextTrackAttribute();
 
         Assert.assertFalse(actualAttribute.contains("item item--audio active"));
     }
 
     @Test(priority = 1,retryAnalyzer = Retry.class)
-    public void testAddTrackInTheFavorite() throws InterruptedException {
+    public void testAddTrackInTheFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualValueFirstTrack = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -163,7 +184,7 @@ public class MusicTest extends BaseTest {
     }
 
     @Test(priority = 2,retryAnalyzer = Retry.class)
-    public void tesPlayTrackInTheFavorite() throws InterruptedException {
+    public void tesPlayTrackInTheFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
@@ -176,9 +197,10 @@ public class MusicTest extends BaseTest {
         final String actualAttribute = musicPage
                 .clickFavoritePlaylist()
                 .clickPlayButton()
+                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
                 .getPreviousTrackAttribute();
 
-        final String actualDuration = musicPage.getVolumeDuration();
+        final String actualDuration = musicPage.getVolumeDurationFirstTrack();
 
         Assert.assertTrue(musicPage.playButtonsIsDisplayed());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
@@ -215,23 +237,21 @@ public class MusicTest extends BaseTest {
     }
 
     @Test(priority = 3,retryAnalyzer = Retry.class)
-    public void testDeleteTrackFromFavorite() throws InterruptedException {
+    public void testDeleteTrackFromFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
-        openBaseURL()
+        final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickHamburgerMenu()
-                .signIn();
-
-        final String oldUrl = musicPage.getCurrentURL();
+                .signIn()
+                .getCurrentURL();
 
         final String actualH2Title = musicPage
                 .clickFavoritePlaylist()
                 .clickFavoriteIconInPlaylist()
                 .getErrorTitleInFavoritePlaylist();
-
 
         final String newUrl = musicPage.getCurrentURL();
 
@@ -243,21 +263,25 @@ public class MusicTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        final List<String> actualTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickHamburgerMenu()
-                .signIn()
+                .signIn();
+        final List<String> actualTracks = musicPage
+                .waitUntilVisibilityAudioResult()
                 .clickOnAllHeart()
+                .scrollToFavoritePlaylist()
                 .clickFavoritePlaylist()
                 .getTitleAllTracks();
 
         Assert.assertEquals(actualTracks.size(), 20);
         musicPage
                 .clickOnAllActiveHeart()
-                .clickSearchButton();
+                .clickMusicButton()
+                .waitUntilVisibilityAudioResult();
 
         Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         Assert.assertEquals(musicPage.getFavoriteAttribute(), "button favorite");
@@ -267,15 +291,12 @@ public class MusicTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
         MainPage mainPage = new MainPage(getDriver());
-        final String query = "ivanka";
 
-        openBaseURL()
-                .inputSearchCriteriaAndEnter(query)
+        final List<String> actualSuggestion = openBaseURL()
+                .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
-                .clickSearchFieldHeader();
-
-        final List<String> actualSuggestion = mainPage
+                .clickSearchFieldHeader()
                 .waitForSuggestToBeVisible()
                 .getAllElementsText();
 
@@ -286,20 +307,19 @@ public class MusicTest extends BaseTest {
         for (String searchCriteria : actualSuggestion) {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
-            Assert.assertTrue(searchCriteria.contains(query));
+            Assert.assertTrue(searchCriteria.contains("ivanka"));
         }
     }
     @Test(retryAnalyzer = Retry.class)
-    public void testScrollToNextPage() throws InterruptedException {
-        MusicPage musicPage= new MusicPage(getDriver());
-        openBaseURL()
+    public void testScrollToNextPage() {
+
+        final List<String> actualTracks = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .scrollToLastTrack();
-        ;
-        final List<String> actualTracks = musicPage.getTitleAllTracks();
+                .scrollToLastTrack()
+                .getTitleAllTracks();
 
         Assert.assertTrue(actualTracks.size()>= 29);
 

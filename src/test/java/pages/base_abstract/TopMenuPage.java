@@ -157,7 +157,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement searchFieldHeader;
     @FindBy(xpath = "//div[@class='three-bounce']//div[1]")
     private WebElement loader;
-    @FindBy(xpath = "//button[@class='button favorite']")
+    @FindBy(xpath = "//button[@class='button favorite']/*[name() ='svg']")
     private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//div[@class ='filters-button']//*[name() = 'svg']")
     private WebElement filterButton;
@@ -456,7 +456,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new ImagePage(getDriver());
     }
     public String getErrorTitleInFavoritePlaylist()  {
-
+        wait10ElementToBeVisible(h2TitleErrorInFavorite);
         return getText(h2TitleErrorInFavorite);
     }
     public NewsPage clickNewsButton() {
@@ -489,9 +489,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(choiceInDropdownMenu);
 
     }
-    public void clickSearchFieldHeader() {
+    public MainPage clickSearchFieldHeader() {
         click(searchFieldHeader);
-        new WebPage(getDriver());
+        return new MainPage(getDriver());
     }
     public MainPage clickHeartIcon() {
         click(heartIcon);

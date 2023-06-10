@@ -1,10 +1,8 @@
 package pages.top_menu;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
@@ -26,13 +24,16 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     @FindBy(xpath = "//article[2]")
     private WebElement nextTrackAttributes;
     @FindBy(xpath = "//article[20]")
-    private WebElement lastTrack;
+    private WebElement last20Track;
+    @FindBy(xpath = "//article[29]")
+    private WebElement last29Track;
     @FindBy(xpath = "//article[1]/div[1]/span[1]")
-    private WebElement durationAttribute;
-
+    private WebElement durationAttributeOfFirstTrack;
+    @FindBy(xpath = "//div//article[2]//div//span[1]")
+    private WebElement durationAttributeOfSecondTrack;
     @FindBy(xpath = "//article[1]")
     private WebElement previousTrackAttribute;
-    @FindBy(xpath = "//div[@class = 'timeline']")
+    @FindBy(xpath = "//article[1]//div[@class = 'timeline']//div[@class = 'progress-bar']//div")
     private WebElement progressbar;
     @FindBy(xpath = "//button[@class = 'button shuffle']")
     private WebElement shuffleButton;
@@ -77,10 +78,16 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
 
-    public MusicPage clickPlayButton() throws InterruptedException {
+    public MusicPage clickPlayButton(){
         click(firstPlayButton);
-        sleep(4000);
-
+        return new MusicPage(getDriver());
+    }
+    public MusicPage waitUntilTimeOfFirstTrackToBeChanged(String expectedTime){
+        getWait10().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstTrack, expectedTime));
+        return new MusicPage(getDriver());
+    }
+    public MusicPage waitUntilTimeOfSecondTrackToBeChanged(String expectedTime){
+        getWait10().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfSecondTrack, expectedTime));
         return new MusicPage(getDriver());
     }
     public MusicPage clickPauseButton() {
@@ -93,11 +100,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(shuffleButton);
         return new MusicPage(getDriver());
     }
-    public MusicPage clickForwardButton() {
+    public MusicPage clickNextButton() {
         click(skipButton);
         return new MusicPage(getDriver());
     }
-    public MusicPage clickBackButton() {
+    public MusicPage clickPreviousButton() {
         click(previousButton);
         return new MusicPage(getDriver());
     }
@@ -107,21 +114,36 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     }
 
     public List <String> getTitleAllTracks()  {
+        for (WebElement element : allTracks){
+            wait10ElementToBeVisible(element);
+        }
         return getTexts(allTracks);
     }
 
 
-    public MusicPage clickToProgressbar() {
-        click(progressbar);
+    public MusicPage setTimeOfProgressbar() {
+        int progressBarWidth = progressbar.getSize().getWidth();
+        int progressBarX = progressbar.getLocation().getX();
+
+        int middlePosition = progressBarX + (progressBarWidth / 2);
+        getActions().moveToElement(progressbar, middlePosition, 0).build().perform();
+
+        getActions().click().build().perform();
+
         return new MusicPage(getDriver());
     }
-    public MusicPage scrollToLastTrack() throws InterruptedException {
-        scrollByVisibleElement(lastTrack);
-        sleep(1000);
+    public MusicPage scrollToLastTrack(){
+        scrollByVisibleElement(last20Track);
+        wait10ElementToBeVisible(last29Track);
+        scrollByVisibleElement(last29Track);
+        return new MusicPage(getDriver());
+    }
+    public MusicPage scrollToFavoritePlaylist(){
+        scrollByVisibleElementActions(favoriteContainer);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {
-        click(favoriteContainer);
+        click20(favoriteContainer);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/music/my?query=");
         return new MusicPage(getDriver());
     }
@@ -132,7 +154,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     }
 
     public String getPlayButtonAttribute() {
-
         return getAttribute(playButtonAttribute, "xlink:href");
     }
     public String getShuffleButtonAttribute() {
@@ -155,12 +176,16 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getAttribute(progressbarFirsTrack, "style");
     }
-    public String getFirstTrackAttribute() throws InterruptedException {
+    public String getFirstTrackAttribute() {
         return getAttribute( valueFirstImage, "src");
     }
-    public String getVolumeDuration()  {
+    public String getVolumeDurationFirstTrack()  {
 
-        return getText(durationAttribute);
+        return getText(durationAttributeOfFirstTrack);
+    }
+    public String getVolumeDurationSecondTrack()  {
+
+        return getText(durationAttributeOfSecondTrack);
     }
 
     public String getFontSizeErrorTitleInFavoritePlaylist()  {
