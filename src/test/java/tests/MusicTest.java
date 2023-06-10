@@ -322,8 +322,6 @@ public class MusicTest extends BaseTest {
                 .getTitleAllTracks();
 
         Assert.assertTrue(actualTracks.size()>= 29);
-
-
     }
     @Test(retryAnalyzer = Retry.class)
     public void testRegionalSearch_MusicPage() {
