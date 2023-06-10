@@ -106,9 +106,9 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .setTimeOfProgressbar()
-                .waitUntilTimeOfFirstTrackToBeChanged("1:50")
+                .waitUntilTimeOfFirstTrackToBeChanged("1:52")
                 .getVolumeInProgressbarAttribute();
 
         Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
@@ -147,7 +147,7 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
-                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .waitUntilTimeOfFirstTrackToBeChanged("0:02")
                 .clickShuffleButton()
                 .getShuffleButtonAttribute();
 
@@ -197,7 +197,7 @@ public class MusicTest extends BaseTest {
         final String actualAttribute = musicPage
                 .clickFavoritePlaylist()
                 .clickPlayButton()
-                .waitUntilTimeOfFirstTrackToBeChanged("0:03")
+                .waitUntilTimeOfFirstTrackToBeChanged("0:02")
                 .getPreviousTrackAttribute();
 
         final String actualDuration = musicPage.getVolumeDurationFirstTrack();
