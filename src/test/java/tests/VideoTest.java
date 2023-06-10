@@ -59,7 +59,7 @@ public class VideoTest extends BaseTest {
 
     }
     @Test
-    public void testScrollToNextPage_VideoPage() throws InterruptedException {
+    public void testScrollToNextPage_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
         final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
@@ -115,24 +115,25 @@ public class VideoTest extends BaseTest {
             Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
         }
     }
-    @Test
-    public void testPlayVideo_VideoPage() throws InterruptedException, IOException {
+    @Test public void testPlayVideo_VideoPage() throws IOException {
         VideoPage videoPage = new VideoPage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("плакала")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
                 .clickFirstVideoResult()
                 .clickPlayerYouTubeVideo()
+                .waitUntilTimeOfFirstVideoToBeChanged("0:02")
                 .screen("youtube.png");
+
         final String actualSrc = videoPage.getVideoImageAttribute();
 
         Assert.assertTrue(actualSrc.contains("youtube.com"));
 
     }
     @Test
-    public void testImageProxy_VideoPage() throws InterruptedException, IOException {
+    public void testImageProxy_VideoPage() throws  IOException {
         VideoPage videoPage = new VideoPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
@@ -141,6 +142,7 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityVideoResult()
                 .clickFirstVideoResult()
                 .clickPlayerYouTubeVideo()
+                .waitUntilTimeOfFirstVideoToBeChanged("0:02")
                 .screen("proxy.png");
         final String actualSrc = videoPage.getProxyImageAttribute();
 

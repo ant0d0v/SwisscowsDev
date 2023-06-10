@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import pages.footer_menu.MediaEducationPage;
 
@@ -27,6 +28,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement videoPlayerYouTubeButtonOk;
     @FindBy(xpath = "//article//h2[1]")
     private WebElement firstVideoResult;
+    @FindBy(xpath = "//iframe")
+    private WebElement iframe;
     @FindBy(xpath = "//div[@class='video-player']//iframe")
     private WebElement imageAttribute;
     @FindBy(xpath = "//div[@class='video-player']//img")
@@ -37,6 +40,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement durationAttribute;
     @FindBy(xpath = "//div[@class][3]//ul//li[2]")
     private WebElement shortButtonInDropdownDuration;
+    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[20]")
+    private WebElement last20Video;
+    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[29]")
+    private WebElement last29Video;
+    @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]")
+    private WebElement durationAttributeOfFirstVideo;
     @FindBy(xpath = "//article[@class ='item-video']//figure//span")
     private List<WebElement> listDurationAllVideo;
     public VideoPage(WebDriver driver) {
@@ -68,11 +77,15 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);
     }
-    public VideoPage clickPlayerYouTubeVideo() throws InterruptedException {
+    public VideoPage waitUntilTimeOfFirstVideoToBeChanged(String expectedTime) {
+        getWait10().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
+        getWait20().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstVideo, expectedTime));
+        getDriver().switchTo().defaultContent();
+        return new VideoPage(getDriver());
+    }
+    public VideoPage clickPlayerYouTubeVideo(){
         wait10ElementToBeVisible(videoPlayerYouTube);
-
         clickByJavaScript(videoPlayerYouTubeButtonOk);
-        sleep(7000);
         return  this;
     }
     public VideoPage clickFirstVideoResult() {
@@ -87,9 +100,10 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         click(shortButtonInDropdownDuration);
         return new VideoPage(getDriver());
     }
-    public VideoPage scrollToLastVideo() throws InterruptedException {
-        scroll();
-        sleep(1000);
+    public VideoPage scrollToLastVideo() {
+        scrollByVisibleElement(last20Video);
+        wait10ElementToBeVisible(last29Video);
+        scrollByVisibleElement(last29Video);
         return new VideoPage(getDriver());
     }
     public String getVideoImageAttribute() {
