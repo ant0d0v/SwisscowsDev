@@ -12,7 +12,7 @@
 <!--            <class name="tests.NewsTest"/>-->
 <!--            <class name="tests.ImageTest"/>-->
 <!--            <class name="tests.VideoTest"/>-->
-<!--            <class name="tests.MusicTest"/>-->
+            <class name="tests.MusicTest"/>
 <!--            <class name="tests.WhoWeAreTest"/>-->
 <!--            <class name="tests.MediaEducationTest"/>-->
 <!--            <class name="tests.CharityProjectTest"/>-->
@@ -20,7 +20,7 @@
 <!--            <class name="tests.ContactUsTest"/>-->
 <!--            <class name="tests.VpnPageTest"/>-->
 <!--            <class name="tests.VpnInstructionsTest"/>-->
-            <class name="tests.EmailTest"/>
+<!--            <class name="tests.EmailTest"/>-->
 <!--            <class name="tests.SetAsStartTest"/>-->
 <!--            <class name="tests.MakeDefaultSearchTest"/>-->
 <!--            <class name="tests.DonationTest"/>-->

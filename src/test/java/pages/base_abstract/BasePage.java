@@ -230,7 +230,7 @@ public abstract class BasePage {
             if (element.isEnabled() && element.isDisplayed()) {
                 wait10ElementToBeVisible(element);
                 wait10ElementToBeClickable(element);
-                clickByJavaScript(element);
+                click20(element);
             } else {
                 Reporter.log("Element " + element + " is not visible or not clickable ", true);
             }
@@ -357,6 +357,9 @@ public abstract class BasePage {
     protected void scrollByVisibleElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
+    }
+    protected void scrollByVisibleElementActions(WebElement element) {
+        getActions().moveToElement(element).perform();
     }
     protected void scroll() {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
