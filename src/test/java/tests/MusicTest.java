@@ -108,7 +108,6 @@ public class MusicTest extends BaseTest {
                 .clickPlayButton()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .setTimeOfProgressbar()
-                .waitUntilTimeOfFirstTrackToBeChanged("1:52")
                 .getVolumeInProgressbarAttribute();
 
         Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
@@ -211,28 +210,27 @@ public class MusicTest extends BaseTest {
     public void testLocalization_MusicPage() {
 
         MusicPage musicPage =new MusicPage(getDriver());
-        openBaseURL()
+        final String oldURL = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
-                .waitUntilVisibilityAudioResult();
+                .waitUntilVisibilityAudioResult()
+                .getCurrentURL();
 
-        final String oldURL = musicPage.getCurrentURL();
-        final String oldText = musicPage.getTitlePlaylist();
+        final String oldTitle = musicPage.getTitle();
 
-        musicPage
-                .clickHamburgerMenu()
-                .clickLanguagesTopMenu()
-                .clickLangDeutsch();
+        final String actualURL = musicPage
+                .selectDeutschLocalisation()
+                .waitUntilVisibilityAudioResult()
+                .getCurrentURL();
 
-        final String actualURL = musicPage.getCurrentURL();
-        final String actualText = musicPage.getTitlePlaylist();
+        final String actualTitle = musicPage.getTitle();;
 
 
         Assert.assertNotEquals(oldURL, actualURL);
-        Assert.assertNotEquals(oldText, actualText);
+        Assert.assertNotEquals(oldTitle, actualTitle);
         Assert.assertEquals(actualURL, ProjectConstants.DOMAIN + "/de/music?query=ivanka");
-        Assert.assertEquals(actualText,"Musik");
+        Assert.assertEquals(actualTitle,"ivanka in Musik suchen - Swisscows");
 
     }
 

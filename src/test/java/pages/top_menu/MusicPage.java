@@ -192,10 +192,13 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
         return getFontSize(h2TitleErrorInFavorite);
     }
-    public String getTitlePlaylist()  {
-
-        return getText(h2TitleInFavorite);
+    public MusicPage selectDeutschLocalisation(){
+                 clickHamburgerMenu();
+                 clickLanguagesTopMenu();
+                 clickLangDeutsch();
+        return new MusicPage(getDriver());
     }
+
     public boolean favoriteIsDisplayed() {
         return isElementDisplayed(favoriteContainer);
 
