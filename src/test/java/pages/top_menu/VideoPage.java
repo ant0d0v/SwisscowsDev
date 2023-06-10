@@ -77,7 +77,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);
     }
-    public VideoPage waitUntilTimeOfFirstVideoToBeChanged(String expectedTime) throws InterruptedException {
+    public VideoPage waitUntilTimeOfFirstVideoToBeChanged(String expectedTime) {
         getWait10().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
         getWait20().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstVideo, expectedTime));
         getDriver().switchTo().defaultContent();

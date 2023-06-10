@@ -115,7 +115,7 @@ public class VideoTest extends BaseTest {
             Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
         }
     }
-    @Test public void testPlayVideo_VideoPage() throws InterruptedException, IOException {
+    @Test public void testPlayVideo_VideoPage() throws IOException {
         VideoPage videoPage = new VideoPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("плакала")
@@ -133,7 +133,7 @@ public class VideoTest extends BaseTest {
 
     }
     @Test
-    public void testImageProxy_VideoPage() throws InterruptedException, IOException {
+    public void testImageProxy_VideoPage() throws  IOException {
         VideoPage videoPage = new VideoPage(getDriver());
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
