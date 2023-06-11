@@ -329,9 +329,7 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
+                .selectDeutschRegion()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=ivanka&region=");
 
         final String actualRegion = musicPage.getCurrentURL();

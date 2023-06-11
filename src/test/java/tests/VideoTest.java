@@ -45,13 +45,13 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=");
+                .selectGermanyRegion()
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=de-DE");
 
         final String actualRegion = videoPage.getCurrentURL();
-        final String titleAllVideo = videoPage.getTitleFirstVideo();
+        final String titleAllVideo = videoPage
+                .waitUntilVisibilityVideoResult()
+                .getTitleFirstVideo();
 
 
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=de-DE");
@@ -161,10 +161,9 @@ public class VideoTest extends BaseTest {
                 .clickDurationButton();
         Assert.assertEquals(videoPage.getDurationButtonAttribute(),"button-menu open");
 
-        videoPage
+        final List<String> durationAllVideo = videoPage
                 .clickShortInDropdownDuration()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
-        final List<String> durationAllVideo = videoPage.getListDurationAllVideo();
+                .getListDurationAllVideo();
 
 
         for (String search : durationAllVideo) {
@@ -175,23 +174,19 @@ public class VideoTest extends BaseTest {
     @Test
     public void testCancelFilterSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
-         openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
-                .waitUntilVisibilityWebResult()
-                .clickVideoButton()
-                .waitUntilVisibilityVideoResult()
+        final String oldUrl = openBaseURL()
+                 .inputSearchCriteriaAndEnter("ivanka")
+                 .waitUntilVisibilityWebResult()
+                 .clickVideoButton()
+                 .waitUntilVisibilityVideoResult()
+                 .clickFilterButton()
+                 .clickDurationButton()
+                 .clickShortInDropdownDuration()
+                 .getCurrentURL();
+
+        final String newUrl = videoPage
                 .clickFilterButton()
-                .clickDurationButton()
-                .clickShortInDropdownDuration()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
-
-
-        final String oldUrl = videoPage.getCurrentURL();
-        videoPage
-                .clickFilterButton()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka");
-
-        final String newUrl = videoPage.getCurrentURL();
+                .getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,ProjectConstants.DOMAIN + "/en/video?query=ivanka");
@@ -204,10 +199,9 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=");
+                .selectGermanyRegion()
+                .waitUntilToBeVisiblyListRelatedSearches()
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
 
         final List<String> oldTextsColorsWhenHover = videoPage.getTextColors();
         final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();

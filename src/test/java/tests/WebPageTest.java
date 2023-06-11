@@ -258,7 +258,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("flover")
                 .waitUntilVisibilityWebResult()
                 .clickMoreImagesInVideoWidget()
-                .waitForImageIsVisible();
+                .waitUtilToBeVisibleFifteenImages();
 
         Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=flover");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);

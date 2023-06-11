@@ -1,8 +1,6 @@
 package pages.top_menu;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
@@ -20,8 +18,11 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement h2FirstImage;
     @FindBy(xpath = "(//figure//a//img)[position() < 5]")
     private List<WebElement> AltAttributeAllImage;
-    @FindBy(xpath = "//figure[40]//img")
-    private WebElement lastImage;
+    @FindBy(xpath = "//figure[50]//img")
+    private WebElement last50Image;
+    @FindBy(xpath = "//figure[60]//img")
+    private WebElement last60Image;
+
     @FindBy(xpath = "//div[@class='button-menu color']")
     private WebElement colorButton;
     @FindBy(xpath = "//div[@class][3]//li[4]")
@@ -63,8 +64,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement loader;
     @FindBy(xpath = "//ul[@class='popup menu']")
     private WebElement dropdownLisOfColor;
-    @FindBy(xpath = "(//div[@class='images-results']//figure//img)[position() < 5]")
-    private List<WebElement> allImages;
+    @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<15]")
+    private List<WebElement> fifteenImages;
     @FindBy(xpath = "//a[@class ='item favorite']")
     private WebElement favoriteItem;
 
@@ -77,7 +78,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstImageInImagesResult() {
-        clickByJavaScript(firstImageInImagesResult);
+        click20(firstImageInImagesResult);
         return this;
 
     }
@@ -96,10 +97,15 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         refreshPage();
         return new ImagePage(getDriver());
     }
+    public ImagePage choiceRegionGermany(){
+        selectGermanyRegion();
+        return new ImagePage(getDriver());
+    }
 
-    public ImagePage scrollToLastImage() throws InterruptedException {
-        scrollByVisibleElement(lastImage);
-        sleep(1000);
+    public ImagePage scrollToLastImage(){
+        scrollByVisibleElementActions(last50Image);
+        wait10ElementToBeVisible(last60Image);
+        scrollByVisibleElement(last60Image);
         return new ImagePage(getDriver());
     }
     public List <String> getLinksAllImages()  {
@@ -108,6 +114,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
 
     public String getTitleFirstImage()  {
+        wait10ElementToBeVisible(h2FirstImage);
         return getText(h2FirstImage);
     }
     public List<String> getAltAllImages() {
@@ -125,8 +132,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ArrayList<>();
     }
-    public String getTitleInRelatedSearchesImages() throws InterruptedException {
-        sleep(1000);
+    public String getTitleInRelatedSearchesImages() {
+        wait10ElementToBeVisible(relatedSearchesImage);
         return getText(relatedSearchesImage);
     }
     public String getAttributeFirstImage() {
@@ -145,23 +152,23 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
-    public ImagePage waitForLoaderToBeVisible(){
-        wait10ElementToBeVisible(loader);
+    public ImagePage waitForLoaderToBeInVisible(){
+        wait10ElementToBeInVisible(loader);
         return this;
     }
-    public ImagePage waitForImageIsVisible(){
-        for (WebElement image : allImages) {
-            wait20ElementToBeVisible(image);
+    public ImagePage waitUtilToBeVisibleFifteenImages(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        for (WebElement image : fifteenImages) {
+            wait20ElementToBeVisibleJsExecutor(jsExecutor,image);
         }
         return this;
     }
-    public ImagePage clickColorButton() throws InterruptedException {
+    public ImagePage clickColorButton(){
         click(colorButton);
-        sleep(1000);
         return new ImagePage(getDriver());
     }
-    public ImagePage clickFilterButton_ImagePage() {
-        click20(filterButton);
+    public ImagePage clickFilterButton() {
+        clickFilterButtonWeb();
 
         return new ImagePage(getDriver());
     }
@@ -179,7 +186,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
-        clickByJavaScript(secondQueryInRelatedSearchContainer);
+        click20(secondQueryInRelatedSearchContainer);
         waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=Ronaldo%");
         return new ImagePage(getDriver());
     }
@@ -193,8 +200,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     }
 
     public ImagePage clickRedColorInDropdownColors() {
-        wait10ElementToBeVisible(dropdownLisOfColor);
-        click(redInDropdownColor);
+        click20(redInDropdownColor);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=color&color=Red");
         return new ImagePage(getDriver());
     }
@@ -208,16 +214,26 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return isElementDisplayed(firstImageInAds);
 
     }
+    public ImagePage waitUntilToBeVisibleFavoriteItem(){
+        wait10ElementToBeVisible(favoriteItem);
+        return new ImagePage(getDriver());
+    }
+    public ImagePage choiceDeutschLocalisation(){
+        selectDeutschLocalisation();
+        return new ImagePage(getDriver());
+    }
     public boolean favoriteItemIsDisplayed() {
-        getDriver().navigate().refresh();
         return isElementDisplayed(favoriteItem);
 
     }
-    public void favoriteItemOnPage() {
-        getDriver().navigate().refresh();
-        getDriver().findElement(By.xpath("//a[@class ='item favorite']"));
-        new ImagePage(getDriver());
-
+    public boolean isFavoriteItemIsPresent() {
+        try {
+            getDriver().navigate().refresh();
+            getDriver().findElement(By.xpath("//a[@class ='item favorite']"));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
 }

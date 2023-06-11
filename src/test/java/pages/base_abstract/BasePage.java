@@ -410,6 +410,10 @@ public abstract class BasePage {
     public void waitForUrlContains(String text) {
         getWait10().until(ExpectedConditions.urlContains(text));
     }
+    protected void wait20ElementToBeVisibleJsExecutor(JavascriptExecutor jsExecutor, WebElement element) {
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});", element);
+        jsExecutor.executeScript("return (typeof arguments[0].offsetParent !== 'undefined' && arguments[0].offsetParent !== null)", element);
+    }
 
     protected void waitTextToBeChanged(WebElement element, String text) {
         getWait20().until(ExpectedConditions

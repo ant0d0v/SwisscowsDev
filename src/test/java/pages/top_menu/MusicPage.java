@@ -152,6 +152,10 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(favoriteIconInPlaylist);
         return new MusicPage(getDriver());
     }
+    public MusicPage selectDeutschRegion(){
+        selectGermanyRegion();
+        return new MusicPage(getDriver());
+    }
 
     public String getPlayButtonAttribute() {
         return getAttribute(playButtonAttribute, "xlink:href");
@@ -191,12 +195,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public String getFontSizeErrorTitleInFavoritePlaylist()  {
 
         return getFontSize(h2TitleErrorInFavorite);
-    }
-    public MusicPage selectDeutschLocalisation(){
-                 clickHamburgerMenu();
-                 clickLanguagesTopMenu();
-                 clickLangDeutsch();
-        return new MusicPage(getDriver());
     }
 
     public boolean favoriteIsDisplayed() {
