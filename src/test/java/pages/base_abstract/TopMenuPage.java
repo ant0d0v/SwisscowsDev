@@ -17,6 +17,7 @@ import pages.top_menu.*;
 import pages.top_menu.EmailPage;
 import pages.top_menu.VpnInstructionsPage;
 import pages.top_menu.VpnPage;
+import utils.ProjectConstants;
 
 
 import java.util.ArrayList;
@@ -269,6 +270,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
 
     }
+    public VideoPage selectGermanyRegion(){
+        clickHamburgerMenu();
+        clickRegionTopMenu();
+        clickRegionGerman();
+        return new VideoPage(getDriver());
+    }
+    public MusicPage selectDeutschLocalisation(){
+        clickHamburgerMenu();
+        clickLanguagesTopMenu();
+        clickLangDeutsch();
+        return new MusicPage(getDriver());
+    }
 
     public void clickTopMenu(int index) {
         List<WebElement> menus = new ArrayList<>();
@@ -452,7 +465,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public ImagePage clickImageButton() {
         clickEnter(imageButton);
-
+        return new ImagePage(getDriver());
+    }
+    public ImagePage waitUrlToBeChanged(String parametr){
+        waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new ImagePage(getDriver());
     }
     public String getErrorTitleInFavoritePlaylist()  {
@@ -464,14 +480,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new NewsPage(getDriver());
     }
-    public VideoPage clickFilterButton() {
-        click20(filterButton);
-
-        return new VideoPage(getDriver());
-    }
     public WebPage clickFilterButtonWeb() {
         click20(filterButton);
-
         return new WebPage(getDriver());
     }
     public NewsPage clickRegionBrazil() {

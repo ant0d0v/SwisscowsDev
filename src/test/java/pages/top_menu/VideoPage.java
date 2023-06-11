@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import pages.footer_menu.MediaEducationPage;
+import utils.ProjectConstants;
 
 import java.util.List;
 
@@ -71,7 +72,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return getTexts(h2AllVideo);
     }
     public String getTitleFirstVideo()  {
-
         return getText(h2FirstVideo);
     }
     public List <String> getTitleInRelatedSearches()  {
@@ -98,6 +98,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     public VideoPage clickShortInDropdownDuration() {
         click(shortButtonInDropdownDuration);
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
+        return new VideoPage(getDriver());
+    }
+    public VideoPage clickFilterButton() {
+        clickFilterButtonWeb();
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka");
         return new VideoPage(getDriver());
     }
     public VideoPage scrollToLastVideo() {
@@ -121,6 +127,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
 
         return  getHoverColorsOfElements(listRelatedSearches);
+    }
+    public VideoPage waitUntilToBeVisiblyListRelatedSearches(){
+        for (WebElement element : listRelatedSearches){
+            wait10ElementToBeVisible(element);
+        }
+        return new VideoPage(getDriver());
     }
     public List<String> getTextColors() throws InterruptedException {
 

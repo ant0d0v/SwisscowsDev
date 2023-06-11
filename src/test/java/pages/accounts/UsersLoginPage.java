@@ -44,7 +44,7 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
     }
 
     public void clickSubmitButton() {
-        click(submitButton);
+        clickEnter(submitButton);
     }
 
     public void signInAsRegularUser() {
