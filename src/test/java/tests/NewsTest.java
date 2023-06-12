@@ -15,8 +15,7 @@ public class NewsTest extends BaseTest {
     public void testSuggestEqualsSearchCriteria_NewsSearch() {
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
-        openBaseURL()
+        MainPage mainPage = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
@@ -45,6 +44,7 @@ public class NewsTest extends BaseTest {
         NewsPage newsPage = new NewsPage (getDriver());
         final String expectedTitle501Error = "Sorry, there are no search results for your region";
         final String expectedFontSizeTitle501Error = "40px";
+
         final String actualTitle501Error = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
@@ -53,9 +53,7 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionBrazil()
+                .selectRegionBrazil()
                 .waitUntilVisibilityErrorImage()
                 .getTitleNews();
 
@@ -101,7 +99,7 @@ public class NewsTest extends BaseTest {
         newsPage
                 .searchAfterClearSearchField("Ronaldo")
                 .clickSearchButton()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=Ronaldo&region=de-DE");
+                .waitUrlToBeChanged("/en/news?query=Ronaldo&region=de-DE");
 
         final String newTextFirstNews = newsPage
                 .waitUntilVisibilityNewsResult()
@@ -164,8 +162,13 @@ public class NewsTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickNewsButton()
+                .waitUntilUrlToBeChanged("/en/news?query=ronaldo&region=de-DE")
+                .waitUntilToBeInVisibleLoader()
                 .waitUntilVisibilityNewsResult()
                 .clickNextPagePagination()
+                .waitUntilUrlToBeChanged("/en/news?query=ronaldo&region=de-DE&offset=10")
+                .waitUntilToBeInVisibleLoader()
+                .waitUntilVisibilityNewsResult()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(newsPage.allImageIsDisplayed());
@@ -184,11 +187,20 @@ public class NewsTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickNewsButton()
                 .waitUntilVisibilityNewsResult()
+                .waitUntilUrlToBeChanged("/en/news?query=ronaldo&region=de-DE")
+                .waitUntilToBeInVisibleLoader()
+                .waitUntilVisibilityNewsResult()
                 .clickNextPagePagination()
+                .waitUntilUrlToBeChanged("/en/news?query=ronaldo&region=de-DE&offset=10")
+                .waitUntilToBeInVisibleLoader()
+                .waitUntilVisibilityNewsResult()
                 .getTitleNews();
 
         final String newTitle = newsPage
                 .clickPreviousPagePagination()
+                .waitUntilVisibilityNewsResult()
+                .waitUntilUrlToBeChanged("/en/news?query=ronaldo&region=de-DE&offset=0")
+                .waitUntilToBeInVisibleLoader()
                 .waitUntilVisibilityNewsResult()
                 .getTitleNews();
 

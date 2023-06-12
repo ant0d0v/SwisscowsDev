@@ -54,6 +54,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return new NewsPage(getDriver());
     }
     public String getTitleNews()  {
+        wait10ElementToBeVisible(h2News);
         return getText(h2News);
     }
     public List<String> getTitleH2Texts()  {
@@ -64,9 +65,10 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return  getFontSize(h2News);
 
     }
-    public NewsPage clickRegionBrazil() {
+    public NewsPage selectRegionBrazil() {
+        clickHamburgerMenu();
+        clickRegionTopMenu();
         click(regionBrazil);
-
         return new NewsPage(getDriver());
     }
     public NewsPage clickFirstPost() {
@@ -92,10 +94,6 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return getSrcOfElements(allImageNewsPage);
     }
-    public NewsPage waitUntilLoaderToBeInvisible(){
-        wait10ElementToBeInVisible(loader);
-        return new NewsPage(getDriver());
-    }
     public NewsPage clickThirdPagePagination() {
         click(thirdPagePagination);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=20");
@@ -108,7 +106,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return new NewsPage(getDriver());
     }
     public NewsPage clickNextPagePagination() {
-        click(nextPagePagination);
+        click20(nextPagePagination);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=10");
         return new NewsPage(getDriver());
     }
@@ -120,6 +118,14 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     public String getAttributeSecondButtonPagination() {
 
         return getAttribute(attributeSecondPagePagination,"class");
+    }
+    public NewsPage waitUntilToBeInVisibleLoader(){
+        waitForLoaderToBeInVisible();
+        return new NewsPage(getDriver());
+    }
+    public NewsPage waitUntilUrlToBeChanged(String parametr){
+        waitForUrlContains(ProjectConstants.DOMAIN +parametr);
+        return new  NewsPage(getDriver());
     }
 
 }
