@@ -378,6 +378,5 @@ public class ImageTest extends BaseTest {
 
             Assert.assertFalse(imagePage.isFavoriteItemIsPresent());
         }
-
 }
 
