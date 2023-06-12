@@ -230,7 +230,7 @@ public abstract class BasePage {
             if (element.isEnabled() && element.isDisplayed()) {
                 wait10ElementToBeVisible(element);
                 wait10ElementToBeClickable(element);
-                click20(element);
+                clickByJavaScript(element);
             } else {
                 Reporter.log("Element " + element + " is not visible or not clickable ", true);
             }

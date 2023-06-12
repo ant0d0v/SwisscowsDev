@@ -16,8 +16,7 @@ public class VideoTest extends BaseTest {
     public void testSuggestEqualsSearchCriteria_VideoSearch() {
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
-        openBaseURL()
+        MainPage mainPage = openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
@@ -200,10 +199,12 @@ public class VideoTest extends BaseTest {
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
                 .selectGermanyRegion()
-                .waitUntilToBeVisiblyListRelatedSearches()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
 
-        final List<String> oldTextsColorsWhenHover = videoPage.getTextColors();
+        final List<String> oldTextsColorsWhenHover = videoPage
+                .waitUtilLoaderToBeInVisible()
+                .waitUntilToBeVisiblyListRelatedSearches()
+                .getTextColors();
         final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();
 
         Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);

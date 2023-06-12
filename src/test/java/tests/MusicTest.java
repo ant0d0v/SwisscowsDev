@@ -258,7 +258,7 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -271,7 +271,6 @@ public class MusicTest extends BaseTest {
         final List<String> actualTracks = musicPage
                 .waitUntilVisibilityAudioResult()
                 .clickOnAllHeart()
-                .scrollToFavoritePlaylist()
                 .clickFavoritePlaylist()
                 .getTitleAllTracks();
 
