@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WebPage extends TopMenuPage<WebPage> {
@@ -207,14 +208,18 @@ public class WebPage extends TopMenuPage<WebPage> {
 
 
     public WebPage waitUntilToBeVisibleTitlesInWebResult(){
-        for(WebElement text : listWebResult){
-            wait10ElementToBeVisible(text);
-        }
+        getWait20().until(ExpectedConditions.visibilityOfAllElements(listWebResult));
         return new WebPage(getDriver());
     }
 
-    public List <String> getTitlesInWebResult()  {
-        return getTexts(listWebResult);
+    public List <String> getTitlesInWebResult() {
+        List<String> textList = new ArrayList<>();
+        for (WebElement element : listWebResult) {
+            if (element.isEnabled() && element.isDisplayed()) {
+                textList.add(element.getText());
+            }
+        }
+        return textList;
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
 
@@ -375,11 +380,15 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return isElementDisplayed(errorImage);
     }
-    public void screenshotIsDisplayedWebPage() {
-        getDriver().navigate().refresh();
-        getDriver().findElement(By.xpath("//div[@class ='screenshot fade in']"));
-        new WebPage(getDriver());
 
+    public boolean isScreenshotItemIsPresent() {
+        try {
+            getDriver().navigate().refresh();
+            getDriver().findElement(By.xpath("//div[@class ='screenshot fade in']"));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
     public boolean firstImageInVideoWidgetIsDisplayed() {
         wait10ElementToBeVisible(firstImageInVideoWidget);
