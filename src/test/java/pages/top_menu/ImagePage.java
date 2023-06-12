@@ -152,10 +152,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
-    public ImagePage waitForLoaderToBeInVisible(){
-        wait10ElementToBeInVisible(loader);
-        return this;
-    }
+
     public ImagePage waitUtilToBeVisibleFifteenImages(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         for (WebElement image : fifteenImages) {

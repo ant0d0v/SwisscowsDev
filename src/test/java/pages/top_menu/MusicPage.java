@@ -53,8 +53,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement valueFirstImage;
     @FindBy(xpath = "//div[@class='error']//h2[@class]")
     private WebElement h2TitleErrorInFavorite;
-    @FindBy(xpath = "//nav[@class='menu-summary']//li[4]/a")
-    private WebElement h2TitleInFavorite;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private WebElement favoriteIconInPlaylist;
     @FindBy(xpath = "//button[@class='button favorite active']")
@@ -136,10 +134,6 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         scrollByVisibleElement(last20Track);
         wait10ElementToBeVisible(last29Track);
         scrollByVisibleElement(last29Track);
-        return new MusicPage(getDriver());
-    }
-    public MusicPage scrollToFavoritePlaylist(){
-        scrollByVisibleElementActions(favoriteContainer);
         return new MusicPage(getDriver());
     }
     public MusicPage clickFavoritePlaylist() {

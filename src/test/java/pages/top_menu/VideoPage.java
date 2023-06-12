@@ -112,6 +112,10 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         scrollByVisibleElement(last29Video);
         return new VideoPage(getDriver());
     }
+    public VideoPage waitUtilLoaderToBeInVisible(){
+        waitForLoaderToBeInVisible();
+        return new VideoPage(getDriver());
+    }
     public String getVideoImageAttribute() {
 
         return getAttribute(imageAttribute, "src");

@@ -158,7 +158,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement searchFieldHeader;
     @FindBy(xpath = "//div[@class='three-bounce']//div[1]")
     private WebElement loader;
-    @FindBy(xpath = "//button[@class='button favorite']/*[name() ='svg']")
+    @FindBy(xpath = "//button[@class='button favorite']")
     private List<WebElement> allHeartButtons;
     @FindBy(xpath = "//div[@class ='filters-button']//*[name() = 'svg']")
     private WebElement filterButton;
@@ -206,6 +206,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         setWindowDimensions(width, height);
 
         return new MainPage(getDriver());
+    }
+    public ImagePage waitForLoaderToBeInVisible(){
+        wait10ElementToBeInVisible(loader);
+        return new ImagePage(getDriver());
     }
 
     public List<String> getLangMenuListTexts() {
