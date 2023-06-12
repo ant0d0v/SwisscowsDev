@@ -127,8 +127,11 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(footerSearchCopyright);
     }
-    public String getTitleH2Text()  {
+    public WebPage waitToBeVisibleTitleFirstSearchResult(){
         wait10ElementToBeVisible(h2Text);
+        return new WebPage(getDriver());
+    }
+    public String getTitleH2Text()  {
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {
