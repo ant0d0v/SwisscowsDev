@@ -22,6 +22,7 @@ public class CharityProjectTest extends BaseTest {
                 .getCurrentSrcOfVideo();
         charityProjectPage
                 .playVideoCharity()
+                .waitUntilTimeOfVideoToBeChanged(2000)
                 .pauseVideoCharity()
                 .screen("CharityProject.png");
 

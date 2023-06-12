@@ -25,6 +25,7 @@ public class OurDatacenterTest extends BaseTest {
                 .getCurrentSrcOfVideo();
         ourDatacenterPage
                 .playVideoDatacenter()
+                .waitUntilTimeOfVideoChanged(2000)
                 .pauseVideoDatacenter()
                 .screen("dataCentre.png");
 
@@ -43,6 +44,7 @@ public class OurDatacenterTest extends BaseTest {
                 .getCurrentSrcOfVideo();
         ourDatacenterPage
                 .playVideoDatacenter()
+                .waitUntilTimeOfVideoChanged(2000)
                 .pauseVideoDatacenter()
                 .screen("dataCentre.png");
 
