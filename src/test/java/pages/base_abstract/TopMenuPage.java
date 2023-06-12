@@ -314,8 +314,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
     public MainPage clickRegionGerman() {
-        click(RegionGerman);
-
+        click20(RegionGerman);
         return new MainPage(getDriver());
     }
     public MainPage clickGermanyLang() {
@@ -381,7 +380,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public MainPage clickRegionTopMenu() {
-        click(RegionDropDownIcon);
+        click20(RegionDropDownIcon);
 
         return new MainPage(getDriver());
     }
