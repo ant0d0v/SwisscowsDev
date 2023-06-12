@@ -206,11 +206,14 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
 
 
-
-    public List <String> getTitleInWebResult()  {
+    public WebPage waitUntilToBeVisibleTitlesInWebResult(){
         for(WebElement text : listWebResult){
             wait10ElementToBeVisible(text);
         }
+        return new WebPage(getDriver());
+    }
+
+    public List <String> getTitlesInWebResult()  {
         return getTexts(listWebResult);
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {

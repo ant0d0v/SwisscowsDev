@@ -153,11 +153,11 @@ public class WebPageTest extends BaseTest {
         final List<String> oldSearchResult = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
-                .getTitleInWebResult();
+                .getTitlesInWebResult();
 
         final List<String> newSearchResult = webPage
                 .clickFirstTitleInRelatedSearches()
-                .getTitleInWebResult();
+                .getTitlesInWebResult();
 
         Assert.assertNotEquals(oldSearchResult, newSearchResult);
 
@@ -183,9 +183,9 @@ public class WebPageTest extends BaseTest {
         final List<String> titles = openBaseURL()
                 .inputSearchCriteriaAndEnter("ukraine")
                 .waitUntilVisibilityWebResult()
-                .getTitleInWebResult();
+                .getTitlesInWebResult();
 
-        final int actualSize = webPage.getTitleInWebResult().size();
+        final int actualSize = webPage.getTitlesInWebResult().size();
 
         Assert.assertTrue(actualSize >= 5);
         for (String searchCriteria : titles) {
@@ -372,7 +372,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .getAttributeSecondButtonPagination();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
+        Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
         Assert.assertEquals(actualAttribute,"number active");
 
@@ -380,14 +380,11 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
-        final String oldTitle = openBaseURL()
+        final String actualTitleFirstSearchResult = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
-                .getTitleH2Text();
-
-        final String firstPageTitle = webPage
                 .clickNextPagePagination_WebPage()
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=10")
                 .waitUntilLoaderToBeInvisible()
@@ -399,7 +396,7 @@ public class WebPageTest extends BaseTest {
                 .getTitleH2Text();
 
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
-        Assert.assertEquals(oldTitle,firstPageTitle);
+        Assert.assertEquals(actualTitleFirstSearchResult,"Cristiano Ronaldo - Wikipedia");
 
 
     }
@@ -423,7 +420,7 @@ public class WebPageTest extends BaseTest {
                 .getTitleH2Text();
 
         Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=winner&freshness=Year")));
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
+        Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
         Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),"winner in Web search - Swisscows");
 
@@ -445,8 +442,8 @@ public class WebPageTest extends BaseTest {
                 .clickFilterButtonWeb()
                 .waitUntilUrlToBeChanged( "/en/web?query=chat+jpg")
                 .waitUntilLoaderToBeInvisible()
-                .scrollToFooterSearchPages()
-                .getTitleInWebResult();
+                .waitUntilToBeVisibleTitlesInWebResult()
+                .getTitlesInWebResult();
 
         Assert.assertTrue(actualListTitleInWebResult.size() >= 5);
         Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/web?query=chat+jpg");
