@@ -8,7 +8,7 @@
 <!--            <class name="tests.TopMenuTest"/>-->
 <!--            <class name="tests.FooterMenuTest"/>-->
           <!--  <class name="tests.MainTest"/>-->
-            <class name="tests.WebPageTest"/>
+<!--            <class name="tests.WebPageTest"/>-->
 <!--            <class name="tests.NewsTest"/>-->
 <!--            <class name="tests.ImageTest"/>-->
 <!--            <class name="tests.VideoTest"/>-->
@@ -26,7 +26,7 @@
 <!--            <class name="tests.DonationTest"/>-->
 <!--            <class name="tests.PrivacyPolicyTest"/>-->
 <!--            <class name="tests.ImprintTest"/>-->
-<!--            <class name="tests.AutobahnTest"/>-->
+            <class name="tests.AutobahnTest"/>
         </classes>
     </test>
 </suite>

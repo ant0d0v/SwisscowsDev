@@ -569,9 +569,7 @@ public class WebPageTest extends BaseTest {
         final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter("price")
                 .waitUntilVisibilityWebResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
+                .choiceGermanyRegion()
                 .getCurrentURL();
 
         final String newUrl = webPage
