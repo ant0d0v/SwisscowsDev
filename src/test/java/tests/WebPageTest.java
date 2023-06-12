@@ -13,17 +13,16 @@ import java.util.List;
 public class WebPageTest extends BaseTest {
     @Test
     public void testSuggestEqualsSearchCriteria_WebSearch() {
+        MainPage mainPage = new MainPage(getDriver());
         final String query = "ivanka";
 
-        MainPage mainPage = openBaseURL();
-        openBaseURL()
+        final List<String> actualSuggestion = openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
-                .clickSearchFieldHeader();
-
-        final List<String> actualSuggestion = mainPage
+                .clickSearchFieldHeader()
                 .waitForSuggestToBeVisible()
                 .getAllElementsText();
+
         final int actualSizeSuggest = mainPage.countElementsInSuggestContainer();
 
         Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
@@ -47,6 +46,7 @@ public class WebPageTest extends BaseTest {
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
                 .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
+                .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
 
@@ -66,6 +66,7 @@ public class WebPageTest extends BaseTest {
 
         final String actualTitle404Error =openBaseURL()
                 .inputSearchCriteriaAndEnter("porn")
+                .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
 
@@ -198,17 +199,17 @@ public class WebPageTest extends BaseTest {
     public void testNextButtonAndPrevButtonVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo video")
+                .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilVisibilityWebResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo+video&region=de-DE");
-        webPage
+                .choiceGermanyRegion()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=de-DE")
+                .waitUntilLoaderToBeInvisible()
                 .clickNextButtonVideoWidget();
+
         Assert.assertTrue(webPage.lastImageInVideoWidgetIsDisplayed());
-        webPage
-                .clickPrevButtonVideoWidget();
+
+        webPage.clickPrevButtonVideoWidget();
+
         Assert.assertTrue(webPage.firstImageInVideoWidgetIsDisplayed());
 
     }
@@ -235,12 +236,12 @@ public class WebPageTest extends BaseTest {
         final String expectedTitle = "Your private and anonymous search engine Swisscows";
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo youtube")
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube")
+                .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityWebResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo+youtube&region=");
-        webPage
+                .choiceGermanyRegion()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=")
+                .waitUntilLoaderToBeInvisible()
                 .clickFirstVideoInVideoWidget()
                 .waitIUntilVisiblyVideoPlayer();
 
@@ -339,19 +340,20 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testAnyNumberInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
+        final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilVisibilityWebResult();
-        final String oldTitle = webPage.getTitleH2Text();
-
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo")
+                .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityWebResult()
+                .getTitleH2Text();
 
         final String newTitle = webPage
                 .clickThirdPagePagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=20")
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
-        final String actualAttribute = webPage
-                .getAttributeThirdButtonPagination();
+        final String actualAttribute = webPage.getAttributeThirdButtonPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(actualAttribute,"number active");
@@ -360,13 +362,13 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testNextButtonInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
+        final String actualAttribute = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickNextPagePagination_WebPage()
-                .waitUntilLoaderToBeInvisible();
-
-        final String actualAttribute = webPage
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=10")
+                .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityWebResult()
                 .getAttributeSecondButtonPagination();
 
         Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
@@ -377,19 +379,28 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
+        final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilVisibilityWebResult()
-                .clickNextPagePagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo")
                 .waitUntilLoaderToBeInvisible()
-                .clickPreviousPagePagination_WebPage()
-                .waitUntilLoaderToBeInvisible();
+                .getTitleH2Text();
 
-        final String oldTitle = webPage.getTitleH2Text();
-        final String newTitle = webPage.getTitleH2Text();
+        final String newTitle = webPage
+                .clickNextPagePagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=10")
+                .waitUntilLoaderToBeInvisible()
+                .getTitleH2Text();
+
+        final String firstPageTitle = webPage
+                .clickPreviousPagePagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=0")
+                .waitUntilLoaderToBeInvisible()
+                .getTitleH2Text();
 
         Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
-        Assert.assertEquals(oldTitle,newTitle);
+        Assert.assertEquals(oldTitle,firstPageTitle);
+        Assert.assertNotEquals(oldTitle,newTitle);
+
 
     }
     @Test
@@ -397,13 +408,15 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("winner")
-                .waitUntilVisibilityWebResult()
+                .waitUntilUrlToBeChanged("/en/web?query=winner")
+                .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
         final String newTitle = webPage
                 .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
+                .waitUntilUrlToBeChanged("/en/web?query=winner&freshness=Year")
                 .waitUntilLoaderToBeInvisible()
                 .getTitleH2Text();
 
@@ -418,18 +431,21 @@ public class WebPageTest extends BaseTest {
     public void testCancelFilter_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
-        openBaseURL()
+      final List<String> actualListTitleInWebResult = openBaseURL()
                 .inputSearchCriteriaAndEnter("chat jpg")
+                .waitUntilUrlToBeChanged("/en/web?query=chat+jpg")
+                .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityWebResult()
                 .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=chat+jpg&freshness=Year");
-        webPage
+                .waitUntilUrlToBeChanged( "/en/web?query=chat+jpg&freshness=Year")
                 .clickFilterButtonWeb()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=chat+jpg");
+                .waitUntilUrlToBeChanged( "/en/web?query=chat+jpg")
+                .waitUntilLoaderToBeInvisible()
+                .getTitleInWebResult();
 
-        Assert.assertTrue(webPage.getTitleInWebResult().size() >= 5);
+        Assert.assertTrue(actualListTitleInWebResult.size() >= 5);
         Assert.assertEquals(webPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/web?query=chat+jpg");
     }
     @Test(retryAnalyzer = Retry.class)
@@ -537,19 +553,15 @@ public class WebPageTest extends BaseTest {
     public void testAdvertising_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
-        openBaseURL()
+        final String actualAdsText = openBaseURL()
                 .inputSearchCriteriaAndEnter("price")
                 .waitUntilVisibilityWebResult()
-                .clickHamburgerMenu()
-                .clickRegionTopMenu()
-                .clickRegionGerman();
-
-        final String actualAdsText = webPage
+                .choiceGermanyRegion()
+                .waitUntilUrlToBeChanged("/en/web?query=price&region=de-DE")
                 .waitUntilLoaderToBeInvisible()
                 .getAdsText_WebPage();
-        final int actualSizes = webPage
-                .getAdsList().size();
 
+        final int actualSizes = webPage.getAdsList().size();
 
         Assert.assertEquals(actualAdsText,expectedAdsText);
         Assert.assertTrue(actualSizes >= 1);
