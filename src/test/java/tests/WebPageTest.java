@@ -472,12 +472,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityScreenshot()
                 .clickCloseInScreenshot();
 
-        try {
-            webPage.screenshotIsDisplayedWebPage();
-            Assert.fail("Item is present on the page!");
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-
-        }
+        Assert.assertFalse(webPage.isScreenshotItemIsPresent());
 
     }
     @Test(retryAnalyzer = Retry.class)
