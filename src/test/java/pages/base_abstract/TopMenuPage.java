@@ -493,8 +493,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new NewsPage(getDriver());
     }
     public NewsPage clickRegionUkraine() {
-        click(regionUkraine);
-
+        click20(regionUkraine);
         return new NewsPage(getDriver());
     }
     public void clickChoiceInDropDownList() {

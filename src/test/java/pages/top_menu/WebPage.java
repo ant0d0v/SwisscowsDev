@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
+import utils.ProjectConstants;
+
 import java.util.List;
 
 public class WebPage extends TopMenuPage<WebPage> {
@@ -125,12 +127,24 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(footerSearchCopyright);
     }
+    public WebPage waitToBeVisibleTitleFirstSearchResult(){
+        wait10ElementToBeVisible(h2Text);
+        return new WebPage(getDriver());
+    }
     public String getTitleH2Text()  {
-
         return getText(h2Text);
     }
     public String getAdsText_WebPage() {
+        wait10ElementToBeVisible(adsText);
         return getText(adsText);
+    }
+    public WebPage choiceGermanyRegion(){
+        selectGermanyRegion();
+        return new WebPage(getDriver());
+    }
+    public WebPage waitUntilUrlToBeChanged(String parametr){
+        waitForUrlContains(ProjectConstants.DOMAIN +parametr);
+        return new  WebPage(getDriver());
     }
     public List<String> getTrackersInScreenshot() {
         wait10ElementToBeVisible(trackersScreenshot);
@@ -158,6 +172,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
 
     public String getTitleErrorText()  {
+        wait10ElementToBeVisible(h2TextError);
         return getText(h2TextError);
     }
     public String getTextDidYpuMeanMessage()  {
@@ -186,13 +201,19 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getTexts(listRelatedSearches);
     }
     public WebPage waitUntilLoaderToBeInvisible(){
-           wait10ElementToBeVisible(loader);
-            return new WebPage(getDriver());
+           waitForLoaderToBeInVisible();
+           return new WebPage(getDriver());
         }
 
 
+    public WebPage waitUntilToBeVisibleTitlesInWebResult(){
+        for(WebElement text : listWebResult){
+            wait10ElementToBeVisible(text);
+        }
+        return new WebPage(getDriver());
+    }
 
-    public List <String> getTitleInWebResult()  {
+    public List <String> getTitlesInWebResult()  {
         return getTexts(listWebResult);
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
@@ -215,9 +236,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getAttribute(attributeThirdPagePagination,"class");
     }
     public String getAttributeSecondButtonPagination() {
-        for (WebElement text : h2Texts) {
-            wait10ElementToBeVisible(text);
-        }
+        wait10ElementToBeVisible(attributeSecondPagePagination);
         return getAttribute(attributeSecondPagePagination,"class");
     }
     public NewsPage clickRegionBrazil() {
@@ -293,8 +312,8 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage (getDriver());
     }
     public WebPage  clickPreviousPagePagination_WebPage() {
-        click20(previousPagePagination);
 
+        click20(previousPagePagination);
         return new WebPage (getDriver());
     }
     public WebPage clickNextPagePagination_WebPage() {
@@ -302,18 +321,20 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return new WebPage(getDriver());
     }
-    public void clickNextButtonVideoWidget() {
-
+    public WebPage clickNextButtonVideoWidget() {
+        wait10ElementToBeVisible(nextButtonInVideoWidget);
         clickElementUntilInvisible(nextButtonInVideoWidget);
+        return new WebPage(getDriver());
     }
     public WebPage clickFirstVideoInVideoWidget() {
-
+        wait10ElementToBeVisible(firstImageInVideoWidget);
         clickByJavaScript(firstImageInVideoWidget);
         return  this;
     }
     public void clickPrevButtonVideoWidget() {
-
+        wait10ElementToBeVisible(prevButtonInVideoWidget);
         clickElementUntilInvisible(prevButtonInVideoWidget);
+        new WebPage(getDriver());
     }
     public boolean lastImageInVideoWidgetIsDisplayed() {
         wait10ElementToBeVisible(lastImageInVideoWidget);

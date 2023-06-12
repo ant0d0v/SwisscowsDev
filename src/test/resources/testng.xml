@@ -8,8 +8,8 @@
 <!--            <class name="tests.TopMenuTest"/>-->
 <!--            <class name="tests.FooterMenuTest"/>-->
           <!--  <class name="tests.MainTest"/>-->
-<!--            <class name="tests.WebPageTest"/>-->
-            <class name="tests.NewsTest"/>
+            <class name="tests.WebPageTest"/>
+<!--            <class name="tests.NewsTest"/>-->
 <!--            <class name="tests.ImageTest"/>-->
 <!--            <class name="tests.VideoTest"/>-->
 <!--            <class name="tests.MusicTest"/>-->
