@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -49,6 +50,18 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
         action.doubleClick(secondImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(secondImageInSlider));
         return this;
+    }
+    public OurDatacenterPage playVideoDatacenter()  {
+        playVideoCharity();
+        return new OurDatacenterPage(getDriver());
+    }
+    public OurDatacenterPage pauseVideoDatacenter(){
+        pauseVideoCharity();
+        return new OurDatacenterPage(getDriver());
+    }
+    public OurDatacenterPage waitUntilTimeOfVideoChanged(long expectedTime) {
+        waitUntilTimeOfVideoToBeChanged(expectedTime);
+        return new OurDatacenterPage(getDriver());
     }
 
     public boolean elementIsDisplayedInSlider() {

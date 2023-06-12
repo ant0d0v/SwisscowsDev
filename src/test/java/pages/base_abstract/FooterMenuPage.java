@@ -2,14 +2,17 @@ package pages.base_abstract;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.footer_menu.*;
 import pages.top_menu.EmailPage;
+import pages.top_menu.VideoPage;
 /*import pages.MainPage;
 import pages.WeatherStationsPage;
 import pages.footer_menu.WhoWeArePage;
@@ -427,29 +430,26 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         return (String) executor.executeScript("return arguments[0].currentSrc;", videoPlayer);
     }
-    public CharityProjectPage pauseVideoCharity() throws InterruptedException {
+    public CharityProjectPage waitUntilTimeOfVideoToBeChanged(long expectedTime) {
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+        String currentDuration = executor.executeScript("return arguments[0].duration", videoPlayer).toString();
+        long startTime = System.currentTimeMillis();
+        long maxWaitTime = expectedTime;
+        while (!currentDuration.equals(String.valueOf(expectedTime)) && System.currentTimeMillis() - startTime < maxWaitTime) {
+            currentDuration = executor.executeScript("return arguments[0].duration", videoPlayer).toString();
+        }
+        return new CharityProjectPage(getDriver());
+    }
+    public CharityProjectPage pauseVideoCharity()  {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].pause()", videoPlayer);
         return new CharityProjectPage(getDriver());
     }
-    public OurDatacenterPage pauseVideoDatacenter() throws InterruptedException {
-        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-        executor.executeScript("return arguments[0].pause()", videoPlayer);
-        return new OurDatacenterPage(getDriver());
-    }
-    public CharityProjectPage playVideoCharity() throws InterruptedException {
+    public CharityProjectPage playVideoCharity() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].play()", videoPlayer);
-        Thread.sleep(5000);
         return new CharityProjectPage(getDriver());
     }
-    public OurDatacenterPage playVideoDatacenter() throws InterruptedException {
-        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-        executor.executeScript("return arguments[0].play()", videoPlayer);
-        Thread.sleep(5000);
-        return new OurDatacenterPage(getDriver());
-    }
-
 
     public String getPdfText(String pdfUrl) throws IOException {
         URL url = new URL(pdfUrl);
@@ -458,9 +458,4 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         PDDocument doc = PDDocument.load(bis);
         return  new PDFTextStripper().getText(doc);
     }
-
-    /*public long getDurationOfVideo() {
-        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-        return (Long) executor.executeScript("return arguments[0].duration", videoPlayer);
-    }*/
 }
