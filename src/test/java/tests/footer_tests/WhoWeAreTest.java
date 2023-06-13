@@ -1,4 +1,4 @@
-package tests;
+package tests.footer_tests;
 
 import base.BaseTest;
 import org.testng.Assert;

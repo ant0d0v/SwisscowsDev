@@ -1,11 +1,10 @@
-package tests;
+package tests.footer_tests;
 
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.footer_menu.ContactUsPage;
-import pages.footer_menu.MediaEducationPage;
 import utils.ProjectConstants;
 
 public class ContactUsTest extends BaseTest {

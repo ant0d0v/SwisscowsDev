@@ -1,4 +1,4 @@
-package tests;
+package tests.header_tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -7,7 +7,7 @@ import pages.top_menu.ImagePage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
+
 import java.util.List;
 
 

@@ -1,7 +1,6 @@
-package tests;
+package tests.footer_tests;
 
 import base.BaseTest;
-import io.qameta.allure.Attachment;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;

@@ -1,4 +1,4 @@
-package tests;
+package tests.footer_tests;
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -9,7 +9,6 @@ import pages.footer_menu.*;
 import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;

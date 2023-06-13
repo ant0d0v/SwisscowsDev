@@ -1,4 +1,4 @@
-package tests;
+package tests.footer_tests;
 
 import base.BaseTest;
 import org.testng.Assert;
@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.footer_menu.DonationPage;
-import pages.top_menu.EmailPage;
 import utils.ProjectConstants;
 
 import java.io.IOException;

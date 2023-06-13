@@ -1,10 +1,9 @@
-package tests;
+package tests.header_tests;
 
 import base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
 import utils.ProjectConstants;
 

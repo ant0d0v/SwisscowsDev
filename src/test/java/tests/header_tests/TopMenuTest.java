@@ -1,4 +1,4 @@
-package tests;
+package tests.header_tests;
 
 import base.BaseTest;
 import org.testng.Assert;
@@ -6,14 +6,10 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.accounts.UsersLoginPage;
 import pages.top_menu.NewsPage;
 import pages.top_menu.VideoPage;
-import pages.top_menu.VpnPage;
-import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
 
 import java.util.List;
 
