@@ -2,8 +2,10 @@ package pages.footer_menu;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.FooterMenuPage;
 import pages.top_menu.EmailPage;
+import pages.top_menu.VideoPage;
 
 import static java.lang.Thread.sleep;
 
@@ -17,6 +19,8 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
     private WebElement videoPlayerYouTube;
     @FindBy(xpath = "//button[@class='ytp-large-play-button ytp-button ytp-large-play-button-red-bg']")
     private WebElement videoPlayerYouTubeButtonPlay;
+    @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]//span[1]")
+    private WebElement durationAttributeOfFirstVideo;
     public MediaEducationPage(WebDriver driver) {
         super(driver);
     }
@@ -55,8 +59,12 @@ public class MediaEducationPage extends FooterMenuPage<MediaEducationPage> {
         wait10ElementToBeVisible(videoPlayerYouTube);
         getDriver().switchTo().frame(videoPlayerYouTube);
         clickByJavaScript(videoPlayerYouTubeButtonPlay);
-        sleep(7000);
+
         return  this;
+    }
+    public MediaEducationPage waitUntilTimeOfVideoToBeChanged(String expectedTime) {
+        getWait20().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstVideo, expectedTime));
+        return new MediaEducationPage(getDriver());
     }
     public MediaEducationPage hoverElement() throws InterruptedException {
         hover(buttonOpenFlyer);
