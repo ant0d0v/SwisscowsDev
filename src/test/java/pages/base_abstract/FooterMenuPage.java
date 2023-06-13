@@ -430,12 +430,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         return (String) executor.executeScript("return arguments[0].currentSrc;", videoPlayer);
     }
-    public CharityProjectPage waitUntilTimeOfVideoToBeChanged(long expectedTime) {
+    public CharityProjectPage waitUntilTimeOfVideoToBeChanged(long timeMillis) {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         String currentDuration = executor.executeScript("return arguments[0].duration", videoPlayer).toString();
         long startTime = System.currentTimeMillis();
-        long maxWaitTime = expectedTime;
-        while (!currentDuration.equals(String.valueOf(expectedTime)) && System.currentTimeMillis() - startTime < maxWaitTime) {
+        long maxWaitTime = timeMillis;
+        while (!currentDuration.equals(String.valueOf(timeMillis)) && System.currentTimeMillis() - startTime < maxWaitTime) {
             currentDuration = executor.executeScript("return arguments[0].duration", videoPlayer).toString();
         }
         return new CharityProjectPage(getDriver());

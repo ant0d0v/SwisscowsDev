@@ -46,7 +46,7 @@ public class OurDatacenterTest extends BaseTest {
                 .playVideoDatacenter()
                 .waitUntilTimeOfVideoChanged(2000)
                 .pauseVideoDatacenter()
-                .screen("dataCentre.png");
+                .screen("dataCentreGermany.png");
 
         Assert.assertEquals(source, expectedSource);
     }
@@ -82,6 +82,7 @@ public class OurDatacenterTest extends BaseTest {
 
         final String newAttribute = ourDatacenterPage
                 .doubleClickToSecondImageInSlider()
+                .waitUntilSecondImageToBeVisible()
                 .getClassAttributeOfImageSlider();
 
         Assert.assertNotEquals(newAttribute, oldAttribute);
