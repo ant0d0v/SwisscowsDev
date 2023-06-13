@@ -58,6 +58,7 @@ public class CharityProjectTest extends BaseTest {
                 .getClassAttributeOfImageInFirstSlider();
         final String newAttribute = charityProjectPage
                 .doubleClickToSecondImageInSlider()
+                .waitUntilTwoImageInTheSliderToBeVisible()
                 .getClassAttributeOfImageInFirstSlider();
 
         Assert.assertNotEquals(newAttribute,oldAttribute);
@@ -75,6 +76,7 @@ public class CharityProjectTest extends BaseTest {
 
         final String newAttribute = charityProjectPage
                 .doubleClickToThirdImageInSlider()
+                .waitUntilThirdImageInTheSliderToBeVisible()
                 .getClassAttributeOfImageInSecondSlider();
 
         Assert.assertNotEquals(newAttribute,oldAttribute);

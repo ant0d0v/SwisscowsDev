@@ -59,8 +59,12 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
         pauseVideoCharity();
         return new OurDatacenterPage(getDriver());
     }
-    public OurDatacenterPage waitUntilTimeOfVideoChanged(long expectedTime) {
-        waitUntilTimeOfVideoToBeChanged(expectedTime);
+    public OurDatacenterPage waitUntilTimeOfVideoChanged(long timeMillis) {
+        waitUntilTimeOfVideoToBeChanged(timeMillis);
+        return new OurDatacenterPage(getDriver());
+    }
+    public OurDatacenterPage waitUntilSecondImageToBeVisible() {
+        wait10ElementToBeVisible(bigSecondImageInSlider);
         return new OurDatacenterPage(getDriver());
     }
 

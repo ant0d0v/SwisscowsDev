@@ -73,6 +73,14 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
     public String getClassAttributeOfImageInSecondSlider() {
         return getAttribute(attributeThirdImageInSecondSlider, "class");
     }
+    public CharityProjectPage waitUntilTwoImageInTheSliderToBeVisible(){
+        wait10ElementToBeVisible(bigTwoImageInSlider);
+        return new CharityProjectPage(getDriver());
+    }
+    public CharityProjectPage waitUntilThirdImageInTheSliderToBeVisible(){
+        wait10ElementToBeVisible(bigThirdImageInSlider);
+        return new CharityProjectPage(getDriver());
+    }
 
 
     public boolean elementIsDisplayedFirstSlider() {
