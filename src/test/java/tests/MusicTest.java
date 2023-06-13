@@ -265,10 +265,14 @@ public class MusicTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
+                .waitUntilUrlToBeChanged("/en/music?query=skofka")
+                .waitLoaderToBeInvisible()
                 .waitUntilVisibilityAudioResult()
                 .clickHamburgerMenu()
                 .signIn();
         final List<String> actualTracks = musicPage
+                .waitUntilUrlToBeChanged("/en/music?query=skofka")
+                .waitLoaderToBeInvisible()
                 .waitUntilVisibilityAudioResult()
                 .clickOnAllHeart()
                 .clickFavoritePlaylist()

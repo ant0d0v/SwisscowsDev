@@ -27,6 +27,10 @@ public class MakeDefaultSearchPage extends FooterMenuPage<MakeDefaultSearchPage>
 
         return this;
     }
+    public MakeDefaultSearchPage waitToBeVisibleAnimationImage(){
+        wait10ElementToBeVisible(animationImage);
+        return new MakeDefaultSearchPage(getDriver());
+    }
     public boolean elementIsDisplayedAnimationImage() {
 
         return isElementDisplayed(animationImage);

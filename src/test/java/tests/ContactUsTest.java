@@ -20,6 +20,7 @@ public class ContactUsTest extends BaseTest {
 
         final String actualSuccessMessage = new ContactUsPage(getDriver())
                 .sendFormContactUs()
+                .waitToBeVisibleThanksMessage()
                 .getThanksMessage();
 
         Assert.assertNotEquals(actualURL, oldURL);
