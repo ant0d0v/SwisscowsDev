@@ -117,6 +117,14 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         }
         return getTexts(allTracks);
     }
+    public MusicPage waitLoaderToBeInvisible(){
+        waitForLoaderToBeInVisible();
+        return new MusicPage(getDriver());
+    }
+    public MusicPage waitUntilUrlToBeChanged(String parametr){
+        waitUrlToBeChanged(parametr);
+        return new MusicPage(getDriver());
+    }
 
 
     public MusicPage setTimeOfProgressbar() {

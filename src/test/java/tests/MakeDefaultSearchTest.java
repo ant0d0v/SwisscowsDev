@@ -83,7 +83,8 @@ public class MakeDefaultSearchTest extends BaseTest {
         openBaseURL()
                 .scrollToFooter()
                 .clickMakeDefaultSearchPageFooterMenu()
-                .scrollToWhereH2Tor();
+                .scrollToWhereH2Tor()
+                .waitToBeVisibleAnimationImage();
 
         Assert.assertTrue(makeDefaultSearchPage.elementIsDisplayedAnimationImage());
     }

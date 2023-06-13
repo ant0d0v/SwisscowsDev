@@ -39,6 +39,10 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
 
         return getText(thanksMessage);
     }
+    public ContactUsPage waitToBeVisibleThanksMessage(){
+        wait10ElementToBeVisible(thanksMessage);
+        return new ContactUsPage(getDriver());
+    }
     public void clickClearInputRegularUserName() {
         click(userName);
         userName.clear();
