@@ -145,8 +145,6 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     @FindBy(xpath = FOOTER_MENU_ID + "//a") // Swisscows links
     private List<WebElement> footerMenuLinks;
-
-
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='app']//a")
     private List<WebElement> storePanelIconsFooterMenu; // Swisscows
 
@@ -157,32 +155,14 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     private WebElement textH1FooterMenu;
     @FindBy(xpath = "//h1")
     private List<WebElement> textsH1;
-
     @FindBy(xpath = "//h2")
     private List<WebElement> textsH2;
-
-
     @FindBy(xpath = "//div[@class='row narrow static-content']//a")
     private List<WebElement> allLinksOnPage; // Swisscows
-
     @FindBy(xpath = FOOTER_MENU_ID + "//ul/li/a")
     private List<WebElement> innerFooterMenuLink;
-
-    @FindBy(xpath = "//ul[@class ='menu-dropdown-list']/li")
-    private List<WebElement> innerLangMenuList;
-
-    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li")
-    private List<WebElement> innerRegionMenuList;
-
-    @FindBy(xpath = "//div[@class ='menu-dropdown-button'][1]")
-    private WebElement LangDropDownIcon;
-
-    @FindBy(xpath = "//div[@class='menu-dropdown-button'][2]")
-    private WebElement RegionDropDownIcon;
     @FindBy(xpath = "//video")
     private WebElement videoPlayer;
-    @FindBy(xpath = "//div[@class='player']/iframe")
-    private WebElement videoPlayerYouTube;
     @FindBy(xpath = "//a[@href='mailto: info@swisscows.com']")
     private WebElement linkToEmail;
 
