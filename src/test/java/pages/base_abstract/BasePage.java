@@ -327,11 +327,6 @@ public abstract class BasePage {
 
         element.sendKeys(text);
     }
-    protected void inputJavaScript(String text, WebElement element) {
-
-        JavascriptExecutor javaScriptExecutor = (JavascriptExecutor)getDriver();
-        javaScriptExecutor.executeScript("arguments[0].value='"+text+"';", element);
-    }
 
     protected void inputAfterClear(WebElement element, String text) {
         element.clear();

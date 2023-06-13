@@ -60,6 +60,7 @@ public class MediaEducationTest extends BaseTest {
                 .clickMediaEducationFooterMenu()
                 .scrollToWhereToVideoPlayerYouTube()
                 .clickPlayerYouTube()
+                .waitUntilTimeOfVideoToBeChanged("0:02")
                 .getCurrentSrcOfVideo();
 
         mediaEducationPage.screen("MediaEducation.png");
