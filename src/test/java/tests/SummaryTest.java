@@ -13,7 +13,6 @@ public class SummaryTest extends BaseTest {
 
         final String expectedTextInSummaryPage = "3.5";
 
-
         final String actualTitle404Error = mainPage
                 .openVersionTxtPageSwisscows()
                 .getTextInSummaryPage();
@@ -25,7 +24,6 @@ public class SummaryTest extends BaseTest {
         MainPage mainPage = new MainPage(getDriver());
 
         final String expectedTextInSummaryPage = "4.";
-
 
         final String actualTitle404Error = mainPage
                 .openVersionTxtPageAccount()
