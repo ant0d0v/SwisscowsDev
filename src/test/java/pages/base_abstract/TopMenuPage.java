@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -267,8 +268,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return allLinksOnPage;
     }
 
-    public MainPage waitTopMenuToBeInvisible(){
-        wait10ElementToBeInVisible(topMenuContainer);
+    public MainPage waitTopMenuToBeVisible(){
+        wait10ElementToBeVisible(topMenuContainer);
         return new MainPage(getDriver());
 
     }
@@ -308,7 +309,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public MainPage clickHamburgerMenu() {
         click20(hamburgerTopMenu);
-
         return new MainPage(getDriver());
     }
     public MainPage clickRegionGerman() {
@@ -331,10 +331,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(getTopMenuLinks().get(index));
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
-    }
-    public void setOriginalHandle() {
-
-        getDriver().getWindowHandle();
     }
 
     public MainPage clickLogo() {
@@ -559,18 +555,21 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         searchFieldHeader.sendKeys(text);
         clickEnter();
 
-
         new NewsPage(getDriver());
     }
 
 
-    public String getValueHeartIcon() {
-        return getText(valueHeartIcon);
-    }
-    public NewsPage waitValueHeartIconToBeChanged() {
-        waitTextToBeChanged(valueHeartIcon,"2");
 
-        return new NewsPage(getDriver());
+    public String getValueHeartIcon() {
+        int attempts = 0;
+        while (attempts < 2) {
+            try {
+                return valueHeartIcon.getAttribute("title");
+            } catch (StaleElementReferenceException e) {
+                attempts++;
+            }
+        }
+        return null;
     }
     public MainPage refreshMainPage() {
         refreshPage();
@@ -581,9 +580,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         goBack();
         return new MainPage(getDriver());
     }
-    public WebPage waitCharityValueCountChanged(String oldText) {
-        waitTextToBeChanged(valueHeartIcon, oldText);
-
+    public WebPage waitCharityValueCountChanged(String newValue ) {
+        waitAttributeToBeChanged(valueHeartIcon, "title",newValue);
         return new WebPage(getDriver());
     }
 

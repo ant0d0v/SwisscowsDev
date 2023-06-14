@@ -414,6 +414,9 @@ public abstract class BasePage {
         getWait20().until(ExpectedConditions
                 .not(ExpectedConditions.textToBePresentInElement(element, text)));
     }
+    protected void waitAttributeToBeChanged(WebElement element, String attributeName, String expectedValue) {
+        getWait20().until(ExpectedConditions.attributeToBe(element, attributeName, expectedValue));
+    }
 
     protected boolean isElementDisplayed(WebElement element) {
 

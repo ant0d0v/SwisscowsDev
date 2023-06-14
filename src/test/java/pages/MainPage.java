@@ -157,7 +157,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
     public String getNicknameInHamburgerMenu() {
-
+        wait10ElementToBeVisible(nicknameHamburgerMenu);
         return getText(nicknameHamburgerMenu);
     }
 
