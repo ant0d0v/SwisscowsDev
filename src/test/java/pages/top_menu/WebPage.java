@@ -133,7 +133,12 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     public String getTitleH2Text()  {
-        return getText(h2Text);
+        try {
+            return h2Text.getText();
+        } catch (StaleElementReferenceException e) {
+            wait10ElementToBeVisible(h2Text);
+            return h2Text.getText();
+        }
     }
     public String getAdsText_WebPage() {
         wait10ElementToBeVisible(adsText);

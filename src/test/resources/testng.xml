@@ -8,7 +8,7 @@
             <class name="tests.header.TopMenuTest"/>
             <class name="tests.footer.FooterMenuTest"/>
             <class name="tests.MainTest"/>
-            <class name="tests.footer.WebPageTest"/>
+            <class name="tests.header.WebPageTest"/>
             <class name="tests.header.NewsTest"/>
             <class name="tests.header.ImageTest"/>
             <class name="tests.header.VideoTest"/>

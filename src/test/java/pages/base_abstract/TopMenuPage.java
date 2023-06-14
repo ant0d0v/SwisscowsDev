@@ -296,6 +296,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         }
     }
     public MusicPage clickOnAllHeart()  {
+        getWait20().until(ExpectedConditions.visibilityOfAllElements(allHeartButtons));
         clickAllElementsInList(allHeartButtons);
         return new MusicPage(getDriver());
     }
