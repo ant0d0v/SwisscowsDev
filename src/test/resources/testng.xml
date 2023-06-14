@@ -5,27 +5,27 @@
         <classes>
             <class name="tests.SummaryTest"/>
             <class name="tests.SubscriptionsTest"/>
-            <class name="tests.TopMenuTest"/>
-            <class name="tests.FooterMenuTest"/>
+            <class name="tests.header.TopMenuTest"/>
+            <class name="tests.footer.FooterMenuTest"/>
             <class name="tests.MainTest"/>
-            <class name="tests.WebPageTest"/>
-            <class name="tests.NewsTest"/>
-            <class name="tests.ImageTest"/>
-            <class name="tests.VideoTest"/>
-            <class name="tests.MusicTest"/>
-            <class name="tests.WhoWeAreTest"/>
-            <class name="tests.MediaEducationTest"/>
-            <class name="tests.CharityProjectTest"/>
-            <class name="tests.OurDatacenterTest"/>
-            <class name="tests.ContactUsTest"/>
-            <class name="tests.VpnPageTest"/>
-            <class name="tests.VpnInstructionsTest"/>
-            <class name="tests.EmailTest"/>
-            <class name="tests.SetAsStartTest"/>
-            <class name="tests.MakeDefaultSearchTest"/>
-            <class name="tests.DonationTest"/>
-            <class name="tests.PrivacyPolicyTest"/>
-            <class name="tests.ImprintTest"/>
+            <class name="tests.footer.WebPageTest"/>
+            <class name="tests.header.NewsTest"/>
+            <class name="tests.header.ImageTest"/>
+            <class name="tests.header.VideoTest"/>
+            <class name="tests.header.MusicTest"/>
+            <class name="tests.footer.WhoWeAreTest"/>
+            <class name="tests.footer.MediaEducationTest"/>
+            <class name="tests.footer.CharityProjectTest"/>
+            <class name="tests.footer.OurDatacenterTest"/>
+            <class name="tests.footer.ContactUsTest"/>
+            <class name="tests.header.VpnPageTest"/>
+            <class name="tests.header.VpnInstructionsTest"/>
+            <class name="tests.header.EmailTest"/>
+            <class name="tests.footer.SetAsStartTest"/>
+            <class name="tests.footer.MakeDefaultSearchTest"/>
+            <class name="tests.footer.DonationTest"/>
+            <class name="tests.footer.PrivacyPolicyTest"/>
+            <class name="tests.footer.ImprintTest"/>
             <class name="tests.AutobahnTest"/>
         </classes>
     </test>
