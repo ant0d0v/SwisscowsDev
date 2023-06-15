@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
 import pages.top_menu.EmailPage;
+import tests.retrytest.Retry;
 import utils.ProjectConstants;
 import utils.TestUtils;
 import java.util.List;
@@ -113,7 +114,7 @@ public class MainTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
 
