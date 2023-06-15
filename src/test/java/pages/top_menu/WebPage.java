@@ -220,20 +220,21 @@ public class WebPage extends TopMenuPage<WebPage> {
 
 
     public WebPage waitUntilToBeVisibleTitlesInWebResult(){
-        getWait20().until(ExpectedConditions.visibilityOfAllElements(listWebResult));
+        getWait10().until(driver -> {
+            try {
+                getWait20().until(ExpectedConditions.visibilityOfAllElements(listWebResult));
+                return areElementsInListDisplayed(listWebResult);
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
         return new WebPage(getDriver());
     }
 
     public List<String> getTitlesInWebResult() {
         List<String> textList = new ArrayList<>();
         for (WebElement element : listWebResult) {
-            try {
-                if (element.isEnabled() && element.isDisplayed()) {
-                    textList.add(element.getText());
-                }
-            } catch (StaleElementReferenceException e) {
-                textList.add(element.getText());
-            }
+            textList.add(element.getText());
         }
         return textList;
     }

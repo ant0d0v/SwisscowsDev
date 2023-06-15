@@ -21,7 +21,6 @@ public class AutobahnTest extends BaseTest {
         for (int i = 0; i < 20; i++)  {
             webPage.searchAfterClear( "\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
                    + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
-            webPage.waitUntilVisibilityErrorImage();
             if (i == 20 - 1) {
                Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
                 break;

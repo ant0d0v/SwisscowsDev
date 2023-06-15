@@ -164,7 +164,7 @@ public class TestData {
 
         return new Object[][] {
                 {0, "Enterprise Search Software für Unternehmen", "https://hesbox.com/de"},
-                {1, "Swisscows Fanshop für Kleider und Geschenke für Fans","https://swisscows-fanshop.com/"},
+                {1, "SWISSCOWS FANSHOP – Swisscows","https://swisscows-fanshop.com/"},
                 {2, "Blog - Andreas Wiebe","https://awiebe.org/"},
 
 
@@ -220,7 +220,7 @@ public class TestData {
                 {7, "TeleGuard", "https://teleguard.com", "https://teleguard.com/en", "TeleGuard - secure messenger from Switzerland"},
                 {8, "HES", "https://hesbox.com/", "https://hesbox.com/de", "Enterprise Search Software für Unternehmen"},
                 {9, "GetDigest", "https://getdigest.com/", "https://getdigest.com/en", "GetDigest | Get a document summary. Fast!"},
-                {10, "Fan-shop", "https://swisscows-fanshop.com", "https://swisscows-fanshop.com/", "Swisscows Fanshop für Kleider und Geschenke für Fans"},
+                {10, "Fan-shop", "https://swisscows-fanshop.com", "https://swisscows-fanshop.com/", "SWISSCOWS FANSHOP – Swisscows"},
                 {11, "Swisscows Blog", "https://blog.swisscows.com/", "https://blog.swisscows.com/", "Blog - Swisscows AG"},
                 {12, "Swisscows Support", "https://support.swisscows.com", "https://support.swisscows.com/", "Swisscows Support"},
 
