@@ -1,4 +1,4 @@
-package tests;
+package tests.header;
 
 import base.BaseTest;
 import org.testng.Assert;
@@ -39,22 +39,23 @@ public class VideoTest extends BaseTest {
     @Test
     public void testRegionalSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ivanka")
+        final String actualRegion =   openBaseURL()
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
                 .selectGermanyRegion()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=de-DE");
+                .waitUrlToBeChanged("/en/video?query=ronaldo&region=de-DE")
+                .waitForLoaderToBeInVisible()
+                .getCurrentURL();
 
-        final String actualRegion = videoPage.getCurrentURL();
         final String titleAllVideo = videoPage
                 .waitUntilVisibilityVideoResult()
                 .getTitleFirstVideo();
 
 
-        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ivanka&region=de-DE");
-        Assert.assertTrue(titleAllVideo.toLowerCase().contains("ivan"));
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
+        Assert.assertTrue(titleAllVideo.toLowerCase().contains("ronaldo"));
 
     }
     @Test

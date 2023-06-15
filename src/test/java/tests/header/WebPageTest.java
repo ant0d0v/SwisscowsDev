@@ -1,4 +1,4 @@
-package tests;
+package tests.header;
 
 import base.BaseTest;
 import org.testng.Assert;
@@ -404,8 +404,8 @@ public class WebPageTest extends BaseTest {
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
         final String oldTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("winner")
-                .waitUntilUrlToBeChanged("/en/web?query=winner")
+                .inputSearchCriteriaAndEnter("date")
+                .waitUntilUrlToBeChanged("/en/web?query=date")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
@@ -414,15 +414,15 @@ public class WebPageTest extends BaseTest {
                 .clickFilterButtonWeb()
                 .clickButtonDateInFilter()
                 .clickPastYearInDropDownOfFilter()
-                .waitUntilUrlToBeChanged("/en/web?query=winner&freshness=Year")
+                .waitUntilUrlToBeChanged("/en/web?query=date&freshness=Year")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=winner&freshness=Year")));
+        Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=date&freshness=Year")));
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
         Assert.assertNotEquals(oldTitle,newTitle);
-        Assert.assertEquals(webPage.getTitle(),"winner in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"date in Web search - Swisscows");
 
 
     }

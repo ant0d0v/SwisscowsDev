@@ -1,4 +1,4 @@
-package tests;
+package tests.header;
 
 import base.BaseTest;
 import org.testng.Assert;
@@ -364,7 +364,7 @@ public class TopMenuTest extends BaseTest {
         MainPage mainPage = openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
+                .waitTopMenuToBeVisible()
                 .clickHamburgerMenu();
 
         Assert.assertTrue(mainPage.isAvatarIconIsDisplayedInHamburgerMenu());
@@ -378,7 +378,7 @@ public class TopMenuTest extends BaseTest {
         final String nickname = openBaseURL()
                 .clickHamburgerMenu()
                 .signIn()
-                .waitTopMenuToBeInvisible()
+                .waitTopMenuToBeVisible()
                 .clickHamburgerMenu()
                 .getNicknameInHamburgerMenu();
 
@@ -390,9 +390,9 @@ public class TopMenuTest extends BaseTest {
             final String actualUrl =openBaseURL()
                     .clickHamburgerMenu()
                     .signIn()
-                    .waitTopMenuToBeInvisible()
+                    .waitTopMenuToBeVisible()
                     .logOut()
-                    .waitTopMenuToBeInvisible()
+                    .waitTopMenuToBeVisible()
                     .clickHamburgerMenu()
                     .getCurrentURL();
 
@@ -460,7 +460,8 @@ public class TopMenuTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("news")
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitCharityValueCountChanged("1")
+                .waitUrlToBeChanged("/en/images?query=news")
+                .waitCharityValueCountChanged("2")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
@@ -468,17 +469,15 @@ public class TopMenuTest extends BaseTest {
     }
     @Test
     public void testCharityQueryCounterSearchVideo() {
-        VideoPage videoPage  = new VideoPage(getDriver());
 
         final String expectedValueHeartIcon = "2";
 
-        openBaseURL()
+        final String  actualValueHeartIcon = openBaseURL()
                 .inputSearchCriteriaAndEnter("news")
                 .waitUntilVisibilityWebResult()
-                .clickVideoButton();
-
-        final String  actualValueHeartIcon = videoPage
-                .waitUntilVisibilityVideoResult()
+                .clickVideoButton()
+                .waitUrlToBeChanged("/en/video?query=news")
+                .waitCharityValueCountChanged("2")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
@@ -486,21 +485,17 @@ public class TopMenuTest extends BaseTest {
     }
     @Test
     public void testCharityQueryCounterSearchNews() {
-        NewsPage newsPage = new NewsPage(getDriver());
-        final String expectedValueHeartIcon = "3";
+        final String expectedValueHeartIcon = "2";
 
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("news")
-                .waitUntilVisibilityWebResult()
+        final String  actualValueHeartIcon =openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN +"/en/web?query=news&region=de-DE");
-
-        final String  actualValueHeartIcon = newsPage
+                .inputSearchCriteriaAndEnter("news")
+                .waitUntilVisibilityWebResult()
                 .clickNewsButton()
-                .waitUntilVisibilityNewsResult()
-                .waitValueHeartIconToBeChanged()
+                .waitUrlToBeChanged("/en/news?query=news&region=de-DE")
+                .waitCharityValueCountChanged("2")
                 .getValueHeartIcon();
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);

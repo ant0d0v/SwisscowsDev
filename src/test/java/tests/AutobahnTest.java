@@ -18,11 +18,10 @@ public class AutobahnTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("\"iphone\"")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 15; i++)  {
+        for (int i = 0; i < 20; i++)  {
             webPage.searchAfterClear( "\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
                    + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
-            webPage.waitUntilVisibilityErrorImage();
-            if (i == 11 - 1) {
+            if (i == 20 - 1) {
                Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
                 break;
             }

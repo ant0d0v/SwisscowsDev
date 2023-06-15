@@ -71,8 +71,14 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return new MusicPage(getDriver());
     }
     public MusicPage waitUntilVisibilityAudioResult() {
-        wait20ElementToBeVisible(audioResultContainer);
-
+        getWait10().until(driver -> {
+            try {
+                wait10ElementToBeVisible(audioResultContainer);
+                return audioResultContainer.isDisplayed();
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
         return new MusicPage(getDriver());
     }
 
