@@ -129,7 +129,14 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getText(footerSearchCopyright);
     }
     public WebPage waitToBeVisibleTitleFirstSearchResult(){
-        wait10ElementToBeVisible(h2Text);
+        getWait10().until(driver -> {
+            try {
+                wait10ElementToBeVisible(h2Text);
+                return h2Text.isDisplayed();
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
         return new WebPage(getDriver());
     }
     public String getTitleH2Text()  {
@@ -217,10 +224,14 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
 
-    public List <String> getTitlesInWebResult() {
+    public List<String> getTitlesInWebResult() {
         List<String> textList = new ArrayList<>();
         for (WebElement element : listWebResult) {
-            if (element.isEnabled() && element.isDisplayed()) {
+            try {
+                if (element.isEnabled() && element.isDisplayed()) {
+                    textList.add(element.getText());
+                }
+            } catch (StaleElementReferenceException e) {
                 textList.add(element.getText());
             }
         }

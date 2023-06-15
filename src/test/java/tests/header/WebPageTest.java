@@ -416,6 +416,7 @@ public class WebPageTest extends BaseTest {
                 .clickPastYearInDropDownOfFilter()
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo&freshness=Year")
                 .waitUntilLoaderToBeInvisible()
+                .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
         Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=ronaldo&freshness=Year")));
