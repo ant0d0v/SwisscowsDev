@@ -381,22 +381,22 @@ public class WebPageTest extends BaseTest {
     public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String actualTitleFirstSearchResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo")
+                .inputSearchCriteriaAndEnter("wiki")
+                .waitUntilUrlToBeChanged("/en/web?query=wiki")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .clickNextPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=10")
+                .waitUntilUrlToBeChanged("/en/web?query=wiki&offset=10")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .clickPreviousPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=0")
+                .waitUntilUrlToBeChanged("/en/web?query=wiki&offset=0")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
-        Assert.assertEquals(actualTitleFirstSearchResult,"Cristiano Ronaldo - Wikipedia");
+        Assert.assertEquals(webPage.getTitle(),"wiki in Web search - Swisscows");
+        Assert.assertEquals(actualTitleFirstSearchResult,"Wikipedia");
 
 
     }

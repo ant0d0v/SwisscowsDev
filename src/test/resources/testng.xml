@@ -8,6 +8,7 @@
                 <class name="tests.SubscriptionsTest"/>
             </classes>
         </test>
+       <test name="Static pages tests" >
         <classes>
             <class name="tests.header.TopMenuTest"/>
             <class name="tests.footer.FooterMenuTest"/>

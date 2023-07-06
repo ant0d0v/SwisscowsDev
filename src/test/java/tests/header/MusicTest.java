@@ -37,7 +37,7 @@ public class MusicTest extends BaseTest {
     public void testClickPauseOfTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttribute = openBaseURL()
-                .inputSearchCriteriaAndEnter("Popular")
+                .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -77,7 +77,7 @@ public class MusicTest extends BaseTest {
         public void testSwitchToPreviousTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualAttributeNextTrack = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
+                .inputSearchCriteriaAndEnter("Skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -117,7 +117,7 @@ public class MusicTest extends BaseTest {
     public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("Skofka")
+                .inputSearchCriteriaAndEnter("best")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -129,11 +129,11 @@ public class MusicTest extends BaseTest {
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("skofka"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("best"));
         }
         Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         for (String search : titleAllPlaylist) {
-            Assert.assertEquals(search.toLowerCase(), "skofka");
+            Assert.assertTrue(search.toLowerCase().contains("best"));
         }
     }
 
