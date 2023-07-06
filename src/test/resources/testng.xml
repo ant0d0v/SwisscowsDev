@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Parallel Test Suite" parallel="classes" thread-count="2">
-        <test name="Important tests" >
-            <classes>
-                <class name="tests.SummaryTest"/>
-                <class name="tests.SubscriptionsTest"/>
-            </classes>
-        </test>
        <test name="Static pages tests" >
         <classes>
+            <class name="tests.SummaryTest"/>
+            <class name="tests.SubscriptionsTest"/>
             <class name="tests.header.TopMenuTest"/>
             <class name="tests.footer.FooterMenuTest"/>
             <class name="tests.MainTest"/>
