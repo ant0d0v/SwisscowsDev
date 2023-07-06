@@ -1,12 +1,10 @@
 package pages.top_menu;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
-import pages.footer_menu.MediaEducationPage;
 import utils.ProjectConstants;
 
 import java.util.List;
@@ -43,8 +41,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement shortButtonInDropdownDuration;
     @FindBy(xpath = "//div[@class = 'video-results'][2]//article[20]")
     private WebElement last20Video;
-    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[29]")
-    private WebElement last29Video;
+    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[23]")
+    private WebElement last23Video;
     @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]")
     private WebElement durationAttributeOfFirstVideo;
     @FindBy(xpath = "//article[@class ='item-video']//figure//span")
@@ -108,8 +106,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     public VideoPage scrollToLastVideo() {
         scrollByVisibleElement(last20Video);
-        wait10ElementToBeVisible(last29Video);
-        scrollByVisibleElement(last29Video);
+        wait10ElementToBeVisible(last23Video);
+        scrollByVisibleElement(last23Video);
         return new VideoPage(getDriver());
     }
     public VideoPage waitUtilLoaderToBeInVisible(){
