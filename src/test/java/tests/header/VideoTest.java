@@ -79,7 +79,7 @@ public class VideoTest extends BaseTest {
     public void testVideoResultsEqualsSearchCriteria(){
         VideoPage videoPage = new VideoPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("war")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
@@ -90,7 +90,7 @@ public class VideoTest extends BaseTest {
 
         Assert.assertTrue(actualSize >= 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("war"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
 
     }
