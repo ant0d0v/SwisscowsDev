@@ -1,5 +1,6 @@
 package base;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -71,7 +72,7 @@ public abstract class BaseTest {
     public void sleep(int millis) throws InterruptedException {
         Thread.sleep(millis);
     }
-
+    @Step("Open the base URL of the web page.")
     public MainPage openBaseURL() {
         TestUtils.loadBaseUrlPage(getDriver(), getWait());
 

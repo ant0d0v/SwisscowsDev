@@ -1,5 +1,6 @@
 package pages;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -126,21 +127,20 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return new MainPage(getDriver());
     }
+    @Step("Open the version.txt page on the Swisscows website.")
     public MainPage openVersionTxtPageSwisscows() {
         getDriver().get("https://dev.swisscows.com/version.txt");
         return new MainPage(getDriver());
     }
+    @Step("Open the version.txt page on the Accounts website.")
     public MainPage openVersionTxtPageAccount() {
         getDriver().get("https://accounts.dev.swisscows.com/version.txt");
         return new MainPage(getDriver());
     }
+    @Step("Get the text in the summary page.")
     public String getTextInSummaryPage() {
 
         return getText(summaryPage);
-    }
-    public List <String> getH2TextsMainPage() {
-
-        return getTexts(h2TextsMainPage);
     }
     public List <String> getH1TextsMainPage() {
 
@@ -167,7 +167,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return isElementDisplayed(logoHome);
     }
-
+    @Step("Click on the search field ")
     public MainPage clickSearchField() {
         click(searchCityField);
 
@@ -222,7 +222,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-
+    @Step("Input the search criteria (e.g., the defined query).")
     public MainPage inputSearchCriteria(String text) {
         input(text, searchCityField);
 
@@ -261,10 +261,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-
+    @Step("Click on the main logo to remove focus from the search field")
     public MainPage clickMainLogo() {
         click(logoHome);
-
         return this;
     }
 
@@ -294,9 +293,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-
+    @Step("Get actual sizes of  suggest ")
     public int countElementsInSuggestContainer() {
-
         return getListSize(suggestListMainPage);
     }
 
@@ -317,6 +315,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
+    @Step("Wait until the suggest container is visible")
     public MainPage waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
         return new MainPage(getDriver());
@@ -430,11 +429,9 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return  getHoverColorsOfElements(linksServicesBlock);
     }
 
-
+    @Step("Get the list of suggestions from the suggest container.")
     public List<String> getAllElementsText() {
-
         List<String> textList = new ArrayList<>();
-
         for (WebElement element : allChoicesInSuggestion) {
             textList.add(element.getText().toLowerCase());
         }

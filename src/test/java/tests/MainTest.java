@@ -1,5 +1,6 @@
 package tests;
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class MainTest extends BaseTest {
 
+    @QaseId(value = 4891)
     @Test
     public void testSuggestIsDysplaed() {
         final String query = "test";
@@ -30,11 +32,8 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(mainPage.suggestIsDisplayed());
         Assert.assertTrue(actualSizeSuggest > 0);
         Assert.assertEquals(actualSizeSuggest, expectedSizeSuggest);
-
-
-
     }
-
+    @QaseId(value = 4893)
     @Test
     public void testSuggestEqualsSearchCriteria() {
         final String query = "ivan";

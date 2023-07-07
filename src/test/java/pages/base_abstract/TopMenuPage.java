@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -307,11 +308,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(LogOutButtonHamburgerDropDownMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click the hamburger menu.")
     public MainPage clickHamburgerMenu() {
         click20(hamburgerTopMenu);
         return new MainPage(getDriver());
     }
+    @Step("Click on the region in the top menu (e.g., German).")
     public MainPage clickRegionGerman() {
         click20(RegionGerman);
         return new MainPage(getDriver());
@@ -373,10 +375,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(teleGuardTopMenuSearch);
         return  new MainPage (getDriver());
     }
-
+    @Step("Click the region top menu.")
     public MainPage clickRegionTopMenu() {
         click20(RegionDropDownIcon);
-
         return new MainPage(getDriver());
     }
 
@@ -473,6 +474,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         wait10ElementToBeVisible(h2TitleErrorInFavorite);
         return getText(h2TitleErrorInFavorite);
     }
+    @Step("Click on the \"News\" button")
     public NewsPage clickNewsButton() {
         clickEnter(newsButton);
 
@@ -482,14 +484,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(filterButton);
         return new WebPage(getDriver());
     }
+    @Step("Click the region Ukraine")
     public NewsPage clickRegionUkraine() {
         click20(regionUkraine);
         return new NewsPage(getDriver());
-    }
-    public void clickChoiceInDropDownList() {
-        wait20ElementToBeVisible(searchDropdownMenu);
-        click(choiceInDropdownMenu);
-
     }
     public MainPage clickSearchFieldHeader() {
         click(searchFieldHeader);
@@ -550,6 +548,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         inputAfterClear(searchFieldHeader,text);
         return new NewsPage(getDriver());
     }
+    @Step("Search and clear after")
     public void searchAfterClear(String text) throws InterruptedException {
         click(clearButton);
         wait10ElementToBeEmpty(searchFieldHeader);
@@ -636,10 +635,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return innerRegionMenuList;
     }
+    @Step("nput the search criteria and press Enter.")
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
-
         return new WebPage(getDriver());
     }
 
