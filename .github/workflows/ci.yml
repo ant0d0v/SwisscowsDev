@@ -29,7 +29,7 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Maven test
-        run: mvn -B package --file pom.xml
+        run: mvn -B package clean test -DQASE_ENABLE=true -DQASE_PROJECT_CODE=SWISSCOWS -DQASE_RUN_NAME=Regresion -DQASE_API_TOKEN=${{ secrets.QASE_API_TOKEN }} --file pom.xml
         env:
           CHROME_OPTIONS: --disable-gpu;--no-sandbox;--disable-dev-shm-usage;--headless;--window-size=1920,1080
           CI_RUN: true
