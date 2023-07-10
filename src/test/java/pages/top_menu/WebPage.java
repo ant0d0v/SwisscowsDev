@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -115,10 +116,12 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return new WebPage(getDriver());
     }
+    @Step("Open the 404 page.")
     public WebPage open404Page() {
         getDriver().get("https://swisscows.com/en/qwerty");
         return new WebPage(getDriver());
     }
+    @Step("Open the 500 page.")
     public WebPage open500Page() {
         getDriver().get(" https://swisscows.com/en/music?query= ");
         return new WebPage(getDriver());
@@ -182,8 +185,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getListSize(innerFooterMenuLink);
     }
 
-
-
+    @Step("Get the title text of the 202 error page")
     public String getTitleErrorText()  {
         wait10ElementToBeVisible(h2TextError);
         return getText(h2TextError);
@@ -192,7 +194,7 @@ public class WebPage extends TopMenuPage<WebPage> {
 
         return getText(didYpuMeanMessage);
     }
-
+    @Step("Get the font size of the title text.")
     public String getH2FontSize(){
         return  getFontSize(h2TextError);
 
@@ -213,6 +215,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);
     }
+    @Step("Wait until the loader is invisible.")
     public WebPage waitUntilLoaderToBeInvisible(){
            waitForLoaderToBeInVisible();
            return new WebPage(getDriver());
@@ -363,14 +366,15 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(lastImageInVideoWidget);
 
     }
+    @Step("Wait until the web search results are visibl")
     public WebPage waitUntilVisibilityWebResult() {
         wait20ElementToBeVisible(webResultContainer);
 
         return this;
     }
+    @Step("Wait until the error image is visible.")
     public WebPage waitUntilVisibilityErrorImage() {
         wait20ElementToBeVisible(errorImage);
-
         return new WebPage(getDriver());
     }
     public WebPage waitUntilVisibilityTrackerButton() {

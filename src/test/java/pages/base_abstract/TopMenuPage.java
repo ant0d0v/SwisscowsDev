@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -194,13 +195,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
-
+    @Step("Sign in to the account.")
     public LoginPage signIn() {
         clickSignInMenu().signInAsRegularUser();
-
         return new LoginPage(getDriver());
     }
-
+    @Step("Set the window size to the adaptive mode using the specified width and height constants (e.g., hamburger menu size).")
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
         setWindowDimensions(width, height);
 
@@ -307,11 +307,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(LogOutButtonHamburgerDropDownMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click the hamburger menu.")
     public MainPage clickHamburgerMenu() {
         click20(hamburgerTopMenu);
         return new MainPage(getDriver());
     }
+    @Step("Click on the region in the top menu (e.g., German).")
     public MainPage clickRegionGerman() {
         click20(RegionGerman);
         return new MainPage(getDriver());
@@ -373,10 +374,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(teleGuardTopMenuSearch);
         return  new MainPage (getDriver());
     }
-
+    @Step("Click the region top menu.")
     public MainPage clickRegionTopMenu() {
         click20(RegionDropDownIcon);
-
         return new MainPage(getDriver());
     }
 
@@ -385,8 +385,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
        return new MainPage(getDriver());
     }
+    @Step("Click on \"Account\" in the hamburger menu.")
     public SubscriptionsPage clickAccountInHamburgerMenu() {
-
         click(accountInHamburgerMenu);
         return new SubscriptionsPage (getDriver());
     }
@@ -402,8 +402,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    @Step("Get h3 texts")
     public List <String> getH3Texts() {
-
         return getTexts(textsH3);
     }
     public List <String> getH2Texts() {
@@ -414,12 +414,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getText(textH1);
     }
+    @Step("Get the texts of the answers.")
     public List <String> getAnswersTexts() {
-
         return getTexts(textsAnswers);
     }
     public String getHeartPopupMessage() {
-
         return getText(popupHeartIcon);
     }
 
@@ -445,6 +444,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new WebPage(getDriver());
     }
+    @Step("Click the search icon.")
     public WebPage clickSearchButton() {
         clickEnter(searchButton);
 
@@ -473,6 +473,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         wait10ElementToBeVisible(h2TitleErrorInFavorite);
         return getText(h2TitleErrorInFavorite);
     }
+    @Step("Click on the \"News\" button")
     public NewsPage clickNewsButton() {
         clickEnter(newsButton);
 
@@ -482,14 +483,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(filterButton);
         return new WebPage(getDriver());
     }
+    @Step("Click the region Ukraine")
     public NewsPage clickRegionUkraine() {
         click20(regionUkraine);
         return new NewsPage(getDriver());
-    }
-    public void clickChoiceInDropDownList() {
-        wait20ElementToBeVisible(searchDropdownMenu);
-        click(choiceInDropdownMenu);
-
     }
     public MainPage clickSearchFieldHeader() {
         click(searchFieldHeader);
@@ -550,6 +547,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         inputAfterClear(searchFieldHeader,text);
         return new NewsPage(getDriver());
     }
+    @Step("Search and clear after")
     public void searchAfterClear(String text) throws InterruptedException {
         click(clearButton);
         wait10ElementToBeEmpty(searchFieldHeader);
@@ -636,10 +634,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return innerRegionMenuList;
     }
+    @Step("nput the search criteria and press Enter.")
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
-
         return new WebPage(getDriver());
     }
 

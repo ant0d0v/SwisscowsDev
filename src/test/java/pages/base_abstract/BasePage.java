@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import io.qase.api.annotation.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -71,14 +72,13 @@ public abstract class BasePage {
         return actions;
     }
 
-
+    @Step("Get the title")
     public String getTitle() {
 
         return getDriver().getTitle();
     }
-
+    @Step("Get the current URL.")
     public String getCurrentURL() {
-
         return getDriver().getCurrentUrl();
     }
 

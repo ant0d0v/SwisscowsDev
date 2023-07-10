@@ -1,6 +1,7 @@
 package tests.header;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -34,14 +35,15 @@ public class WebPageTest extends BaseTest {
         }
     }
 
+    @QaseId(value = 4884)
     @Test
     public void test202NoResultsFoundPageError_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle404Error = "No results found for \"@#@$%^$^dasdsad1231\"";
-        final String expectedFontSizeTitle404Error = "40px";
+        final String expectedTitle202Error = "No results found for \"@#@$%^$^dasdsad1231\"";
+        final String expectedFontSizeTitle202Error = "40px";
 
-        final String actualTitle404Error = openBaseURL()
+        final String actualTitle202Error = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
@@ -50,12 +52,13 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
 
-        final String actualFontSizeTitle404Error = webPage.getH2FontSize();
+        final String actualFontSizeTitle202Error = webPage.getH2FontSize();
 
-        Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
+        Assert.assertEquals(actualTitle202Error, expectedTitle202Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+        Assert.assertEquals(actualFontSizeTitle202Error, expectedFontSizeTitle202Error);
     }
+    @QaseId(value = 4885)
     @Test
     public void testError450RequestIsBlocked_WebPage() {
         WebPage webPage = new WebPage(getDriver());
@@ -64,7 +67,7 @@ public class WebPageTest extends BaseTest {
         final String expectedFontSizeTitle404Error = "40px";
 
 
-        final String actualTitle404Error =openBaseURL()
+        final String actualTitle404Error = openBaseURL()
                 .inputSearchCriteriaAndEnter("porn")
                 .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityErrorImage()
@@ -76,6 +79,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
+    @QaseId(value = 4880)
     @Test
     public void testError404PageNotFound() {
         WebPage webPage = new WebPage(getDriver());
@@ -94,6 +98,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
     }
+    @QaseId(value = 4887)
     @Test
     public void testError500UnknownError() {
         WebPage webPage = new WebPage(getDriver());

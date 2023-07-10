@@ -1,26 +1,24 @@
 package tests;
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.top_menu.EmailPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
+
 import java.util.List;
 
 public class MainTest extends BaseTest {
-
+    @QaseTitle("Check that suggest feature is displayed")
+    @QaseId(value = 4891)
     @Test
     public void testSuggestIsDysplaed() {
-        final String query = "test";
-        final int expectedSizeSuggest = 5;
-
-        MainPage mainPage = openBaseURL();
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .clickSearchField()
-                .inputSearchCriteria(query)
+                .inputSearchCriteria("test")
                 .clickMainLogo()
                 .clickSearchField()
                 .waitForSuggestToBeVisible();
@@ -29,21 +27,15 @@ public class MainTest extends BaseTest {
 
         Assert.assertTrue(mainPage.suggestIsDisplayed());
         Assert.assertTrue(actualSizeSuggest > 0);
-        Assert.assertEquals(actualSizeSuggest, expectedSizeSuggest);
-
-
-
+        Assert.assertEquals(actualSizeSuggest, 5);
     }
-
+    @QaseTitle("Check the list of suggestions from the suggest container.")
+    @QaseId(value = 4893)
     @Test
     public void testSuggestEqualsSearchCriteria() {
-        final String query = "ivan";
-
-        MainPage mainPage = openBaseURL();
-
-        mainPage
+        MainPage mainPage = openBaseURL()
                 .clickSearchField()
-                .inputSearchCriteria(query)
+                .inputSearchCriteria("ivan")
                 .clickMainLogo()
                 .clickSearchField()
                 .waitForSuggestToBeVisible();
@@ -55,15 +47,15 @@ public class MainTest extends BaseTest {
         for (String searchCriteria : actualSuggestion) {
             Assert.assertTrue(mainPage.suggestIsDisplayed());
             Assert.assertTrue(actualSizeSuggest > 0);
-            Assert.assertTrue(searchCriteria.contains(query));
+            Assert.assertTrue(searchCriteria.contains("ivan"));
 
         }
     }
-
+    @QaseTitle("Check that the home page banner is clickable and redirects to the corresponding page")
+    @QaseId(value = 4894)
     @Test
     public void testHomePageBannerClickableAndRedirectToCorrespondingPage() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedUrl = ProjectConstants.DOMAIN_WITHOUT_DEV + "/en/music?query=new+charts+2022";
 
         final String oldUrl  = openBaseURL()
                 .getCurrentURL();
@@ -74,16 +66,16 @@ public class MainTest extends BaseTest {
                 .getCurrentURL();
 
         Assert.assertNotEquals(oldUrl,actualUrl);
-        Assert.assertEquals(actualUrl,expectedUrl);
+        Assert.assertEquals(actualUrl, ProjectConstants.DOMAIN_WITHOUT_DEV + "/en/music?query=new+charts+2022");
     }
+    @QaseTitle("Home page banner switches correctly")
+    @QaseId(value = 4895)
     @Test
     public void testHomePageBannerSwitching ()  {
-
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
-        MainPage mainPage = openBaseURL();
-
-        final String valueFirstSwitch = mainPage
+        final String valueFirstSwitch = openBaseURL()
                 .clickBannerSwitchFirst()
                 .getClassAttributeSwitchFirst();
 
@@ -97,13 +89,15 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(valueSecondSwitch,valueFirstSwitch);
 
     }
-
+    @QaseTitle("Home page banner automatically switches to the next image")
+    @QaseId(value = 4896)
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
         MainPage mainPage = new MainPage(getDriver());
         final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
         final String actualValue = openBaseURL()
+                .waitForImageInBannerVisibleOfMusic()
                 .waitForImageInBannerVisibleOfEmail()
                 .getClassAttributeSwitchSecond();
 
@@ -112,7 +106,8 @@ public class MainTest extends BaseTest {
 
 
     }
-
+    @QaseTitle("Check that the cursor is in the search field and the search icon is clickable.")
+    @QaseId(value = 4897)
     @Test(retryAnalyzer = Retry.class)
     public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
@@ -123,11 +118,11 @@ public class MainTest extends BaseTest {
                 .waitUntilVisibilityWebResult();
 
         Assert.assertEquals(getExternalPageURL(),ProjectConstants.DOMAIN + "/en/web?query=test");
-
     }
+    @QaseTitle("Check that all questions and answers were opened on the page.")
+    @QaseId(value = 4898)
     @Test
     public void testQuestionAndAnswersWasOpened() {
-
         final List<String> expectedAttribute = List.of(
                 "faq open",
                 "faq open",
@@ -135,7 +130,6 @@ public class MainTest extends BaseTest {
                 "faq open",
                 "faq open",
                 "faq open"
-
         );
 
         final List<String> actualAttribute = openBaseURL()
@@ -144,53 +138,45 @@ public class MainTest extends BaseTest {
                 .getClassAttributeAllQuestions();
 
         Assert.assertEquals(actualAttribute,expectedAttribute);
-
-
     }
+    @QaseTitle("Check that a question and answer can be opened and closed on the page.")
+    @QaseId(value = 4899)
     @Test
     public void testQuestionAndAnswersOpenAndClose() {
-
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedClassOpen = "faq open";
         final String expectedClassCloses = "faq";
 
-        MainPage mainPage = openBaseURL();
-
-        final String actualClassAttributeQuestionOpen = mainPage
+        final String actualClassAttributeQuestionOpen = openBaseURL()
                 .scrollToQuestions()
-                .clickQuestion1()
-                .getClassAttributeQuestion1();
+                .clickFirstQuestion()
+                .getClassAttributeFirstQuestion();
 
         Assert.assertEquals(actualClassAttributeQuestionOpen,expectedClassOpen);
 
         final String actualClassAttributeQuestionCloses = mainPage
-                .clickQuestion1()
+                .clickFirstQuestion()
                 .waitForAnswerToBeInvisible()
-                .getClassAttributeQuestion1();
+                .getClassAttributeFirstQuestion();
 
         Assert.assertEquals(actualClassAttributeQuestionCloses,expectedClassCloses);
-
-
     }
+    @QaseTitle("Check that the link in the fourth question leads to the expected URL.")
+    @QaseId(value = 4900)
     @Test
     public void testLinkIn4Question() {
-
-        final String expectedUrl = ProjectConstants.DOMAIN + "/en/default-search";
-
-        MainPage mainPage = openBaseURL();
-        final String actualUrl =mainPage
+        final String actualUrl = openBaseURL()
                 .scrollToQuestions()
-                .clickQuestion4()
+                .clickFourthQuestion()
                 .clickLinkInQuestion4()
                 .getCurrentURL();
 
-        Assert.assertEquals(actualUrl,expectedUrl);
-
-
+        Assert.assertEquals(actualUrl,ProjectConstants.DOMAIN + "/en/default-search");
     }
-
+    @QaseTitle("Check that the \"Install Google Block\" button is clickable and leads to the expected URL.")
+    @QaseId(value = 4901)
     @Test
     public void testClickableAndVisibleInstallGoogleBlock() {
-
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
 
         openBaseURL()
@@ -198,26 +184,21 @@ public class MainTest extends BaseTest {
                 .clickInstallGoogleBlockPopup()
                 .switchToAnotherWindow();
 
-        final String actualUrl = getExternalPageURL();
-
-        Assert.assertEquals(actualUrl,expectedUrl);
-
-
+        Assert.assertEquals(getExternalPageURL(),expectedUrl);
     }
-
+    @QaseTitle("Check the number of links in the footer of the website.")
+    @QaseId(value = 4902)
     @Test
     public void testAmountLinksInTheFooter() {
-
-        MainPage mainPage = openBaseURL();
-        mainPage
+        int actualUrl = openBaseURL()
                 .scrollToFooter()
-                .waitForFooterPanelToBeVisible();
+                .waitForFooterPanelToBeVisible()
+                .getAllLinks().size();
 
-        int actualUrl = mainPage.getAllLinks().size();
         Assert.assertEquals(actualUrl, 26);
-
-
     }
+    @QaseTitle("Check that the services block links navigate to the corresponding pages.")
+    @QaseId(value = 4903)
     @Test(dataProvider = "ServicesBlockLinksData", dataProviderClass = TestData.class)
     public void testServicesBlockLinksNavigateToCorrespondingPages(
             int index, String expectedTittle,String expectedUrl) {
@@ -238,6 +219,8 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(actualURL,expectedUrl);
         Assert.assertEquals(actualTittle, expectedTittle);
     }
+    @QaseTitle("Check that the services block links navigate to the corresponding pages.")
+    @QaseId(value = 4904)
     @Test
     public void testHoverServicesBlockButtons() throws InterruptedException {
         MainPage mainPage = new MainPage(getDriver());
@@ -252,8 +235,10 @@ public class MainTest extends BaseTest {
         Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
 
     }
+    @QaseTitle("Check that popup google install Is Dysplaed")
+    @QaseId(value = 4905)
     @Test
-    public void testPopupIsDysplaed() {
+    public void testPopupGoogleInstallIsDysplaed() {
 
         MainPage mainPage = openBaseURL()
                 .waitForPopupGoogleInstallToBeVisible();
@@ -261,13 +246,11 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(mainPage.isPopupGoogleDisplayed());
         Assert.assertEquals(mainPage.getTextPopupInstall(),"Install Swisscows\n" + "at Google Chrome\n"
                 + "Stay with us and set Swisscows as your default search engine.");
-
-
     }
-
+    @QaseTitle("Check that popup google redirect to the corresponding page")
+    @QaseId(value = 4906)
     @Test
     public void testPopupGoogleRedirectToInstall() {
-
         final String expectedUrl = "https://chrome.google.com/webstore/detail/swisscows/ibimaeimnogcdnjmmlpodbhhbejnpaij?hl=en";
 
         openBaseURL()
@@ -278,10 +261,9 @@ public class MainTest extends BaseTest {
         final String actualUrl = getExternalPageURL();
 
         Assert.assertEquals(actualUrl,expectedUrl);
-
-
     }
-
+    @QaseTitle("Check that all images and texts in the \"Why Swisscows\" block on the main page are displayed.")
+    @QaseId(value = 4907)
     @Test
     public void testAllImagesAndTextsIsDisplayedWhySwisscowsBlock_MainPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -295,11 +277,11 @@ public class MainTest extends BaseTest {
                 .getH2Texts();
 
         Assert.assertTrue(actualH2Texts.size() > 0);
-
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
         Assert.assertTrue(mainPage.allImagesDisplayed());
-
     }
+    @QaseTitle("Check h1 text on the main page")
+    @QaseId(value = 4908)
     @Test
     public void testH1textIsCorrect_MainPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -307,18 +289,16 @@ public class MainTest extends BaseTest {
                 "Our Services",
                 "Questions and Answers",
                 "Why Swisscows?"
-
         );
         final List<String> actualH2Texts = openBaseURL()
                 .getH1TextsMainPage();
 
         Assert.assertTrue(actualH2Texts.size() > 0);
-
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
         Assert.assertEquals(mainPage.getMainTittleName(),"Anonymous search engine");
-
-
     }
+    @QaseTitle("Check font sizes h2 text on the main page")
+    @QaseId(value = 4909)
     @Test
     public void testTextsFontSizes_MainPage(){
         final List<String> expectedH1FontSizes = List.of(
@@ -332,7 +312,8 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
-
+    @QaseTitle("Check that  placeholder text on the main page.")
+    @QaseId(value = 4910)
     @Test
     public void testPlaceholderIsAvailable_Main() {
         final String expectedInnerTextOfPlaceholder = "Your search. Your business.";
@@ -346,7 +327,8 @@ public class MainTest extends BaseTest {
         Assert.assertEquals(actualInnerTextOfPlaceholder, expectedInnerTextOfPlaceholder);
 
     }
-
+    @QaseTitle("Check that the presence of the logo on the adaptive homepage.")
+    @QaseId(value = 4911)
     @Test
     public void testAdaptiveHomePageHasLogo() {
         MainPage mainPage =  openBaseURL()
@@ -355,8 +337,9 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(mainPage.isHomePageLogoDisplayed());
         Assert.assertTrue(mainPage.allImagesDisplayed());
 
-
     }
+    @QaseTitle("Check the texts of questions on the main page.")
+    @QaseId(value = 4912)
     @Test
     public void testQuestionsTextsMainPage() {
         List<String> expectedH3Texts = List.of(
@@ -373,7 +356,8 @@ public class MainTest extends BaseTest {
         Assert.assertTrue(actualH3Texts.size() > 0);
         Assert.assertEquals(actualH3Texts, expectedH3Texts);
     }
-
+    @QaseTitle("Check that the texts of answers on the main page.")
+    @QaseId(value = 4913)
     @Test
     public void testAnswersTextsMainPage() {
         List<String> expectedH3Texts = List.of(
@@ -400,11 +384,10 @@ public class MainTest extends BaseTest {
                 .scrollToQuestions()
                 .clickAllQuestions()
                 .getAnswersTexts();
+
         Assert.assertTrue(actualH3Texts.size() > 0);
         Assert.assertEquals(actualH3Texts, expectedH3Texts);
     }
-
-
 
 }
 

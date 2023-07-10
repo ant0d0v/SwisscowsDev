@@ -1,5 +1,6 @@
 package pages.accounts;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -74,42 +75,49 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
 
         return new SubscriptionsPage(getDriver());
     }
-
+    @Step("Click on the subscription icon.")
     public SubscriptionsPage clickSubscriptionIcon() {
-
         click(subscriptionIcon);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"See All\" link.")
     public SubscriptionsPage clickSeeAllLink() {
         wait10ElementToBeVisible(seeAllLink);
         click(seeAllLink);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Get the text of the successful message.")
     public SubscriptionsPage waitSuccessImage() {
         wait20ElementToBeVisible(successfulImage);
         wait10ElementToBeVisible(successfulMessage);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"Buy Now\" button of the Email Standard subscription.")
     public SubscriptionsPage clickBuyNowButtonOfEmailStandardSubscription() {
         clickByJavaScript(buyNowButtonOfEmailStandardSubscription);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"Buy Now\" button of the Platinum subscription.")
     public SubscriptionsPage clickBuyNowButtonOfPlatinumSubscription() {
         clickByJavaScript(buyNowButtonOfPlatinumSubscription);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"Confirm\" button in the popup")
     public SubscriptionsPage clickConfirmButtonInPopup() {
         click(confirmButtonInPopup);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"Buy Now\" button of the product.")
     public SubscriptionsPage clickBuyNowButtonOfProduct() {
         click(buyNowButtonOfPlatinumProduct);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the \"Buy Now\" button of the monthly plan.")
     public SubscriptionsPage clickBuyNowButtonOfMonthlyPlan() {
         click(buyNowButtonOfMonthlyPlan);
         return new SubscriptionsPage (getDriver());
     }
+    @Step("Click on the card payment method.")
     public SubscriptionsPage clickMethodCard() {
         click(methodCard);
         click(buttonProceed);
@@ -151,7 +159,7 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
         click(proceedButton);
     }
 
-
+    @Step("Proceed with the card payment.\n")
     public SubscriptionsPage payByCard() throws InterruptedException {
         clickClearInputRegularCardName();
         clickClearInputRegularCardNumber();
@@ -161,13 +169,16 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
 
         return new SubscriptionsPage(getDriver());
     }
+    @Step("Get the text of the successful message.")
     public String getTextSuccessfulMessage() {
         return getText(successfulMessage);
     }
+    @Step("Get the attribute of the Email Standard subscription.")
     public String getAttributeEmailStandardSubscription() {
         wait10ElementToBeVisible(attributeEmailStandardSubscription);
         return getAttribute(attributeEmailStandardSubscription,"class");
     }
+    @Step("Get the attribute of the Platinum subscription.")
     public String getAttributePlatinumSubscription() {
         wait10ElementToBeVisible(attributePlatinumSubscription);
         return getAttribute(attributePlatinumSubscription,"class");

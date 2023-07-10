@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.top_menu.ImagePage;
@@ -9,6 +10,7 @@ import utils.TestUtils;
 
 
 public class AutobahnTest extends BaseTest {
+    @QaseId(value = 4875)
     @Test
     public void testBrazilianBotsAndError429Page() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
@@ -30,6 +32,7 @@ public class AutobahnTest extends BaseTest {
         Assert.assertEquals(webPage.getH2FontSize(),"40px");
 
     }
+    @QaseId(value = 4889)
     @Test
     public void testRegularBotAndError429Page() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());

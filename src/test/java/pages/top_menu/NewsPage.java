@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,17 +43,18 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return new NewsPage(getDriver());
     }
+    @Step("Wait until the news search results are visible")
     public NewsPage waitUntilVisibilityNewsResult() {
         wait20ElementToBeVisible(newsResultContainer);
 
         return new NewsPage(getDriver());
     }
-
+    @Step("Wait until the error image is visible.")
     public NewsPage waitUntilVisibilityErrorImage() {
         wait20ElementToBeVisible(errorImage);
-
         return new NewsPage(getDriver());
     }
+    @Step("Get the title text of the news page")
     public String getTitleNews()  {
         wait10ElementToBeVisible(h2News);
         return getText(h2News);
@@ -61,9 +63,9 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return getTexts(h2Texts);
     }
+    @Step("Get the font size of the title text")
     public String getH2FontSize(){
         return  getFontSize(h2News);
-
     }
     public NewsPage selectRegionBrazil() {
         clickHamburgerMenu();

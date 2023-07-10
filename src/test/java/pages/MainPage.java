@@ -1,5 +1,6 @@
 package pages;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -44,13 +45,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
     private WebElement homepageBannerImageOfMusic;
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[1]")
-    private WebElement homepageQuestion1;
+    private WebElement homepageFirstQuestion;
 
     @FindBy(xpath = "//h3[@class='question'][1]")
     private WebElement homepageQuestionOne;
 
     @FindBy(xpath = "//div[@class= 'faq-wrap']//div[4]")
-    private WebElement homepageQuestion4;
+    private WebElement homepageFourthQuestion;
 
     @FindBy(xpath = "//p//a[@href='/en/default-search']")
     private WebElement linkInQuestion4;
@@ -126,29 +127,27 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return new MainPage(getDriver());
     }
+    @Step("Open the version.txt page on the Swisscows website.")
     public MainPage openVersionTxtPageSwisscows() {
         getDriver().get("https://dev.swisscows.com/version.txt");
         return new MainPage(getDriver());
     }
+    @Step("Open the version.txt page on the Accounts website.")
     public MainPage openVersionTxtPageAccount() {
         getDriver().get("https://accounts.dev.swisscows.com/version.txt");
         return new MainPage(getDriver());
     }
+    @Step("Get the text in the summary page.")
     public String getTextInSummaryPage() {
 
         return getText(summaryPage);
     }
-    public List <String> getH2TextsMainPage() {
-
-        return getTexts(h2TextsMainPage);
-    }
+    @Step("Get h1 text on the main page")
     public List <String> getH1TextsMainPage() {
-
         return getTexts(h1TextsMainPage);
     }
-
+    @Step("Get title text on the main page")
     public String getMainTittleName() {
-
         return getText(h1HomeTitle);
     }
     public String getTextPopupInstall() {
@@ -163,11 +162,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
 
 
+    @Step("Check that home page logo is displayed")
     public boolean isHomePageLogoDisplayed() {
-
         return isElementDisplayed(logoHome);
     }
-
+    @Step("Click on the search field ")
     public MainPage clickSearchField() {
         click(searchCityField);
 
@@ -180,31 +179,32 @@ public class MainPage extends FooterMenuPage<MainPage> {
         switchToAnotherWindow();
         return new MusicPage(getDriver());
     }
-
-    public MainPage clickQuestion1() {
+    @Step("Click on a first question .")
+    public MainPage clickFirstQuestion() {
         click(homepageQuestionOne);
 
         return this;
     }
-
+    @Step("Click on the \"Install Google Block\" button")
     public MainPage clickInstallGoogleBlockPopup() {
         click(installGoogleBlockPopup);
 
         return this;
     }
-
-    public MainPage clickQuestion4() {
-        click(homepageQuestion4);
+    @Step("Click on the fourth question")
+    public MainPage clickFourthQuestion() {
+        click(homepageFourthQuestion);
 
         return this;
     }
+    @Step("Click on the link within the fourth question")
     public MainPage clickLinkInQuestion4() {
         click(linkInQuestion4);
         switchToAnotherWindow();
         return new MainPage(getDriver());
 
     }
-
+    @Step("Click on all the questions to expand the answers.")
     public MainPage clickAllQuestions(){
         clickAllElementsInList(homepageAllQuestion);
         return new MainPage(getDriver());
@@ -222,7 +222,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-
+    @Step("Input the search criteria (e.g., the defined query).")
     public MainPage inputSearchCriteria(String text) {
         input(text, searchCityField);
 
@@ -240,34 +240,30 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return isElementDisplayed(suggestMainPage);
     }
+    @Step("Check that  images are dysplaed")
     public boolean allImagesDisplayed() {
-
         return areElementsInListDisplayed(allImagesMainPage);
     }
-
+    @Step("Check that  home page banner are dysplaed")
     public boolean homePageBannerIsDisplayed() {
-
         return isElementDisplayed(homepageBanner);
     }
-
+    @Step("Check that placeholder on the main page  is dysplaed")
     public boolean isPlaceholderDisplayedMain() {
-
         return isElementDisplayed(searchBoxTopMenu);
     }
-
+    @Step("Get text of placeholder")
     public String getInnerTextOfPlaceholderMain(String attribute) {
-
         return getAttribute(searchField, attribute);
     }
 
 
-
+    @Step("Click on the main logo to remove focus from the search field")
     public MainPage clickMainLogo() {
         click(logoHome);
-
         return this;
     }
-
+    @Step("Click to popup google")
     public MainPage clickPopupGoogle() {
         click(googlePopupInstall);
 
@@ -284,39 +280,41 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return new MainPage(getDriver());
     }
-
+    @Step("Click on the second switch button.")
     public MainPage clickBannerSwitchSecond() {
         clickByJavaScript(homepageBannerSwitchSecond);
         return this;
     }
+    @Step("Click on the first switch button.")
     public MainPage clickBannerSwitchFirst() {
         clickByJavaScript(homepageBannerSwitchFirst);
         return this;
     }
 
-
+    @Step("Get actual sizes of  suggest ")
     public int countElementsInSuggestContainer() {
-
         return getListSize(suggestListMainPage);
     }
 
-
+    @Step("Wait to be visible image Email in the banner")
     public MainPage waitForImageInBannerVisibleOfEmail() {
         wait20ElementToBeVisible(homepageBannerImageOfEmail);
       return new MainPage(getDriver());
     }
+    @Step("Wait to be visible image Music in the banner")
     public MainPage waitForImageInBannerVisibleOfMusic() {
         wait20ElementToBeVisible(homepageBannerImageOfMusic);
         return new MainPage(getDriver());
     }
-
-    public void waitForFooterPanelToBeVisible() {
+    @Step("Wait for the footer panel to be visible.")
+    public MainPage waitForFooterPanelToBeVisible() {
         wait20ElementToBeVisible(footerPanelContainer);
         wait20ElementToBeVisible(imageFooterPanel);
-
+       return new MainPage(getDriver());
     }
 
 
+    @Step("Wait until the suggest container is visible")
     public MainPage waitForSuggestToBeVisible() {
         wait20ElementToBeVisible(suggestMainPage);
         return new MainPage(getDriver());
@@ -327,37 +325,36 @@ public class MainPage extends FooterMenuPage<MainPage> {
         closeWindow();
         return new VpnPage(getDriver());
     }
+    @Step("Wait until to be visible popup google install ")
     public MainPage waitForPopupGoogleInstallToBeVisible() {
         wait20ElementToBeVisible(googlePopupInstall);
         return new MainPage(getDriver());
-
     }
-
+    @Step("Wait until to be the visible first answer")
     public MainPage waitForAnswerToBeInvisible(){
       wait10ElementToBeInVisible(homepageOneAnswer);
       return new MainPage(getDriver());
 
     }
-
+    @Step("Scroll to the questions section")
     public MainPage scrollToQuestions() {
         scrollByVisibleElement(homepageQuestion6);
-
         return this;
     }
-
+    @Step("Scroll to the \"Google Block\" popup block.")
     public MainPage scrollToBlockGooglePopup() {
         scrollByVisibleElement(installGoogleBlockPopup);
 
         return this;
     }
+    @Step("Scroll to the footer section.")
     public MainPage scrollToFooter() {
         scrollByVisibleElement(footerPanelContainer);
-
         return this;
     }
+    @Step("Scroll to the \"Our Services\" section.")
     public MainPage scrollToOurService() {
         scrollByVisibleElement(ourServiceContainer);
-
         return this;
     }
 
@@ -373,14 +370,12 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
 
-
+    @Step("Get all the links in the footer")
     public List<String> getAllLinks() {
         List<String> linksList = new ArrayList<>();
-
         for (WebElement link : allLinks) {
             linksList.add(getAttribute(link, "href"));
         }
-
         return linksList;
     }
 
@@ -388,13 +383,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getAttribute(element, "class");
     }
-
+    @Step("Get the class attribute value of the second switch button.")
     public String getClassAttributeSwitchSecond() {
 
         return getAttribute(homepageBannerSwitchSecond, "class");
     }
+    @Step("Get the class attribute value of the first switch button.")
    public String getClassAttributeSwitchFirst() {
-
      return getAttribute(homepageBannerSwitchFirst, "class");
    }
 
@@ -411,11 +406,11 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getAttribute(secondValueOfLight, "class");
     }
-
-    public String getClassAttributeQuestion1() {
-
-        return getAttribute(homepageQuestion1,"class");
+    @Step("Get the actual class attribute first question")
+    public String getClassAttributeFirstQuestion() {
+        return getAttribute(homepageFirstQuestion,"class");
     }
+    @Step("Get the actual class attribute value for all the questions and answer")
     public List<String> getClassAttributeAllQuestions() {
 
         return getAttributeClassAllElements(attributeAllQuestions);
@@ -425,16 +420,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return  getColorsOfElements(linksServicesBlock);
     }
+    @Step("Hover over the services block buttons and get the button colors when hovered over.")
     public List<String> getLinksColorsWhenHoverServicesBlock() throws InterruptedException {
-
         return  getHoverColorsOfElements(linksServicesBlock);
     }
 
-
+    @Step("Get the list of suggestions from the suggest container.")
     public List<String> getAllElementsText() {
-
         List<String> textList = new ArrayList<>();
-
         for (WebElement element : allChoicesInSuggestion) {
             textList.add(element.getText().toLowerCase());
         }
@@ -444,17 +437,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return linksServicesBlock;
     }
+    @Step("Click the services block link based on the provided index.")
     public void clickServicesBlockLinks(int index) {
         click(getServicesBlockLinks().get(index));
         switchToAnotherWindow();
-
     }
 
 
 
     public void switchToAnotherWindow() {
         String originalWindow = getDriver().getWindowHandle();
-
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (!originalWindow.equals(windowHandle) && getDriver().getWindowHandles().size() == 2) {
                 getDriver().switchTo().window(windowHandle);

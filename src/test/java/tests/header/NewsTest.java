@@ -1,6 +1,7 @@
 package tests.header;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -39,6 +40,7 @@ public class NewsTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
+    @QaseId(value = 4888)
     @Test
     public void testError501UnsupportedRegion_NewsPage(){
         NewsPage newsPage = new NewsPage (getDriver());
