@@ -97,6 +97,7 @@ public class MainTest extends BaseTest {
         final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
         final String actualValue = openBaseURL()
+                .waitForImageInBannerVisibleOfMusic()
                 .waitForImageInBannerVisibleOfEmail()
                 .getClassAttributeSwitchSecond();
 

@@ -12,7 +12,7 @@ public class SummaryTest extends BaseTest {
     @Test
     public void testOpenVersionTxtSwisscowsPage() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedTextInSummaryPage = "3.5";
+        final String expectedTextInSummaryPage = "3.6";
 
 
         final String actualTitle404Error = mainPage
