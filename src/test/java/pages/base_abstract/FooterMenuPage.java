@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import io.qase.api.annotation.Step;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
@@ -190,15 +191,15 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return getTexts(textsH1);
     }
-
+    @Step("Get h2 texts on the page")
     public List<String> getH2Texts() {
-
         return getTexts(textsH2);
     }
     public List<String> getH1Colors(){
         return  getColors(textsH1);
 
     }
+    @Step("Get font sixes h2 text")
     public List<String> getH2FontSizes(){
         return  getFontSizes(textsH2);
 

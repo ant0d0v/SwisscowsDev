@@ -94,7 +94,6 @@ public abstract class BaseTest {
     }
 
     public String getExternalPageURL() {
-
         return getDriver().getCurrentUrl();
     }
 }

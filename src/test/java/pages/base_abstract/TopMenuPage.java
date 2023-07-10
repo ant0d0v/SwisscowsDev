@@ -195,13 +195,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
-
+    @Step("Sign in to the account.")
     public LoginPage signIn() {
         clickSignInMenu().signInAsRegularUser();
-
         return new LoginPage(getDriver());
     }
-
+    @Step("Set the window size to the adaptive mode using the specified width and height constants (e.g., hamburger menu size).")
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
         setWindowDimensions(width, height);
 
@@ -386,8 +385,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
        return new MainPage(getDriver());
     }
+    @Step("Click on \"Account\" in the hamburger menu.")
     public SubscriptionsPage clickAccountInHamburgerMenu() {
-
         click(accountInHamburgerMenu);
         return new SubscriptionsPage (getDriver());
     }
@@ -403,8 +402,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    @Step("Get h3 texts")
     public List <String> getH3Texts() {
-
         return getTexts(textsH3);
     }
     public List <String> getH2Texts() {
@@ -415,12 +414,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return getText(textH1);
     }
+    @Step("Get the texts of the answers.")
     public List <String> getAnswersTexts() {
-
         return getTexts(textsAnswers);
     }
     public String getHeartPopupMessage() {
-
         return getText(popupHeartIcon);
     }
 
@@ -446,6 +444,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new WebPage(getDriver());
     }
+    @Step("Click the search icon.")
     public WebPage clickSearchButton() {
         clickEnter(searchButton);
 
