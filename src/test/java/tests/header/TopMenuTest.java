@@ -1,31 +1,26 @@
 package tests.header;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.accounts.UsersLoginPage;
-import pages.top_menu.NewsPage;
-import pages.top_menu.VideoPage;
-import pages.top_menu.VpnPage;
-import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
 
 import java.util.List;
 
 public class TopMenuTest extends BaseTest {
-
+    @QaseTitle("TeleGuard icon navigates to the TeleGuard web page.")
+    @QaseId(value = 4918)
     @Test
     public void testTeleGardIconNavigatesToTeleGardWebPage() {
+        MainPage mainPage = new MainPage(getDriver());
         final String expectedPartialInstagramURL = "https://teleguard.com/en";
 
         final String oldURL = openBaseURL().getCurrentURL();
-
-        MainPage mainPage = new MainPage(getDriver());
         mainPage
                 .clickTeleGuardTopMenu()
                 .switchToExternalPage();
@@ -34,18 +29,20 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(getExternalPageURL(), expectedPartialInstagramURL);
 
     }
-
+    @QaseTitle("Email icon navigates to the Email web page.")
+    @QaseId(value = 4919)
     @Test(retryAnalyzer = Retry.class)
     public void testEmailIconNavigatesToEmailWebPage() {
         MainPage mainPage = new MainPage(getDriver());
         final String expectedEmailURL = ProjectConstants.DOMAIN +"/en/swisscows-email";
         final String expectedH1Text = "A letter is your personal property!";
 
-        String oldURL = openBaseURL().getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
         mainPage
                 .clickEmailTopMenu()
                 .switchToExternalPage();
-        final String actualH1text = mainPage.getH1Text();
+        final String actualH1text = mainPage
+                .getH1Text();
 
 
         Assert.assertNotEquals(getExternalPageURL(), oldURL);
@@ -53,12 +50,13 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
-    @Ignore
-    @Test(retryAnalyzer = Retry.class)
+    @QaseTitle("VPN icon navigates to the VPN web page.")
+    @QaseId(value = 4920)
+    @Test
     public void testVPNIconNavigatesToVPNWebPage() {
         MainPage mainPage = new MainPage(getDriver());
         final String expectedURL = ProjectConstants.DOMAIN + "/en/anonymous-vpn";
-        final String expectedTitle = ProjectConstants.TITLE_VPN_PAGE ;
+        final String expectedH1text = "Anonymous web surfing with Swisscows";
 
         final String oldURL = openBaseURL()
                 .getCurrentURL();
@@ -67,14 +65,15 @@ public class TopMenuTest extends BaseTest {
                 .clickVPNTopMenu()
                 .getCurrentURL();
 
-        final String actualTitle = mainPage.getTitle();
+        final String actualH1text = mainPage.getH1Text();
 
         Assert.assertNotEquals(actualURL, oldURL);
         Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(actualH1text, expectedH1text);
     }
 
-
+    @QaseTitle("Texts of the links in the hamburger menu.")
+    @QaseId(value = 4921)
     @Test
     public void testHamburgerMenuLinksTexts() {
         final List<String> expectedList = List.of(
@@ -89,13 +88,15 @@ public class TopMenuTest extends BaseTest {
                 "Donation",
                 "Support"
         );
-
+        
         final List actualList = openBaseURL()
                 .clickHamburgerMenuIcon()
-                .getLinksText();
+                .getLinksOfText();
+
         Assert.assertEquals(actualList, expectedList);
     }
-
+    @QaseTitle("Hamburger menu can be clicked and its visibility changes accordingly.")
+    @QaseId(value = 4922)
     @Test
     public void testHamburgerMenuIsClickable() {
         MainPage mainPage = new MainPage(getDriver());
@@ -115,8 +116,8 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(actualIfNotVisible, expectedIfNotVisible);
     }
-
-
+    @QaseTitle("Check number of top menu links")
+    @QaseId(value = 4923)
     @Test
     public void testTopMenuLinkAmount() {
         final int expectedTopMenuLinkAmount = 3;
@@ -126,7 +127,8 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(actualTopMenuLinkAmount, expectedTopMenuLinkAmount);
     }
-
+    @QaseTitle("Clicking on the company's logo leads to the basic URL address.")
+    @QaseId(value = 4924)
     @Test
     public void testCompanyLogoNavigatesToBaseURL() {
         MainPage mainPage = new MainPage(getDriver());
@@ -145,9 +147,10 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-
-    @Test(dataProvider = "TopMenuTestData", dataProviderClass = TestData.class)
-    public void testEachTopMenuNavigatesToCorrespondingPage(
+    @QaseTitle("Each hamburger menu links navigates to the corresponding page.")
+    @QaseId(value = 4925)
+    @Test(dataProvider = "hamburgerTestData", dataProviderClass = TestData.class)
+    public void testEachHamburgerMenuLinksNavigatesToCorrespondingPage(
             int index, String menuName, String href, String expectedURL) {
         MainPage mainPage = new MainPage(getDriver());
 
@@ -170,7 +173,8 @@ public class TopMenuTest extends BaseTest {
         }
 
     }
-
+    @QaseTitle("Check Availability and Options of Hamburger Menu in Top Menu")
+    @QaseId(value = 4926)
     @Test
     public void testHamburgerMenuIsAvailableAndHasOptions_TopMenu() {
         MainPage mainPage = new MainPage(getDriver());
@@ -185,7 +189,7 @@ public class TopMenuTest extends BaseTest {
                 .clickHamburgerMenuIcon()
                 .getNumberOfListHamburgerMenu();
 
-        final List<String> actualHamburgerMenuListTexts =mainPage.getHamburgerMenuAllListText();
+        final List<String> actualHamburgerMenuListTexts = mainPage.getHamburgerMenuAllListText();
 
         Assert.assertTrue(mainPage.isHamburgerIconDisplayed());
         Assert.assertTrue(mainPage.getNumberOfListHamburgerMenu() > 0);
@@ -193,22 +197,25 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualHamburgerMenuListTexts, expectedHamburgerMenuListTexts);
     }
 
-
+    @QaseTitle("Check navigation account Page when clicking SingIn from hamburger menu")
+    @QaseId(value = 4927)
     @Test
-    public void testLoginMenuNavigatesToAccountPage() {
-        final String expectedURLPartial = ProjectConstants.URL_ACCOUNTS;
+    public void testNavigationAccountPageWhenClickingSingInFromHamburgerMenu() {
+        MainPage mainPage = new MainPage(getDriver());
+
         final String oldURL = openBaseURL().getCurrentURL();
 
-        String actualURL = new MainPage(getDriver())
+        final String actualURL = mainPage
                 .clickHamburgerMenu()
                 .clickSignInMenu()
                 .getCurrentURL();
 
         Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertTrue(actualURL.contains(expectedURLPartial), " PageURL does not contain 'accounts.dev.swisscows.com' ");
+        Assert.assertTrue(actualURL.contains(ProjectConstants.URL_ACCOUNTS), " PageURL does not contain 'accounts.dev.swisscows.com' ");
 
     }
-
+    @QaseTitle("Check availability and options of localization dropdown menu in hamburger Menu")
+    @QaseId(value = 4928)
     @Test
     public void testLocalizationDropdownMenuIsAvailableAndHasOptions_TopMenu() {
         MainPage mainPage = new MainPage(getDriver());
@@ -220,7 +227,7 @@ public class TopMenuTest extends BaseTest {
         final int actualNumberOfOptionsHamburgerMenu = openBaseURL()
                 .setWindowWithHamburgerMenu(ProjectConstants.WIDTH_HAMBURGER_MENU, ProjectConstants.HEIGHT_HAMBURGER_MENU)
                 .clickHamburgerMenuIcon()
-                .clickLanguagesTopMenu()
+                .clickLanguagesHamburgerMenu()
                 .getNumberLangMenu();
 
         List<String> actualHamburgerMenuListTexts = mainPage.getLangMenuListTexts();
@@ -230,7 +237,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualNumberOfOptionsHamburgerMenu, expectedNumberOfOptionsHamburgerMenu);
         Assert.assertEquals(actualHamburgerMenuListTexts, expectedHamburgerMenuListTexts);
     }
-
+    @QaseTitle("Check navigation to corresponding pages for localization")
+    @QaseId(value = 4929)
     @Test(dataProvider = "LangTopMenuTestData", dataProviderClass = TestData.class)
     public void testLocalizationNavigateToCorrespondingPages(
             int index, String LangName, String expectedURL, String expectedTitle) {
@@ -252,7 +260,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-
+    @QaseTitle("Check  availability and options of region dropdown menu in hamburger menu")
+    @QaseId(value = 4930)
     @Test
     public void testRegionDropdownMenuIsAvailableAndHasOptions_TopMenu() {
         MainPage mainPage = new MainPage(getDriver());
@@ -267,20 +276,21 @@ public class TopMenuTest extends BaseTest {
                 , "Spain", "Sweden", "Switzerland (DE)", "Switzerland (FR)", "Taiwan", "Turkey", "Ukraine", "United Kingdom"
                 , "United States (EN)", "United States (ES)", "World-wide"
         );
-        final int actualNumberOfOptionsHamburgerMenu =openBaseURL()
+        final int actualNumberOfOptionsHamburgerMenu = openBaseURL()
                 .clickHamburgerMenuIcon()
                 .clickRegionTopMenu()
                 .scrollToLastElementInDropdownRegion()
                 .getNumberRegionMenu();
 
-        final List<String> actualHamburgerMenuListTexts =mainPage.getLangMenuListTexts();
+        final List<String> actualHamburgerMenuListTexts = mainPage.getLangMenuListTexts();
 
         Assert.assertTrue(mainPage.isHamburgerIconDisplayed());
         Assert.assertTrue(mainPage.getNumberOfListHamburgerMenu() > 0);
         Assert.assertEquals(actualNumberOfOptionsHamburgerMenu, expectedNumberOfOptionsHamburgerMenu);
         Assert.assertEquals(actualHamburgerMenuListTexts, expectedHamburgerMenuListTexts);
     }
-
+    @QaseTitle("Check navigation to corresponding pages for region")
+    @QaseId(value = 4931)
     @Test(dataProvider = "RegionTopMenuTestData", dataProviderClass = TestData.class)
     public void testRegionNavigateToCorrespondingPages(
             int index, String LangName, String expectedURL, String expectedTitle){
@@ -294,13 +304,14 @@ public class TopMenuTest extends BaseTest {
                 .waitForUrlContains(ProjectConstants.DOMAIN +"/en?region=");
 
         final String actualURL = mainPage.getCurrentURL();
-        final String actualTitle = getDriver().getTitle();
+        final String actualTitle = mainPage.getTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-
+    @QaseTitle("Check default theme on first opening the site")
+    @QaseId(value = 4932)
     @Test
     public void testThemeIsDefaultFirstOpenSite() {
         final String expectedValue = "active";
@@ -313,7 +324,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValue, expectedValue);
 
     }
-
+    @QaseTitle("Check theme change to light theme")
+    @QaseId(value = 4933)
     @Test
     public void tesThemeChanged(){
         final String expectedValue = "active";
@@ -328,7 +340,8 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(actualValueLight, expectedValue);
     }
-
+    @QaseTitle("Theme change of body")
+    @QaseId(value = 4934)
     @Test
     public void tesThemeOfBodyChanged()  {
         final String expectedValue = "dark";
@@ -340,9 +353,9 @@ public class TopMenuTest extends BaseTest {
                 .getClassAttributeBodyOfSite();
 
         Assert.assertEquals(actualValueLight, expectedValue);
-
-
     }
+    @QaseTitle("Check Theme menu texts")
+    @QaseId(value = 4935)
     @Test
     public void testThemeMenuTexts() {
         final List<String> expectedList = List.of(
@@ -355,9 +368,11 @@ public class TopMenuTest extends BaseTest {
                 .clickHamburgerMenuIcon()
                 .clickThemeDropDownIcon()
                 .getLangMenuListTexts();
+
         Assert.assertEquals(actualList, expectedList);
     }
-
+    @QaseTitle("Check  login User and display of avatar image in hamburger menu")
+    @QaseId(value = 4936)
     @Test
     public void testLoginUserAndAvatarIconIsDysplaed() {
 
@@ -370,7 +385,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertTrue(mainPage.isAvatarIconIsDisplayedInHamburgerMenu());
 
     }
-
+    @QaseTitle("Check  login User and display of nickname in hamburger menu")
+    @QaseId(value = 4937)
     @Test
     public void testLoginUserAndNicknameIsDysplaed() {
         final String expectedNick = "a" +"\n" +"a.qa@swisscows.email";
@@ -384,22 +400,26 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(nickname, expectedNick);
     }
-        @Test
-        public void testLogOutUserAndLoginButtonIsDysplaed()  {
-            MainPage mainPage = new MainPage(getDriver());
-            final String actualUrl =openBaseURL()
-                    .clickHamburgerMenu()
-                    .signIn()
-                    .waitTopMenuToBeVisible()
-                    .logOut()
-                    .waitTopMenuToBeVisible()
-                    .clickHamburgerMenu()
-                    .getCurrentURL();
+    @QaseTitle("Check Log Out user and display of login button")
+    @QaseId(value = 4938)
+    @Test
+    public void testLogOutUserAndLoginButtonIsDysplaed()  {
+        MainPage mainPage = new MainPage(getDriver());
+        final String actualUrl =openBaseURL()
+                .clickHamburgerMenu()
+                .signIn()
+                .waitTopMenuToBeVisible()
+                .logOut()
+                .waitTopMenuToBeVisible()
+                .clickHamburgerMenu()
+                .getCurrentURL();
 
-            Assert.assertTrue(mainPage.isLoginIconDisplayed());
-            Assert.assertTrue(actualUrl.contains(ProjectConstants.DOMAIN));
+        Assert.assertTrue(mainPage.isLoginIconDisplayed());
+        Assert.assertTrue(actualUrl.contains(ProjectConstants.DOMAIN));
 
     }
+    @QaseTitle("Check that display of heart icon message on the main Page")
+    @QaseId(value = 4939)
     @Test
     public void testHeartIconMessageIsDysplaed_MainPage() {
 
@@ -410,10 +430,10 @@ public class TopMenuTest extends BaseTest {
                 .clickHeartIcon()
                 .getHeartPopupMessage();
 
-
         Assert.assertEquals(actualTextHeartPopup,expectedTextHeartPopup);
-
     }
+    @QaseTitle("Check charity query counter value at the Beginning")
+    @QaseId(value = 4940)
     @Test
     public void testCharityQueryCounterAtTheBeginning_MainPage() {
 
@@ -425,6 +445,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
 
     }
+    @QaseTitle("Check charity query counter value after refresh page")
+    @QaseId(value = 4941)
     @Test
     public void testCharityQueryCounterAfterReloadPage_MainPage() {
         final String expectedValueHeartIcon = "0";
@@ -436,6 +458,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
 
     }
+    @QaseTitle("Check charity query counter value after search and go back to main bage ")
+    @QaseId(value = 4942)
     @Test
     public void testCharityQueryCounterSearchAndGoBack_MainPage() {
 
@@ -451,6 +475,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
 
     }
+    @QaseTitle("Check query counter value when searching for images ")
+    @QaseId(value = 4943)
     @Test
     public void testCharityQueryCounterSearchImage() {
 
@@ -467,6 +493,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
 
     }
+    @QaseTitle("Check query counter value when searching for videos ")
+    @QaseId(value = 4944)
     @Test
     public void testCharityQueryCounterSearchVideo() {
 
@@ -483,11 +511,13 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
 
     }
+    @QaseTitle("Check query counter value when searching for news ")
+    @QaseId(value = 4945)
     @Test
     public void testCharityQueryCounterSearchNews() {
         final String expectedValueHeartIcon = "2";
 
-        final String  actualValueHeartIcon =openBaseURL()
+        final String  actualValueHeartIcon = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
@@ -500,6 +530,8 @@ public class TopMenuTest extends BaseTest {
 
         Assert.assertEquals(actualValueHeartIcon,expectedValueHeartIcon);
     }
+    @QaseTitle("Check message is dysplaed after click heart icon")
+    @QaseId(value = 4946)
     @Test
     public void testHeartIconMessageIsDysplaed_SearchPages() {
 
@@ -512,10 +544,10 @@ public class TopMenuTest extends BaseTest {
                 .clickHeartIcon()
                 .getHeartPopupMessage();
 
-
         Assert.assertEquals(actualTextHeartPopup,expectedTextHeartPopup);
-
     }
+    @QaseTitle("Check that email icon navigates to login page if user logged in ")
+    @QaseId(value = 4947)
     @Test
     public void testEmailIconNavigatesToLoginPageIfLoggedIn() {
         MainPage mainPage = new MainPage(getDriver());
@@ -534,6 +566,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
+    @QaseTitle("Check that email icon navigates to login page if user logged in on the search page  ")
+    @QaseId(value = 4948)
     @Test
     public void testEmailIconNavigatesToLoginPageIfLoggedIn_SearchPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -554,7 +588,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedH1Text);
 
     }
-
+    @QaseTitle("VPN icon navigates to the VPN web page for search page")
+    @QaseId(value = 4949)
     @Test
     public void testVpnIconNavigatesToVpnPage_SearchPage() {
         MainPage mainPage = new MainPage(getDriver());
@@ -573,6 +608,8 @@ public class TopMenuTest extends BaseTest {
         Assert.assertEquals(actualH1text,expectedTitle);
 
     }
+    @QaseTitle("VPN icon navigates to the VPN web page for search page")
+    @QaseId(value = 4950)
     @Test
     public void testTeleGuardIconNavigatesToTeleGuardPage_SearchPage() {
         final String expectedURL = "https://teleguard.com/en";

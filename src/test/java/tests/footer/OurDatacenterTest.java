@@ -2,11 +2,9 @@ package tests.footer;
 
 import base.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.footer_menu.MakeDefaultSearchPage;
 import pages.footer_menu.OurDatacenterPage;
 import utils.ProjectConstants;
 
@@ -39,7 +37,7 @@ public class OurDatacenterTest extends BaseTest {
                 .scrollToFooterMenu()
                 .clickOurDatacenterPageFooterMenu()
                 .clickHamburgerMenu()
-                .clickLanguagesTopMenu()
+                .clickLanguagesHamburgerMenu()
                 .clickGermanyLang()
                 .getCurrentSrcOfVideo();
         ourDatacenterPage

@@ -183,7 +183,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return getText(copyright);
     }
-
+    @Step("Get h1 text on the page")
     public String getH1Text() {
         return getText(textH1FooterMenu);
     }

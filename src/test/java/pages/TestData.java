@@ -5,8 +5,8 @@ import utils.ProjectConstants;
 
 public class TestData {
 
-    @DataProvider(name = "TopMenuTestData")
-    public static Object[][] topMenuTestDataProvider() {
+    @DataProvider(name = "hamburgerTestData")
+    public static Object[][] hamburgerTestDataProvider() {
 
         return new Object[][]{
                 {0, "Set as Startpage", "/en/set-as-startpage", ProjectConstants.DOMAIN + "/en/set-as-startpage"},

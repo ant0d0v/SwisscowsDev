@@ -180,22 +180,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
     public abstract Generic createGeneric();
-
+    @Step("Get the actual number of top menu links on the page.")
     public int topMenuLinkAmount() {
-
         return getListSize(topMenus);
     }
 
     protected WebElement getLastElementInDropdownRegion() {
-
         return lastElementInDropdownRegion;
     }
-
-    public List<String> getLinksText() {
-
+    @Step("Get text of links")
+    public List<String> getLinksOfText() {
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
-    @Step("Sign in to the account.")
     public LoginPage signIn() {
         clickSignInMenu().signInAsRegularUser();
         return new LoginPage(getDriver());
@@ -206,31 +202,29 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MainPage(getDriver());
     }
+    @Step("Wait until to be invisible loader")
     public ImagePage waitForLoaderToBeInVisible(){
         wait10ElementToBeInVisible(loader);
         return new ImagePage(getDriver());
     }
-
+    @Step("Get the list of texts for all the options in the Localization dropdown menu.")
     public List<String> getLangMenuListTexts() {
-
         return getTexts(innerLangMenuList);
     }
-
+    @Step("Get the list of texts for all the Hamburger menu options.")
     public List<String> getHamburgerMenuAllListText() {
-
         return getTexts(hamburgerTopMenuDropdownList);
     }
-
+    @Step("Get the number of options in the Localization dropdown menu.")
     public int getNumberLangMenu() {
-
         return getListSize(innerRegionMenuList);
     }
+    @Step("Get the number of options in the region dropdown menu.")
     public int getNumberRegionMenu() {
-
         return getListSize(innerRegionMenuList);
     }
+    @Step("Get the number of options in the Hamburger menu")
     public int getNumberOfListHamburgerMenu() {
-
         return getListSize(hamburgerTopMenuDropdownList);
     }
     public List<String> getH2FontSizes(){
@@ -257,9 +251,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToAnotherWindow();
         return new VpnInstructionsPage(getDriver());
     }
-
+    @Step("Get the value of the class attribute for the hamburger menu when it is visible.")
     public String getHamburgerMenuIsActiveValue() {
-
         return getAttribute(hamburgerTopMenu, "class");
     }
 
@@ -267,7 +260,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return allLinksOnPage;
     }
-
+    @Step("Wait for the top menu to be visible.")
     public MainPage waitTopMenuToBeVisible(){
         wait10ElementToBeVisible(topMenuContainer);
         return new MainPage(getDriver());
@@ -281,7 +274,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public MusicPage selectDeutschLocalisation(){
         clickHamburgerMenu();
-        clickLanguagesTopMenu();
+        clickLanguagesHamburgerMenu();
         clickLangDeutsch();
         return new MusicPage(getDriver());
     }
@@ -300,7 +293,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickAllElementsInList(allHeartButtons);
         return new MusicPage(getDriver());
     }
-
+    @Step("Click on the Log Out option.")
     public MainPage logOut() {
         click(hamburgerTopMenu);
         wait20ElementToBeVisible(LogOutButtonHamburgerDropDownMenu);
@@ -334,41 +327,40 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
-
+    @Step("Click the company logo.")
     public MainPage clickLogo() {
         click(logo);
-
         return new MainPage(getDriver());
     }
 
-
+    @Step("Click on the TeleGuard icon in the top menu")
     public MainPage clickTeleGuardTopMenu() {
         click(TeleGuardTopMenu);
-
         return new MainPage(getDriver());
     }
-
-    public MainPage clickLanguagesTopMenu() {
+    @Step("Click on the Languages option in the hamburger menu")
+    public MainPage clickLanguagesHamburgerMenu() {
         click20(LangDropDownIcon);
-
         return new MainPage(getDriver());
     }
-
+    @Step("Click on the Email icon in the top menu")
     public EmailPage clickEmailTopMenu() {
-
         click20(EmailTopMenu);
         return  new EmailPage(getDriver());
     }
+    @Step("Click on the Email icon in the top menu ")
     public LoginPage clickEmailTopMenuSearch() {
         waitForElementIsDisappeared(loader);
         click(emailTopMenuSearch);
         return  new LoginPage (getDriver());
     }
+    @Step("Click on the VPN icon in the top menu ")
     public VpnPage clickVpnTopMenuSearch() {
         wait10ElementToBeVisible(vpnTopMenuSearch);
         click(vpnTopMenuSearch);
         return  new VpnPage (getDriver());
     }
+    @Step("Click on the TeleGuard icon in the top menu ")
     public MainPage clickTeleGuardTopMenuSearch() {
         wait10ElementToBeVisible(teleGuardTopMenuSearch);
         click(teleGuardTopMenuSearch);
@@ -379,7 +371,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(RegionDropDownIcon);
         return new MainPage(getDriver());
     }
-
+    @Step("Click on the theme dropdown icon.")
     public MainPage clickThemeDropDownIcon() {
         click(ThemeDropDownIcon);
 
@@ -396,7 +388,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         switchToExternalPage();
         return new VpnPage(getDriver());
     }
-
+    @Step("Click hamburger menu icon")
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
@@ -418,10 +410,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List <String> getAnswersTexts() {
         return getTexts(textsAnswers);
     }
+    @Step("Get the text of the heart icon popup message.")
     public String getHeartPopupMessage() {
         return getText(popupHeartIcon);
     }
-
+    @Step("Click the \"Set as Startpage\" link in the hamburger menu.")
     public SetAsStartPage clickSetAsStartAppInHamburgerMenu() {
         click(setAsStartAppHamburgerMenu);
         switchToAnotherWindow();
@@ -450,6 +443,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new WebPage(getDriver());
     }
+    @Step("Click video button")
     public VideoPage clickVideoButton() {
         clickEnter(videoButton);
 
@@ -460,11 +454,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new MusicPage(getDriver());
     }
-
+    @Step("Click image button")
     public ImagePage clickImageButton() {
         clickEnter(imageButton);
         return new ImagePage(getDriver());
     }
+    @Step("Wait until url to be changed ")
     public ImagePage waitUrlToBeChanged(String parametr){
         waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new ImagePage(getDriver());
@@ -492,34 +487,31 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(searchFieldHeader);
         return new MainPage(getDriver());
     }
+    @Step("Click on the heart icon.")
     public MainPage clickHeartIcon() {
         click(heartIcon);
 
         return new MainPage(getDriver());
     }
-
+    @Step("Hamburger dropdown container is displayed ")
     public boolean isHamburgerDropdownContainerDisplayed() {
-
         return isElementDisplayed(hamburgerDropDownContainerTopMenu);
     }
-
+    @Step("Verify that the Hamburger menu icon is displayed.")
     public boolean isHamburgerIconDisplayed() {
-
         return isElementDisplayed(hamburgerTopMenuIcon);
     }
 
+    @Step("Verify that the login icon is displayed.")
     public boolean isLoginIconDisplayed() {
-
         return isElementDisplayed(LoginIconHamburgerMenu);
     }
-
+    @Step("Verify that the avatar icon is displayed in the hamburger menu")
     public boolean isAvatarIconIsDisplayedInHamburgerMenu() {
-
         return isElementDisplayed(AvatarIconHamburgerMenu);
     }
-
+    @Step("Verify that the logo image is displayed in the header")
     public boolean isLogoIconDisplayed() {
-
         return isElementDisplayed(logo);
     }
 
@@ -527,9 +519,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return areElementsInListDisplayed(allImagesOnPage);
     }
+    @Step("Click on the Sign In menu.")
     public UsersLoginPage clickSignInMenu() {
         click20(signInTopMenu);
-
         return new UsersLoginPage(getDriver());
     }
 
@@ -558,7 +550,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
 
 
-
+    @Step("Get the value of the heart icon counter.")
     public String getValueHeartIcon() {
         int attempts = 0;
         while (attempts < 2) {
@@ -570,15 +562,18 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         }
         return null;
     }
+    @Step("Refresh main page")
     public MainPage refreshMainPage() {
         refreshPage();
         wait10ElementToBeVisible(heartIcon);
         return new MainPage(getDriver());
     }
+    @Step("Go back to main page")
     public MainPage goBackToMainPage() {
         goBack();
         return new MainPage(getDriver());
     }
+    @Step("Wait until to be changed value of charity")
     public WebPage waitCharityValueCountChanged(String newValue ) {
         waitAttributeToBeChanged(valueHeartIcon, "title",newValue);
         return new WebPage(getDriver());
@@ -621,7 +616,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
-
         createGeneric();
         return new MainPage(getDriver());
     }
@@ -634,7 +628,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return innerRegionMenuList;
     }
-    @Step("nput the search criteria and press Enter.")
+    @Step("Input the search criteria and press Enter.")
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
