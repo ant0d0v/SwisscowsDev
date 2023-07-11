@@ -1,5 +1,6 @@
 package pages.accounts;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,7 +47,7 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
     public void clickSubmitButton() {
         clickEnter(submitButton);
     }
-
+    @Step("Sign in to the account.")
     public void signInAsRegularUser() {
         clickClearInputRegularUserEmail();
         clickClearInputRegularUserPassword();
@@ -55,4 +56,3 @@ public class UsersLoginPage extends FooterMenuPage<UsersLoginPage> {
         new MainPage(getDriver());
     }
 }
-

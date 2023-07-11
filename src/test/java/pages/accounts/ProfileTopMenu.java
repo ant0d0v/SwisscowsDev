@@ -25,9 +25,9 @@ public abstract class ProfileTopMenu<Generic> extends TopMenuPage<Generic> {
 
     public abstract Generic createGeneric();
 
-
     public UsersLoginPage clickSignInMenu() {
         click(signInTopMenu);
+
         return new UsersLoginPage (getDriver());
     }
 
@@ -37,6 +37,7 @@ public abstract class ProfileTopMenu<Generic> extends TopMenuPage<Generic> {
                 .clickClearInputRegularUserEmail()
                 .clickClearInputRegularUserPassword()
                 .clickSubmitButton();
+
         return new LoginPage(getDriver());
     }
 }

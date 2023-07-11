@@ -192,7 +192,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public List<String> getLinksOfText() {
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
-    @Step("Sign in to the account.")
     public LoginPage signIn() {
         clickSignInMenu().signInAsRegularUser();
         return new LoginPage(getDriver());
