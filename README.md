@@ -4,110 +4,73 @@
 
 <p><strong>pom.xml dependencies used:</strong></p>
 <blockquote>
-<pre>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <aspectj.version>1.9.19</aspectj.version>
-        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
-        <allure-testing.version>2.6.0</allure-testing.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <suiteXml>testng.xml</suiteXml>
-    </properties>
-    <dependencies>
+<dependencies>
+    
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.7.1</version>
         </dependency>
+        
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.10.0</version>
         </dependency>
+        
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.3</version>
         </dependency>
+        
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10</version>
         </dependency>
+        
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.14.1</version>
         </dependency>
+        
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.3.0</version>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20220924</version>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.26</version>
         </dependency>
+        
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.20.1</version>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>io.qase</groupId>
             <artifactId>qase-testng</artifactId>
             <version>3.0.5</version>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                    </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/${suiteXml}</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
-                <configuration>
-                    <allureDownloadUrl>https://github.com/allure-framework/allure/releases/download/2.7.0/allure-2.7.0.zip</allureDownloadUrl>
-                    <resultsDirectory>allure-results</resultsDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-</project></pre>
 </blockquote>
 <h1>API testing in progress</h1>
 <p>For testing requests and responses&nbsp;<strong>DevTools&nbsp;type property</strong> was used&nbsp;</p>
