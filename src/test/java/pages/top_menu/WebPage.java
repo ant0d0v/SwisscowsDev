@@ -366,7 +366,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(lastImageInVideoWidget);
 
     }
-    @Step("Wait until the web search results are visibl")
+    @Step("Wait until the web search results are visible")
     public WebPage waitUntilVisibilityWebResult() {
         wait20ElementToBeVisible(webResultContainer);
 

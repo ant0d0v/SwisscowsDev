@@ -457,13 +457,11 @@ public abstract class BasePage {
     public void waitForElementIsDisappeared(WebElement element) {
         getWait10().until(ExpectedConditions.visibilityOf(element));
     }
-
+    @Step("Switch to the external web page.")
     public void switchToExternalPage() {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
-
-
 
     public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);

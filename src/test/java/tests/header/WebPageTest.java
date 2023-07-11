@@ -541,7 +541,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickHamburgerMenu()
-                .clickLanguagesTopMenu()
+                .clickLanguagesHamburgerMenu()
                 .clickLangDeutsch();
 
 

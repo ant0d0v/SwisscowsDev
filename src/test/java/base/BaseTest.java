@@ -92,7 +92,7 @@ public abstract class BaseTest {
 
         return getDriver().getTitle();
     }
-
+    @Step("Get url external web page.")
     public String getExternalPageURL() {
         return getDriver().getCurrentUrl();
     }

@@ -154,7 +154,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return getText(googlePopupInstall);
     }
-
+    @Step("Get the nickname displayed in the Hamburger menu.")
     public String getNicknameInHamburgerMenu() {
         wait10ElementToBeVisible(nicknameHamburgerMenu);
         return getText(nicknameHamburgerMenu);
@@ -216,7 +216,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-
+    @Step("croll to the last element in the dropdown menu of regions.")
     public MainPage scrollToLastElementInDropdownRegion() {
         scrollByVisibleElement(getLastElementInDropdownRegion());
 
@@ -269,12 +269,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
 
         return this;
     }
-
+    @Step("Click on the Light theme option.")
     public MainPage clickThemeLight() {
         click(secondValueOfLight);
 
         return new MainPage(getDriver());
     }
+    @Step("Click on the Dark theme option.")
     public MainPage clickThemeDark() {
         click(thirdValueOfDark);
 
@@ -392,18 +393,16 @@ public class MainPage extends FooterMenuPage<MainPage> {
    public String getClassAttributeSwitchFirst() {
      return getAttribute(homepageBannerSwitchFirst, "class");
    }
-
+    @Step("Get the class attribute value of the default theme.")
     public String getClassAttributeThemeDefault() {
-
         return getAttribute(firstValueOfTheme, "class");
     }
-
+    @Step("Get the class attribute value of the body of the site.")
     public String getClassAttributeBodyOfSite() {
-
         return getAttribute(bodyIsDark, "class");
     }
+    @Step("Get the class attribute value of the light theme.")
     public String getClassAttributeThemeLight() {
-
         return getAttribute(secondValueOfLight, "class");
     }
     @Step("Get the actual class attribute first question")
@@ -412,7 +411,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
     @Step("Get the actual class attribute value for all the questions and answer")
     public List<String> getClassAttributeAllQuestions() {
-
         return getAttributeClassAllElements(attributeAllQuestions);
     }
 
