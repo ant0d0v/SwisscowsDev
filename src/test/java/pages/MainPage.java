@@ -213,7 +213,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return this;
     }
 
-    @Step("croll to the last element in the dropdown menu of regions.")
+    @Step("Scroll to the last element in the dropdown menu of regions.")
     public MainPage scrollToLastElementInDropdownRegion() {
         scrollByVisibleElement(getLastElementInDropdownRegion());
 
