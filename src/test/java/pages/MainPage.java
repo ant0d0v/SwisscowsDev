@@ -159,9 +159,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         wait10ElementToBeVisible(nicknameHamburgerMenu);
         return getText(nicknameHamburgerMenu);
     }
-
-
-
     @Step("Check that home page logo is displayed")
     public boolean isHomePageLogoDisplayed() {
         return isElementDisplayed(logoHome);
