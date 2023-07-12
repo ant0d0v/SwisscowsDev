@@ -1,5 +1,7 @@
 package tests.footer;
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -16,46 +18,9 @@ import java.net.URL;
 import java.util.List;
 
 public class FooterMenuTest extends BaseTest {
-
+    @QaseTitle("Check existence and icons in the store panel")
+    @QaseId(value = 4951)
     @Test
-    public void testSocialPanelIconsNavigateToCorrespondingWebSites() {
-        final List<String> links = List.of(
-                "https://www.facebook.com/swisscows/",
-                "https://twitter.com/swisscows_ch",
-                "https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFuutP8yP2NDwAAAYX_eJogFQhUFhjStomNWXxXyMfDTfaUTiDW86rJWhd1oVtNp4DfW1sjImPirI5XjJDnJSdq2Zs4a3GrvTb7V_OG87A1fb9eLiJzpkBA0abyxuA7e9Oa4g0=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fswisscows%2F",
-                "https://www.instagram.com/swisscows.official/",
-                "https://teleguard.com/en"
-
-        );
-
-        final List<String> expectedDomains = List.of(
-                "www.facebook.com",
-                "twitter.com",
-                "www.linkedin.com",
-                "www.instagram.com",
-                "teleguard.com"
-
-        );
-
-        Assert.assertEquals(links.size(), expectedDomains.size());
-
-        for (int i = 0; i < links.size(); i++) {
-            String expectedDomain = expectedDomains.get(i);
-
-            URL url = null;
-            try {
-                url = new URL(links.get(i));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
-            Assert.assertNotNull(url);
-            String actualDomain = url.getHost();
-
-            Assert.assertEquals(actualDomain, expectedDomain);
-        }
-    }
-   @Test
     public void testStorePanelExistsAndHasIcons() {
         final int expectedQuantity = 2;
 
@@ -65,7 +30,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(mainPage.isStorePanelDisplayed(), " StorePanel is not displayed ");
         Assert.assertEquals(mainPage.getStoresIconsCount(), expectedQuantity);
     }
-
+    @QaseTitle("Check existence and icons in the store panel")
+    @QaseId(value = 4952)
     @Test
     public void testSocialPanelExistsAndHasIcons() {
         final int expectedIconsQuantity = 5;
@@ -76,7 +42,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(mainPage.isSocialPanelDisplayed(), " SocialPanel is not displayed ");
         Assert.assertEquals(mainPage.getSocialPanelSize(), expectedIconsQuantity);
     }
-
+    @QaseTitle("Check texts in the about swisscows section")
+    @QaseId(value = 4953)
     @Test
     public void testAboutSwisscowsTexts() {
         final List<String> expectedSubscriptionTexts = List.of(
@@ -95,105 +62,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(actualSubscriptionTexts.size() > 0);
         Assert.assertEquals(actualSubscriptionTexts, expectedSubscriptionTexts);
     }
-    @Ignore
-    @Test
-    public void testEducationFooterLinkNavigatesToEducationPage() {
-        final String expectedURL = ProjectConstants.DOMAIN + "/en/media-education";
-        final String expectedTitle = "Media Education - Extremely Safe Web for Children";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
-        MediaEducationPage educationPagePage = new MainPage(getDriver())
-                 .scrollToFooterMenu()
-                 .clickMediaEducationFooterMenu();
-
-        final String actualTitle = educationPagePage.getTitle();
-        final String actualURL = educationPagePage.getCurrentURL();
-
-        Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
-    @Ignore
-    @Test(retryAnalyzer = Retry.class)
-    public void testCharityProjectFooterLinkNavigatesToCharityProjectPage() {
-        final String expectedURL = ProjectConstants.DOMAIN + "/en/social-projects";
-        final String expectedTitle = "Social projects - We support social projects";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
-        CharityProjectPage charityPagePage = new MainPage(getDriver())
-                .scrollToFooterMenu()
-                .clickCharityProjectFooterMenu();
-
-        String actualTitle = charityPagePage.getTitle();
-        String actualURL = charityPagePage.getCurrentURL();
-
-        Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
-    @Ignore
-    @Test(retryAnalyzer = Retry.class)
-    public void testOurDatacenterPageFooterLinkNavigatesToOurDatacenterPagePage() {
-        final String expectedURL = ProjectConstants.DOMAIN + "/en/data-safe-search-engine";
-        final String expectedTitle = "Data center – Everything about the Swisscows data center";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
-        OurDatacenterPage OurDatacenterPage = new MainPage(getDriver())
-                .scrollToFooterMenu()
-                .clickOurDatacenterPageFooterMenu();
-
-        String actualTitle = OurDatacenterPage.getTitle();
-        String actualURL = OurDatacenterPage.getCurrentURL();
-
-        Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
-
-
-    @Ignore
-    @Test(retryAnalyzer = Retry.class)
-    public void testWhoWeAreUsFooterLinkNavigatesToAboutUsPage() {
-        final String expectedTitle = "Search engine without tracking - Learn more about us";
-        final String expectedUrl = ProjectConstants.DOMAIN + "/en/search-engine-no-tracking";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
-        String actualURL = new MainPage(getDriver())
-                .scrollToFooterMenu()
-                .clickAboutUsFooterMenu()
-                .waitForWhoWeArePageHeaderBeVisible()
-                .getCurrentURL();
-
-        String actualTitle = new WhoWeArePage(getDriver()).getTitle();
-
-        Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertEquals(actualURL, expectedUrl);
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
-
-    @Test
-    public void testContactUsPageFooterLinkNavigatesToContactUsPage() {
-        final String expectedURL = ProjectConstants.DOMAIN + "/en/contact";
-        final String expectedTitle = "Contact us | Swisscows";
-
-        final String oldURL = openBaseURL().getCurrentURL();
-
-        ContactUsPage contactPage = new MainPage(getDriver())
-                .scrollToFooterMenu()
-                .clickContactUsPageFooterMenu();
-
-        final String actualTitle = contactPage.getTitle();
-        final String actualURL = contactPage.getCurrentURL();
-
-        Assert.assertNotEquals(actualURL, oldURL);
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
-
+    @QaseTitle("Check texts in the our products section")
+    @QaseId(value = 4954)
     @Test
     public void testOurProductsText() {
         final List<String> OurProductsTextTexts = List.of(
@@ -212,12 +82,10 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(actualSubscriptionTexts.size() > 0);
         Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
     }
-
-
-
-
+    @QaseTitle("Check that swisscows email link in the footer navigates to email page")
+    @QaseId(value = 4955)
     @Test(retryAnalyzer = Retry.class)
-    public void testSwisscowsEmailPageFooterNavigatesToSwisscowsEmailSite() {
+    public void testSwisscowsEmailLinkFooterNavigatesToSwisscowsEmailSite() {
         MainPage mainPage = new MainPage(getDriver());
         final String expectedEmailURL = ProjectConstants.DOMAIN + "/en/swisscows-email";
         final String expectedH1Text = "A letter is your personal property!";
@@ -239,8 +107,8 @@ public class FooterMenuTest extends BaseTest {
                 " ExternalPageTitle does not contain 'A letter is your personal property!' ");
     }
 
-
-
+    @QaseTitle("Check that Google play icon in the footer navigates to google play page")
+    @QaseId(value = 4956)
     @Test
     public void testGooglePlayIconNavigatesToGooglePlayWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -257,7 +125,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(getExternalPageURL(), expectedURL);
         Assert.assertEquals(getExternalPageTitle(), expectedTitle);
     }
-
+    @QaseTitle("Check that app store icon in the footer navigates  to app store page")
+    @QaseId(value = 4958)
     @Test
     public void testAppStoreIconNavigatesToAppStoreWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -266,7 +135,8 @@ public class FooterMenuTest extends BaseTest {
 
         final String oldURL = openBaseURL().getCurrentURL();
 
-        mainPage.scrollToFooterMenu()
+        mainPage
+                .scrollToFooterMenu()
                 .clickAppStoreIcon()
                 .switchToExternalPage();;
 
@@ -274,18 +144,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(getExternalPageURL(), expectedURL);
         Assert.assertEquals(getExternalPageTitle(), expectedTitle);
     }
-
-    @Test
-    public void testCopyrightOnFooterMenu() {
-        final String expectedCopyright = "© Swisscows AG, 2023";
-
-        final String actualCopyright = openBaseURL()
-                .scrollToFooterMenu()
-                .getCopyright();
-
-        Assert.assertEquals(actualCopyright, expectedCopyright);
-    }
-
+    @QaseTitle("Check that facebook icon in the footer navigates  to facebook page")
+    @QaseId(value = 4957)
     @Test
     public void testFacebookIconNavigatesToFacebookWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -303,7 +163,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
                 " ExternalPageURL does not contain 'facebook.com' " + getExternalPageURL());
     }
-
+    @QaseTitle("Check that instagram icon in the footer navigates  to instagram page")
+    @QaseId(value = 4959)
     @Test
     public void testInstagramIconNavigatesToInstagramWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -322,6 +183,8 @@ public class FooterMenuTest extends BaseTest {
 
 
     }
+    @QaseTitle("Check that LinkedIn icon in the footer navigates  to LinkedIn page")
+    @QaseId(value = 4960)
     @Test
     public void testLinkedinIconNavigatesToLinkedinWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -338,7 +201,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertTrue(getExternalPageURL().contains(expectedPartialFacebookURL),
                 " ExternalPageURL does not contain 'linkedin.com' " + getExternalPageURL());
     }
-
+    @QaseTitle("Check that twitter icon in the footer navigates  to twitter page")
+    @QaseId(value = 4961)
     @Test
     public void testTwitterIconNavigatesToTwitterWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -355,7 +219,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(getExternalPageURL(),expectedPartialInstagramURL);
 
     }
-
+    @QaseTitle("Check that TeleGuard icon in the footer navigates  to TeleGuard page")
+    @QaseId(value = 4962)
     @Test
     public void testTeleGardIconNavigatesToTeleGardWeb() {
         MainPage mainPage = new MainPage(getDriver());
@@ -373,7 +238,8 @@ public class FooterMenuTest extends BaseTest {
 
     }
 
-
+    @QaseTitle("Check that numbers links in the footer")
+    @QaseId(value = 4962)
     @Test(priority = -5)
     public void testFooterMenuLinksAmount() {
         final int expectedLinks = 26;
@@ -384,6 +250,8 @@ public class FooterMenuTest extends BaseTest {
 
         Assert.assertEquals(actualLinks, expectedLinks);
     }
+    @QaseTitle("Check hover effect on footer menu links")
+    @QaseId(value = 4964)
     @Test
     public void testHoverFooterMenuLinks() throws InterruptedException {
         MainPage mainPage = new MainPage(getDriver());
@@ -397,7 +265,20 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
 
     }
+    @QaseTitle("Check copyright in the footer")
+    @QaseId(value = 4965)
+    @Test
+    public void testCopyrightOnFooterMenu() {
+        final String expectedCopyright = "© Swisscows AG, 2023";
 
+        final String actualCopyright = openBaseURL()
+                .scrollToFooterMenu()
+                .getCopyright();
+
+        Assert.assertEquals(actualCopyright, expectedCopyright);
+    }
+    @QaseTitle("Check texts in the Imprint, Donation, DataPrivacy, section")
+    @QaseId(value = 4966)
     @Test
     public void testBlockImprintDonationDataPrivacyTexts() {
         final List<String> OurProductsTextTexts = List.of(
@@ -408,14 +289,15 @@ public class FooterMenuTest extends BaseTest {
 
         );
 
-        final List<String> actualSubscriptionTexts =
-                openBaseURL()
+        final List<String> actualSubscriptionTexts = openBaseURL()
                         .scrollToAboutSwisscowsAGFooterMenu()
                         .getAboutSwisscowsAGMenusTexts();
 
         Assert.assertTrue(actualSubscriptionTexts.size() > 0);
         Assert.assertEquals(actualSubscriptionTexts, OurProductsTextTexts);
     }
+    @QaseTitle("Check texts in our services section")
+    @QaseId(value = 4967)
     @Test
     public void testBlockOurServicesTexts() {
         final List<String> OurProductsTextTexts = List.of(
@@ -435,8 +317,8 @@ public class FooterMenuTest extends BaseTest {
     }
 
 
-
-
+    @QaseTitle("Check that footer menu links navigate to corresponding pages")
+    @QaseId(value = 4968)
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
         int index, String linkName, String href, String expectedURL, String expectedH1Header)  {
@@ -459,7 +341,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualH1Header, expectedH1Header);
 
     }
-
+    @QaseTitle("Check that footer menu external links navigate to corresponding pages")
+    @QaseId(value = 4969)
     @Test(dataProvider = "ExternalFooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)
     public void testExternalMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
@@ -481,6 +364,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+    @QaseTitle("Check copyright in the footer for search pages")
+    @QaseId(value = 4970)
     @Test(retryAnalyzer = Retry.class)
     public void testCopyrightOnFooterSearchPages() {
         final String expectedCopyright = "© Swisscows AG, 2023";
@@ -493,14 +378,15 @@ public class FooterMenuTest extends BaseTest {
 
         Assert.assertEquals(actualCopyright, expectedCopyright);
     }
+    @QaseTitle("Check that footer menu links navigate to corresponding pages for search pages ")
+    @QaseId(value = 4971)
     @Test(dataProvider = "ExternalFooterSearchMenuData", dataProviderClass = TestData.class)
     public void testExternalFooterSearchLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
         WebPage webPage = new WebPage(getDriver());
 
-        openBaseURL();
-
-        final String oldURL = webPage.getCurrentURL();
+        final String oldURL = openBaseURL()
+                .getCurrentURL();
         final String oldTitle = webPage.getTitle();
 
         webPage
@@ -517,6 +403,8 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+    @QaseTitle("Check that numbers links in the footer for search pages")
+    @QaseId(value = 4972)
     @Test
     public void testFooterSearchMenuLinksAmount() {
         final int expectedLinks = 8;
@@ -528,43 +416,5 @@ public class FooterMenuTest extends BaseTest {
                 .getFooterMenuLinksCount();
 
         Assert.assertEquals(actualLinks, expectedLinks);
-    }
-    @Test
-    public void testFooterSearchSocialPanelIconsNavigateToCorrespondingWebSites() {
-        final List<String> links = List.of(
-                "https://www.facebook.com/swisscows/",
-                "https://twitter.com/swisscows_ch",
-                "https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFuutP8yP2NDwAAAYX_eJogFQhUFhjStomNWXxXyMfDTfaUTiDW86rJWhd1oVtNp4DfW1sjImPirI5XjJDnJSdq2Zs4a3GrvTb7V_OG87A1fb9eLiJzpkBA0abyxuA7e9Oa4g0=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fswisscows%2F",
-                "https://www.instagram.com/swisscows.official/",
-                "https://teleguard.com/en"
-
-        );
-
-        final List<String> expectedDomains = List.of(
-                "www.facebook.com",
-                "twitter.com",
-                "www.linkedin.com",
-                "www.instagram.com",
-                "teleguard.com"
-
-        );
-
-        Assert.assertEquals(links.size(), expectedDomains.size());
-
-        for (int i = 0; i < links.size(); i++) {
-            String expectedDomain = expectedDomains.get(i);
-
-            URL url = null;
-            try {
-                url = new URL(links.get(i));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
-            Assert.assertNotNull(url);
-            String actualDomain = url.getHost();
-
-            Assert.assertEquals(actualDomain, expectedDomain);
-        }
     }
 }

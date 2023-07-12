@@ -3,17 +3,14 @@ package pages.base_abstract;
 import io.qase.api.annotation.Step;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.MainPage;
 import pages.footer_menu.*;
 import pages.top_menu.EmailPage;
-import pages.top_menu.VideoPage;
 /*import pages.MainPage;
 import pages.WeatherStationsPage;
 import pages.footer_menu.WhoWeArePage;
@@ -148,6 +145,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     private List<WebElement> footerMenuLinks;
     @FindBy(xpath = FOOTER_MENU_ID + "//div[@class='app']//a")
     private List<WebElement> storePanelIconsFooterMenu; // Swisscows
+    @FindBy(xpath = "(//div[@class = 'footer-full-inner']//ul[1]//li)[position() > 1]")
+    private List<WebElement> aboutSwisscowsLinks;
 
     @FindBy(className = "social-networks")
     private WebElement socialPanelFooterMenu;
@@ -173,31 +172,29 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
     public abstract Generic createGeneric();
-
+    @Step("Get numbers social icons in the footer")
     public int getSocialPanelSize() {
-
         return getListSize(socialPanelIconsFooterMenu);
     }
-
+    @Step("Get text of Copyright ")
     public String getCopyright() {
-
         return getText(copyright);
     }
     @Step("Get h1 text on the page")
     public String getH1Text() {
         return getText(textH1FooterMenu);
     }
+    @Step("Get text of h1 texts ")
     public List<String> getH1Texts() {
-
         return getTexts(textsH1);
     }
     @Step("Get h2 texts on the page")
     public List<String> getH2Texts() {
         return getTexts(textsH2);
     }
+    @Step("Get color of h1 text on the page")
     public List<String> getH1Colors(){
         return  getColors(textsH1);
-
     }
     @Step("Get font sixes h2 text")
     public List<String> getH2FontSizes(){
@@ -211,6 +208,9 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return getColors(allLinksOnPage);
     }
+    public List<WebElement> getAboutSwisscowsLinks() {
+        return aboutSwisscowsLinks;
+    }
 
     public WebElement getAboutSwisscowsFooterMenu() {
 
@@ -222,23 +222,25 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return aboutSwisscowsAG;
     }
 
-
+    @Step("Get the texts of the menus in the About Swisscows section.")
     public List<String> getAboutSwisscowsMenusTexts() {
-
         return getTexts(aboutSwisscowsList);
     }
-
+    @Step("Click the about services block link based on the provided index.")
+    public void clickAboutSwisscowsBlockLinks(int index) {
+        click(getAboutSwisscowsLinks().get(index));
+        switchToAnotherWindow();
+    }
+    @Step("Get texts of about swisscowsAg menu")
     public List<String> getAboutSwisscowsAGMenusTexts() {
-
         return getTexts(aboutSwisscowsAGList);
     }
+    @Step("Get texts of our services section")
     public List<String> getOurServicesTexts() {
-
         return getTexts(ourServicesText);
     }
-
+    @Step("Get the texts of the menus in the our products section.")
     public List<String> getOurProductsMenusTexts() {
-
         return getTexts(OurProductsList);
     }
 
@@ -246,21 +248,20 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
         return footerMenu;
     }
-
+    @Step("Get numbers links int he footer")
     public int getFooterMenuLinksCount() {
         areAllElementsVisibleAndClickable(footerMenuLinks);
-
         return getListSize(footerMenuLinks);
     }
-
+    @Step("Get numbers store icons in the footer")
     public int getStoresIconsCount() {
-
         return getListSize(storePanelIconsFooterMenu);
     }
+    @Step("Get the list of colors of the footer menu links")
     public List<String> getLinkColorsFooterMenu() throws InterruptedException {
-
         return  getColorsOfElements(footerMenuLinks);
     }
+    @Step("Get the list of colors of the footer menu links when hovered")
     public List<String> getLinksColorsWhenHoverFooterMenu() throws InterruptedException {
 
         return  getHoverColorsOfElements(footerMenuLinks);
@@ -284,12 +285,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         createGeneric();
     }
 
+
     public Generic clickFooterMenu(int index) {
         click(getInnerFooterMenuLinks().get(index));
         if (getDriver().getWindowHandles().size() > 1) {
             switchToAnotherWindow();
         }
-
         return createGeneric();
     }
 
@@ -300,111 +301,109 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-
+    @Step("Click mediz education link in the footer")
     public MediaEducationPage clickMediaEducationFooterMenu() {
         click(MediaEducationFooterMenu);
-
         return new MediaEducationPage(getDriver());
     }
 
-
+    @Step("Click charity project link in the footer")
     public CharityProjectPage clickCharityProjectFooterMenu() {
         click(CharityProjectFooterMenu);
-
         return new CharityProjectPage(getDriver());
     }
-
+    @Step("Click our data center link in the footer")
     public OurDatacenterPage clickOurDatacenterPageFooterMenu() {
         click(OurDatacenterFooterMenu);
-
         return new OurDatacenterPage(getDriver());
     }
+    @Step("Click donation link in the footer")
     public DonationPage clickDonationPageFooterMenu() {
         click(donationFooterMenu);
-
         return new DonationPage(getDriver());
     }
-
+    @Step("Click about us link in the footer")
     public WhoWeArePage clickAboutUsFooterMenu() {
         click20(whoWeAreFooterMenu);
-
         return new WhoWeArePage(getDriver());
     }
-
+    @Step("Click instagram icon in the footer")
     public MainPage clickInstagramIcon() {
         click20(instagramIconFooterMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click linkedin icon in the footer")
     public MainPage clickLinkedinIcon() {
         click20(linkedinIconFooterMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click swisscows email link ")
     public EmailPage clickSwisscowsEmail() {
         click20(SwisscowsEmailFooterMenu);
         return new EmailPage(getDriver());
     }
+    @Step("Click contact us link in the footer")
     public ContactUsPage clickContactUsPageFooterMenu() {
         click(ContactusFooterMenu);
-
         return new ContactUsPage(getDriver());
     }
+    @Step("Click set as start link in the footer")
     public SetAsStartPage clickSetAsStartPageFooterMenu() {
         click(setAsStartpageFooterMenu);
 
         return new SetAsStartPage(getDriver());
     }
+    @Step("Click make default search link in the footer")
     public MakeDefaultSearchPage clickMakeDefaultSearchPageFooterMenu() {
         click(makeDefaultSearchEngineFooterMenu);
 
         return new MakeDefaultSearchPage(getDriver());
     }
+    @Step("Click privacy policy link in the footer")
     public PrivacyPolicyPage clickPrivacyPolicyPageFooterMenu() {
         click(dataPrivacyFooterMenu);
 
         return new PrivacyPolicyPage(getDriver());
     }
+    @Step("Click imprint link in the footer")
     public ImprintPage clickImprintPageFooterMenu() {
         click(imprintFooterMenu);
 
         return new ImprintPage(getDriver());
     }
-
+    @Step("Click app store icon in the footer")
     public MainPage clickAppStoreIcon() {
         click20(downloadOnTheAppStoreLinkFooterMenu);
         return new MainPage(getDriver());
     }
 
-
+    @Step("Click google play icon in the footer")
     public MainPage clickGooglePlayIcon() {
         click20(downloadGooglePlayLinkFooterMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click facebook icon in the footer")
     public MainPage clickFacebookIcon() {
         click20(facebookIconFooterMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click twitter icon in the footer")
     public MainPage clickTwitterIcon() {
         click20(twitterIconFooterMenu);
         return new MainPage(getDriver());
     }
-
+    @Step("Click teleguard icon in the footer")
     public MainPage clickTeleGuardIcon() {
         click20(teleGuardIconFooterMenu);
         return new MainPage(getDriver());
     }
 
-
+    @Step("Check that store panel is displayed")
     public boolean isStorePanelDisplayed() {
-
         return areElementsInListDisplayed(storePanelIconsFooterMenu);
     }
-
+    @Step("Check that social panel is displayed")
     public boolean isSocialPanelDisplayed() {
-
         return isElementDisplayed(socialPanelFooterMenu);
     }
     public String getCurrentSrcOfVideo() {
