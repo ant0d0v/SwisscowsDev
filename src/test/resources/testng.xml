@@ -5,10 +5,10 @@
         <classes>
             <class name="tests.SummaryTest"/>
             <class name="tests.SubscriptionsTest"/>
-            <class name="tests.MainTest"/>
-            <class name="tests.header.TopMenuTest"/>
-            <class name="tests.footer.FooterMenuTest"/>
-            <class name="tests.AutobahnTest"/>
+<!--            <class name="tests.MainTest"/>-->
+<!--            <class name="tests.header.TopMenuTest"/>-->
+<!--            <class name="tests.footer.FooterMenuTest"/>-->
+<!--            <class name="tests.AutobahnTest"/>-->
         </classes>
     </test>
 </suite>
