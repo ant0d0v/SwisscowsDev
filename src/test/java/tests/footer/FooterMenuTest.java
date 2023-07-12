@@ -91,7 +91,6 @@ public class FooterMenuTest extends BaseTest {
 
         final String oldURL = openBaseURL()
                 .getCurrentURL();
-
         mainPage
                 .scrollToFooterMenu()
                 .clickSwisscowsEmail()
