@@ -4,6 +4,7 @@
        <test name="Static pages tests" >
         <classes>
             <class name="tests.SummaryTest"/>
+
         </classes>
     </test>
 </suite>
