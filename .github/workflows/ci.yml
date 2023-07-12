@@ -56,14 +56,15 @@ jobs:
           allure_report: allure-report
           allure_history: allure-history
 
-      - name: Deploy report to Github Pages
+      - name: Post the link to the report
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.NEW_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
-
+        uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{ secrets.NEW_TOKEN }}
+          context: 'Test report'
+          state: 'success'
+          sha: ${{ github.event.pull_request.head.sha }}
+          target_url: https://ant0d0v.github.io/SwisscowsDev/${{ github.run_number }}
 
 
 
