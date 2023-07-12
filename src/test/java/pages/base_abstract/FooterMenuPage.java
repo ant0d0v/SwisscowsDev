@@ -204,8 +204,8 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public String getColorEmail (){
         return getBackgroundColor(linkToEmail);
     }
+    @Step("Get colours links on the page")
     public List <String> getColorLinks (){
-
         return getColors(allLinksOnPage);
     }
     public List<WebElement> getAboutSwisscowsLinks() {
@@ -406,10 +406,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     public boolean isSocialPanelDisplayed() {
         return isElementDisplayed(socialPanelFooterMenu);
     }
+    @Step("Get the current src link of video ")
     public String getCurrentSrcOfVideo() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         return (String) executor.executeScript("return arguments[0].currentSrc;", videoPlayer);
     }
+    @Step("Wait for the time of the video to change .")
     public CharityProjectPage waitUntilTimeOfVideoToBeChanged(long timeMillis) {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         String currentDuration = executor.executeScript("return arguments[0].duration", videoPlayer).toString();
@@ -420,11 +422,13 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         }
         return new CharityProjectPage(getDriver());
     }
+    @Step("Pause the video")
     public CharityProjectPage pauseVideoCharity()  {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].pause()", videoPlayer);
         return new CharityProjectPage(getDriver());
     }
+    @Step("Play the  video")
     public CharityProjectPage playVideoCharity() {
         JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("return arguments[0].play()", videoPlayer);

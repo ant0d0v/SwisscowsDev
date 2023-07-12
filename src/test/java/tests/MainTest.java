@@ -102,14 +102,12 @@ public class MainTest extends BaseTest {
             mainPage.waitForImageInBannerVisibleOfEmail();
 
             Assert.assertTrue(mainPage.imageOfEmailInBannerIsDysplaed());
-
     }
     @QaseTitle("Check that the cursor is in the search field and the search icon is clickable.")
     @QaseId(value = 4897)
     @Test(retryAnalyzer = Retry.class)
     public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
-
         openBaseURL()
                 .inputSearchCriteria(query)
                 .clickSearchButton()

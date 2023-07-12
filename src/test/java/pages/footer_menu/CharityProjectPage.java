@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -36,15 +37,15 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
 
         return new CharityProjectPage(getDriver());
     }
-
+    @Step("Scroll to the desired section where the links are located (")
     public CharityProjectPage scrollToWhereToH2Header() {
         scrollByVisibleElement(whereToH2Header);
 
         return this;
     }
+    @Step("Scroll to the first slider.")
     public CharityProjectPage scrollToFirstSlider() {
         scrollByVisibleElement(attributeSecondImageInFirstSlider);
-
         return new CharityProjectPage(getDriver());
     }
     public CharityProjectPage scrollToSecondSlider() {
@@ -52,20 +53,21 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
 
         return new CharityProjectPage(getDriver());
     }
-
+    @Step("double-clicking on the second image")
     public CharityProjectPage doubleClickToSecondImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(secondImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(secondImageInSlider));
         return this;
     }
-
+    @Step("double-clicking on the third image")
     public CharityProjectPage doubleClickToThirdImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(thirdImageInSlider).build().perform();
         getWait10().until(ExpectedConditions.visibilityOf(thirdImageInSlider));
         return this;
     }
+    @Step("Get the  attribute of the image in the first slider")
     public String getClassAttributeOfImageInFirstSlider() {
         return getAttribute(attributeSecondImageInFirstSlider, "class");
     }
@@ -73,6 +75,7 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
     public String getClassAttributeOfImageInSecondSlider() {
         return getAttribute(attributeThirdImageInSecondSlider, "class");
     }
+    @Step("Waiting for two images to be visible")
     public CharityProjectPage waitUntilTwoImageInTheSliderToBeVisible(){
         wait10ElementToBeVisible(bigTwoImageInSlider);
         return new CharityProjectPage(getDriver());
