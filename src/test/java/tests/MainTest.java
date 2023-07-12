@@ -102,7 +102,6 @@ public class MainTest extends BaseTest {
             mainPage.waitForImageInBannerVisibleOfEmail();
 
             Assert.assertTrue(mainPage.imageOfEmailInBannerIsDysplaed());
-
     }
     @QaseTitle("Check that the cursor is in the search field and the search icon is clickable.")
     @QaseId(value = 4897)
