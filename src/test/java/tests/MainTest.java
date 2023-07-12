@@ -94,7 +94,6 @@ public class MainTest extends BaseTest {
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
             MainPage mainPage = new MainPage(getDriver());
-
             openBaseURL()
                     .waitForImageInBannerVisibleOfMusic();
 
