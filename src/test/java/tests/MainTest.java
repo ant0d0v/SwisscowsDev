@@ -93,17 +93,16 @@ public class MainTest extends BaseTest {
     @QaseId(value = 4896)
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
-        MainPage mainPage = new MainPage(getDriver());
-        final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
+            MainPage mainPage = new MainPage(getDriver());
 
-        final String actualValue = openBaseURL()
-                .waitForImageInBannerVisibleOfMusic()
-                .waitForImageInBannerVisibleOfEmail()
-                .getClassAttributeSwitchSecond();
+            openBaseURL()
+                    .waitForImageInBannerVisibleOfMusic();
 
-        Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
-        Assert.assertEquals(actualValue,expectedValue);
+            Assert.assertTrue(mainPage.imageOfMusicInBannerIsDysplaed() );
 
+            mainPage.waitForImageInBannerVisibleOfEmail();
+
+            Assert.assertTrue(mainPage.imageOfEmailInBannerIsDysplaed());
 
     }
     @QaseTitle("Check that the cursor is in the search field and the search icon is clickable.")
