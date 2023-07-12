@@ -173,30 +173,37 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
 
     public abstract Generic createGeneric();
     @Step("Get numbers social icons in the footer")
+    @io.qameta.allure.Step
     public int getSocialPanelSize() {
         return getListSize(socialPanelIconsFooterMenu);
     }
     @Step("Get text of Copyright ")
+    @io.qameta.allure.Step
     public String getCopyright() {
         return getText(copyright);
     }
     @Step("Get h1 text on the page")
+    @io.qameta.allure.Step
     public String getH1Text() {
         return getText(textH1FooterMenu);
     }
     @Step("Get text of h1 texts ")
+    @io.qameta.allure.Step
     public List<String> getH1Texts() {
         return getTexts(textsH1);
     }
     @Step("Get h2 texts on the page")
+    @io.qameta.allure.Step
     public List<String> getH2Texts() {
         return getTexts(textsH2);
     }
     @Step("Get color of h1 text on the page")
+    @io.qameta.allure.Step
     public List<String> getH1Colors(){
         return  getColors(textsH1);
     }
     @Step("Get font sixes h2 text")
+    @io.qameta.allure.Step
     public List<String> getH2FontSizes(){
         return  getFontSizes(textsH2);
 
@@ -223,23 +230,28 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
     @Step("Get the texts of the menus in the About Swisscows section.")
+    @io.qameta.allure.Step
     public List<String> getAboutSwisscowsMenusTexts() {
         return getTexts(aboutSwisscowsList);
     }
     @Step("Click the about services block link based on the provided index.")
+    @io.qameta.allure.Step
     public void clickAboutSwisscowsBlockLinks(int index) {
         click(getAboutSwisscowsLinks().get(index));
         switchToAnotherWindow();
     }
     @Step("Get texts of about swisscowsAg menu")
+    @io.qameta.allure.Step
     public List<String> getAboutSwisscowsAGMenusTexts() {
         return getTexts(aboutSwisscowsAGList);
     }
     @Step("Get texts of our services section")
+    @io.qameta.allure.Step
     public List<String> getOurServicesTexts() {
         return getTexts(ourServicesText);
     }
     @Step("Get the texts of the menus in the our products section.")
+    @io.qameta.allure.Step
     public List<String> getOurProductsMenusTexts() {
         return getTexts(OurProductsList);
     }
@@ -249,19 +261,23 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return footerMenu;
     }
     @Step("Get numbers links int he footer")
+    @io.qameta.allure.Step
     public int getFooterMenuLinksCount() {
         areAllElementsVisibleAndClickable(footerMenuLinks);
         return getListSize(footerMenuLinks);
     }
     @Step("Get numbers store icons in the footer")
+    @io.qameta.allure.Step
     public int getStoresIconsCount() {
         return getListSize(storePanelIconsFooterMenu);
     }
     @Step("Get the list of colors of the footer menu links")
+    @io.qameta.allure.Step
     public List<String> getLinkColorsFooterMenu() throws InterruptedException {
         return  getColorsOfElements(footerMenuLinks);
     }
     @Step("Get the list of colors of the footer menu links when hovered")
+    @io.qameta.allure.Step
     public List<String> getLinksColorsWhenHoverFooterMenu() throws InterruptedException {
 
         return  getHoverColorsOfElements(footerMenuLinks);
@@ -302,107 +318,127 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
     @Step("Click mediz education link in the footer")
+    @io.qameta.allure.Step
     public MediaEducationPage clickMediaEducationFooterMenu() {
         click(MediaEducationFooterMenu);
         return new MediaEducationPage(getDriver());
     }
 
     @Step("Click charity project link in the footer")
+    @io.qameta.allure.Step
     public CharityProjectPage clickCharityProjectFooterMenu() {
         click(CharityProjectFooterMenu);
         return new CharityProjectPage(getDriver());
     }
     @Step("Click our data center link in the footer")
+    @io.qameta.allure.Step
     public OurDatacenterPage clickOurDatacenterPageFooterMenu() {
         click(OurDatacenterFooterMenu);
         return new OurDatacenterPage(getDriver());
     }
     @Step("Click donation link in the footer")
+    @io.qameta.allure.Step
     public DonationPage clickDonationPageFooterMenu() {
         click(donationFooterMenu);
         return new DonationPage(getDriver());
     }
     @Step("Click about us link in the footer")
+    @io.qameta.allure.Step
     public WhoWeArePage clickAboutUsFooterMenu() {
         click20(whoWeAreFooterMenu);
         return new WhoWeArePage(getDriver());
     }
     @Step("Click instagram icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickInstagramIcon() {
         click20(instagramIconFooterMenu);
         return new MainPage(getDriver());
     }
     @Step("Click linkedin icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickLinkedinIcon() {
         click20(linkedinIconFooterMenu);
         return new MainPage(getDriver());
     }
     @Step("Click swisscows email link ")
+    @io.qameta.allure.Step
     public EmailPage clickSwisscowsEmail() {
         click20(SwisscowsEmailFooterMenu);
         return new EmailPage(getDriver());
     }
     @Step("Click contact us link in the footer")
+    @io.qameta.allure.Step
     public ContactUsPage clickContactUsPageFooterMenu() {
         click(ContactusFooterMenu);
         return new ContactUsPage(getDriver());
     }
     @Step("Click set as start link in the footer")
+    @io.qameta.allure.Step
     public SetAsStartPage clickSetAsStartPageFooterMenu() {
         click(setAsStartpageFooterMenu);
 
         return new SetAsStartPage(getDriver());
     }
     @Step("Click make default search link in the footer")
+    @io.qameta.allure.Step
     public MakeDefaultSearchPage clickMakeDefaultSearchPageFooterMenu() {
         click(makeDefaultSearchEngineFooterMenu);
 
         return new MakeDefaultSearchPage(getDriver());
     }
     @Step("Click privacy policy link in the footer")
+    @io.qameta.allure.Step
     public PrivacyPolicyPage clickPrivacyPolicyPageFooterMenu() {
         click(dataPrivacyFooterMenu);
 
         return new PrivacyPolicyPage(getDriver());
     }
     @Step("Click imprint link in the footer")
+    @io.qameta.allure.Step
     public ImprintPage clickImprintPageFooterMenu() {
         click(imprintFooterMenu);
 
         return new ImprintPage(getDriver());
     }
     @Step("Click app store icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickAppStoreIcon() {
         click20(downloadOnTheAppStoreLinkFooterMenu);
         return new MainPage(getDriver());
     }
 
     @Step("Click google play icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickGooglePlayIcon() {
         click20(downloadGooglePlayLinkFooterMenu);
         return new MainPage(getDriver());
     }
     @Step("Click facebook icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickFacebookIcon() {
         click20(facebookIconFooterMenu);
         return new MainPage(getDriver());
     }
     @Step("Click twitter icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickTwitterIcon() {
         click20(twitterIconFooterMenu);
         return new MainPage(getDriver());
     }
     @Step("Click teleguard icon in the footer")
+    @io.qameta.allure.Step
     public MainPage clickTeleGuardIcon() {
         click20(teleGuardIconFooterMenu);
         return new MainPage(getDriver());
     }
 
     @Step("Check that store panel is displayed")
+    @io.qameta.allure.Step
     public boolean isStorePanelDisplayed() {
         return areElementsInListDisplayed(storePanelIconsFooterMenu);
     }
     @Step("Check that social panel is displayed")
+    @io.qameta.allure.Step
     public boolean isSocialPanelDisplayed() {
         return isElementDisplayed(socialPanelFooterMenu);
     }

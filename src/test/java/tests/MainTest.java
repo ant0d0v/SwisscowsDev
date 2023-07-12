@@ -94,15 +94,15 @@ public class MainTest extends BaseTest {
     @Test
     public void testHomePageBannerSwitchingAuto ()  {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedValue = "swiper-pagination-bullet swiper-pagination-bullet-active";
 
-        final String actualValue = openBaseURL()
-                .waitForImageInBannerVisibleOfMusic()
-                .waitForImageInBannerVisibleOfEmail()
-                .getClassAttributeSwitchSecond();
+        openBaseURL()
+                .waitForImageInBannerVisibleOfMusic();
 
-        Assert.assertTrue(mainPage.homePageBannerIsDisplayed());
-        Assert.assertEquals(actualValue,expectedValue);
+        Assert.assertTrue(mainPage.imageOfMusicInBannerIsDysplaed() );
+
+                mainPage.waitForImageInBannerVisibleOfEmail();
+                
+        Assert.assertTrue(mainPage.imageOfEmailInBannerIsDysplaed());
 
 
     }

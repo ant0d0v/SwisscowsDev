@@ -73,11 +73,13 @@ public abstract class BasePage {
     }
 
     @Step("Get the title")
+    @io.qameta.allure.Step
     public String getTitle() {
 
         return getDriver().getTitle();
     }
     @Step("Get the current URL.")
+    @io.qameta.allure.Step
     public String getCurrentURL() {
         return getDriver().getCurrentUrl();
     }
@@ -458,6 +460,7 @@ public abstract class BasePage {
         getWait10().until(ExpectedConditions.visibilityOf(element));
     }
     @Step("Switch to the external web page.")
+    @io.qameta.allure.Step
     public void switchToExternalPage() {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));

@@ -181,6 +181,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     public abstract Generic createGeneric();
     @Step("Get the actual number of top menu links on the page.")
+    @io.qameta.allure.Step
     public int topMenuLinkAmount() {
         return getListSize(topMenus);
     }
@@ -189,6 +190,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return lastElementInDropdownRegion;
     }
     @Step("Get text of links")
+    @io.qameta.allure.Step
     public List<String> getLinksOfText() {
         return getTexts(hamburgerTopMenuDropdownLinks);
     }
@@ -197,33 +199,40 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new LoginPage(getDriver());
     }
     @Step("Set the window size to the adaptive mode using the specified width and height constants (e.g., hamburger menu size).")
+    @io.qameta.allure.Step
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
         setWindowDimensions(width, height);
 
         return new MainPage(getDriver());
     }
     @Step("Wait until to be invisible loader")
+    @io.qameta.allure.Step
     public ImagePage waitForLoaderToBeInVisible(){
         wait10ElementToBeInVisible(loader);
         return new ImagePage(getDriver());
     }
     @Step("Get the list of texts for all the options in the Localization dropdown menu.")
+    @io.qameta.allure.Step
     public List<String> getLangMenuListTexts() {
         return getTexts(innerLangMenuList);
     }
     @Step("Get the list of texts for all the Hamburger menu options.")
+    @io.qameta.allure.Step
     public List<String> getHamburgerMenuAllListText() {
         return getTexts(hamburgerTopMenuDropdownList);
     }
     @Step("Get the number of options in the Localization dropdown menu.")
+    @io.qameta.allure.Step
     public int getNumberLangMenu() {
         return getListSize(innerRegionMenuList);
     }
     @Step("Get the number of options in the region dropdown menu.")
+    @io.qameta.allure.Step
     public int getNumberRegionMenu() {
         return getListSize(innerRegionMenuList);
     }
     @Step("Get the number of options in the Hamburger menu")
+    @io.qameta.allure.Step
     public int getNumberOfListHamburgerMenu() {
         return getListSize(hamburgerTopMenuDropdownList);
     }
@@ -252,6 +261,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new VpnInstructionsPage(getDriver());
     }
     @Step("Get the value of the class attribute for the hamburger menu when it is visible.")
+    @io.qameta.allure.Step
     public String getHamburgerMenuIsActiveValue() {
         return getAttribute(hamburgerTopMenu, "class");
     }
@@ -261,6 +271,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return allLinksOnPage;
     }
     @Step("Wait for the top menu to be visible.")
+    @io.qameta.allure.Step
     public MainPage waitTopMenuToBeVisible(){
         wait10ElementToBeVisible(topMenuContainer);
         return new MainPage(getDriver());
@@ -301,11 +312,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
     @Step("Click the hamburger menu.")
+    @io.qameta.allure.Step
     public MainPage clickHamburgerMenu() {
         click20(hamburgerTopMenu);
         return new MainPage(getDriver());
     }
     @Step("Click on the region in the top menu (e.g., German).")
+    @io.qameta.allure.Step
     public MainPage clickRegionGerman() {
         click20(RegionGerman);
         return new MainPage(getDriver());
@@ -328,56 +341,66 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
     @Step("Click the company logo.")
+    @io.qameta.allure.Step
     public MainPage clickLogo() {
         click(logo);
         return new MainPage(getDriver());
     }
 
     @Step("Click on the TeleGuard icon in the top menu")
+    @io.qameta.allure.Step
     public MainPage clickTeleGuardTopMenu() {
         click(TeleGuardTopMenu);
         return new MainPage(getDriver());
     }
     @Step("Click on the Languages option in the hamburger menu")
+    @io.qameta.allure.Step
     public MainPage clickLanguagesHamburgerMenu() {
         click20(LangDropDownIcon);
         return new MainPage(getDriver());
     }
     @Step("Click on the Email icon in the top menu")
+    @io.qameta.allure.Step
     public EmailPage clickEmailTopMenu() {
         click20(EmailTopMenu);
         return  new EmailPage(getDriver());
     }
     @Step("Click on the Email icon in the top menu ")
+    @io.qameta.allure.Step
     public LoginPage clickEmailTopMenuSearch() {
         waitForElementIsDisappeared(loader);
         click(emailTopMenuSearch);
         return  new LoginPage (getDriver());
     }
     @Step("Click on the VPN icon in the top menu ")
+    @io.qameta.allure.Step
     public VpnPage clickVpnTopMenuSearch() {
         wait10ElementToBeVisible(vpnTopMenuSearch);
         click(vpnTopMenuSearch);
         return  new VpnPage (getDriver());
     }
     @Step("Click on the TeleGuard icon in the top menu ")
+    @io.qameta.allure.Step
     public MainPage clickTeleGuardTopMenuSearch() {
         wait10ElementToBeVisible(teleGuardTopMenuSearch);
         click(teleGuardTopMenuSearch);
         return  new MainPage (getDriver());
     }
     @Step("Click the region top menu.")
+    @io.qameta.allure.Step
     public MainPage clickRegionTopMenu() {
         click20(RegionDropDownIcon);
         return new MainPage(getDriver());
     }
     @Step("Click on the theme dropdown icon.")
+    @io.qameta.allure.Step
     public MainPage clickThemeDropDownIcon() {
         click(ThemeDropDownIcon);
 
        return new MainPage(getDriver());
     }
     @Step("Click on \"Account\" in the hamburger menu.")
+    @io.qameta.allure.Step
     public SubscriptionsPage clickAccountInHamburgerMenu() {
         click(accountInHamburgerMenu);
         return new SubscriptionsPage (getDriver());
@@ -389,12 +412,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new VpnPage(getDriver());
     }
     @Step("Click hamburger menu icon")
+    @io.qameta.allure.Step
     public MainPage clickHamburgerMenuIcon() {
         click(hamburgerTopMenu);
 
         return new MainPage(getDriver());
     }
     @Step("Get h3 texts")
+    @io.qameta.allure.Step
     public List <String> getH3Texts() {
         return getTexts(textsH3);
     }
@@ -407,14 +432,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getText(textH1);
     }
     @Step("Get the texts of the answers.")
+    @io.qameta.allure.Step
     public List <String> getAnswersTexts() {
         return getTexts(textsAnswers);
     }
     @Step("Get the text of the heart icon popup message.")
+    @io.qameta.allure.Step
     public String getHeartPopupMessage() {
         return getText(popupHeartIcon);
     }
     @Step("Click the \"Set as Startpage\" link in the hamburger menu.")
+    @io.qameta.allure.Step
     public SetAsStartPage clickSetAsStartAppInHamburgerMenu() {
         click(setAsStartAppHamburgerMenu);
         switchToAnotherWindow();
@@ -438,12 +466,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new WebPage(getDriver());
     }
     @Step("Click the search icon.")
+    @io.qameta.allure.Step
     public WebPage clickSearchButton() {
         clickEnter(searchButton);
 
         return new WebPage(getDriver());
     }
     @Step("Click video button")
+    @io.qameta.allure.Step
     public VideoPage clickVideoButton() {
         clickEnter(videoButton);
 
@@ -455,11 +485,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MusicPage(getDriver());
     }
     @Step("Click image button")
+    @io.qameta.allure.Step
     public ImagePage clickImageButton() {
         clickEnter(imageButton);
         return new ImagePage(getDriver());
     }
     @Step("Wait until url to be changed ")
+    @io.qameta.allure.Step
     public ImagePage waitUrlToBeChanged(String parametr){
         waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new ImagePage(getDriver());
@@ -469,6 +501,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getText(h2TitleErrorInFavorite);
     }
     @Step("Click on the \"News\" button")
+    @io.qameta.allure.Step
     public NewsPage clickNewsButton() {
         clickEnter(newsButton);
 
@@ -479,6 +512,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new WebPage(getDriver());
     }
     @Step("Click the region Ukraine")
+    @io.qameta.allure.Step
     public NewsPage clickRegionUkraine() {
         click20(regionUkraine);
         return new NewsPage(getDriver());
@@ -488,29 +522,35 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
     @Step("Click on the heart icon.")
+    @io.qameta.allure.Step
     public MainPage clickHeartIcon() {
         click(heartIcon);
 
         return new MainPage(getDriver());
     }
     @Step("Hamburger dropdown container is displayed ")
+    @io.qameta.allure.Step
     public boolean isHamburgerDropdownContainerDisplayed() {
         return isElementDisplayed(hamburgerDropDownContainerTopMenu);
     }
     @Step("Verify that the Hamburger menu icon is displayed.")
+    @io.qameta.allure.Step
     public boolean isHamburgerIconDisplayed() {
         return isElementDisplayed(hamburgerTopMenuIcon);
     }
 
     @Step("Verify that the login icon is displayed.")
+    @io.qameta.allure.Step
     public boolean isLoginIconDisplayed() {
         return isElementDisplayed(LoginIconHamburgerMenu);
     }
     @Step("Verify that the avatar icon is displayed in the hamburger menu")
+    @io.qameta.allure.Step
     public boolean isAvatarIconIsDisplayedInHamburgerMenu() {
         return isElementDisplayed(AvatarIconHamburgerMenu);
     }
     @Step("Verify that the logo image is displayed in the header")
+    @io.qameta.allure.Step
     public boolean isLogoIconDisplayed() {
         return isElementDisplayed(logo);
     }
@@ -520,6 +560,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return areElementsInListDisplayed(allImagesOnPage);
     }
     @Step("Click on the Sign In menu.")
+    @io.qameta.allure.Step
     public UsersLoginPage clickSignInMenu() {
         click20(signInTopMenu);
         return new UsersLoginPage(getDriver());
@@ -540,6 +581,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new NewsPage(getDriver());
     }
     @Step("Search and clear after")
+    @io.qameta.allure.Step
     public void searchAfterClear(String text) throws InterruptedException {
         click(clearButton);
         wait10ElementToBeEmpty(searchFieldHeader);
@@ -551,6 +593,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
 
     @Step("Get the value of the heart icon counter.")
+    @io.qameta.allure.Step
     public String getValueHeartIcon() {
         int attempts = 0;
         while (attempts < 2) {
@@ -563,17 +606,20 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return null;
     }
     @Step("Refresh main page")
+    @io.qameta.allure.Step
     public MainPage refreshMainPage() {
         refreshPage();
         wait10ElementToBeVisible(heartIcon);
         return new MainPage(getDriver());
     }
     @Step("Go back to main page")
+    @io.qameta.allure.Step
     public MainPage goBackToMainPage() {
         goBack();
         return new MainPage(getDriver());
     }
     @Step("Wait until to be changed value of charity")
+    @io.qameta.allure.Step
     public WebPage waitCharityValueCountChanged(String newValue ) {
         waitAttributeToBeChanged(valueHeartIcon, "title",newValue);
         return new WebPage(getDriver());
@@ -629,6 +675,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return innerRegionMenuList;
     }
     @Step("Input the search criteria and press Enter.")
+    @io.qameta.allure.Step
     public WebPage inputSearchCriteriaAndEnter(String text) {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
