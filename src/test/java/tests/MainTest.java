@@ -108,7 +108,6 @@ public class MainTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testCursorInSearchFieldAndSearchIconClickeble() {
         final String query = "test";
-
         openBaseURL()
                 .inputSearchCriteria(query)
                 .clickSearchButton()
