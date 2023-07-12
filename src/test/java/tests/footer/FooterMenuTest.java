@@ -73,7 +73,6 @@ public class FooterMenuTest extends BaseTest {
                 "HES",
                 "GetDigest"
         );
-
        final List<String> actualSubscriptionTexts =
                 openBaseURL()
                         .scrollToAboutSwisscowsFooterMenu()
