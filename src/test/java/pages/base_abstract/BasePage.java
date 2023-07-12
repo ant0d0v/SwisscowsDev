@@ -462,7 +462,7 @@ public abstract class BasePage {
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
-
+    @Step("Make screen")
     public void screen(String name) throws IOException {
         File scrFile = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("screenshotsVideo/" + name));
