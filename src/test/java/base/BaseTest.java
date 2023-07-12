@@ -84,7 +84,7 @@ public abstract class BaseTest {
 
         return new MainPage(getDriver());
     }
-
+    @Step("Get external page title")
     public String getExternalPageTitle() {
         if(getDriver().getTitle().isEmpty()) {
             TestUtils.waitForPageLoaded(getDriver());

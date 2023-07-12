@@ -126,9 +126,8 @@ public class WebPage extends TopMenuPage<WebPage> {
         getDriver().get(" https://swisscows.com/en/music?query= ");
         return new WebPage(getDriver());
     }
-
+    @Step("Get text of Copyright")
     public String getCopyright() {
-
         return getText(footerSearchCopyright);
     }
     public WebPage waitToBeVisibleTitleFirstSearchResult(){
@@ -457,10 +456,9 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
         return imagesInNewsWidgetIsDisplayed();
     }
-
+    @Step("Scroll to the footer menu for search ")
     public WebPage scrollToFooterSearchPages() {
         scrollByVisibleElement(footerFooterSearchPages);
-
         return new WebPage(getDriver());
     }
 

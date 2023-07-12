@@ -210,6 +210,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return new MainPage(getDriver());
     }
 
+    @Step("Scroll to footer menu ")
     public MainPage scrollToFooterMenu() {
         scrollByVisibleElement(getFooterMenu());
 
@@ -358,12 +359,13 @@ public class MainPage extends FooterMenuPage<MainPage> {
         scrollByVisibleElement(ourServiceContainer);
         return this;
     }
-
+    @Step("Scroll to the About Swisscows section in the footer menu.")
     public MainPage scrollToAboutSwisscowsFooterMenu() {
         scrollByVisibleElement(getAboutSwisscowsFooterMenu());
 
         return this;
     }
+    @Step("Scroll to the About SwisscowsAG section in the footer menu.")
     public MainPage scrollToAboutSwisscowsAGFooterMenu() {
         scrollByVisibleElement(getAboutSwisscowsAGFooterMenu());
 
@@ -432,7 +434,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return textList;
     }
     public List<WebElement> getServicesBlockLinks() {
-
         return linksServicesBlock;
     }
     @Step("Click the services block link based on the provided index.")
@@ -440,8 +441,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
         click(getServicesBlockLinks().get(index));
         switchToAnotherWindow();
     }
-
-
 
     public void switchToAnotherWindow() {
         String originalWindow = getDriver().getWindowHandle();

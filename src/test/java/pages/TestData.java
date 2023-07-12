@@ -166,8 +166,17 @@ public class TestData {
                 {0, "Enterprise Search Software für Unternehmen", "https://hesbox.com/de"},
                 {1, "SWISSCOWS FANSHOP – Swisscows","https://swisscows-fanshop.com/"},
                 {2, "Blog - Andreas Wiebe","https://awiebe.org/"},
+        };
+    }
+    @DataProvider(name = "AboutSwisscowsLinksData")
+    public static Object[][] AboutSwisscowsLinksDataDataProvider() {
 
-
+        return new Object[][] {
+                {0, "The search engine without tracking – Swisscows", ProjectConstants.DOMAIN + "/en/search-engine-no-tracking"},
+                {1, "Swisscows – media education",ProjectConstants.DOMAIN + "/en/media-education"},
+                {2, "Charity Project",ProjectConstants.DOMAIN + "/en/social-projects"},
+                {3, "Data secure search engine",ProjectConstants.DOMAIN + "/en/data-safe-search-engine"},
+                {4, "Contact us",ProjectConstants.DOMAIN + "/en/contact"},
         };
     }
 
