@@ -359,6 +359,14 @@ public class MainPage extends FooterMenuPage<MainPage> {
         scrollByVisibleElement(ourServiceContainer);
         return this;
     }
+    @Step("music image is dysplaed in the banner  ")
+    public boolean imageOfMusicInBannerIsDysplaed(){
+        return isElementDisplayed(homepageBannerImageOfMusic);
+    }
+    @Step("email image is dysplaed in the banner  ")
+    public boolean imageOfEmailInBannerIsDysplaed(){
+        return isElementDisplayed(homepageBannerImageOfEmail);
+    }
     @Step("Scroll to the About Swisscows section in the footer menu.")
     public MainPage scrollToAboutSwisscowsFooterMenu() {
         scrollByVisibleElement(getAboutSwisscowsFooterMenu());
