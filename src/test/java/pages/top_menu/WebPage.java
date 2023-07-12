@@ -4,6 +4,7 @@ import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.MainPage;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
@@ -172,11 +173,6 @@ public class WebPage extends TopMenuPage<WebPage> {
     public List<WebElement> getInnerFooterMenuLinks() {
 
         return innerFooterMenuLink;
-    }
-    public void clickFooterSearchMenuExternalLink(int index) {
-        click(getInnerFooterMenuLinks().get(index));
-        switchToAnotherWindow();
-        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
     public int getFooterMenuLinksCount() {
         areAllElementsVisibleAndClickable(innerFooterMenuLink);

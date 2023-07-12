@@ -322,17 +322,15 @@ public class FooterMenuTest extends BaseTest {
     @Test(dataProvider = "FooterMenuData", dataProviderClass = TestData.class)
     public void testFooterMenuLinksNavigateToCorrespondingPages(
         int index, String linkName, String href, String expectedURL, String expectedH1Header)  {
+        MainPage mainPage = new MainPage(getDriver());
 
-        MainPage mainPage = openBaseURL();
-
-        final String oldURL = mainPage.getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
         final String oldH1Header = mainPage.getH1Text();
 
-        mainPage
+        final String actualURL = mainPage
                 .scrollToFooterMenu()
-                .clickFooterMenu(index);
-
-        final String actualURL = mainPage.getCurrentURL();
+                .clickFooterMenu(index)
+                .getCurrentURL();
         final String actualH1Header = mainPage.getH1Text();
 
         Assert.assertNotEquals(oldURL, actualURL);
@@ -346,17 +344,17 @@ public class FooterMenuTest extends BaseTest {
     @Test(dataProvider = "ExternalFooterMenuData", dataProviderClass = TestData.class, retryAnalyzer = Retry.class)
     public void testExternalMenuLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
+        MainPage mainPage = new MainPage(getDriver());
 
-        MainPage mainPage = openBaseURL();
-
-        final String oldURL = mainPage.getCurrentURL();
+        final String oldURL = openBaseURL().getCurrentURL();
         final String oldTitle = mainPage.getTitle();
 
-        mainPage
-                .scrollToFooterMenu()
-                .clickFooterMenuExternalLink(index);
 
-        final String actualURL = getExternalPageURL();
+        final String actualURL = mainPage
+                .scrollToFooterMenu()
+                .clickFooterMenuExternalLink(index)
+                .getCurrentURL();
+
         final String actualTitle = getExternalPageTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
@@ -383,19 +381,21 @@ public class FooterMenuTest extends BaseTest {
     @Test(dataProvider = "ExternalFooterSearchMenuData", dataProviderClass = TestData.class)
     public void testExternalFooterSearchLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL, String expectedTitle) {
-        WebPage webPage = new WebPage(getDriver());
+        MainPage mainPage = new MainPage(getDriver());
 
-        final String oldURL = openBaseURL()
-                .getCurrentURL();
-        final String oldTitle = webPage.getTitle();
 
-        webPage
+        final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .scrollToFooterSearchPages()
-                .clickFooterSearchMenuExternalLink(index);
+                .getTitle();
 
-        final String actualURL = getExternalPageURL();
+        final String oldURL = mainPage.getCurrentURL();
+
+        final String actualURL = mainPage
+                .clickFooterSearchMenuExternalLink(index)
+                .getCurrentURL();
+
         final String actualTitle = getExternalPageTitle();
 
         Assert.assertNotEquals(oldURL, actualURL);
@@ -407,14 +407,12 @@ public class FooterMenuTest extends BaseTest {
     @QaseId(value = 4972)
     @Test
     public void testFooterSearchMenuLinksAmount() {
-        final int expectedLinks = 8;
-
         int actualLinks = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
                 .scrollToFooterSearchPages()
                 .getFooterMenuLinksCount();
 
-        Assert.assertEquals(actualLinks, expectedLinks);
+        Assert.assertEquals(actualLinks, 8);
     }
 }

@@ -201,6 +201,12 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return  getFontSizes(textsH2);
 
     }
+    public MainPage clickFooterSearchMenuExternalLink(int index) {
+        click(getInnerFooterMenuLinks().get(index));
+        switchToAnotherWindow();
+        getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+        return new MainPage(getDriver());
+    }
     public String getColorEmail (){
         return getBackgroundColor(linkToEmail);
     }
@@ -295,10 +301,11 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
     }
 
 
-    public void clickFooterMenuExternalLink(int index) {
+    public MainPage clickFooterMenuExternalLink(int index) {
         click(getInnerFooterMenuLinks().get(index));
         switchToAnotherWindow();
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
+        return new MainPage(getDriver());
     }
 
     @Step("Click mediz education link in the footer")
