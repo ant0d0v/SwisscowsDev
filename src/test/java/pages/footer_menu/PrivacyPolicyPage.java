@@ -1,4 +1,5 @@
 package pages.footer_menu;
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
@@ -14,11 +15,13 @@ public class PrivacyPolicyPage extends FooterMenuPage<PrivacyPolicyPage> {
 
         return new PrivacyPolicyPage(getDriver());
     }
+    @Step("Click  privacy microsoft link ")
     public PrivacyPolicyPage clickPrivacyMicrosoftLink() {
         click(privacyMicrosoft);
         switchToAnotherWindow();
         return new PrivacyPolicyPage(getDriver());
     }
+    @Step("Scroll to privacy microsoft link ")
     public PrivacyPolicyPage scrollToWherePrivacyMicrosoft() {
         scrollByVisibleElement(privacyMicrosoft);
 

@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,22 +30,23 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
 
         return new OurDatacenterPage(getDriver());
     }
-
+    @Step("Scroll to h2 header")
     public OurDatacenterPage scrollToWhereToH2Header() {
         scrollByVisibleElement(whereToH2Header);
 
         return this;
     }
-
+    @Step("Scroll to slider")
     public OurDatacenterPage scrollToSlider() {
         scrollByVisibleElement(attributeSecondImageInSlider);
 
         return this;
     }
-
+    @Step("Get attribute of image slider")
     public String getClassAttributeOfImageSlider() {
         return getAttribute(attributeSecondImageInSlider, "class");
     }
+    @Step("Double click to second image in slider")
     public OurDatacenterPage doubleClickToSecondImageInSlider() {
         Actions action = new Actions(getDriver());
         action.doubleClick(secondImageInSlider).build().perform();
@@ -59,17 +61,18 @@ public class OurDatacenterPage extends FooterMenuPage<OurDatacenterPage> {
         pauseVideoCharity();
         return new OurDatacenterPage(getDriver());
     }
+
     public OurDatacenterPage waitUntilTimeOfVideoChanged(long timeMillis) {
         waitUntilTimeOfVideoToBeChanged(timeMillis);
         return new OurDatacenterPage(getDriver());
     }
+    @Step("Wait to be visible second image in the slider")
     public OurDatacenterPage waitUntilSecondImageToBeVisible() {
         wait10ElementToBeVisible(bigSecondImageInSlider);
         return new OurDatacenterPage(getDriver());
     }
-
+    @Step("Image is displayed in slider")
     public boolean elementIsDisplayedInSlider() {
-
         return isElementDisplayed(bigSecondImageInSlider);
     }
 

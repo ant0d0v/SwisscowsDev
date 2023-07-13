@@ -1,6 +1,8 @@
 package tests.footer;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -10,7 +12,8 @@ import pages.footer_menu.WhoWeArePage;
 import java.util.List;
 
 public class WhoWeAreTest extends BaseTest {
-
+    @QaseTitle("Check h1 text")
+    @QaseId(value = 5023)
     @Test
     public void testH1text() {
         final String expectedH1Text = "The search engine without tracking – Swisscows";
@@ -29,9 +32,11 @@ public class WhoWeAreTest extends BaseTest {
         Assert.assertNotEquals(oldUrl, newUrl);
         Assert.assertEquals(actualText1, expectedH1Text);
     }
-        @Test(dataProvider = "WhoWeAreLinksData", dataProviderClass = TestData.class)
-        public void testWhoWeAreLinksNavigateToCorrespondingPages(
-        int index, String linkName, String href, String expectedURL, String expectedH1text) throws InterruptedException {
+    @QaseTitle("Check that links navigate to corresponding pages ")
+    @QaseId(value = 5023)
+    @Test(dataProvider = "WhoWeAreLinksData", dataProviderClass = TestData.class)
+    public void testWhoWeAreLinksNavigateToCorrespondingPages(
+            int index, String linkName, String href, String expectedURL, String expectedH1text) throws InterruptedException {
             WhoWeArePage whoWeArePage = new WhoWeArePage(getDriver());
             MainPage mainPage = new MainPage(getDriver());
 
@@ -53,7 +58,9 @@ public class WhoWeAreTest extends BaseTest {
             Assert.assertNotEquals(oldH1Text, actualH1Text);
             Assert.assertEquals(actualURL, expectedURL);
             Assert.assertEquals(actualH1Text, expectedH1text);
-        }
+    }
+    @QaseTitle("Check colors of links")
+    @QaseId(value = 5024)
     @Test
     public void testLinksColorsWhoWeArePage() {
         final List<String> expectedLinksColors = List.of(

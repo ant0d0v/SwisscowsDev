@@ -1,6 +1,8 @@
 package tests.footer;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -11,6 +13,8 @@ import pages.top_menu.EmailPage;
 import java.util.List;
 
 public class MakeDefaultSearchTest extends BaseTest {
+    @QaseTitle("Check h2 texts on the page")
+    @QaseId(value = 4994)
     @Test
     public void testH2TextsMakeDefaultSearchPage() {
         List<String> expectedH2Texts = List.of(
@@ -22,30 +26,35 @@ public class MakeDefaultSearchTest extends BaseTest {
                 "Microsoft Internet Explorer",
                 "Microsoft Edge"
         );
-        List<String> actualH2Texts = openBaseURL()
+        final List<String> actualH2Texts = openBaseURL()
                 .scrollToFooterMenu()
                 .clickMakeDefaultSearchPageFooterMenu()
                 .getH2Texts();
+
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
     }
+    @QaseTitle("Check make default search links navigate to corresponding pages")
+    @QaseId(value = 4995)
     @Test(dataProvider = "MakeDefaultSearchLinksData", dataProviderClass = TestData.class)
     public void testMakeDefaultSearchLinksNavigateToCorrespondingPages(
             int index, String linkName, String href, String expectedURL) throws InterruptedException {
         MakeDefaultSearchPage makeDefaultSearchPage = new MakeDefaultSearchPage(getDriver());
-        MainPage mainPage = openBaseURL();
-        final String oldURL = mainPage
+
+        final String oldURL = openBaseURL()
                 .scrollToFooterMenu()
                 .clickMakeDefaultSearchPageFooterMenu()
                 .getCurrentURL();
-        makeDefaultSearchPage
-                .clickAllLinks(index);
-        final String actualURL = mainPage.getCurrentURL();
+
+        makeDefaultSearchPage.clickAllLinks(index);
+
+        final String actualURL = makeDefaultSearchPage.getCurrentURL();
 
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertEquals(actualURL, expectedURL);
     }
-
+    @QaseTitle("Check font sixes of texts on the page")
+    @QaseId(value = 4996)
     @Test
     public void testH2FontSizesMakeDefaultSearchPage(){
         List<String> expectedH1FontSizes = List.of(
@@ -65,20 +74,24 @@ public class MakeDefaultSearchTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
+    @QaseTitle("Check localisation navigate to corresponding pages")
+    @QaseId(value = 4997)
     @Test(dataProvider = "LangMakaDefaultSearchTestData", dataProviderClass = TestData.class)
     public void testLocalizationGoToCorrespondingLanguage(
             int index, String LangName, String expectedH1text) {
 
-        String actualH1texts = (openBaseURL()
+        String actualH1texts = openBaseURL()
                 .clickMakeDefaultSearchPageFooterMenu()
                 .clickHamburgerMenu()
                 .clickLangDropDownMakeDefault(index)
-                .getH1Text());
+                .getH1Text();
 
         Assert.assertEquals(actualH1texts, expectedH1text);
     }
+    @QaseTitle("Check that animation images are dysplaed")
+    @QaseId(value = 4998)
     @Test
-    public void testAnimationImageIsDysplaed(){
+    public void testAnimationImageAreDysplaed(){
         MakeDefaultSearchPage makeDefaultSearchPage = new MakeDefaultSearchPage(getDriver());
         openBaseURL()
                 .scrollToFooter()
@@ -88,6 +101,8 @@ public class MakeDefaultSearchTest extends BaseTest {
 
         Assert.assertTrue(makeDefaultSearchPage.elementIsDisplayedAnimationImage());
     }
+    @QaseTitle("Check colors of links on the page ")
+    @QaseId(value = 4999)
     @Test
     public void testLinksColorsMakeDefaultSearchPage() {
         List<String> expectedLinksColors = List.of(
@@ -107,6 +122,8 @@ public class MakeDefaultSearchTest extends BaseTest {
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
     }
+    @QaseTitle("Check existence of all icons on  page ")
+    @QaseId(value = 5000)
     @Test
     public void testAllIconsExistToMakeDefaultSearchPage() {
 
@@ -119,6 +136,8 @@ public class MakeDefaultSearchTest extends BaseTest {
 
 
     }
+    @QaseTitle("Check button colors when hover on page")
+    @QaseId(value = 5001)
     @Test
     public void testAllButtonColorsWhenHover_makeDefaultSearchPage() throws InterruptedException {
         MakeDefaultSearchPage makeDefaultSearchPage = new MakeDefaultSearchPage(getDriver());
@@ -131,7 +150,6 @@ public class MakeDefaultSearchTest extends BaseTest {
                 .getButtonColorsWhenHover();
 
         Assert.assertNotEquals(newButtonColorsWhenHover, oldButtonColorsWhenHover);
-
     }
 
 }

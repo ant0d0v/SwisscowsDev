@@ -310,6 +310,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(RegionGerman);
         return new MainPage(getDriver());
     }
+    @Step("Click germany languages")
     public MainPage clickGermanyLang() {
         click(langGermany);
 
@@ -451,7 +452,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public MusicPage clickMusicButton() {
         clickEnter(musicButton);
-
         return new MusicPage(getDriver());
     }
     @Step("Click image button")
@@ -514,9 +514,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public boolean isLogoIconDisplayed() {
         return isElementDisplayed(logo);
     }
-
+    @Step("Verify that all elements on page are displayed.")
     public boolean allElementsDisplayed() {
-
         return areElementsInListDisplayed(allImagesOnPage);
     }
     @Step("Click on the Sign In menu.")

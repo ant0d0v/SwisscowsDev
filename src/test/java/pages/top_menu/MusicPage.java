@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -119,7 +120,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
 
     public List <String> getTitleAllTracks()  {
         for (WebElement element : allTracks){
-            wait10ElementToBeVisible(element);
+            try {
+                wait10ElementToBeVisible(element);
+            } catch (StaleElementReferenceException e) {
+                System.out.println("StaleElementReferenceException occurred: " + e.getMessage());
+            }
         }
         return getTexts(allTracks);
     }

@@ -101,7 +101,7 @@ public class MusicTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testSetTimeInPlayer(){
         final String actualTime = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
+                .inputSearchCriteriaAndEnter("best")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -258,7 +258,7 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()

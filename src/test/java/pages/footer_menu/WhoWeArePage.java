@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,22 +28,13 @@ public class WhoWeArePage extends FooterMenuPage<WhoWeArePage> {
         return new WhoWeArePage(getDriver());
     }
 
-    public List<String> getProductsText() {
-
-        return getTexts(products);
-    }
-
+    @Step("Scroll to h2 header")
     public WhoWeArePage scrollToWhereToH2Header() {
         scrollByVisibleElement(whereToH2Header);
 
         return this;
     }
 
-    public WhoWeArePage waitForWhoWeArePageHeaderBeVisible() {
-        wait10ElementToBeVisible(WhoWeArePageHeader);
-
-        return new WhoWeArePage(getDriver());
-    }
 
 }
 

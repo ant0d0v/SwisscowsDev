@@ -48,6 +48,7 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
         scrollByVisibleElement(attributeSecondImageInFirstSlider);
         return new CharityProjectPage(getDriver());
     }
+    @Step("Scroll to the second slider.")
     public CharityProjectPage scrollToSecondSlider() {
         scrollByVisibleElement(attributeThirdImageInSecondSlider);
 
@@ -71,7 +72,7 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
     public String getClassAttributeOfImageInFirstSlider() {
         return getAttribute(attributeSecondImageInFirstSlider, "class");
     }
-
+    @Step("Get the  attribute of the image in the second slider")
     public String getClassAttributeOfImageInSecondSlider() {
         return getAttribute(attributeThirdImageInSecondSlider, "class");
     }
@@ -80,19 +81,18 @@ public class CharityProjectPage extends FooterMenuPage<CharityProjectPage> {
         wait10ElementToBeVisible(bigTwoImageInSlider);
         return new CharityProjectPage(getDriver());
     }
+    @Step("Waiting for third images to be visible in  the slider")
     public CharityProjectPage waitUntilThirdImageInTheSliderToBeVisible(){
         wait10ElementToBeVisible(bigThirdImageInSlider);
         return new CharityProjectPage(getDriver());
     }
 
-
+    @Step("Check that image is dysplaed in the first slider")
     public boolean elementIsDisplayedFirstSlider() {
-
         return isElementDisplayed(bigTwoImageInSlider);
     }
-
+    @Step("Check that image is dysplaed in the second slider")
     public boolean elementIsDisplayedInSecondSlider() {
-
         return isElementDisplayed(bigThirdImageInSlider);
     }
 
