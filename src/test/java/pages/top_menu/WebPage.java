@@ -214,7 +214,6 @@ public class WebPage extends TopMenuPage<WebPage> {
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);
     }
-    @Step("Wait until the loader is invisible.")
     public WebPage waitUntilLoaderToBeInvisible(){
            waitForLoaderToBeInVisible();
            return new WebPage(getDriver());

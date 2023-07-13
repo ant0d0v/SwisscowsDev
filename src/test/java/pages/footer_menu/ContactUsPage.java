@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,10 +36,11 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
 
         return new ContactUsPage(getDriver());
     }
+    @Step("Get the actual success message from the page.")
     public String getThanksMessage() {
-
         return getText(thanksMessage);
     }
+    @Step("Wait for the \"Thanks\" message to be visible.")
     public ContactUsPage waitToBeVisibleThanksMessage(){
         wait10ElementToBeVisible(thanksMessage);
         return new ContactUsPage(getDriver());
@@ -76,11 +78,12 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
         switchToAnotherWindow();
         return new PrivacyPolicyPage(getDriver());
     }
+    @Step("Click on the \"Back to Search\" button.")
     public MainPage clickBackToSearchButton(){
         click20(backToSearchButton);
         return new MainPage(getDriver());
     }
-
+    @Step("Submit the contact form on the Contact Us page.")
     public ContactUsPage sendFormContactUs() {
         clickClearInputRegularUserName();
         clickClearInputRegularUserEmail();
@@ -89,19 +92,19 @@ public class ContactUsPage extends FooterMenuPage<ContactUsPage> {
         clickSendButton();
         return new ContactUsPage(getDriver());
     }
+    @Step("Get color privacy link ")
     public String getColorPrivacyLink(){
-
         return getBackgroundColor(privacyPolicyLink);
     }
+    @Step("Hover on the send button ")
     public ContactUsPage hoverElement() throws InterruptedException {
         hover(sendButton);
         return  this;
 
     }
-
+    @Step("Get color of button")
     public String backgroundColorOfElement() {
         return getBackgroundHoverColor(sendButton);
-
     }
 
 }

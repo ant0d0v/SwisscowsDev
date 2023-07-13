@@ -1,4 +1,5 @@
 package pages.footer_menu;
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.FooterMenuPage;
@@ -22,29 +23,31 @@ public class MakeDefaultSearchPage extends FooterMenuPage<MakeDefaultSearchPage>
 
         return new MakeDefaultSearchPage(getDriver());
     }
+    @Step("Scroll to where h2 tor")
     public  MakeDefaultSearchPage scrollToWhereH2Tor() {
         scrollByVisibleElement(h2Tor);
-
         return this;
     }
+    @Step("Wait to be visible animation images ")
     public MakeDefaultSearchPage waitToBeVisibleAnimationImage(){
         wait10ElementToBeVisible(animationImage);
         return new MakeDefaultSearchPage(getDriver());
     }
+    @Step("Check that animation images are dysplaed")
     public boolean elementIsDisplayedAnimationImage() {
-
         return isElementDisplayed(animationImage);
     }
+    @Step("Check that all images are dysplaed ")
     public boolean allElementsDisplayed() {
-
         return areElementsInListDisplayed(allImageOnPageMakePage);
     }
+    @Step("Get the button colors when hover")
     public List<String> getButtonColorsWhenHover() throws InterruptedException {
 
         return  getBackgroundHoverColorsOfElements(allButtonsOnMakeDefaultPage);
     }
+    @Step("Get the button colors without hover")
     public List<String> getButtonColors() throws InterruptedException {
-
         return  getBackgroundColorsOfElements(allButtonsOnMakeDefaultPage);
     }
 

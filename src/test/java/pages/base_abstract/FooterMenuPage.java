@@ -201,6 +201,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         return  getFontSizes(textsH2);
 
     }
+    @Step("Get color email link")
     public String getColorEmail (){
         return getBackgroundColor(linkToEmail);
     }
@@ -301,7 +302,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         getWait20().until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
-    @Step("Click mediz education link in the footer")
+    @Step("Click media education link in the footer")
     public MediaEducationPage clickMediaEducationFooterMenu() {
         click(MediaEducationFooterMenu);
         return new MediaEducationPage(getDriver());
@@ -434,7 +435,7 @@ public abstract class FooterMenuPage<Generic> extends TopMenuPage {
         executor.executeScript("return arguments[0].play()", videoPlayer);
         return new CharityProjectPage(getDriver());
     }
-
+    @Step("Get the text content of the PDF ")
     public String getPdfText(String pdfUrl) throws IOException {
         URL url = new URL(pdfUrl);
         InputStream is = url.openStream();

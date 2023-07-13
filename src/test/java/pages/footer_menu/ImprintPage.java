@@ -1,5 +1,6 @@
 package pages.footer_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,15 +20,16 @@ public class ImprintPage extends FooterMenuPage<ImprintPage> {
     public ImprintPage(WebDriver driver) {
         super(driver);
     }
+    @Step("Check image swisscows is dysplaed")
     public boolean elementIsDisplayedImageSwisscows() {
-
         return isElementDisplayed(imageSwisscows);
     }
+    @Step("Get text on the page")
     public List<String> getTextsOnPage() {
 
         return getTexts(listTextsOnPage);
     }
-
+    @Step("Get font sizes of texts ")
     public List<String> getTextsFontSizes(){
         return  getFontSizes(listTextsOnPage);
 

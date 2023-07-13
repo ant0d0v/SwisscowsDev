@@ -1,6 +1,8 @@
 package tests.footer;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.footer_menu.ImprintPage;
@@ -8,7 +10,8 @@ import pages.footer_menu.ImprintPage;
 import java.util.List;
 
 public class ImprintTest extends BaseTest {
-
+    @QaseTitle("Check image swisscows is dysplaed")
+    @QaseId(value = 4990)
     @Test
     public void testImageSwisscowsIsDysplaed(){
         ImprintPage imprintPage  = new ImprintPage (getDriver());
@@ -18,6 +21,8 @@ public class ImprintTest extends BaseTest {
 
         Assert.assertTrue(imprintPage.elementIsDisplayedImageSwisscows());
     }
+    @QaseTitle("Check texts on the page")
+    @QaseId(value = 4991)
     @Test
     public void testSpanTextsImprintPage() {
         final  List<String> expectedH2Texts = List.of(
@@ -35,9 +40,12 @@ public class ImprintTest extends BaseTest {
                 .scrollToFooterMenu()
                 .clickImprintPageFooterMenu()
                 .getTextsOnPage();
+
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
     }
+    @QaseTitle("Check font sizes of texts on the page")
+    @QaseId(value = 4992)
     @Test
     public void testTextsFontSizesImprintPage(){
         final List<String> expectedH1FontSizes = List.of(
@@ -59,7 +67,8 @@ public class ImprintTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
-
+    @QaseTitle("Check color of email link ")
+    @QaseId(value = 4993)
     @Test
     public void tesEmailLinkColorImprintPage(){
         final String expectedH1Colors =

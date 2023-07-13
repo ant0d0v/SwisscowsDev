@@ -1,6 +1,8 @@
 package tests.footer;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -9,6 +11,8 @@ import pages.footer_menu.MediaEducationPage;
 import utils.ProjectConstants;
 
 public class ContactUsTest extends BaseTest {
+    @QaseTitle("Check form submission on Contact Us Page")
+    @QaseId(value = 4978)
     @Test
     public void testFormContactUs() {
         final String expectedSuccessMessage = "Thank you for contacting us!";
@@ -26,7 +30,8 @@ public class ContactUsTest extends BaseTest {
         Assert.assertNotEquals(actualURL, oldURL);
         Assert.assertEquals(actualSuccessMessage, expectedSuccessMessage);
     }
-
+    @QaseTitle("Check that contact Us Button navigates to corresponding pages")
+    @QaseId(value = 4979)
     @Test
     public void testContactUsButtonNavigateToCorrespondingPages() {
         final String expectedUrl = ProjectConstants.DOMAIN +"/en";
@@ -45,7 +50,8 @@ public class ContactUsTest extends BaseTest {
         Assert.assertNotEquals(newURL, oldURL);
         Assert.assertEquals(actualUrl, expectedUrl);
     }
-
+    @QaseTitle("Check that privacy policy link navigates to corresponding pages")
+    @QaseId(value = 4980)
     @Test
     public void testPrivacyPolicyLinkNavigateToCorrespondingPages() {
         final String expectedUrl = ProjectConstants.DOMAIN + "/en/privacy";
@@ -57,7 +63,8 @@ public class ContactUsTest extends BaseTest {
 
         Assert.assertEquals(actualUrl, expectedUrl);
     }
-
+    @QaseTitle("Check that colors of links on the page")
+    @QaseId(value = 4981)
     @Test
     public void testLinksColorContactUsPage() {
         final String expectedLinksColors =
@@ -70,6 +77,8 @@ public class ContactUsTest extends BaseTest {
         Assert.assertEquals(actualLinksColors, expectedLinksColors);
 
     }
+    @QaseTitle("Check that send button color when hovering")
+    @QaseId(value = 4982)
     @Test
     public void testSendButtonColorWhenHover_ContactUsPage() throws InterruptedException {
         ContactUsPage contactUsPage  = new ContactUsPage (getDriver());

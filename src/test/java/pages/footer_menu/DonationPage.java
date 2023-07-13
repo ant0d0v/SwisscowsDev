@@ -1,4 +1,5 @@
 package pages.footer_menu;
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,21 +26,20 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
 
         return new DonationPage(getDriver());
     }
+    @Step("Scroll to the payment block on the Donation page.")
     public DonationPage scrollToWherePaymentBlock() {
         scrollByVisibleElement(paymentBlock);
-
         return this;
     }
+    @Step("Scroll to where h1 header")
     public DonationPage scrollToWhereH1Header() {
         scrollByVisibleElement(h1Header);
-
         return this;
     }
 
     public DonationPage clickQrCodeChf() {
         click(qrCodeChf);
         switchToAnotherWindow();
-
         return this;
     }
     public DonationPage clickQrCodeEuro()  {
@@ -58,8 +58,8 @@ public class DonationPage extends FooterMenuPage<DonationPage> {
         }
         createGeneric();
     }
+    @Step("Get colors of links")
     public List <String> getColorLinksDonation (){
-
         return getColors(allLinksOnPage);
     }
 

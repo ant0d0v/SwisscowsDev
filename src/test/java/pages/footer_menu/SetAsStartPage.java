@@ -1,4 +1,5 @@
 package pages.footer_menu;
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.MainPage;
@@ -23,8 +24,8 @@ public class SetAsStartPage extends FooterMenuPage<SetAsStartPage> {
         click20(dragLink);
         return new MainPage(getDriver());
     }
+    @Step("Check that elements are displayed ")
     public boolean allElementsDisplayed() {
-
         return areElementsInListDisplayed(allImageOnPageSetAsPage);
     }
 
