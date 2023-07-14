@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
         return new EmailPage(getDriver());
     }
+    @Step("Switch to email page")
     public EmailPage switchToEmailPage() {
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (getDriver().getWindowHandles().size() == 1) {
@@ -34,6 +36,7 @@ public class EmailPage extends TopMenuPage<EmailPage> {
         }
         return this;
     }
+    @Step("Close tab")
     public EmailPage closeWindow() {
         getDriver().close();
         return this;
@@ -56,28 +59,26 @@ public class EmailPage extends TopMenuPage<EmailPage> {
 
         return linksOfEmailPage;
     }
-
+    @Step("Scroll to install email link")
     public EmailPage scrollToWhereToInstallEmail() {
         scrollByVisibleElement(InstallWebAppLink);
-
         return this;
     }
 
-
+    @Step("Get colors buttons when hovering")
     public List<String> getButtonColorsWhenHover() throws InterruptedException {
-
         return  getBackgroundHoverColorsOfElements(allLinksOfPriceContainers);
     }
+    @Step("Get colors buttons")
     public List<String> getButtonColors() throws InterruptedException {
-
         return  getBackgroundColorsOfElements(allLinksOfPriceContainers);
     }
+    @Step("Get colors buttons Start and Install when hovering")
     public List<String> getButtonsStartAndInstallColorsWhenHover() throws InterruptedException {
-
         return  getBackgroundHoverColorsOfElements(allButtonsOnEmailPage);
     }
+    @Step("Get colors buttons Start and Install")
     public List<String> getButtonStartAndInstallColors() throws InterruptedException {
-
         return  getBackgroundColorsOfElements(allButtonsOnEmailPage);
     }
 }

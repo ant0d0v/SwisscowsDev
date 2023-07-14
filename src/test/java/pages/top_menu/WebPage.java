@@ -184,10 +184,17 @@ public class WebPage extends TopMenuPage<WebPage> {
         return getListSize(innerFooterMenuLink);
     }
 
-    @Step("Get the title text of the 202 error page")
+    @Step("Get the title text of the error page")
     public String getTitleErrorText()  {
-        wait10ElementToBeVisible(h2TextError);
-        return getText(h2TextError);
+        String errorText = null;
+        try {
+            wait10ElementToBeVisible(h2TextError);
+            errorText = getText(h2TextError);
+        } catch (StaleElementReferenceException e) {
+            System.out.println("StaleElementReferenceException occurred: " + e.getMessage());
+            errorText = getText(h2TextError);
+        }
+        return errorText;
     }
     public String getTextDidYpuMeanMessage()  {
 
@@ -233,11 +240,14 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
 
     public List<String> getTitlesInWebResult() {
-        List<String> textList = new ArrayList<>();
-        for (WebElement element : listWebResult) {
-            textList.add(element.getText());
+        for (WebElement element : listWebResult){
+            try {
+                wait10ElementToBeVisible(element);
+            } catch (StaleElementReferenceException e) {
+                System.out.println("StaleElementReferenceException occurred: " + e.getMessage());
+            }
         }
-        return textList;
+        return getTexts(listWebResult);
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
 

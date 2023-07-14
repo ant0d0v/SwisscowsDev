@@ -317,7 +317,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new MainPage(getDriver());
     }
     public List <String> getColorLinks (){
-
         return getColors(allLinks);
     }
 
@@ -400,7 +399,6 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return getTexts(textsH3);
     }
     public List <String> getH2Texts() {
-
         return getTexts(textsH2);
     }
     public String getH1Text() {

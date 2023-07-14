@@ -322,6 +322,7 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return new MainPage(getDriver());
 
     }
+    @Step("Click vpn logo and close tab")
     public VpnPage clickVPNTopMenuAndCloseWindow() {
         click(VPNTopMenu);
         closeWindow();
