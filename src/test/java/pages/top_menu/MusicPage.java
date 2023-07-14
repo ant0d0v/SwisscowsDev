@@ -194,6 +194,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         return getAttribute(progressbarFirsTrack, "style");
     }
     public String getFirstTrackAttribute() {
+        wait10ElementToBeVisible(valueFirstImage);
         return getAttribute( valueFirstImage, "src");
     }
     public String getVolumeDurationFirstTrack()  {

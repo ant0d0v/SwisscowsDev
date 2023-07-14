@@ -81,9 +81,8 @@ public abstract class BasePage {
     public String getCurrentURL() {
         return getDriver().getCurrentUrl();
     }
-
+    @Step("Get the formatted URL.")
     public String getFormattedURL() {
-
         return getDriver().getCurrentUrl().substring(61, 84);
     }
 

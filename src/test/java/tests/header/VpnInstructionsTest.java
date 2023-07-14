@@ -1,6 +1,8 @@
 package tests.header;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 
 import org.testng.annotations.Test;
@@ -13,6 +15,8 @@ import java.net.URL;
 import java.util.List;
 
 public class VpnInstructionsTest extends BaseTest {
+    @QaseTitle("Check h2 texts")
+    @QaseId(value = 5046)
     @Test
     public void testH2TextsVpnInstructionsPage() {
         final List<String> expectedH2Texts = List.of(
@@ -35,7 +39,8 @@ public class VpnInstructionsTest extends BaseTest {
         Assert.assertTrue(actualH2Texts.size() > 0);
         Assert.assertEquals(actualH2Texts, expectedH2Texts);
     }
-
+    @QaseTitle("Check that vpn logo navigate to base url")
+    @QaseId(value = 5047)
     @Test
     public void testVpnLogoNavigatesToBaseURL() {
         final String expectedURL = ProjectConstants.DOMAIN + "/en";
@@ -54,6 +59,8 @@ public class VpnInstructionsTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+    @QaseTitle("Check font sizes of texts")
+    @QaseId(value = 5048)
     @Test
     public void testTextsFontSizesVpnInstructionsPage() {
         final List<String> expectedH1FontSizes = List.of(
@@ -75,7 +82,8 @@ public class VpnInstructionsTest extends BaseTest {
         Assert.assertTrue(actualH2FontSizes.size() > 0);
         Assert.assertEquals(actualH2FontSizes, expectedH1FontSizes);
     }
-
+    @QaseTitle("Check that browser icons are displayed")
+    @QaseId(value = 5049)
     @Test
     public void testAllBrowserIconsExist() {
         VpnInstructionsPage vpnInstructionsPage = openBaseURL()
@@ -86,41 +94,23 @@ public class VpnInstructionsTest extends BaseTest {
         Assert.assertTrue(vpnInstructionsPage.isLogoIconDisplayed());
         Assert.assertTrue(vpnInstructionsPage.allElementsDisplayed());
     }
+    @QaseTitle("Check that vpn extensions links navigate to corresponding page")
+    @QaseId(value = 5050)
     @Test
     public void testVpnExtensionsLinksNavigateToCorrespondingWebSites() {
-        final List<String> links = List.of(
-                "https://chrome.google.com/webstore/detail/swisscowsvpn",
-                "https://addons.mozilla.org/en-GB/firefox/addon/swisscows-vpn/"
+        final List<String> expectedLinks = List.of(
+                "https://chrome.google.com/webstore/detail/swisscowsvpn/nglddggbgngenfgaelmmmhldofddjlmh",
+                "https://addons.mozilla.org/firefox/addon/swisscows-vpn/"
 
         );
-
-        final List<String> expectedDomains = List.of(
-                "chrome.google.com",
-                "addons.mozilla.org"
-
-        );
-        openBaseURL()
+        final List<String> actualLinks  = openBaseURL()
                 .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage()
-                .clickInstructionsLink();
+                .clickInstructionsLink()
+                .getListOfExtensionsLinks();
 
-        Assert.assertEquals(links.size(), expectedDomains.size());
+        Assert.assertEquals(actualLinks,expectedLinks);
 
-        for (int i = 0; i < links.size(); i++) {
-            String expectedDomain = expectedDomains.get(i);
-
-            URL url = null;
-            try {
-                url = new URL(links.get(i));
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-
-            Assert.assertNotNull(url);
-            String actualDomain = url.getHost();
-
-            Assert.assertEquals(actualDomain, expectedDomain);
-        }
     }
 }
 

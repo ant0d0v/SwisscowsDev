@@ -113,11 +113,11 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("best")
+                .inputSearchCriteriaAndEnter("1")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -129,11 +129,11 @@ public class MusicTest extends BaseTest {
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("best"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains("1"));
         }
         Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         for (String search : titleAllPlaylist) {
-            Assert.assertTrue(search.toLowerCase().contains("best"));
+            Assert.assertTrue(search.toLowerCase().contains("1"));
         }
     }
 
@@ -163,7 +163,7 @@ public class MusicTest extends BaseTest {
     public void testAddTrackInTheFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
         final String actualValueFirstTrack = openBaseURL()
-                .inputSearchCriteriaAndEnter("Ivanka")
+                .inputSearchCriteriaAndEnter("lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -258,7 +258,7 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
 
-    @Test(priority = 3,retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
         openBaseURL()
@@ -328,19 +328,19 @@ public class MusicTest extends BaseTest {
     public void testRegionalSearch_MusicPage() {
         MusicPage musicPage =new MusicPage(getDriver());
         openBaseURL()
-                .inputSearchCriteriaAndEnter("best")
+                .inputSearchCriteriaAndEnter("1")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .selectDeutschRegion()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=best&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=1&region=");
 
         final String actualRegion = musicPage.getCurrentURL();
         final List<String> titleAllTracks = musicPage.getTitleAllTracks();
 
-        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=best&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=1&region=de-DE");
         for (String search : titleAllTracks) {
-            Assert.assertTrue(search.toLowerCase().contains("best"));
+            Assert.assertTrue(search.toLowerCase().contains("1"));
         }
     }
 

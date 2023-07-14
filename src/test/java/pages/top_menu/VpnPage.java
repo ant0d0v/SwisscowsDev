@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +36,7 @@ public class VpnPage extends TopMenuPage<VpnPage> {
 
         return new VpnPage(getDriver());
     }
-
+    @Step("Switch to vpn page")
     public VpnPage switchToVpnPage() {
         for (String windowHandle : getDriver().getWindowHandles()) {
             if (getDriver().getWindowHandles().size() == 1) {
@@ -45,47 +46,44 @@ public class VpnPage extends TopMenuPage<VpnPage> {
         }
         return this;
     }
-    public VpnPage closeWindow() {
-        getDriver().close();
-        return this;
-
-    }
-
+    @Step("Scroll to where instructions")
     public VpnPage scrollToWhereToInstructions() {
         scrollByVisibleElement(instructionsContainer);
-
         return this;
     }
+    @Step("Scroll to where extensions block ")
     public VpnPage scrollToWhereExtensionsBlock() {
         scrollByVisibleElement(allExtensionsBlock);
-
         return this;
     }
-
+    @Step("Check that google extension icon is displayed")
     public boolean isGoogleExtensionIconDisplayed() {
-
         return isElementDisplayed(imageGoogleExtension);
     }
+    @Step("Check that mozilla extension icon is displayed")
     public boolean isMozillaExtensionIconDisplayed() {
-
         return isElementDisplayed(imageMozillaExtension);
     }
+    @Step("Check that other extension icon is displayed")
     public boolean isOtherExtensionIconDisplayed() {
 
         return isElementDisplayed(imageOtherExtension);
     }
+    @Step("Get color buttons when hovering")
     public List<String> getButtonColorsWhenHover() throws InterruptedException {
 
         return  getBackgroundHoverColorsOfElements(allLinksOnVpnPage);
     }
+    @Step("Get color buttons without hover")
     public List<String> getButtonColors() throws InterruptedException {
-
         return  getBackgroundColorsOfElements(allLinksOnVpnPage);
     }
+    @Step("Get color start now button without hover")
     public String backgroundColorOfElement() {
         return getBackgroundHoverColor(startNowButtonVpnPage);
 
     }
+    @Step("Hover to button")
     public VpnPage hoverElement(){
         hover(startNowButtonVpnPage);
         return  this;
