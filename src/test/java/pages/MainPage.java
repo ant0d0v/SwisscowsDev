@@ -235,10 +235,8 @@ public class MainPage extends FooterMenuPage<MainPage> {
         return isElementDisplayed(googlePopupInstall);
     }
 
-
-
+    @Step("Check suggest id displayed")
     public boolean suggestIsDisplayed() {
-
         return isElementDisplayed(suggestMainPage);
     }
     @Step("Check that  images are dysplaed")
