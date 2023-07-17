@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -56,6 +57,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return new VideoPage(getDriver());
 
     }
+    @Step("Wait until to be visible video result")
     public VideoPage waitUntilVisibilityVideoResult() {
         wait20ElementToBeVisible(videoResultContainer);
 

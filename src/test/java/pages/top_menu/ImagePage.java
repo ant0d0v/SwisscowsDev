@@ -1,5 +1,6 @@
 package pages.top_menu;
 
+import io.qase.api.annotation.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -152,7 +153,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
-
+    @Step("Wait until to be visible fifteen images")
     public ImagePage waitUtilToBeVisibleFifteenImages(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         for (WebElement image : fifteenImages) {

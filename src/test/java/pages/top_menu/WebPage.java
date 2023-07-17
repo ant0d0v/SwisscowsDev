@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WebPage extends TopMenuPage<WebPage> {
@@ -130,6 +129,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     public String getCopyright() {
         return getText(footerSearchCopyright);
     }
+    @Step("Wait to be visible title of first search result ")
     public WebPage waitToBeVisibleTitleFirstSearchResult(){
         getWait10().until(driver -> {
             try {
@@ -141,6 +141,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         });
         return new WebPage(getDriver());
     }
+    @Step("Get title h2 text")
     public String getTitleH2Text()  {
         try {
             return h2Text.getText();
@@ -149,28 +150,28 @@ public class WebPage extends TopMenuPage<WebPage> {
             return h2Text.getText();
         }
     }
+    @Step("Get texts ads")
     public String getAdsText_WebPage() {
         wait10ElementToBeVisible(adsText);
         return getText(adsText);
     }
+
     public WebPage choiceGermanyRegion(){
         selectGermanyRegion();
         return new WebPage(getDriver());
     }
+    @Step("Wait until url to be changed")
     public WebPage waitUntilUrlToBeChanged(String parametr){
         waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new  WebPage(getDriver());
     }
+    @Step("Get trackers in screenshot ")
     public List<String> getTrackersInScreenshot() {
         wait10ElementToBeVisible(trackersScreenshot);
         return getTexts(trackersInScreenshot);
     }
-    public WebPage refreshWebPage() {
-        refreshPage();
-        return new WebPage(getDriver());
-    }
-    public List<WebElement> getInnerFooterMenuLinks() {
 
+    public List<WebElement> getInnerFooterMenuLinks() {
         return innerFooterMenuLink;
     }
     public void clickFooterSearchMenuExternalLink(int index) {
@@ -196,8 +197,8 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
         return errorText;
     }
-    public String getTextDidYpuMeanMessage()  {
-
+    @Step("Get text Did you mean message in the search field")
+    public String getTextDidYouMeanMessage()  {
         return getText(didYpuMeanMessage);
     }
     @Step("Get the font size of the title text.")
@@ -205,10 +206,11 @@ public class WebPage extends TopMenuPage<WebPage> {
         return  getFontSize(h2TextError);
 
     }
+    @Step("Get title of image widget")
     public String getTittleImagesWidget(){
         return  getText(titleImageWidget);
-
     }
+    @Step("Get title of news widget")
     public String getTittleNewsWidget(){
         return  getText(titleNewsWidget);
 
@@ -218,6 +220,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return  getTexts(adsList);
 
     }
+    @Step("Get title in the related searches")
     public List <String> getTitleInRelatedSearches()  {
         return getTexts(listRelatedSearches);
     }
@@ -226,7 +229,7 @@ public class WebPage extends TopMenuPage<WebPage> {
            return new WebPage(getDriver());
         }
 
-
+    @Step("Wait to be visible titles in web result")
     public WebPage waitUntilToBeVisibleTitlesInWebResult(){
         getWait10().until(driver -> {
             try {
@@ -238,7 +241,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         });
         return new WebPage(getDriver());
     }
-
+    @Step("Get titles all queries in web results")
     public List<String> getTitlesInWebResult() {
         for (WebElement element : listWebResult){
             try {
@@ -249,126 +252,134 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
         return getTexts(listWebResult);
     }
+    @Step("Get texts color when hovering")
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
-
         return  getHoverColorsOfElements(listRelatedSearches);
     }
+    @Step("Get texts color")
     public List<String> getTextColors() throws InterruptedException {
-
         return  getColorsOfElements(listRelatedSearches);
     }
+    @Step("Get colors preview buttons when hovering")
     public List<String> getPreviewColorsWhenHover() throws InterruptedException {
 
         return  getHoverColorsOfElements(listPreviewButtons);
     }
+    @Step("Get colors preview buttons")
     public List<String> getPreviewColors() throws InterruptedException {
 
         return  getColorsOfElements(listPreviewButtons);
     }
+    @Step("Get attribute third button of pagination ")
     public String getAttributeThirdButtonPagination() {
         return getAttribute(attributeThirdPagePagination,"class");
     }
+    @Step("Get attribute second button of pagination ")
     public String getAttributeSecondButtonPagination() {
         wait10ElementToBeVisible(attributeSecondPagePagination);
         return getAttribute(attributeSecondPagePagination,"class");
     }
-    public NewsPage clickRegionBrazil() {
-        click(regionBrazil);
-
-        return new NewsPage(getDriver());
-    }
+    @Step("Click preview button ")
     public WebPage clickPreviewButton() {
         click(previewButton);
         return new WebPage(getDriver());
     }
+    @Step("Click first link od ads")
     public WebPage clickFirstAds() {
         click(firstAds);
         return new WebPage(getDriver());
     }
+    @Step("Click first link in the web result")
     public WebPage clickFirstLinkInWebResult() {
         click(firstLinkWebResult);
         return new WebPage(getDriver());
     }
+    @Step("Click open button in the screenshot")
     public WebPage clickOpenButtonInScreenshot() {
         click(openButtonInScreenshot);
         return new WebPage(getDriver());
     }
+    @Step("Click trackers button in Screenshot")
     public WebPage clickTrackersButtonInScreenshot() {
         click(trackersButtonInScreenshot);
         return new WebPage(getDriver());
     }
+    @Step("Select of date filter ")
     public WebPage clickButtonDateInFilter() {
         click(buttonDateInFilter);
 
         return new WebPage(getDriver());
     }
+    @Step("Select past year of filter date")
     public WebPage clickPastYearInDropDownOfFilter() {
         click(pastYearDateInDropDownOfFilter);
-
         return new WebPage(getDriver());
     }
 
-
+    @Step("Click first query in related search ")
     public WebPage clickFirstTitleInRelatedSearches()  {
         clickByJavaScript(firstTitleRelatedSearches);
         return this;
     }
-    public void clickMoreVideoInVideoWidget()  {
-
+    @Step("Click more video button in the video widget")
+    public VideoPage clickMoreVideoInVideoWidget()  {
         click(buttonMoreVideo);
+        return new VideoPage(getDriver());
     }
+    @Step("Check click more button in the image widget")
     public ImagePage clickMoreImagesInVideoWidget()  {
-
         click(buttonMoreImages);
         return new ImagePage(getDriver());
     }
+    @Step("Click close in screenshot")
     public WebPage clickCloseInScreenshot()  {
-
         click(closeButtonInScreenshot);
         return new WebPage(getDriver());
     }
     public ImagePage clickFirstImageInImageWidget()  {
-
         clickByJavaScript(firstImageInImageWidget);
         switchToAnotherWindow();
         return new ImagePage(getDriver());
     }
     public ImagePage clickFirstNewsInNewsWidget()  {
-
         clickByJavaScript(firstNewsInNewsWidget);
         switchToAnotherWindow();
         return new ImagePage(getDriver());
     }
+    @Step("Click third number in the pagination")
     public WebPage clickThirdPagePagination_WebPage() {
         click(thirdPagePagination);
-
         return new WebPage (getDriver());
     }
+    @Step("Click prev button in the pagination")
     public WebPage  clickPreviousPagePagination_WebPage() {
-
         click20(previousPagePagination);
         return new WebPage (getDriver());
     }
+    @Step("Click next button in the pagination")
     public WebPage clickNextPagePagination_WebPage() {
         click(nextPagePagination);
-
         return new WebPage(getDriver());
     }
+    @Step("Click next button until button to be invisible in the video widget")
     public WebPage clickNextButtonVideoWidget() {
         wait10ElementToBeVisible(nextButtonInVideoWidget);
         clickElementUntilInvisible(nextButtonInVideoWidget);
         return new WebPage(getDriver());
     }
+    @Step("Click first video in the video widget")
     public WebPage clickFirstVideoInVideoWidget() {
         wait10ElementToBeVisible(firstImageInVideoWidget);
         clickByJavaScript(firstImageInVideoWidget);
         return  this;
     }
+    @Step("Click prev button until button to be invisible in the video widget")
     public void clickPrevButtonVideoWidget() {
         wait10ElementToBeVisible(prevButtonInVideoWidget);
         clickElementUntilInvisible(prevButtonInVideoWidget);
         new WebPage(getDriver());
     }
+    @Step("Check that last video is dysplaed")
     public boolean lastImageInVideoWidgetIsDisplayed() {
         wait10ElementToBeVisible(lastImageInVideoWidget);
         return isElementDisplayed(lastImageInVideoWidget);
@@ -385,31 +396,33 @@ public class WebPage extends TopMenuPage<WebPage> {
         wait20ElementToBeVisible(errorImage);
         return new WebPage(getDriver());
     }
+    @Step("Wait until visible tracker button .")
     public WebPage waitUntilVisibilityTrackerButton() {
         wait10ElementToBeVisible(trackersButtonInScreenshot);
 
         return new WebPage(getDriver());
     }
+    @Step("Wait to be visible screenshot button")
     public WebPage waitUntilVisibilityScreenshotButton() {
         wait10ElementToBeVisible(screenshotButtonInScreenshot);
 
         return new WebPage(getDriver());
     }
+    @Step("Wait until to be visible Screenshot")
     public WebPage waitUntilVisibilityScreenshot() {
         wait10ElementToBeVisible(previewFrame);
 
         return new WebPage(getDriver());
     }
+    @Step("Check that Screenshot is dysplaed")
     public boolean screenshotIsDisplayed() {
-
         return isElementDisplayed(previewFrame);
-
     }
     public boolean  errorImageIsDisplayed() {
-
         return isElementDisplayed(errorImage);
     }
 
+    @Step("Check that Screenshot is present on the page")
     public boolean isScreenshotItemIsPresent() {
         try {
             getDriver().navigate().refresh();
@@ -419,16 +432,19 @@ public class WebPage extends TopMenuPage<WebPage> {
             return false;
         }
     }
+    @Step("Check that first video is dysplaed in the video widget")
     public boolean firstImageInVideoWidgetIsDisplayed() {
         wait10ElementToBeVisible(firstImageInVideoWidget);
         return isElementDisplayed(firstImageInVideoWidget);
 
     }
+    @Step("Wait to be visible video player")
     public VideoPage waitIUntilVisiblyVideoPlayer() {
         wait10ElementToBeVisible(videoPlayer);
         return new VideoPage(getDriver());
 
     }
+    @Step("Wait until to be visible images in image widget")
     public WebPage waitForImageIsVisibleInImagesWidget(){
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement image : imagesInImageWidget) {
@@ -439,7 +455,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return this;
 
     }
-
+    @Step("Wait until to be visible images in news widget")
     public WebPage waitForImageIsVisibleInNewsWidget(){
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement image : imagesInNewsWidget) {
@@ -450,6 +466,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return this;
 
     }
+    @Step("Images are dysplaed in the image widget")
     public boolean imagesInImageWidgetIsDisplayed() {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement image : imagesInImageWidget) {
@@ -457,7 +474,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         }
         return imagesInNewsWidgetIsDisplayed();
     }
-
+    @Step("Images are dysplaed in the news widget")
     public boolean imagesInNewsWidgetIsDisplayed(){
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement image : imagesInNewsWidget) {

@@ -472,6 +472,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new NewsPage(getDriver());
     }
+    @Step("Click filter button")
     public WebPage clickFilterButtonWeb() {
         click20(filterButton);
         return new WebPage(getDriver());
@@ -481,6 +482,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(regionUkraine);
         return new NewsPage(getDriver());
     }
+    @Step("Click search field")
     public MainPage clickSearchFieldHeader() {
         click(searchFieldHeader);
         return new MainPage(getDriver());
@@ -527,6 +529,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(favoriteIcon);
         return new MusicPage(getDriver());
     }
+    @Step("Click language Deutsch")
     public void clickLangDeutsch() {
         wait10ElementToBeVisible(langDeutschInHamburgerMenu);
         click(langDeutschInHamburgerMenu);
