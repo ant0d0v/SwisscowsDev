@@ -63,8 +63,6 @@ public class SubscriptionsPage extends TopMenuPage<SubscriptionsPage> {
     private WebElement successfulMessage;
     @FindBy(xpath = "//img[@src ='./images/payment-illustration-success.svg']")
     private WebElement successfulImage;
-    @FindBy(xpath = "//img[@src ='./images/payment-illustration.svg']")
-    private WebElement paymentImage;
 
     public SubscriptionsPage(WebDriver driver) {
 

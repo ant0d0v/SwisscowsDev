@@ -535,12 +535,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click(langDeutschInHamburgerMenu);
         new WebPage(getDriver());
     }
+    @Step("Search after clear int the search field")
     public NewsPage searchAfterClearSearchField(String text) {
         inputAfterClear(searchFieldHeader,text);
         return new NewsPage(getDriver());
     }
     @Step("Search and clear after")
-    public void searchAfterClear(String text) throws InterruptedException {
+    public void searchAfterClear(String text){
         click(clearButton);
         wait10ElementToBeEmpty(searchFieldHeader);
         searchFieldHeader.sendKeys(text);

@@ -100,9 +100,9 @@ public class VpnPageTest extends BaseTest {
     @Test
     public void testTextsFontSizesVpnPage() {
         final List<String> expectedH1FontSizes = List.of(
-                "40px",
-                "40px",
-                "40px"
+                ProjectConstants.FONT_SIZE_40_PX,
+                ProjectConstants.FONT_SIZE_40_PX,
+                ProjectConstants.FONT_SIZE_40_PX
         );
         final List<String> actualH2FontSizes = openBaseURL()
                 .clickVPNTopMenu()

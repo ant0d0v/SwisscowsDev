@@ -18,7 +18,7 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testSuggestEqualsSearchCriteria_WebSearch() {
         MainPage mainPage = new MainPage(getDriver());
-        final String query = "ivanka";
+        String query = "ivanka";
 
         final List<String> actualSuggestion = openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
@@ -42,15 +42,14 @@ public class WebPageTest extends BaseTest {
     @Test
     public void test202NoResultsFoundPageError_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
-
+        String query = "@#@$%^$^dasdsad1231";
         final String expectedTitle202Error = "No results found for \"@#@$%^$^dasdsad1231\"";
-        final String expectedFontSizeTitle202Error = "40px";
 
         final String actualTitle202Error = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
-                .inputSearchCriteriaAndEnter("@#@$%^$^dasdsad1231")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
@@ -59,7 +58,7 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertEquals(actualTitle202Error, expectedTitle202Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle202Error, expectedFontSizeTitle202Error);
+        Assert.assertEquals(actualFontSizeTitle202Error, ProjectConstants.FONT_SIZE_40_PX);
     }
     @QaseId(value = 4885)
     @Test
@@ -67,8 +66,6 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "No results found for \"porn\"";
-        final String expectedFontSizeTitle404Error = "40px";
-
 
         final String actualTitle404Error = openBaseURL()
                 .inputSearchCriteriaAndEnter("porn")
@@ -80,7 +77,7 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+        Assert.assertEquals(actualFontSizeTitle404Error, ProjectConstants.FONT_SIZE_40_PX);
     }
     @QaseId(value = 4880)
     @Test
@@ -88,18 +85,17 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "Page not found";
-        final String expectedFontSizeTitle404Error = "40px";
-
 
         final String actualTitle404Error = webPage
                 .open404Page()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
+
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+        Assert.assertEquals(actualFontSizeTitle404Error, ProjectConstants.FONT_SIZE_40_PX);
     }
     @QaseId(value = 4887)
     @Test
@@ -107,24 +103,24 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String expectedTitle404Error = "Oops! Something is wrong";
-        final String expectedFontSizeTitle404Error = "40px";
-
 
         final String actualTitle404Error = webPage
                 .open500Page()
                 .waitUntilVisibilityErrorImage()
                 .getTitleErrorText();
+
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
 
         Assert.assertEquals(actualTitle404Error, expectedTitle404Error);
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(actualFontSizeTitle404Error, expectedFontSizeTitle404Error);
+        Assert.assertEquals(actualFontSizeTitle404Error, ProjectConstants.FONT_SIZE_40_PX);
     }
     @QaseTitle("Check that hover texts related to search")
     @QaseId(value = 5052)
     @Test
     public void testHoverTextsRelatedSearch_WebPage() throws InterruptedException {
         WebPage webPage = new WebPage(getDriver());
+
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult();
@@ -139,15 +135,16 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testRelatedSearchCriteria_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilVisibilityWebResult()
+        String query = "ronaldo";
+
+        final String actualRegion = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=ronaldo&region=");
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilVisibilityWebResult()
+                .getCurrentURL();
 
-        final String actualRegion = webPage.getCurrentURL();
         final List<String> titleAllVideo = webPage.getTitleInRelatedSearches();
 
         Assert.assertEquals(actualRegion, ProjectConstants.DOMAIN + "/en/web?query=ronaldo&region=de-DE");
@@ -160,8 +157,10 @@ public class WebPageTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testClickSearchCriteriaInRelatedSearch_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "ronaldo";
+
         final List<String> oldSearchResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .getTitlesInWebResult();
 
@@ -176,10 +175,12 @@ public class WebPageTest extends BaseTest {
     @QaseId(value = 5055)
     @Test
     public void testSearchFieldDidYouMeanMessage_webPage() {
+        String query = "appple";
+        final String expectedResult = "[Do you want results only for" + query + "?]";
 
-        final String expectedResult = "[Do you want results only for appple?]";
+
         final String actualResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("appple")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .getTextDidYouMeanMessage();
 
@@ -190,8 +191,10 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testWebResultsEqualsSearchCriteria() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "iphone";
+
         final List<String> titles = openBaseURL()
-                .inputSearchCriteriaAndEnter("ukraine")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .getTitlesInWebResult();
 
@@ -199,9 +202,9 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(actualSize >= 5);
         for (String searchCriteria : titles) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ukraine"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains(query));
         }
-        Assert.assertEquals(webPage.getTitle(),"ukraine in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),query+ " in Web search - Swisscows");
 
     }
     @QaseTitle("Check next and prev buttons in the video widget")
@@ -234,7 +237,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=")
-                .clickMoreVideoInVideoWidget()
+                .click_MoreVideo_ButtonInVideoWidget()
                 .waitUntilVisibilityVideoResult();
 
         Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo%20youtube&region=de-DE"));
@@ -265,30 +268,39 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check click more button in the image widget")
     @QaseId(value = 5060)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickMoreImageButtonInImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "flowers";
 
-        final String expectedTitle = "flover in Images search - Swisscows";
+        final String expectedTitle = query + " in Images search - Swisscows";
+
         openBaseURL()
-                .inputSearchCriteriaAndEnter("flover")
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
-                .clickMoreImagesInVideoWidget()
+                .click_MoreImages_ButtonInImageWidget()
+                .waitUrlToBeChanged("/en/images?query=" + query + "&region=de-DE")
+                .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages();
 
-        Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=flover");
+        Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=" + query + "&region=de-DE");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);
 
     }
     @QaseTitle("Check that all images and title are dysplaed in the Image widget")
     @QaseId(value = 5061)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImagesAndTitleIsDysplaedInImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        final String expectedTitle = "Images for flover";
+        String query = "flowers";
+
+        final String expectedTitle = "Images for " + query;
 
         final String actualTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("flover")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .waitForImageIsVisibleInImagesWidget()
                 .getTittleImagesWidget();
@@ -303,9 +315,10 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testOpenImageInTheImageWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "flowers";
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("flovers")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
@@ -362,21 +375,23 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testSelectAnyNumberInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "ronaldo";
+
         final String oldTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo")
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilUrlToBeChanged("/en/web?query=" + query)
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
         final String newTitle = webPage
-                .clickThirdPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=20")
+                .clickThirdNumberInPagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=20")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        final String actualAttribute = webPage.getAttributeThirdButtonPagination();
+        final String actualAttribute = webPage.getAttributeOfThirdButtonInPagination();
 
         Assert.assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(actualAttribute,"number active");
@@ -387,17 +402,19 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testNextButtonInPaging_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "ronaldo";
+
         final String actualAttribute = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
-                .clickNextPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo&offset=10")
+                .clickNextButtonInPagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=10")
                 .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityWebResult()
-                .getAttributeSecondButtonPagination();
+                .getAttributeOfSecondButtonInPagination();
 
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
-        Assert.assertEquals(webPage.getTitle(),"ronaldo in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),query + " in Web search - Swisscows");
         Assert.assertEquals(actualAttribute,"number active");
 
     }
@@ -406,22 +423,24 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testPreviousButtonInPaging_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
+        String query = "wiki";
+
         final String actualTitleFirstSearchResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("wiki")
-                .waitUntilUrlToBeChanged("/en/web?query=wiki")
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilUrlToBeChanged("/en/web?query=" + query)
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
-                .clickNextPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=wiki&offset=10")
+                .clickNextButtonInPagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=10")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
-                .clickPreviousPagePagination_WebPage()
-                .waitUntilUrlToBeChanged("/en/web?query=wiki&offset=0")
+                .clickPreviousButtonInPagination_WebPage()
+                .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=0")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        Assert.assertEquals(webPage.getTitle(),"wiki in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),query + " in Web search - Swisscows");
         Assert.assertEquals(actualTitleFirstSearchResult,"Wikipedia");
 
 
@@ -431,41 +450,44 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
+        String query = "date";
+
         final String oldTitle = openBaseURL()
-                .inputSearchCriteriaAndEnter("date")
-                .waitUntilUrlToBeChanged("/en/web?query=date")
+                .inputSearchCriteriaAndEnter(query)
+                .waitUntilUrlToBeChanged("/en/web?query=" + query)
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
         final String newTitle = webPage
                 .clickFilterButtonWeb()
-                .clickButtonDateInFilter()
-                .clickPastYearInDropDownOfFilter()
-                .waitUntilUrlToBeChanged("/en/web?query=date&freshness=Year")
+                .clickDateButtonInFilter()
+                .click_PastYear_InDropDownOfDateFilter()
+                .waitUntilUrlToBeChanged("/en/web?query=" + query + "&freshness=Year")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=date&freshness=Year")));
+        Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=" + query + "&freshness=Year")));
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
         Assert.assertNotEquals(oldTitle,newTitle);
-        Assert.assertEquals(webPage.getTitle(),"date in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),query +" in Web search - Swisscows");
     }
     @QaseTitle("Check cancel filter ")
     @QaseId(value = 5069)
     @Test
     public void testCancelFilter_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
+        String query = "chat jpg";
 
-      final List<String> actualListTitleInWebResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("chat jpg")
+        final List<String> actualListTitleInWebResult = openBaseURL()
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilUrlToBeChanged("/en/web?query=chat+jpg")
                 .waitUntilLoaderToBeInvisible()
                 .waitUntilVisibilityWebResult()
                 .clickFilterButtonWeb()
-                .clickButtonDateInFilter()
-                .clickPastYearInDropDownOfFilter()
+                .clickDateButtonInFilter()
+                .click_PastYear_InDropDownOfDateFilter()
                 .waitUntilUrlToBeChanged( "/en/web?query=chat+jpg&freshness=Year")
                 .clickFilterButtonWeb()
                 .waitUntilUrlToBeChanged( "/en/web?query=chat+jpg")
@@ -502,7 +524,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
                 .waitUntilVisibilityScreenshot()
-                .clickCloseInScreenshot();
+                .clickCloseButtonInScreenshot();
 
         Assert.assertFalse(webPage.isScreenshotItemIsPresent());
 
@@ -520,7 +542,7 @@ public class WebPageTest extends BaseTest {
         webPage
                 .clickPreviewButton()
                 .waitUntilVisibilityScreenshot()
-                .clickOpenButtonInScreenshot()
+                .click_OpenSite_ButtonInScreenshot()
                 .switchToExternalPage();
 
         Assert.assertNotEquals(getExternalPageURL(),oldUrl);
@@ -538,7 +560,7 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
-                .waitUntilVisibilityScreenshotButton()
+                .waitUntilVisibilityScreenshotButtonInScreenshot()
                 .clickTrackersButtonInScreenshot()
                 .getTrackersInScreenshot();
 
@@ -558,9 +580,9 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("asdasd")
                 .waitUntilVisibilityWebResult()
                 .clickPreviewButton()
-                .waitUntilVisibilityTrackerButton()
+                .waitUntilVisibilityTrackersButtonInScreenshot()
                 .clickTrackersButtonInScreenshot()
-                .waitUntilVisibilityScreenshotButton()
+                .waitUntilVisibilityScreenshotButtonInScreenshot()
                 .clickTrackersButtonInScreenshot()
                 .waitUntilVisibilityScreenshot();
 
@@ -615,7 +637,7 @@ public class WebPageTest extends BaseTest {
                 .getCurrentURL();
 
         final String newUrl = webPage
-                .clickFirstAds()
+                .clickFirstLinkOfAds()
                 .getCurrentURL();
 
         Assert.assertNotEquals(newUrl,oldUrl);
@@ -628,7 +650,7 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("wiki")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
@@ -648,10 +670,10 @@ public class WebPageTest extends BaseTest {
         final List<String> colorPrevButtonWithoutHover = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
-                .getPreviewColors();
+                .getColorsOfPreviewButtons();
 
         final List<String> colorPrevButtonWhenHover = webPage
-                .getPreviewColorsWhenHover();
+                .getColorsOfPreviewButtonsWhenHovering();
 
         Assert.assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
     }

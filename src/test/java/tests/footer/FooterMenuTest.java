@@ -3,18 +3,13 @@ import base.BaseTest;
 import io.qase.api.annotation.QaseId;
 import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
-import pages.footer_menu.*;
 import pages.top_menu.WebPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 public class FooterMenuTest extends BaseTest {
@@ -373,7 +368,7 @@ public class FooterMenuTest extends BaseTest {
         final String actualCopyright = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
-                .scrollToFooterSearchPages()
+                .scrollToFooterOnSearchPages()
                 .getCopyright();
 
         Assert.assertEquals(actualCopyright, expectedCopyright);
@@ -392,7 +387,7 @@ public class FooterMenuTest extends BaseTest {
         webPage
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
-                .scrollToFooterSearchPages()
+                .scrollToFooterOnSearchPages()
                 .clickFooterSearchMenuExternalLink(index);
 
         final String actualURL = getExternalPageURL();
@@ -412,7 +407,7 @@ public class FooterMenuTest extends BaseTest {
         int actualLinks = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
-                .scrollToFooterSearchPages()
+                .scrollToFooterOnSearchPages()
                 .getFooterMenuLinksCount();
 
         Assert.assertEquals(actualLinks, expectedLinks);
