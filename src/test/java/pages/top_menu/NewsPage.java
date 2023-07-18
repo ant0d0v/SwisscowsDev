@@ -73,6 +73,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         click(regionBrazil);
         return new NewsPage(getDriver());
     }
+
     public NewsPage clickFirstPost() {
         click(h2News);
         switchToAnotherWindow();
@@ -81,42 +82,44 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     }
 
     public boolean  errorImageIsDisplayed() {
-
         return isElementDisplayed(errorImage);
     }
+    @Step("Check that all images are dysplaed")
     public boolean  allImageIsDisplayed() {
-
         for (WebElement image : allImageNewsPage) {
                 wait10ElementToBeVisible(image);
         }
 
         return areElementsInListDisplayed(allImageNewsPage);
     }
+    @Step("Get srs of all images")
     public List<String> getSrsOfImages() {
-
         return getSrcOfElements(allImageNewsPage);
     }
+    @Step("Click third number in pagination")
     public NewsPage clickThirdPagePagination() {
         click(thirdPagePagination);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=20");
         return new NewsPage(getDriver());
     }
+    @Step("Click previous button in pagination")
     public NewsPage clickPreviousPagePagination() {
         click(previousPagePagination);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE");
 
         return new NewsPage(getDriver());
     }
+    @Step("Click next button in pagination")
     public NewsPage clickNextPagePagination() {
         click20(nextPagePagination);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/news?query=ronaldo&region=de-DE&offset=10");
         return new NewsPage(getDriver());
     }
-
+    @Step("Get attribute third number in the pagination")
     public String getAttributeThirdButtonPagination() {
-
         return getAttribute(attributeThirdPagePagination,"class");
     }
+    @Step("Get attribute second number in the pagination")
     public String getAttributeSecondButtonPagination() {
 
         return getAttribute(attributeSecondPagePagination,"class");
@@ -125,6 +128,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         waitForLoaderToBeInVisible();
         return new NewsPage(getDriver());
     }
+    @Step("Wait url to be changed")
     public NewsPage waitUntilUrlToBeChanged(String parametr){
         waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new  NewsPage(getDriver());

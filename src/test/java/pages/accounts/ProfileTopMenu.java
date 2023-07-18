@@ -16,9 +16,6 @@ public abstract class ProfileTopMenu<Generic> extends TopMenuPage<Generic> {
     @FindBy(xpath = "//li[@class='user-li']/a")
     private WebElement signInTopMenu;
 
-    @FindBy(xpath = "//ul[@id='myTab']/li")
-    private List<WebElement> navTabLinks;
-
     public ProfileTopMenu(WebDriver driver) {
         super(driver);
     }

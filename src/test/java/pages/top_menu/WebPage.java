@@ -261,21 +261,19 @@ public class WebPage extends TopMenuPage<WebPage> {
         return  getColorsOfElements(listRelatedSearches);
     }
     @Step("Get colors preview buttons when hovering")
-    public List<String> getPreviewColorsWhenHover() throws InterruptedException {
-
+    public List<String> getColorsOfPreviewButtonsWhenHovering() throws InterruptedException {
         return  getHoverColorsOfElements(listPreviewButtons);
     }
     @Step("Get colors preview buttons")
-    public List<String> getPreviewColors() throws InterruptedException {
-
+    public List<String> getColorsOfPreviewButtons() throws InterruptedException {
         return  getColorsOfElements(listPreviewButtons);
     }
     @Step("Get attribute third button of pagination ")
-    public String getAttributeThirdButtonPagination() {
+    public String getAttributeOfThirdButtonInPagination() {
         return getAttribute(attributeThirdPagePagination,"class");
     }
     @Step("Get attribute second button of pagination ")
-    public String getAttributeSecondButtonPagination() {
+    public String getAttributeOfSecondButtonInPagination() {
         wait10ElementToBeVisible(attributeSecondPagePagination);
         return getAttribute(attributeSecondPagePagination,"class");
     }
@@ -285,7 +283,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     @Step("Click first link od ads")
-    public WebPage clickFirstAds() {
+    public WebPage clickFirstLinkOfAds() {
         click(firstAds);
         return new WebPage(getDriver());
     }
@@ -295,7 +293,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     @Step("Click open button in the screenshot")
-    public WebPage clickOpenButtonInScreenshot() {
+    public WebPage click_OpenSite_ButtonInScreenshot() {
         click(openButtonInScreenshot);
         return new WebPage(getDriver());
     }
@@ -305,13 +303,13 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     @Step("Select of date filter ")
-    public WebPage clickButtonDateInFilter() {
+    public WebPage clickDateButtonInFilter() {
         click(buttonDateInFilter);
 
         return new WebPage(getDriver());
     }
     @Step("Select past year of filter date")
-    public WebPage clickPastYearInDropDownOfFilter() {
+    public WebPage click_PastYear_InDropDownOfDateFilter() {
         click(pastYearDateInDropDownOfFilter);
         return new WebPage(getDriver());
     }
@@ -322,19 +320,19 @@ public class WebPage extends TopMenuPage<WebPage> {
         return this;
     }
     @Step("Click more video button in the video widget")
-    public VideoPage clickMoreVideoInVideoWidget()  {
+    public VideoPage click_MoreVideo_ButtonInVideoWidget()  {
         click(buttonMoreVideo);
         return new VideoPage(getDriver());
     }
     @Step("Check click more button in the image widget")
-    public ImagePage clickMoreImagesInVideoWidget()  {
+    public ImagePage click_MoreImages_ButtonInImageWidget()  {
         click(buttonMoreImages);
         return new ImagePage(getDriver());
     }
     @Step("Click close in screenshot")
-    public WebPage clickCloseInScreenshot()  {
+    public void clickCloseButtonInScreenshot()  {
         click(closeButtonInScreenshot);
-        return new WebPage(getDriver());
+        new WebPage(getDriver());
     }
     public ImagePage clickFirstImageInImageWidget()  {
         clickByJavaScript(firstImageInImageWidget);
@@ -347,17 +345,17 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new ImagePage(getDriver());
     }
     @Step("Click third number in the pagination")
-    public WebPage clickThirdPagePagination_WebPage() {
+    public WebPage clickThirdNumberInPagination_WebPage() {
         click(thirdPagePagination);
         return new WebPage (getDriver());
     }
     @Step("Click prev button in the pagination")
-    public WebPage  clickPreviousPagePagination_WebPage() {
+    public WebPage clickPreviousButtonInPagination_WebPage() {
         click20(previousPagePagination);
         return new WebPage (getDriver());
     }
     @Step("Click next button in the pagination")
-    public WebPage clickNextPagePagination_WebPage() {
+    public WebPage clickNextButtonInPagination_WebPage() {
         click(nextPagePagination);
         return new WebPage(getDriver());
     }
@@ -397,13 +395,13 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new WebPage(getDriver());
     }
     @Step("Wait until visible tracker button .")
-    public WebPage waitUntilVisibilityTrackerButton() {
+    public WebPage waitUntilVisibilityTrackersButtonInScreenshot() {
         wait10ElementToBeVisible(trackersButtonInScreenshot);
 
         return new WebPage(getDriver());
     }
     @Step("Wait to be visible screenshot button")
-    public WebPage waitUntilVisibilityScreenshotButton() {
+    public WebPage waitUntilVisibilityScreenshotButtonInScreenshot() {
         wait10ElementToBeVisible(screenshotButtonInScreenshot);
 
         return new WebPage(getDriver());
@@ -483,7 +481,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return imagesInNewsWidgetIsDisplayed();
     }
     @Step("Scroll to the footer menu for search ")
-    public WebPage scrollToFooterSearchPages() {
+    public WebPage scrollToFooterOnSearchPages() {
         scrollByVisibleElement(footerFooterSearchPages);
         return new WebPage(getDriver());
     }
