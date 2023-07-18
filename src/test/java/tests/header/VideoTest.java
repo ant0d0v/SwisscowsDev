@@ -206,6 +206,7 @@ public class VideoTest extends BaseTest {
                 .waitUtilLoaderToBeInVisible()
                 .waitUntilToBeVisiblyListRelatedSearches()
                 .getTextColors();
+
         final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();
 
         Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
