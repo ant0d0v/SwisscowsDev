@@ -102,6 +102,11 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         selectGermanyRegion();
         return new ImagePage(getDriver());
     }
+    public ImagePage loginUsingCookie(){
+        clickHamburgerMenu();
+        clickSignInMenu();
+        return new ImagePage(getDriver());
+    }
 
     public ImagePage scrollToLastImage(){
         scrollByVisibleElementActions(last50Image);
