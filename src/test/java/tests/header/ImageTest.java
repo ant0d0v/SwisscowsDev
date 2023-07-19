@@ -84,7 +84,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=ivanka")
                 .waitForLoaderToBeInVisible()
-                .getAltAllImages();
+                .getAltAttributeAllImages();
 
         final int actualSize = imagePage.getLinksAllImages().size();
 
@@ -107,7 +107,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery + "&region=")
                 .getCurrentURL();
 
-        final String textsRelatedSearch = new ImagePage(getDriver()).getTitleInRelatedSearchesImages();
+        final String textsRelatedSearch = new ImagePage(getDriver()).getTitleOfImagesInRelatedSearche();
 
         Assert.assertTrue(textsRelatedSearch.toLowerCase().contains(searchQuery));
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN +"/en/images?query=ronaldo&region=de-DE");
@@ -147,7 +147,7 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .clickFilterButton()
                 .clickColorButton()
-                .clickRedColorInDropdownColors()
+                .clickRedColorInDropdownListOfColorsFilter()
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .clickFirstImageInImagesResult()
@@ -171,11 +171,11 @@ public class ImageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=iphone+price+in+germany&region=de-DE")
-                .clickNextButton();
+                .clickNextButtonInRelatedSearch();
 
         Assert.assertTrue(imagePage.lastImageInAdsIsDisplayed());
 
-        imagePage.clickPrevButton();
+        imagePage.clickPrevButtonInRelatedSearch();
 
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
@@ -212,7 +212,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .getAttributeHrefImage();
+                .getAttributeHrefOfImage();
 
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
@@ -256,7 +256,7 @@ public class ImageTest extends BaseTest {
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddImageInFavorite_ImagePage() {
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -265,7 +265,7 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .waitUntilToBeVisibleFavoriteItem();
 
         Assert.assertTrue(new ImagePage(getDriver()).favoriteItemIsDisplayed());
@@ -277,7 +277,7 @@ public class ImageTest extends BaseTest {
         ImagePage imagePage = new ImagePage(getDriver());
 
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -293,14 +293,14 @@ public class ImageTest extends BaseTest {
                 .getAttributeHrefImageInSideView();
 
 
-        Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
+        Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefOfImage());
 
     }
     @Test(dependsOnMethods = "testAddedImageEqualImageInFavorite_ImagePage",retryAnalyzer = Retry.class )
     public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -313,7 +313,7 @@ public class ImageTest extends BaseTest {
                 .clickFavoriteItem()
                 .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .refreshImagePage()
                 .getErrorTitleInFavoritePlaylist();
 
@@ -324,7 +324,7 @@ public class ImageTest extends BaseTest {
     public void testAddSeveralImagesInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -333,9 +333,9 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .clickNextButtonInSideImageview()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .clickFavoriteItem()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=" + searchQuery);
 
@@ -346,7 +346,7 @@ public class ImageTest extends BaseTest {
     public void testChangeLanguageInFavorite_ImagePage() {
             ImagePage imagePage = new ImagePage(getDriver());
 
-            openBaseURLUsingCookie()
+            openBaseURLAndGetCookie()
                     .inputSearchCriteriaAndEnter(searchQuery)
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
@@ -365,7 +365,7 @@ public class ImageTest extends BaseTest {
         @Test(dependsOnMethods = "testChangeLanguageInFavorite_ImagePage")
         public void testDeletedSeveralImagesFromFavorite_ImagePage () {
 
-            openBaseURLUsingCookie()
+            openBaseURLAndGetCookie()
                     .inputSearchCriteriaAndEnter(searchQuery)
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
@@ -374,9 +374,9 @@ public class ImageTest extends BaseTest {
                     .waitUtilToBeVisibleFifteenImages()
                     .loginUsingCookie()
                     .clickFirstImageInImagesResult()
-                    .clickFavoriteButtonInSideImageview()
+                    .clickFavoriteButtonOfImageInSideView()
                     .clickNextButtonInSideImageview()
-                    .clickFavoriteButtonInSideImageview();
+                    .clickFavoriteButtonOfImageInSideView();
 
             Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
         }

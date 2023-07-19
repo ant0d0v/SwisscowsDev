@@ -164,7 +164,7 @@ public class MusicTest extends BaseTest {
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddTrackInTheFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        final String actualValueFirstTrack = openBaseURLUsingCookie()
+        final String actualValueFirstTrack = openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter("lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -187,7 +187,7 @@ public class MusicTest extends BaseTest {
     public void tesPlayTrackInTheFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
 
-        final String actualAttribute =  openBaseURLUsingCookie()
+        final String actualAttribute =  openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -236,7 +236,7 @@ public class MusicTest extends BaseTest {
     @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
-        final String oldUrl = openBaseURLUsingCookie()
+        final String oldUrl = openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
@@ -259,7 +259,7 @@ public class MusicTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        final List<String> actualTracks = openBaseURLUsingCookie()
+        final List<String> actualTracks = openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()

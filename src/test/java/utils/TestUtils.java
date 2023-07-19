@@ -1,8 +1,10 @@
 package utils;
 
 import base.BaseTest;
+import io.restassured.http.ContentType;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,8 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static io.restassured.RestAssured.given;
 
 public class TestUtils {
 
@@ -83,6 +88,20 @@ public class TestUtils {
         int index = text.indexOf(separator);
 
         return text.substring(0, index);
+    }
+    public static String getCookie (WebDriver driver){
+        driver.get("https://accounts.dev.swisscows.com/profile");
+        return given()
+                .contentType(ContentType.JSON)
+                .body("{\"email\":\"a.qa@swisscows.email\",\"password\":\"2075Deltuha\",\"returnUrl\":\"/login\"}")
+                .post("https://accounts.dev.swisscows.com/api/account/login")
+                .then().log().all().extract().cookie(".AspNetCore.Identity.Application");
+    }
+    public static void addCookie(WebDriver driver, String cookieValue){
+        Date expDate = new Date();
+        expDate.setTime(expDate.getTime() + (10000 * 10000));
+        Cookie cookie = new Cookie(".AspNetCore.Identity.Application", cookieValue, "accounts.dev.swisscows.com", "/", expDate);
+        driver.manage().addCookie(cookie);
     }
 
     public static List<String> getSortedList(List<String> elements) {
