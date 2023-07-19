@@ -324,7 +324,6 @@ public class ImageTest extends BaseTest {
     public void testAddSeveralImagesInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-
         openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
