@@ -116,8 +116,10 @@ public class MusicTest extends BaseTest {
     @Test
     public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
+        String query = "popular";
+
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("1")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
@@ -129,11 +131,11 @@ public class MusicTest extends BaseTest {
 
         Assert.assertEquals(actualSize, 20);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("1"));
+            Assert.assertTrue(searchCriteria.toLowerCase().contains(query));
         }
         Assert.assertEquals(musicPage.getTitleAllPlaylist().size(), 3);
         for (String search : titleAllPlaylist) {
-            Assert.assertTrue(search.toLowerCase().contains("1"));
+            Assert.assertTrue(search.toLowerCase().contains(query));
         }
     }
 
@@ -162,13 +164,12 @@ public class MusicTest extends BaseTest {
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddTrackInTheFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        final String actualValueFirstTrack = openBaseURL()
+        final String actualValueFirstTrack = openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter("lady gaga")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickHamburgerMenu()
-                .signIn()
+                .loginUsingCookie()
                 .clickFavoriteIcon()
                 .getFirstTrackAttribute();
 
@@ -185,15 +186,13 @@ public class MusicTest extends BaseTest {
     @Test(priority = 2,retryAnalyzer = Retry.class)
     public void tesPlayTrackInTheFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
-        openBaseURL()
+
+        final String actualAttribute =  openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickHamburgerMenu()
-                .signIn();
-
-        final String actualAttribute = musicPage
+                .loginUsingCookie()
                 .clickFavoritePlaylist()
                 .clickPlayButton()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:02")
@@ -237,13 +236,12 @@ public class MusicTest extends BaseTest {
     @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
-        final String oldUrl = openBaseURL()
+        final String oldUrl = openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter("Ivanka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickHamburgerMenu()
-                .signIn()
+                .loginUsingCookie()
                 .getCurrentURL();
 
         final String actualH2Title = musicPage
@@ -261,16 +259,14 @@ public class MusicTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
-        openBaseURL()
+        final List<String> actualTracks = openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilUrlToBeChanged("/en/music?query=skofka")
                 .waitLoaderToBeInvisible()
                 .waitUntilVisibilityAudioResult()
-                .clickHamburgerMenu()
-                .signIn();
-        final List<String> actualTracks = musicPage
+                .loginUsingCookie()
                 .waitUntilUrlToBeChanged("/en/music?query=skofka")
                 .waitLoaderToBeInvisible()
                 .waitUntilVisibilityAudioResult()
@@ -326,21 +322,22 @@ public class MusicTest extends BaseTest {
     }
     @Test
     public void testRegionalSearch_MusicPage() {
-        MusicPage musicPage =new MusicPage(getDriver());
+        MusicPage musicPage = new MusicPage(getDriver());
+        String query = "popular";
         openBaseURL()
-                .inputSearchCriteriaAndEnter("1")
+                .inputSearchCriteriaAndEnter(query)
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .selectDeutschRegion()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=1&region=");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/music?query=" + query + "&region=");
 
         final String actualRegion = musicPage.getCurrentURL();
         final List<String> titleAllTracks = musicPage.getTitleAllTracks();
 
-        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=1&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/music?query=" + query + "&region=de-DE");
         for (String search : titleAllTracks) {
-            Assert.assertTrue(search.toLowerCase().contains("1"));
+            Assert.assertTrue(search.toLowerCase().contains(query));
         }
     }
 
