@@ -99,6 +99,11 @@ public class MusicPage extends TopMenuPage<MusicPage> {
         click(firstPlayButton);
         return new MusicPage(getDriver());
     }
+    public MusicPage loginUsingCookie(){
+        clickHamburgerMenu();
+        clickSignInMenu();
+        return new MusicPage(getDriver());
+    }
 
 
     public MusicPage clickShuffleButton() {
