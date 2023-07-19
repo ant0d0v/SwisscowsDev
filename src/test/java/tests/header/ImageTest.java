@@ -12,9 +12,11 @@ import java.util.List;
 
 
 public class ImageTest extends BaseTest {
+    private final String searchQuery = "ronaldo";
     @Test
     public void testSuggestEqualsSearchCriteria_ImageSearch() {
         MainPage mainPage = new MainPage(getDriver());
+
         final String query = "ivanka";
 
         openBaseURL()
@@ -54,7 +56,7 @@ public class ImageTest extends BaseTest {
     }
     @Test
     public void testScrollToNextPage_ImagePage() {
-        ImagePage imagePage = new ImagePage(getDriver());
+
         final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("Lady gaga")
                 .waitUntilVisibilityWebResult()
@@ -64,7 +66,7 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .getLinksAllImages();
 
-        final List<String> newSize = imagePage
+        final List<String> newSize = new ImagePage(getDriver())
                 .scrollToLastImage()
                 .getLinksAllImages();
 
@@ -75,6 +77,7 @@ public class ImageTest extends BaseTest {
     @Test
     public void testImageResultsEqualsSearchCriteria(){
         ImagePage imagePage = new ImagePage(getDriver());
+
         final List<String> titleAllImage = openBaseURL()
                 .inputSearchCriteriaAndEnter("ivanka")
                 .waitUntilVisibilityWebResult()
@@ -93,35 +96,36 @@ public class ImageTest extends BaseTest {
     }
     @Test
     public void testRelatedSearch_ImagePage() {
-        ImagePage imagePage = new ImagePage(getDriver());
+
         final String actualRegion = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .choiceRegionGermany()
-                .waitUrlToBeChanged("/en/images?query=ronaldo&region=")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery + "&region=")
                 .getCurrentURL();
 
-        final String textsRelatedSearch = imagePage.getTitleInRelatedSearchesImages();
+        final String textsRelatedSearch = new ImagePage(getDriver()).getTitleInRelatedSearchesImages();
 
-        Assert.assertTrue(textsRelatedSearch.toLowerCase().contains("ronaldo"));
+        Assert.assertTrue(textsRelatedSearch.toLowerCase().contains(searchQuery));
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN +"/en/images?query=ronaldo&region=de-DE");
 
     }
     @Test
     public void testSelectAnyQueryFromRelatedSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
+
         final String actualUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .choiceRegionGermany()
-                .waitUrlToBeChanged("/en/images?query=ronaldo&region=de-DE")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery + "&region=de-DE")
                 .getCurrentURL();
 
         final String newUrl = imagePage
@@ -158,6 +162,7 @@ public class ImageTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testNextButtonAndPrevButtonAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
+
         openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
@@ -167,6 +172,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=iphone+price+in+germany&region=de-DE")
                 .clickNextButton();
+
         Assert.assertTrue(imagePage.lastImageInAdsIsDisplayed());
 
         imagePage.clickPrevButton();
@@ -176,11 +182,12 @@ public class ImageTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
+
         final String actualAttributePrevImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
@@ -197,11 +204,12 @@ public class ImageTest extends BaseTest {
     @Test
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
+
         final String AttributeImageInResult = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .getAttributeHrefImage();
@@ -216,7 +224,7 @@ public class ImageTest extends BaseTest {
     public void testNextButtonInSideView_ImagePage() {
 
         final String actualAttributeSecondImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=ronaldo")
@@ -230,12 +238,13 @@ public class ImageTest extends BaseTest {
     }
     @Test
     public void testCloseButtonInSideView_ImagePage() {
+        String searchQuery = "rep";
 
         final String actualAttributePrevImage = openBaseURL()
-                .inputSearchCriteriaAndEnter("rep")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=rep")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .clickFirstImageInImagesResult()
@@ -246,33 +255,33 @@ public class ImageTest extends BaseTest {
     }
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddImageInFavorite_ImagePage() {
-        ImagePage imagePage = new ImagePage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+
+        openBaseURLUsingCookie()
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .clickHamburgerMenu()
-                .signIn();
-       imagePage
+                .loginUsingCookie()
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonInSideImageview()
                 .waitUntilToBeVisibleFavoriteItem();
 
-        Assert.assertTrue(imagePage.favoriteItemIsDisplayed());
+        Assert.assertTrue(new ImagePage(getDriver()).favoriteItemIsDisplayed());
 
 
     }
     @Test(dependsOnMethods = "testAddImageInFavorite_ImagePage",retryAnalyzer = Retry.class)
     public void testAddedImageEqualImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
+
+
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .clickHamburgerMenu()
@@ -280,7 +289,7 @@ public class ImageTest extends BaseTest {
 
         final String AttributeImageInSideView = imagePage
                 .clickFavoriteItem()
-                .waitUrlToBeChanged("/en/images/my?query=ronaldo")
+                .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
                 .clickFirstImageInImagesResult()
                 .getAttributeHrefImageInSideView();
 
@@ -290,48 +299,47 @@ public class ImageTest extends BaseTest {
     }
     @Test(dependsOnMethods = "testAddedImageEqualImageInFavorite_ImagePage")
     public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
-        MusicPage musicPage =new MusicPage(getDriver());
         ImagePage imagePage = new ImagePage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+
+        openBaseURLUsingCookie()
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .clickHamburgerMenu()
-                .signIn();
+                .loginUsingCookie();
 
         final String actualH2Title = imagePage
                 .clickFavoriteItem()
-                .waitUrlToBeChanged("/en/images/my?query=ronaldo")
+                .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonInSideImageview()
                 .refreshImagePage()
                 .getErrorTitleInFavoritePlaylist();
 
         Assert.assertTrue(actualH2Title.contains("No items found"));
-        Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
+        Assert.assertEquals( new MusicPage(getDriver()).getFontSizeErrorTitleInFavoritePlaylist(),ProjectConstants.FONT_SIZE_40_PX);
     }
     @Test(dependsOnMethods = "testDeleteImageFromFavorite_ImagePage_ImagePage")
     public void testAddSeveralImagesInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+
+
+        openBaseURLUsingCookie()
+                .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
-                .waitUrlToBeChanged("/en/images?query=ronaldo")
+                .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .clickHamburgerMenu()
-                .signIn();
-        imagePage
+                .loginUsingCookie()
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonInSideImageview()
                 .clickNextButtonInSideImageview()
                 .clickFavoriteButtonInSideImageview()
                 .clickFavoriteItem()
-                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=ronaldo");
+                .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=" + searchQuery);
 
 
         Assert.assertEquals(imagePage.getLinksAllImages().size(), 2);
@@ -339,44 +347,40 @@ public class ImageTest extends BaseTest {
     @Test(dependsOnMethods = "testAddSeveralImagesInFavorite_ImagePage")
     public void testChangeLanguageInFavorite_ImagePage() {
             ImagePage imagePage = new ImagePage(getDriver());
-            openBaseURL()
-                    .inputSearchCriteriaAndEnter("ronaldo")
+
+            openBaseURLUsingCookie()
+                    .inputSearchCriteriaAndEnter(searchQuery)
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitUrlToBeChanged("/en/images?query=ronaldo")
+                    .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                     .waitForLoaderToBeInVisible()
                     .waitUtilToBeVisibleFifteenImages()
-                    .clickHamburgerMenuIcon()
-                    .signIn();
-            imagePage
+                    .loginUsingCookie()
                     .clickFavoriteItem()
-                    .waitUrlToBeChanged("/en/images/my?query=ronaldo")
+                    .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
                     .choiceDeutschLocalisation();
 
-            Assert.assertEquals(imagePage.getCurrentURL(),ProjectConstants.DOMAIN + "/de/images/my?query=ronaldo");
+            Assert.assertEquals(imagePage.getCurrentURL(),ProjectConstants.DOMAIN + "/de/images/my?query=" + searchQuery);
             Assert.assertEquals(imagePage.getTitle(),"Meine Bilder - Swisscows");
 
     }
         @Test(dependsOnMethods = "testChangeLanguageInFavorite_ImagePage")
         public void testDeletedSeveralImagesFromFavorite_ImagePage () {
-            ImagePage imagePage = new ImagePage(getDriver());
-            openBaseURL()
-                    .inputSearchCriteriaAndEnter("ronaldo")
+
+            openBaseURLUsingCookie()
+                    .inputSearchCriteriaAndEnter(searchQuery)
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
-                    .waitUrlToBeChanged("/en/images?query=ronaldo")
+                    .waitUrlToBeChanged("/en/images?query="+ searchQuery)
                     .waitForLoaderToBeInVisible()
                     .waitUtilToBeVisibleFifteenImages()
-                    .clickHamburgerMenuIcon()
-                    .signIn();
-
-            imagePage
+                    .loginUsingCookie()
                     .clickFirstImageInImagesResult()
                     .clickFavoriteButtonInSideImageview()
                     .clickNextButtonInSideImageview()
                     .clickFavoriteButtonInSideImageview();
 
-            Assert.assertFalse(imagePage.isFavoriteItemIsPresent());
+            Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
         }
 }
 

@@ -196,6 +196,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickSignInMenu().signInAsRegularUser();
         return new LoginPage(getDriver());
     }
+
     @Step("Set the window size to the adaptive mode using the specified width and height constants (e.g., hamburger menu size).")
     public MainPage setWindowWithHamburgerMenu(int width, int height) {
         setWindowDimensions(width, height);

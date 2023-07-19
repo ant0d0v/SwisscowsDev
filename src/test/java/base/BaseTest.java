@@ -1,6 +1,8 @@
 package base;
 
 import io.qase.api.annotation.Step;
+import io.restassured.http.ContentType;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -15,6 +17,9 @@ import utils.TestUtils;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.Date;
+
+import static io.restassured.RestAssured.given;
 
 public abstract class BaseTest {
 
@@ -76,6 +81,30 @@ public abstract class BaseTest {
     public MainPage openBaseURL() {
         TestUtils.loadBaseUrlPage(getDriver(), getWait());
 
+        if (TestUtils.isH2HeaderExists(getDriver())) {
+            Reporter.log("BaseURL page was loaded successfully ", true);
+        } else {
+            TestUtils.reLoadBaseUrlPage(getDriver(), getWait());
+        }
+
+        return new MainPage(getDriver());
+    }
+    @Step("Open the base URL of the web page using coccike")
+    public MainPage openBaseURLUsingCookie() {
+        getDriver().get("https://accounts.dev.swisscows.com/profile");
+
+        String sessionCookie = given()
+                .contentType(ContentType.JSON)
+                .body("{\"email\":\"a.qa@swisscows.email\",\"password\":\"2075Deltuha\",\"returnUrl\":\"/login\"}")
+                .post("https://accounts.dev.swisscows.com/api/account/login")
+                .then().log().all().extract().cookie(".AspNetCore.Identity.Application");
+
+        Date expDate = new Date();
+        expDate.setTime(expDate.getTime() + (10000 * 10000));
+
+        Cookie cookie = new Cookie(".AspNetCore.Identity.Application", sessionCookie, "accounts.dev.swisscows.com", "/", expDate);
+        getDriver().manage().addCookie(cookie);
+        TestUtils.loadBaseUrlPage(getDriver(), getWait());
         if (TestUtils.isH2HeaderExists(getDriver())) {
             Reporter.log("BaseURL page was loaded successfully ", true);
         } else {
