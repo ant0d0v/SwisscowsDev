@@ -284,8 +284,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .clickHamburgerMenu()
-                .signIn();
+                .loginUsingCookie();
 
         final String AttributeImageInSideView = imagePage
                 .clickFavoriteItem()
