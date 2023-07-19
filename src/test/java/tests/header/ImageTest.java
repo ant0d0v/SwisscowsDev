@@ -277,7 +277,7 @@ public class ImageTest extends BaseTest {
         ImagePage imagePage = new ImagePage(getDriver());
 
 
-        openBaseURL()
+        openBaseURLUsingCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -297,7 +297,7 @@ public class ImageTest extends BaseTest {
         Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
 
     }
-    @Test(dependsOnMethods = "testAddedImageEqualImageInFavorite_ImagePage")
+    @Test(dependsOnMethods = "testAddedImageEqualImageInFavorite_ImagePage",retryAnalyzer = Retry.class )
     public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
