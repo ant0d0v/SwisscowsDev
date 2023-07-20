@@ -247,7 +247,7 @@ public class MusicTest extends BaseTest {
         final String actualH2Title = musicPage
                 .clickFavoritePlaylist()
                 .clickFavoriteIconInPlaylist()
-                .getErrorTitleInFavoritePlaylist();
+                .getErrorOfTitleInFavorite();
 
         final String newUrl = musicPage.getCurrentURL();
 
