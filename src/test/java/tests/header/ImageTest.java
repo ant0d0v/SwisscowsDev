@@ -1,5 +1,7 @@
 package tests.header;
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -13,6 +15,8 @@ import java.util.List;
 
 public class ImageTest extends BaseTest {
     private final String searchQuery = "ronaldo";
+    @QaseTitle("Check Queries Rate Limit for \"Brazillian bots\"")
+    @QaseId(value = 5089)
     @Test
     public void testSuggestEqualsSearchCriteria_ImageSearch() {
         MainPage mainPage = new MainPage(getDriver());
@@ -39,6 +43,8 @@ public class ImageTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains(query));
         }
     }
+    @QaseTitle("Check regional search")
+    @QaseId(value = 5090)
     @Test
     public void testRegionalSearch_ImagePage() {
 
@@ -54,6 +60,8 @@ public class ImageTest extends BaseTest {
 
 
     }
+    @QaseTitle("Check scroll down to next page")
+    @QaseId(value = 5091)
     @Test
     public void testScrollToNextPage_ImagePage() {
 
@@ -74,6 +82,8 @@ public class ImageTest extends BaseTest {
 
 
     }
+    @QaseTitle("Check that image result equals search criteria")
+    @QaseId(value = 5092)
     @Test
     public void testImageResultsEqualsSearchCriteria(){
         ImagePage imagePage = new ImagePage(getDriver());
@@ -84,7 +94,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=ivanka")
                 .waitForLoaderToBeInVisible()
-                .getAltAllImages();
+                .getAltAttributeAllImages();
 
         final int actualSize = imagePage.getLinksAllImages().size();
 
@@ -94,6 +104,8 @@ public class ImageTest extends BaseTest {
         }
 
     }
+    @QaseTitle("Check related search container")
+    @QaseId(value = 5093)
     @Test
     public void testRelatedSearch_ImagePage() {
 
@@ -107,12 +119,14 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery + "&region=")
                 .getCurrentURL();
 
-        final String textsRelatedSearch = new ImagePage(getDriver()).getTitleInRelatedSearchesImages();
+        final String textsRelatedSearch = new ImagePage(getDriver()).getTitleOfImagesInRelatedSearche();
 
         Assert.assertTrue(textsRelatedSearch.toLowerCase().contains(searchQuery));
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN +"/en/images?query=ronaldo&region=de-DE");
 
     }
+    @QaseTitle("Check select any query from related search container")
+    @QaseId(value = 5094)
     @Test
     public void testSelectAnyQueryFromRelatedSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
@@ -134,7 +148,8 @@ public class ImageTest extends BaseTest {
 
         Assert.assertNotEquals(actualUrl,newUrl);
     }
-
+    @QaseTitle("Check filter search")
+    @QaseId(value = 5095)
     @Test
     public void testFilterSearch_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
@@ -147,7 +162,7 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .clickFilterButton()
                 .clickColorButton()
-                .clickRedColorInDropdownColors()
+                .clickRedColorInDropdownListOfColorsFilter()
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
                 .clickFirstImageInImagesResult()
@@ -157,10 +172,10 @@ public class ImageTest extends BaseTest {
         Assert.assertEquals(imagePage.getCurrentURL(),
                 ProjectConstants.DOMAIN +"/en/images?query=color&color=Red");
     }
-
-
+    @QaseTitle("Check next button and prev button of advertising")
+    @QaseId(value = 5096)
     @Test(retryAnalyzer = Retry.class)
-    public void testNextButtonAndPrevButtonAdvertising_ImagePage() {
+    public void testNextButtonAndPrevButtonOfAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
         openBaseURL()
@@ -171,14 +186,16 @@ public class ImageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=iphone+price+in+germany&region=de-DE")
-                .clickNextButton();
+                .clickNextButtonInRelatedSearch();
 
         Assert.assertTrue(imagePage.lastImageInAdsIsDisplayed());
 
-        imagePage.clickPrevButton();
+        imagePage.clickPrevButtonInRelatedSearch();
 
         Assert.assertTrue(imagePage.firstImageInAdsIsDisplayed());
     }
+    @QaseTitle("Check prev button in side View")
+    @QaseId(value = 5097)
     @Test(retryAnalyzer = Retry.class)
     public void testPrevButtonInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
@@ -201,6 +218,8 @@ public class ImageTest extends BaseTest {
         Assert.assertNotEquals(actualAttributePrevImage,newAttributePrevImage);
         Assert.assertTrue(newAttributePrevImage.contains("active"));
     }
+    @QaseTitle("Check that image in the images results equals image in side view")
+    @QaseId(value = 5098)
     @Test
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
@@ -212,7 +231,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFifteenImages()
-                .getAttributeHrefImage();
+                .getAttributeHrefOfImage();
 
         final String AttributeImageInSideView = imagePage
                 .clickFirstImageInImagesResult()
@@ -220,6 +239,8 @@ public class ImageTest extends BaseTest {
 
         Assert.assertEquals(AttributeImageInResult,AttributeImageInSideView);
     }
+    @QaseTitle("Check next button in side View")
+    @QaseId(value = 5099)
     @Test
     public void testNextButtonInSideView_ImagePage() {
 
@@ -236,6 +257,8 @@ public class ImageTest extends BaseTest {
 
         Assert.assertEquals(actualAttributeSecondImage,"item--image active");
     }
+    @QaseTitle("Check close button in side View")
+    @QaseId(value = 5100)
     @Test
     public void testCloseButtonInSideView_ImagePage() {
         String searchQuery = "rep";
@@ -253,10 +276,12 @@ public class ImageTest extends BaseTest {
 
         Assert.assertEquals(actualAttributePrevImage,"item--image");
     }
+    @QaseTitle("Check add image in favorite ")
+    @QaseId(value = 5101)
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddImageInFavorite_ImagePage() {
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -265,19 +290,20 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .waitUntilToBeVisibleFavoriteItem();
 
         Assert.assertTrue(new ImagePage(getDriver()).favoriteItemIsDisplayed());
 
 
     }
+    @QaseTitle("Check that added image equal image in favorite")
+    @QaseId(value = 5102)
     @Test(dependsOnMethods = "testAddImageInFavorite_ImagePage",retryAnalyzer = Retry.class)
     public void testAddedImageEqualImageInFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -292,15 +318,15 @@ public class ImageTest extends BaseTest {
                 .clickFirstImageInImagesResult()
                 .getAttributeHrefImageInSideView();
 
-
-        Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefImage());
-
+        Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefOfImage());
     }
+    @QaseTitle("Check delete image from favorite")
+    @QaseId(value = 5103)
     @Test(dependsOnMethods = "testAddedImageEqualImageInFavorite_ImagePage",retryAnalyzer = Retry.class )
     public void testDeleteImageFromFavorite_ImagePage_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -313,18 +339,20 @@ public class ImageTest extends BaseTest {
                 .clickFavoriteItem()
                 .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .refreshImagePage()
-                .getErrorTitleInFavoritePlaylist();
+                .getErrorOfTitleInFavorite();
 
         Assert.assertTrue(actualH2Title.contains("No items found"));
         Assert.assertEquals( new MusicPage(getDriver()).getFontSizeErrorTitleInFavoritePlaylist(),ProjectConstants.FONT_SIZE_40_PX);
     }
+    @QaseTitle("Check add several images to favorite")
+    @QaseId(value = 5104)
     @Test(dependsOnMethods = "testDeleteImageFromFavorite_ImagePage_ImagePage")
-    public void testAddSeveralImagesInFavorite_ImagePage() {
+    public void testAddSeveralImagesToFavorite_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
-        openBaseURLUsingCookie()
+        openBaseURLAndGetCookie()
                 .inputSearchCriteriaAndEnter(searchQuery)
                 .waitUntilVisibilityWebResult()
                 .clickImageButton()
@@ -333,20 +361,22 @@ public class ImageTest extends BaseTest {
                 .waitUtilToBeVisibleFifteenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .clickNextButtonInSideImageview()
-                .clickFavoriteButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView()
                 .clickFavoriteItem()
                 .waitForUrlContains(ProjectConstants.DOMAIN + "/en/images/my?query=" + searchQuery);
 
 
         Assert.assertEquals(imagePage.getLinksAllImages().size(), 2);
     }
-    @Test(dependsOnMethods = "testAddSeveralImagesInFavorite_ImagePage")
+    @QaseTitle("Check change language in favorite")
+    @QaseId(value = 5105)
+    @Test(dependsOnMethods = "testAddSeveralImagesToFavorite_ImagePage")
     public void testChangeLanguageInFavorite_ImagePage() {
             ImagePage imagePage = new ImagePage(getDriver());
 
-            openBaseURLUsingCookie()
+            openBaseURLAndGetCookie()
                     .inputSearchCriteriaAndEnter(searchQuery)
                     .waitUntilVisibilityWebResult()
                     .clickImageButton()
@@ -362,23 +392,25 @@ public class ImageTest extends BaseTest {
             Assert.assertEquals(imagePage.getTitle(),"Meine Bilder - Swisscows");
 
     }
-        @Test(dependsOnMethods = "testChangeLanguageInFavorite_ImagePage")
+    @QaseTitle("Check delete several images from favorite")
+    @QaseId(value = 5106)
+    @Test(dependsOnMethods = "testChangeLanguageInFavorite_ImagePage")
         public void testDeletedSeveralImagesFromFavorite_ImagePage () {
 
-            openBaseURLUsingCookie()
-                    .inputSearchCriteriaAndEnter(searchQuery)
-                    .waitUntilVisibilityWebResult()
-                    .clickImageButton()
-                    .waitUrlToBeChanged("/en/images?query="+ searchQuery)
-                    .waitForLoaderToBeInVisible()
-                    .waitUtilToBeVisibleFifteenImages()
-                    .loginUsingCookie()
-                    .clickFirstImageInImagesResult()
-                    .clickFavoriteButtonInSideImageview()
-                    .clickNextButtonInSideImageview()
-                    .clickFavoriteButtonInSideImageview();
+        openBaseURLAndGetCookie()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickImageButton()
+                .waitUrlToBeChanged("/en/images?query="+ searchQuery)
+                .waitForLoaderToBeInVisible()
+                .waitUtilToBeVisibleFifteenImages()
+                .loginUsingCookie()
+                .clickFirstImageInImagesResult()
+                .clickFavoriteButtonOfImageInSideView()
+                .clickNextButtonInSideImageview()
+                .clickFavoriteButtonOfImageInSideView();
 
-            Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
-        }
+        Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
+    }
 }
 

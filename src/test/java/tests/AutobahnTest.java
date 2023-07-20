@@ -2,53 +2,78 @@ package tests;
 
 import base.BaseTest;
 import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
+import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.top_menu.ImagePage;
 import pages.top_menu.WebPage;
 import utils.TestUtils;
 
+import static io.restassured.RestAssured.given;
+
 
 public class AutobahnTest extends BaseTest {
+    @QaseTitle("Check Queries Rate Limit for \"Brazillian bots\"")
     @QaseId(value = 4875)
     @Test
-    public void testBrazilianBotsAndError429Page() throws InterruptedException {
+    public void testBrazilianBotsAndError429Page()  {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedErrorMessage = "Too many requests";
+        Header nonceHeader = new Header("Request-Nonce", "HxKCS7QWGay1C6--VD0sRoWu.DVUluq.");
+        Header signatureHeader = new Header("X-Request-Signature", "V67ilp9bISPgKVx5hmuSGlWApZkXXy74jZ6WurtRm2I");
+
+
         openBaseURL()
                 .inputSearchCriteriaAndEnter("\"iphone\"")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 20; i++)  {
-            webPage.searchAfterClear( "\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
-                   + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
-            if (i == 20 - 1) {
-               Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
-                break;
-            }
+        for (int i = 0; i < 10; i++) {
+            RestAssured
+                    .given()
+                    .header(nonceHeader)
+                    .header(signatureHeader)
+                    .queryParam("query","\"Otras características considerar\"")
+                    .get("https://api.dev.swisscows.com/web/search");
         }
+
+        webPage.searchAfterClear("\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()
+                + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
+
+
+        Assert.assertTrue(webPage.getTitleErrorText().contains("Too many requests"));
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(webPage.getH2FontSize(),"40px");
 
     }
+    @QaseTitle("Check Queries Rate Limit for Regular Bot")
     @QaseId(value = 4889)
     @Test
-    public void testRegularBotAndError429Page() throws InterruptedException {
+    public void testRegularBotAndError429Page() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedErrorMessage = "Too many requests";
+        Header nonceHeader = new Header("Request-Nonce", "I6iO_D0fwZOi8HsyXaUQraP8SgqL8cBl");
+        Header signatureHeader = new Header("X-Request-Signature", "SLQ8JkCtYy4jwTM1_jyvtCcNsaQpOsmtvbgR_1XnBUo");
+
         openBaseURL()
                 .inputSearchCriteriaAndEnter("iphone")
-                .waitUntilVisibilityWebResult();
+                .waitUntilVisibilityWebResult()
+                .getCurrentURL();
 
-        for (int i = 0; i < 130; i++)  {
-            webPage.searchAfterClear(TestUtils.getRandomName());
-            if (i == 130 - 1) {
-                Assert.assertTrue(webPage.getTitleErrorText().contains(expectedErrorMessage));
-                break;
-            }
+        for (int i = 0; i < 99; i++) {
+            RestAssured
+                    .given()
+                    .header(nonceHeader)
+                    .header(signatureHeader)
+                    .get("https://api.dev.swisscows.com/web/search?query=ddsf&offset=0&itemsCount=10&region=uk-UA&freshness=All");
         }
+
+        webPage.searchAfterClear(TestUtils.getRandomName());
+
+        Assert.assertTrue(webPage.getTitleErrorText().contains("Too many requests"));
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(webPage.getH2FontSize(),"40px");
     }

@@ -23,7 +23,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement last50Image;
     @FindBy(xpath = "//figure[60]//img")
     private WebElement last60Image;
-
     @FindBy(xpath = "//div[@class='button-menu color']")
     private WebElement colorButton;
     @FindBy(xpath = "//div[@class][3]//li[4]")
@@ -54,17 +53,10 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
-    @FindBy(xpath = "//div[@class ='filters-button']//*[name() = 'svg']")
-    private WebElement filterButton;
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
     private WebElement secondQueryInRelatedSearchContainer;
-
-    @FindBy(xpath = "//div[@class='three-bounce']")
-    private WebElement loader;
-    @FindBy(xpath = "//ul[@class='popup menu']")
-    private WebElement dropdownLisOfColor;
     @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<15]")
     private List<WebElement> fifteenImages;
     @FindBy(xpath = "//a[@class ='item favorite']")
@@ -78,22 +70,25 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ImagePage(getDriver());
     }
+    @Step("Click first image in images results")
     public ImagePage clickFirstImageInImagesResult() {
         click20(firstImageInImagesResult);
         return this;
 
     }
-    public ImagePage clickFavoriteButtonInSideImageview() {
+    @Step("Click favorite button of image in the side view")
+    public ImagePage clickFavoriteButtonOfImageInSideView() {
         click(favoriteButtonInSideImageview);
         return this;
-
     }
+    @Step("Click favorite item")
     public ImagePage clickFavoriteItem() {
         wait10ElementToBeVisible(favoriteItem);
         click(favoriteItem);
         return this;
 
     }
+    @Step("Update page")
     public ImagePage refreshImagePage(){
         refreshPage();
         return new ImagePage(getDriver());
@@ -107,23 +102,24 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         clickSignInMenu();
         return new ImagePage(getDriver());
     }
-
+    @Step("Scroll down to last image")
     public ImagePage scrollToLastImage(){
         scrollByVisibleElementActions(last50Image);
         wait10ElementToBeVisible(last60Image);
         scrollByVisibleElement(last60Image);
         return new ImagePage(getDriver());
     }
+    @Step("Get links all images")
     public List <String> getLinksAllImages()  {
-
         return getTexts(allLinksImages);
     }
-
+    @Step("Get title first image")
     public String getTitleFirstImage()  {
         wait10ElementToBeVisible(h2FirstImage);
         return getText(h2FirstImage);
     }
-    public List<String> getAltAllImages() {
+    @Step("Get attribute alt all images")
+    public List<String> getAltAttributeAllImages() {
         if (AltAttributeAllImage.size() > 0) {
             getWait20().until(ExpectedConditions.visibilityOfAllElements(AltAttributeAllImage));
             List<String> ListAttribute = new ArrayList<>();
@@ -132,28 +128,31 @@ public class ImagePage extends TopMenuPage<ImagePage> {
                     ListAttribute.add(element.getAttribute("alt"));
                 }
             }
-
             return ListAttribute;
         }
-
         return new ArrayList<>();
     }
-    public String getTitleInRelatedSearchesImages() {
+    @Step("Get get title of related search images")
+    public String getTitleOfImagesInRelatedSearche() {
         wait10ElementToBeVisible(relatedSearchesImage);
         return getText(relatedSearchesImage);
     }
+    @Step("Get attribute first image")
     public String getAttributeFirstImage() {
         wait10ElementToBeVisible(imageAttribute);
         return getAttribute(imageAttribute,"class");
     }
+    @Step("Get attribute second image")
     public String getAttributeSecondImage() {
         wait10ElementToBeVisible(secondImageAttribute);
         return getAttribute(secondImageAttribute,"class");
     }
-    public String getAttributeHrefImage() {
+    @Step("Get href attribute of image")
+    public String getAttributeHrefOfImage() {
         wait10ElementToBeVisible(imageAttributeHref);
         return getAttribute(imageAttributeHref,"src");
     }
+    @Step("Get href attribute of image in side view")
     public String getAttributeHrefImageInSideView() {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
@@ -166,57 +165,67 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         }
         return this;
     }
+    @Step("Click color button in the filter")
     public ImagePage clickColorButton(){
         click(colorButton);
         return new ImagePage(getDriver());
     }
+
     public ImagePage clickFilterButton() {
         clickFilterButtonWeb();
-
         return new ImagePage(getDriver());
     }
+    @Step("Click next button of image in the side view")
     public ImagePage clickNextButtonInSideImageview() {
         wait10ElementToBeVisible(nextButtonInSideImageview);
         clickByJavaScript(nextButtonInSideImageview);
         return new ImagePage(getDriver());
     }
+    @Step("Click prev button of image in the side view")
     public ImagePage clickPrevButtonInSideImageview() {
         click(prevButtonInSideImageview);
         return new ImagePage(getDriver());
     }
+    @Step("Click close button of image in the side view")
     public ImagePage clickCloseButtonInSideImageview() {
         click(closeButtonInSideImageview);
         return new ImagePage(getDriver());
     }
+    @Step("Click second query in the related search container")
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
         click20(secondQueryInRelatedSearchContainer);
         waitForUrlContains(ProjectConstants.DOMAIN +"/en/images?query=Ronaldo%");
         return new ImagePage(getDriver());
     }
-    public void clickNextButton() {
+    @Step("Click next button the related search container")
+    public void clickNextButtonInRelatedSearch() {
         wait10ElementToBeVisible(nextButtonInAds);
         clickElementUntilInvisible(nextButtonInAds);
     }
-    public void clickPrevButton() {
+    @Step("Click prev button the related search container")
+    public void clickPrevButtonInRelatedSearch() {
         wait10ElementToBeVisible(prevButtonInAds);
         clickElementUntilInvisible(prevButtonInAds);
     }
-
-    public ImagePage clickRedColorInDropdownColors() {
+    @Step("Click Red color in the dropdown list of colors")
+    public ImagePage clickRedColorInDropdownListOfColorsFilter() {
         click20(redInDropdownColor);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=color&color=Red");
         return new ImagePage(getDriver());
     }
+    @Step("Check that last image of ads is dysplaed")
     public boolean lastImageInAdsIsDisplayed() {
         wait10ElementToBeVisible(lastImageInAds);
         return isElementDisplayed(lastImageInAds);
 
     }
+    @Step("Check that first image of ads is dysplaed")
     public boolean firstImageInAdsIsDisplayed() {
         wait10ElementToBeVisible(firstImageInAds);
         return isElementDisplayed(firstImageInAds);
 
     }
+    @Step("Wait until to be visible favorite item")
     public ImagePage waitUntilToBeVisibleFavoriteItem(){
         wait10ElementToBeVisible(favoriteItem);
         return new ImagePage(getDriver());
@@ -225,10 +234,12 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         selectDeutschLocalisation();
         return new ImagePage(getDriver());
     }
+    @Step("Check that favorite item  is dysplaed on the page")
     public boolean favoriteItemIsDisplayed() {
         return isElementDisplayed(favoriteItem);
 
     }
+    @Step("Check that favorite item  is present on the page")
     public boolean isFavoriteItemIsPresent() {
         try {
             getDriver().navigate().refresh();
@@ -238,5 +249,4 @@ public class ImagePage extends TopMenuPage<ImagePage> {
             return false;
         }
     }
-
 }

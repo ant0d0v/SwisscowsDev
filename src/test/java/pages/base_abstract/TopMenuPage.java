@@ -463,7 +463,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         waitForUrlContains(ProjectConstants.DOMAIN +parametr);
         return new ImagePage(getDriver());
     }
-    public String getErrorTitleInFavoritePlaylist()  {
+    @Step("Get tittle of error in favorite")
+    public String getErrorOfTitleInFavorite()  {
         wait10ElementToBeVisible(h2TitleErrorInFavorite);
         return getText(h2TitleErrorInFavorite);
     }
