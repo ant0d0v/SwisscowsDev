@@ -63,7 +63,7 @@ public class AutobahnTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < 110; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
