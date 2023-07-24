@@ -28,9 +28,9 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement regionBrazil;
     @FindBy(xpath = "//div[@class='image']//img")
     private WebElement errorImage;
-    @FindBy(xpath = "//div[@class='related-searches fade in']//li//a")
+    @FindBy(xpath = "//div[@class='related-searches  fade in']//li//a")
     private List<WebElement> listRelatedSearches;
-    @FindBy(xpath = "//div[@class='related-searches fade in']//li//a[1]")
+    @FindBy(xpath = "//div[@class='related-searches  fade in']//li//a[1]")
     private WebElement firstTitleRelatedSearches;
     @FindBy(xpath = "//article[@class = 'item-web']//h2")
     private List<WebElement> listWebResult;
@@ -74,9 +74,9 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement previousPagePagination;
     @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[last()]")
     private WebElement nextPagePagination;
-    @FindBy(xpath = "//div[@class = 'filters']//div[@class='button-menu']")
+    @FindBy(xpath = "//div[@class = 'filters-wrap']//div[@class='button-menu']")
     private WebElement buttonDateInFilter;
-    @FindBy(xpath = "//div[@class = 'filters']//ul[@class='popup menu']//li[5]")
+    @FindBy(xpath = "//div[@class = 'filters-wrap']//ul[@class='popup menu']//li[5]")
     private WebElement pastYearDateInDropDownOfFilter;
     @FindBy(xpath = "//button[@class ='preview-link'][1]")
     private WebElement previewButton;
@@ -88,11 +88,11 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement closeButtonInScreenshot;
     @FindBy(xpath = "//a[@class ='button button-preview mobile-hidden']")
     private WebElement openButtonInScreenshot;
-    @FindBy(xpath = "//div[@class ='trackers fade in']")
+    @FindBy(xpath = "//div[@class ='trackers  fade in']")
     private WebElement trackersButtonInScreenshot;
-    @FindBy(xpath = "//div[@class ='trackers fade in']//span")
+    @FindBy(xpath = "//div[@class ='trackers  fade in']//span")
     private WebElement screenshotButtonInScreenshot;
-    @FindBy(xpath = "//div[@class ='trackers fade in']//section")
+    @FindBy(xpath = "//div[@class ='trackers  fade in']//section")
     private List<WebElement>trackersInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers fade in']//section")
     private WebElement trackersScreenshot;

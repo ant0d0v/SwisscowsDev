@@ -12,7 +12,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 public class MusicPage extends TopMenuPage<MusicPage> {
-    @FindBy(xpath = "//div[@class='audio-results']//article")
+    @FindBy(xpath = "//div[@class='music-results']//article")
     private WebElement audioResultContainer;
     @FindBy(xpath = "//button[@class='button play-pause'][1]")
     private WebElement firstPlayButton;
@@ -44,7 +44,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement favoriteButton;
     @FindBy(xpath = "//div[@class = 'progress-bar']//div[@style]")
     private WebElement progressbarFirsTrack;
-    @FindBy(xpath = "//div[@class = 'tracks']//h2")
+    @FindBy(xpath = "//article[@class = 'item item--audio']//h2")
     private List<WebElement> allTracks;
     @FindBy(xpath = "//button[@title='Play/Pause']")
     private List<WebElement> allPlayButton;
@@ -58,7 +58,7 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     private WebElement favoriteIconInPlaylist;
     @FindBy(xpath = "//button[@class='button favorite active']")
     private List<WebElement> allActiveHeartButtons;
-    @FindBy(xpath = "//div[@class='playlists']/a/h2")
+    @FindBy(xpath = "//div[@class='music-results']//a//h2")
     private List<WebElement> titleAllPlaylist;
 
 
@@ -146,12 +146,15 @@ public class MusicPage extends TopMenuPage<MusicPage> {
     public MusicPage setTimeOfProgressbar() {
         int progressBarWidth = progressbar.getSize().getWidth();
         int progressBarX = progressbar.getLocation().getX();
+        int desiredPosition = progressBarX + (int) (progressBarWidth * 50.0);
 
-        int middlePosition = progressBarX + (progressBarWidth / 2);
-        getActions().moveToElement(progressbar, middlePosition, 0).build().perform();
+        getActions().moveToElement(progressbar, desiredPosition, 0).clickAndHold()
+                .moveByOffset(-progressBarWidth, 0).release().build().perform();
 
-        getActions().click().build().perform();
-
+        return new MusicPage(getDriver());
+    }
+    public MusicPage waitForProgressBarPercentage() {
+        getWait10().until(ExpectedConditions.attributeContains(progressbar, "style", "width:"));
         return new MusicPage(getDriver());
     }
     public MusicPage scrollToLastTrack(){

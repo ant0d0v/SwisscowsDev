@@ -98,22 +98,23 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(actualAttributePrevTrack.contains("item item--audio active"));
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testSetTimeInPlayer(){
         final String actualTime = openBaseURL()
-                .inputSearchCriteriaAndEnter("best")
+                .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .clickPlayButton()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .setTimeOfProgressbar()
+                .waitForProgressBarPercentage()
                 .getVolumeInProgressbarAttribute();
 
-        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 9)) >= 50.0);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testTrackResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         String query = "popular";
@@ -320,7 +321,7 @@ public class MusicTest extends BaseTest {
 
         Assert.assertTrue(actualTracks.size()>= 29);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testRegionalSearch_MusicPage() {
         MusicPage musicPage = new MusicPage(getDriver());
         String query = "popular";

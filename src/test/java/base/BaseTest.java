@@ -29,7 +29,6 @@ public abstract class BaseTest {
     private WebDriverWait webDriverWait;
 
     public static String getBaseUrl() {
-
         return BASE_URL;
     }
 
@@ -62,7 +61,6 @@ public abstract class BaseTest {
     }
 
     protected WebDriver getDriver() {
-
         return driver;
     }
 

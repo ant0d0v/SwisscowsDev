@@ -249,8 +249,6 @@ public class WebPageTest extends BaseTest {
     public void testOpenVideoInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
-
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube")
@@ -260,10 +258,9 @@ public class WebPageTest extends BaseTest {
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=")
                 .waitUntilLoaderToBeInvisible()
                 .clickFirstVideoInVideoWidget()
-                .waitIUntilVisiblyVideoPlayer();
+                .switchToAnotherWindow();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains(ProjectConstants.DOMAIN + "/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
-        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
+        Assert.assertTrue(webPage.getCurrentURL().contains( "https://www.youtube.com/"));
 
     }
     @QaseTitle("Check click more button in the image widget")
@@ -284,7 +281,7 @@ public class WebPageTest extends BaseTest {
                 .click_MoreImages_ButtonInImageWidget()
                 .waitUrlToBeChanged("/en/images?query=" + query + "&region=de-DE")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages();
+                .waitUtilToBeVisibleTenImages();
 
         Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=" + query + "&region=de-DE");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);

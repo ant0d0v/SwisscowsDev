@@ -32,13 +32,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private static final String TOP_MENU_ID = "//div[@class = 'badges animation-badges']";
     @FindBy(xpath = TOP_MENU_ID)
     private WebElement topMenuContainer;
-    @FindBy(xpath = TOP_MENU_ID + "//a[3]")
+    @FindBy(xpath = TOP_MENU_ID + "//a[@class='badge-tg']//img")
     private WebElement TeleGuardTopMenu;
 
-    @FindBy(xpath = TOP_MENU_ID + "//a[2]")
+    @FindBy(xpath = TOP_MENU_ID + "//a[@class='badge-vpn']//img")
     private WebElement VPNTopMenu;
 
-    @FindBy(xpath = "//header//a[@class = 'badge-email']//span")
+    @FindBy(xpath = TOP_MENU_ID + "//a[@class = 'badge-email']//img")
     private WebElement EmailTopMenu;
 
     @FindBy(xpath = TOP_MENU_ID + "//div[@class = 'menu popup']//a[@href = '/en/set-as-startpage']")
@@ -168,7 +168,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement heartIcon;
     @FindBy(xpath = "//div[@class= 'search-counter']//div[@class='popup']//p[2]")
     private WebElement popupHeartIcon;
-    @FindBy(xpath = "//span[@class= 'header-icon-title header-icon-title--charity']")
+    @FindBy(xpath = "//span[@class= 'header-icon-charity']")
     private WebElement valueHeartIcon;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[44]")
     private WebElement regionUkraine;

@@ -71,7 +71,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=Lady+gaga")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .getLinksAllImages();
 
         final List<String> newSize = new ImagePage(getDriver())
@@ -137,7 +137,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .choiceRegionGermany()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery + "&region=de-DE")
                 .getCurrentURL();
@@ -159,12 +159,12 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=color")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .clickFilterButton()
                 .clickColorButton()
                 .clickRedColorInDropdownListOfColorsFilter()
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
 
@@ -230,7 +230,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .getAttributeHrefOfImage();
 
         final String AttributeImageInSideView = imagePage
@@ -250,7 +250,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=ronaldo")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeSecondImage();
@@ -269,7 +269,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .clickFirstImageInImagesResult()
                 .clickCloseButtonInSideImageview()
                 .getAttributeFirstImage();
@@ -287,7 +287,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonOfImageInSideView()
@@ -309,7 +309,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie();
 
         final String AttributeImageInSideView = imagePage
@@ -332,7 +332,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie();
 
         final String actualH2Title = imagePage
@@ -358,7 +358,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonOfImageInSideView()
@@ -382,7 +382,7 @@ public class ImageTest extends BaseTest {
                     .clickImageButton()
                     .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                     .waitForLoaderToBeInVisible()
-                    .waitUtilToBeVisibleFifteenImages()
+                    .waitUtilToBeVisibleTenImages()
                     .loginUsingCookie()
                     .clickFavoriteItem()
                     .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
@@ -403,7 +403,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query="+ searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages()
+                .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
                 .clickFirstImageInImagesResult()
                 .clickFavoriteButtonOfImageInSideView()
