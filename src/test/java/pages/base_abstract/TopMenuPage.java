@@ -353,8 +353,15 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     @Step("Click on the Email icon in the top menu")
     public EmailPage clickEmailTopMenu() {
-        click20(EmailTopMenu);
-        return  new EmailPage(getDriver());
+        getWait10().until(driver -> {
+        try {
+            click20(EmailTopMenu);
+            return EmailTopMenu.isDisplayed();
+        } catch (StaleElementReferenceException e) {
+            return false;
+        }
+        });
+        return new EmailPage(getDriver());
     }
     @Step("Click on the Email icon in the top menu ")
     public LoginPage clickEmailTopMenuSearch() {
