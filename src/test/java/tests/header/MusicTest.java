@@ -1,5 +1,7 @@
 package tests.header;
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
@@ -10,7 +12,8 @@ import utils.ProjectConstants;
 import java.util.List;
 
 public class MusicTest extends BaseTest {
-
+    @QaseTitle("Check play video")
+    @QaseId(value = 5107)
     @Test(retryAnalyzer = Retry.class)
     public void testPlayTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
@@ -20,19 +23,20 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:03")
-                .getPlayButtonAttribute();
+                .getAttributeOfPlayButtonFirstTrack();
 
         final String actualDuration = musicPage.getVolumeDurationFirstTrack();
 
 
-        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
+        Assert.assertTrue(musicPage.playButtonsAreDisplayed());
         Assert.assertEquals(actualAttribute, "/images/icons.svg#pause");
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
-
+    @QaseTitle("Check pause video")
+    @QaseId(value = 5108)
     @Test(retryAnalyzer = Retry.class)
     public void testClickPauseOfTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
@@ -41,17 +45,18 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:03")
                 .clickPauseButton()
-                .getPlayButtonAttribute();
+                .getAttributeOfPlayButtonFirstTrack();
 
         final String actualDuration = musicPage.getVolumeDurationFirstTrack();
 
         Assert.assertEquals(actualAttribute, "/images/icons.svg#play");
         Assert.assertEquals(actualDuration,"0:03");
     }
-
+    @QaseTitle("Check next button of track")
+    @QaseId(value = 5109)
     @Test(retryAnalyzer = Retry.class)
     public void testSwitchToNextTrack() {
         MusicPage musicPage = new MusicPage(getDriver());
@@ -60,19 +65,20 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:03")
                 .clickNextButton()
                 .waitUntilTimeOfSecondTrackToBeChanged("0:03")
-                .getNextTrackAttribute();
+                .getAttributeOfNextTrack();
 
         final String actualDuration = musicPage.getVolumeDurationSecondTrack();
 
-        Assert.assertNotEquals(actualAttribute, musicPage.getPreviousTrackAttribute());
+        Assert.assertNotEquals(actualAttribute, musicPage.getAttributeOfPreviousTrack());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
     }
-
+    @QaseTitle("Check previous button of track")
+    @QaseId(value = 5110)
     @Test(retryAnalyzer = Retry.class)
         public void testSwitchToPreviousTrack(){
         MusicPage musicPage = new MusicPage(getDriver());
@@ -81,40 +87,43 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .clickNextButton()
                 .waitUntilTimeOfSecondTrackToBeChanged("0:01")
-                .getNextTrackAttribute();
+                .getAttributeOfNextTrack();
 
         final String actualAttributePrevTrack = musicPage
                 .clickPreviousButton()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:01")
-                .getPreviousTrackAttribute();
+                .getAttributeOfPreviousTrack();
 
 
         Assert.assertEquals(actualAttributeNextTrack, actualAttributePrevTrack);
-        Assert.assertNotEquals(actualAttributePrevTrack,musicPage.getNextTrackAttribute());
+        Assert.assertNotEquals(actualAttributePrevTrack,musicPage.getAttributeOfNextTrack());
         Assert.assertTrue(actualAttributePrevTrack.contains("item item--audio active"));
     }
-
-    @Test(retryAnalyzer = Retry.class)
+    @QaseTitle("Check set time in player")
+    @QaseId(value = 5111)
+    @Test
     public void testSetTimeInPlayer(){
         final String actualTime = openBaseURL()
-                .inputSearchCriteriaAndEnter("best")
+                .inputSearchCriteriaAndEnter("skofka")
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:01")
                 .setTimeOfProgressbar()
-                .getVolumeInProgressbarAttribute();
+                .waitForProgressBarToBeChanged()
+                .getAttributeStyleInProgressbar();
 
-        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 10)) >= 49.0);
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 9)) >= 50.0);
     }
-
-    @Test
-    public void testTrackResultsEqualsSearchCriteria(){
+    @QaseTitle("Check that music results equals search criteria ")
+    @QaseId(value = 5112)
+    @Test(retryAnalyzer = Retry.class)
+    public void testMusicResultsEqualsSearchCriteria(){
         MusicPage musicPage = new MusicPage(getDriver());
         String query = "popular";
 
@@ -124,8 +133,8 @@ public class MusicTest extends BaseTest {
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
                 .getTitleAllTracks();
-        final int actualSize = titleAllTracks.size();
 
+        final int actualSize = titleAllTracks.size();
 
         final List<String> titleAllPlaylist = musicPage.getTitleAllPlaylist();
 
@@ -138,7 +147,8 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(search.toLowerCase().contains(query));
         }
     }
-
+    @QaseTitle("Check shuffle function in the player")
+    @QaseId(value = 5113)
     @Test(retryAnalyzer = Retry.class)
     public void testShuffleFunctionInPlayer() {
         MusicPage musicPage = new MusicPage(getDriver());
@@ -147,20 +157,21 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .clickMusicButton()
                 .waitUntilVisibilityAudioResult()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:02")
                 .clickShuffleButton()
-                .getShuffleButtonAttribute();
+                .getAttributeShuffleButton();
 
         Assert.assertTrue(actualAttribute.contains("button shuffle active"));
 
         musicPage
                 .clickNextButton()
-                .getNextTrackAttribute();
+                .getAttributeOfNextTrack();
 
         Assert.assertFalse(actualAttribute.contains("item item--audio active"));
     }
-
+    @QaseTitle("Check add track in the favorite")
+    @QaseId(value = 5114)
     @Test(priority = 1,retryAnalyzer = Retry.class)
     public void testAddTrackInTheFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
@@ -171,18 +182,19 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult()
                 .loginUsingCookie()
                 .clickFavoriteIcon()
-                .getFirstTrackAttribute();
+                .getAttributeSrcOfFirstTrack();
 
         final String expectedValueFirstTrackInFavorite = musicPage
                         .clickFavoritePlaylist()
-                        .getFirstTrackAttribute();
+                        .getAttributeSrcOfFirstTrack();
 
         Assert.assertEquals(actualValueFirstTrack, expectedValueFirstTrackInFavorite);
-        Assert.assertTrue(musicPage.favoriteIsDisplayed());
+        Assert.assertTrue(musicPage.favoritePlaylistIsDisplayed());
 
 
     }
-
+    @QaseTitle("Check play track in the favorite")
+    @QaseId(value = 5115)
     @Test(priority = 2,retryAnalyzer = Retry.class)
     public void tesPlayTrackInTheFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
@@ -194,17 +206,19 @@ public class MusicTest extends BaseTest {
                 .waitUntilVisibilityAudioResult()
                 .loginUsingCookie()
                 .clickFavoritePlaylist()
-                .clickPlayButton()
+                .clickPlayButtonOfFirstTrack()
                 .waitUntilTimeOfFirstTrackToBeChanged("0:02")
-                .getPreviousTrackAttribute();
+                .getAttributeOfPreviousTrack();
 
         final String actualDuration = musicPage.getVolumeDurationFirstTrack();
 
-        Assert.assertTrue(musicPage.playButtonsIsDisplayed());
+        Assert.assertTrue(musicPage.playButtonsAreDisplayed());
         Assert.assertTrue(actualAttribute.contains("item item--audio active"));
         Assert.assertTrue(Double.parseDouble(actualDuration.substring(3, 4)) > 0);
 
     }
+    @QaseTitle("Check localization")
+    @QaseId(value = 5116)
     @Test(retryAnalyzer = Retry.class)
     public void testLocalization_MusicPage() {
 
@@ -232,7 +246,8 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(actualTitle,"ivanka in Musik suchen - Swisscows");
 
     }
-
+    @QaseTitle("Check delete track in the favorite")
+    @QaseId(value = 5117)
     @Test(priority = 3,retryAnalyzer = Retry.class)
     public void testDeleteTrackFromFavorite(){
         MusicPage musicPage = new MusicPage(getDriver());
@@ -255,7 +270,8 @@ public class MusicTest extends BaseTest {
         Assert.assertTrue(actualH2Title.contains("No items found"));
         Assert.assertEquals(musicPage.getFontSizeErrorTitleInFavoritePlaylist(),"40px");
     }
-
+    @QaseTitle("Check add after delete several tracks from favorite")
+    @QaseId(value = 5118)
     @Test(retryAnalyzer = Retry.class)
     public void testAddAfterDeleteSeveralTracksFromFavorite() {
         MusicPage musicPage = new MusicPage(getDriver());
@@ -284,7 +300,8 @@ public class MusicTest extends BaseTest {
         Assert.assertEquals(musicPage.getFavoriteAttribute(), "button favorite");
 
     }
-
+    @QaseTitle("Check that suggest equals search criteria")
+    @QaseId(value = 5119)
     @Test(retryAnalyzer = Retry.class)
     public void testSuggestEqualsSearchCriteria() {
         MainPage mainPage = new MainPage(getDriver());
@@ -307,6 +324,8 @@ public class MusicTest extends BaseTest {
             Assert.assertTrue(searchCriteria.contains("ivanka"));
         }
     }
+    @QaseTitle("Check scroll to next page")
+    @QaseId(value = 5120)
     @Test(retryAnalyzer = Retry.class)
     public void testScrollToNextPage() {
 
@@ -320,7 +339,9 @@ public class MusicTest extends BaseTest {
 
         Assert.assertTrue(actualTracks.size()>= 29);
     }
-    @Test
+    @QaseTitle("Check regional search")
+    @QaseId(value = 5121)
+    @Test(retryAnalyzer = Retry.class)
     public void testRegionalSearch_MusicPage() {
         MusicPage musicPage = new MusicPage(getDriver());
         String query = "popular";

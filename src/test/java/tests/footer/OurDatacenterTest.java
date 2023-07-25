@@ -1,6 +1,7 @@
 package tests.footer;
 
 import base.BaseTest;
+import io.qameta.allure.Attachment;
 import io.qase.api.annotation.QaseId;
 import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
@@ -31,6 +32,7 @@ public class OurDatacenterTest extends BaseTest {
                 .waitUntilTimeOfVideoChanged(2000)
                 .pauseVideoDatacenter()
                 .screen("dataCentre.png");
+                 captureScreenshot();
 
         Assert.assertEquals(source, expectedSource);
     }
@@ -54,6 +56,7 @@ public class OurDatacenterTest extends BaseTest {
                 .waitUntilTimeOfVideoChanged(2000)
                 .pauseVideoDatacenter()
                 .screen("dataCentreGermany.png");
+                 captureScreenshot();
 
         Assert.assertEquals(source, expectedSource);
     }

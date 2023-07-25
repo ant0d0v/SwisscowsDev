@@ -17,7 +17,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private List<WebElement> h2AllVideo;
     @FindBy(xpath = "//h2[@class = 'title'][1]")
     private WebElement h2FirstVideo;
-    @FindBy(xpath = "//div[@class='video-results']//article")
+    @FindBy(xpath = "//section[@class='container page-results']//div")
     private WebElement videoResultContainer;
     @FindBy(xpath = "//div[@class='related-searches']//li//a")
     private List<WebElement> listRelatedSearches;

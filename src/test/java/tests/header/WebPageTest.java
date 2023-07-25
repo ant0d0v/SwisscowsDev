@@ -249,8 +249,6 @@ public class WebPageTest extends BaseTest {
     public void testOpenVideoInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
-
         openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo youtube")
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube")
@@ -260,10 +258,9 @@ public class WebPageTest extends BaseTest {
                 .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=")
                 .waitUntilLoaderToBeInvisible()
                 .clickFirstVideoInVideoWidget()
-                .waitIUntilVisiblyVideoPlayer();
+                .switchToAnotherWindow();
 
-        Assert.assertTrue(webPage.getCurrentURL().contains(ProjectConstants.DOMAIN + "/en/video/watch?query=ronaldo%20youtube&region=de-DE&id"));
-        Assert.assertEquals(getExternalPageTitle(), expectedTitle);
+        Assert.assertTrue(webPage.getCurrentURL().contains( "https://www.youtube.com/"));
 
     }
     @QaseTitle("Check click more button in the image widget")
@@ -284,7 +281,7 @@ public class WebPageTest extends BaseTest {
                 .click_MoreImages_ButtonInImageWidget()
                 .waitUrlToBeChanged("/en/images?query=" + query + "&region=de-DE")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleFifteenImages();
+                .waitUtilToBeVisibleTenImages();
 
         Assert.assertEquals(webPage.getCurrentURL(), ProjectConstants.DOMAIN + "/en/images?query=" + query + "&region=de-DE");
         Assert.assertEquals(webPage.getTitle(), expectedTitle);
@@ -550,10 +547,10 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check open trackers in web Preview ")
     @QaseId(value = 5073)
-    @Test(retryAnalyzer = Retry.class)
-    public void testOpenTrackersInPreview_WebPage() {
+    @Test
+    public void testOpenTrackersInPreview_WebPage(){
 
-        final List<String> trackersSize = openBaseURL()
+        final int trackersSize = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
@@ -564,8 +561,7 @@ public class WebPageTest extends BaseTest {
                 .clickTrackersButtonInScreenshot()
                 .getTrackersInScreenshot();
 
-
-        Assert.assertTrue(trackersSize.size() >= 2);
+        Assert.assertTrue(trackersSize  >= 3);
 
     }
     @QaseTitle("Check click screenshot button in web Preview ")

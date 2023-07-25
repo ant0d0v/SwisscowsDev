@@ -76,6 +76,7 @@ public class MediaEducationTest extends BaseTest {
                 .getCurrentSrcOfVideo();
 
         mediaEducationPage.screen("MediaEducation.png");
+        captureScreenshot();
 
         Assert.assertTrue(source.contains("youtube.com"));
 

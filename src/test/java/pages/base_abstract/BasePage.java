@@ -1,5 +1,6 @@
 package pages.base_abstract;
 
+import base.BaseTest;
 import io.qase.api.annotation.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -32,8 +33,6 @@ public abstract class BasePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-
 
 
 
