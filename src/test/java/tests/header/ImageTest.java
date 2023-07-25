@@ -79,8 +79,6 @@ public class ImageTest extends BaseTest {
                 .getLinksAllImages();
 
         Assert.assertNotEquals(newSize,oldSize);
-
-
     }
     @QaseTitle("Check that image result equals search criteria")
     @QaseId(value = 5092)
@@ -102,7 +100,6 @@ public class ImageTest extends BaseTest {
         for (String searchCriteria : titleAllImage) {
             Assert.assertTrue(searchCriteria.toLowerCase().contains("ivan"));
         }
-
     }
     @QaseTitle("Check related search container")
     @QaseId(value = 5093)
