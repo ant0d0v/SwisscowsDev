@@ -6,13 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
-import static org.testng.internal.DataProviderLoader.log;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
     @FindBy(xpath = "//figure//img[1]")
