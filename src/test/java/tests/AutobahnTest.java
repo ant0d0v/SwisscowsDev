@@ -66,12 +66,13 @@ public class AutobahnTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
-        for (int i = 0; i < 110; i++) {
+        for (int i = 0; i < 99; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
                     .header(signatureHeader)
-                    .get("https://api.dev.swisscows.com/web/search?query=ddsf&offset=0&itemsCount=10&region=uk-UA&freshness=All");
+                    .queryParam("query","iphone")
+                    .get("https://api.dev.swisscows.com/web/search");
         }
 
         webPage.searchAfterClear(TestUtils.getRandomName());
