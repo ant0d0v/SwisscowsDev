@@ -103,7 +103,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     @Step("Scroll down to last image")
-    public ImagePage scrollToLastImage() throws Throwable {
+    public ImagePage scrollToLastImage() {
         scrollByVisibleElementActions(last50Image);
         wait10ElementToBeVisible(last60Image);
         scrollByVisibleElement(last60Image);
