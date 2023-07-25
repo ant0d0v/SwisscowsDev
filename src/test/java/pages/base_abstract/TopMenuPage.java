@@ -263,9 +263,15 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     @Step("Wait for the top menu to be visible.")
     public MainPage waitTopMenuToBeVisible(){
-        wait10ElementToBeVisible(topMenuContainer);
+        getWait10().until(driver -> {
+            try {
+                wait10ElementToBeVisible(topMenuContainer);
+                return topMenuContainer.isDisplayed();
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
         return new MainPage(getDriver());
-
     }
     public VideoPage selectGermanyRegion(){
         clickHamburgerMenu();

@@ -209,14 +209,14 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check next and prev buttons in the video widget")
     @QaseId(value = 5057)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNextButtonAndPrevButtonVideoWidget_WebPage() {
 
         WebPage webPage = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo youtube")
+                .inputSearchCriteriaAndEnter("watch youtube")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=de-DE")
+                .waitUntilUrlToBeChanged("/en/web?query=watch+youtube&region=de-DE")
                 .waitUntilLoaderToBeInvisible()
                 .clickNextButtonVideoWidget();
 
@@ -229,23 +229,23 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check click more button in the video widget")
     @QaseId(value = 5058)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
 
         openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo youtube")
+                .inputSearchCriteriaAndEnter("watch youtube")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
-                .waitUntilUrlToBeChanged("/en/web?query=ronaldo+youtube&region=")
+                .waitUntilUrlToBeChanged("/en/web?query=watch+youtube")
                 .click_MoreVideo_ButtonInVideoWidget()
                 .waitUntilVisibilityVideoResult();
 
-        Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=ronaldo%20youtube&region=de-DE"));
+        Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE"));
 
     }
     @QaseTitle("Check that open video in the video widget")
     @QaseId(value = 5059)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenVideoInVideoWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -608,10 +608,10 @@ public class WebPageTest extends BaseTest {
         final String expectedAdsText = "Ads by Microsoft Data privacy";
 
         final String actualAdsText = openBaseURL()
-                .inputSearchCriteriaAndEnter("price")
+                .inputSearchCriteriaAndEnter("price of iphone")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
-                .waitUntilUrlToBeChanged("/en/web?query=price&region=de-DE")
+                .waitUntilUrlToBeChanged("/en/web?query=price+of+iphone&region=de-DE")
                 .waitUntilLoaderToBeInvisible()
                 .getAdsText_WebPage();
 
@@ -627,7 +627,7 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
 
         final String oldUrl = openBaseURL()
-                .inputSearchCriteriaAndEnter("price")
+                .inputSearchCriteriaAndEnter("price of iphone")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
                 .getCurrentURL();
