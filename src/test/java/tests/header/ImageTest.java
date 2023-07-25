@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ImageTest extends BaseTest {
     private final String searchQuery = "ronaldo";
-    @QaseTitle("Check Queries Rate Limit for \"Brazillian bots\"")
+    @QaseTitle("Check that suggestion equals search criteria")
     @QaseId(value = 5089)
     @Test
     public void testSuggestEqualsSearchCriteria_ImageSearch() {
@@ -164,7 +164,7 @@ public class ImageTest extends BaseTest {
                 .clickColorButton()
                 .clickRedColorInDropdownListOfColorsFilter()
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleTenImages()
+                .waitUtilToBeVisibleFiveImages()
                 .clickFirstImageInImagesResult()
                 .getTitleFirstImage();
 
@@ -230,7 +230,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleTenImages()
+                .waitUtilToBeVisibleFiveImages()
                 .getAttributeHrefOfImage();
 
         final String AttributeImageInSideView = imagePage
@@ -250,7 +250,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=ronaldo")
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleTenImages()
+                .waitUtilToBeVisibleFiveImages()
                 .clickFirstImageInImagesResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeSecondImage();
@@ -269,7 +269,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .waitUtilToBeVisibleTenImages()
+                .waitUtilToBeVisibleFiveImages()
                 .clickFirstImageInImagesResult()
                 .clickCloseButtonInSideImageview()
                 .getAttributeFirstImage();

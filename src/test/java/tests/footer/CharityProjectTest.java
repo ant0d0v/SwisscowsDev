@@ -29,6 +29,7 @@ public class CharityProjectTest extends BaseTest {
                 .waitUntilTimeOfVideoToBeChanged(2000)
                 .pauseVideoCharity()
                 .screen("CharityProject.png");
+                 captureScreenshot();
 
         Assert.assertEquals(source, expectedSource);
     }

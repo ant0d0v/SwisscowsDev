@@ -289,6 +289,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
             switchToAnotherWindow();
         }
     }
+    @Step("Click on all heart icons")
     public MusicPage clickOnAllHeart()  {
         getWait20().until(ExpectedConditions.visibilityOfAllElements(allHeartButtons));
         clickAllElementsInList(allHeartButtons);
@@ -449,6 +450,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new VideoPage(getDriver());
     }
+    @Step("Click music button")
     public MusicPage clickMusicButton() {
         clickEnter(musicButton);
         return new MusicPage(getDriver());
@@ -525,7 +527,7 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         click20(signInTopMenu);
         return new UsersLoginPage(getDriver());
     }
-
+    @Step("Click favorite icon")
     public MusicPage clickFavoriteIcon() {
         wait10ElementToBeVisible(favoriteIcon);
         click(favoriteIcon);

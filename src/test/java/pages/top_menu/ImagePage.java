@@ -59,6 +59,8 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement secondQueryInRelatedSearchContainer;
     @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<10]")
     private List<WebElement> tenImages;
+    @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<5]")
+    private List<WebElement> fiveImages;
     @FindBy(xpath = "//a[@class ='item favorite']")
     private WebElement favoriteItem;
 
@@ -157,10 +159,18 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         wait10ElementToBeVisible(imageAttributeHrefInSideImageview);
         return getAttribute(imageAttributeHrefInSideImageview,"src");
     }
-    @Step("Wait until to be visible fifteen images")
+    @Step("Wait until to be visible ten images")
     public ImagePage waitUtilToBeVisibleTenImages(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
         for (WebElement image : tenImages) {
+            wait20ElementToBeVisibleJsExecutor(jsExecutor,image);
+        }
+        return this;
+    }
+    @Step("Wait until to be visible five images")
+    public ImagePage waitUtilToBeVisibleFiveImages(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        for (WebElement image : fiveImages) {
             wait20ElementToBeVisibleJsExecutor(jsExecutor,image);
         }
         return this;

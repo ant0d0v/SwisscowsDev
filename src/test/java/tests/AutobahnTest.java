@@ -11,12 +11,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.top_menu.ImagePage;
 import pages.top_menu.WebPage;
+import utils.ProjectConstants;
 import utils.TestUtils;
 
 import static io.restassured.RestAssured.given;
 
 
 public class AutobahnTest extends BaseTest {
+    final String errorMessage = "Too many requests";
+
     @QaseTitle("Check Queries Rate Limit for \"Brazillian bots\"")
     @QaseId(value = 4875)
     @Test
@@ -44,9 +47,9 @@ public class AutobahnTest extends BaseTest {
                 + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
 
 
-        Assert.assertTrue(webPage.getTitleErrorText().contains("Too many requests"));
+        Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(webPage.getH2FontSize(),"40px");
+        Assert.assertEquals(webPage.getH2FontSize(), ProjectConstants.FONT_SIZE_40_PX);
 
     }
     @QaseTitle("Check Queries Rate Limit for Regular Bot")
@@ -63,7 +66,7 @@ public class AutobahnTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
-        for (int i = 0; i < 110; i++) {
+        for (int i = 0; i < 105; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
@@ -73,8 +76,8 @@ public class AutobahnTest extends BaseTest {
 
         webPage.searchAfterClear(TestUtils.getRandomName());
 
-        Assert.assertTrue(webPage.getTitleErrorText().contains("Too many requests"));
+        Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
         Assert.assertTrue(webPage.errorImageIsDisplayed());
-        Assert.assertEquals(webPage.getH2FontSize(),"40px");
+        Assert.assertEquals(webPage.getH2FontSize(), ProjectConstants.FONT_SIZE_40_PX);
     }
 }

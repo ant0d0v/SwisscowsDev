@@ -92,10 +92,10 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement trackersButtonInScreenshot;
     @FindBy(xpath = "//div[@class ='trackers  fade in']//span")
     private WebElement screenshotButtonInScreenshot;
-    @FindBy(xpath = "//div[@class ='trackers  fade in']//section")
-    private List<WebElement>trackersInScreenshot;
-    @FindBy(xpath = "//div[@class ='trackers fade in']//section")
-    private WebElement trackersScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']//section//p//a")
+    private List<WebElement> trackersOfScreenshot;
+    @FindBy(xpath = "//div[@class ='trackers fade in']//section//p//a[1]")
+    private WebElement firstTrackerOfScreenshot;
 
     @FindBy(xpath = "//div[@class='a11t-privacy']")
     private WebElement adsText;
@@ -166,9 +166,9 @@ public class WebPage extends TopMenuPage<WebPage> {
         return new  WebPage(getDriver());
     }
     @Step("Get trackers in screenshot ")
-    public List<String> getTrackersInScreenshot() {
-        wait10ElementToBeVisible(trackersScreenshot);
-        return getTexts(trackersInScreenshot);
+    public int getTrackersInScreenshot() {
+        wait10ElementToBeVisible(firstTrackerOfScreenshot);
+        return getListSize(trackersOfScreenshot);
     }
 
     public List<WebElement> getInnerFooterMenuLinks() {

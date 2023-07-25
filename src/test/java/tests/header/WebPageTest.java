@@ -547,10 +547,10 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check open trackers in web Preview ")
     @QaseId(value = 5073)
-    @Test(retryAnalyzer = Retry.class)
-    public void testOpenTrackersInPreview_WebPage() {
+    @Test
+    public void testOpenTrackersInPreview_WebPage(){
 
-        final List<String> trackersSize = openBaseURL()
+        final int trackersSize = openBaseURL()
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionUkraine()
@@ -561,8 +561,7 @@ public class WebPageTest extends BaseTest {
                 .clickTrackersButtonInScreenshot()
                 .getTrackersInScreenshot();
 
-
-        Assert.assertTrue(trackersSize.size() >= 2);
+        Assert.assertTrue(trackersSize  >= 3);
 
     }
     @QaseTitle("Check click screenshot button in web Preview ")

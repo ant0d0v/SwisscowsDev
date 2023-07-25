@@ -1,8 +1,11 @@
 package base;
 
+import io.qameta.allure.Attachment;
 import io.qase.api.annotation.Step;
 import io.restassured.http.ContentType;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -47,10 +50,11 @@ public abstract class BaseTest {
         Reporter.log(ReportUtils.getClassNameTestName(method, result), true);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     protected void afterMethod(Method method, ITestResult result) {
         if (!result.isSuccess()) {
             BaseUtils.captureScreenFile(driver, method.getName(), this.getClass().getName());
+            captureScreenshot();
         }
 
         BaseUtils.logf("Execution time is %o sec\n\n", (result.getEndMillis() - result.getStartMillis()) / 1000);
@@ -58,6 +62,10 @@ public abstract class BaseTest {
 
         driver.quit();
         webDriverWait = null;
+    }
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] captureScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     protected WebDriver getDriver() {
@@ -72,9 +80,7 @@ public abstract class BaseTest {
         return webDriverWait;
     }
 
-    public void sleep(int millis) throws InterruptedException {
-        Thread.sleep(millis);
-    }
+
     @Step("Open the base URL of the web page.")
     public MainPage openBaseURL() {
         TestUtils.loadBaseUrlPage(getDriver(), getWait());
@@ -87,6 +93,7 @@ public abstract class BaseTest {
 
         return new MainPage(getDriver());
     }
+
     @Step("Open the base URL of the web page and get cookie of page")
     public MainPage openBaseURLAndGetCookie() {
         TestUtils.addCookie(getDriver(),TestUtils.getCookie(getDriver()));

@@ -39,6 +39,7 @@ public class VideoTest extends BaseTest {
     @Test
     public void testRegionalSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
+
         final String actualRegion =   openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
@@ -206,6 +207,7 @@ public class VideoTest extends BaseTest {
                 .waitUtilLoaderToBeInVisible()
                 .waitUntilToBeVisiblyListRelatedSearches()
                 .getTextColors();
+
         final List<String> newTextsColorsWhenHover = videoPage.getTextsColorsWhenHover();
 
         Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
