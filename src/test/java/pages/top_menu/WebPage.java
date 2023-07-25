@@ -12,11 +12,11 @@ import java.util.List;
 public class WebPage extends TopMenuPage<WebPage> {
     @FindBy(xpath = "//div[@class='web-results']//article[1]")
     private WebElement webResultContainer;
-    @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']")
+    @FindBy(xpath = "//footer[@class = 'footer']")
     private WebElement footerFooterSearchPages;
-    @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']" + "//p[contains(text(), '©')]")
+    @FindBy(xpath = "//footer[@class = 'footer']" + "//p[contains(text(), '©')]")
     private WebElement footerSearchCopyright;
-    @FindBy(xpath = "//div[@class = 'row row-page-results footer-inner']//a")
+    @FindBy(xpath = "//footer[@class = 'footer']//a")
     private List<WebElement> innerFooterMenuLink;
     @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;

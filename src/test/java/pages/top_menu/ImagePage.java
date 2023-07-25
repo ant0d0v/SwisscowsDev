@@ -6,11 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Thread.sleep;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
     @FindBy(xpath = "//figure//img[1]")
@@ -72,6 +69,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
         return new ImagePage(getDriver());
     }
+
     @Step("Click first image in images results")
     public ImagePage clickFirstImageInImagesResult() {
         click20(firstImageInImagesResult);
@@ -105,10 +103,11 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
     @Step("Scroll down to last image")
-    public ImagePage scrollToLastImage(){
+    public ImagePage scrollToLastImage() {
         scrollByVisibleElementActions(last50Image);
         wait10ElementToBeVisible(last60Image);
         scrollByVisibleElement(last60Image);
+
         return new ImagePage(getDriver());
     }
     @Step("Get links all images")

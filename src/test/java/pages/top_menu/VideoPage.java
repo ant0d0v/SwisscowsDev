@@ -1,6 +1,7 @@
 package pages.top_menu;
 
 import io.qase.api.annotation.Step;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,8 +60,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     @Step("Wait until to be visible video result")
     public VideoPage waitUntilVisibilityVideoResult() {
-        wait20ElementToBeVisible(videoResultContainer);
-
+        getWait10().until(driver -> {
+            try {
+                wait10ElementToBeVisible(videoResultContainer);
+                return videoResultContainer.isDisplayed();
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
         return new VideoPage(getDriver());
     }
     public List <String> getListDurationAllVideo()  {

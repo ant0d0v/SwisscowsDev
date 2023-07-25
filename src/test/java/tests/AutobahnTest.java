@@ -58,20 +58,23 @@ public class AutobahnTest extends BaseTest {
     public void testRegularBotAndError429Page() {
         WebPage webPage = new WebPage(getDriver());
 
-        Header nonceHeader = new Header("Request-Nonce", "I6iO_D0fwZOi8HsyXaUQraP8SgqL8cBl");
-        Header signatureHeader = new Header("X-Request-Signature", "SLQ8JkCtYy4jwTM1_jyvtCcNsaQpOsmtvbgR_1XnBUo");
+        Header nonceHeader = new Header("Request-Nonce", "5CMgl0NqUuUhq7._dd57XvBNUhhrkdZT");
+        Header signatureHeader = new Header("X-Request-Signature", "oa0ctwcngO5R120H9nAb5yNESv1r7KTffC-xL4aenr0");
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
-        for (int i = 0; i < 105; i++) {
+        for (int i = 0; i < 60; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
                     .header(signatureHeader)
-                    .get("https://api.dev.swisscows.com/web/search?query=ddsf&offset=0&itemsCount=10&region=uk-UA&freshness=All");
+                    .queryParam("query","iphone")
+                    .get("https://api.dev.swisscows.com/web/search");
+             webPage
+                     .searchAfterClear(TestUtils.getRandomName());
         }
 
         webPage.searchAfterClear(TestUtils.getRandomName());
