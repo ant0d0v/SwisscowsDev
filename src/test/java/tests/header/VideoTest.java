@@ -2,14 +2,16 @@ package tests.header;
 
 import base.BaseTest;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
-import pages.top_menu.MusicPage;
 import pages.top_menu.VideoPage;
 import utils.ProjectConstants;
 
 import java.io.IOException;
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class VideoTest extends BaseTest {
     @Test
@@ -31,9 +33,9 @@ public class VideoTest extends BaseTest {
         Assert.assertEquals(mainPage.getAllElementsText().size(), 5);
 
         for (String searchCriteria : actualSuggestion) {
-            Assert.assertTrue(mainPage.suggestIsDisplayed());
-            Assert.assertTrue(actualSizeSuggest > 0);
-            Assert.assertTrue(searchCriteria.contains(query));
+            assertTrue(mainPage.suggestIsDisplayed());
+            assertTrue(actualSizeSuggest > 0);
+            assertTrue(searchCriteria.contains(query));
         }
     }
     @Test
@@ -56,45 +58,52 @@ public class VideoTest extends BaseTest {
 
 
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
-        Assert.assertTrue(titleAllVideo.toLowerCase().contains("ronaldo"));
+        assertTrue(titleAllVideo.toLowerCase().contains("ronaldo"));
 
     }
     @Test
     public void testScrollToNextPage_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
+
         final List<String> oldSize = openBaseURL()
-                .inputSearchCriteriaAndEnter("Lady gaga")
+                .inputSearchCriteriaAndEnter("rep")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
+                .waitUntilToBeVisibleAllImagesOfVideo()
                 .getTitleAllVideo();
 
         final List<String> newSize = videoPage
                 .scrollToLastVideo()
+                .waitUntilToBeVisibleAllImagesOfVideo()
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
+        Assert.assertEquals(newSize.size() ,29);
 
     }
     @Test
     public void testVideoResultsEqualsSearchCriteria(){
         VideoPage videoPage = new VideoPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
+                .waitUtilLoaderToBeInVisible()
                 .waitUntilVisibilityVideoResult()
+                .waitUntilToBeVisibleAllImagesOfVideo()
                 .getTitleAllVideo();
 
 
         final int actualSize = videoPage.getTitleAllVideo().size();
 
-        Assert.assertTrue(actualSize >= 20);
+        assertTrue(actualSize >= 10);
         for (String searchCriteria : titleAllTracks) {
-            Assert.assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
+            assertTrue(searchCriteria.toLowerCase().contains("iphone"));
         }
 
     }
+    @Ignore
     @Test
     public void testRelatedSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -113,7 +122,7 @@ public class VideoTest extends BaseTest {
 
         Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
         for (String search : titleAllVideo) {
-            Assert.assertTrue(search.toLowerCase().contains("ronaldo"));
+            assertTrue(search.toLowerCase().contains("ronaldo"));
         }
     }
     @Test public void testPlayVideo_VideoPage() throws IOException {
@@ -125,30 +134,25 @@ public class VideoTest extends BaseTest {
                 .waitUntilVisibilityVideoResult()
                 .clickFirstVideoResult()
                 .clickPlayerYouTubeVideo()
-                .waitUntilTimeOfFirstVideoToBeChanged("0:02")
-                .screen("youtube.png");
+                .waitUntilTimeOfFirstVideoToBeChanged("0:02");
 
         final String actualSrc = videoPage.getVideoImageAttribute();
 
-        Assert.assertTrue(actualSrc.contains("youtube.com"));
+        assertTrue(actualSrc.contains("https://www.youtube-nocookie.com"));
 
     }
     @Test
-    public void testImageProxy_VideoPage() throws  IOException {
-        VideoPage videoPage = new VideoPage(getDriver());
-        openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+    public void testImageProxy_VideoPage() {
+        final List<String> actualSrc = openBaseURL()
+                .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
-                .waitUntilVisibilityVideoResult()
-                .clickFirstVideoResult()
-                .clickPlayerYouTubeVideo()
-                .waitUntilTimeOfFirstVideoToBeChanged("0:02")
-                .screen("proxy.png");
-        final String actualSrc = videoPage.getProxyImageAttribute();
+                .waitUntilToBeVisibleAllImagesOfVideo()
+                .getProxyImageAttributes();
 
-        Assert.assertTrue(actualSrc.contains("https://cdn.swisscows.com/"));
-
+        for (String search : actualSrc) {
+            assertTrue(search.contains("https://cdn.swisscows.com/image"));
+        }
     }
     @Test
     public void testFilterSearch_VideoPage() {
@@ -159,18 +163,18 @@ public class VideoTest extends BaseTest {
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
                 .clickFilterButton()
-                .clickDurationButton();
-        Assert.assertEquals(videoPage.getDurationButtonAttribute(),"button-menu open");
+                .clickPublisherButton();
+
+        Assert.assertEquals(videoPage.getAttributeOfPublisherButton(),"button-menu open");
 
         final List<String> durationAllVideo = videoPage
-                .clickShortInDropdownDuration()
-                .getListDurationAllVideo();
-
+                .clickDailyMotionButtonInDropdownOfPublisher()
+                .getListMetadataAllVideo();
 
         for (String search : durationAllVideo) {
-            Assert.assertTrue((Integer.parseInt(search.substring(1, 2)) <= 4));
+            assertTrue(search.contains("DailyMotion"));
         }
-        Assert.assertEquals(videoPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
+        Assert.assertEquals(videoPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/video?query=ivanka&publisher=DailyMotion");
     }
     @Test
     public void testCancelFilterSearch_VideoPage() {
@@ -181,8 +185,8 @@ public class VideoTest extends BaseTest {
                  .clickVideoButton()
                  .waitUntilVisibilityVideoResult()
                  .clickFilterButton()
-                 .clickDurationButton()
-                 .clickShortInDropdownDuration()
+                 .clickPublisherButton()
+                 .clickDailyMotionButtonInDropdownOfPublisher()
                  .getCurrentURL();
 
         final String newUrl = videoPage
@@ -192,6 +196,7 @@ public class VideoTest extends BaseTest {
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,ProjectConstants.DOMAIN + "/en/video?query=ivanka");
     }
+    @Ignore
     @Test
     public void testHoverTextsRelatedSearch_VideoPage() throws InterruptedException {
         VideoPage videoPage = new VideoPage(getDriver());

@@ -1,6 +1,7 @@
 package pages.top_menu;
 
 import io.qase.api.annotation.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
@@ -23,32 +25,36 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     @FindBy(xpath = "//div[@class='related-searches']//li//a")
     private List<WebElement> listRelatedSearches;
 
-    @FindBy(xpath = "//div[@class='content']")
-    private WebElement videoPlayerYouTube;
+    @FindBy(xpath = "//div[@class='warning']")
+    private WebElement warningMessage;
     @FindBy(xpath = "//button[@class='button button-warning']")
     private WebElement videoPlayerYouTubeButtonOk;
     @FindBy(xpath = "//article//h2[1]")
     private WebElement firstVideoResult;
     @FindBy(xpath = "//iframe")
     private WebElement iframe;
-    @FindBy(xpath = "//div[@class='video-player']//iframe")
+    @FindBy(xpath = "//*[@id='movie_player']/div[1]//video")
     private WebElement imageAttribute;
-    @FindBy(xpath = "//div[@class='video-player']//img")
-    private WebElement srcAttribute;
-    @FindBy(xpath = "//div[@class ='button-menu'][3]")
-    private WebElement durationButton;
-    @FindBy(xpath = "//div[3]")
-    private WebElement durationAttribute;
-    @FindBy(xpath = "//div[@class][3]//ul//li[2]")
-    private WebElement shortButtonInDropdownDuration;
-    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[20]")
-    private WebElement last20Video;
-    @FindBy(xpath = "//div[@class = 'video-results'][2]//article[23]")
-    private WebElement last23Video;
-    @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]")
+    @FindBy(xpath = "//article[@class='item-video']//img")
+    private List<WebElement> listAllImagesOfVideos;
+    @FindBy(xpath = "//article[@class='item-video']//img")
+    private WebElement ImagesOfVideo;
+    @FindBy(xpath = "//div[@class ='button-menu']//span[text() = 'Publisher']")
+    private WebElement publisherButtonOfFilter;
+    @FindBy(xpath = "//div[contains(@class, 'button-menu')][1]")
+    private WebElement attributeOfPublisherButton;
+    @FindBy(xpath = "//div[contains(@class, 'button-menu')][1]//ul/li[text() = 'DailyMotion']")
+    private WebElement dailyMotionButtonInDropdownOfPublisher;
+    @FindBy(xpath = "//footer")
+    private WebElement lastTenVideo;
+    @FindBy(xpath = "//div[@class = 'video-results list']//article[19]")
+    private WebElement lastTwentyVideo;
+    @FindBy(xpath = "//div[@class = 'video-results list']//article[19]")
+    private WebElement lastThirtyVideo;
+    @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]//span")
     private WebElement durationAttributeOfFirstVideo;
-    @FindBy(xpath = "//article[@class ='item-video']//figure//span")
-    private List<WebElement> listDurationAllVideo;
+    @FindBy(xpath = "//div[@class = 'video-results list']//article//div//p[@class='metadata']")
+    private List<WebElement> listMetadataAllVideo;
     public VideoPage(WebDriver driver) {
         super(driver);
     }
@@ -57,6 +63,21 @@ public class VideoPage extends TopMenuPage<VideoPage> {
 
         return new VideoPage(getDriver());
 
+    }
+    @Step("Wait until to be visible all images of videos")
+    public VideoPage waitUntilToBeVisibleAllImagesOfVideo(){
+        getWait10().until(driver -> {
+        try {
+            for (WebElement imageOfVideo : listAllImagesOfVideos) {
+                wait10ElementToBeVisible(imageOfVideo);
+                return imageOfVideo.isDisplayed();
+            }
+        } catch (StaleElementReferenceException e) {
+            return false;
+        }
+            return null;
+        });
+        return new VideoPage(getDriver());
     }
     @Step("Wait until to be visible video result")
     public VideoPage waitUntilVisibilityVideoResult() {
@@ -70,9 +91,16 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         });
         return new VideoPage(getDriver());
     }
-    public List <String> getListDurationAllVideo()  {
-
-        return getTexts(listDurationAllVideo);
+    public List <String> getListMetadataAllVideo()  {
+        getWait10().until(driver -> {
+            try {
+                getTexts(listMetadataAllVideo);
+                return videoResultContainer.isDisplayed();
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
+        return getTexts(listMetadataAllVideo);
     }
     public List <String> getTitleAllVideo()  {
 
@@ -85,13 +113,13 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return getTexts(listRelatedSearches);
     }
     public VideoPage waitUntilTimeOfFirstVideoToBeChanged(String expectedTime) {
-        getWait10().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
+        getWait20().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
         getWait20().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstVideo, expectedTime));
         getDriver().switchTo().defaultContent();
         return new VideoPage(getDriver());
     }
     public VideoPage clickPlayerYouTubeVideo(){
-        wait10ElementToBeVisible(videoPlayerYouTube);
+        wait10ElementToBeVisible(warningMessage);
         clickByJavaScript(videoPlayerYouTubeButtonOk);
         return  this;
     }
@@ -99,13 +127,13 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         click20(firstVideoResult);
         return new VideoPage(getDriver());
     }
-    public VideoPage clickDurationButton() {
-        click(durationButton);
+    public VideoPage clickPublisherButton() {
+        click(publisherButtonOfFilter);
         return new VideoPage(getDriver());
     }
-    public VideoPage clickShortInDropdownDuration() {
-        click(shortButtonInDropdownDuration);
-        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&videoLength=Short");
+    public VideoPage clickDailyMotionButtonInDropdownOfPublisher() {
+        click(dailyMotionButtonInDropdownOfPublisher);
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&publisher=DailyMotion");
         return new VideoPage(getDriver());
     }
     public VideoPage clickFilterButton() {
@@ -114,26 +142,34 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         return new VideoPage(getDriver());
     }
     public VideoPage scrollToLastVideo() {
-        scrollByVisibleElement(last20Video);
-        wait10ElementToBeVisible(last23Video);
-        scrollByVisibleElement(last23Video);
+        scrollByVisibleElement(lastTenVideo);
+        wait10ElementToBeVisible(lastTwentyVideo);
+        scrollByVisibleElement(lastTwentyVideo);
+        wait10ElementToBeVisible(lastThirtyVideo);
         return new VideoPage(getDriver());
     }
+
     public VideoPage waitUtilLoaderToBeInVisible(){
         waitForLoaderToBeInVisible();
         return new VideoPage(getDriver());
     }
     public String getVideoImageAttribute() {
-
+        getDriver().switchTo().frame(iframe);
         return getAttribute(imageAttribute, "src");
     }
-    public String getProxyImageAttribute() {
-
-        return getAttribute(srcAttribute, "src");
+    public List<String> getProxyImageAttributes() {
+        List<String> srcList = new ArrayList<>();
+        for (WebElement src : listAllImagesOfVideos) {
+            if (src.isEnabled() && src.isDisplayed()) {
+                srcList.add(src.getAttribute( "src"));
+            }
+        }
+        return srcList;
     }
-    public String getDurationButtonAttribute() {
 
-        return getAttribute(durationAttribute, "class");
+    public String getAttributeOfPublisherButton() {
+
+        return getAttribute(attributeOfPublisherButton, "class");
     }
     public List<String> getTextsColorsWhenHover() throws InterruptedException {
 
