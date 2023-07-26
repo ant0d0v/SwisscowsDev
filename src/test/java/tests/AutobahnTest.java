@@ -40,7 +40,7 @@ public class AutobahnTest extends BaseTest {
                     .header(nonceHeader)
                     .header(signatureHeader)
                     .queryParam("query","\"Otras características considerar\"")
-                    .get("address");
+                    .get("https://api.dev.swisscows.com/web/search");
         }
 
         webPage.searchAfterClear("\"" + TestUtils.getRandomNameForBrazilBots() + " " + TestUtils.getRandomNameForBrazilBots()

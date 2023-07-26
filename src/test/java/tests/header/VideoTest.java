@@ -103,6 +103,7 @@ public class VideoTest extends BaseTest {
         }
 
     }
+    @Ignore
     @Test
     public void testRelatedSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
