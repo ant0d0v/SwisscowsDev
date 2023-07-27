@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfElementsToBeMoreThan;
 
 public abstract class BasePage {
     private WebDriver driver;
@@ -195,7 +196,7 @@ public abstract class BasePage {
     }
 
     protected void clickElementUntilInvisible(WebElement element) {
-        while (element.isEnabled() && element.isDisplayed()) {
+        while (element.isEnabled() && element.isDisplayed()){
             clickByJavaScript(element);
         }
 
@@ -379,6 +380,7 @@ public abstract class BasePage {
     protected void wait10ElementToBeVisible(WebElement element) {
         getWait10().until(ExpectedConditions.visibilityOf(element));
     }
+
     protected void wait10ElementToBeInVisible(WebElement element) {
         getWait10().until(ExpectedConditions.invisibilityOf(element));
     }

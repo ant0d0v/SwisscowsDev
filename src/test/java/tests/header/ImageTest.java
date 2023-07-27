@@ -171,7 +171,7 @@ public class ImageTest extends BaseTest {
     }
     @QaseTitle("Check next button and prev button of advertising")
     @QaseId(value = 5096)
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testNextButtonAndPrevButtonOfAdvertising_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 

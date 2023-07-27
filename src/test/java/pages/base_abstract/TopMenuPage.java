@@ -174,6 +174,10 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement regionUkraine;
     @FindBy(xpath = "//div[@class ='account']")
     private WebElement accountInHamburgerMenu;
+    @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure//img")
+    private WebElement lastImageInAds;
+    @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
+    private WebElement firstImageInAds;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -651,6 +655,17 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         inputSearchCriteriaIntoSearchField(text);
         clickEnter();
         return new WebPage(getDriver());
+    }
+    @Step("Check that last image of ads is dysplaed")
+    public boolean lastImageInAdsIsDisplayed() {
+        wait10ElementToBeVisible(lastImageInAds);
+        return isElementDisplayed(lastImageInAds);
+
+    }
+    @Step("Check that first image of ads is dysplaed")
+    public boolean firstImageInAdsIsDisplayed() {
+        wait10ElementToBeVisible(firstImageInAds);
+        return isElementDisplayed(firstImageInAds);
     }
 
 }
