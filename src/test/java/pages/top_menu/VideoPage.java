@@ -1,10 +1,7 @@
 package pages.top_menu;
 
 import io.qase.api.annotation.Step;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.base_abstract.TopMenuPage;
@@ -14,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
+import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfElementsToBeMoreThan;
 
 public class VideoPage extends TopMenuPage<VideoPage> {
     @FindBy(xpath = "//h2[@class = 'title']")
@@ -27,15 +25,21 @@ public class VideoPage extends TopMenuPage<VideoPage> {
 
     @FindBy(xpath = "//div[@class='warning']")
     private WebElement warningMessage;
-    @FindBy(xpath = "//button[@class='button button-warning']")
+    @FindBy(xpath = "//button[@class='button']")
     private WebElement videoPlayerYouTubeButtonOk;
     @FindBy(xpath = "//article//h2[1]")
     private WebElement firstVideoResult;
+    @FindBy(xpath = "//article[2]//h2[1]")
+    private WebElement secondVideoResult;
+    @FindBy(xpath = "(//div[@class = 'video-results list'])//article[last()]")
+    private WebElement lastVideoResult;
+    @FindBy(xpath = "//label[@class='check-player-mode']//input")
+    private WebElement checkboxNoRemindMe;
     @FindBy(xpath = "//iframe")
     private WebElement iframe;
     @FindBy(xpath = "//*[@id='movie_player']/div[1]//video")
     private WebElement imageAttribute;
-    @FindBy(xpath = "//article[@class='item-video']//img")
+    @FindBy(xpath = "//article[@class='item--video']//img")
     private List<WebElement> listAllImagesOfVideos;
     @FindBy(xpath = "//article[@class='item-video']//img")
     private WebElement ImagesOfVideo;
@@ -49,8 +53,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement lastTenVideo;
     @FindBy(xpath = "//div[@class = 'video-results list']//article[19]")
     private WebElement lastTwentyVideo;
-    @FindBy(xpath = "//div[@class = 'video-results list']//article[19]")
-    private WebElement lastThirtyVideo;
     @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]//span")
     private WebElement durationAttributeOfFirstVideo;
     @FindBy(xpath = "//div[@class = 'video-results list']//article//div//p[@class='metadata']")
@@ -127,6 +129,19 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         click20(firstVideoResult);
         return new VideoPage(getDriver());
     }
+    public VideoPage clickSecondVideoFromSideList() {
+        click20(secondVideoResult);
+        return new VideoPage(getDriver());
+    }
+    public VideoPage clickCheckboxNoRemindMe() {
+        click20(checkboxNoRemindMe);
+        return new VideoPage(getDriver());
+    }
+    public VideoPage refreshVideoPage() {
+        refreshPage();
+        return new VideoPage(getDriver());
+    }
+
     public VideoPage clickPublisherButton() {
         click(publisherButtonOfFilter);
         return new VideoPage(getDriver());
@@ -145,7 +160,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         scrollByVisibleElement(lastTenVideo);
         wait10ElementToBeVisible(lastTwentyVideo);
         scrollByVisibleElement(lastTwentyVideo);
-        wait10ElementToBeVisible(lastThirtyVideo);
         return new VideoPage(getDriver());
     }
 
@@ -184,5 +198,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public List<String> getTextColors() throws InterruptedException {
 
         return  getColorsOfElements(listRelatedSearches);
+    }
+    @Step("Check that favorite item  is present on the page")
+    public boolean isWarningMessageIsPresent() {
+            try {
+                getDriver().findElement(By.xpath("//div[@class='warning']"));
+                return true;
+            } catch (NoSuchElementException e) {
+                return false;
+            }
     }
 }

@@ -12,6 +12,8 @@ import utils.ProjectConstants;
 
 import java.util.List;
 
+import static org.testng.Assert.assertNotEquals;
+
 public class WebPageTest extends BaseTest {
     @QaseTitle("Check that suggestion equals search criteria")
     @QaseId(value = 5051)
@@ -128,7 +130,7 @@ public class WebPageTest extends BaseTest {
         final List<String> oldTextsColorsWhenHover = webPage.getTextColors();
         final List<String> newTextsColorsWhenHover = webPage.getTextsColorsWhenHover();
 
-        Assert.assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
+        assertNotEquals(newTextsColorsWhenHover, oldTextsColorsWhenHover);
     }
     @QaseTitle("Check related search criteria")
     @QaseId(value = 5053)
@@ -168,7 +170,7 @@ public class WebPageTest extends BaseTest {
                 .clickFirstTitleInRelatedSearches()
                 .getTitlesInWebResult();
 
-        Assert.assertNotEquals(oldSearchResult, newSearchResult);
+        assertNotEquals(oldSearchResult, newSearchResult);
 
     }
     @QaseTitle("Check Did you mean message in the search field ")
@@ -184,7 +186,7 @@ public class WebPageTest extends BaseTest {
                 .waitUntilVisibilityWebResult()
                 .getTextDidYouMeanMessage();
 
-        Assert.assertNotEquals(expectedResult, actualResult);
+        assertNotEquals(expectedResult, actualResult);
     }
     @QaseTitle("Check that web results equals search criteria ")
     @QaseId(value = 5056)
@@ -232,15 +234,22 @@ public class WebPageTest extends BaseTest {
     @Test(retryAnalyzer = Retry.class)
     public void testClickMoreVideoButtonInVideoWidget_WebPage() {
 
-        openBaseURL()
+        final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter("watch youtube")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
                 .waitUntilUrlToBeChanged("/en/web?query=watch+youtube")
-                .click_MoreVideo_ButtonInVideoWidget()
-                .waitUntilVisibilityVideoResult();
+                .getCurrentURL();
 
+        final String newUrl = new WebPage(getDriver())
+                .click_MoreVideo_ButtonInVideoWidget()
+                .waitUtilLoaderToBeInVisible()
+                .waitUntilVisibilityVideoResult()
+                .getCurrentURL();
+
+        assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE"));
+        Assert.assertEquals(getExternalPageTitle(),"watch youtube in Video search - Swisscows");
 
     }
     @QaseTitle("Check that open video in the video widget")
@@ -323,7 +332,7 @@ public class WebPageTest extends BaseTest {
                 .clickFirstImageInImageWidget()
                 .getCurrentURL();
 
-        Assert.assertNotEquals(newUrl, oldUrl);
+        assertNotEquals(newUrl, oldUrl);
 
 
     }
@@ -345,7 +354,7 @@ public class WebPageTest extends BaseTest {
                 .clickFirstNewsInNewsWidget()
                 .getCurrentURL();
 
-        Assert.assertNotEquals(newUrl, oldUrl);
+        assertNotEquals(newUrl, oldUrl);
 
     }
     @QaseTitle("Check that all images and title are dysplaed in the news widget")
@@ -390,7 +399,7 @@ public class WebPageTest extends BaseTest {
 
         final String actualAttribute = webPage.getAttributeOfThirdButtonInPagination();
 
-        Assert.assertNotEquals(oldTitle,newTitle);
+        assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(actualAttribute,"number active");
 
     }
@@ -422,7 +431,7 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         String query = "wiki";
 
-        final String actualTitleFirstSearchResult = openBaseURL()
+        final String oldUrl = openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilUrlToBeChanged("/en/web?query=" + query)
                 .waitUntilLoaderToBeInvisible()
@@ -431,6 +440,10 @@ public class WebPageTest extends BaseTest {
                 .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=10")
                 .waitUntilLoaderToBeInvisible()
                 .waitToBeVisibleTitleFirstSearchResult()
+                .getCurrentURL();
+
+
+        final String actualTitleFirstSearchResult = webPage
                 .clickPreviousButtonInPagination_WebPage()
                 .waitUntilUrlToBeChanged("/en/web?query=" + query + "&offset=0")
                 .waitUntilLoaderToBeInvisible()
@@ -439,6 +452,7 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertEquals(webPage.getTitle(),query + " in Web search - Swisscows");
         Assert.assertEquals(actualTitleFirstSearchResult,"Wikipedia");
+        assertNotEquals(webPage.getCurrentURL(), oldUrl);
 
 
     }
@@ -447,7 +461,7 @@ public class WebPageTest extends BaseTest {
     @Test
     public void testUsingFilter_WebPage() {
         WebPage webPage = new WebPage(getDriver());
-        String query = "date";
+        String query = "rep";
 
         final String oldTitle = openBaseURL()
                 .inputSearchCriteriaAndEnter(query)
@@ -467,7 +481,7 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=" + query + "&freshness=Year")));
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
-        Assert.assertNotEquals(oldTitle,newTitle);
+        assertNotEquals(oldTitle,newTitle);
         Assert.assertEquals(webPage.getTitle(),query +" in Web search - Swisscows");
     }
     @QaseTitle("Check cancel filter ")
@@ -542,7 +556,7 @@ public class WebPageTest extends BaseTest {
                 .click_OpenSite_ButtonInScreenshot()
                 .switchToExternalPage();
 
-        Assert.assertNotEquals(getExternalPageURL(),oldUrl);
+        assertNotEquals(getExternalPageURL(),oldUrl);
 
     }
     @QaseTitle("Check open trackers in web Preview ")
@@ -603,7 +617,7 @@ public class WebPageTest extends BaseTest {
     @QaseTitle("Check advertising ")
     @QaseId(value = 5078)
     @Test(retryAnalyzer = Retry.class)
-    public void testAdvertising_WebPage()  {
+    public void testTextOfAdvertising_WebPage()  {
         WebPage webPage = new WebPage(getDriver());
         final String expectedAdsText = "Ads by Microsoft Data privacy";
 
@@ -619,6 +633,45 @@ public class WebPageTest extends BaseTest {
 
         Assert.assertEquals(actualAdsText,expectedAdsText);
         Assert.assertTrue(actualSizes >= 1);
+    }
+    @QaseTitle("Check product advertising ")
+    @QaseId(value = 5122)
+    @Test(retryAnalyzer = Retry.class)
+    public void testProductAdvertising_WebPage()  {
+
+        final String expectedAdsText = "Ads\n"
+                + "Products for germany price of iphone";
+
+        final String actualAdsText = openBaseURL()
+                .inputSearchCriteriaAndEnter("germany price of iphone")
+                .waitUntilVisibilityWebResult()
+                .choiceGermanyRegion()
+                .waitUntilUrlToBeChanged("/en/web?query=germany+price+of+iphone&region=de-DE")
+                .waitUntilLoaderToBeInvisible()
+                .getProductsAdsText_WebPage();
+
+        Assert.assertEquals(actualAdsText,expectedAdsText);
+    }
+    @QaseTitle("Check next button and prev button in the product advertising ")
+    @QaseId(value = 5123)
+    @Test(retryAnalyzer = Retry.class)
+    public void testNextAndPrevButtonsInProductAdvertising_WebPage()  {
+        WebPage webPage = new WebPage(getDriver());
+
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("germany price of iphone")
+                .waitUntilVisibilityWebResult()
+                .choiceGermanyRegion()
+                .waitUntilUrlToBeChanged("/en/web?query=germany+price+of+iphone&region=de-DE")
+                .waitUntilLoaderToBeInvisible()
+                .clickNextButtonInProductsAds();
+
+        Assert.assertTrue(webPage.lastImageInAdsIsDisplayed());
+
+        webPage.clickPrevButtonInProductsAds() ;
+
+        Assert.assertTrue(webPage.firstImageInAdsIsDisplayed());
+
     }
     @QaseTitle("Check open advertising ")
     @QaseId(value = 5079)
@@ -636,7 +689,7 @@ public class WebPageTest extends BaseTest {
                 .clickFirstLinkOfAds()
                 .getCurrentURL();
 
-        Assert.assertNotEquals(newUrl,oldUrl);
+        assertNotEquals(newUrl,oldUrl);
 
     }
     @QaseTitle("Check open link in  the web result ")
@@ -654,7 +707,7 @@ public class WebPageTest extends BaseTest {
                 .clickFirstLinkInWebResult()
                 .getCurrentURL();
 
-        Assert.assertNotEquals(newUrl,oldUrl);
+        assertNotEquals(newUrl,oldUrl);
 
     }
     @QaseTitle("Check hover of preview buttons ")
@@ -671,6 +724,6 @@ public class WebPageTest extends BaseTest {
         final List<String> colorPrevButtonWhenHover = webPage
                 .getColorsOfPreviewButtonsWhenHovering();
 
-        Assert.assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
+        assertNotEquals(colorPrevButtonWhenHover,colorPrevButtonWithoutHover);
     }
 }

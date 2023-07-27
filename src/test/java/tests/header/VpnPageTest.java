@@ -34,19 +34,16 @@ public class VpnPageTest extends BaseTest {
     @QaseId(value = 5037)
     @Test
     public void testVpnLogoNavigatesToBaseURL() {
-        final String expectedURL = ProjectConstants.DOMAIN +"/en";
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
-        MainPage mainPage = openBaseURL();
-        final String actualURL = mainPage
+        final String actualURL = openBaseURL()
                 .clickVPNTopMenu()
                 .clickLogo()
                 .getCurrentURL();
 
-        final String actualTitle = mainPage.getTitle();
+        final String actualTitle = new MainPage(getDriver()).getTitle();
 
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(actualURL, ProjectConstants.DOMAIN +"/en");
+        Assert.assertEquals(actualTitle, "Your private and anonymous search engine Swisscows");
     }
     @QaseTitle("Check that links of vpn page navigate to corresponding page ")
     @QaseId(value = 5038)

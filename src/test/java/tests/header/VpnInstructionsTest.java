@@ -28,8 +28,8 @@ public class VpnInstructionsTest extends BaseTest {
                     "Microsoft Internet Explorer Browser",
                     "Windows 10 OS",
                     "Android OS"
+        );
 
-            );
         final List<String> actualH2Texts = openBaseURL()
                     .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
@@ -43,21 +43,18 @@ public class VpnInstructionsTest extends BaseTest {
     @QaseId(value = 5047)
     @Test
     public void testVpnLogoNavigatesToBaseURL() {
-        final String expectedURL = ProjectConstants.DOMAIN + "/en";
-        final String expectedTitle = "Your private and anonymous search engine Swisscows";
 
-        MainPage mainPage = openBaseURL();
-        final String actualURL = mainPage
+        final String actualURL = openBaseURL()
                     .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
                     .clickInstructionsLink()
                     .clickLogo()
                     .getCurrentURL();
 
-        final String actualTitle = mainPage.getTitle();
+        final String actualTitle = new MainPage(getDriver()).getTitle();
 
-        Assert.assertEquals(actualURL, expectedURL);
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertEquals(actualURL, ProjectConstants.DOMAIN + "/en");
+        Assert.assertEquals(actualTitle, "Your private and anonymous search engine Swisscows");
     }
     @QaseTitle("Check font sizes of texts")
     @QaseId(value = 5048)
@@ -72,7 +69,8 @@ public class VpnInstructionsTest extends BaseTest {
                     "24px",
                     "24px",
                     "24px"
-            );
+        );
+
         final List<String> actualH2FontSizes = openBaseURL()
                     .clickVPNTopMenuAndCloseWindow()
                     .switchToVpnPage()
@@ -103,6 +101,7 @@ public class VpnInstructionsTest extends BaseTest {
                 "https://addons.mozilla.org/firefox/addon/swisscows-vpn/"
 
         );
+
         final List<String> actualLinks  = openBaseURL()
                 .clickVPNTopMenuAndCloseWindow()
                 .switchToVpnPage()

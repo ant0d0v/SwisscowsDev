@@ -54,15 +54,15 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement videoPlayer;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[@src]")
     private List<WebElement>imagesInImageWidget;
-    @FindBy(xpath = "//div[@class ='widget']//a[@class='widget-news']//figure//img[@src]")
+    @FindBy(xpath = "//div[@class ='widget widget-news']//div[@class='news-results']//figure//img[@src]")
     private List<WebElement>imagesInNewsWidget;
     @FindBy(xpath = "//div[@class='widget-images']//figure//img[1]")
     private WebElement firstImageInImageWidget;
-    @FindBy(xpath = "(//a[@class='widget-news'])[position() =1]")
+    @FindBy(xpath = "(//div[@class='widget widget-news']//a)[position() =1]")
     private WebElement firstNewsInNewsWidget;
     @FindBy(xpath = "//div[@class='widget']//p[@class='widget-title'][text()='Images for ']")
     private WebElement titleImageWidget;
-    @FindBy(xpath = "//div[@class='widget']//p[@class='widget-title'][text()='News for ']")
+    @FindBy(xpath = "//div[@class='widget widget-news']//p[@class='widget-title']")
     private WebElement titleNewsWidget;
     @FindBy(xpath = "//div['web-results']//ul[contains(@class,'pagination')]//li[3]")
     private WebElement thirdPagePagination;
@@ -99,12 +99,20 @@ public class WebPage extends TopMenuPage<WebPage> {
 
     @FindBy(xpath = "//div[@class='a11t-privacy']")
     private WebElement adsText;
+    @FindBy(xpath = "//div[@class='a11t--product']//p")
+    private WebElement adsProductsText;
     @FindBy(className ="three-bounce")
     private WebElement loader;
     @FindBy(xpath = "//div[@class='a11t']//article")
     private List<WebElement> adsList;
     @FindBy(xpath = "//div[@class='a11t']//article//a[1]")
     private WebElement firstAds;
+    @FindBy(xpath = "//div[@class='a11t--product']//button[2]")
+    private WebElement nextButtonInAds;
+    @FindBy(xpath = "//div[@class='a11t--product']//button[1]")
+    private WebElement prevButtonInAds;
+    @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
+    private WebElement lastImageInAds;
 
 
     public WebPage(WebDriver driver) {
@@ -154,6 +162,22 @@ public class WebPage extends TopMenuPage<WebPage> {
     public String getAdsText_WebPage() {
         wait10ElementToBeVisible(adsText);
         return getText(adsText);
+    }
+    @Step("Get texts of products ads")
+    public String getProductsAdsText_WebPage() {
+        wait10ElementToBeVisible(adsProductsText);
+        return getText(adsProductsText);
+    }
+    @Step("Click next button the products ads container")
+    public void clickNextButtonInProductsAds() {
+        wait10ElementToBeVisible(nextButtonInAds);
+        clickElementUntilInvisible(nextButtonInAds);
+    }
+
+    @Step("Click prev button the related search container")
+    public void clickPrevButtonInProductsAds() {
+        wait10ElementToBeVisible(prevButtonInAds);
+        clickElementUntilInvisible(prevButtonInAds);
     }
 
     public WebPage choiceGermanyRegion(){
@@ -322,6 +346,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     @Step("Click more video button in the video widget")
     public VideoPage click_MoreVideo_ButtonInVideoWidget()  {
         click(buttonMoreVideo);
+        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE");
         return new VideoPage(getDriver());
     }
     @Step("Check click more button in the image widget")

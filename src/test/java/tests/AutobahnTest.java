@@ -73,8 +73,7 @@ public class AutobahnTest extends BaseTest {
                     .header(signatureHeader)
                     .queryParam("query","iphone")
                     .get("https://api.dev.swisscows.com/web/search");
-             webPage
-                     .searchAfterClear(TestUtils.getRandomName());
+             webPage.searchAfterClear(TestUtils.getRandomName());
         }
 
         webPage.searchAfterClear(TestUtils.getRandomName());

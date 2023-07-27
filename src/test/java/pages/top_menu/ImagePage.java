@@ -46,10 +46,6 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement closeButtonInSideImageview;
     @FindBy(xpath = "//button[@class ='bookmark']")
     private WebElement favoriteButtonInSideImageview;
-    @FindBy(xpath = "//div[@class='widget-slider']//div[last()]/article/a[1]/figure")
-    private WebElement lastImageInAds;
-    @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
-    private WebElement firstImageInAds;
     @FindBy(xpath = "//div[@class ='related-queries']//a[1]")
     private WebElement relatedSearchesImage;
     @FindBy(xpath = "//div[@class='related-queries']//a[2]")
@@ -222,18 +218,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/images?query=color&color=Red");
         return new ImagePage(getDriver());
     }
-    @Step("Check that last image of ads is dysplaed")
-    public boolean lastImageInAdsIsDisplayed() {
-        wait10ElementToBeVisible(lastImageInAds);
-        return isElementDisplayed(lastImageInAds);
 
-    }
-    @Step("Check that first image of ads is dysplaed")
-    public boolean firstImageInAdsIsDisplayed() {
-        wait10ElementToBeVisible(firstImageInAds);
-        return isElementDisplayed(firstImageInAds);
-
-    }
     @Step("Wait until to be visible favorite item")
     public ImagePage waitUntilToBeVisibleFavoriteItem(){
         wait10ElementToBeVisible(favoriteItem);
