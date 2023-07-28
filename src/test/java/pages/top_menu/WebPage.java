@@ -345,8 +345,13 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
     @Step("Click more video button in the video widget")
     public VideoPage click_MoreVideo_ButtonInVideoWidget()  {
-        click(buttonMoreVideo);
-        waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE");
+        try {
+            click(buttonMoreVideo);
+            waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE");
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            click(buttonMoreVideo);
+            waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE");
+        }
         return new VideoPage(getDriver());
     }
     @Step("Check click more button in the image widget")

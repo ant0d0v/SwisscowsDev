@@ -242,6 +242,8 @@ public class WebPageTest extends BaseTest {
                 .getCurrentURL();
 
         final String newUrl = new WebPage(getDriver())
+                .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityWebResult()
                 .click_MoreVideo_ButtonInVideoWidget()
                 .waitUtilLoaderToBeInVisible()
                 .waitUntilVisibilityVideoResult()
@@ -675,7 +677,7 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check open advertising ")
     @QaseId(value = 5079)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenAdvertising_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -683,9 +685,12 @@ public class WebPageTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("price of iphone")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
+                .waitUrlToBeChanged("/en/web?query=price+of+iphone&region=de-DE")
                 .getCurrentURL();
 
         final String newUrl =  webPage
+                .waitUntilLoaderToBeInvisible()
+                .waitUntilVisibilityWebResult()
                 .clickFirstLinkOfAds()
                 .getCurrentURL();
 
