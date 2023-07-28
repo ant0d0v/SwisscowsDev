@@ -65,7 +65,7 @@ public class AutobahnTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 60; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)

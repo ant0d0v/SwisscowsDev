@@ -167,7 +167,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     @Step("Scroll to last page")
     public VideoPage scrollToLastPage() {
-        int maxScrollCount = 15;
+        int maxScrollCount = 20;
         int currentScrollCount = 0;
 
         while (list.size() != 100 && currentScrollCount < maxScrollCount) {
