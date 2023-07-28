@@ -103,9 +103,9 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement adsProductsText;
     @FindBy(className ="three-bounce")
     private WebElement loader;
-    @FindBy(xpath = "//div[@class='a11t']//article")
+    @FindBy(xpath = "//div[@class='web-results']//div//article[@class='text-item']")
     private List<WebElement> adsList;
-    @FindBy(xpath = "//div[@class='a11t']//article//a[1]")
+    @FindBy(xpath = "//div[@class='web-results']//div//article[@class='text-item'][1]//a[2]")
     private WebElement firstAds;
     @FindBy(xpath = "//div[@class='a11t--product']//button[2]")
     private WebElement nextButtonInAds;
@@ -308,7 +308,7 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
     @Step("Click first link od ads")
     public WebPage clickFirstLinkOfAds() {
-        click(firstAds);
+        click20(firstAds);
         return new WebPage(getDriver());
     }
     @Step("Click first link in the web result")

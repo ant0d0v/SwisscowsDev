@@ -675,7 +675,7 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check open advertising ")
     @QaseId(value = 5079)
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testOpenAdvertising_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -685,7 +685,7 @@ public class WebPageTest extends BaseTest {
                 .choiceGermanyRegion()
                 .getCurrentURL();
 
-        final String newUrl = webPage
+        final String newUrl =  webPage
                 .clickFirstLinkOfAds()
                 .getCurrentURL();
 
