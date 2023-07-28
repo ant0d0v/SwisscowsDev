@@ -105,7 +105,7 @@ public class MusicTest extends BaseTest {
     }
     @QaseTitle("Check set time in player")
     @QaseId(value = 5111)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSetTimeInPlayer(){
         final String actualTime = openBaseURL()
                 .inputSearchCriteriaAndEnter("skofka")

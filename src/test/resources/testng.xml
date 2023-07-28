@@ -27,7 +27,7 @@
         <classes>
             <class name="tests.header.WebPageTest"/>
             <class name="tests.header.NewsTest"/>
-<!--            <class name="tests.header.ImageTest"/>-->
+            <class name="tests.header.ImageTest"/>
             <class name="tests.header.VideoTest"/>
             <class name="tests.header.MusicTest"/>
         </classes>

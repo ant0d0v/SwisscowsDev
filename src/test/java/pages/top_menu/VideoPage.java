@@ -57,6 +57,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement durationAttributeOfFirstVideo;
     @FindBy(xpath = "//div[@class = 'video-results list']//article//div//p[@class='metadata']")
     private List<WebElement> listMetadataAllVideo;
+    @FindBy(xpath = "//div[@class ='video-results list']//article")
+    private List<WebElement> list;
     public VideoPage(WebDriver driver) {
         super(driver);
     }
@@ -160,6 +162,16 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         scrollByVisibleElement(lastTenVideo);
         wait10ElementToBeVisible(lastTwentyVideo);
         scrollByVisibleElement(lastTwentyVideo);
+        return new VideoPage(getDriver());
+    }
+    public VideoPage scrollToLastVideoInTheSideList() throws InterruptedException {
+
+        hover(firstVideoResult);
+        for (WebElement element : list) {
+            scrollByVisibleElementActions(element);
+            wait10ElementToBeVisible(element);
+        }
+
         return new VideoPage(getDriver());
     }
 

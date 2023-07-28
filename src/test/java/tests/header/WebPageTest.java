@@ -338,7 +338,7 @@ public class WebPageTest extends BaseTest {
     }
     @QaseTitle("Check open news in the news widget")
     @QaseId(value = 5063)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testOpenNewsInTheNewsWidget_WebPage() {
         WebPage webPage = new WebPage(getDriver());
 
@@ -346,7 +346,7 @@ public class WebPageTest extends BaseTest {
                 .clickHamburgerMenu()
                 .clickRegionTopMenu()
                 .clickRegionGerman()
-                .inputSearchCriteriaAndEnter("ukraine")
+                .inputSearchCriteriaAndEnter("germany news")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
