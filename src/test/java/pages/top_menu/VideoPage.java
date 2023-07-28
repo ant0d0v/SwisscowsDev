@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
-import static org.openqa.selenium.support.ui.ExpectedConditions.numberOfElementsToBeMoreThan;
 
 public class VideoPage extends TopMenuPage<VideoPage> {
     @FindBy(xpath = "//h2[@class = 'title']")
@@ -20,9 +19,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement h2FirstVideo;
     @FindBy(xpath = "//section[@class='container page-results']//div")
     private WebElement videoResultContainer;
-    @FindBy(xpath = "//div[@class='related-searches']//li//a")
-    private List<WebElement> listRelatedSearches;
-
     @FindBy(xpath = "//div[@class='warning']")
     private WebElement warningMessage;
     @FindBy(xpath = "//button[@class='button']")
@@ -41,8 +37,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement imageAttribute;
     @FindBy(xpath = "//article[@class='item--video']//img")
     private List<WebElement> listAllImagesOfVideos;
-    @FindBy(xpath = "//article[@class='item-video']//img")
-    private WebElement ImagesOfVideo;
     @FindBy(xpath = "//div[@class ='button-menu']//span[text() = 'Publisher']")
     private WebElement publisherButtonOfFilter;
     @FindBy(xpath = "//div[contains(@class, 'button-menu')][1]")
@@ -50,7 +44,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     @FindBy(xpath = "//div[contains(@class, 'button-menu')][1]//ul/li[text() = 'DailyMotion']")
     private WebElement dailyMotionButtonInDropdownOfPublisher;
     @FindBy(xpath = "//footer")
-    private WebElement lastTenVideo;
+    private WebElement footer;
     @FindBy(xpath = "//div[@class = 'video-results list']//article[19]")
     private WebElement lastTwentyVideo;
     @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]//span")
@@ -95,6 +89,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         });
         return new VideoPage(getDriver());
     }
+    @Step("Get text list meta data of all video")
     public List <String> getListMetadataAllVideo()  {
         getWait10().until(driver -> {
             try {
@@ -106,48 +101,53 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         });
         return getTexts(listMetadataAllVideo);
     }
+    @Step("Get text tittle of all video")
     public List <String> getTitleAllVideo()  {
-
         return getTexts(h2AllVideo);
     }
+    @Step("Get text tittle of first video")
     public String getTitleFirstVideo()  {
         return getText(h2FirstVideo);
     }
-    public List <String> getTitleInRelatedSearches()  {
-        return getTexts(listRelatedSearches);
-    }
+    @Step("Wait until to be changed time of first video ")
     public VideoPage waitUntilTimeOfFirstVideoToBeChanged(String expectedTime) {
         getWait20().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iframe));
         getWait20().until(ExpectedConditions.textToBePresentInElement(durationAttributeOfFirstVideo, expectedTime));
         getDriver().switchTo().defaultContent();
         return new VideoPage(getDriver());
     }
+    @Step("Click play youtube video")
     public VideoPage clickPlayerYouTubeVideo(){
         wait10ElementToBeVisible(warningMessage);
         clickByJavaScript(videoPlayerYouTubeButtonOk);
         return  this;
     }
+    @Step("Click first video in the video result")
     public VideoPage clickFirstVideoResult() {
         click20(firstVideoResult);
         return new VideoPage(getDriver());
     }
+    @Step("Click second video in the sidebar")
     public VideoPage clickSecondVideoFromSideList() {
         click20(secondVideoResult);
         return new VideoPage(getDriver());
     }
+    @Step("Click checkbox no remind me")
     public VideoPage clickCheckboxNoRemindMe() {
         click20(checkboxNoRemindMe);
         return new VideoPage(getDriver());
     }
+    @Step("Update video page")
     public VideoPage refreshVideoPage() {
         refreshPage();
         return new VideoPage(getDriver());
     }
-
+    @Step("Click publisher dropdown")
     public VideoPage clickPublisherButton() {
         click(publisherButtonOfFilter);
         return new VideoPage(getDriver());
     }
+    @Step("Click dayliMotion filter in dropdown ")
     public VideoPage clickDailyMotionButtonInDropdownOfPublisher() {
         click(dailyMotionButtonInDropdownOfPublisher);
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka&publisher=DailyMotion");
@@ -158,20 +158,20 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         waitForUrlContains(ProjectConstants.DOMAIN + "/en/video?query=ivanka");
         return new VideoPage(getDriver());
     }
+    @Step("Scroll to last video")
     public VideoPage scrollToLastVideo() {
-        scrollByVisibleElement(lastTenVideo);
+        scrollByVisibleElement(footer);
         wait10ElementToBeVisible(lastTwentyVideo);
         scrollByVisibleElement(lastTwentyVideo);
         return new VideoPage(getDriver());
     }
-    public VideoPage scrollToLastVideoInTheSideList() throws InterruptedException {
-
-        hover(firstVideoResult);
+    @Step("Scroll to last page")
+    public VideoPage scrollToLastPage() {
         for (WebElement element : list) {
             scrollByVisibleElementActions(element);
             wait10ElementToBeVisible(element);
+            scrollByVisibleElementActions(footer);
         }
-
         return new VideoPage(getDriver());
     }
 
@@ -179,10 +179,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         waitForLoaderToBeInVisible();
         return new VideoPage(getDriver());
     }
+    @Step("Get attribute video image")
     public String getVideoImageAttribute() {
         getDriver().switchTo().frame(iframe);
         return getAttribute(imageAttribute, "src");
     }
+    @Step("Get attribute of images")
     public List<String> getProxyImageAttributes() {
         List<String> srcList = new ArrayList<>();
         for (WebElement src : listAllImagesOfVideos) {
@@ -192,26 +194,16 @@ public class VideoPage extends TopMenuPage<VideoPage> {
         }
         return srcList;
     }
-
+    @Step("Get attribute of publisher button")
     public String getAttributeOfPublisherButton() {
-
         return getAttribute(attributeOfPublisherButton, "class");
     }
-    public List<String> getTextsColorsWhenHover() throws InterruptedException {
-
-        return  getHoverColorsOfElements(listRelatedSearches);
-    }
-    public VideoPage waitUntilToBeVisiblyListRelatedSearches(){
-        for (WebElement element : listRelatedSearches){
-            wait10ElementToBeVisible(element);
-        }
+    @Step("Set the window size to the adaptive mode using the specified width")
+    public VideoPage setWindowWithMobileSize(int width, int height) {
+        setWindowDimensions(width, height);
         return new VideoPage(getDriver());
     }
-    public List<String> getTextColors() throws InterruptedException {
-
-        return  getColorsOfElements(listRelatedSearches);
-    }
-    @Step("Check that favorite item  is present on the page")
+    @Step("Check that favorite item  isn't present on the page")
     public boolean isWarningMessageIsPresent() {
             try {
                 getDriver().findElement(By.xpath("//div[@class='warning']"));

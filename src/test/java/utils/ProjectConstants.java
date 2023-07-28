@@ -14,5 +14,6 @@ public class ProjectConstants {
     public static final String FONT_SIZE_40_PX = "40px";
 
     public static final int WIDTH_HAMBURGER_MENU = 224;
+    public static final int WIDTH_TABLET = 768;
     public static final int HEIGHT_HAMBURGER_MENU = 900;
 }
