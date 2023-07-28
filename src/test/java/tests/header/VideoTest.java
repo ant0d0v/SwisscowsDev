@@ -120,7 +120,6 @@ public class VideoTest extends BaseTest {
     @Test
     public void testScrollToMaxPage_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
-
         final List<String> oldSize = openBaseURL()
                 .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
