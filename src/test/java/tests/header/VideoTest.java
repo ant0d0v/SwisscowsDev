@@ -81,7 +81,27 @@ public class VideoTest extends BaseTest {
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
         assertTrue(newSize.size()  >= 19);
+    }
+    @Test
+    public void testScrollToNextPageInSideListOfVideos_VideoPage() throws InterruptedException {
+        VideoPage videoPage = new VideoPage(getDriver());
 
+        final List<String> oldSize = openBaseURL()
+                .inputSearchCriteriaAndEnter("rep")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .waitUntilToBeVisibleAllImagesOfVideo()
+                .clickFirstVideoResult()
+                .getTitleAllVideo();
+
+        final List<String> newSize = videoPage
+                .scrollToLastVideoInTheSideList()
+                .waitUntilToBeVisibleAllImagesOfVideo()
+                .getTitleAllVideo();
+
+        Assert.assertNotEquals(newSize.size() ,oldSize.size());
+        assertTrue(newSize.size()  >= 19);
     }
     @Test
     public void testVideoResultsEqualsSearchCriteria(){
