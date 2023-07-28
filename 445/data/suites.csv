@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Fri Jul 28 21:24:44 GMT 2023","Fri Jul 28 21:25:08 GMT 2023","23656","Parallel Test Suite","Search pages test","tests.header.VideoTest","tests.header.VideoTest","testCancelFilterSearch_VideoPage","testCancelFilterSearch_VideoPage",""
+"broken","Fri Jul 28 21:25:09 GMT 2023","Fri Jul 28 21:25:32 GMT 2023","22894","Parallel Test Suite","Search pages test","tests.header.VideoTest","tests.header.VideoTest","testCheckboxNoRemindMe_VideoPage","testCheckboxNoRemindMe_VideoPage",""
+"broken","Fri Jul 28 21:25:32 GMT 2023","Fri Jul 28 21:25:55 GMT 2023","23014","Parallel Test Suite","Search pages test","tests.header.VideoTest","tests.header.VideoTest","testFilterSearch_VideoPage","testFilterSearch_VideoPage",""
