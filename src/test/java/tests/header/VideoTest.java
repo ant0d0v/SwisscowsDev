@@ -1,6 +1,8 @@
 package tests.header;
 
 import base.BaseTest;
+import io.qase.api.annotation.QaseId;
+import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -11,10 +13,13 @@ import utils.ProjectConstants;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertFalse;
 
 public class VideoTest extends BaseTest {
+    @QaseTitle("Check that suggest equals search criteria")
+    @QaseId(value = 5124)
     @Test
     public void testSuggestEqualsSearchCriteria_VideoSearch() {
         final String query = "ivanka";
@@ -39,6 +44,8 @@ public class VideoTest extends BaseTest {
             assertTrue(searchCriteria.contains(query));
         }
     }
+    @QaseTitle("Check that regional search")
+    @QaseId(value = 5125)
     @Test
     public void testRegionalSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -62,6 +69,8 @@ public class VideoTest extends BaseTest {
         assertTrue(titleAllVideo.toLowerCase().contains("ronaldo"));
 
     }
+    @QaseTitle("Check scroll to next page")
+    @QaseId(value = 5126)
     @Test
     public void testScrollToNextPage_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -82,8 +91,10 @@ public class VideoTest extends BaseTest {
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
         assertTrue(newSize.size()  >= 19);
     }
+    @QaseTitle("Check scroll to next page when watching video")
+    @QaseId(value = 5127)
     @Test
-    public void testScrollToNextPageInSideListOfVideos_VideoPage() throws InterruptedException {
+    public void testScrollToNextPageWhenWatchingVideo_VideoPage() throws InterruptedException {
         VideoPage videoPage = new VideoPage(getDriver());
 
         final List<String> oldSize = openBaseURL()
@@ -96,18 +107,43 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         final List<String> newSize = videoPage
-                .scrollToLastVideoInTheSideList()
+                .setWindowWithMobileSize(ProjectConstants.WIDTH_TABLET,ProjectConstants.HEIGHT_HAMBURGER_MENU)
+                .scrollToLastVideo()
                 .waitUntilToBeVisibleAllImagesOfVideo()
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
         assertTrue(newSize.size()  >= 19);
     }
+    @QaseTitle("Check scroll to max page")
+    @QaseId(value = 5128)
+    @Test
+    public void testScrollToMaxPage_VideoPage() throws InterruptedException {
+        VideoPage videoPage = new VideoPage(getDriver());
+
+        final List<String> oldSize = openBaseURL()
+                .inputSearchCriteriaAndEnter("rep")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .waitUntilToBeVisibleAllImagesOfVideo()
+                .getTitleAllVideo();
+
+        final List<String> newSize = videoPage
+                .scrollToLastPage()
+                .waitUntilToBeVisibleAllImagesOfVideo()
+                .getTitleAllVideo();
+
+        Assert.assertNotEquals(newSize.size() ,oldSize.size());
+        assertTrue(newSize.size() >= 50);
+    }
+    @QaseTitle("Check that video result equals search criteria")
+    @QaseId(value = 5129)
     @Test
     public void testVideoResultsEqualsSearchCriteria(){
         VideoPage videoPage = new VideoPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("iphone")
+                .inputSearchCriteriaAndEnter("cristiano ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUtilLoaderToBeInVisible()
@@ -115,20 +151,20 @@ public class VideoTest extends BaseTest {
                 .waitUntilToBeVisibleAllImagesOfVideo()
                 .getTitleAllVideo();
 
-
         final int actualSize = videoPage.getTitleAllVideo().size();
 
         assertTrue(actualSize >= 10);
         for (String searchCriteria : titleAllTracks) {
-            assertTrue(searchCriteria.toLowerCase().contains("iphone"));
+            assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
     }
-
+    @QaseTitle("Check that video result equals search criteria when watching video")
+    @QaseId(value = 5130)
     @Test
-    public void testVideoResultsEqualsSearchCriteriaWhenVideoIsSelected(){
+    public void testVideoResultsEqualsSearchCriteriaWhenWatchingVideo(){
         VideoPage videoPage = new VideoPage(getDriver());
         final List<String> titleAllTracks = openBaseURL()
-                .inputSearchCriteriaAndEnter("iphone")
+                .inputSearchCriteriaAndEnter("cristiano ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUtilLoaderToBeInVisible()
@@ -142,13 +178,15 @@ public class VideoTest extends BaseTest {
 
         assertTrue(actualSize >= 10);
         for (String searchCriteria : titleAllTracks) {
-            assertTrue(searchCriteria.toLowerCase().contains("iphone"));
+            assertTrue(searchCriteria.toLowerCase().contains("ronaldo"));
         }
     }
+    @QaseTitle("Check play video")
+    @QaseId(value = 5131)
     @Test
     public void testPlayVideoFromSideList(){
         final  String actualSrc = openBaseURL()
-                .inputSearchCriteriaAndEnter("short video")
+                .inputSearchCriteriaAndEnter("watch video")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUtilLoaderToBeInVisible()
@@ -164,6 +202,8 @@ public class VideoTest extends BaseTest {
 
         assertTrue(actualSrc.contains("https://www.youtube-nocookie.com"));
     }
+    @QaseTitle("Check play video")
+    @QaseId(value = 5132)
     @Test
     public void testPlayVideo_VideoPage() throws IOException {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -182,6 +222,8 @@ public class VideoTest extends BaseTest {
         assertTrue(actualSrc.contains("https://www.youtube-nocookie.com"));
 
     }
+    @QaseTitle("Check checkbox No remind me")
+    @QaseId(value = 5133)
     @Test
     public void testCheckboxNoRemindMe_VideoPage()  {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -202,6 +244,8 @@ public class VideoTest extends BaseTest {
         assertFalse(videoPage.isWarningMessageIsPresent());
 
     }
+    @QaseTitle("Check image of video use sdn proxy server")
+    @QaseId(value = 5134)
     @Test
     public void testImageProxy_VideoPage() {
         final List<String> actualSrc = openBaseURL()
@@ -215,6 +259,8 @@ public class VideoTest extends BaseTest {
             assertTrue(search.contains("https://cdn.swisscows.com/image"));
         }
     }
+    @QaseTitle("Check filter search")
+    @QaseId(value = 5135)
     @Test
     public void testFilterSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
@@ -237,6 +283,8 @@ public class VideoTest extends BaseTest {
         }
         Assert.assertEquals(videoPage.getCurrentURL(),ProjectConstants.DOMAIN + "/en/video?query=ivanka&publisher=DailyMotion");
     }
+    @QaseTitle("Check  cancel filter")
+    @QaseId(value = 5136)
     @Test
     public void testCancelFilterSearch_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
