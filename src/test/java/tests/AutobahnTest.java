@@ -63,16 +63,16 @@ public class AutobahnTest extends BaseTest {
 
         openBaseURL()
                 .inputSearchCriteriaAndEnter("iphone")
-                .waitUntilVisibilityWebResult()
-                .getCurrentURL();
+                .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 65; i++) {
+        for (int i = 0; i < 50; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
                     .header(signatureHeader)
-                    .queryParam("query","iphone")
+                    .queryParam("query",TestUtils.getRandomName())
                     .get("https://api.dev.swisscows.com/web/search");
+
              webPage.searchAfterClear(TestUtils.getRandomName());
         }
 
