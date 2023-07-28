@@ -167,9 +167,7 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     @Step("Scroll to last page")
     public VideoPage scrollToLastPage() {
-        for (WebElement element : list) {
-            scrollByVisibleElementActions(element);
-            wait10ElementToBeVisible(element);
+       while (list.size() != 100) {
             scrollByVisibleElementActions(footer);
         }
         return new VideoPage(getDriver());

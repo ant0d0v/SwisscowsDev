@@ -118,11 +118,11 @@ public class VideoTest extends BaseTest {
     @QaseTitle("Check scroll to max page")
     @QaseId(value = 5128)
     @Test
-    public void testScrollToMaxPage_VideoPage() throws InterruptedException {
+    public void testScrollToMaxPage_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
 
         final List<String> oldSize = openBaseURL()
-                .inputSearchCriteriaAndEnter("rep")
+                .inputSearchCriteriaAndEnter("ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
@@ -135,7 +135,7 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
-        assertTrue(newSize.size() >= 50);
+        assertTrue(newSize.size() >= 100);
     }
     @QaseTitle("Check that video result equals search criteria")
     @QaseId(value = 5129)
