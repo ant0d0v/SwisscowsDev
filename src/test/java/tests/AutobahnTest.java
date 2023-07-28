@@ -61,19 +61,23 @@ public class AutobahnTest extends BaseTest {
         Header nonceHeader = new Header("Request-Nonce", "5CMgl0NqUuUhq7._dd57XvBNUhhrkdZT");
         Header signatureHeader = new Header("X-Request-Signature", "oa0ctwcngO5R120H9nAb5yNESv1r7KTffC-xL4aenr0");
 
+
         openBaseURL()
                 .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult()
                 .getCurrentURL();
 
-        for (int i = 0; i < 65; i++) {
+        for (int i = 0; i < 50; i++) {
+            String query = TestUtils.getRandomName();
             RestAssured
                     .given()
                     .header(nonceHeader)
                     .header(signatureHeader)
                     .queryParam("query","iphone")
                     .get("https://api.dev.swisscows.com/web/search");
-             webPage.searchAfterClear(TestUtils.getRandomName());
+            webPage
+                    .searchAfterClear(query)
+                    .waitForUrlContains(ProjectConstants.DOMAIN + "/en/web?query=" + query);
         }
 
         webPage.searchAfterClear(TestUtils.getRandomName());

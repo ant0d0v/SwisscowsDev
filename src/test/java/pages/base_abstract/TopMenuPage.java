@@ -561,13 +561,13 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         return new NewsPage(getDriver());
     }
     @Step("Search and clear after")
-    public void searchAfterClear(String text){
+    public WebPage searchAfterClear(String text){
         click(clearButton);
         wait10ElementToBeEmpty(searchFieldHeader);
         searchFieldHeader.sendKeys(text);
         clickEnter();
 
-        new NewsPage(getDriver());
+        return new WebPage(getDriver());
     }
 
 
