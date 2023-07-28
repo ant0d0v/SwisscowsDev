@@ -169,7 +169,6 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     public VideoPage scrollToLastPage() {
         int maxScrollCount = 20;
         int currentScrollCount = 0;
-
         while (list.size() != 100 && currentScrollCount < maxScrollCount) {
            scrollByVisibleElementActions(footer);
            currentScrollCount++;
