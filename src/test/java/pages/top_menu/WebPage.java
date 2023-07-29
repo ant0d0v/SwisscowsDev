@@ -20,8 +20,6 @@ public class WebPage extends TopMenuPage<WebPage> {
     private List<WebElement> innerFooterMenuLink;
     @FindBy(xpath = "//article[@class = 'item-web']//h2[1]")
     private WebElement h2Text;
-    @FindBy(xpath = "//div[@class ='web-results']//article[@class = 'item-web']//h2")
-    private List<WebElement> h2Texts;
     @FindBy(xpath = "//div[@class='error']//h2[@class = 'title']")
     private WebElement h2TextError;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
@@ -446,6 +444,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(previewFrame);
     }
     public boolean  errorImageIsDisplayed() {
+        waitUntilVisibilityErrorImage();
         return isElementDisplayed(errorImage);
     }
 
