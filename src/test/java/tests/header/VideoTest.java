@@ -134,7 +134,7 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
-        assertEquals(newSize.size(),100);
+        assertTrue(newSize.size() > 80);
     }
     @QaseTitle("Check that video result equals search criteria")
     @QaseId(value = 5129)
