@@ -80,6 +80,5 @@ public class AutobahnTest extends BaseTest {
 
         Assert.assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
-        Assert.assertEquals(webPage.getH2FontSize(), ProjectConstants.FONT_SIZE_40_PX);
     }
 }

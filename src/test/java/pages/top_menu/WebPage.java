@@ -444,6 +444,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(previewFrame);
     }
     public boolean  errorImageIsDisplayed() {
+        waitUntilVisibilityErrorImage();
         return isElementDisplayed(errorImage);
     }
 
