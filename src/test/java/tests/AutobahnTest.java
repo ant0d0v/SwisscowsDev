@@ -15,6 +15,7 @@ import utils.ProjectConstants;
 import utils.TestUtils;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.Assert.assertTrue;
 
 
 public class AutobahnTest extends BaseTest {
@@ -47,8 +48,8 @@ public class AutobahnTest extends BaseTest {
                 + " " + TestUtils.getRandomNameForBrazilBots() + "\"");
 
 
-        Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
-        Assert.assertTrue(webPage.errorImageIsDisplayed());
+        assertTrue(webPage.getTitleErrorText().contains(errorMessage));
+        assertTrue(webPage.errorImageIsDisplayed());
         Assert.assertEquals(webPage.getH2FontSize(), ProjectConstants.FONT_SIZE_40_PX);
 
     }
@@ -65,21 +66,20 @@ public class AutobahnTest extends BaseTest {
                 .inputSearchCriteriaAndEnter("iphone")
                 .waitUntilVisibilityWebResult();
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 50; i++) {
             RestAssured
                     .given()
                     .header(nonceHeader)
                     .header(signatureHeader)
                     .queryParam("query",TestUtils.getRandomName())
                     .get("https://api.dev.swisscows.com/web/search");
+            webPage
+                    .searchAfterClear(TestUtils.getRandomName());
 
-             webPage.searchAfterClear(TestUtils.getRandomName());
         }
 
-        webPage.searchAfterClear(TestUtils.getRandomName());
-
-        Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
         Assert.assertTrue(webPage.errorImageIsDisplayed());
+        Assert.assertTrue(webPage.getTitleErrorText().contains(errorMessage));
         Assert.assertEquals(webPage.getH2FontSize(), ProjectConstants.FONT_SIZE_40_PX);
     }
 }

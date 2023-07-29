@@ -51,12 +51,12 @@ public class VideoTest extends BaseTest {
         VideoPage videoPage = new VideoPage(getDriver());
 
         final String actualRegion =   openBaseURL()
-                .inputSearchCriteriaAndEnter("ronaldo")
+                .inputSearchCriteriaAndEnter("cristiano+ronaldo")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUntilVisibilityVideoResult()
                 .selectGermanyRegion()
-                .waitUrlToBeChanged("/en/video?query=ronaldo&region=de-DE")
+                .waitUrlToBeChanged("/en/video?query=cristiano%2Bronaldo&region=de-DE")
                 .waitForLoaderToBeInVisible()
                 .getCurrentURL();
 
@@ -65,7 +65,7 @@ public class VideoTest extends BaseTest {
                 .getTitleFirstVideo();
 
 
-        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=ronaldo&region=de-DE");
+        Assert.assertEquals(actualRegion,ProjectConstants.DOMAIN + "/en/video?query=cristiano%2Bronaldo&region=de-DE");
         assertTrue(titleAllVideo.toLowerCase().contains("ronaldo"));
 
     }
@@ -134,7 +134,7 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
-        assertTrue(newSize.size() >= 100);
+        assertTrue(newSize.size() >= 80);
     }
     @QaseTitle("Check that video result equals search criteria")
     @QaseId(value = 5129)

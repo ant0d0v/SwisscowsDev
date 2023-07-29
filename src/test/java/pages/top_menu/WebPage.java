@@ -28,6 +28,8 @@ public class WebPage extends TopMenuPage<WebPage> {
     private WebElement regionBrazil;
     @FindBy(xpath = "//div[@class='image']//img")
     private WebElement errorImage;
+    @FindBy(xpath = "//img[@src='/_next/image?url=%2Fimages%2Ferror-429.png&w=1080&q=75']")
+    private WebElement errorImage429;
     @FindBy(xpath = "//div[@class='related-searches  fade in']//li//a")
     private List<WebElement> listRelatedSearches;
     @FindBy(xpath = "//div[@class='related-searches  fade in']//li//a[1]")
@@ -447,6 +449,15 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
     public boolean  errorImageIsDisplayed() {
         return isElementDisplayed(errorImage);
+    }
+    public boolean  errorImageOf429IsDisplayed() {
+        try {
+            getDriver().navigate().refresh();
+            getDriver().findElement(By.xpath("//img[@src='/_next/image?url=%2Fimages%2Ferror-429.png&w=1080&q=75']"));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Step("Check that Screenshot is present on the page")

@@ -167,10 +167,11 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     @Step("Scroll to last page")
     public VideoPage scrollToLastPage() {
-        int maxScrollCount = 20;
+        int maxScrollCount = 25;
         int currentScrollCount = 0;
         while (list.size() != 100 && currentScrollCount < maxScrollCount) {
            scrollByVisibleElementActions(footer);
+           wait10ElementToBeVisible(footer);
            currentScrollCount++;
            }
         return new VideoPage(getDriver());
