@@ -3,33 +3,33 @@
 <suite name="Parallel Test Suite" parallel="classes" thread-count="3">
     <test name="Static pages tests" >
         <classes>
-<!--            <class name="tests.SummaryTest"/>-->
-<!--            <class name="tests.SubscriptionsTest"/>-->
-<!--            <class name="tests.header.TopMenuTest"/>-->
-<!--            <class name="tests.footer.FooterMenuTest"/>-->
-<!--            <class name="tests.MainTest"/>-->
-<!--            <class name="tests.footer.WhoWeAreTest"/>-->
-<!--            <class name="tests.footer.MediaEducationTest"/>-->
-<!--            <class name="tests.footer.CharityProjectTest"/>-->
-<!--            <class name="tests.footer.OurDatacenterTest"/>-->
-<!--            <class name="tests.footer.ContactUsTest"/>-->
-<!--            <class name="tests.header.VpnPageTest"/>-->
-<!--            <class name="tests.header.VpnInstructionsTest"/>-->
-<!--            <class name="tests.header.EmailTest"/>-->
-<!--            <class name="tests.footer.SetAsStartTest"/>-->
-<!--            <class name="tests.footer.MakeDefaultSearchTest"/>-->
-<!--            <class name="tests.footer.DonationTest"/>-->
-<!--            <class name="tests.footer.PrivacyPolicyTest"/>-->
-<!--            <class name="tests.footer.ImprintTest"/>-->
+            <class name="tests.SummaryTest"/>
+            <class name="tests.SubscriptionsTest"/>
+            <class name="tests.header.TopMenuTest"/>
+            <class name="tests.footer.FooterMenuTest"/>
+            <class name="tests.MainTest"/>
+            <class name="tests.footer.WhoWeAreTest"/>
+            <class name="tests.footer.MediaEducationTest"/>
+            <class name="tests.footer.CharityProjectTest"/>
+            <class name="tests.footer.OurDatacenterTest"/>
+            <class name="tests.footer.ContactUsTest"/>
+            <class name="tests.header.VpnPageTest"/>
+            <class name="tests.header.VpnInstructionsTest"/>
+            <class name="tests.header.EmailTest"/>
+            <class name="tests.footer.SetAsStartTest"/>
+            <class name="tests.footer.MakeDefaultSearchTest"/>
+            <class name="tests.footer.DonationTest"/>
+            <class name="tests.footer.PrivacyPolicyTest"/>
+            <class name="tests.footer.ImprintTest"/>
         </classes>
     </test>
     <test name="Search pages test" >
         <classes>
-<!--            <class name="tests.header.WebPageTest"/>-->
-<!--            <class name="tests.header.NewsTest"/>-->
-<!--            <class name="tests.header.ImageTest"/>-->
+            <class name="tests.header.WebPageTest"/>
+            <class name="tests.header.NewsTest"/>
+            <class name="tests.header.ImageTest"/>
             <class name="tests.header.VideoTest"/>
-<!--            <class name="tests.header.MusicTest"/>-->
+            <class name="tests.header.MusicTest"/>
         </classes>
     </test>
     <test name="Autobahn test" >
