@@ -323,7 +323,6 @@ public abstract class BasePage {
 
 
     protected void input(String text, WebElement element) {
-
         element.sendKeys(text);
     }
 
@@ -419,7 +418,6 @@ public abstract class BasePage {
     }
 
     protected boolean isElementDisplayed(WebElement element) {
-
         return element.isDisplayed();
     }
 
