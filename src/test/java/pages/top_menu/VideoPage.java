@@ -19,10 +19,12 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement h2FirstVideo;
     @FindBy(xpath = "//section[@class='container page-results']//div")
     private WebElement videoResultContainer;
-    @FindBy(xpath = "//div[@class='warning']")
+    @FindBy(xpath = "//div[@class='warning']//p")
     private WebElement warningMessage;
-    @FindBy(xpath = "//button[@class='button']")
+    @FindBy(xpath = "//div[@class='buttons']//button[1]")
     private WebElement videoPlayerYouTubeButtonOk;
+    @FindBy(xpath = "//div[@class='buttons']//button[2]")
+    private WebElement videoPlayerYouTubeButtonCancel;
     @FindBy(xpath = "//article//h2[1]")
     private WebElement firstVideoResult;
     @FindBy(xpath = "//article[2]//h2[1]")
@@ -49,6 +51,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     private WebElement lastTwentyVideo;
     @FindBy(xpath = "//div[@class='ytp-time-display notranslate']//span[2]//span")
     private WebElement durationAttributeOfFirstVideo;
+    @FindBy(xpath = "//div[@class='warning']//p")
+    private WebElement textWarningMessage;
     @FindBy(xpath = "//div[@class = 'video-results list']//article//div//p[@class='metadata']")
     private List<WebElement> listMetadataAllVideo;
     @FindBy(xpath = "//div[@class ='video-results list']//article")
@@ -119,7 +123,17 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     @Step("Click play youtube video")
     public VideoPage clickPlayerYouTubeVideo(){
         wait10ElementToBeVisible(warningMessage);
-        clickByJavaScript(videoPlayerYouTubeButtonOk);
+        click(videoPlayerYouTubeButtonOk);
+        return  this;
+    }
+    @Step("Get text warning message")
+    public String getTextWarningMessage(){
+        return getText(textWarningMessage);
+    }
+    @Step("Click cancel buttton youtube video")
+    public VideoPage clickCancelButtonOfYouTubeVideo(){
+        wait10ElementToBeVisible(warningMessage);
+        click(videoPlayerYouTubeButtonCancel);
         return  this;
     }
     @Step("Click first video in the video result")
@@ -215,5 +229,14 @@ public class VideoPage extends TopMenuPage<VideoPage> {
             } catch (NoSuchElementException e) {
                 return false;
             }
+    }
+    @Step("Check that favorite video player  isn't present on the page")
+    public boolean isVideoPlayerIsPresent() {
+        try {
+            getDriver().findElement(By.xpath("//figure[@class='media player']"));
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }

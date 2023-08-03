@@ -233,7 +233,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     public List<String> getH2FontSizes(){
         return  getFontSizes(textsH2);
-
+    }
+    public String getH1FontSizes(){
+        return  getFontSize(textH1);
     }
     public int getCountImagesOnPage()  {
 

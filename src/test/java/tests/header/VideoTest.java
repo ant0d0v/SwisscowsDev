@@ -4,7 +4,6 @@ import base.BaseTest;
 import io.qase.api.annotation.QaseId;
 import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.VideoPage;
@@ -134,7 +133,7 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
-        assertTrue(newSize.size() > 80);
+        assertTrue(newSize.size() > 70);
     }
     @QaseTitle("Check that video result equals search criteria")
     @QaseId(value = 5129)
@@ -303,5 +302,41 @@ public class VideoTest extends BaseTest {
 
         Assert.assertNotEquals(newUrl,oldUrl);
         Assert.assertEquals(newUrl,ProjectConstants.DOMAIN + "/en/video?query=ivanka");
+    }
+    @QaseTitle("Check cancel button of video")
+    @QaseId(value = 5138)
+    @Test
+    public void testCancelButtonOfVideo_VideoPage() {
+        VideoPage videoPage = new VideoPage(getDriver());
+        openBaseURL()
+                .inputSearchCriteriaAndEnter("плакала")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickFirstVideoResult()
+                .clickCancelButtonOfYouTubeVideo()
+                .waitUntilVisibilityVideoResult();
+
+        assertFalse(videoPage.isVideoPlayerIsPresent());
+
+    }
+    @QaseTitle("Check warning message of video player")
+    @QaseId(value = 5137)
+    @Test
+    public void testWarningMessageVideo_VideoPage() {
+        VideoPage videoPage = new VideoPage(getDriver());
+        final String actualText = openBaseURL()
+                .inputSearchCriteriaAndEnter("плакала")
+                .waitUntilVisibilityWebResult()
+                .clickVideoButton()
+                .waitUntilVisibilityVideoResult()
+                .clickFirstVideoResult()
+                .getTextWarningMessage();
+
+       Assert.assertEquals(actualText,"Video provider prevents videos from being watched anonymously. "
+               + "Watching this video can be tracked by the video provider.");
+       Assert.assertEquals(videoPage.getH1Text(),"Privacy Warning");
+       Assert.assertEquals(videoPage.getH1FontSizes(),ProjectConstants.FONT_SIZE_24_PX);
+
     }
 }

@@ -12,6 +12,7 @@ public class ProjectConstants {
     public static final String PASSWORD = "2075Deltuha";
     public static final String SWISSCOWS_EMAIL_USER = "a.qa@swisscows.email";
     public static final String FONT_SIZE_40_PX = "40px";
+    public static final String FONT_SIZE_24_PX = "24px";
 
     public static final int WIDTH_HAMBURGER_MENU = 224;
     public static final int WIDTH_TABLET = 768;
