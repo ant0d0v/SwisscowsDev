@@ -1,22 +1,35 @@
 package tests.header;
 
 import base.BaseTest;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.ImageComparisonUtil;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
+import io.qameta.allure.Attachment;
 import io.qase.api.annotation.QaseId;
 import io.qase.api.annotation.QaseTitle;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.VideoPage;
 import utils.ProjectConstants;
+import utils.TestUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.util.List;
-
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertFalse;
 
-public class VideoTest extends BaseTest {
+public class VideoSearchTest extends BaseTest {
     @QaseTitle("Check that suggest equals search criteria")
     @QaseId(value = 5124)
     @Test
@@ -307,7 +320,7 @@ public class VideoTest extends BaseTest {
     @QaseId(value = 5138)
     @Test
     public void testCancelButtonOfVideo_VideoPage() {
-        VideoPage videoPage = new VideoPage(getDriver());
+
         openBaseURL()
                 .inputSearchCriteriaAndEnter("плакала")
                 .waitUntilVisibilityWebResult()
@@ -317,7 +330,7 @@ public class VideoTest extends BaseTest {
                 .clickCancelButtonOfYouTubeVideo()
                 .waitUntilVisibilityVideoResult();
 
-        assertFalse(videoPage.isVideoPlayerIsPresent());
+        assertFalse(new VideoPage(getDriver()).isVideoPlayerIsPresent());
 
     }
     @QaseTitle("Check warning message of video player")
@@ -325,6 +338,7 @@ public class VideoTest extends BaseTest {
     @Test
     public void testWarningMessageVideo_VideoPage() {
         VideoPage videoPage = new VideoPage(getDriver());
+        
         final String actualText = openBaseURL()
                 .inputSearchCriteriaAndEnter("плакала")
                 .waitUntilVisibilityWebResult()
@@ -338,5 +352,16 @@ public class VideoTest extends BaseTest {
        Assert.assertEquals(videoPage.getH1Text(),"Privacy Warning");
        Assert.assertEquals(videoPage.getH1FontSizes(),ProjectConstants.FONT_SIZE_24_PX);
 
+    }
+    @Test
+    public void testScreen_VideoPage(Method method) throws IOException {
+        getDriver().get("https://swisscows.com/ru");
+        getDriver().manage().window().setSize(new Dimension(300, 900));
+        TestUtils.assertScreen(method,getDriver());
+    }
+    @Test
+    public void testScreen2_VideoPage(Method method) throws IOException {
+        getDriver().get("https://swisscows.com/ru");
+        TestUtils.assertScreen(method,getDriver());
     }
 }

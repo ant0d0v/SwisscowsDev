@@ -35,8 +35,6 @@ public abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-
-
     protected WebDriver getDriver() {
         return driver;
     }
@@ -331,8 +329,18 @@ public abstract class BasePage {
         element.sendKeys(text);
     }
 
-    protected void setWindowDimensions(int width, int height) {
+    public void setWindowDimensions(int width, int height) {
         getDriver().manage().window().setSize(new Dimension(width, height));
+    }
+    public File saveScreenFile(WebDriver driver) {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File file = ts.getScreenshotAs(OutputType.FILE);
+//        try {
+//            FileUtils.copyFile(file, new File(String.format("screenshots/%s-%s.png", className, methodName)));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        return file;
     }
 
     public void switchToAnotherWindow() {

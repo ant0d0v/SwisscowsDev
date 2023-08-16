@@ -27,12 +27,12 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.10.0</version>
+            <version>4.11.0</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.3.3</version>
+            <version>5.4.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -71,6 +71,12 @@
             <groupId>io.qase</groupId>
             <artifactId>qase-testng</artifactId>
             <version>3.0.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.romankh3</groupId>
+            <artifactId>image-comparison</artifactId>
+            <version>4.4.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
