@@ -1,6 +1,7 @@
 package pages.base_abstract;
 
 import io.qase.api.annotation.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -148,7 +149,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement newsButton;
     @FindBy(xpath = "//button[@class ='button favorite'][1]")
     private WebElement favoriteIcon;
-
+    @FindBy(xpath = "//div[@class = 'music-results']//h2[text() = 'Playlists']")
+    private WebElement h2PlaylistText;
     @FindBy(xpath = "//ul[@class='suggestions']//li[2]")
     private WebElement choiceInDropdownMenu;
     @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[2]")
@@ -302,9 +304,19 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     }
     @Step("Click on all heart icons")
     public MusicPage clickOnAllHeart()  {
-        getWait20().until(ExpectedConditions.visibilityOfAllElements(allHeartButtons));
-        clickAllElementsInList(allHeartButtons);
+        for(WebElement heart : allHeartButtons){
+            wait10ElementToBeVisible(heart);
+            if(heart.isDisplayed()){
+                heart.click();
+            }
+        }
         return new MusicPage(getDriver());
+    }
+    @Step("Scroll max to top ")
+    public MusicPage scrollToHeaderMenu(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        jsExecutor.executeScript("window.scrollTo(0, 0);");
+        return new MusicPage (getDriver());
     }
     @Step("Click on the Log Out option.")
     public MainPage logOut() {

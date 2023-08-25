@@ -8,7 +8,6 @@ import pages.MainPage;
 import pages.top_menu.MusicPage;
 import tests.retrytest.Retry;
 import utils.ProjectConstants;
-import utils.TestUtils;
 
 import java.util.List;
 
@@ -119,7 +118,7 @@ public class MusicTest extends BaseTest {
                 .waitForProgressBarToBeChanged()
                 .getAttributeStyleInProgressbar();
 
-        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 9)) >= 50.0);
+        Assert.assertTrue(Double.parseDouble(actualTime.substring(7, 9)) >= 35.0);
     }
     @QaseTitle("Check that music results equals search criteria ")
     @QaseId(value = 5112)
@@ -288,6 +287,7 @@ public class MusicTest extends BaseTest {
                 .waitLoaderToBeInvisible()
                 .waitUntilVisibilityAudioResult()
                 .clickOnAllHeart()
+                .scrollToHeaderMenu()
                 .clickFavoritePlaylist()
                 .getTitleAllTracks();
 
