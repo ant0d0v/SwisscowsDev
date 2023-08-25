@@ -7,10 +7,12 @@ import com.github.romankh3.image.comparison.model.ImageComparisonState;
 import io.qameta.allure.Attachment;
 import io.restassured.http.ContentType;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+import org.testng.asserts.Assertion;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -138,7 +140,8 @@ public class TestUtils {
             addImgToAllure("diff", resultDestination);
         }
 
-        assertEquals(ImageComparisonState.MATCH, result.getImageComparisonState());
+       Assertions.assertEquals(ImageComparisonState.MATCH, result.getImageComparisonState());
+
     }
 
     private static void addImgToAllure(String name, File file) {
