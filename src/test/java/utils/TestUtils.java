@@ -1,22 +1,32 @@
 package utils;
 
 import base.BaseTest;
+import com.github.romankh3.image.comparison.ImageComparison;
+import com.github.romankh3.image.comparison.model.ImageComparisonResult;
+import com.github.romankh3.image.comparison.model.ImageComparisonState;
+import io.qameta.allure.Attachment;
 import io.restassured.http.ContentType;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+import org.testng.asserts.Assertion;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class TestUtils {
 
@@ -89,7 +99,7 @@ public class TestUtils {
 
         return text.substring(0, index);
     }
-    public static String getCookie (WebDriver driver){
+    public static String getCookie(WebDriver driver){
         driver.get("https://accounts.dev.swisscows.com/profile");
         return given()
                 .contentType(ContentType.JSON)
@@ -102,6 +112,50 @@ public class TestUtils {
         expDate.setTime(expDate.getTime() + (10000 * 10000));
         Cookie cookie = new Cookie(".AspNetCore.Identity.Application", cookieValue, "accounts.dev.swisscows.com", "/", expDate);
         driver.manage().addCookie(cookie);
+    }
+    public static void assertScreen(Method method,WebDriver driver) throws IOException {
+        String expectedFileName = method.getName();
+        String expectedScreenDir = "src/test/resources/screens/";
+
+        File actualScreenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File expectedScreenshot = new File(expectedScreenDir + expectedFileName + ".png");
+
+        if (!expectedScreenshot.exists()) {
+            addImgToAllure("actual", actualScreenshot);
+            throw new IllegalArgumentException("Cannot assert image, because there is no reference. "
+                    + "Actual screenshot can be downloaded from Allure.");
+        }
+
+        BufferedImage expectedImage = ImageIO.read(expectedScreenshot);
+        BufferedImage actualImage = ImageIO.read(actualScreenshot);
+
+        File resultDestination = new File("target/diffs/diff_" + expectedFileName + ".png");
+
+        ImageComparison imageComparison = new ImageComparison(expectedImage, actualImage, resultDestination);
+        ImageComparisonResult result = imageComparison.compareImages();
+
+        if (!result.getImageComparisonState().equals(ImageComparisonState.MATCH)) {
+            addImgToAllure("actual", actualScreenshot);
+            addImgToAllure("expected", expectedScreenshot);
+            addImgToAllure("diff", resultDestination);
+        }
+
+       Assertions.assertEquals(ImageComparisonState.MATCH, result.getImageComparisonState());
+
+    }
+
+    private static void addImgToAllure(String name, File file) {
+        try {
+            byte[] image = Files.readAllBytes(file.toPath());
+            saveScreenshot(name, image);
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot read bytes");
+        }
+    }
+
+    @Attachment(value = "{name}", type = "image/png")
+    private static byte[] saveScreenshot(String name, byte[] image) {
+        return image;
     }
 
     public static List<String> getSortedList(List<String> elements) {

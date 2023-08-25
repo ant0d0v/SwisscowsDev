@@ -124,7 +124,6 @@ public class MainPage extends FooterMenuPage<MainPage> {
     }
 
     public MainPage createGeneric() {
-
         return new MainPage(getDriver());
     }
     @Step("Open the version.txt page on the Swisscows website.")
