@@ -244,7 +244,7 @@ public class MusicTest extends BaseTest {
         Assert.assertNotEquals(oldURL, actualURL);
         Assert.assertNotEquals(oldTitle, actualTitle);
         Assert.assertEquals(actualURL, ProjectConstants.DOMAIN + "/de/music?query=ivanka");
-        Assert.assertEquals(actualTitle,"ivanka in Musik suchen - Swisscows");
+        Assert.assertEquals(actualTitle,"Musik zu ivanka - Swisscows");
 
     }
     @QaseTitle("Check delete track in the favorite")

@@ -206,7 +206,7 @@ public class WebPageTest extends BaseTest {
         for (String searchCriteria : titles) {
             Assert.assertTrue(searchCriteria.toLowerCase().contains(query));
         }
-        Assert.assertEquals(webPage.getTitle(),query+ " in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"Web pages for " + query +" - Swisscows");
 
     }
     @QaseTitle("Check next and prev buttons in the video widget")
@@ -251,7 +251,7 @@ public class WebPageTest extends BaseTest {
 
         assertNotEquals(newUrl, oldUrl);
         Assert.assertTrue(getExternalPageURL().contains(ProjectConstants.DOMAIN + "/en/video?query=watch%20youtube&region=de-DE"));
-        Assert.assertEquals(getExternalPageTitle(),"watch youtube in Video search - Swisscows");
+        Assert.assertEquals(getExternalPageTitle(),"Videos for watch youtube - Swisscows");
 
     }
     @QaseTitle("Check that open video in the video widget")
@@ -281,7 +281,7 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         String query = "flowers";
 
-        final String expectedTitle = query + " in Images search - Swisscows";
+        final String expectedTitle = query + "Images for flowers - Swisscows";
 
         openBaseURL()
                 .clickHamburgerMenu()
@@ -422,7 +422,7 @@ public class WebPageTest extends BaseTest {
                 .getAttributeOfSecondButtonInPagination();
 
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
-        Assert.assertEquals(webPage.getTitle(),query + " in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"Web pages for " + "ronaldo" + " - Swisscows");
         Assert.assertEquals(actualAttribute,"number active");
 
     }
@@ -452,7 +452,7 @@ public class WebPageTest extends BaseTest {
                 .waitToBeVisibleTitleFirstSearchResult()
                 .getTitleH2Text();
 
-        Assert.assertEquals(webPage.getTitle(),query + " in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"Web pages for " + query +" - Swisscows");
         Assert.assertEquals(actualTitleFirstSearchResult,"Wikipedia");
         assertNotEquals(webPage.getCurrentURL(), oldUrl);
 
@@ -484,7 +484,7 @@ public class WebPageTest extends BaseTest {
         Assert.assertTrue(webPage.getCurrentURL().contains((ProjectConstants.DOMAIN + "/en/web?query=" + query + "&freshness=Year")));
         Assert.assertTrue(webPage.getTitlesInWebResult().size() >= 5);
         assertNotEquals(oldTitle,newTitle);
-        Assert.assertEquals(webPage.getTitle(),query +" in Web search - Swisscows");
+        Assert.assertEquals(webPage.getTitle(),"Web pages for " + query +" - Swisscows");
     }
     @QaseTitle("Check cancel filter ")
     @QaseId(value = 5069)
