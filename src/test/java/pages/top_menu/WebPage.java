@@ -413,7 +413,11 @@ public class WebPage extends TopMenuPage<WebPage> {
     }
     @Step("Wait until the web search results are visible")
     public WebPage waitUntilVisibilityWebResult() {
-        wait20ElementToBeVisible(webResultContainer);
+        try {
+            wait20ElementToBeVisible(webResultContainer);
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+            wait20ElementToBeVisible(webResultContainer);
+        }
         return this;
     }
     @Step("Wait until the error image is visible.")

@@ -201,7 +201,7 @@ public class FooterMenuTest extends BaseTest {
     @Test
     public void testTwitterIconNavigatesToTwitterWeb() {
         MainPage mainPage = new MainPage(getDriver());
-        final String expectedPartialInstagramURL = "https://twitter.com/swisscows_ch";
+        final String expectedPartialInstagramURL = "https://twitter.com/i/flow/login?redirect_after_login=%2Fswisscows_ch";
 
         final String oldURL = openBaseURL().getCurrentURL();
 
