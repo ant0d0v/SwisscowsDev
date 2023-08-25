@@ -217,7 +217,7 @@ public class ImageTest extends BaseTest {
     }
     @QaseTitle("Check that image in the images results equals image in side view")
     @QaseId(value = 5098)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testImageInResultEqualsImageInSideView_ImagePage() {
         ImagePage imagePage = new ImagePage(getDriver());
 
@@ -238,7 +238,7 @@ public class ImageTest extends BaseTest {
     }
     @QaseTitle("Check next button in side View")
     @QaseId(value = 5099)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNextButtonInSideView_ImagePage() {
 
         final String actualAttributeSecondImage = openBaseURL()
@@ -256,7 +256,7 @@ public class ImageTest extends BaseTest {
     }
     @QaseTitle("Check close button in side View")
     @QaseId(value = 5100)
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testCloseButtonInSideView_ImagePage() {
         String searchQuery = "rep";
 

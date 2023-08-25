@@ -3,6 +3,7 @@ import base.BaseTest;
 import io.qase.api.annotation.QaseId;
 import io.qase.api.annotation.QaseTitle;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.TestData;
@@ -359,9 +360,10 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+
     @QaseTitle("Check copyright in the footer for search pages")
     @QaseId(value = 4970)
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testCopyrightOnFooterSearchPages() {
         final String expectedCopyright = "© Swisscows AG, 2023";
 

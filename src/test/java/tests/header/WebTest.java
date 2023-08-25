@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertNotEquals;
 
-public class WebPageTest extends BaseTest {
+public class WebTest extends BaseTest {
     @QaseTitle("Check that suggestion equals search criteria")
     @QaseId(value = 5051)
     @Test
@@ -281,7 +281,7 @@ public class WebPageTest extends BaseTest {
         WebPage webPage = new WebPage(getDriver());
         String query = "flowers";
 
-        final String expectedTitle = query + "Images for flowers - Swisscows";
+        final String expectedTitle = "Images for " + query + " - Swisscows";
 
         openBaseURL()
                 .clickHamburgerMenu()
