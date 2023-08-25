@@ -360,7 +360,7 @@ public class FooterMenuTest extends BaseTest {
         Assert.assertEquals(actualURL, expectedURL);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-    @Ignore
+
     @QaseTitle("Check copyright in the footer for search pages")
     @QaseId(value = 4970)
     @Test
