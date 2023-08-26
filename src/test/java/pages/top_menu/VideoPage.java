@@ -128,7 +128,8 @@ public class VideoPage extends TopMenuPage<VideoPage> {
     }
     @Step("Get text warning message")
     public String getTextWarningMessage(){
-        return getText(textWarningMessage);
+        wait10ElementToBeVisible(textWarningMessage);
+        return  textWarningMessage.getText();
     }
     @Step("Click cancel buttton youtube video")
     public VideoPage clickCancelButtonOfYouTubeVideo(){
