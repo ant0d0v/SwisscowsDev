@@ -68,9 +68,13 @@ public class ImagePage extends TopMenuPage<ImagePage> {
 
     @Step("Click first image in images results")
     public ImagePage clickFirstImageInImagesResult() {
-        click20(firstImageInImagesResult);
+        click(firstImageInImagesResult);
         return this;
-
+    }
+    @Step("Click first image in images results")
+    public ImagePage clickFirstImageInResult() {
+       firstImageInImagesResult.click();
+        return this;
     }
     @Step("Click favorite button of image in the side view")
     public ImagePage clickFavoriteButtonOfImageInSideView() {

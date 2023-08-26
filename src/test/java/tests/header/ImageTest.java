@@ -162,7 +162,7 @@ public class ImageTest extends BaseTest {
                 .clickRedColorInDropdownListOfColorsFilter()
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFiveImages()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .getTitleFirstImage();
 
         Assert.assertTrue(actualTitleImage.contains("Red"));
