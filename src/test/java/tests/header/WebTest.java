@@ -215,10 +215,10 @@ public class WebTest extends BaseTest {
     public void testNextButtonAndPrevButtonVideoWidget_WebPage() {
 
         WebPage webPage = openBaseURL()
-                .inputSearchCriteriaAndEnter("watch youtube")
+                .inputSearchCriteriaAndEnter("youtube video")
                 .waitUntilVisibilityWebResult()
                 .choiceGermanyRegion()
-                .waitUntilUrlToBeChanged("/en/web?query=watch+youtube&region=de-DE")
+                .waitUntilUrlToBeChanged("/en/web?query=youtube+video&region=de-DE")
                 .waitUntilLoaderToBeInvisible()
                 .clickNextButtonVideoWidget();
 

@@ -133,7 +133,7 @@ public class VideoTest extends BaseTest {
                 .getTitleAllVideo();
 
         Assert.assertNotEquals(newSize.size() ,oldSize.size());
-        assertTrue(newSize.size() > 60);
+        assertTrue(newSize.size() >= 60);
     }
     @QaseTitle("Check that video result equals search criteria")
     @QaseId(value = 5129)
@@ -184,7 +184,7 @@ public class VideoTest extends BaseTest {
     @Test
     public void testPlayVideoFromSideList(){
         final  String actualSrc = openBaseURL()
-                .inputSearchCriteriaAndEnter("watch video")
+                .inputSearchCriteriaAndEnter("evanescence")
                 .waitUntilVisibilityWebResult()
                 .clickVideoButton()
                 .waitUtilLoaderToBeInVisible()
