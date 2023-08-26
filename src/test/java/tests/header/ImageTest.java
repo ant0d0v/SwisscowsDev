@@ -409,5 +409,6 @@ public class ImageTest extends BaseTest {
 
         Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
     }
+
 }
 
