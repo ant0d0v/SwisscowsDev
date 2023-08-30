@@ -203,7 +203,7 @@ public class ImageTest extends BaseTest {
                 .clickImageButton()
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeFirstImage();
 
@@ -231,7 +231,7 @@ public class ImageTest extends BaseTest {
                 .getAttributeHrefOfImage();
 
         final String AttributeImageInSideView = imagePage
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .getAttributeHrefImageInSideView();
 
         Assert.assertEquals(AttributeImageInResult,AttributeImageInSideView);
@@ -248,7 +248,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=ronaldo")
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFiveImages()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickNextButtonInSideImageview()
                 .getAttributeSecondImage();
 
@@ -267,7 +267,7 @@ public class ImageTest extends BaseTest {
                 .waitUrlToBeChanged("/en/images?query=" + searchQuery)
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleFiveImages()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickCloseButtonInSideImageview()
                 .getAttributeFirstImage();
 
@@ -286,7 +286,7 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickFavoriteButtonOfImageInSideView()
                 .waitUntilToBeVisibleFavoriteItem();
 
@@ -312,7 +312,7 @@ public class ImageTest extends BaseTest {
         final String AttributeImageInSideView = imagePage
                 .clickFavoriteItem()
                 .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .getAttributeHrefImageInSideView();
 
         Assert.assertEquals(AttributeImageInSideView, imagePage.getAttributeHrefOfImage());
@@ -335,7 +335,7 @@ public class ImageTest extends BaseTest {
         final String actualH2Title = imagePage
                 .clickFavoriteItem()
                 .waitUrlToBeChanged("/en/images/my?query=" + searchQuery)
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickFavoriteButtonOfImageInSideView()
                 .refreshImagePage()
                 .getErrorOfTitleInFavorite();
@@ -357,7 +357,7 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickFavoriteButtonOfImageInSideView()
                 .clickNextButtonInSideImageview()
                 .clickFavoriteButtonOfImageInSideView()
@@ -391,7 +391,7 @@ public class ImageTest extends BaseTest {
     }
     @QaseTitle("Check delete several images from favorite")
     @QaseId(value = 5106)
-    @Test(dependsOnMethods = "testChangeLanguageInFavorite_ImagePage")
+    @Test(dependsOnMethods = "testAddSeveralImagesToFavorite_ImagePage")
         public void testDeletedSeveralImagesFromFavorite_ImagePage () {
 
         openBaseURLAndGetCookie()
@@ -402,10 +402,11 @@ public class ImageTest extends BaseTest {
                 .waitForLoaderToBeInVisible()
                 .waitUtilToBeVisibleTenImages()
                 .loginUsingCookie()
-                .clickFirstImageInImagesResult()
+                .clickFirstImageInResult()
                 .clickFavoriteButtonOfImageInSideView()
                 .clickNextButtonInSideImageview()
-                .clickFavoriteButtonOfImageInSideView();
+                .clickFavoriteButtonOfImageInSideView()
+                .waitUntilToBeInvisibleFavorite();
 
         Assert.assertFalse(new ImagePage(getDriver()).isFavoriteItemIsPresent());
     }
