@@ -53,7 +53,7 @@ public class WebTest extends BaseTest {
                 .clickRegionUkraine()
                 .inputSearchCriteriaAndEnter(query)
                 .waitUntilLoaderToBeInvisible()
-                .waitUntilVisibilityErrorImage()
+                .waitUntilVisibilityImageOfError()
                 .getTitleErrorText();
 
         final String actualFontSizeTitle202Error = webPage.getH2FontSize();
@@ -72,7 +72,7 @@ public class WebTest extends BaseTest {
         final String actualTitle404Error = openBaseURL()
                 .inputSearchCriteriaAndEnter("porn")
                 .waitUntilLoaderToBeInvisible()
-                .waitUntilVisibilityErrorImage()
+                .waitUntilVisibilityImageOfError()
                 .getTitleErrorText();
 
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
@@ -90,7 +90,7 @@ public class WebTest extends BaseTest {
 
         final String actualTitle404Error = webPage
                 .open404Page()
-                .waitUntilVisibilityErrorImage()
+                .waitUntilVisibilityImageOfError()
                 .getTitleErrorText();
 
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();
@@ -108,7 +108,7 @@ public class WebTest extends BaseTest {
 
         final String actualTitle404Error = webPage
                 .open500Page()
-                .waitUntilVisibilityErrorImage()
+                .waitUntilVisibilityImageOfError()
                 .getTitleErrorText();
 
         final String actualFontSizeTitle404Error = webPage.getH2FontSize();

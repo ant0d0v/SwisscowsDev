@@ -14,10 +14,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     private WebElement newsResultContainer;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2News;
-    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
-    private WebElement regionBrazil;
-    @FindBy(xpath = "//div[@class='image']//img")
-    private WebElement errorImage;
+
     @FindBy(xpath = "//figure//img")
     private List<WebElement> allImageNewsPage;
     @FindBy(xpath = "//h2[@class = 'title']")
@@ -49,11 +46,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return new NewsPage(getDriver());
     }
-    @Step("Wait until the error image is visible.")
-    public NewsPage waitUntilVisibilityErrorImage() {
-        wait20ElementToBeVisible(errorImage);
-        return new NewsPage(getDriver());
-    }
+
     @Step("Get the title text of the news page")
     public String getTitleNews()  {
         wait10ElementToBeVisible(h2News);
@@ -67,12 +60,6 @@ public class NewsPage extends TopMenuPage<NewsPage> {
     public String getH2FontSize(){
         return  getFontSize(h2News);
     }
-    public NewsPage selectRegionBrazil() {
-        clickHamburgerMenu();
-        clickRegionTopMenu();
-        click(regionBrazil);
-        return new NewsPage(getDriver());
-    }
 
     public NewsPage clickFirstPost() {
         click(h2News);
@@ -81,9 +68,6 @@ public class NewsPage extends TopMenuPage<NewsPage> {
         return new NewsPage(getDriver());
     }
 
-    public boolean  errorImageIsDisplayed() {
-        return isElementDisplayed(errorImage);
-    }
     @Step("Check that all images are dysplaed")
     public boolean  allImageIsDisplayed() {
         for (WebElement image : allImageNewsPage) {
@@ -92,10 +76,7 @@ public class NewsPage extends TopMenuPage<NewsPage> {
 
         return areElementsInListDisplayed(allImageNewsPage);
     }
-    @Step("Get srs of all images")
-    public List<String> getSrsOfImages() {
-        return getSrcOfElements(allImageNewsPage);
-    }
+
     @Step("Click third number in pagination")
     public NewsPage clickThirdPagePagination() {
         click(thirdPagePagination);
