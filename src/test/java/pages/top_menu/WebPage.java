@@ -421,7 +421,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return this;
     }
     @Step("Wait until the error image is visible.")
-    public WebPage waitUntilVisibilityErrorImage() {
+    public WebPage waitUntilVisibilityImageOfError() {
         wait20ElementToBeVisible(errorImage);
         return new WebPage(getDriver());
     }
@@ -448,7 +448,7 @@ public class WebPage extends TopMenuPage<WebPage> {
         return isElementDisplayed(previewFrame);
     }
     public boolean  errorImageIsDisplayed() {
-        waitUntilVisibilityErrorImage();
+        waitUntilVisibilityImageOfError();
         return isElementDisplayed(errorImage);
     }
 

@@ -147,6 +147,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement imageButton;
     @FindBy(xpath = "//a[text()='News']")
     private WebElement newsButton;
+    @FindBy(xpath = "//a[text()='Shopping']")
+    private WebElement shoppingButton;
     @FindBy(xpath = "//button[@class ='button favorite'][1]")
     private WebElement favoriteIcon;
     @FindBy(xpath = "//div[@class = 'music-results']//h2[text() = 'Playlists']")
@@ -180,6 +182,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement lastImageInAds;
     @FindBy(xpath = "//div[@class='widget-slider']//div[2]/article/a[1]/figure/img")
     private WebElement firstImageInAds;
+    @FindBy(xpath = "//ul[@class='menu-dropdown-list']//li[5]")
+    private WebElement regionBrazil;
+    @FindBy(xpath = "//div[@class='image']//img")
+    private WebElement errorImage;
+    @FindBy(xpath = "//figure//img")
+    private List<WebElement> allImageNewsPage;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -506,6 +514,12 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
         return new NewsPage(getDriver());
     }
+    @Step("Click on the \"Shopping\" button")
+    public ShoppingPage clickShoppingButton() {
+        clickEnter(shoppingButton);
+
+        return new ShoppingPage(getDriver());
+    }
     @Step("Click filter button")
     public WebPage clickFilterButtonWeb() {
         click20(filterButton);
@@ -679,6 +693,24 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public boolean firstImageInAdsIsDisplayed() {
         wait10ElementToBeVisible(firstImageInAds);
         return isElementDisplayed(firstImageInAds);
+    }
+    public NewsPage selectRegionBrazil() {
+        clickHamburgerMenu();
+        clickRegionTopMenu();
+        click(regionBrazil);
+        return new NewsPage(getDriver());
+    }
+    @Step("Wait until the error image is visible.")
+    public NewsPage waitUntilVisibilityErrorImage() {
+        wait20ElementToBeVisible(errorImage);
+        return new NewsPage(getDriver());
+    }
+    @Step("Get srs of all images")
+    public List<String> getSrsOfImages() {
+        return getSrcOfElements(allImageNewsPage);
+    }
+    public boolean  errorImageIsDisplayed() {
+        return isElementDisplayed(errorImage);
     }
 
 }
