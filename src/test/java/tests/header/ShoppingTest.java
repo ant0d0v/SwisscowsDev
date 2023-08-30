@@ -200,4 +200,26 @@ public class ShoppingTest extends BaseTest {
         Assert.assertTrue(newsPage.allImageIsDisplayed());
 
     }
+    @QaseTitle("Check close button in side View")
+    @Test
+    public void testCloseButtonInSideView_ShoppingPage() {
+        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
+        String searchQuery = "laptop";
+
+        openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickShoppingButton()
+                .waitUntilVisibilityShoppingResult()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .waitToBeVisibleFirstFiveImage()
+                .clickFirstImageInShoppingResult()
+                .clickCloseIconInSideImageview();
+
+        Assert.assertFalse(shoppingPage.detailsPanelIsDysplaed());
+    }
 }

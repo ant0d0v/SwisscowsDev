@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImagePage extends TopMenuPage<ImagePage> {
-    @FindBy(xpath = "//figure//img[1]")
-    private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//h2[@class = 'title']")
     private WebElement h2FirstImage;
     @FindBy(xpath = "(//figure//a//img)[position() < 5]")
@@ -52,8 +50,9 @@ public class ImagePage extends TopMenuPage<ImagePage> {
     private WebElement secondQueryInRelatedSearchContainer;
     @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<10]")
     private List<WebElement> tenImages;
-    @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<5]")
-    private List<WebElement> fiveImages;
+    @FindBy(xpath = "//div[@class = 'details-pane']")
+    private WebElement detailsPanel;
+
     @FindBy(xpath = "//a[@class ='item favorite']")
     private WebElement favoriteItem;
 
@@ -66,20 +65,17 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         return new ImagePage(getDriver());
     }
 
-    @Step("Click first image in images results")
-    public ImagePage clickFirstImageInImagesResult() {
-        click(firstImageInImagesResult);
-        return this;
-    }
-    @Step("Click first image in images results")
-    public ImagePage clickFirstImageInResult() {
-       firstImageInImagesResult.click();
-        return this;
-    }
     @Step("Click favorite button of image in the side view")
     public ImagePage clickFavoriteButtonOfImageInSideView() {
-        click(favoriteButtonInSideImageview);
+        wait10ElementToBeVisible(detailsPanel);
+        if (favoriteButtonInSideImageview.isEnabled() && favoriteButtonInSideImageview.isEnabled()) {
+            click(favoriteButtonInSideImageview);
+        }
         return this;
+    }
+    public ImagePage waitUntilToBeInvisibleFavorite(){
+        wait10ElementToBeInVisible(favoriteItem);
+        return new ImagePage(getDriver());
     }
     @Step("Click favorite item")
     public ImagePage clickFavoriteItem() {
@@ -166,14 +162,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         }
         return this;
     }
-    @Step("Wait until to be visible five images")
-    public ImagePage waitUtilToBeVisibleFiveImages(){
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
-        for (WebElement image : fiveImages) {
-            wait20ElementToBeVisibleJsExecutor(jsExecutor,image);
-        }
-        return this;
-    }
+
     @Step("Click color button in the filter")
     public ImagePage clickColorButton(){
         click(colorButton);
@@ -195,11 +184,7 @@ public class ImagePage extends TopMenuPage<ImagePage> {
         click(prevButtonInSideImageview);
         return new ImagePage(getDriver());
     }
-    @Step("Click close button of image in the side view")
-    public ImagePage clickCloseButtonInSideImageview() {
-        click(closeButtonInSideImageview);
-        return new ImagePage(getDriver());
-    }
+
     @Step("Click second query in the related search container")
     public ImagePage clickSecondQueryInRelatedSearchContainer() {
         click20(secondQueryInRelatedSearchContainer);

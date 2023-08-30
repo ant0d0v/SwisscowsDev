@@ -69,6 +69,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
 
     @FindBy(xpath= "//button[@type='reset']")
     private WebElement clearButton;
+    @FindBy(xpath = "(//figure[@class='item--image']//img)[position()<5]")
+    private List<WebElement> fiveImages;
 
     @FindBy(xpath = "//header//button[@type = 'button']")
     private WebElement hamburgerTopMenu;
@@ -147,6 +149,9 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement imageButton;
     @FindBy(xpath = "//a[text()='News']")
     private WebElement newsButton;
+
+    @FindBy(xpath = "//figure//img[1]")
+    private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//a[text()='Shopping']")
     private WebElement shoppingButton;
     @FindBy(xpath = "//button[@class ='button favorite'][1]")
@@ -188,6 +193,8 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     private WebElement errorImage;
     @FindBy(xpath = "//figure//img")
     private List<WebElement> allImageNewsPage;
+    @FindBy(xpath = "//button[@class='close']")
+    private WebElement closeButtonInSideImageview;
 
     public TopMenuPage(WebDriver driver) {
         super(driver);
@@ -219,6 +226,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     @Step("Wait until to be invisible loader")
     public ImagePage waitForLoaderToBeInVisible(){
         wait10ElementToBeInVisible(loader);
+        return new ImagePage(getDriver());
+    }
+    @Step("Click close button of image in the side view")
+    public ImagePage clickCloseButtonInSideImageview() {
+        click(closeButtonInSideImageview);
         return new ImagePage(getDriver());
     }
     @Step("Get the list of texts for all the options in the Localization dropdown menu.")
@@ -337,6 +349,11 @@ public abstract class TopMenuPage<Generic> extends BasePage {
     public MainPage clickHamburgerMenu() {
         click20(hamburgerTopMenu);
         return new MainPage(getDriver());
+    }
+    public ImagePage clickFirstImageInResult() {
+        wait10ElementToBeVisible(firstImageInImagesResult);
+        firstImageInImagesResult.click();
+        return new ImagePage(getDriver());
     }
     @Step("Click on the region in the top menu (e.g., German).")
     public MainPage clickRegionGerman() {
@@ -596,6 +613,14 @@ public abstract class TopMenuPage<Generic> extends BasePage {
         clickEnter();
 
         new NewsPage(getDriver());
+    }
+    @Step("Wait until to be visible five images")
+    public ImagePage waitUtilToBeVisibleFiveImages(){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) getDriver();
+        for (WebElement image : fiveImages) {
+            wait20ElementToBeVisibleJsExecutor(jsExecutor,image);
+        }
+        return new ImagePage(getDriver());
     }
 
 

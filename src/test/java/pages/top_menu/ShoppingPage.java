@@ -18,6 +18,8 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private List<WebElement> h2TextShopping;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[3]")
     private WebElement thirdPagePagination;
+    @FindBy(xpath = "//figure//img[1]")
+    private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[4]")
     private WebElement attributeThirdPagePagination;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[3]")
@@ -26,6 +28,8 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private WebElement previousPagePagination;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[last()]")
     private WebElement nextPagePagination;
+    @FindBy(xpath = "//div[@class = 'details-pane']")
+    private WebElement detailsPanel;
     public ShoppingPage(WebDriver driver) {
         super(driver);
     }
@@ -56,6 +60,29 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     public List<String> getH2TextShoppingResult()  {
         return getTexts( h2TextShopping);
     }
+    @Step("Get attribute first image")
+    public boolean detailsPanelIsDysplaed() {
+        wait10ElementToBeInVisible(detailsPanel);
+        return detailsPanel.isDisplayed();
+    }
+    public ShoppingPage waitToBeVisibleFirstFiveImage(){
+        waitUtilToBeVisibleFiveImages();
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickCloseIconInSideImageview(){
+        clickCloseButtonInSideImageview();
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickFirstImageInShoppingResult(){
+        clickFirstImageInResult();
+        return new ShoppingPage(getDriver());
+    }
+
+    public ShoppingPage waitUntilLoaderToBeInVisible(){
+        waitForLoaderToBeInVisible();
+        return new ShoppingPage(getDriver());
+    }
+
     @Step("Click third number in pagination")
     public ShoppingPage clickThirdPagePagination() {
         click(thirdPagePagination);
