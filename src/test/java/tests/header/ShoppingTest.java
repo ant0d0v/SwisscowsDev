@@ -158,7 +158,7 @@ public class ShoppingTest extends BaseTest {
         Assert.assertEquals(newsPage.getCurrentURL(),ProjectConstants.DOMAIN+"/en/shopping?query=" + query + "&region=de-DE&offset=0");
 
     }
-    @QaseId(value = 6)
+    @QaseTitle("Check image proxy")
     @Test()
     public void testImageProxy_ShoppingPage() {
         NewsPage newsPage = new NewsPage (getDriver());
