@@ -28,8 +28,17 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private WebElement previousPagePagination;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[last()]")
     private WebElement nextPagePagination;
-    @FindBy(xpath = "//div[@class = 'details-pane']")
+    @FindBy(xpath = "//div[@class = 'details-pane']//img")
     private WebElement detailsPanel;
+    @FindBy(xpath = "//div[@class = 'details-pane']")
+    private WebElement detailsContainer;
+    @FindBy(xpath = "(//a[text() ='See all offers'])[position() < 2]")
+    private WebElement seeAllOffersLink;
+    @FindBy(xpath = "//section[@class ='section offers']//a[1]")
+    private WebElement firstShopInDetailsPanel;
+    @FindBy(xpath = "//section[@class ='section offers']//a")
+    private List<WebElement> shopsInDetailsPanel;
+
     public ShoppingPage(WebDriver driver) {
         super(driver);
     }
@@ -60,10 +69,33 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     public List<String> getH2TextShoppingResult()  {
         return getTexts( h2TextShopping);
     }
+
+    public ShoppingPage waitUntilToBeInvisibleDetailsPanel() {
+        wait10ElementToBeInVisible(detailsContainer);
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage waitUntilToBeVisibleDetailsPanel() {
+        wait10ElementToBeVisible(detailsPanel);
+        return new ShoppingPage(getDriver());
+    }
+
     @Step("Get attribute first image")
     public boolean detailsPanelIsDysplaed() {
-        wait10ElementToBeInVisible(detailsPanel);
-        return detailsPanel.isDisplayed();
+        return detailsContainer.isDisplayed();
+    }
+    public ShoppingPage clickFirstShopInDetailPanel(){
+        click(firstShopInDetailsPanel);
+        return new ShoppingPage(getDriver());
+    }
+    public int getCountShopsInDetailsPanel(){
+        int count = 0;
+        for(WebElement element : shopsInDetailsPanel){
+            wait10ElementToBeVisible(element);
+            if(element.isEnabled()){
+                count = getListSize(shopsInDetailsPanel);
+            }
+        }
+        return  count;
     }
     public ShoppingPage waitToBeVisibleFirstFiveImage(){
         waitUtilToBeVisibleFiveImages();
@@ -75,6 +107,10 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     }
     public ShoppingPage clickFirstImageInShoppingResult(){
         clickFirstImageInResult();
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickFirstLink_SeeAllOffers(){
+        click(seeAllOffersLink);
         return new ShoppingPage(getDriver());
     }
 

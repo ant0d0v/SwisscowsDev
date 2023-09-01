@@ -177,7 +177,7 @@ public class ShoppingTest extends BaseTest {
             Assert.assertTrue(search.contains("https://cdn.swisscows.com/image?url"));
         }
     }
-    @QaseTitle("Check search results in the news ")
+    @QaseTitle("Check search results in the shopping")
     @Test
     public void testSearchResults_ShoppingPage(){
         NewsPage newsPage = new NewsPage (getDriver());
@@ -218,8 +218,62 @@ public class ShoppingTest extends BaseTest {
                 .waitUntilLoaderToBeInVisible()
                 .waitToBeVisibleFirstFiveImage()
                 .clickFirstImageInShoppingResult()
-                .clickCloseIconInSideImageview();
+                .clickCloseIconInSideImageview()
+                .waitUntilToBeInvisibleDetailsPanel();
 
         Assert.assertFalse(shoppingPage.detailsPanelIsDysplaed());
+    }
+    @QaseTitle("Check click see all link of product card")
+    @Test
+    public void testSeeAllOffersLinkOpenedSideView_ShoppingPage() {
+        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
+        String searchQuery = "laptop";
+
+        openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickShoppingButton()
+                .waitUntilVisibilityShoppingResult()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .waitToBeVisibleFirstFiveImage()
+                .clickFirstLink_SeeAllOffers()
+                .waitUntilToBeVisibleDetailsPanel();
+
+        Assert.assertTrue(shoppingPage.detailsPanelIsDysplaed());
+    }
+    @QaseTitle("Check open shop from details panel")
+    @Test
+    public void testOpenShopInSideView_ShoppingPage() {
+        ShoppingPage shoppingPage = new ShoppingPage(getDriver());
+        String searchQuery = "laptop";
+
+        final String oldUrl = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickShoppingButton()
+                .waitUntilVisibilityShoppingResult()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .waitToBeVisibleFirstFiveImage()
+                .clickFirstLink_SeeAllOffers()
+                .waitUntilToBeVisibleDetailsPanel()
+                .getCurrentURL();
+
+        Assert.assertTrue(shoppingPage.detailsPanelIsDysplaed());
+        Assert.assertTrue(shoppingPage.getCountShopsInDetailsPanel() >= 6);
+
+        shoppingPage
+                .clickFirstShopInDetailPanel()
+                .switchToAnotherWindow();
+
+        Assert.assertNotEquals(shoppingPage.getCurrentURL(), oldUrl);
+
     }
 }
