@@ -1,12 +1,14 @@
 package pages.top_menu;
 
 import io.qase.api.annotation.Step;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ShoppingPage extends TopMenuPage<ShoppingPage> {
@@ -16,6 +18,7 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private WebElement h2Shopping;
     @FindBy(xpath = "//h2[@class = 'title']")
     private List<WebElement> h2TextShopping;
+
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[3]")
     private WebElement thirdPagePagination;
     @FindBy(xpath = "//figure//img[1]")
@@ -36,8 +39,14 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private WebElement seeAllOffersLink;
     @FindBy(xpath = "//section[@class ='section offers']//a[1]")
     private WebElement firstShopInDetailsPanel;
+    @FindBy(xpath = "//h3[@title ='Marken']")
+    private WebElement modelDropdown;
+    @FindBy(xpath = "//div[@class = 'filter']//ul//li[text() = 'Apple']")
+    private WebElement appleModel;
     @FindBy(xpath = "//section[@class ='section offers']//a")
     private List<WebElement> shopsInDetailsPanel;
+    @FindBy(xpath = "//div[@class = 'scroller']//h3")
+    private List<WebElement> h3TextInFilter;
 
     public ShoppingPage(WebDriver driver) {
         super(driver);
@@ -65,9 +74,19 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         wait10ElementToBeVisible( h2Shopping);
         return getText( h2Shopping);
     }
+    public ShoppingPage refreshShoppingPage(){
+        refreshPage();
+        return new ShoppingPage(getDriver());
+    }
     @Step("Get the title text of the shopping page")
     public List<String> getH2TextShoppingResult()  {
-        return getTexts( h2TextShopping);
+        try {
+            return getTexts(h2TextShopping);
+        } catch (StaleElementReferenceException e) {
+            e.printStackTrace();
+            return getTexts(h2TextShopping);
+        }
+
     }
 
     public ShoppingPage waitUntilToBeInvisibleDetailsPanel() {
@@ -76,6 +95,18 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     }
     public ShoppingPage waitUntilToBeVisibleDetailsPanel() {
         wait10ElementToBeVisible(detailsPanel);
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickFilterButton() {
+        clickFilterButtonWeb();
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickModelDropdown() {
+        click(modelDropdown);
+        return new ShoppingPage(getDriver());
+    }
+    public ShoppingPage clickAppleModel() {
+        click(appleModel);
         return new ShoppingPage(getDriver());
     }
 
@@ -101,6 +132,11 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         waitUtilToBeVisibleFiveImages();
         return new ShoppingPage(getDriver());
     }
+    public List<String> getH3TextsInTheFilter(){
+        return getTexts(h3TextInFilter);
+
+    }
+
     public ShoppingPage clickCloseIconInSideImageview(){
         clickCloseButtonInSideImageview();
         return new ShoppingPage(getDriver());
