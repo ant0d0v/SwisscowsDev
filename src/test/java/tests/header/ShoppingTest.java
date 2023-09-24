@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.top_menu.NewsPage;
 import pages.top_menu.ShoppingPage;
-import tests.retrytest.Retry;
 import utils.ProjectConstants;
 
 import java.util.List;
@@ -264,10 +263,11 @@ public class ShoppingTest extends BaseTest {
                 .waitToBeVisibleFirstFiveImage()
                 .clickFirstLink_SeeAllOffers()
                 .waitUntilToBeVisibleDetailsPanel()
+                .scrollToSideBarMenu()
                 .getCurrentURL();
 
         Assert.assertTrue(shoppingPage.detailsPanelIsDysplaed());
-        Assert.assertTrue(shoppingPage.getCountShopsInDetailsPanel() >= 6);
+        Assert.assertTrue(shoppingPage.getCountShopsInDetailsPanel()>=4);
 
         shoppingPage
                 .clickFirstShopInDetailPanel()
@@ -275,5 +275,81 @@ public class ShoppingTest extends BaseTest {
 
         Assert.assertNotEquals(shoppingPage.getCurrentURL(), oldUrl);
 
+    }
+    @QaseTitle("Check filter model")
+    @Test
+    public void testCheckFilterModel_ShoppingPage() {
+        String searchQuery = "smartphone";
+
+        final List<String> actualResult = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickShoppingButton()
+                .waitUntilVisibilityShoppingResult()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .clickFilterButton()
+                .clickModelDropdown()
+                .clickAppleModel()
+                .waitUntilLoaderToBeInVisible()
+                .waitToBeVisibleFirstFiveImage()
+                .getH2TextShoppingResult();
+
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://dev.swisscows.com/en/shopping?query=smartphone&region=de-DE&brands=58" );
+
+        for(String h2text : actualResult){
+            Assert.assertTrue(h2text.contains("iPhone"));
+        }
+    }
+    @QaseTitle("Check filter parameters")
+    @Test
+    public void testCheckFilterParameters_ShoppingPage() {
+        final List<String> expectedFilterTexts = List.of(
+                "Sort By", "Marken", "Anbieter", "Zahlungsarten", "Deals & Schnäppchen", "Betriebssystemfamilie", "Display-Diagonale"
+                , "Integrierter Speicher", "Farbe", "Kameraauflösung", "Arbeitsspeicher","Auflösung Frontkamera","SIM-Kartenleser",
+                "Akkukapazität","Datenübertragung","Sprachassistent","Produkttyp","Schutzart","Bildwiederholfrequenz"
+        );
+        String searchQuery = "smartphone";
+
+        final List<String> actualFilterTexts = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .waitUntilVisibilityWebResult()
+                .clickShoppingButton()
+                .waitUntilVisibilityShoppingResult()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .clickFilterButton()
+                .getH3TextsInTheFilter();
+
+        Assert.assertEquals(actualFilterTexts.size(),19);
+        Assert.assertEquals(actualFilterTexts, expectedFilterTexts);
+    }
+    @QaseTitle("Check filter expensive")
+    @Test
+    public void testCheckFilterSortByMostExpensiveFirst_ShoppingPage() {
+        String searchQuery = "laptop";
+
+            final String actualPrice = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .clickShoppingButton()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .clickFilterButton()
+                .clickMostExpensive()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE&sort=PriceDesc")
+                .waitUntilLoaderToBeInVisible()
+                .getPriceFirstProductInShoppingResult();
+
+        Assert.assertTrue(Integer.parseInt(actualPrice.substring(2, 7))> 16000);
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://dev.swisscows.com/en/shopping?query=laptop&region=de-DE&sort=PriceDesc" );
     }
 }

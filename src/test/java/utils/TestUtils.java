@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 import static org.testng.AssertJUnit.assertEquals;
 
-public class TestUtils {
+public class TestUtils{
 
     private final static By H2_HEADER = By.xpath("//div[@class = 'logo-home']//h1");
     private final static By ON_LOAD_CONTAINER = By.xpath("//div[@class = 'badges animation-badges']");
