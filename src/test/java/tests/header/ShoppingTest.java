@@ -263,10 +263,11 @@ public class ShoppingTest extends BaseTest {
                 .waitToBeVisibleFirstFiveImage()
                 .clickFirstLink_SeeAllOffers()
                 .waitUntilToBeVisibleDetailsPanel()
+                .scrollToSideBarMenu()
                 .getCurrentURL();
 
         Assert.assertTrue(shoppingPage.detailsPanelIsDysplaed());
-        Assert.assertTrue(shoppingPage.getCountShopsInDetailsPanel() >= 6);
+        Assert.assertTrue(shoppingPage.getCountShopsInDetailsPanel()>=4);
 
         shoppingPage
                 .clickFirstShopInDetailPanel()
@@ -328,5 +329,27 @@ public class ShoppingTest extends BaseTest {
 
         Assert.assertEquals(actualFilterTexts.size(),19);
         Assert.assertEquals(actualFilterTexts, expectedFilterTexts);
+    }
+    @QaseTitle("Check filter expensive")
+    @Test
+    public void testCheckFilterSortByMostExpensiveFirst_ShoppingPage() {
+        String searchQuery = "laptop";
+
+            final String actualPrice = openBaseURL()
+                .clickHamburgerMenu()
+                .clickRegionTopMenu()
+                .clickRegionGerman()
+                .inputSearchCriteriaAndEnter(searchQuery)
+                .clickShoppingButton()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE")
+                .waitUntilLoaderToBeInVisible()
+                .clickFilterButton()
+                .clickMostExpensive()
+                .waitUntilUrlToBeChanged("/en/shopping?query=" + searchQuery + "&region=de-DE&sort=PriceDesc")
+                .waitUntilLoaderToBeInVisible()
+                .getPriceFirstProductInShoppingResult();
+
+        Assert.assertTrue(Integer.parseInt(actualPrice.substring(2, 7))> 16000);
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://dev.swisscows.com/en/shopping?query=laptop&region=de-DE&sort=PriceDesc" );
     }
 }

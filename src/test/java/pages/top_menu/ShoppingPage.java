@@ -1,6 +1,7 @@
 package pages.top_menu;
 
 import io.qase.api.annotation.Step;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,10 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import pages.base_abstract.TopMenuPage;
 import utils.ProjectConstants;
 
-import java.util.Collections;
 import java.util.List;
 
-public class ShoppingPage extends TopMenuPage<ShoppingPage> {
+public class ShoppingPage extends TopMenuPage<ShoppingPage>  {
     @FindBy(xpath = "//div[@class='shopping-results']")
     private WebElement shoppingResultContainer;
     @FindBy(xpath = "//h2[@class = 'title']")
@@ -21,6 +21,8 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
 
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[3]")
     private WebElement thirdPagePagination;
+    @FindBy(xpath = "(//div[@class ='price']//b)[position() =1]")
+    private WebElement priceFirstProduct;
     @FindBy(xpath = "//figure//img[1]")
     private WebElement firstImageInImagesResult;
     @FindBy(xpath = "//div['shopping-results']//ul[@class]//li[4]")
@@ -41,12 +43,16 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
     private WebElement firstShopInDetailsPanel;
     @FindBy(xpath = "//h3[@title ='Marken']")
     private WebElement modelDropdown;
+    @FindBy(xpath = "//ul[@class ='filter-options']//li[3]")
+    private WebElement mostExpensive;
     @FindBy(xpath = "//div[@class = 'filter']//ul//li[text() = 'Apple']")
     private WebElement appleModel;
     @FindBy(xpath = "//section[@class ='section offers']//a")
     private List<WebElement> shopsInDetailsPanel;
     @FindBy(xpath = "//div[@class = 'scroller']//h3")
     private List<WebElement> h3TextInFilter;
+    @FindBy(xpath = "//section[@class='section offers']//a")
+    private List<WebElement> shopsInSideBar;
 
     public ShoppingPage(WebDriver driver) {
         super(driver);
@@ -88,6 +94,24 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         }
 
     }
+    public ShoppingPage waitUntilToBeVisibleFirstPriceOfProduct(){
+        waitTextToBeChanged(priceFirstProduct,"2138");
+        return new ShoppingPage(getDriver());
+    }
+
+
+    @Step("Get the price text of the shopping page")
+    public String getPriceFirstProductInShoppingResult()  {
+        try {
+            JavascriptExecutor je = (JavascriptExecutor) getDriver();
+            wait20ElementToBeVisibleJsExecutor(je,priceFirstProduct);
+            return priceFirstProduct.getText();
+        } catch (StaleElementReferenceException e) {
+            JavascriptExecutor je = (JavascriptExecutor) getDriver();
+            wait20ElementToBeVisibleJsExecutor(je,priceFirstProduct);
+            return priceFirstProduct.getText();
+        }
+    }
 
     public ShoppingPage waitUntilToBeInvisibleDetailsPanel() {
         wait10ElementToBeInVisible(detailsContainer);
@@ -97,6 +121,13 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         wait10ElementToBeVisible(detailsPanel);
         return new ShoppingPage(getDriver());
     }
+    public ShoppingPage scrollToSideBarMenu(){
+        JavascriptExecutor je = (JavascriptExecutor) getDriver();
+        for (WebElement element : shopsInSideBar) {
+            je.executeScript("arguments[0].scrollIntoView(true);", element);
+        }
+        return this;
+    }
     public ShoppingPage clickFilterButton() {
         clickFilterButtonWeb();
         return new ShoppingPage(getDriver());
@@ -105,6 +136,11 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         click(modelDropdown);
         return new ShoppingPage(getDriver());
     }
+    public ShoppingPage clickMostExpensive() {
+       clickByJavaScript(mostExpensive);
+        return new ShoppingPage(getDriver());
+    }
+
     public ShoppingPage clickAppleModel() {
         click(appleModel);
         return new ShoppingPage(getDriver());
@@ -192,4 +228,5 @@ public class ShoppingPage extends TopMenuPage<ShoppingPage> {
         waitForLoaderToBeInVisible();
         return new ShoppingPage(getDriver());
     }
+
 }
