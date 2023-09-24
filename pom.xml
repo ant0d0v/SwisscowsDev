@@ -14,8 +14,8 @@
         <aspectj.version>1.9.19</aspectj.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
         <allure-testing.version>2.6.0</allure-testing.version>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <suiteXml>testng.xml</suiteXml>
     </properties>
     <dependencies>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.10.0</version>
+            <version>4.12.1</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
